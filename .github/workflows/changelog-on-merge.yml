@@ -17,6 +17,8 @@ jobs:
     name: Update CHANGELOG on merge
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Check for merge commits
         id: merge_commits
@@ -127,6 +129,8 @@ jobs:
     name: Require changelog block
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
