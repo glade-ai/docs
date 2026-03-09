@@ -38,7 +38,7 @@ Do not invent behaviors. If something is unclear, leave a `> TODO:` blockquote i
 
 When a merged PR changes a feature:
 1. Update only the sections affected by the change.
-2. Add a `CHANGELOG.md` entry.
+2. In the PR description, add a changelog block between `<!-- changelog -->` and `<!-- /changelog -->`. Use **one sub-section per domain/feature** (e.g. `### payments/invoices` then bullets; `### other/feature` then bullets). Content is free-form (summary, source PRs, Linear, Notion — whatever you used). **Both tags are required**; the workflow inserts only the content between them into CHANGELOG when the PR is merged. Do not edit CHANGELOG.md in the branch. A PR check requires both tags and non-empty content between them; if the block is missing or incomplete, the check fails and the merged CHANGELOG would show "no details available".
 3. Do not rewrite sections that were not affected.
 
 ## Tone
