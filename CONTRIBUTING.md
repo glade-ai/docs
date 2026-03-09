@@ -27,7 +27,7 @@ When a feature grows complex enough to need multiple pages:
 
 ## Changelog
 
-Update `CHANGELOG.md` with every PR that changes doc content. Use the format defined at the top of that file.
+CHANGELOG is updated automatically when a PR is merged. When you open a PR that changes doc content, include in the PR description a changelog block between `<!-- changelog -->` and `<!-- /changelog -->` with **one sub-section per domain/feature** (e.g. `### domain/feature` plus bullets). Both tags are required; content between them is inserted into CHANGELOG on merge. A PR check will fail if the block is missing or incomplete (e.g. missing closing tag or empty content). See the format at the top of `CHANGELOG.md`.
 
 ## Style
 
