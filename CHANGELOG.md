@@ -4,8 +4,14 @@ Documentation changes are tracked here. Each entry corresponds to a pull request
 
 ## Format
 
+Entries are added automatically when a PR is merged. Each entry has:
+- **Heading:** `## YYYY-MM-DD HH:MM · [PR #N](url)` (merge datetime and link to the PR).
+- **Body:** The content from the PR description between `<!-- changelog -->` and `<!-- /changelog -->`, or "no details available" if the block was missing or empty.
+
+Use one sub-section per domain/feature inside the changelog block (e.g. `### domain/feature` plus bullets). See CONTRIBUTING.md and AGENTS.md for how to add the block when opening a PR.
+
 ```
-## YYYY-MM-DD
+## YYYY-MM-DD HH:MM · [PR #N](https://github.com/owner/repo/pull/N)
 
 ### <domain>/<feature>
 - What changed and why
