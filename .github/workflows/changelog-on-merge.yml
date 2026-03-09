@@ -1,0 +1,159 @@
+# Changelog on merge: append entry per merged PR (datetime, PR link, <!-- changelog --> content).
+# PR check: require <!-- changelog --> and <!-- /changelog --> with non-empty content.
+name: Changelog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths: ['**/*.md']
+
+permissions:
+  contents: write
+
+jobs:
+  changelog-on-merge:
+    name: Update CHANGELOG on merge
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: Check for merge commits
+        id: merge_commits
+        run: |
+          COMMITS='${{ toJSON(github.event.commits) }}'
+          # One line per merge: "timestamp|pr_number", then reverse for newest first
+          MERGES=$(echo "$COMMITS" | jq -r '.[] | select(.message | test("Merge pull request #\\d+")) | .message as $m | (.timestamp) + "|" + ($m | capture("Merge pull request #(?<n>[0-9]+)") | .n)')
+          if [ -z "$MERGES" ]; then
+            echo "has_merges=false" >> "$GITHUB_OUTPUT"
+            echo "merge_commits=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "has_merges=true" >> "$GITHUB_OUTPUT"
+          MERGES_REV=$(echo "$MERGES" | tac)
+          echo "merge_commits<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$MERGES_REV" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout repository
+        if: steps.merge_commits.outputs.has_merges == 'true'
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update CHANGELOG
+        if: steps.merge_commits.outputs.has_merges == 'true'
+        env:
+          REPO: ${{ github.repository }}
+          MERGE_COMMITS: ${{ steps.merge_commits.outputs.merge_commits }}
+        run: |
+          set -e
+          echo "$MERGE_COMMITS" > merge_commits.txt
+          REPO="$REPO"
+          CHANGELOG="CHANGELOG.md"
+          NO_DETAILS="no details available"
+
+          extract_changelog_block() {
+            local body="$1"
+            if ! echo "$body" | grep -q '<!-- changelog -->'; then
+              echo "$NO_DETAILS"
+              return
+            fi
+            if ! echo "$body" | grep -q '<!-- /changelog -->'; then
+              echo "$NO_DETAILS"
+              return
+            fi
+            local content
+            content=$(echo "$body" | sed -n '/<!-- changelog -->/,/<!-- \/changelog -->/p' | sed '1d;$d')
+            content=$(echo "$content" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+            if [ -z "$(echo "$content" | tr -d '[:space:]')" ]; then
+              echo "$NO_DETAILS"
+              return
+            fi
+            echo "$content"
+          }
+
+          already_in_changelog() {
+            local pr_num="$1"
+            grep -q "PR #$pr_num\|\[PR #$pr_num\]" "$CHANGELOG" 2>/dev/null
+          }
+
+          format_datetime() {
+            echo "$1" | sed 's/T/ /;s/\.[0-9]*Z//;s/Z//'
+          }
+
+          NEW_SECTIONS=""
+          while IFS='|' read -r timestamp pr_num || [ -n "$timestamp" ]; do
+            [ -z "$pr_num" ] && continue
+            if already_in_changelog "$pr_num"; then
+              continue
+            fi
+            body=$(gh pr view "$pr_num" --repo "$REPO" --json body -q .body 2>/dev/null || echo "")
+            content=$(extract_changelog_block "$body")
+            dt=$(format_datetime "$timestamp")
+            url="https://github.com/${REPO}/pull/${pr_num}"
+            section="## ${dt} · [PR #${pr_num}](${url})"$'\n\n'"${content}"$'\n\n'
+            NEW_SECTIONS="${NEW_SECTIONS}${section}"
+          done < merge_commits.txt
+
+          [ -z "$NEW_SECTIONS" ] && echo "No new sections to add" && exit 0
+
+          # Insert after --- and before the first ## (existing entry). Newest is first in NEW_SECTIONS.
+          awk -v new="$NEW_SECTIONS" '
+            /^---$/ {
+              print
+              inserted = 1
+              printf "%s", new
+              next
+            }
+            inserted == 0 { print; next }
+            inserted == 1 && /^## / { inserted = 2; print; next }
+            inserted == 1 { next }
+            inserted == 2 { print }
+          ' "$CHANGELOG" > "${CHANGELOG}.tmp" && mv "${CHANGELOG}.tmp" "$CHANGELOG"
+
+      - name: Commit and push
+        if: steps.merge_commits.outputs.has_merges == 'true'
+        run: |
+          if [ -n "$(git status -s CHANGELOG.md)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add CHANGELOG.md
+            git commit -m "chore: add CHANGELOG entries for merged PRs [skip ci]"
+            git push
+          fi
+
+  changelog-pr-check:
+    name: Require changelog block
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for changelog block
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -e
+          body=$(gh pr view "$PR_NUMBER" --json body -q .body)
+
+          if ! echo "$body" | grep -q '<!-- changelog -->'; then
+            echo "::error::PR description must contain opening tag: <!-- changelog -->"
+            exit 1
+          fi
+          if ! echo "$body" | grep -q '<!-- /changelog -->'; then
+            echo "::error::PR description must contain closing tag: <!-- /changelog -->"
+            exit 1
+          fi
+
+          content=$(echo "$body" | sed -n '/<!-- changelog -->/,/<!-- \/changelog -->/p' | sed '1d;$d')
+          if [ -z "$(echo "$content" | tr -d '[:space:]')" ]; then
+            echo "::error::Changelog block must have non-empty content between the two tags"
+            exit 1
+          fi
+          echo "Changelog block is present and non-empty."
