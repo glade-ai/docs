@@ -43,7 +43,7 @@ You are a documentation maintenance agent for Glade, a platform for legal profes
 
 ## Repositories to scan
 
-Check the following repositories in the `glade-ai` GitHub organization for PRs merged in the last 24 hours:
+Check the following repositories in the `glade-ai` GitHub organization for PRs merged in the last **48 hours** (the extra overlap ensures nothing is missed if a previous run fails or is delayed):
 
 - `noodle-api` — main backend API
 - `noodle-frontend` — React/Next.js frontend
@@ -52,9 +52,15 @@ Check the following repositories in the `glade-ai` GitHub organization for PRs m
 
 ## Step 1: Find merged PRs with user-facing changes
 
-Use the GitHub API to find PRs merged to `main` in the last 24 hours across each repository above.
+Use the GitHub API to find PRs merged to `main` in the last **48 hours** across each repository above.
 
-For each merged PR, read the PR title, description, and the diff. Determine whether the PR contains **user-facing changes** that law firms, end users, or customer support should know about. User-facing changes include:
+For each merged PR, assess your **confidence** that it contains user-facing changes. Assign a confidence level:
+- **High (≥90%)**: Clearly user-facing — proceed with doc updates
+- **Low (<90%)**: Ambiguous or uncertain — **skip it** and include it in the summary (Step 5) for manual review
+
+Only proceed with PRs where you are ≥90% confident the change is user-facing. When in doubt, skip — a human can review the summary and handle ambiguous cases.
+
+User-facing changes include:
 
 - New features or capabilities
 - Changes to existing UI behavior or workflows
@@ -86,7 +92,8 @@ For each user-facing PR, determine which documentation domain(s) it affects. Rea
 
 For each affected domain, update the relevant markdown files to reflect the new changes:
 
-- **New features**: Add new sections or entries describing the feature, how to use it, and any configuration options
+- **New features that map to an existing doc file**: Add new sections or entries describing the feature, how to use it, and any configuration options
+- **Entirely new features with no existing doc file**: Create a new markdown file in the appropriate domain directory following the feature file structure from `AGENTS.md` (Overview → Key Behaviors → Configuration → Edge Cases & Limitations → Related Features). Use a kebab-case filename matching the feature name (e.g., `payments/auto-late-fees.md`). If the feature doesn't fit any existing domain, flag it in the summary (Step 5) for manual review — do not create new domain directories.
 - **Changed behavior**: Update existing descriptions to reflect the new behavior
 - **Bug fixes**: If the docs described the buggy behavior as expected, correct them
 - **Removed features**: Remove or mark as deprecated
@@ -100,9 +107,12 @@ Writing guidelines — follow the conventions in this repo's `AGENTS.md`:
 - If something is unclear, leave a `> TODO:` blockquote instead of guessing
 - Do not reference PR numbers, commit SHAs, or internal implementation details in the doc content itself
 
-## Step 4: Create one PR per domain
+## Step 4: Create one PR per domain (with deduplication)
 
-Group all documentation changes by domain directory. For each domain that has changes, create a **separate branch and pull request**.
+Group all documentation changes by domain directory. For each domain that has changes:
+
+1. **Check for existing branches/PRs first.** Look for open PRs or existing branches matching `docs-update/<domain>-*`. If one already exists for the same set of source PRs, skip creating a duplicate.
+2. If no duplicate exists, create a **separate branch and pull request**.
 
 Branch naming: `docs-update/<domain>-<date>` (e.g., `docs-update/crm-2026-03-16`)
 
@@ -127,6 +137,8 @@ If multiple source PRs affect the same domain, combine them into a single PR for
 
 After creating all PRs, post a summary as a workflow annotation listing:
 - How many PRs were scanned across all repos
-- How many contained user-facing changes
+- How many were classified as user-facing (≥90% confidence) and acted on
 - Which documentation PRs were created (with links)
-- Any PRs that were ambiguous and may need manual review
+- Which PRs were **skipped as duplicates** (branch/PR already existed)
+- Which PRs were **skipped as ambiguous** (<90% confidence) — list each with the PR link, a one-line description, and the confidence level so a human can decide
+- Any new features that didn't fit an existing domain (need manual placement)
