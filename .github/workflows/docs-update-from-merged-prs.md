@@ -98,11 +98,12 @@ For each affected domain, update the relevant markdown files to reflect the new 
 - **Removed features**: Remove or mark as deprecated
 
 Writing guidelines — follow the conventions in this repo's `AGENTS.md`:
+- **Audience**: Attorneys, paralegals, legal ops staff, and customer support — not engineers. Write for people who use the software daily but don't know how it's built.
 - **Feature file structure**: Overview → Key Behaviors → Configuration → Edge Cases & Limitations → Related Features
-- **Tone**: Technical, factual, concise. Present tense ("The form validates..." not "The form will validate...")
+- **Tone**: Clear, practical, concise. Present tense ("The form validates..." not "The form will validate...")
+- **No technical jargon**: Never mention URLs, query parameters, API endpoints, database fields, component names, CSS classes, or implementation details. Describe what the user *sees and does*, not how it works under the hood. For example, instead of "the page URL updates with a `?modal=fieldKey:rowId` query parameter", write "you can share a direct link to a specific item — anyone who opens the link sees that item's details immediately."
 - Update only the sections affected by the change — do not rewrite unaffected sections
-- Do not describe internal implementation details (database schema, function names) unless directly relevant to behavior
-- Do not copy-paste PR descriptions verbatim — summarize the resulting behavior
+- Do not copy-paste PR descriptions verbatim — translate engineer-speak into user-speak
 - If something is unclear, leave a `> TODO:` blockquote instead of guessing
 - Do not reference PR numbers, commit SHAs, or internal implementation details in the doc content itself
 
