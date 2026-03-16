@@ -2,30 +2,27 @@
 
 ## Overview
 
-Notes allow creators and their team members to attach internal annotations to client records. Notes are visible only to the creator's team and are accessed through the "Notes" tab on the member detail view. They serve as a lightweight way to record observations, reminders, or context about a client that does not belong in the client-facing conversation.
+Notes let your team attach internal annotations to client records. Notes are visible only to your team — clients cannot see them. Access notes through the **Notes** tab on a client's detail view. They are a lightweight way to record observations, reminders, or context that does not belong in the client-facing conversation.
 
 ## Key Behaviors
 
-- Notes are scoped to a (creator, person) pair. A note belongs to a specific creator's practice and references a specific client (person).
-- Each note records the `authorPersonId` (the team member who wrote it), the `creatorId`, and the `personId` (the client the note is about).
-- Note content is stored as structured rich text (`slateAST` in JSON format) and a rendered `html` representation. The rich text editor supports standard formatting.
-- Notes are displayed grouped by month and year, with the most recent notes first.
-- The notes list is paginated with a default of 5 notes per page.
-- Creating a note requires team member permissions for the creator. The system verifies that the requesting user has permission before allowing note creation.
-- After a note is created, the author's name and profile photo are displayed alongside the note content and creation date.
-- Notes are fetched and displayed on a per-client basis from the member detail view.
+- Each note belongs to your firm and is attached to a specific client.
+- Notes support rich text formatting through a standard text editor.
+- Notes are displayed grouped by month and year, with the most recent first.
+- The notes list is paginated, showing 5 notes per page by default.
+- Only team members with appropriate permissions can create notes.
+- Each note displays the author's name, profile photo, and creation date alongside the content.
 
 ## Configuration
 
-- **Pagination**: Notes are paginated with a configurable `perPage` parameter (default: 5).
-- No additional configuration options exist. Notes do not support editing or deletion through the UI.
+- **Pagination**: Notes display 5 per page by default.
+- No additional configuration options. Notes do not support editing or deletion.
 
 ## Edge Cases & Limitations
 
-- Notes cannot be edited or deleted after creation. There is no update or delete endpoint exposed for person notes.
-- Notes are not searchable. There is no full-text search or filtering capability on note content.
-- Notes are only accessible through the creator dashboard member detail view. Clients cannot see notes written about them.
-- The `slateAST` field is typed as `any` in the codebase, meaning there is no strict schema validation on the rich text structure beyond what the frontend editor produces.
+- Notes cannot be edited or deleted after creation. Make sure the content is correct before saving.
+- Notes are not searchable. There is no way to filter or search note content.
+- Notes are only accessible from your dashboard — clients never see notes written about them.
 
 ## Related Features
 
