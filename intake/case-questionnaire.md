@@ -20,7 +20,7 @@ Case questionnaires are structured forms that collect information from clients a
 - Collaborators (additional team members) can be assigned to questionnaires with view or edit permissions.
 - A **require all fields** setting controls whether all required fields must be filled before the questionnaire can be completed.
 - A questionnaire can be marked as generating a case document, which enables PDF generation from the questionnaire data.
-- List-type fields support row-level edit modals. When a list item modal is opened, the page URL updates with a `?modal=fieldKey:rowId` query parameter. Navigating to or reloading that URL automatically reopens the modal for the matching row. Closing the modal clears the parameter.
+- List-type fields allow you to click into individual rows to view or edit details. When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 
 ## Configuration
 
