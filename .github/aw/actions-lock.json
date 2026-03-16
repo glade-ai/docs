@@ -1,5 +1,10 @@
 {
   "entries": {
+    "actions/create-github-app-token@v1": {
+      "repo": "actions/create-github-app-token",
+      "version": "v1",
+      "sha": "d72941d797fd3113feb6b93fd0dec494b13a2547"
+    },
     "actions/github-script@v8": {
       "repo": "actions/github-script",
       "version": "v8",

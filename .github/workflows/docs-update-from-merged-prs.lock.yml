@@ -23,7 +23,7 @@
 #
 # Daily scan of merged PRs across Glade repositories to automatically update user-facing documentation when new features, changes, or fixes ship.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"53b6c81b2512146701a81ac870a0c2c12eece1d3bec76fd8083dc58c34bc311b","compiler_version":"v0.58.3","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"be1d82c456ebe4040f7cb7c352514053e74d352797e1de1adff9c7fabfced804","compiler_version":"v0.58.3","strict":true}
 
 name: "Docs Update from Merged PRs"
 "on":
@@ -37,6 +37,9 @@ concurrency:
   group: "gh-aw-${{ github.workflow }}"
 
 run-name: "Docs Update from Merged PRs"
+
+env:
+  GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
 jobs:
   activation:
@@ -264,6 +267,14 @@ jobs:
           persist-credentials: false
       - name: Create gh-aw temp directory
         run: bash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh
+      - id: app-token
+        name: Generate GitHub App token
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
+          private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
+          repositories: noodle-api,noodle-frontend,noodle-documents,webforms,docs
+
       - name: Configure Git credentials
         env:
           REPO_NAME: ${{ github.repository }}
@@ -794,8 +805,10 @@ jobs:
             const { main } = require('/opt/gh-aw/actions/redact_secrets.cjs');
             await main();
         env:
-          GH_AW_SECRET_NAMES: 'ANTHROPIC_API_KEY,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN'
+          GH_AW_SECRET_NAMES: 'ANTHROPIC_API_KEY,DOCS_BUMP_APP_ID,DOCS_BUMP_APP_PRIVATE_KEY,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN'
           SECRET_ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SECRET_DOCS_BUMP_APP_ID: ${{ secrets.DOCS_BUMP_APP_ID }}
+          SECRET_DOCS_BUMP_APP_PRIVATE_KEY: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
           SECRET_GH_AW_GITHUB_MCP_SERVER_TOKEN: ${{ secrets.GH_AW_GITHUB_MCP_SERVER_TOKEN }}
           SECRET_GH_AW_GITHUB_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN }}
           SECRET_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
