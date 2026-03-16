@@ -2,40 +2,38 @@
 
 ## Overview
 
-Document collection enables creators to request specific files from clients as part of a workflow. The feature is managed by the `noodle-documents` microservice, with `noodle-api` orchestrating events and notifications. Creators define document request templates with a checklist of required and optional files, and clients upload documents through the client portal. Uploaded files can be reviewed, approved, or rejected by the creator's team.
+Document collection enables your team to request specific files from clients as part of a workflow. You define document request templates with a checklist of required and optional files, and clients upload documents through the client portal. Uploaded files can be reviewed, approved, or rejected by your team.
 
 ## Key Behaviors
 
-- A `DocumentRequest` is a template defining the files to collect. It contains one or more `DocumentRequestFile` entries, each specifying a file name, description, ordering, required/optional status, and whether the file is "for your eyes only" (restricted visibility).
-- When a document request is assigned to a client within a workflow, a `DocumentRequestUser` instance is created, linking the document request to a specific person and user workflow.
-- Document request users progress through statuses: `in-progress`, `in-review`, `succeeded`, `skipped`, and `failed`.
-- Each file slot in the request becomes a `DocumentRequestUserFile` for the client, tracking upload status (`incomplete`, `complete`, `action-required`), rejection messages, and file metadata.
-- Clients upload documents via the portal at `/{creatorSlug}/document-requests/{documentRequestUserId}`. Each uploaded file is associated with a `DocumentRequestUserFileDocument` linking to the actual stored document.
-- Files can be rejected by a reviewer with a rejection message, setting the file status to `action-required` and notifying the client. Clients can then re-upload.
-- A client can submit the document request for review once all required files have been uploaded. The `canSubmitForReview` check verifies `uploadedRequiredFiles >= totalRequiredFiles`.
-- The review workflow tracks whether the document request is expecting a review (status `in-review` with no rejected files) via the `isExpectingAReview` method.
-- Reviewers are tracked via `DocumentRequestReviewer` entities, associating specific team members with document request review responsibilities.
-- Document request completion emits events consumed by `noodle-api` to trigger downstream workflow steps, task updates, activity logging, email notifications, and socket notifications.
-- Document requests support collaborator assignment, allowing multiple team members to participate in the review process.
-- The `isForCreator` flag on a document request indicates whether the document request is for the creator's internal use (e.g., the attorney uploads documents) rather than the client.
+- A document request defines the files to collect. Each file slot specifies a file name, description, ordering, whether the file is required or optional, and whether the file is restricted to your team only ("for your eyes only").
+- When a document request is assigned to a client within a workflow, it creates an individual assignment linking the request to that specific client and their workflow.
+- Document request assignments progress through statuses: **in progress**, **in review**, **succeeded**, **skipped**, and **failed**.
+- Each file slot tracks its upload status: **incomplete**, **complete**, or **action required**.
+- Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
+- Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement.
+- When all required documents are uploaded, the client can submit for review.
+- When a document request is in review and no files have been rejected, it is awaiting reviewer action.
+- Reviewers from your team are assigned to document requests to handle the review process.
+- When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
+- Document requests support collaborator assignment, allowing multiple team members to participate in review.
+- A document request can be marked as "for your team" (e.g., the attorney uploads documents) rather than for the client.
 
 ## Configuration
 
-- **Document request templates** (`DocumentRequest`) define the title, slug, followup settings, auto-assignment behavior, archival status, type, and whether it is for the creator.
-- **Document request files** (`DocumentRequestFile`) define each file slot: file name, description, ordering, required flag, "for your eyes only" flag, and optional integration metadata (e.g., PACER integration slug and file name).
-- **Followup cadence** can be configured per document request and per document request user instance with a cadence value and units (minutes, hours, days, weeks, or none).
-- **Document request types**: `basic` for standard file uploads, `income-data` for structured income data collection. Income data files can track metadata including income source, pay frequency, start/end dates, and monthly dollar values.
-- **Internal data types** on files (`income-data`, `asset-data`, `personal-data`, `prompt-data`) enable structured data extraction from uploaded documents.
-- **Integration support**: Files can be associated with external integrations (e.g., PACER) via `integrationSlug` and `integrationFileName`, enabling auto-generated legal documents to be included in the checklist.
-- **Email notifications** can be toggled per document request template via `emailNotificationsEnabled`.
+- **Document request templates** define the title, followup settings, auto-assignment behavior, archival status, type, and whether it is for your team.
+- **File slots** define each requested file: name, description, ordering, required flag, "for your eyes only" flag, and optional integration metadata (e.g., PACER integration for auto-generated legal documents).
+- **Followup reminders** can be configured per document request and per individual client assignment, with a customizable frequency (minutes, hours, days, weeks, or none).
+- **Document request types**: "basic" for standard file uploads, "income data" for structured income data collection. Income data files can track metadata including income source, pay frequency, start/end dates, and monthly dollar values.
+- **Structured data types** on file slots (income data, asset data, personal data, prompt data) enable structured data extraction from uploaded documents.
+- **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
+- **Email notifications** can be toggled on or off per document request template.
 
 ## Edge Cases & Limitations
 
-- Skipping a document request user sets status to `skipped` but does not remove uploaded files; unskipping returns the status to its previous state.
-- The `submitForReviewModalCloseForAttorney` and `submitForReviewModalCloseForClient` flags on `DocumentRequestUser` track whether the "submit for review" modal has been dismissed, preventing repeated prompts.
-- File validation status is stored as JSONB (`validationStatus`) with a status string and optional `approvedBy` field, but the schema is loosely typed.
-- The compiled document (`compiledDocumentId` on `DocumentRequestUser`) links to a generated document that aggregates all uploaded files, but this is optional and may be null.
-- Archiving a document request template (`isArchived`) prevents it from being used in new workflows but does not affect existing instances.
+- Skipping a document request assignment sets its status to "skipped" but does not remove uploaded files. Unskipping returns it to its previous state.
+- A compiled document that aggregates all uploaded files can be generated, but this is optional and may not always be present.
+- Archiving a document request template prevents it from being used in new workflows but does not affect existing assignments.
 
 ## Related Features
 
