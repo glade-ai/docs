@@ -16,6 +16,8 @@ permissions:
 
 safe-outputs:
   create-pull-request:
+    draft: false
+    max: 10
 
 network:
   allowed:
@@ -119,14 +121,17 @@ PR description must include:
 - A summary of what changed and why
 - Links to the source PRs that triggered the updates
 - A list of files modified
-- A changelog block between `<!-- changelog -->` and `<!-- /changelog -->` tags (required by this repo's PR checks). Use one sub-section per domain/feature, e.g.:
-  ```
-  <!-- changelog -->
-  ### payments/invoices
-  - Added documentation for automatic late-fee calculation
-  - Updated payment plan section to reflect new 12-month option
-  <!-- /changelog -->
-  ```
+- **CRITICAL: A changelog block is required or the PR will fail CI checks.** The PR body MUST contain both `<!-- changelog -->` and `<!-- /changelog -->` HTML comment tags with non-empty content between them. Format:
+
+```
+<!-- changelog -->
+### payments/invoices
+- Added documentation for automatic late-fee calculation
+- Updated payment plan section to reflect new 12-month option
+<!-- /changelog -->
+```
+
+Both tags and non-empty content between them are mandatory. Do not omit them.
 
 If multiple source PRs affect the same domain, combine them into a single PR for that domain.
 
