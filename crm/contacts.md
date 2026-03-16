@@ -2,32 +2,30 @@
 
 ## Overview
 
-Contacts are the people (persons) that a creator interacts with on the Glade platform. The contacts system encompasses individual person records, company records, and associated user relationships. Creators view and manage their contacts through the dashboard "Members" tab, which lists all people who have a customer relationship with that creator.
+Contacts are the people your firm interacts with on Glade. The contacts system includes individual people, companies, and relationships between people (e.g., family members on the same legal matter). You view and manage contacts through the **Members** tab on your dashboard.
 
 ## Key Behaviors
 
-- The contacts list displays all people linked to a creator through customer records, sorted and filterable by subscription status, verification state, and search terms.
-- Each person record stores core identity fields: name, email, phone number, contact phone number, date of birth, preferred language, address, and profile photo.
-- Persons have one of three roles: `admin`, `creator`, or `customer`.
-- Companies are separate entities scoped to a creator, storing a company name, email, phone number, point of contact, and a randomly generated display color. Companies can have employees linked through a `company_employees` join table.
-- Companies support CRUD operations: list (with search by name), create, read by ID, and update. All company operations require creator authorization.
-- Associated users represent relationships between people (e.g., family members sharing a legal matter). The association is bidirectional -- when person A is associated with person B, person B is also associated with person A, and all existing associations are transitively linked.
-- New associated users can be created by providing a name and email. If the email matches an existing user, the association is only allowed if the user is not already associated. If the email is new, a person record with the `customer` role is created.
-- The member detail view provides tabs for information, conversation, documents, forms, workflows, invoices, order history, payment methods, AI follow-up cadence, and notes.
-- Recent members are tracked in the frontend (up to 5) and displayed for quick access.
+- The contacts list shows everyone who has a client relationship with your firm, sortable and filterable by subscription status, verification state, and search terms.
+- Each contact has core identity fields: name, email, phone number, date of birth, preferred language, address, and profile photo.
+- **Companies** are separate records your firm can create to represent organizations. Each company stores a name, email, phone number, and point of contact. Companies can have employees linked to them.
+- **Associated users** represent relationships between people — for example, family members sharing a legal matter. Associations are automatic in both directions: if you link Person A to Person B, Person B is also linked back to Person A, and all existing associations are connected transitively.
+- When adding an associated user, you provide their name and email. If the email matches an existing user, they are linked directly. If the email is new, a new contact is created automatically.
+- The member detail view provides tabs for: information, conversation, documents, forms, cases, invoices, order history, payment methods, AI follow-up cadence, and notes.
+- Your 5 most recently viewed members are tracked for quick access.
 
 ## Configuration
 
-- **Member list filters**: `all`, `subscribed_members`, `free_members`, `unverified_contacts`. Additional status-based filters exist for legal workflow states (retained, booked consultation, filed case).
-- **Sort options**: Applied to the member list query to control ordering.
-- **Search**: Filters members by name, email, or phone number.
+- **Member list filters**: All, Subscribed, Free, Unverified. Additional filters exist for legal workflow states (retained, booked consultation, filed case).
+- **Sort options**: Control the ordering of the member list.
+- **Search**: Filter members by name, email, or phone number.
 
 ## Edge Cases & Limitations
 
-- Person email and phone number columns have unique constraints. When these need to change (e.g., deduplication), the old values are stored in a `backupAuthData` text field.
-- The `archivedAt` timestamp on a person record acts as a soft archive for contacts. Archived persons are excluded from the standard member list.
-- Company employee associations are stored separately from the person-to-person `associated_users` relationship. These are two distinct concepts.
-- The contacts list query joins through the `customers` table, so a person only appears in a creator's contacts if a customer record exists for that (person, creator) pair.
+- Each email and phone number must be unique across all contacts. If a contact's email or phone needs to change (e.g., during deduplication), the old values are preserved internally.
+- Archived contacts are excluded from the standard member list but are not permanently deleted.
+- Company employee relationships and person-to-person associations are two separate concepts — linking someone as a company employee does not automatically create a person-to-person association.
+- A person only appears in your contacts list if they have a client record with your firm.
 
 ## Related Features
 
