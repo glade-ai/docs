@@ -1,0 +1,62 @@
+name: Bump docs submodule in glade-mcp-server
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  bump-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
+          private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
+          repositories: glade-mcp-server,docs
+
+      - name: Clone glade-mcp-server
+        uses: actions/checkout@v4
+        with:
+          repository: glade-ai/glade-mcp-server
+          token: ${{ steps.app-token.outputs.token }}
+          submodules: true
+          fetch-depth: 0
+
+      - name: Advance docs-content submodule to latest
+        run: |
+          git submodule update --init --remote docs-content
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet docs-content; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "sha_short=$(cd docs-content && git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit, and open PR
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          BRANCH="chore/update-docs-content-${{ steps.diff.outputs.sha_short }}"
+
+          git config user.name "glade-docs-bot"
+          git config user.email "docs-bot@glade.ai"
+
+          git checkout -b "$BRANCH"
+          git add docs-content
+          git commit -m "chore: bump docs-content submodule to ${{ steps.diff.outputs.sha_short }}"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --repo glade-ai/glade-mcp-server \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: bump docs-content to ${{ steps.diff.outputs.sha_short }}" \
+            --body "Automated bump of the \`docs-content\` submodule to the latest commit on \`glade-ai/docs@main\`." \
+            --label "release-patch"
