@@ -2,57 +2,55 @@
 
 ## Overview
 
-Triggers are event-driven workflow steps that listen for specific events in the system and initiate or continue workflow execution. They form the entry points and continuation points in a workflow's step graph. When an external event occurs (e.g., a product is purchased, a form is completed), the workflow engine evaluates all matching triggers and advances the relevant workflows.
+Triggers are the events that start or advance a workflow. When something happens in the system — a client purchases a service, completes a questionnaire, or uploads documents — the workflow engine checks for matching triggers and moves the relevant cases forward. Triggers are the entry points and continuation points that connect real-world client actions to automated workflow steps.
 
 ## Key Behaviors
 
-- Triggers are workflow steps with `type: 'trigger'`. Each trigger has an `eventName` that corresponds to a specific system event.
-- The supported trigger types are:
-  - `product-purchased` — fires when a product purchase payment succeeds
-  - `purchase-initiated` — fires when a purchase is started (before payment completes)
-  - `form-request-completed` — fires when a form request (questionnaire) is completed or skipped
-  - `documents-uploaded` — fires when all required documents in a document request are uploaded
-  - `custom-terms-agreed` — fires when a client agrees to custom terms/agreements
-  - `credit-report-completed` — fires when a credit report pull completes
-  - `cart-abandoned` — fires when a shopping cart is abandoned (scheduled event)
-  - `upcoming-booking` — fires as a reminder before a scheduled booking
-  - `booking-scheduled` — fires when a booking is scheduled
-  - `initiate-cta` — fires when a call-to-action button is clicked to start a new workflow thread
-  - `initiate-thread` — fires to start a new thread within an existing workflow, optionally gated by building block dependencies
-  - `user-workflow-cta` — fires when a user-initiated action within a workflow is triggered
-  - `all-dependencies` — fires when all external dependencies on the step are fulfilled
-  - `e-signature-request-created` — fires when an e-signature request is created
-  - `e-signature-request-completed` — fires when an e-signature is completed
-- Trigger processing follows a two-phase approach:
-  1. **New workflow triggers**: The system finds all matching trigger steps that have no dependencies (i.e., they start a thread) in enabled, non-archived, current-state workflows for the creator. For each match, it creates a new `UserWorkflow` and a `StepTaken` record.
-  2. **Continuation triggers**: The system finds all pending `StepTaken` records that have unfulfilled `WorkflowExternalDependency` entries matching the event's reference. It marks those dependencies as completed.
-- A trigger is considered complete when all its external dependencies are fulfilled. At that point, the system executes the trigger's downstream actions.
-- Triggers listen to events from multiple services via the event listener pattern. Each listener file translates a service event into an `ExecuteEventData` object containing the trigger type, creator ID, person ID, and external reference information.
-- The event listeners that feed triggers include: `purchase`, `formRequest`, `creditReport`, `documentRequest`, `customTerms`, `invoice`, `messages`, `payment`, `scheduledEvents`, `scheduling`, `creator`, and `userWorkflowOwner`.
-- When a trigger step has a `workflowStatus` field set, the user workflow's status is automatically updated to that value when the trigger completes (see [Status Tracking](./status-tracking.md)).
-- Trigger steps can have **building block dependencies** (`BuildingBlockDependency`) that gate thread initiation on the completion of specific form requests, document requests, or other building blocks.
+- Each trigger listens for a specific type of event. The available trigger types are:
+  - **Product purchased** — a client completes payment for a service
+  - **Purchase initiated** — a client starts a purchase (before payment completes)
+  - **Questionnaire completed** — a client finishes or skips a questionnaire
+  - **Documents uploaded** — a client uploads all required documents in a document request
+  - **Custom terms agreed** — a client agrees to custom legal terms or agreements
+  - **Credit report completed** — a credit report pull finishes
+  - **Cart abandoned** — a client starts a purchase but does not complete it (fires on a schedule)
+  - **Upcoming booking** — fires as a reminder before a scheduled consultation
+  - **Booking scheduled** — a client schedules a consultation
+  - **Start new thread** — a call-to-action button is clicked to begin a new sequence within the workflow
+  - **Continue thread** — starts a new sequence within an existing case, optionally waiting until specific prerequisite items are completed first
+  - **Client action taken** — a client-initiated action within a case triggers the next step
+  - **All prerequisites met** — fires when all prior steps in the workflow are complete, rather than waiting for a specific client action
+  - **E-signature request sent** — an e-signature request is created and delivered
+  - **E-signature completed** — a client finishes signing an e-signature document
+- When a trigger event occurs, the system handles it in two ways:
+  1. **Starting a new case**: If the trigger is the first step in a workflow thread and the workflow is active, a new case is created for the client.
+  2. **Advancing an existing case**: If the trigger is later in a workflow thread, the system finds cases that are waiting for this event and advances them.
+- A trigger is considered complete when the required client action has been fulfilled. At that point, the system runs the actions that follow the trigger in the workflow.
+- When a trigger completes, it can automatically update the case status (see [Status Tracking](./status-tracking.md)). This is configured per step.
+- A trigger that starts a new thread can be gated by prerequisites — it only fires after specific questionnaires, document requests, or other items are completed first.
+- Skipping a questionnaire counts the same as completing it for trigger purposes.
 
 ## Configuration
 
-- **eventName**: The trigger type (one of the `WORKFLOW_TRIGGERS` enum values).
-- **isRequired**: Whether the trigger step must be completed for the workflow to be considered complete.
-- **workflowStatus**: Optional status string to set on the user workflow when this trigger completes.
-- **title**: Optional human-readable title for the trigger step.
-- **rankOfThread**: Determines the ordering of threads when the trigger is the first step in a thread.
-- **Owner assignments**: Trigger steps can have `WorkflowStepOwnerAssignment` records that require specific roles to be assigned before execution continues. If the required role is not assigned, an `assign-workflow-step` task is created.
-- **Step dependencies**: Triggers can depend on prior steps (triggers or actions) via the `step_dependencies` join table. A trigger with dependencies only fires when those prior steps have completed.
-- **External dependencies**: When a trigger is enabled (via `enableNextTrigger`), `WorkflowExternalDependency` records are created to track what external events must occur before the trigger fires. These reference types include: `document-request-user`, `form-request`, `credit-report`, `custom-terms`, `invoice`, `booking`, `e-signature-request`, `bank-account-integration`, `workflow-purchase-reference`, `workflow-owner-assignment`, and `global`.
+- **Trigger type**: Which event this trigger listens for (one of the types listed above).
+- **Required**: Whether this trigger must be completed for the case to be considered finished.
+- **Status on completion**: An optional case status to set automatically when this trigger completes.
+- **Title**: An optional human-readable label for the trigger step.
+- **Thread order**: Determines the display order when the trigger is the first step in a thread.
+- **Team role assignments**: A trigger step can require a specific team role to be assigned before it proceeds. If the role is not assigned, the system creates a task to assign it.
+- **Step order**: Triggers can depend on prior steps in the workflow. A trigger with prior steps only fires after those steps complete.
+- **Prerequisite items**: Triggers of the "continue thread" type can wait for specific items to be completed before firing. Supported item types include: document requests, questionnaires, credit reports, custom terms, invoices, bookings, e-signature requests, bank account integrations, purchase references, team assignments, and general conditions.
 
 ## Edge Cases & Limitations
 
-- A trigger step currently supports only a single external dependency check at a time. Multiple concurrent external dependencies on a single trigger are noted as a limitation in the codebase.
-- If a trigger's external dependencies are not yet set up when the completing event arrives (race condition), the system retries with polling (up to ~30 seconds) before giving up.
-- Skipped form requests are treated the same as completed form requests for trigger evaluation purposes.
-- The `all-dependencies` trigger type is a meta-trigger that fires when all prior step dependencies are met, rather than listening for a specific external event.
-- Triggers in workflows with `state: 'draft'` or `state: 'stale'` are never evaluated.
+- Each trigger step currently supports only one required action at a time. A single trigger cannot wait for multiple unrelated client actions simultaneously.
+- If a client completes an action very quickly (before the system has finished setting up the workflow), the system retries for up to approximately 30 seconds before giving up.
+- Skipped questionnaires are treated the same as completed questionnaires.
+- The "all prerequisites met" trigger type fires based on prior workflow steps being complete, rather than waiting for a specific client action.
+- Triggers in draft or stale workflows are never evaluated.
 
 ## Related Features
 
-- [Automation Rules](./automation-rules.md) — the workflow definitions that contain trigger steps
+- [Automation Rules](./automation-rules.md) — the workflows that contain trigger steps
 - [Status Tracking](./status-tracking.md) — automatic status updates driven by trigger completion
 - [Task Templates](./task-templates.md) — templates that define trigger-action sequences

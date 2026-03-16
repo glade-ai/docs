@@ -2,54 +2,52 @@
 
 ## Overview
 
-Automation rules in Glade are workflow definitions that automatically execute a sequence of actions when specific events occur. They are the core orchestration mechanism that connects triggers (events) to actions (side effects) within the workflow engine. Creators (legal professionals) configure automation rules per product or globally, and the system evaluates them whenever a matching event fires.
+Automation rules define what happens automatically when events occur during a case. Your firm configures these rules per service or globally, and the system runs them whenever the matching event takes place. For example, when a client purchases a service, the automation rule can send a welcome message, deliver a questionnaire, and request documents — all without manual intervention.
 
 ## Key Behaviors
 
-- A workflow is a directed graph of **steps**, where each step is either a **trigger** (event listener) or an **action** (side effect). Steps are connected via dependency edges (`step_dependencies` join table).
-- Steps are organized into **threads** — linear chains of trigger-action pairs that begin with a step that has no dependencies. Multiple threads can exist within a single workflow and are ordered by `rankOfThread`.
-- When a trigger fires, the system looks up all enabled, non-archived, current-state workflows for the creator whose steps match the trigger event. If the trigger step has no prior dependencies, a new user workflow is created and execution begins.
-- If a matching trigger step has dependencies (i.e., it is not the first step in a thread), the system checks for pending `StepTaken` records with unfulfilled external dependencies and completes them instead of starting a new workflow.
-- Actions execute sequentially after a trigger completes. The supported action types are:
-  - `send-message` — sends a message with optional attachments (invoices, form requests, document requests, booking links, custom terms, credit reports, e-signature requests)
-  - `generate-all-workflow-pdfs` — generates all compiled PDF documents for the workflow
-  - `send-e-signature-request` — sends an e-signature request
-  - `send-document-request` — sends a document request
-  - `send-email` — sends an email notification
-- After an action succeeds, the system enables the next trigger(s) in the chain by creating `StepTaken` records with associated `WorkflowExternalDependency` entries. These external dependencies must be fulfilled (e.g., a form request completed, document uploaded) before the next trigger fires.
-- Workflows can be scoped to a specific product (`referenceType: 'product'`, `referenceId` set) or apply globally across all products for a creator (`referenceId: null`).
-- A workflow has a `state` field with values `current`, `draft`, or `stale`. Only workflows in the `current` state are evaluated for trigger matching.
-- Workflows can be locked (`isLocked: true`) to prevent modification. Default global workflows (e.g., confirmation receipt, abandoned cart email, booking reminder) are locked.
-- The system supports **re-execution** of actions via the `forceReexecute` flag, which allows retrying a previously executed step.
+- A workflow is a sequence of **steps** organized into **threads**. Each step is either a **trigger** (something that happens, like a client completing a questionnaire) or an **action** (something the system does in response, like sending a message). Steps run in order within a thread.
+- A single workflow can contain multiple threads, each representing an independent sequence of steps. Threads are ordered by rank.
+- When a trigger event occurs, the system checks all active workflows for your firm to see if any match. If a matching trigger is the first step in a thread, a new case is created and execution begins automatically.
+- If a matching trigger is later in a thread (not the first step), the system checks whether the case is waiting for that event and advances the case accordingly.
+- The available action types are:
+  - **Send message** — sends a message to the client, optionally with attachments such as invoices, questionnaires, document requests, booking links, custom terms, credit report requests, or e-signature requests
+  - **Generate all case PDFs** — compiles and generates all PDF documents for the case
+  - **Send e-signature request** — sends a document for the client to sign electronically
+  - **Send document request** — asks the client to upload specific documents
+  - **Send email** — sends an email notification
+- After an action completes, the system enables the next trigger in the sequence. That next trigger waits for the client to take the required action (such as completing a questionnaire or uploading a document) before the workflow continues.
+- Workflows can apply to a specific service or apply globally across all services for your firm.
+- A workflow can be in one of three states: **active**, **draft**, or **stale**. Only active workflows run automatically.
+- You can lock a workflow to prevent accidental changes. Default system workflows (such as confirmation receipts, abandoned cart emails, and booking reminders) are locked automatically.
+- If a step needs to be retried, your team can force re-execution of a previously completed action.
 
 ## Configuration
 
-- **isEnabled**: Boolean toggle to activate or deactivate a workflow.
-- **isArchived**: Boolean flag to soft-archive a workflow without deleting it.
-- **isLocked**: Prevents editing of the workflow definition.
-- **sendEmailToCreatorOnCompletion**: Sends a notification email to the creator when all steps complete.
-- **sendEmailToCreatorOnFirstPayment**: Sends a notification when the first payment is received.
-- **canInitiateAssociatedWorkflows**: Allows this workflow to start related workflows upon completion.
-- **preserveWorkflowAssignment**: Keeps owner assignments when the workflow is duplicated.
-- **enableUscisUpdates**: Enables USCIS case status tracking (immigration-specific).
-- **enablePacerSubmissions**: Enables PACER court filing integration (bankruptcy/litigation-specific).
-- **noodleFee**: Platform fee percentage applied to invoices in this workflow.
-- **estimatedTotalFees**: Estimated total fees shown to clients.
-- **type**: Either `basic` or `attorney-case`, which affects status progression behavior.
-- **caseType**: Optional case categorization (e.g., for bankruptcy chapter types).
-- **Workflow owners**: Persons assigned as default owners, copied to each new user workflow instance.
-- **Step owner assignments**: Individual steps can require specific roles via `WorkflowStepOwnerAssignment`, which creates assignment tasks when the trigger fires.
+- **Enabled/disabled toggle**: Activate or deactivate a workflow without deleting it.
+- **Archived**: Hide a workflow without deleting it. Archived workflows do not run.
+- **Locked**: Prevent editing of the workflow. Useful for protecting default workflows.
+- **Email on completion**: Send a notification to your team when all steps in a case finish.
+- **Email on first payment**: Send a notification when the first payment is received on a case.
+- **Start related workflows on completion**: Allow this workflow to automatically kick off related workflows when it finishes.
+- **Preserve assignments on duplication**: Keep team member assignments when a workflow is copied.
+- **USCIS updates**: Enable automatic USCIS case status tracking (immigration cases).
+- **PACER submissions**: Enable PACER court filing integration (bankruptcy/litigation cases).
+- **Platform fee**: Fee percentage applied to invoices in this workflow.
+- **Estimated total fees**: Estimated total fees shown to clients before they purchase.
+- **Workflow type**: Either "basic" or "attorney case", which affects how status progression works.
+- **Case type**: Optional categorization (e.g., bankruptcy chapter type).
+- **Workflow owners**: Team members assigned as default owners for every new case created from this workflow.
+- **Step assignments**: Individual steps can require a specific team role. If the required role is not assigned when the step runs, the system creates an assignment task.
 
 ## Edge Cases & Limitations
 
-- The current implementation only supports a single `WorkflowExternalDependency` per step. Multiple concurrent dependencies on a single step are not fully supported.
-- A circuit breaker (1000 iterations) prevents infinite loops when traversing thread step graphs, logging an error if circular dependencies are detected.
-- When an action execution fails, the failure is logged and reported to Sentry, but the trigger is marked as failed rather than retried automatically.
-- External dependency setup uses a polling mechanism (`waitForExternalDependenciesToBeSetup`) that retries up to 10 times at 1-second intervals, then once at 20 seconds, to handle race conditions where webhook events arrive before dependencies are created.
-- Workflows in `draft` or `stale` state are not evaluated for trigger matching.
+- Each step currently supports only one required client action at a time. A single step cannot wait for multiple things simultaneously (e.g., both a questionnaire and a document upload).
+- If an action fails to execute, the failure is logged and the step is marked as failed. The system does not automatically retry failed actions.
+- Only active workflows are evaluated. Workflows in draft or stale state are ignored.
 
 ## Related Features
 
-- [Triggers](./triggers.md) — the event types that initiate automation rule evaluation
-- [Task Templates](./task-templates.md) — workflow templates that define reusable workflow configurations
-- [Status Tracking](./status-tracking.md) — how user workflow status progresses as steps complete
+- [Triggers](./triggers.md) — the event types that start or advance automation rules
+- [Task Templates](./task-templates.md) — reusable templates that define complete workflow configurations
+- [Status Tracking](./status-tracking.md) — how case status progresses as steps complete

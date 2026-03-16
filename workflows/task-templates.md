@@ -2,54 +2,53 @@
 
 ## Overview
 
-Task templates (called `WorkflowTemplate` in the codebase) are predefined, reusable configurations that define an entire workflow setup — including products, invoices, form requests, document requests, custom terms, and the workflow step sequences. They allow creators to instantiate a fully configured workflow from a template rather than building one from scratch. Templates are primarily used for legal practice areas such as immigration, bankruptcy, and personal injury.
+Task templates are predefined, reusable configurations that set up an entire workflow in one step — including the service, invoices, questionnaires, document requests, custom terms, and the automation step sequences. Instead of building a workflow from scratch, your firm can apply a template and get a fully configured workflow immediately. Templates are available for common legal practice areas such as immigration, bankruptcy, and personal injury.
 
 ## Key Behaviors
 
-- A template is stored as a JSON document in the `workflow_templates` table, identified by a unique `slug` and categorized by legal practice area (`immigration`, `bankruptcy`, `personal-injury`, or `unknown`).
-- When a template is applied, the system clones its configuration into real entities: products, product types, invoices, form request templates, document requests, custom terms, workflow contexts, and workflow steps with their trigger-action chains.
-- The template JSON structure defines:
-  - **Product and product type**: The service offering that the workflow is attached to, including slug and title.
-  - **Invoices**: Invoice templates with line items, pricing, and payment configuration.
-  - **Form requests**: Questionnaire templates with settings for auto-completion, followup cadence, and provider configuration.
-  - **Document requests**: Document upload requests with file specifications, grouping, and integration settings.
-  - **Custom terms**: Legal terms/agreements with dynamic variables and signature configuration.
+- Each template is identified by a unique name and categorized by practice area: immigration, bankruptcy, personal injury, or general.
+- When a template is applied, the system creates all the components defined in it: the service, invoices, questionnaires, document requests, custom terms, consultation offerings, and automation workflows with their step sequences.
+- A template defines:
+  - **Service**: The legal service offering that the workflow is attached to, including its name and category.
+  - **Invoices**: Invoice templates with line items, pricing, and payment settings.
+  - **Questionnaires**: Client intake forms with settings for auto-completion, reminder frequency, and form type.
+  - **Document requests**: Requests for the client to upload specific documents, including file specifications and grouping.
+  - **Custom terms**: Legal agreements with dynamic variables and signature settings.
   - **Consultations**: Booking-based consultation offerings with pricing.
-  - **Workflows**: One or more workflow definitions, each containing threads of trigger-action step sequences.
-- Each workflow within a template defines its own:
-  - **Threads**: Ordered sequences of trigger-initiate steps followed by send-message actions with attachments.
-  - **Context variables**: Data fields collected during the workflow (person info, additional info, selections).
+  - **Workflows**: One or more automation workflows, each containing sequences of triggers and actions.
+- Each workflow within a template includes its own:
+  - **Step sequences**: Ordered chains of triggers (events to wait for) followed by actions (messages with attachments).
+  - **Data fields**: Information collected during the workflow (client details, case-specific information, selections).
   - **Compiled documents**: References to documents generated or collected during the workflow.
-  - **Fees and settings**: Noodle fee, estimated total fees, email notification preferences.
-- The clone process resolves references by slug — template components reference each other by slug (e.g., a message attachment references an invoice template by slug), and the clone process maps these to real entity IDs.
-- Templates support expression-based conditional logic on message attachments, allowing certain attachments to appear only when conditions are met.
-- Owner assignments can be specified at the template level (`ownerPersonIds`) and are applied to the workflow upon cloning.
+  - **Fee and notification settings**: Platform fees, estimated total fees, and email preferences.
+- Template components reference each other by name. For example, a message action can include an invoice attachment by referencing the invoice's name within the template.
+- Templates support conditional attachments — certain attachments on a message can appear only when specific conditions are met.
+- Default team member assignments can be specified in the template and are applied to the workflow when it is created.
 
 ## Configuration
 
-- **slug**: Unique identifier for the template. Used to look up and apply the template.
-- **category**: Legal practice area classification — `immigration`, `bankruptcy`, `personal-injury`, or `unknown`.
-- **version**: Template version number, stored in the JSON payload.
-- **Workflow-level settings** (per workflow in the template):
-  - `enableUscisUpdates`: Enable USCIS tracking.
-  - `enablePacerSubmissions`: Enable PACER filing integration.
-  - `hasGeneratedPdfs`: Whether the workflow generates compiled PDFs.
-  - `sendEmailToCreatorOnCompletion`: Email notification on completion.
-  - `canInitiateAssociatedWorkflows`: Allow spawning associated workflows.
-  - `preserveWorkflowAssignment`: Preserve owner assignments on duplication.
-  - `caseType`: Optional case type classification.
-  - `noodleFee` / `estimatedTotalFees`: Fee configuration.
+- **Template name**: Unique identifier used to look up and apply the template.
+- **Practice area**: Legal category — immigration, bankruptcy, personal injury, or general.
+- **Version**: Template version number for tracking updates.
+- **Per-workflow settings** (each workflow in a template can have its own):
+  - USCIS updates enabled/disabled
+  - PACER submissions enabled/disabled
+  - PDF generation enabled/disabled
+  - Email notification on completion
+  - Ability to start related workflows on completion
+  - Preserve team assignments on duplication
+  - Case type classification
+  - Platform fee and estimated total fees
 
 ## Edge Cases & Limitations
 
-- Template slugs must be globally unique across all templates.
-- The clone process is not atomic across all entities — if it fails partway through, partial entities may be created.
-- Templates reference building blocks (form requests, document requests, invoices) by slug. If a slug collision occurs or a referenced slug does not exist in the template definition, the clone process fails.
-- Expressions within templates are cloned as new expression entities; they do not share references with the original template expressions.
-- The `version` field in the template JSON is informational and is not enforced by the system for compatibility checks.
+- Template names must be globally unique across all templates.
+- If applying a template fails partway through, some components may be partially created. The process is not all-or-nothing.
+- All components in a template reference each other by name. If a referenced name does not exist within the template, the process fails.
+- The version number is informational only. The system does not enforce version compatibility.
 
 ## Related Features
 
-- [Automation Rules](./automation-rules.md) — the workflow definitions that templates instantiate
-- [Triggers](./triggers.md) — trigger types used in template thread definitions
-- [Status Tracking](./status-tracking.md) — how workflows created from templates track progress
+- [Automation Rules](./automation-rules.md) — the workflows that templates create
+- [Triggers](./triggers.md) — trigger types used in template step sequences
+- [Status Tracking](./status-tracking.md) — how cases created from templates track progress
