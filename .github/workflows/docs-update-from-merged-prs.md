@@ -24,17 +24,22 @@ network:
 
 timeout-minutes: 30
 
-steps:
-  - name: Generate GitHub App token
-    id: app-token
-    uses: actions/create-github-app-token@v1
-    with:
-      app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
-      private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
-      repositories: noodle-api,noodle-frontend,noodle-documents,webforms,docs
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.app-token.outputs.token }}
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
+          private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
+          repositories: noodle-api,noodle-frontend,noodle-documents,webforms,docs
 
 env:
-  GH_TOKEN: ${{ steps.app-token.outputs.token }}
+  GH_TOKEN: ${{ needs.generate-token.outputs.token }}
 ---
 
 # Docs Update from Merged PRs
