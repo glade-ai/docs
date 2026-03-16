@@ -30,6 +30,8 @@ tools:
     github-app:
       app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
       private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
+      owner: glade-ai
+      repositories: [docs, noodle-api, noodle-frontend, noodle-documents, webforms]
 ---
 
 # Docs Update from Merged PRs

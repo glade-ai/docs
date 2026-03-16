@@ -23,7 +23,7 @@
 #
 # Daily scan of merged PRs across Glade repositories to automatically update user-facing documentation when new features, changes, or fixes ship.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"ee0fed825442acf9d912a93de6009bb7ce1b850e0edf927e604d6c56755474e6","compiler_version":"v0.58.3","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"978fb26e71c85ea450a64a8e96a91da563dc3ba562115c40bf7eab259eef7143","compiler_version":"v0.58.3","strict":true}
 
 name: "Docs Update from Merged PRs"
 "on":
@@ -305,8 +305,13 @@ jobs:
         with:
           app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
           private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: ${{ github.event.repository.name }}
+          owner: glade-ai
+          repositories: |-
+            docs
+            noodle-api
+            noodle-frontend
+            noodle-documents
+            webforms
           github-api-url: ${{ github.api_url }}
           permission-contents: read
           permission-pull-requests: read
