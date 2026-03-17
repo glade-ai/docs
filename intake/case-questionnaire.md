@@ -20,7 +20,11 @@ Case questionnaires are structured forms that collect information from clients a
 - Collaborators (additional team members) can be assigned to questionnaires with view or edit permissions.
 - A **require all fields** setting controls whether all required fields must be filled before the questionnaire can be completed.
 - A questionnaire can be marked as generating a case document, which enables PDF generation from the questionnaire data.
-- List-type fields allow you to click into individual rows to view or edit details. When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
+- List-type fields allow you to click into individual rows to view or edit details:
+  - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
+  - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
+  - The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it.
+  - When editing a row in the detail view, saving checks required fields. If any are incomplete, errors are highlighted and you must confirm to save and continue with the incomplete data.
 
 ## Configuration
 
