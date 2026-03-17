@@ -1,0 +1,13 @@
+name: PR Notifications
+
+on:
+  pull_request_target:
+    types: [opened, ready_for_review, converted_to_draft, reopened, closed, review_requested]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  notify:
+    uses: glade-ai/github-actions/.github/workflows/pr-notifications.yml@v2
+    secrets:
+      slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
