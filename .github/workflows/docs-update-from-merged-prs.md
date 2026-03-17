@@ -106,6 +106,7 @@ Writing guidelines — follow the conventions in this repo's `AGENTS.md`:
 - Do not copy-paste PR descriptions verbatim — translate engineer-speak into user-speak
 - If something is unclear, leave a `> TODO:` blockquote instead of guessing
 - Do not reference PR numbers, commit SHAs, or internal implementation details in the doc content itself
+- **No custom pricing details**: Never mention that custom or per-firm pricing overrides exist. These are internal arrangements — external-facing docs should only reference standard/default pricing behavior.
 
 ## Step 4: Create one PR per domain (with deduplication)
 
