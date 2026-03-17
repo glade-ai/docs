@@ -3,6 +3,18 @@ name: Bump docs submodule in glade-mcp-server
 on:
   push:
     branches: [main]
+    paths:
+      - 'appointments/**'
+      - 'back-office/**'
+      - 'crm/**'
+      - 'intake/**'
+      - 'integrations/**'
+      - 'payments/**'
+      - 'workflows/**'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
 
 jobs:
   bump-submodule:
