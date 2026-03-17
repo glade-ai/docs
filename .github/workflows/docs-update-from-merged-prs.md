@@ -154,13 +154,16 @@ After creating each PR, assign it to whoever is currently on call:
 
 ## Step 5: Post Slack update
 
-After all PRs are created, post a summary message to the `#agentic-workflows` channel (ID: `C0AMJ6V7WQH`) using the Slack tool. The message should include:
-- A brief description of what the workflow did (e.g., "Docs Update from Merged PRs scanned X PRs across Y repos")
+After all PRs are created, post a summary message to the `#agentic-workflows` channel (ID: `C0AMJ6V7WQH`) using the Slack tool.
+
+Start with 1–3 sentences in plain English describing what you did and why — e.g., "Updated the payments docs to reflect the new 12-month payment plan option that shipped in noodle-api#1234. Also added a new doc for the auto-late-fees feature from noodle-frontend#567."
+
+Then include:
 - Links to each documentation PR that was created
 - Which source PRs triggered the updates
 - Any PRs that were skipped as ambiguous (with confidence levels) so a human can review
 
-Keep the message concise and scannable — use bullet points, not paragraphs.
+Keep the message concise and scannable — use bullet points for the details, not paragraphs.
 
 ## Step 6: Summary
 
