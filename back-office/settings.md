@@ -71,6 +71,7 @@ Settings control how your firm's back office behaves. This includes custom workf
 
 - **Pull attempt limit** sets the maximum number of credit report pull attempts per case.
 - **Custom pricing** lets you override the default pricing for individual and joint credit report pulls.
+- Credit report pulls are billed from the first pull. If no custom pricing is configured for your firm, the default rate applies — there is no free-pull threshold.
 
 ## Configuration
 
