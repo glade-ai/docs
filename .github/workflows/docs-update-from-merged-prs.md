@@ -23,17 +23,24 @@ network:
   allowed:
     - defaults
     - api.github.com
+    - api.pagerduty.com
+    - slack.com
 
 timeout-minutes: 30
 
 tools:
   github:
-    toolsets: [repos, pull_requests]
+    toolsets: [repos, pull_requests, users]
     github-app:
       app-id: ${{ secrets.DOCS_BUMP_APP_ID }}
       private-key: ${{ secrets.DOCS_BUMP_APP_PRIVATE_KEY }}
       owner: glade-ai
       repositories: [docs, noodle-api, noodle-frontend, noodle-documents, webforms]
+  slack:
+    token: ${{ secrets.SLACK_BOT_TOKEN }}
+  fetch:
+    urls:
+      - https://api.pagerduty.com/*
 ---
 
 # Docs Update from Merged PRs
@@ -137,7 +144,25 @@ Both tags and non-empty content between them are mandatory. Do not omit them.
 
 If multiple source PRs affect the same domain, combine them into a single PR for that domain.
 
-## Step 5: Summary
+### Assign the on-call reviewer
+
+After creating each PR, assign it to whoever is currently on call:
+
+1. Fetch the current on-call user from PagerDuty using the REST API (`GET https://api.pagerduty.com/oncalls`), authenticating with the `${{ secrets.PAGERDUTY_API_TOKEN }}` token in the `Authorization: Token token=...` header.
+2. Match the on-call user's email to a GitHub username (use the GitHub API to look up the user by email).
+3. Assign that GitHub user as both the **assignee** and **reviewer** on the PR.
+
+## Step 5: Post Slack update
+
+After all PRs are created, post a summary message to the `#agentic-workflows` channel (ID: `C0AMJ6V7WQH`) using the Slack tool. The message should include:
+- A brief description of what the workflow did (e.g., "Docs Update from Merged PRs scanned X PRs across Y repos")
+- Links to each documentation PR that was created
+- Which source PRs triggered the updates
+- Any PRs that were skipped as ambiguous (with confidence levels) so a human can review
+
+Keep the message concise and scannable — use bullet points, not paragraphs.
+
+## Step 6: Summary
 
 After creating all PRs, post a summary as a workflow annotation listing:
 - How many PRs were scanned across all repos
