@@ -28,7 +28,7 @@
 name: "Docs Update from Merged PRs"
 "on":
   schedule:
-  - cron: "0 10 * * *"
+  - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions: {}

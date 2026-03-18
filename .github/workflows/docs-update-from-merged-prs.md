@@ -5,7 +5,7 @@ description: >
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # 5 AM ET (10:00 UTC)
+    - cron: '0 8 * * *'  # 3 AM ET (08:00 UTC)
   workflow_dispatch:
 
 engine: claude
