@@ -25,6 +25,10 @@ Document collection enables your team to request specific files from clients as 
 - **File slots** define each requested file: name, description, ordering, required flag, "for your eyes only" flag, and optional integration metadata (e.g., PACER integration for auto-generated legal documents).
 - **Followup reminders** can be configured per document request and per individual client assignment, with a customizable frequency (minutes, hours, days, weeks, or none).
 - **Document request types**: "basic" for standard file uploads, "income data" for structured income data collection. Income data files can track metadata including income source, pay frequency, start/end dates, and monthly dollar values.
+- **Income calculation mode** (employment income): When a client uploads multiple paystubs for employment income, your team can choose how Glade calculates the monthly income figures used in documents like Schedule I:
+  - **All paystubs** (default): sums all selected paystubs and averages them across the unique months represented.
+  - **Single paystub YTD**: uses the year-to-date totals from one paystub divided by the number of months elapsed in the year. This is useful when only one recent paystub is available or when YTD figures are more accurate than averaging multiple pay periods.
+  To switch modes, click the **Calculation** button next to an employer row in the income document view. When using YTD mode, you select which paystub provides the YTD figures, and choose whether to auto-detect months elapsed from the paystub date or set the number manually. A preview of the resulting Schedule I contributions is shown before you apply changes.
 - **Structured data types** on file slots (income data, asset data, personal data, prompt data) enable structured data extraction from uploaded documents.
 - **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
 - **Email notifications** can be toggled on or off per document request template.

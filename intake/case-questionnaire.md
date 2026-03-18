@@ -23,8 +23,9 @@ Case questionnaires are structured forms that collect information from clients a
 - List-type fields allow you to click into individual rows to view or edit details:
   - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
   - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
-  - The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it.
-  - When editing a row in the detail view, saving checks required fields. If any are incomplete, errors are highlighted and you must confirm to save and continue with the incomplete data.
+  - The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real-time as fields are edited.
+  - When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. On questionnaires that do not require completion, saving always proceeds without a prompt.
+  - When a list row references items in another section (for example, an exemption row linked to a property), the detail modal header shows the parent item's name as context so you always know which item you are editing.
 
 ## Configuration
 
