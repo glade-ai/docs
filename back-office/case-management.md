@@ -11,6 +11,7 @@ Case management is the core back-office feature that lets your firm track client
 - Cases track progress as a percentage based on steps taken and tasks completed.
 - Cases record key lifecycle dates: when filed, completed, canceled, ended, archived, and paused until a future date.
 - A "last activity" timestamp updates whenever significant activity occurs on a case, providing a recency signal for dashboards and reports.
+- The case list can be sorted by any column, including Progress. Sorting by Progress orders cases by their completion percentage without affecting any active status or other filters.
 - Cases can be initiated by a specific team member and assigned to one or more owners, each of whom can have a role on that case (e.g., Paralegal, Documents Team).
 - A case can be marked as the primary case, with associated sub-workflows linked to it. Associated workflows appear together in intake status reports.
 - Case data supports both single-value fields (e.g., debtor SSN, attorney info) and repeatable items (e.g., creditors, assets). The system preserves a full history of field changes for audit purposes.
