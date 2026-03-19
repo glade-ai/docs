@@ -11,6 +11,7 @@ Case questionnaires are structured forms that collect information from clients a
 - When using Glade's native provider, initial values can be pre-populated from field mappings tied to the client's workflow.
 - Questionnaires are organized into sections, each containing fields. Sections can be conditionally shown or hidden based on the client's answers to other fields.
 - Supported field types include: short text, long text, numeric, number, currency, date, phone number, SSN, name, US address, international address, single select, multi-select, list, table, percent, and domain-specific types like creditor select, court division select, bankruptcy statute select, and median income.
+- Currency fields default to $0.00 on first load. You can delete the value to leave the field empty — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
 - Fields support validation rules (min/max length, patterns, required status), conditional visibility, default values, and autofills from external data sources or AI.
 - Questionnaire responses track who submitted them and the source of the value (e.g., manual entry, autofill, AI).
 - A **review workflow** can be enabled on the template so that a questionnaire goes to "submitted for review" before being marked complete. Reviewers from your team are assigned to handle the review.
