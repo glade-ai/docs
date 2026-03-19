@@ -47,12 +47,43 @@ Courts not in this list are not available for automated filing.
 - Payment is retried up to 3 times if the initial attempt fails.
 - The transaction number from PACER is recorded on the submission.
 
+### Filing progress panel
+
+A filing progress panel appears in the bottom-right corner of the screen when a PACER filing is running. It persists as you navigate to other pages — you do not need to stay on the filing tab to monitor progress.
+
+- The panel is collapsed by default. The header shows the current step label, a progress count (e.g., "Uploading documents (3/6)"), and a spinner while the filing is in progress.
+- Click the header to expand the panel and see the full step list, a **View filing** link that opens the case's status tab, and a dismiss button.
+- When the filing completes, the header shows a green check and "Filing completed." When it fails, a red indicator and "Filing failed" appear.
+- If you cancel a filing in progress, the header shows "Cancellation pending" until the cancellation is confirmed.
+- Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
+
 ### Status tracking
 
 - Submission status values: in progress, succeeded, failed, or manual (attorney filed outside Glade).
 - Each step of the filing process is logged with timestamps.
 - Screenshots are captured at key steps for debugging failed submissions.
 - Inbox notifications link directly to the case's status tab.
+
+### Preventing duplicate filings
+
+Before a filing proceeds, Glade checks whether the case already has an assigned case number or an in-progress filing. Depending on the situation, you will see one of two states in the pre-filing dialog:
+
+- **Hard block** — If a case number already exists, or if a filing is actively in progress for the case, the dialog shows only a **Go Back** button. You cannot proceed until the existing filing resolves. A red alert banner in the eFiling modal also shows the blocking reason.
+- **Soft warning** — If a recent filing attempt exists but does not meet the hard-block conditions, you can review the details and continue by checking an acknowledgment checkbox and clicking **Continue Anyway**.
+
+At the moment you click the final submit button, Glade performs a fresh check. If the status has changed to a hard-block condition while the dialog was open, the submission is blocked and you will see a toast and an updated alert banner.
+
+### Compiling selected documents for amendments
+
+When filing an amendment, you can select a subset of the case's documents and download them as a single merged PDF — without downloading all documents or individual files.
+
+1. Open the Case Documents pane (press **D** while viewing the case).
+2. Check the boxes next to the documents you want to include. You can select across multiple document categories.
+3. The footer button changes to **Download N selected as PDF**, where N is your selection count.
+4. Click it to open the compile modal. Enter a custom filename and drag to reorder documents if needed.
+5. Click **Compile and Download PDF** to download the merged file.
+
+Deselecting all documents returns the footer to the standard download options. Your selection clears automatically when you close the documents pane.
 
 ### Notifications
 
@@ -78,6 +109,7 @@ Courts not in this list are not available for automated filing.
 - If the PACER session token expires mid-filing, the submission fails and can be retried.
 - PACER passwords are not stored — they are passed only at filing time. The 2FA key is stored encrypted.
 - If a filing partially succeeds (some documents uploaded but fee payment fails), the submission is marked as failed. The attorney may need to complete the filing manually in PACER.
+- Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
 
 ## Related Features
