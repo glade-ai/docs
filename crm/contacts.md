@@ -18,7 +18,7 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 
 - **Member list filters**: All, Subscribed, Free, Unverified. Additional filters exist for legal workflow states (retained, booked consultation, filed case).
 - **Sort options**: Control the ordering of the member list.
-- **Search**: Filter members by name, email, or phone number.
+- **Search**: Filter members by name, email, phone number, or profile notes.
 
 ## Edge Cases & Limitations
 
