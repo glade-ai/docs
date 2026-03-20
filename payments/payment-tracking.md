@@ -89,6 +89,15 @@ Payment tracking in Glade provides firms with a complete view of all payment act
 - The invoice must already be synced to QuickBooks before its payments can sync.
 - Changes made directly in QuickBooks are not synced back to Glade. The sync is one-directional.
 
+### Disputes
+
+When a client files a dispute with their card issuer against a payment processed through Stripe, the dispute is surfaced in Glade so your team can track it.
+
+- Disputed payments are flagged in the payment list and the payment detail view.
+- Each dispute shows the reason the client provided to their card issuer (e.g., "unrecognized charge", "service not provided") and the current dispute status.
+- Dispute statuses reflect the state of the chargeback process: **Warning needs response**, **Warning under review**, **Warning closed**, **Needs response**, **Under review**, **Charge refunded**, **Won**, or **Lost**.
+- A dispute does not automatically refund the payment. The outcome depends on the chargeback process with the card issuer.
+
 ### Outside-of-Glade payments
 
 - Payments made outside the platform (cash, check, wire, etc.) can be recorded manually on an invoice.
