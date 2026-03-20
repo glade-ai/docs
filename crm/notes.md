@@ -2,7 +2,7 @@
 
 ## Overview
 
-Notes let your team attach internal annotations to client records. Notes are visible only to your team — clients cannot see them. Access notes through the **Notes** tab on a client's detail view. They are a lightweight way to record observations, reminders, or context that does not belong in the client-facing conversation.
+Notes let your team attach internal annotations to client records. Notes are visible only to your team — clients cannot see them. Access notes through the **Notes** tab on a client's detail view — it is the second tab in the member profile, right after the overview. They are a lightweight way to record observations, reminders, or context that does not belong in the client-facing conversation.
 
 ## Key Behaviors
 
@@ -21,7 +21,7 @@ Notes let your team attach internal annotations to client records. Notes are vis
 ## Edge Cases & Limitations
 
 - Notes cannot be edited or deleted after creation. Make sure the content is correct before saving.
-- Notes are not searchable. There is no way to filter or search note content.
+- Note content is included when searching for clients in the Members list. If a client's profile notes match your search query, that client appears in the results.
 - Notes are only accessible from your dashboard — clients never see notes written about them.
 
 ## Related Features

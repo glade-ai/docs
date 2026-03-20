@@ -11,7 +11,7 @@ Client records track the relationship between a client and your firm on Glade. E
 - Client records store personal details including address, date of birth, SSN, and communication preferences (broadcast opt-in, SMS opt-in).
 - From a client's detail view, you can see their total dollar value, active subscriptions, order history, invoices, payment methods, cases, documents, and questionnaires.
 - Clients are classified as **Subscribed**, **Free**, or **Unverified** based on whether they have an active subscription and have verified their account.
-- The member list supports filtering by these classifications and searching by name, email, or phone number.
+- The member list supports filtering by these classifications and searching by name, email, phone number, or the content of a client's profile notes.
 - You can edit a client's name, email, phone number, date of birth, SSN, and address through the **Edit Contact** modal.
 - Follow-up cadence settings can be configured per client to control how frequently automated reminders are sent.
 - When a client makes a payment through Stripe, their payment profile is linked to the client record automatically.
