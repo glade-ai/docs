@@ -25,7 +25,7 @@ Case management is the core back-office feature that lets your firm track client
 - **Custom statuses**: Your firm defines its own statuses with a title, icon, color, and behavioral flags. Some statuses can be configured to treat cases as archived or to disable automated follow-up reminders. A set of default statuses is created when your firm is set up (e.g., Data Collection, Processing, Filed and Pending, Completed, Archived).
 - **Workflow templates**: Each case is based on a workflow template that defines the steps, contexts, invoices, owners, and fee structure. Workflow templates are either "basic" or "attorney-case" type, with an optional case type for further categorization.
 - **Follow-up cadence**: Configured at the firm level to control how often automated client follow-up reminders are sent for outstanding tasks.
-- **District templates**: Cases can be linked to a district template for court-specific configuration.
+- **District templates**: Cases can be linked to a district template for court-specific filing configuration. The district template editor shows an info tooltip for each field label so you can learn what a field does without leaving the page. Document configurations that share the same display name (for example, Ch. 7 and Ch. 13 variants of the same petition type) are grouped under a single collapsible header with condition labels for each variant, reducing visual clutter when a district has many document types configured.
 
 ## Edge Cases & Limitations
 
