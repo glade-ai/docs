@@ -1,10 +1,14 @@
 # Intake
 
-Tools for collecting client information, documents, and case details at the start of an engagement.
+Client onboarding — the portal experience and intake flow for new clients.
 
 ## Features
 
-- [Webforms](./webforms.md)
-- [Case Questionnaire](./case-questionnaire.md)
-- [Document Collection](./document-collection.md)
 - [Client Portal](./client-portal.md)
+
+## Workflow Steps
+
+Questionnaires and document collection are general-purpose building blocks used throughout a case's lifecycle. They are documented under Workflows:
+
+- [Questionnaires](../workflows/questionnaires.md)
+- [Document Collection](../workflows/document-collection.md)

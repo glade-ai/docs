@@ -88,10 +88,10 @@ This repository contains documentation organized into these domains:
 | Appointments | `appointments/` | Scheduling, calendar sync, reminders, video consultations |
 | Back Office | `back-office/` | Admin settings, firm management, user roles |
 | CRM | `crm/` | Client records, contacts, communication history, notes |
-| Intake | `intake/` | Client intake forms, lead management, onboarding |
+| Intake | `intake/` | Client onboarding, portal, intake flow |
 | Integrations | `integrations/` | Third-party integrations, API connections, court systems |
 | Payments | `payments/` | Invoices, payment plans, online payments, tracking |
-| Workflows | `workflows/` | Automation rules, task templates, triggers, status tracking |
+| Workflows | `workflows/` | Automation rules, task templates, triggers, status tracking, questionnaires, document collection, webforms |
 
 For each user-facing PR, determine which documentation domain(s) it affects. Read the existing documentation files in those domains to understand the current state.
 
