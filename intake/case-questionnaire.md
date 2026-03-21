@@ -14,6 +14,7 @@ Case questionnaires are structured forms that collect information from clients a
 - Currency fields default to $0.00 on first load. You can delete the value to leave the field empty — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
 - Fields support validation rules (min/max length, patterns, required status), conditional visibility, default values, and autofills from external data sources or AI.
 - Questionnaire responses track who submitted them and the source of the value (e.g., manual entry, autofill, AI).
+- When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
 - A **review workflow** can be enabled on the template so that a questionnaire goes to "submitted for review" before being marked complete. Reviewers from your team are assigned to handle the review.
 - An **AI summary** can be enabled to generate a summary of the questionnaire responses after completion. The summary voice (tone) is customizable.
 - When a questionnaire is completed, it triggers downstream workflow steps, updates case data, generates compiled documents, creates tasks, and sends notifications.
