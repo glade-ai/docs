@@ -32,7 +32,7 @@ Courts not in this list are not available for automated filing.
 3. A submission attempt is created with status "in progress."
 4. The filing runs asynchronously via browser automation:
    - Logs into PACER with the firm's credentials and 2FA.
-   - Uploads core case documents (debtor info, petition, creditor matrix, pay advices).
+   - Uploads core case documents (debtor info, attorney information, petition, creditor matrix, pay advices).
    - Uploads supplemental documents based on chapter type — Chapter 7: income statements, means test; Chapter 13: repayment plan, income statements.
    - Submits credit counseling certificates and compensation disclosures.
    - Extracts the assigned case number from the court's confirmation screen.
