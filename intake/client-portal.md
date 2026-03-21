@@ -29,6 +29,6 @@ The client portal is where clients interact with your firm's workflows. Clients 
 
 ## Related Features
 
-- [Case Questionnaire](./case-questionnaire.md)
-- [Document Collection](./document-collection.md)
-- [Webforms](./webforms.md)
+- [Case Questionnaire](../workflows/case-questionnaire.md)
+- [Document Collection](../workflows/document-collection.md)
+- [Webforms](../workflows/webforms.md)
