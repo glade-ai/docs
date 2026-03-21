@@ -43,5 +43,4 @@ Document collection enables your team to request specific files from clients as 
 ## Related Features
 
 - [Client Portal](../intake/client-portal.md)
-- [Case Questionnaire](./case-questionnaire.md)
-- [Webforms](./webforms.md)
+- [Questionnaires](./questionnaires.md)
