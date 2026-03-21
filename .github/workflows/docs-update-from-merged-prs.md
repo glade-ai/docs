@@ -77,6 +77,8 @@ User-facing changes include:
 
 **Skip** PRs that are purely internal: refactors, dependency bumps, test-only changes, CI/CD changes, infrastructure changes, or developer tooling.
 
+Also **skip** changes that are **Glade-admin/ops-facing only** — i.e., tools and interfaces used by Glade's internal team to manage the platform, not by Glade's customers. These docs are for attorneys, paralegals, and legal ops staff who use the product daily. Internal admin tooling (e.g., district template editors, internal dashboards, ops configuration panels) should not be documented here even if it has a UI. When in doubt, ask: "Would a Glade customer ever see or interact with this?" If not, skip it.
+
 ## Step 2: Map changes to documentation domains
 
 This repository contains documentation organized into these domains:
