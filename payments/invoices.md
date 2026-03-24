@@ -14,7 +14,7 @@ There are three ways to create an invoice:
 
 - **Manually** — A firm user creates an invoice directly by adding line items, setting an amount, and assigning it to a client. The invoice starts in an active state and is immediately payable.
 - **From a template** — Firms set up reusable invoice templates with predefined line items, payment settings, and amounts. Creating an invoice from a template copies all settings into a new invoice, saving time for recurring billing scenarios.
-- **Via a workflow** — Invoices can be generated automatically as a step in a workflow (for example, after a client submits an intake form or books an appointment). Workflow-generated invoices start in a "generating" state while line items are being finalized, then become active once amounts are set.
+- **Via a workflow** — Invoices can be generated automatically as a step in a workflow (for example, after a client submits an intake form or books an appointment). Workflow-generated invoices start in a "generating" state while line items are being finalized, then become active once amounts are set. If a client pays at the start of a workflow before the invoice is formally created, the invoice is correctly marked as paid once it is finalized — it does not remain active as if payment were still outstanding.
 
 ### Line items
 
