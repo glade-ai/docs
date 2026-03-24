@@ -11,8 +11,8 @@ Document collection enables your team to request specific files from clients as 
 - Document request assignments progress through statuses: **in progress**, **in review**, **succeeded**, **skipped**, and **failed**.
 - Each file slot tracks its upload status: **incomplete**, **complete**, or **action required**.
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
-- Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement.
-- When all required documents are uploaded, the client can submit for review.
+- Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement. After a re-upload, the new file is correctly recognized as ready for review.
+- When all required documents are uploaded, the client can submit for review. Before submission, the system verifies that all required files are fully uploaded — if any required file is still incomplete, submission is blocked and the client sees an error message.
 - When a document request is in review and no files have been rejected, it is awaiting reviewer action.
 - Reviewers from your team are assigned to document requests to handle the review process.
 - When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
