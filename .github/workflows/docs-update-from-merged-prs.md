@@ -10,10 +10,6 @@ on:
 
 engine: claude
 
-secrets:
-  PAGERDUTY_API_TOKEN: ${{ secrets.PAGERDUTY_API_TOKEN }}
-  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
 permissions:
   contents: read
   pull-requests: read
@@ -27,8 +23,6 @@ network:
   allowed:
     - defaults
     - api.github.com
-    - api.pagerduty.com
-    - slack.com
 
 timeout-minutes: 30
 
@@ -145,35 +139,7 @@ Both tags and non-empty content between them are mandatory. Do not omit them.
 
 If multiple source PRs affect the same domain, combine them into a single PR for that domain.
 
-### Assign the on-call reviewer
-
-After creating each PR, assign it to whoever is currently on call:
-
-1. Fetch the current on-call user from PagerDuty via Bash/curl: `curl -s -H "Authorization: Token token=$PAGERDUTY_API_TOKEN" -H "Content-Type: application/json" "https://api.pagerduty.com/oncalls?earliest=true"`. Extract the on-call user's email from the response.
-2. Match the on-call user's email to a GitHub username using the GitHub `search_users` tool.
-3. Assign that GitHub user as both the **assignee** and **reviewer** on the PR.
-
-## Step 5: Post Slack update
-
-After all PRs are created, post a summary message to the `#agentic-workflows` channel (ID: `C0AMJ6V7WQH`) via Bash/curl using the Slack API:
-
-```bash
-curl -s -X POST "https://slack.com/api/chat.postMessage" \
-  -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"channel": "C0AMJ6V7WQH", "text": "..."}'
-```
-
-Start with 1–3 sentences in plain English describing what you did and why — e.g., "Updated the payments docs to reflect the new 12-month payment plan option that shipped in noodle-api#1234. Also added a new doc for the auto-late-fees feature from noodle-frontend#567."
-
-Then include:
-- Links to each documentation PR that was created
-- Which source PRs triggered the updates
-- Any PRs that were skipped as ambiguous (with confidence levels) so a human can review
-
-Keep the message concise and scannable — use bullet points for the details, not paragraphs.
-
-## Step 6: Summary
+## Step 5: Summary
 
 After creating all PRs, post a summary as a workflow annotation listing:
 - How many PRs were scanned across all repos
