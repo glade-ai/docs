@@ -11,6 +11,7 @@ The client portal is where clients interact with your firm's workflows. Clients 
 - Clients start a workflow by following a link that walks them through the workflow's initial steps.
 - Each workflow step can include questionnaires, document collection, payments, bookings, e-signatures, and messaging.
 - Clients sign up or sign in through the portal. Each client is associated with your firm's account.
+- When adding a joint filer or collaborator to a case workflow at initiation, you can provide an optional phone number. When present, the phone number appears in the case initiation summary and is saved with that person's contact record.
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
 - The portal includes a branded "Client login portal" accessible from your public page.
 
