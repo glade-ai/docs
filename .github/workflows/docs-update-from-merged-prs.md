@@ -10,6 +10,10 @@ on:
 
 engine: claude
 
+secrets:
+  PAGERDUTY_API_TOKEN: ${{ secrets.PAGERDUTY_API_TOKEN }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
 permissions:
   contents: read
   pull-requests: read
@@ -27,10 +31,6 @@ network:
     - slack.com
 
 timeout-minutes: 30
-
-env:
-  PAGERDUTY_API_TOKEN: ${{ secrets.PAGERDUTY_API_TOKEN }}
-  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 tools:
   github:
