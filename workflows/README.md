@@ -10,3 +10,4 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [Status Tracking](./status-tracking.md)
 - [Questionnaires](./questionnaires.md)
 - [Document Collection](./document-collection.md)
+- [Exemptions Calculator](./exemptions-calculator.md)

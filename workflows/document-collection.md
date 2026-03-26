@@ -12,6 +12,7 @@ Document collection enables your team to request specific files from clients as 
 - Each file slot tracks its upload status: **incomplete**, **complete**, or **action required**.
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
 - Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement. After a re-upload, the new file is correctly recognized as ready for review.
+- Files can be moved from one document request to another. If a document request is currently in review when you move files out of it, a warning message appears asking you to confirm — moving files out of an in-review request will change its status. If all files in an in-review request are moved out, the request status changes back from in review to in progress.
 - When all required documents are uploaded, the client can submit for review. Before submission, the system verifies that all required files are fully uploaded — if any required file is still incomplete, submission is blocked and the client sees an error message.
 - When a document request is in review and no files have been rejected, it is awaiting reviewer action.
 - Reviewers from your team are assigned to document requests to handle the review process.
