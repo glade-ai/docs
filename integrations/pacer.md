@@ -64,6 +64,22 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Screenshots are captured at key steps for debugging failed submissions.
 - Inbox notifications link directly to the case's status tab.
 
+### AI document review
+
+When a document is uploaded to a PACER filing packet, Glade AI automatically reviews it against court-specific requirements and flags any issues. Each document row in the filing packet displays a status badge showing the current review result:
+
+- **Evaluating** — AI review is in progress.
+- **Approved by Glade AI** — The document passed AI review with no issues found.
+- **Needs Review** — The AI found one or more potential issues and flagged the document for human review.
+- **Approved by Reviewer** — A team member reviewed the document and manually approved it.
+- **Failed** — The AI review process encountered an error and could not complete.
+
+Clicking a document row opens the **Review Panel** above the document preview. The panel shows the Document Status, an AI-generated summary of the review findings, and a checklist of the specific items checked. Documents in "Needs Review" state include an **Approve Document** button — clicking it marks the document as approved by the reviewer.
+
+Review status updates in real time as AI review completes. You do not need to refresh the page.
+
+**Triggering review manually:** If a document was uploaded before AI review was available, it will not have a status badge. To trigger a review after the fact, open the three-dot menu on the document row and choose **Review by Glade AI**.
+
 ### Preventing duplicate filings
 
 Before a filing proceeds, Glade checks whether the case already has an assigned case number or an in-progress filing. Depending on the situation, you will see one of two states in the pre-filing dialog:
