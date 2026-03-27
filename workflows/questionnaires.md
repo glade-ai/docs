@@ -104,6 +104,8 @@ When using Glade's native form provider, initial values can be pre-populated fro
 
 Response history tracks when responses are modified, supporting undo and audit.
 
+Default options on single-select fields (configured in the questionnaire template) are automatically applied and saved when the questionnaire first loads. These defaults count as valid answers during validation — a field with a pre-set default is not flagged as incomplete.
+
 ### Currency Field Behavior
 
 Currency fields default to $0.00 on first load. You can delete the value to leave the field empty — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
@@ -115,7 +117,7 @@ List-type fields allow you to click into individual rows to view or edit details
 - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
 - The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited.
-- When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
+- When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. This prompt also appears if you clear a required field that previously had a value. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 
@@ -165,6 +167,7 @@ When a questionnaire is completed, it triggers downstream workflow steps, update
 - Typeform and Anvil providers are supported, but Glade's native provider is the primary path. Typeform questionnaires redirect clients to an external URL. Auto-complete is only supported for the Anvil provider.
 - When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade.
 - List fields that use referenced lists depend on both the referencing and referenced fields existing in the same questionnaire template.
+- List fields that are linked as destinations — populated automatically from another list in the questionnaire at filing time (for example, Schedule D Creditors mirroring the Creditors list) — are not counted as incomplete during validation. Only the source list needs to be filled.
 - Deduplication of list items is available but requires specifying the field.
 - Linked destination list fields (for example, a Schedule D creditors list that auto-populates from a master creditor list) are not independently validated. Completing the source list is sufficient — the destination list does not need to be filled out separately.
 

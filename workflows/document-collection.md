@@ -15,6 +15,7 @@ Document collection enables your team to request specific files from clients as 
 - Files can be moved from one document request to another. If a document request is currently in review when you move files out of it, a warning message appears asking you to confirm — moving files out of an in-review request will change its status. If all files in an in-review request are moved out, the request status changes back from in review to in progress.
 - When all required documents are uploaded, the client can submit for review. Before submission, the system verifies that all required files are fully uploaded — if any required file is still incomplete, submission is blocked and the client sees an error message.
 - When a document request is in review and no files have been rejected, it is awaiting reviewer action.
+- If you move a file that belongs to a document request currently in review, a warning message appears explaining that the move will change the review status. If you move all files out of a submitted document request slot while it is in review, the review status resets automatically to reflect that the slot is no longer populated.
 - Reviewers from your team are assigned to document requests to handle the review process.
 - When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
 - Document requests support collaborator assignment, allowing multiple team members to participate in review.
