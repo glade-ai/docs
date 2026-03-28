@@ -40,6 +40,22 @@ Courts not in this list are not available for automated filing.
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
 
+### Filing Packet AI Review
+
+Before a filing is submitted, Glade automatically reviews each document in the filing packet and flags issues that could cause the court to reject the filing.
+
+- Each document row in the filing packet shows a status badge indicating the AI review result. The badge combines a Glade AI icon with a status indicator.
+- Available review statuses:
+  - **Evaluating** — AI review is in progress.
+  - **Approved** — Glade AI found no issues with the document.
+  - **Needs Review** — Glade AI flagged potential issues. Click the document to see a summary and a checklist of specific concerns.
+  - **Failed** — The review process encountered an error and could not complete.
+  - **Approved by Reviewer** — A team member has manually approved the document after reviewing it.
+- Clicking a document opens a review panel above the document preview. The panel shows the document's current status, an AI-generated summary, and a checklist of validation items.
+- On documents with a **Needs Review** status, an **Approve Document** button lets a team member manually mark the document as approved after reviewing the flagged items.
+- Review results update in real time — when the AI finishes reviewing a document, the badge and review panel update automatically without requiring a page refresh.
+- To trigger AI review for a document that was uploaded before the review feature was active, open the document's three-dot options menu and select **Review by Glade AI**. The document transitions to **Evaluating** and then updates to its review result.
+
 ### Filing fees
 
 - PACER charges a filing fee per case, determined by court and chapter type.
