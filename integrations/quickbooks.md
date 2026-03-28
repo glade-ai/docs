@@ -35,7 +35,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 ### Invoice sync
 
 - Invoices sync with their full amount, line items, and date.
-- Line items appear as "Services" entries in QuickBooks.
+- Line items are recorded against a configurable QuickBooks service item. By default, QuickBooks auto-selects the item; firms can set a specific item in the QuickBooks settings (see Configuration).
 - A private memo on the QuickBooks invoice includes the Glade invoice ID for cross-reference.
 - If an invoice is voided in Glade, the corresponding QuickBooks invoice is also marked as voided.
 - Edited invoices (new versions) sync as updates to the existing QuickBooks invoice.
@@ -82,6 +82,7 @@ Firms choose when invoices sync to QuickBooks:
 |---------|-------------|
 | QuickBooks connection | Connect or disconnect from the Integrations settings page |
 | Invoice sync timing | Choose when invoices sync: Never, On Invoice Payable (default), or On First Payment |
+| Service item | Choose which QuickBooks service item invoice line items are recorded against. The dropdown is populated from your QuickBooks account. Leave unset to use QuickBooks' default auto-selection. The two settings operate independently — changing one does not affect the other. |
 | Connected company | Displayed in settings after connection — one QuickBooks company per Glade account |
 
 ## Edge Cases & Limitations
@@ -91,7 +92,7 @@ Firms choose when invoices sync to QuickBooks:
 - Customers without an email address in Glade cannot sync to QuickBooks.
 - Customers are matched by email only — if the same person has different emails in Glade and QuickBooks, a duplicate may be created.
 - Payments are written once to QuickBooks and never updated afterward — refunds create separate records.
-- Line items sync as generic "Services" entries — custom QuickBooks item mapping is not supported.
+- Line items sync against the configured service item; if that item is later deleted in QuickBooks, Glade automatically clears the stale setting and falls back to QuickBooks' default item on the next sync.
 - Customer address and phone number do not sync — only name and email.
 - If the refresh token expires (after approximately 100 days without activity), the firm must manually reconnect.
 - Reconnecting to the same QuickBooks company after disconnecting may create duplicate records (previously synced records are not re-matched).
