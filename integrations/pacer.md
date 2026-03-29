@@ -51,7 +51,7 @@ Before a filing is submitted, Glade automatically reviews each document in the f
   - **Needs Review** — Glade AI flagged potential issues. Click the document to see a summary and a checklist of specific concerns.
   - **Failed** — The review process encountered an error and could not complete.
   - **Approved by Reviewer** — A team member has manually approved the document after reviewing it.
-- Clicking a document opens a review panel above the document preview. The panel shows the document's current status, an AI-generated summary, and a checklist of validation items.
+- Clicking a document opens a **Document Review Status** panel above the document preview. Click the panel header to collapse or expand it. The panel shows the document's current status, an AI-generated summary, and a bullet-pointed list of specific issues found.
 - On documents with a **Needs Review** status, an **Approve Document** button lets a team member manually mark the document as approved after reviewing the flagged items.
 - Review results update in real time — when the AI finishes reviewing a document, the badge and review panel update automatically without requiring a page refresh.
 - To trigger AI review for a document that was uploaded before the review feature was active, open the document's three-dot options menu and select **Review by Glade AI**. The document transitions to **Evaluating** and then updates to its review result.
@@ -90,7 +90,7 @@ When a document is uploaded to a PACER filing packet, Glade AI automatically rev
 - **Approved by Reviewer** — A team member reviewed the document and manually approved it.
 - **Failed** — The AI review process encountered an error and could not complete.
 
-Clicking a document row opens the **Review Panel** above the document preview. The panel shows the Document Status, an AI-generated summary of the review findings, and a checklist of the specific items checked. Documents in "Needs Review" state include an **Approve Document** button — clicking it marks the document as approved by the reviewer.
+Clicking a document row opens the **Document Review Status** panel above the document preview. Click the panel header to collapse or expand it. The panel shows the document's current status, an AI-generated summary of the review findings, and a bullet-pointed list of specific issues found. Documents in "Needs Review" state include an **Approve Document** button — clicking it marks the document as approved by the reviewer.
 
 Review status updates in real time as AI review completes. You do not need to refresh the page.
 
