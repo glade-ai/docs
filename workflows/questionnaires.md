@@ -115,13 +115,18 @@ List-type fields allow you to click into individual rows to view or edit details
 - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
 - The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited.
+- When a list row has validation errors, the subsection tabs (for example, "Exemptions" and "Details") each display a red count badge showing how many errors are in that tab, making it easy to navigate directly to the tab that needs attention.
 - When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
+- A **Save & Next** button lets you save the current row and advance directly to the next row without returning to the full list.
+- If you use **Previous** or **Next** to navigate between rows while there are unsaved changes, you will be prompted to confirm before leaving the current row.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 
 ### Resource Panel
 
-When a resource panel is open on the right side of the form (for example, showing source data or a reference document), it scrolls independently of the questionnaire content on the left. Scrolling the form does not move the resource panel, and scrolling the panel does not move the form.
+The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
+
+The panel scrolls independently of the questionnaire content. Scrolling through the form does not move the resource panel, and scrolling the panel does not move the form.
 
 ### Source Data Access
 
