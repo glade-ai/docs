@@ -60,6 +60,7 @@ Each booking moves through a series of statuses over its lifetime:
 
 - Both clients and firm staff can reschedule appointments.
 - Rescheduling checks availability to prevent conflicts with existing bookings.
+- When rescheduling, available time slots are filtered to the team member originally assigned to the booking. This ensures the rescheduled appointment stays with the same team member.
 - By default, clients cannot reschedule within 48 hours of the appointment start time. This protects firms from last-minute schedule changes.
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
