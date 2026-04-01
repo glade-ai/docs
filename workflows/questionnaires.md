@@ -28,6 +28,8 @@ Supported field types include: short text, long text, numeric, number, currency,
 
 Fields support validation rules including minimum and maximum values, minimum and maximum lengths, patterns, required status, and custom validators (for example, age validation).
 
+When a field fails validation, the field itself is visually highlighted — input borders, checkboxes, radio buttons, and date pickers change to indicate the error — and an error message appears below the field. This applies to all field types including short text, long text, date, address, and select fields.
+
 ### Field Options
 
 Select-type fields define their options as a list of choices, each with a label, key, default flag, and optional PDF fill key.
@@ -114,7 +116,7 @@ List-type fields allow you to click into individual rows to view or edit details
 
 - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
-- The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited.
+- The section's error badge count includes errors from incomplete list rows and table cells, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited. Section sidebar navigation and subsection tab badges display error counts in amber.
 - When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
@@ -148,6 +150,16 @@ When viewing from Schedule A/B, property names are clickable links that navigate
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
 
+### Case Data Sync Fields
+
+Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
+
+You can override a synced field's value directly in the questionnaire. When you close the override modal, the updated response saves immediately and reflects in the questionnaire without requiring a separate save action.
+
+### Access Control
+
+If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
+
 ### Re-opening
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
@@ -167,6 +179,8 @@ When a questionnaire is completed, it triggers downstream workflow steps, update
 - List fields that use referenced lists depend on both the referencing and referenced fields existing in the same questionnaire template.
 - Deduplication of list items is available but requires specifying the field.
 - Linked destination list fields (for example, a Schedule D creditors list that auto-populates from a master creditor list) are not independently validated. Completing the source list is sufficient — the destination list does not need to be filled out separately.
+- Clearing a required date field and saving leaves the field in an invalid state — it is treated as empty, not as a valid cleared value, so validation correctly flags it as required.
+- Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 
 ## Related Features
 
