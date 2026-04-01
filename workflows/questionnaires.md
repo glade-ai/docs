@@ -28,6 +28,8 @@ Supported field types include: short text, long text, numeric, number, currency,
 
 Fields support validation rules including minimum and maximum values, minimum and maximum lengths, patterns, required status, and custom validators (for example, age validation).
 
+When a field fails validation, the field itself is visually highlighted — input borders, checkboxes, radio buttons, and date pickers change to indicate the error — and an error message appears below the field. This applies to all field types including short text, long text, date, address, and select fields.
+
 ### Field Options
 
 Select-type fields define their options as a list of choices, each with a label, key, default flag, and optional PDF fill key.
@@ -104,6 +106,8 @@ When using Glade's native form provider, initial values can be pre-populated fro
 
 Response history tracks when responses are modified, supporting undo and audit.
 
+Default options on single-select fields (configured in the questionnaire template) are automatically applied and saved when the questionnaire first loads. These defaults count as valid answers during validation — a field with a pre-set default is not flagged as incomplete.
+
 ### Currency Field Behavior
 
 Currency fields default to $0.00 on first load. You can delete the value to leave the field empty — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
@@ -114,14 +118,18 @@ List-type fields allow you to click into individual rows to view or edit details
 
 - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
-- The section's error badge count includes errors from incomplete list rows, in the same way it counts errors from other field types. Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited.
-- When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
+- The section's error badge count includes errors from incomplete list rows and table cells, in the same way it counts errors from other field types. Error badges always appear on the source list section — for example, errors in a property list appear under "Property (Real & Personal)", not under a derived section like "Schedule D Creditors". Completing required fields in a row reduces the section count; clearing them increases it. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited. Section sidebar navigation and subsection tab badges display error counts in amber.
+- When a list row has validation errors, each subsection tab in the detail view (for example, **Details** or **Exemptions**) shows an error count badge so you can navigate directly to the tab with missing required fields.
+- When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. This prompt also appears if you clear a required field that previously had a value. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
+- A **Save & Next** button saves the current row and opens the next row immediately — no need to return to the full list between edits. **Previous** and **Next** buttons let you move between rows; if you have unsaved changes, you will be prompted before switching.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 
 ### Resource Panel
 
-When a resource panel is open on the right side of the form (for example, showing source data or a reference document), it scrolls independently of the questionnaire content on the left. Scrolling the form does not move the resource panel, and scrolling the panel does not move the form.
+The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
+
+The panel scrolls independently of the questionnaire content. Scrolling through the form does not move the resource panel, and scrolling the panel does not move the form.
 
 ### Source Data Access
 
@@ -132,6 +140,8 @@ The questionnaire content and the resource panel scroll independently — scroll
 ### Exemptions Calculator
 
 When working on bankruptcy Schedule A/B or Schedule C, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
+
+On Schedule C, the homestead exemption question ("Are you claiming a homestead exemption of more than $214,000?") is automatically answered based on the client's total real estate value minus total secured liabilities from Schedule D. The field updates as those values change — no manual entry is needed.
 
 The panel has two tabs:
 
@@ -147,6 +157,16 @@ When viewing from Schedule A/B, property names are clickable links that navigate
 ### AI Autofills
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
+
+### Case Data Sync Fields
+
+Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
+
+You can override a synced field's value directly in the questionnaire. When you close the override modal, the updated response saves immediately and reflects in the questionnaire without requiring a separate save action.
+
+### Access Control
+
+If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
 
 ### Re-opening
 
@@ -165,8 +185,11 @@ When a questionnaire is completed, it triggers downstream workflow steps, update
 - Typeform and Anvil providers are supported, but Glade's native provider is the primary path. Typeform questionnaires redirect clients to an external URL. Auto-complete is only supported for the Anvil provider.
 - When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade.
 - List fields that use referenced lists depend on both the referencing and referenced fields existing in the same questionnaire template.
+- List fields that are linked as destinations — populated automatically from another list in the questionnaire at filing time (for example, Schedule D Creditors mirroring the Creditors list) — are not counted as incomplete during validation. Only the source list needs to be filled.
 - Deduplication of list items is available but requires specifying the field.
 - Linked destination list fields (for example, a Schedule D creditors list that auto-populates from a master creditor list) are not independently validated. Completing the source list is sufficient — the destination list does not need to be filled out separately.
+- Clearing a required date field and saving leaves the field in an invalid state — it is treated as empty, not as a valid cleared value, so validation correctly flags it as required.
+- Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 
 ## Related Features
 
