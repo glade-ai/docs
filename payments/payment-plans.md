@@ -56,6 +56,7 @@ A payment plan moves through the following statuses over its lifetime:
 - If all 3 attempts fail, the installment is marked as failed.
 - Both the client and the firm are notified by email when retries are exhausted.
 - The plan itself remains active. The failed amount rolls into future installments or requires manual intervention by the firm.
+- Payment plan charges are processed as off-session payments. If a card requires 3D Secure authentication, the client receives a notification to complete authentication separately — the system does not attempt an automatic 3D Secure challenge during a retry. This prevents spurious authentication prompts for clients whose cards have 3D Secure enabled.
 
 ### Modifying a payment plan
 
