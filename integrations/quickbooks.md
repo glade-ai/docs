@@ -31,6 +31,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 - Customers are matched by email address. If a customer with the same email already exists in QuickBooks, Glade reuses that record rather than creating a new one.
 - Customer name and email are synced.
 - A customer must have an email address in Glade to sync to QuickBooks.
+- When **Invoice sync timing** is set to "On First Payment", customers are not pushed to QuickBooks when they are created or updated in Glade. Instead, the customer record is created in QuickBooks only when their first payment is processed. This ensures customers appear in QuickBooks at the same time as their first invoice and payment, keeping the books clean for firms that use cash-basis accounting. If a customer already has a payment recorded in QuickBooks (their first payment has been processed), subsequent updates to their name, email, or phone in Glade still sync immediately.
 
 ### Invoice sync
 
@@ -54,8 +55,8 @@ Firms choose when invoices sync to QuickBooks:
 | Option | Behavior |
 |--------|----------|
 | Never | Invoices do not sync. Only customers and payments sync. |
-| On invoice payable (default) | Invoices sync as soon as they have line items and are ready to accept payment. |
-| On first payment | Invoices sync when the first payment succeeds. Useful for firms that only want paid invoices in their books. |
+| On invoice payable (default) | Invoices sync as soon as they have line items and are ready to accept payment. Customers are pushed to QuickBooks when created or updated in Glade. |
+| On first payment | Invoices sync when the first payment succeeds. Customers are also created in QuickBooks at first payment time rather than when first added in Glade. Useful for firms that only want paid records in their books. |
 
 ### Sync status dashboard
 
@@ -75,6 +76,7 @@ Firms choose when invoices sync to QuickBooks:
 - Access tokens refresh every hour; refresh tokens are valid for approximately 100 days.
 - If the refresh token expires (e.g., if the firm has not used Glade in over 100 days), the firm must reconnect QuickBooks.
 - Glade proactively refreshes tokens on a weekly basis to prevent expiration.
+- If an automatic token refresh fails (for example, because the authorization was revoked in QuickBooks), the connection status immediately updates to show as disconnected. The Integrations page reflects the true connection state — a disconnected connection is never shown as active after token failure.
 
 ## Configuration
 
