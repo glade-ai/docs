@@ -24,6 +24,17 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - External calendar events from connected calendars (Google Calendar or Outlook) automatically block availability to prevent double-booking.
 - Only events marked as "busy" block availability. Events marked as "free" or "transparent" do not.
 
+### Availability management view
+
+The **Availability** tab in the Bookings section gives you a centralized place to review and manage availability across all services and team members.
+
+The tab has two sub-views:
+
+- **Team Members**: Shows availability settings organized by team member.
+- **Services**: Lists all schedulable services. For each service, a summary shows which team members have availability configured. Clicking a service name opens the availability editor for that service inline. A **View in services** link navigates to the full service settings page.
+
+Clicking a service in either view opens the availability editor directly — you can update availability without leaving the Bookings section.
+
 ### Client booking flow
 
 1. The client views the firm's product or service listing.
