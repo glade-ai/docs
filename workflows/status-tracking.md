@@ -12,6 +12,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
   - **Steps completed** — how many workflow steps are done out of the total
   - **Tasks completed** — how many client/team tasks are done out of the total
   - **Last activity** — when the most recent action occurred on the case
+  - **Last status change** — when the case's status was most recently updated
 - **Automatic status updates**: When a workflow trigger completes, the case status can automatically update to a specific value. This is configured per workflow step, so workflow designers control exactly when status transitions happen.
 - **Automatic progress calculation**: After each trigger completes, the system recalculates the case's progress, step counts, and task counts based on what has been completed so far.
 - **Automatic completion**: When all workflow steps are done, the system automatically transitions the case to "Completed" status. Attorney-case type workflows may have specialized completion logic for certain case types.
@@ -32,6 +33,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
   - Unarchiving a case restores the previous status. If there was no previous status, it defaults to Data Collection.
   - Moving to Filed and Pending records the filing date. Moving back to Data Collection or Processing clears the filing date.
   - Moving to Completed records the completion date.
+- **Sortable workflow list**: In the workflow list view, cases can be sorted by when their status last changed. This lets you surface cases that have been stuck in a status for a long time or prioritize recently updated ones.
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.

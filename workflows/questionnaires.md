@@ -168,6 +168,10 @@ You can override a synced field's value directly in the questionnaire. When you 
 
 If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
 
+### Submitting with Incomplete Fields
+
+When you click **Submit Questionnaire** and required fields are missing, validation runs and the incomplete fields are highlighted. A **Submit Anyway** button appears in the page header alongside the main submit button, so you can bypass validation and submit the form without completing every required field. This is useful when a field is not applicable to a particular client and cannot be left blank under normal validation rules.
+
 ### Re-opening
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
