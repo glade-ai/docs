@@ -55,6 +55,7 @@ Each booking moves through a series of statuses over its lifetime:
 - Team members can be reassigned after booking.
 - When connected to a workflow, team assignment follows workflow rules.
 - Each team member's individual availability is checked when assigning.
+- When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
 
 ### Rescheduling
 
