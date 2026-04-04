@@ -57,6 +57,19 @@ Before a filing is submitted, Glade automatically reviews each document in the f
 - Review results update in real time — when the AI finishes reviewing a document, the badge and review panel update automatically without requiring a page refresh.
 - To trigger AI review for a document that was uploaded before the review feature was active, open the document's three-dot options menu and select **Review by Glade AI**. The document transitions to **Evaluating** and then updates to its review result.
 
+### Customizing AI Review Instructions
+
+Law firms can customize the review instructions the AI uses when checking filing documents. From your dashboard, navigate to **Filing Packet AI Review Configs** to open the configuration page.
+
+The page lists all supported document types. For each type you can:
+
+- **Override** the default instructions — your text replaces the defaults entirely.
+- **Append** additional instructions — your text is added after the defaults.
+
+Rows with active customizations are tagged **Customized**. Click the clear button on a row to remove the customization and revert that document type to the default instructions.
+
+An info banner on the configuration page explains the difference between override and append behavior.
+
 ### Filing fees
 
 - PACER charges a filing fee per case, determined by court and chapter type.
