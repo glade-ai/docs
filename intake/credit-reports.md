@@ -13,6 +13,14 @@ Glade lets your team pull credit reports for clients as part of the intake proce
 - After confirming, Glade retrieves the report and displays it within the workflow.
 - The action buttons in the modal are disabled while the request is in progress, preventing accidental duplicate submissions.
 
+### Data Saved to the Client Record
+
+When you enter client information in the credit report pull modal — such as name, date of birth, address, phone number, and Social Security Number — Glade automatically saves those values to the client's record. This means you do not need to re-enter the same information on future pulls or elsewhere in the case.
+
+- Each field is only written if the client record does not already have a value for it. Existing data is never overwritten.
+- Address information is treated as a unit: the full address (street, city, state, and ZIP) is only saved if none of those fields are currently set on the record. A partial existing address is left as-is.
+- If the save fails for any reason, the credit report pull itself is not affected — you still receive the report.
+
 ### Error Handling
 
 If a credit report pull fails:
