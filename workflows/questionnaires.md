@@ -139,7 +139,7 @@ The questionnaire content and the resource panel scroll independently — scroll
 
 ### Exemptions Calculator
 
-When working on bankruptcy Schedule A/B or Schedule C, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
+When working on bankruptcy Schedule A/B, Schedule C, or the Master Creditor List, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
 
 On Schedule C, the homestead exemption question ("Are you claiming a homestead exemption of more than $214,000?") is automatically answered based on the client's total real estate value minus total secured liabilities from Schedule D. The field updates as those values change — no manual entry is needed.
 
@@ -157,6 +157,20 @@ When viewing from Schedule A/B, property names are clickable links that navigate
 ### AI Autofills
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
+
+Each autofilled field shows a status indicator describing its current state:
+
+- **Synced with [source]** — the autofilled value is current and up to date with the source data.
+- **Import Autofill** — the autofill has not run yet. Click the pill to trigger it immediately.
+- **Edited** — the field value was manually changed after autofill. A re-run button lets you re-apply the autofill if needed.
+- **Out of sync** — the source data has changed and the autofilled value may be stale. Re-run to update.
+- **Error** — the autofill encountered an error. A re-run button lets you try again.
+
+### Chapter 13 Plan Calculator
+
+On Chapter 13 questionnaires, a **Plan Calculator** button appears in the form header. Clicking it opens the Chapter 13 Plan Calculator in a new tab alongside the questionnaire. The calculator uses case data to help attorneys analyze payment structures, classify claims, and prepare the repayment plan without leaving the questionnaire workflow.
+
+The Plan Calculator button only appears on questionnaires identified as Chapter 13. If the button is not visible on a Chapter 13 questionnaire, contact support to confirm the feature is enabled for your firm.
 
 ### Case Data Sync Fields
 
