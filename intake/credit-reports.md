@@ -13,6 +13,14 @@ Glade lets your team pull credit reports for clients as part of the intake proce
 - After confirming, Glade retrieves the report and displays it within the workflow.
 - The action buttons in the modal are disabled while the request is in progress, preventing accidental duplicate submissions.
 
+### Client Data Write-Through
+
+When you fill in a client's information in the credit report modal — including name, address, date of birth, phone number, and SSN — Glade automatically saves those fields back to the client's profile for any fields that are not already set. You only need to enter the information once: it is available in future credit report pulls and other workflows without re-entry.
+
+- If any part of the client's address is already on file, the entire address block is left unchanged to avoid mixing data from different sources.
+- Only empty fields are filled in. Existing values are never overwritten.
+- If the write-through fails, the credit report pull still completes normally.
+
 ### Error Handling
 
 If a credit report pull fails:
