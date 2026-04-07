@@ -133,6 +133,12 @@ The resource panel appears on the right side of the form and displays supplement
 
 The panel scrolls independently of the questionnaire content. Scrolling through the form does not move the resource panel, and scrolling the panel does not move the form.
 
+### Chapter 13 Plan Calculator
+
+On Chapter 13 questionnaires, a **Plan Calculator** button appears in the questionnaire header toolbar. Clicking it opens the Chapter 13 Plan Calculator in a new tab, pre-loaded with the current case. The calculator lets you model plan payments, trustee fees, creditor treatments, and liquidation analysis without leaving your workflow.
+
+> TODO: Confirm exact tab behavior and whether feature-flag gating is still in place once the calculator is fully released.
+
 ### Source Data Access
 
 While filling out certain forms (for example, Bankruptcy Schedules), a **Source Data** dropdown lets you reference related data without leaving the form. For bankruptcy workflows that include an Income Organizer, an **Income Organizer** option appears in the dropdown — clicking it opens the Income Organizer in a new tab with the table view already expanded, so you can review income figures alongside the schedules form. The option only appears when the workflow has an associated Income Organizer.
@@ -155,6 +161,16 @@ Both tabs include **Expand All** and **Collapse All** controls. A **Only show no
 An **Exemptions Summary** card at the top of the panel shows the total exempted and non-exempt amounts across all properties.
 
 When viewing from Schedule A/B, property names are clickable links that navigate to that property's entry. When viewing from Schedule C, those links are hidden.
+
+### Autofill Status Indicators
+
+Fields populated by autofill show a status indicator so you can see where the value came from and whether it is current:
+
+- **Synced** — The field value matches the source data. Shown with a green checkmark (or the Glade AI icon for AI-sourced values).
+- **Out of sync** — The source data has changed since the field was last filled. Shown with an amber warning icon. You can re-run the autofill to update the value.
+- **Error** — The autofill encountered a problem and could not set the value. Shown with a red warning icon and a re-run button.
+- **Edited** — You have manually changed the value after it was autofilled. Shown with a violet pencil icon and a re-run button if you want to restore the autofilled value.
+- **Not yet run** — The autofill has not been applied yet. Shown as a blue **Import Autofill** pill. Click it to trigger the autofill.
 
 ### AI Autofills
 
