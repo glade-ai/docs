@@ -69,7 +69,11 @@ Settings control how your firm's back office behaves. This includes custom workf
 
 ### Filing Packet AI Review
 
-When your firm uses AI-assisted document review for filing packets, you can customize the review instructions for each document type. This lets you tailor how the AI evaluates specific documents — for example, adding firm-specific checks or adjusting focus areas.
+When your firm uses AI-assisted document review for filing packets, the AI reads the actual content of each uploaded document and evaluates it against the review instructions for that document type. This produces specific, targeted feedback — for example, identifying which required pages are missing or flagging discrepancies in the document — rather than generic observations.
+
+AI review is triggered automatically when a document file is uploaded to a case. No manual action is required to initiate a review.
+
+You can customize the review instructions for each document type to tailor how the AI evaluates specific documents — for example, adding firm-specific checks or adjusting focus areas.
 
 - Access **Filing Packet AI Review Configs** from your dashboard to view and manage review instructions across all 20 supported document types.
 - Each document type shows the default review instructions. You can add an **override** (replaces the default entirely) or an **append** (adds to the default instructions).
