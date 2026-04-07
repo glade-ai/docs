@@ -6,7 +6,7 @@ The Exemptions Calculator is a panel available in bankruptcy cases that helps at
 
 ## Key Behaviors
 
-- The Exemptions Calculator panel opens while viewing Schedule A/B or Schedule C. It provides a summary alongside the schedule so you can review exemption coverage without leaving the form.
+- The Exemptions Calculator panel opens while viewing Schedule A/B, Schedule C, or the Master Creditor List. It provides a summary alongside the schedule so you can review exemption coverage without leaving the form.
 - A top-level **Exemptions Summary** card shows the total exempted value and the total non-exempt value across all assets.
 - Two tabs organize the data in different ways:
   - **By Property** — Groups assets by category in collapsible cards. Each card shows the property name in bold, any liens indented beneath it, and the exemptions claimed against that property displayed as styled pills with the statute citation. Use **Expand All** or **Collapse All** to open or close all category cards at once.
