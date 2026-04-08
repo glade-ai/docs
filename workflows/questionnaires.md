@@ -24,6 +24,8 @@ Fields define individual form inputs. Each field belongs to a section and has pr
 
 Supported field types include: short text, long text, numeric, number, currency, date, phone number, SSN, name, US address, international address, single select, multi-select, list, table, percent, and domain-specific types like creditor select, court division select, bankruptcy statute select, and median income.
 
+Currency fields support a **Default to blank** setting in the template editor. When enabled, the field starts empty instead of showing $0.00 when first loaded. This is useful for optional amounts where a $0.00 default would be misleading.
+
 ### Field Validation
 
 Fields support validation rules including minimum and maximum values, minimum and maximum lengths, patterns, required status, and custom validators (for example, age validation).
@@ -112,7 +114,9 @@ Default options on single-select fields (configured in the questionnaire templat
 
 ### Currency Field Behavior
 
-Currency fields default to $0.00 on first load. You can delete the value to leave the field empty — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
+By default, currency fields show $0.00 on first load. You can delete the value to leave the field blank — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
+
+If the questionnaire template has **Default to blank** enabled for a currency field, that field starts empty rather than showing $0.00. Enabling or disabling this setting is done in the questionnaire template editor by your firm's template administrator.
 
 ### List Row Detail Views
 
