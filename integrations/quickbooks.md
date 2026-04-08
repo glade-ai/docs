@@ -20,7 +20,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 |------|---------------|---------|
 | Customers | When a customer is created or updated in Glade | Matched by email — if a QuickBooks customer with the same email exists, Glade links to them instead of creating a duplicate |
 | Invoices | Configurable (see Configuration) | Invoice amount, line items, date, and a reference back to the Glade invoice ID |
-| Payments | When a payment succeeds | Payment amount, date, and customer. Linked to the QuickBooks invoice when available. |
+| Payments | When a payment succeeds and is linked to a Glade invoice | Payment amount, date, and customer, linked to the corresponding QuickBooks invoice. |
 
 - Sync is one-way: Glade to QuickBooks. Changes made directly in QuickBooks are not reflected in Glade.
 - Sync is automatic — once connected, data flows without manual intervention.
@@ -44,9 +44,9 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 ### Payment sync
 
 - Only succeeded payments sync to QuickBooks. Failed or pending payments are not sent.
+- Payments only sync to QuickBooks when they are linked to a Glade invoice. Payments without an associated invoice are not pushed to QuickBooks.
 - Payments are written once — they are not updated after initial creation in QuickBooks.
-- When a payment is linked to an invoice that has already been synced, the QuickBooks payment references that invoice, so QuickBooks shows the invoice as partially or fully paid.
-- If the associated invoice has not been synced to QuickBooks yet, the payment is recorded as an unapplied payment.
+- When a payment syncs, the QuickBooks payment references the linked invoice, so QuickBooks shows the invoice as partially or fully paid.
 
 ### Invoice sync timing options
 
