@@ -20,6 +20,15 @@ Communication history tracks messaging between your firm and clients. Each conve
 - Conversations are categorized by type: paid, scheduled, case-related, subscriber, lead, or anonymous.
 - The conversation list shows a preview of the last message, timestamp, unread count, status, and associated products.
 
+### Internal notes in case conversations
+
+Case conversations — the discussions attached to a client's active workflow — support two types of messages: regular comments (visible to the client) and internal notes (visible to your team only).
+
+- Internal notes are never shown to the client and never trigger client email notifications.
+- Replies to an internal note are also internal. They remain team-only and do not appear in the client-facing discussion, regardless of who sends the reply.
+- Only team members can reply to an internal note. Clients cannot post replies in an internal note thread.
+- Tagged team members on an internal note or its replies receive the standard internal note email notification — but the client is never included.
+
 ## Configuration
 
 - **AI toggle**: Enable or disable AI responses on a per-conversation basis. Requires team member permissions.
