@@ -38,7 +38,7 @@ Clicking a service in either view opens the availability editor directly — you
 ### Client booking flow
 
 1. The client views the firm's product or service listing.
-2. The client selects a product and initiates scheduling.
+2. The client selects a product and initiates scheduling. Free appointments show a **Book a call** button. Paid appointments show a button with the price (for example, **Book for $150**).
 3. A calendar displays available dates and time slots.
 4. Times are shown in the client's local timezone, converted from the firm's timezone.
 5. The client selects a date and time.
