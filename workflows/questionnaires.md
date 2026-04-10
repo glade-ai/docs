@@ -130,6 +130,7 @@ List-type fields allow you to click into individual rows to view or edit details
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
 - A **Save & Next** button saves the current row and opens the next row immediately — no need to return to the full list between edits. **Previous** and **Next** buttons let you move between rows; if you have unsaved changes, you will be prompted before switching.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
+- Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel.
 
 ### Resource Panel
 
