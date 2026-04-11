@@ -207,7 +207,7 @@ If you navigate to a questionnaire you are not assigned to and are not a member 
 
 ### Submitting with Incomplete Fields
 
-When you click **Submit Questionnaire** and required fields are missing, validation runs and the incomplete fields are highlighted. A **Submit Anyway** button appears in the page header alongside the main submit button, so you can bypass validation and submit the form without completing every required field. This is useful when a field is not applicable to a particular client and cannot be left blank under normal validation rules.
+When you click **Submit Questionnaire** and required fields are missing, a **Fields Need Attention** dialog opens immediately. The dialog shows how many fields are incomplete and which sections they are in (up to five sections are listed by their position in the form, with a count of any additional). You must check the acknowledgment checkbox before the **Submit Anyway** button becomes active. Clicking **Submit Anyway** bypasses validation and submits the form — useful when a field is not applicable to a particular client and cannot be left blank under normal validation rules. Clicking **Cancel** closes the dialog and leaves the questionnaire open for further editing. If you complete all incomplete fields before clicking Submit again, the form submits directly without the dialog appearing.
 
 ### Re-opening
 
@@ -230,6 +230,7 @@ When a questionnaire is completed, it triggers downstream workflow steps, update
 - Deduplication of list items is available but requires specifying the field.
 - Linked destination list fields (for example, a Schedule D creditors list that auto-populates from a master creditor list) are not independently validated. Completing the source list is sufficient — the destination list does not need to be filled out separately.
 - Clearing a required date field and saving leaves the field in an invalid state — it is treated as empty, not as a valid cleared value, so validation correctly flags it as required.
+- When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 
 ## Related Features
