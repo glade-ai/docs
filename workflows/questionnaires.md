@@ -201,6 +201,14 @@ Some questionnaire fields are linked to case data — they display a value pulle
 
 You can override a synced field's value directly in the questionnaire. When you close the override modal, the updated response saves immediately and reflects in the questionnaire without requiring a separate save action.
 
+### Entity-Bound List Fields
+
+Some list and table fields are linked directly to case entities such as creditors or assets. When a questionnaire has this binding configured, adding, editing, or removing rows in those lists updates the corresponding case entities.
+
+- When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
+- When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
+- Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+
 ### Access Control
 
 If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
