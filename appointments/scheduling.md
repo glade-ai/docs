@@ -77,6 +77,7 @@ Each booking moves through a series of statuses over its lifetime:
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
 - When an appointment is rescheduled, all associated reminders and calendar events are updated automatically.
+- Firm team members can reschedule canceled or completed bookings by assigning a new time, which returns the booking to scheduled status. Calendar events, reminders, and email notifications are re-created automatically.
 
 ### Cancellation
 
@@ -84,6 +85,15 @@ Each booking moves through a series of statuses over its lifetime:
 - Cancellation records when it happened but does not delete the booking. The record is preserved for history.
 - Associated reminders are removed when a booking is canceled.
 - Calendar events on connected external calendars are updated to reflect the cancellation.
+
+### Unscheduling
+
+Firm team members can unschedule a scheduled booking without canceling it. Unscheduling clears the appointment time, meeting link, and calendar event, and returns the booking to **Unscheduled** (pending) status so the client can select a new time.
+
+- Only firm team members can unschedule a booking. Clients cannot unschedule.
+- The client receives a notification with the original scheduled date and time.
+- All associated reminders and the calendar event are removed when a booking is unscheduled.
+- The booking record is preserved. Unscheduling is distinct from cancellation — the booking remains open and the client can pick a new slot.
 
 ### Timezone handling
 
