@@ -76,7 +76,17 @@ Each booking moves through a series of statuses over its lifetime:
 - By default, clients cannot reschedule within 48 hours of the appointment start time. This protects firms from last-minute schedule changes.
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
+- Team members can also reschedule bookings that are in canceled or completed status, returning them to scheduled and recreating associated calendar events, reminders, and notifications.
 - When an appointment is rescheduled, all associated reminders and calendar events are updated automatically.
+
+### Unscheduling
+
+- Team members can unschedule a booking — removing the scheduled time and returning it to an unscheduled state so the client can select a new appointment time.
+- Unscheduling clears the meeting link and removes the associated event from any connected external calendar.
+- Scheduled reminders are deleted when a booking is unscheduled.
+- The client receives an email notification referencing the original appointment date.
+- A system message is posted in the client's Glade conversation when a booking is unscheduled.
+- Only team members can unschedule a booking; clients do not have this option.
 
 ### Cancellation
 
