@@ -13,7 +13,6 @@ Glade integrates with electronic court filing systems to let you submit cases di
 - Historical filing events are replayed when you navigate to a case, so the progress panel always reflects the full sequence of events even if you weren't viewing the case when they occurred.
 - **Inbox notifications**: When a filing event occurs (such as a status update from the court), you receive a notification in the Glade inbox. Clicking the notification takes you directly to the Case Status tab for that case so you can review the current filing status without navigating manually.
 - Direct links to a case opened via an inbox notification automatically open the Case Status tab.
-- **Contact Support for failed filings**: When a filing fails with an error that cannot be retried, a **Contact Support** button appears on the filing status panel. Clicking it sends a message to your Glade support conversation (including the district, error details, and attempt number) and opens the Glade chat so you can follow up with the support team immediately. Once support has been notified, the button shows a confirmation state. The button resets if a new filing attempt is made.
 
 ## Configuration
 
