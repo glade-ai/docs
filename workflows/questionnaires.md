@@ -209,6 +209,8 @@ If you navigate to a questionnaire you are not assigned to and are not a member 
 
 When you click **Submit Questionnaire** and required fields are missing, validation runs and the incomplete fields are highlighted. A **Submit Anyway** button appears in the page header alongside the main submit button, so you can bypass validation and submit the form without completing every required field. This is useful when a field is not applicable to a particular client and cannot be left blank under normal validation rules.
 
+When a questionnaire is submitted this way, an entry is recorded in the workflow activity timeline showing the questionnaire name and the number of required fields that were left unanswered. This gives your team a full audit trail of bypass submissions.
+
 ### Re-opening
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
