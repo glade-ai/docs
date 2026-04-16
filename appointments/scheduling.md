@@ -108,6 +108,7 @@ Each booking moves through a series of statuses over its lifetime:
 - Workflow-generated bookings can be assigned to specific team members based on workflow rules.
 - Access permissions are automatically granted to workflow participants.
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
+- When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
 ### Permissions and access
 
