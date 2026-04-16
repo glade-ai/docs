@@ -147,3 +147,4 @@ Each booking moves through a series of statuses over its lifetime:
 - [Calendar Sync](./calendar-sync.md)
 - [Reminders](./reminders.md)
 - [Video Consultations](./video-consultations.md)
+
