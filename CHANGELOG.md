@@ -18,6 +18,13 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-16 18:47:17-04:00 · [PR #99](https://github.com/glade-ai/docs/pull/99)
+
+### appointments/scheduling
+- Updated client booking flow: free-session booking button now reads "Book a call" (was "Book for free")
+- Added documentation for unscheduling: team members can clear a scheduled booking's time, returning it to pending status for client re-selection, with calendar event removal and client notification
+- Added documentation for rescheduling canceled/completed bookings: team members can assign a new time, recreating calendar events, reminders, and email notifications
+
 ## 2026-04-16 12:53:05-04:00 · [PR #100](https://github.com/glade-ai/docs/pull/100)
 
 ### integrations/efiling
