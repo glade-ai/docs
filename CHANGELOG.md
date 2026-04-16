@@ -18,6 +18,12 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-16 12:53:05-04:00 · [PR #100](https://github.com/glade-ai/docs/pull/100)
+
+### integrations/efiling
+- Added documentation for the Contact Support button that appears on non-retryable e-filing errors: sends a pre-filled message to the support conversation and opens the chat
+- Added edge case note: the button only appears for non-retryable errors and gracefully degrades when no support conversation exists
+
 ## 2026-04-10 11:16:08-04:00 · [PR #90](https://github.com/glade-ai/docs/pull/90)
 
 no details available
