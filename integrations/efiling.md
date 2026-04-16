@@ -28,3 +28,4 @@ Glade integrates with electronic court filing systems to let you submit cases di
 
 - [Workflows](../workflows/automation-rules.md) — workflows can include eFiling steps as part of an automated case sequence.
 - [Status Tracking](../workflows/status-tracking.md) — the Case Status tab where eFiling notifications deep-link.
+
