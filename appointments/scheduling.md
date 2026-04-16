@@ -37,7 +37,7 @@ Clicking a service in either view opens the availability editor directly — you
 
 ### Client booking flow
 
-1. The client views the firm's product or service listing.
+1. The client views the firm's product or service listing. For free sessions, the booking button reads **Book a call**; for paid sessions it shows the session price.
 2. The client selects a product and initiates scheduling.
 3. A calendar displays available dates and time slots.
 4. Times are shown in the client's local timezone, converted from the firm's timezone.
@@ -76,7 +76,17 @@ Each booking moves through a series of statuses over its lifetime:
 - By default, clients cannot reschedule within 48 hours of the appointment start time. This protects firms from last-minute schedule changes.
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
+- Team members can also reschedule bookings that are in canceled or completed status by assigning a new time, returning them to scheduled status and recreating associated calendar events, reminders, and email notifications.
 - When an appointment is rescheduled, all associated reminders and calendar events are updated automatically.
+
+### Unscheduling
+
+- Team members can unschedule a booking — removing the scheduled time and returning it to an unscheduled state so the client can select a new appointment time.
+- Unscheduling clears the meeting link and removes the associated event from any connected external calendar.
+- Scheduled reminders are deleted when a booking is unscheduled.
+- The client receives an email notification referencing the original appointment date.
+- A system message is posted in the client's Glade conversation when a booking is unscheduled.
+- Only team members can unschedule a booking; clients do not have this option.
 
 ### Cancellation
 
@@ -98,6 +108,7 @@ Each booking moves through a series of statuses over its lifetime:
 - Workflow-generated bookings can be assigned to specific team members based on workflow rules.
 - Access permissions are automatically granted to workflow participants.
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
+- When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
 ### Permissions and access
 
@@ -136,3 +147,4 @@ Each booking moves through a series of statuses over its lifetime:
 - [Calendar Sync](./calendar-sync.md)
 - [Reminders](./reminders.md)
 - [Video Consultations](./video-consultations.md)
+
