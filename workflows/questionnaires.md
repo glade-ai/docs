@@ -219,6 +219,10 @@ When you click **Submit Questionnaire** and required fields are missing, a **Fie
 
 When a questionnaire is submitted this way, an entry is recorded in the workflow activity timeline showing the questionnaire name and the number of required fields that were left unanswered. This gives your team a full audit trail of bypass submissions.
 
+**Submit Anyway** is also available when a required signature has been skipped — you can submit the questionnaire without completing the signature.
+
+When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
+
 ### Re-opening
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
