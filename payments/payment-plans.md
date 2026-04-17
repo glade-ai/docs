@@ -63,7 +63,7 @@ A payment plan moves through the following statuses over its lifetime:
 - Firms can modify an active payment plan at any time.
 - The following changes can be made: installment amount, frequency, payment method, and next payment date.
 - Individual installments can also be adjusted (amount or date).
-- When a plan is modified, the remaining schedule is recalculated to reflect the new settings.
+- When a plan is modified, the remaining schedule is recalculated to reflect the new settings. Any values you have manually entered for the plan — such as the installment amount — are preserved and take precedence over recalculated defaults.
 - Clients cannot modify their own plans. Only firms can make changes.
 
 ### Canceling a payment plan
