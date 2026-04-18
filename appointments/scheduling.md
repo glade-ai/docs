@@ -102,6 +102,15 @@ Each booking moves through a series of statuses over its lifetime:
 - All bookings are stored in the firm's timezone internally.
 - The system validates timezone inputs and defaults to US/Eastern if not specified.
 
+### User Profile Meetings
+
+Each firm member's profile includes a **Meetings** tab that clients can visit to view upcoming appointments and book new consultation types.
+
+- The Meetings tab shows the firm member's upcoming scheduled appointments, including any that started within the past hour.
+- **Book a meeting** cards appear for consultation products that have the Meetings tab option enabled. Each card shows the appointment type name, session duration, and the firm member's name and photo.
+- Clicking a Book a meeting card takes the client into the scheduling flow for that consultation type.
+- Each consultation product has a toggle that controls whether it appears as a booking option on the profile's Meetings tab. Products with the toggle disabled are not shown as booking cards.
+
 ### Workflow integration
 
 - Appointments can be created automatically as steps within a workflow.
@@ -131,6 +140,7 @@ Each booking moves through a series of statuses over its lifetime:
 | Default team member | Pre-assigned team member for new bookings on this product. |
 | Custom confirmation message | Message shown to the client after booking is confirmed. |
 | Availability patterns | Days of the week and start/end times, configured per team member. |
+| Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 
 ## Edge Cases & Limitations
 
