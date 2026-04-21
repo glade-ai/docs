@@ -11,7 +11,7 @@ Automation rules define what happens automatically when events occur during a ca
 - When a trigger event occurs, the system checks all active workflows for your firm to see if any match. If a matching trigger is the first step in a thread, a new case is created and execution begins automatically.
 - If a matching trigger is later in a thread (not the first step), the system checks whether the case is waiting for that event and advances the case accordingly.
 - The available action types are:
-  - **Send message** — sends a message to the client, optionally with attachments such as invoices, questionnaires, document requests, booking links, custom terms, credit report requests, or e-signature requests
+  - **Send message** — sends a message to the client, optionally with attachments such as invoices, questionnaires, document requests, booking links, custom terms, credit report requests, e-signature requests, or payment gates
   - **Generate all case PDFs** — compiles and generates all PDF documents for the case
   - **Send e-signature request** — sends a document for the client to sign electronically
   - **Send document request** — asks the client to upload specific documents

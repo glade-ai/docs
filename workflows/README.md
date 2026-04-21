@@ -11,3 +11,4 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [Questionnaires](./questionnaires.md)
 - [Document Collection](./document-collection.md)
 - [Exemptions Calculator](./exemptions-calculator.md)
+- [Payment Gates](./payment-gates.md)
