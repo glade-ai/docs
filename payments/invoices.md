@@ -166,6 +166,10 @@ When a client receives an invoice:
 5. If payment plans are available, the client can set up an installment schedule.
 6. If client modifications are disabled by the firm, the client sees a message explaining that changes are not permitted on this invoice.
 
+### Filtering invoices
+
+The invoice list supports filtering by date range. The date filter is labeled **Created from** / **Created to** and filters by the date the invoice was created, not by due date or payment date.
+
 ### Exporting invoice data
 
 Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation.
