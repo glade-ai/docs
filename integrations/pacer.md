@@ -95,6 +95,10 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Inbox notifications link directly to the case's status tab.
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
 
+### Case transfers
+
+When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
+
 ### Preventing duplicate filings
 
 Before a filing proceeds, Glade checks whether the case already has an assigned case number or an in-progress filing. Depending on the situation, you will see one of two states in the pre-filing dialog:
