@@ -41,6 +41,7 @@ Document collection enables your team to request specific files from clients as 
 
 - Skipping a document request assignment sets its status to "skipped" but does not remove uploaded files. Unskipping returns it to its previous state.
 - A compiled document that aggregates all uploaded files can be generated, but this is optional and may not always be present.
+- The **Download all as a single PDF** option in a document request's overflow menu is only available when at least one file has been uploaded to that slot. The option does not appear for slots with no files yet.
 - Archiving a document request template prevents it from being used in new workflows but does not affect existing assignments.
 
 ## Related Features
