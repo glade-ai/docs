@@ -9,7 +9,7 @@ Client records track the relationship between a client and your firm on Glade. E
 - A client record is created when someone connects with your firm — through signup, form submission, booking, or when you manually add them.
 - Each record links a specific person to your firm, establishing them as your client.
 - Client records store personal details including address, date of birth, SSN, and communication preferences (broadcast opt-in, SMS opt-in).
-- From a client's detail view, you can see their total dollar value, active subscriptions, order history, invoices, payment methods, cases, documents, and questionnaires.
+- From a client's detail view, you can see their total dollar value, active subscriptions, order history, invoices, payment methods, cases, documents, questionnaires, and associated workflows.
 - Clients are classified as **Subscribed**, **Free**, or **Unverified** based on whether they have an active subscription and have verified their account.
 - The member list supports filtering by these classifications and searching by name, email, phone number, or the content of a client's profile notes.
 - You can edit a client's name, email, phone number, date of birth, SSN, and address through the **Edit Contact** modal.
