@@ -93,6 +93,7 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Each step of the filing process is logged with timestamps.
 - Screenshots are captured at key steps for debugging failed submissions.
 - Inbox notifications link directly to the case's status tab.
+- The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
 
 ### Preventing duplicate filings
 
