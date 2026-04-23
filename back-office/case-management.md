@@ -15,6 +15,7 @@ Case management is the core back-office feature that lets your firm track client
 - Cases can be initiated by a specific team member and assigned to one or more owners, each of whom can have a role on that case (e.g., Paralegal, Documents Team).
 - A case can be marked as the primary case, with associated sub-workflows linked to it. Associated workflows appear together in intake status reports.
 - Case data supports both single-value fields (e.g., debtor SSN, attorney info) and repeatable items (e.g., creditors, assets). The system preserves a full history of field changes for audit purposes.
+- When two data sources provide different values for the same case field (for example, a questionnaire response and a manually entered value disagree on a party's address), the system flags the field as conflicted. You can resolve the conflict by selecting which value should be authoritative. The selected value becomes the active value for that field immediately after resolution.
 - All case activity is logged, including status changes, document uploads, payments, form completions, e-signature requests, court notices, and owner assignment changes.
 - Cases support PACER integration for bankruptcy filings, including case number and court data tracking.
 - Tags provide lightweight visual categorization (icon and text label) on case list views.
