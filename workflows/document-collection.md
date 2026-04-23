@@ -12,9 +12,8 @@ Document collection enables your team to request specific files from clients as 
 - Each file slot tracks its upload status: **incomplete**, **complete**, or **action required**.
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
 - Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement. After a re-upload, the new file is correctly recognized as ready for review.
-- Files can be moved from one document request to another. If a document request is currently in review when you move files out of it, a warning message appears asking you to confirm — moving files out of an in-review request will change its status. If all files in an in-review request are moved out, the request status changes back from in review to in progress.
+- Files can be moved from one document request to another using a dropdown that lists the available destination requests. If the source document request is currently in review, a warning message asks you to confirm before proceeding — moving files out changes the review status. If all files in an in-review request are moved out, the request status resets from in review to in progress.
 - When all required documents are uploaded, the client can submit for review. Before submission, the system verifies that all required files are fully uploaded — if any required file is still incomplete, submission is blocked and the client sees an error message.
-- If you move a file that belongs to a document request currently in review, a warning message appears explaining that the move will change the review status. If you move all files out of a submitted document request slot while it is in review, the review status resets automatically to reflect that the slot is no longer populated.
 - When a document request is in review and no files have been rejected, it is awaiting reviewer action.
 - Reviewers from your team are assigned to document requests to handle the review process.
 - When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
@@ -41,6 +40,7 @@ Document collection enables your team to request specific files from clients as 
 
 - Skipping a document request assignment sets its status to "skipped" but does not remove uploaded files. Unskipping returns it to its previous state.
 - A compiled document that aggregates all uploaded files can be generated, but this is optional and may not always be present.
+- The **Download all as a single PDF** option in a document request's overflow menu is only available when at least one file has been uploaded to that slot. The option does not appear for slots with no files yet.
 - Archiving a document request template prevents it from being used in new workflows but does not affect existing assignments.
 
 ## Related Features
