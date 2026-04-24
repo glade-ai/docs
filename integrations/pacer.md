@@ -40,6 +40,13 @@ Courts not in this list are not available for automated filing.
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
 
+### Filing packet document types
+
+Each document in the filing packet must be labeled with the correct ECF document type. The document type dropdown in the filing packet lists named options for all commonly filed documents. Selecting the correct type ensures courts can identify each file — courts including FLMB and FLSB reject filings that contain unrecognized filenames.
+
+- For **Chapter 7 business-debt cases** where the debtor is claiming exemption from the means test presumption of abuse, upload the B122A-1 Supplement and select **Statement of Debtor's Temporary Exclusion from Presumption of Abuse (B122A-1Supp)** from the document type dropdown. Filing this document labeled as "Other" causes a submission failure.
+- Use a named document type whenever one exists in the dropdown. The generic "Other" option is for documents that do not match any named type.
+
 ### Filing Packet AI Review
 
 Before a filing is submitted, Glade automatically reviews each document in the filing packet and flags issues that could cause the court to reject the filing.
