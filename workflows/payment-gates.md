@@ -17,6 +17,7 @@ Payment gates are configured by firm staff in the workflow step editor alongside
 - Payment gates are visible to both the client and the firm team in the workflow timeline.
 - Only one payment gate per attachment chip is supported. A step can have multiple gate attachments if needed.
 - If the gate's display condition (set on the attachment) causes the gate to be skipped for a particular client, no gate card appears for that client.
+- Firm staff can skip a payment gate from the workflow timeline. Skipping marks the gate as bypassed and allows the workflow to advance without the payment threshold being reached. Clients do not have the option to skip a gate.
 
 ## Configuration
 
@@ -40,7 +41,7 @@ To remove a gate, delete its chip from the message. The gate configuration is re
 - The gate clears automatically when the payment threshold is met — no manual action is required from the firm team.
 - Gates are order-based: if a step has multiple gate attachments, their pairing with the underlying gate configurations follows the order they appear in the message.
 - Display conditions on the gate attachment control whether the gate appears for a particular client. If the condition is not met, the gate is skipped and does not block the workflow for that client.
-- The gate card is read-only for clients — they cannot modify the threshold or the linked invoice from the timeline view.
+- The gate card is read-only for clients — they cannot modify the threshold, linked invoice, or skip the gate. Only firm staff can skip a gate.
 
 ## Related Features
 
