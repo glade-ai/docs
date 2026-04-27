@@ -16,6 +16,7 @@ Payment gates are configured by firm staff in the workflow step editor alongside
 - Gates are linked to a specific invoice on the workflow. The client can click **View** on the gate card to open the associated invoice and make a payment.
 - Payment gates are visible to both the client and the firm team in the workflow timeline.
 - Only one payment gate per attachment chip is supported. A step can have multiple gate attachments if needed.
+- Firm team members can skip a payment gate for a client using the skip action on the gate card. Skipping marks the gate as satisfied and allows the workflow step to advance without the payment threshold being met. Clients do not have the option to skip a gate.
 - If the gate's display condition (set on the attachment) causes the gate to be skipped for a particular client, no gate card appears for that client.
 
 ## Configuration
@@ -32,6 +33,8 @@ Payment gates are configured in the workflow builder when editing a Send Message
 
 To edit an existing gate, click the gate chip in the step editor — the configuration modal reopens pre-filled with the current settings. Adjust the values and save to update the gate in place.
 
+To assign team members to a payment gate attachment, use the **Assign** button on the gate chip in the step editor. Assignees are recorded on the gate — this designates specific staff responsible for the gate.
+
 To remove a gate, delete its chip from the message. The gate configuration is removed when you next save the step.
 
 ## Edge Cases & Limitations
@@ -40,7 +43,7 @@ To remove a gate, delete its chip from the message. The gate configuration is re
 - The gate clears automatically when the payment threshold is met — no manual action is required from the firm team.
 - Gates are order-based: if a step has multiple gate attachments, their pairing with the underlying gate configurations follows the order they appear in the message.
 - Display conditions on the gate attachment control whether the gate appears for a particular client. If the condition is not met, the gate is skipped and does not block the workflow for that client.
-- The gate card is read-only for clients — they cannot modify the threshold or the linked invoice from the timeline view.
+- The gate card is read-only for clients — they cannot modify the threshold, linked invoice, or skip the gate. Only firm staff can skip a gate.
 
 ## Related Features
 
