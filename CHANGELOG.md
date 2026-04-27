@@ -18,6 +18,21 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-27 18:36:40-04:00 · [PR #124](https://github.com/glade-ai/docs/pull/124)
+
+### workflows/payment-gates
+- Documented skip action: firm team members can skip a payment gate for a client from the gate card; the workflow step advances without the payment threshold being met. Clients cannot skip a gate.
+- Updated the client read-only note to reflect that the gate card is read-only for clients across threshold, linked invoice, and skip — only firm staff can skip.
+- Documented the **Assign** button on the gate chip in the step editor, which records assignees on a payment gate attachment to designate responsible staff.
+
+### workflows/document-collection
+- Documented that renaming a document in the detail pane saves immediately and is reflected in the checklist view.
+
+### workflows/questionnaires
+- Clarified that deleted rows (those moved to Removed Items) are excluded from section error badge counts; only active, non-deleted rows are counted.
+- Documented that stale row-level validation errors clear immediately after a successful row save, so error counts always reflect currently incomplete fields in active rows.
+- Documented that questionnaire-generated documents appear in a consistent order in the case document list — filled court forms first, then other generated documents (e.g., creditor matrix) — and that this ordering is preserved when new sections are added after some documents exist.
+
 ## 2026-04-23 05:58:03-04:00 · [PR #105](https://github.com/glade-ai/docs/pull/105)
 
 no details available
