@@ -33,12 +33,19 @@ Courts not in this list are not available for automated filing.
 4. The filing runs asynchronously via browser automation:
    - Logs into PACER with the firm's credentials and 2FA.
    - Uploads core case documents (debtor info, attorney information, petition, creditor matrix, pay advices).
-   - Uploads supplemental documents based on chapter type — Chapter 7: income statements, means test; Chapter 13: repayment plan, income statements.
+   - Uploads supplemental documents based on chapter type — Chapter 7: income statements, means test; Chapter 13: repayment plan, income statements. For Chapter 7 business-debt cases claiming an exemption from the means test presumption of abuse, the **Statement of Debtor's Temporary Exclusion from Presumption of Abuse (B122A-1Supp)** is available as a document type in the ECF document filename dropdown and is uploaded as part of the supplemental documents.
    - Submits credit counseling certificates and compensation disclosures.
    - Extracts the assigned case number from the court's confirmation screen.
    - Pays the filing fee via the firm's credit card on file with PACER.
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
+
+### Filing packet document types
+
+Each document in the filing packet must be labeled with the correct ECF document type. The document type dropdown in the filing packet lists named options for all commonly filed documents. Selecting the correct type ensures courts can identify each file — courts including FLMB and FLSB reject filings that contain unrecognized filenames.
+
+- For **Chapter 7 business-debt cases** where the debtor is claiming exemption from the means test presumption of abuse, upload the B122A-1 Supplement and select **Statement of Debtor's Temporary Exclusion from Presumption of Abuse (B122A-1Supp)** from the document type dropdown. Filing this document labeled as "Other" causes a submission failure.
+- Use a named document type whenever one exists in the dropdown. The generic "Other" option is for documents that do not match any named type.
 
 ### Filing Packet AI Review
 
@@ -94,6 +101,13 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Screenshots are captured at key steps for debugging failed submissions.
 - Inbox notifications link directly to the case's status tab.
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
+
+### 341 meeting notices
+
+Glade processes incoming court notices about 341 meetings (meetings of creditors) and displays the name of the trustee who will conduct the meeting.
+
+- When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
+- The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
 
 ### Case transfers
 
