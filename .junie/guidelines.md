@@ -1,4 +1,5 @@
-<!-- glade-plugin-skills-begin -->
+
+<!-- shared-begin: create-pr -->
 
 ## Creating Pull Requests
 
@@ -55,5 +56,4 @@ Once the PR is ready for review, promote it:
 ```bash
 gh pr ready
 ```
-
-<!-- glade-plugin-skills-end -->
+<!-- shared-end: create-pr -->
