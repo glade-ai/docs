@@ -34,6 +34,7 @@ All four frequencies are always available; there is no setting to restrict which
 |--------|---------|
 | Upcoming | Scheduled but not yet charged |
 | Paid | Successfully charged |
+| Deferred | The installment has been postponed. The amount is not collected on the original date and remains outstanding |
 | Failed | All charge attempts exhausted without success |
 | Retrying | Initial charge failed; automatic retry pending |
 
