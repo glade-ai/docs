@@ -28,7 +28,7 @@ Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's cal
 
 - **Delta sync** (default): Uses Microsoft's delta links to fetch only events that changed since the last sync. Fast and efficient.
 - **Full sync** (initial and fallback): Fetches all events for the next 3 months. Used on first connection and when the delta link is invalidated.
-- If the delta link expires, Glade automatically falls back to a full sync.
+- If the delta link expires or becomes stale (for example, after a long sync gap or a mailbox migration), Microsoft Graph signals this condition and Glade automatically resets the link and performs a full sync to recover. This recovery happens within the current sync run — there is no need to wait for the next scheduled sync cycle.
 
 ### Sync triggers
 
@@ -55,7 +55,7 @@ Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's cal
 - Events marked as `showAs: "free"` in Outlook are not synced.
 - All-day events are supported and block the entire day. Glade converts all-day event times to the user's timezone.
 - The sync window covers the next 3 months — events further out are not synced.
-- Unlike Google Calendar, Outlook does not support push notification webhooks in Glade's current implementation. Sync relies on the manual trigger and the 24-hour background job.
+- Unlike Google Calendar, Outlook does not support push notification webhooks in Glade's current implementation. Sync relies on the manual trigger and the 24-hour background job. Stale or expired delta links are recovered automatically during the next sync run (manual or scheduled).
 - If the Microsoft OAuth token is revoked or expires without refresh, the user must reconnect.
 - Disconnecting an account soft-deletes all synced events from Glade but does not modify the Outlook calendar.
 - Rate limiting from Microsoft Graph API is handled with retry logic and exponential backoff.
