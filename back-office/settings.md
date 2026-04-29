@@ -13,6 +13,9 @@ Settings control how your firm's back office behaves. This includes custom workf
   - **Archive behavior** — cases in this status are treated as archived
   - **Disable follow-ups** — automated follow-up reminders stop for cases in this status
 - A set of default statuses is created when your firm is set up, including Data Collection, Processing, Filed and Pending, Completed, Archived, Retainer Sent, and others.
+- Custom statuses can be **archived** when they are no longer in active use. Archiving a status removes it from the workflow step dropdown so it cannot be assigned to new steps, but any existing workflow steps that already reference the status continue to work correctly — active cases are not affected.
+- To view archived statuses on the Custom Statuses settings page, turn on the **Show archived** toggle. Each archived status shows **Unarchive** and **Delete** actions. Default seeded statuses cannot be archived.
+- Archiving a custom status is reversible — use **Unarchive** to make the status available in the workflow step dropdown again.
 
 ### Workflow Roles
 
@@ -75,6 +78,13 @@ When your firm uses AI-assisted document review for filing packets, you can cust
 - Each document type shows the default review instructions. You can add an **override** (replaces the default entirely) or an **append** (adds to the default instructions).
 - Rows with active customizations are marked with a **Customized** tag so you can see at a glance which document types have firm-specific settings.
 - To remove a customization and revert to the default, use the **Clear** button on that row.
+
+### Petition Settings
+
+For firms that offer petition-based products, Glade provides a dedicated settings page under **Account → Business Details** to configure how signature pages are generated.
+
+- **Signature pages mode** controls how signature pages are formatted when generating petition documents. The default mode is **Full Page**, where each signature block occupies its own full page.
+- Changes take effect for all new petition documents generated after the setting is saved. Previously generated documents are not affected.
 
 ### Credit Reports
 
