@@ -13,6 +13,9 @@ Settings control how your firm's back office behaves. This includes custom workf
   - **Archive behavior** — cases in this status are treated as archived
   - **Disable follow-ups** — automated follow-up reminders stop for cases in this status
 - A set of default statuses is created when your firm is set up, including Data Collection, Processing, Filed and Pending, Completed, Archived, Retainer Sent, and others.
+- Custom statuses can be **archived** when they are no longer in active use. Archiving a status removes it from the workflow step dropdown so it cannot be assigned to new steps, but any existing workflow steps that already reference the status continue to work correctly — active cases are not affected.
+- To view archived statuses on the Custom Statuses settings page, turn on the **Show archived** toggle. Each archived status shows **Unarchive** and **Delete** actions. Default seeded statuses cannot be archived.
+- Archiving a custom status is reversible — use **Unarchive** to make the status available in the workflow step dropdown again.
 
 ### Workflow Roles
 
