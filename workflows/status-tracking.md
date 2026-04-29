@@ -28,13 +28,14 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Custom statuses**: Your firm can create custom statuses with a title, icon, and color. Custom statuses also support two optional behaviors:
   - **Archive behavior** — moving a case to this status completes all pending tasks and promotes any related workflows, just like archiving
   - **Disable followups** — suppresses automated reminder emails and messages for cases in this status
+- Custom statuses that are no longer in use can be **archived** from Settings. An archived custom status no longer appears in the workflow step dropdown for new step assignments, but any existing workflow step that references it continues to display the correct title, icon, and color. Archived statuses can be unarchived at any time. See [Settings](../back-office/settings.md) for details.
 - **What happens when status changes**:
   - Moving to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case.
   - Archiving a case preserves the previous status so it can be restored later. Archiving also promotes any associated workflows to primary.
   - Unarchiving a case restores the previous status. If there was no previous status, it defaults to Data Collection.
   - Moving to Filed and Pending records the filing date. Moving back to Data Collection or Processing clears the filing date.
   - Moving to Completed records the completion date.
-- **Sortable workflow list**: In the workflow list view, cases can be sorted by when their status last changed or when they were last assigned. This lets you surface cases that have been stuck in a status for a long time, prioritize recently updated ones, or review recently reassigned work.
+- **Sortable workflow list**: In the workflow list view, cases can be sorted by status change date, last assignment date, or by the **Assignees** column (alphabetically by the primary owner's name). Sorting by Assignees lets you group cases by responsible team member for review or handoff.
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
