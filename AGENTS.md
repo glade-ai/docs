@@ -52,3 +52,12 @@ When a merged PR changes a feature:
 - Do not describe internal implementation details (database schema, function names) unless directly relevant to behavior.
 - Do not copy-paste PR descriptions verbatim — summarize the resulting behavior.
 - Do not add sections beyond the structure above without a clear reason.
+
+<!-- shared-begin: pr-creation -->
+## Pull requests
+
+- Create as a **draft** (`--draft`) until ready for review
+- Default to `--label release-minor`; use `release-patch` for fixes/docs only, `release-major` for breaking changes
+- PR description must explain **why** — the motivation behind the change, not just what changed
+- CI requires exactly one release label (`release-patch`, `release-minor`, or `release-major`) or checks will fail
+<!-- shared-end: pr-creation -->
