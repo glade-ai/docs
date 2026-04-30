@@ -18,6 +18,14 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-30 14:31:02-04:00 · [PR #138](https://github.com/glade-ai/docs/pull/138)
+
+### back-office/settings
+- Custom statuses can be archived from the Custom Statuses settings page. Archived statuses are hidden from the workflow step dropdown but existing steps that reference them keep working.
+- A Show archived toggle reveals archived statuses on the settings page, where each row offers Unarchive and Delete actions. Default seeded statuses cannot be archived.
+- Added a Petition Settings section documenting the new account-level page (Account → Business Details) for configuring signature page rendering on petition products.
+- Signature pages mode currently supports Full Page (default), placing signature blocks on a dedicated page at the end of the document. Changes apply to documents generated after the setting is saved; previously generated documents are unaffected.
+
 ## 2026-04-30 14:30:19-04:00 · [PR #137](https://github.com/glade-ai/docs/pull/137)
 
 ### payments/payment-plans
