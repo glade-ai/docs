@@ -199,7 +199,7 @@ The Plan Calculator button only appears on questionnaires identified as Chapter 
 
 Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
 
-You can override a synced field's value directly in the questionnaire. When you close the override modal, the updated response saves immediately and reflects in the questionnaire without requiring a separate save action.
+When you edit a case data sync field, the updated value saves automatically and syncs to the case record immediately — no extra confirmation step is required.
 
 ### Entity-Bound List Fields
 
@@ -208,6 +208,21 @@ Some list and table fields are linked directly to case entities such as creditor
 - When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
 - When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
 - Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+
+### Mobile Experience
+
+Clients filling out questionnaires on a mobile device see a redesigned navigation built for smaller screens:
+
+- A **bottom navigation bar** provides four tabs:
+  - **Overview** — shows the questionnaire's overall completion status
+  - **Sections** — lists all sections so you can jump directly to any part of the form; includes filtering to narrow by section or progress
+  - **Workflow** — shows the client's broader workflow timeline and step progress
+  - **Help** — provides access to help resources and tutorials
+- A **persistent action bar** at the bottom of each section keeps the save and continue button visible as you scroll, so you never need to scroll back to the top to advance.
+- A **close affordance** lets clients dismiss the questionnaire and return to it later without losing progress.
+- Clients can switch between questionnaires assigned to the same workflow directly from the mobile navigation, without returning to the home screen.
+
+The mobile layout is only visible to clients accessing the questionnaire on a mobile device. Attorneys and firm staff viewing the same questionnaire on desktop see the standard layout.
 
 ### Access Control
 

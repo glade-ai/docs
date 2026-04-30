@@ -28,13 +28,16 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Custom statuses**: Your firm can create custom statuses with a title, icon, and color. Custom statuses also support two optional behaviors:
   - **Archive behavior** — moving a case to this status completes all pending tasks and promotes any related workflows, just like archiving
   - **Disable followups** — suppresses automated reminder emails and messages for cases in this status
+- **Archiving statuses**: Any status — including built-in default statuses — can be archived. Archiving a status removes it from the status picker so it cannot be assigned to new cases. When you archive a status that is currently in use, a confirmation prompt shows how many active workflows are using it, so you can make an informed decision before proceeding. See [Settings](../back-office/settings.md) for the archive/unarchive UI.
+- **Archived status visibility**: Cases that are currently assigned an archived status continue to display that status correctly — the label, icon, and color remain visible in workflow lists and on the case. Archived statuses are only hidden from pickers where you select a status; existing cases are not affected.
+- **Viewing archived statuses**: Archived statuses are hidden by default on the Custom Statuses settings page. Toggle **Show archived** to reveal them.
 - **What happens when status changes**:
   - Moving to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case.
   - Archiving a case preserves the previous status so it can be restored later. Archiving also promotes any associated workflows to primary.
   - Unarchiving a case restores the previous status. If there was no previous status, it defaults to Data Collection.
   - Moving to Filed and Pending records the filing date. Moving back to Data Collection or Processing clears the filing date.
   - Moving to Completed records the completion date.
-- **Sortable workflow list**: In the workflow list view, cases can be sorted by when their status last changed or when they were last assigned. This lets you surface cases that have been stuck in a status for a long time, prioritize recently updated ones, or review recently reassigned work.
+- **Sortable workflow list**: In the workflow list view, cases can be sorted by status change date, last assignment date, or by the **Assignees** column (alphabetically by the primary owner's name). Sorting by Assignees lets you group cases by responsible team member for review or handoff.
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
@@ -43,7 +46,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 
 ## Configuration
 
-- **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups).
+- **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
 - **Status per workflow step**: Individual workflow steps can specify a status that the case automatically transitions to when that step's trigger completes.
 - **Workflow type**: The workflow type ("basic" or "attorney case") affects how automatic status progression and completion logic behave.
 
@@ -52,6 +55,8 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - Any string can technically be set as a status, though the system expects it to match either a built-in or custom status.
 - When a case is archived and later unarchived, it restores to the previous status. If there is no previous status, it defaults to Data Collection.
 - Custom statuses with archive behavior trigger the same task completion logic as the built-in Archived status, but the case retains the custom status rather than switching to Archived.
+- Archiving a default status (one that shipped with your firm setup) does not delete it — it is preserved for historical reference but removed from the picker. Default statuses cannot be deleted, only archived.
+- The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
 
 ## Related Features
