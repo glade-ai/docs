@@ -18,6 +18,18 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-30 14:29:54-04:00 · [PR #136](https://github.com/glade-ai/docs/pull/136)
+
+### workflows/status-tracking
+- Any status, including built-in defaults, can now be archived from the Custom Statuses settings page.
+- Archive confirmation shows the count of active workflows using the status before you confirm.
+- Archived statuses remain visible on existing cases but are hidden from the status picker; a Show archived toggle reveals them on the settings page.
+- Workflow list can now be sorted by the Assignees column (alphabetically by primary owner name), in addition to status change date and last assignment date.
+
+### workflows/questionnaires
+- Case data sync fields now save automatically — the previous confirmation modal has been removed.
+- Added a Mobile Experience section documenting the redesigned mobile questionnaire navigation: bottom nav (Overview, Sections, Workflow, Help), section filtering, persistent save/continue bar, and questionnaire switching.
+
 ## 2026-04-30 14:28:16-04:00 · [PR #128](https://github.com/glade-ai/docs/pull/128)
 
 no details available
