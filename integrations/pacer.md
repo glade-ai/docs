@@ -114,6 +114,14 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
 
+### Required fields check before filing
+
+Before a filing can be submitted, Glade validates that all required case information is present. If any required fields are missing, the filing is blocked and the missing fields are listed so your team can address them before re-attempting.
+
+- For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
+- For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
+- Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
+
 ### Preventing duplicate filings
 
 Before a filing proceeds, Glade checks whether the case already has an assigned case number or an in-progress filing. Depending on the situation, you will see one of two states in the pre-filing dialog:
