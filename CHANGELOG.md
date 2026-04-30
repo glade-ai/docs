@@ -18,6 +18,12 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-30 14:30:19-04:00 · [PR #137](https://github.com/glade-ai/docs/pull/137)
+
+### payments/payment-plans
+- The system now skips a new charge or retry if a payment for the same plan is already in progress, preventing duplicate charges and spurious failure notifications.
+- Added the "Deferred" status to the installment status table — a deferred installment has been postponed and its amount remains outstanding without being collected on the original scheduled date.
+
 ## 2026-04-30 14:29:54-04:00 · [PR #136](https://github.com/glade-ai/docs/pull/136)
 
 ### workflows/status-tracking
