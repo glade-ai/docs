@@ -18,6 +18,12 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-04-30 11:56:37-07:00 · [PR #131](https://github.com/glade-ai/docs/pull/131)
+
+### docs/agents
+- Added `## Pull requests` section to `AGENTS.md` with PR creation guidelines (draft by default, release labels, description format)
+- Added `create-pr` skill synced from `glade-claude-plugin` for Claude Code, Cursor, and GitHub Copilot
+
 ## 2026-04-30 14:31:02-04:00 · [PR #138](https://github.com/glade-ai/docs/pull/138)
 
 ### back-office/settings
