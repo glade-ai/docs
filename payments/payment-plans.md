@@ -34,6 +34,7 @@ All four frequencies are always available; there is no setting to restrict which
 |--------|---------|
 | Upcoming | Scheduled but not yet charged |
 | Paid | Successfully charged |
+| Deferred | The installment has been postponed. The amount is not collected on the original date and remains outstanding |
 | Failed | All charge attempts exhausted without success |
 | Retrying | Initial charge failed; automatic retry pending |
 
@@ -57,6 +58,7 @@ A payment plan moves through the following statuses over its lifetime:
 - Both the client and the firm are notified by email when retries are exhausted.
 - The plan itself remains active. The failed amount rolls into future installments or requires manual intervention by the firm.
 - Payment plan charges are processed as off-session payments. If a card requires 3D Secure authentication, the client receives a notification to complete authentication separately — the system does not attempt an automatic 3D Secure challenge during a retry. This prevents spurious authentication prompts for clients whose cards have 3D Secure enabled.
+- **Pending payment guard**: If a payment attempt is already in progress when a new charge or retry is due, the system waits for the in-flight attempt to resolve before initiating another. This prevents duplicate charges and eliminates the spurious failure notifications that would otherwise occur when a retry is triggered while a previous attempt is still processing.
 
 ### Modifying a payment plan
 
