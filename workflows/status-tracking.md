@@ -28,6 +28,9 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Custom statuses**: Your firm can create custom statuses with a title, icon, and color. Custom statuses also support two optional behaviors:
   - **Archive behavior** — moving a case to this status completes all pending tasks and promotes any related workflows, just like archiving
   - **Disable followups** — suppresses automated reminder emails and messages for cases in this status
+- **Archiving statuses**: Any status — including built-in default statuses — can be archived. Archiving a status removes it from the status picker so it cannot be assigned to new cases. When you archive a status that is currently in use, a confirmation prompt shows how many active workflows are using it, so you can make an informed decision before proceeding.
+- **Archived status visibility**: Cases that are currently assigned an archived status continue to display that status correctly — the label, icon, and color remain visible in workflow lists and on the case. Archived statuses are only hidden from pickers where you select a status; existing cases are not affected.
+- **Viewing archived statuses**: Archived statuses are hidden by default on the Custom Statuses settings page. Toggle **Show archived** to reveal them.
 - **What happens when status changes**:
   - Moving to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case.
   - Archiving a case preserves the previous status so it can be restored later. Archiving also promotes any associated workflows to primary.
@@ -43,7 +46,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 
 ## Configuration
 
-- **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups).
+- **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
 - **Status per workflow step**: Individual workflow steps can specify a status that the case automatically transitions to when that step's trigger completes.
 - **Workflow type**: The workflow type ("basic" or "attorney case") affects how automatic status progression and completion logic behave.
 
@@ -52,6 +55,8 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - Any string can technically be set as a status, though the system expects it to match either a built-in or custom status.
 - When a case is archived and later unarchived, it restores to the previous status. If there is no previous status, it defaults to Data Collection.
 - Custom statuses with archive behavior trigger the same task completion logic as the built-in Archived status, but the case retains the custom status rather than switching to Archived.
+- Archiving a default status (one that shipped with your firm setup) does not delete it — it is preserved for historical reference but removed from the picker. Default statuses cannot be deleted, only archived.
+- The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
 
 ## Related Features
