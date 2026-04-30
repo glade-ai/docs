@@ -10,6 +10,7 @@ The client portal is where clients interact with your firm's workflows. Clients 
 - The portal URL is branded to your firm using your unique URL slug (e.g., `yourfirm.glade.app/...`).
 - Clients start a workflow by following a link that walks them through the workflow's initial steps.
 - Each workflow step can include questionnaires, document collection, payments, bookings, e-signatures, and messaging.
+- The portal home screen shows the client's **Your Tasks** section, which lists the workflow steps currently assigned to them. On first sign-in, tasks may take a few seconds to appear while the onboarding workflow is provisioned in the background — the section shows a loading indicator until the data is ready. No action is needed; tasks appear automatically.
 - Clients sign up or sign in through the portal. Each client is associated with your firm's account.
 - When adding a joint filer or collaborator to a case workflow at initiation, you can provide an optional phone number. When present, the phone number appears in the case initiation summary and is saved with that person's contact record.
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
