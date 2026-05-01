@@ -17,6 +17,7 @@ Staff management controls who has access to your firm's back office and what the
   - Set a default assignment role for each team member so they are automatically assigned the right role on new cases
   - Control which team members appear in specific report views
 - **Case ownership**: You can assign one or more team members to a case. Each owner can have specific workflow roles on that case (e.g., one person might be the Paralegal on case A but Intake Lead on case B).
+- **Editing team member details**: A team member's name and email address can be updated directly from the staff management interface. Keeping email addresses current ensures the team member retains access to their cases and workflows — changing an email address that is out of sync with the person's actual account can cause their assigned workflows to become inaccessible.
 - **Organizations** belong to your firm and represent client-side groups. Each organization has an owner and members. Organization members have granular permissions:
   - Assign team members to cases
   - Invite other collaborators
