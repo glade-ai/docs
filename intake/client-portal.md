@@ -14,6 +14,8 @@ The client portal is where clients interact with your firm's workflows. Clients 
 - When adding a joint filer or collaborator to a case workflow at initiation, you can provide an optional phone number. When present, the phone number appears in the case initiation summary and is saved with that person's contact record.
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
 - The portal includes a branded "Client login portal" accessible from your public page.
+- When a client signs in for the first time after a workflow is started, the **Your Tasks** section shows a loading indicator while their initial tasks are being prepared. Tasks appear automatically once ready.
+- The portal's **Your team** section shows the attorneys and staff assigned to the client's workflow. Team members are populated automatically based on the workflow's ownership configuration.
 
 ## Configuration
 
