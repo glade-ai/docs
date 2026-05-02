@@ -20,6 +20,7 @@ Glade currently supports automated filing in the following bankruptcy courts:
 - Florida Northern (FLNB)
 - Florida Southern (FLSB)
 - Idaho (IDB)
+- Pennsylvania Western (PAWB)
 - South Carolina (SCB)
 - Washington Western (WAWB)
 
@@ -39,6 +40,12 @@ Courts not in this list are not available for automated filing.
    - Pays the filing fee via the firm's credit card on file with PACER.
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
+
+### PAWB Chapter 7 — automatic document combine
+
+When filing a Chapter 7 case in the Pennsylvania Western (PAWB) district, Glade automatically merges three required documents — Local Form 29, Schedule 106Dec, and the Creditor Matrix — into a single combined PDF and submits them under one PACER filing event, as required by the court. No manual merging or extra steps are needed: attach each document as you normally would, and Glade handles the combination at the moment of filing.
+
+This combined-form requirement is specific to PAWB Chapter 7. All other supported districts treat these documents as independent uploads.
 
 ### Filing packet document types
 
@@ -116,11 +123,11 @@ When a bankruptcy case is transferred to a different court and assigned a new ca
 
 ### Required fields check before filing
 
-Before a filing can be submitted, Glade validates that all required case information is present. If any required fields are missing, the filing is blocked and the missing fields are listed so your team can address them before re-attempting.
+Before a filing can be submitted, Glade checks that all required debtor fields are present in the case questionnaire. If any are missing, the eFiling modal displays a list of the missing fields and the filing is blocked until your team resolves them.
 
-- For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
-- For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
-- Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
+- Required fields vary by case type. For Chapter 7 and Chapter 13 cases, the **credit counseling completion date** is among the required fields.
+- For joint filings with two debtors, required fields are checked for both the primary debtor and the co-debtor.
+- Glade checks the questionnaire data — if information has been collected but not yet saved, save the questionnaire before initiating the filing.
 
 ### Preventing duplicate filings
 
