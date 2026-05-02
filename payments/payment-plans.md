@@ -117,7 +117,7 @@ A payment plan moves through the following statuses over its lifetime:
 ### Firm management experience
 
 - Firms view and manage payment plans from the transactions dashboard.
-- Plan details show: status, frequency, installment amount, next payment date, and payment history.
+- Plan details show: status, frequency, installment amount, next payment date, and payment history. Deferred installments appear in the schedule alongside upcoming and paid ones, so you can see the full picture of what has been collected, postponed, and is still expected.
 - Firms can modify plan settings, cancel plans, or adjust individual installments from this view.
 
 ## Configuration
