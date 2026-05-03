@@ -116,11 +116,12 @@ When a bankruptcy case is transferred to a different court and assigned a new ca
 
 ### Required fields check before filing
 
-Before a filing can be submitted, Glade validates that all required case information is present. If any required fields are missing, the filing is blocked and the missing fields are listed so your team can address them before re-attempting.
+Before a filing can be submitted, Glade validates that all required debtor fields are present. If any are missing, the filing is blocked at both the pre-filing preview and the ECF submission modal, and the missing fields are listed by name so your team can address them before re-attempting.
 
-- For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
-- For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
-- Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
+- The missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in.
+- An **Open questionnaire** link in the error state takes you directly to the case questionnaire to fill in the missing information.
+- For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
+- Glade checks the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
 
 ### Preventing duplicate filings
 
