@@ -56,7 +56,7 @@ Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's cal
 - All-day events are supported and block the entire day. Glade converts all-day event times to the user's timezone.
 - The sync window covers the next 3 months — events further out are not synced.
 - Unlike Google Calendar, Outlook does not support push notification webhooks in Glade's current implementation. Sync relies on the manual trigger and the 24-hour background job. Stale or expired delta links are recovered automatically during the next sync run (manual or scheduled).
-- If the Microsoft OAuth token is revoked or expires without refresh, the user must reconnect.
+- If the Microsoft OAuth token is permanently revoked — for example, because you changed your Microsoft password, revoked the app permission in your Microsoft account settings, or the refresh token has permanently expired — Glade automatically disconnects the calendar account and notifies your firm so your team knows to reconnect. Sync stops immediately rather than continuing to fail silently. Reconnect from Calendar settings to restore availability blocking and booking sync.
 - Disconnecting an account soft-deletes all synced events from Glade but does not modify the Outlook calendar.
 - Rate limiting from Microsoft Graph API is handled with retry logic and exponential backoff.
 
