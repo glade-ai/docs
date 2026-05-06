@@ -18,6 +18,10 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-05-06 08:42:36-04:00 · [PR #144](https://github.com/glade-ai/docs/pull/144)
+
+no details available
+
 ## 2026-04-30 11:56:37-07:00 · [PR #131](https://github.com/glade-ai/docs/pull/131)
 
 ### docs/agents
