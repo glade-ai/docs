@@ -18,6 +18,16 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-05-06 08:47:42-04:00 · [PR #150](https://github.com/glade-ai/docs/pull/150)
+
+### back-office/settings
+- Corrected documentation: default statuses can now be archived (they still cannot be deleted)
+- Documented the confirmation dialog that appears when archiving a status currently in use on active workflows, showing the count of affected workflows
+
+### back-office/staff-management
+- Documented that firm admins can edit a team member's name and email address directly from the staff management interface
+- Noted that keeping email addresses current prevents workflow visibility issues when a team member's email changes
+
 ## 2026-05-06 08:47:00-04:00 · [PR #148](https://github.com/glade-ai/docs/pull/148)
 
 ### integrations/pacer
