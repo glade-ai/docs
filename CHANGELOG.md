@@ -18,6 +18,21 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-05-06 08:47:00-04:00 · [PR #148](https://github.com/glade-ai/docs/pull/148)
+
+### integrations/pacer
+- Added Pennsylvania Western (PAWB) to the list of supported PACER courts
+- Added section documenting PAWB Chapter 7 auto-combine behavior (LF-29 + 106Dec + Creditor Matrix merged automatically at filing time)
+- Added Local Form 1 as a named document type for PAWB Chapter 7 cases; notes it is filed via EDSS rather than ECF
+- Updated required fields check: all required debtor fields are now validated (not just credit counseling dates), filing is hard-blocked at both the pre-filing preview and ECF modal, missing fields are shown with labels and an "Open questionnaire" link, and specific missing field names appear if a submission attempt fails
+
+### integrations/outlook-calendar
+- Updated Edge Cases: when Microsoft permanently revokes OAuth access, Glade now automatically disconnects the calendar account and notifies the firm instead of retrying indefinitely
+
+### integrations/quickbooks
+- Documented that on-behalf-of payments sync under the invoice's primary client to keep QuickBooks customer records accurate
+- Documented that QuickBooks sync failures send a notification to workflow owners via Glade case chat
+
 ## 2026-05-06 08:42:36-04:00 · [PR #144](https://github.com/glade-ai/docs/pull/144)
 
 no details available
