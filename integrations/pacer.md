@@ -47,39 +47,15 @@ Each document in the filing packet must be labeled with the correct ECF document
 - For **Chapter 7 business-debt cases** where the debtor is claiming exemption from the means test presumption of abuse, upload the B122A-1 Supplement and select **Statement of Debtor's Temporary Exclusion from Presumption of Abuse (B122A-1Supp)** from the document type dropdown. This is supported for all available districts. Filing this document labeled as "Other" causes a submission failure.
 - When a court requires individual debtor identification documents, select **PhotoID (Debtor 1)** or **PhotoID (Debtor 2)** for each debtor's photo identification, and **DeBN (Debtor 1)** or **DeBN (Debtor 2)** for each debtor's Declaration of Electronic Notice. The Debtor 1 variant is for the primary debtor; the Debtor 2 variant is for the co-debtor in a joint case.
 - For **Western District of Pennsylvania (PAWB)** Chapter 7 cases, **Local Form 1 — Declaration Re: Electronic Filing of Petition, Schedules & Statements** is available in the document type dropdown. This form is submitted through the EDSS portal alongside the SSN Statement — it is not part of the standard ECF filing packet. A Local Form 1 slot appears in the per-district document checklist for PAWB Chapter 7 workflows once the document is labeled and uploaded.
+- For **Florida Southern (FLSB)** Chapter 13 cases, **Local Form 67 — Certification of Compliance** is available in the document type dropdown. The form auto-surfaces in the FLSB Chapter 13 required-document checklist, and ad-hoc uploads from the case documents picker are accepted under common filename variants (with or without spaces, hyphens, underscores, or the full form name).
+- Glade also accepts non-canonical filename variants for **Verification of Creditor Matrix** uploads, so files named with run-together or otherwise normalized variants pass the filing packet's filename check instead of being rejected.
 - Use a named document type whenever one exists in the dropdown. The generic "Other" option is for documents that do not match any named type.
 - When you assign a custom filename to a document being added to PACER, Glade now preserves spaces, hyphens, parentheses, periods, plus signs, apostrophes, and accented letters in the filename. Filenames such as `Pay Advices`, `Tax Return 2024`, and `Photo ID (Debtor 1)` flow through to PACER as typed instead of being collapsed into a single run-on word. Only characters that filesystems or PACER cannot accept (such as path separators and control characters) are removed.
 - Filenames that contain only special characters and would resolve to an empty name are rejected at the form before they can be saved, so you see the validation message immediately rather than encountering a runtime error during filing.
 
 ### Filing Packet AI Review
 
-Before a filing is submitted, Glade automatically reviews each document in the filing packet and flags issues that could cause the court to reject the filing.
-
-- Each document row in the filing packet shows a status badge indicating the AI review result. The badge combines a Glade AI icon with a status indicator.
-- Available review statuses:
-  - **Evaluating** — AI review is in progress.
-  - **Approved** — Glade AI found no issues with the document.
-  - **Needs Review** — Glade AI flagged potential issues. Click the document to see a summary and a checklist of specific concerns.
-  - **Failed** — The review process encountered an error and could not complete.
-  - **Approved by Reviewer** — A team member has manually approved the document after reviewing it.
-- All document rows show a three-dot actions menu, including rows for documents that have not yet been uploaded. The **Remove** option is disabled on rows with no document attached.
-- Clicking a document opens a **Document Review Status** panel above the document preview. Click the panel header to expand or collapse it. The panel shows the document's status, an AI-generated summary with flagged issues listed as bullet points, and a checklist of validation items.
-- On documents with a **Needs Review** status, an **Approve Document** button lets a team member manually mark the document as approved after reviewing the flagged items.
-- Review results update in real time — when the AI finishes reviewing a document, the badge and review panel update automatically without requiring a page refresh.
-- To trigger AI review for a document that was uploaded before the review feature was active, open the document's three-dot options menu and select **Review by Glade AI**. The document transitions to **Evaluating** and then updates to its review result.
-
-### Customizing AI Review Instructions
-
-Law firms can customize the review instructions the AI uses when checking filing documents. From your dashboard, navigate to **Filing Packet AI Review Configs** to open the configuration page.
-
-The page lists all supported document types. For each type you can:
-
-- **Override** the default instructions — your text replaces the defaults entirely.
-- **Append** additional instructions — your text is added after the defaults.
-
-Rows with active customizations are tagged **Customized**. Click the clear button on a row to remove the customization and revert that document type to the default instructions.
-
-An info banner on the configuration page explains the difference between override and append behavior.
+Filing Packet AI Review is currently turned off. Filing packet uploads no longer trigger an automated AI review, the document review status panel and review badges have been removed from the PACER preview pane, and the Filing Packet AI Review configuration page is no longer in use. The feature is paused while the review experience is reworked.
 
 ### Filing fees
 
