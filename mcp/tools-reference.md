@@ -47,6 +47,10 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 | `case_data_schema_get` | Gets the global schema defining all structured case data fields (parties, attorneys, billing, IDs). |
 | `case_data_list` | Gets all resolved data for a specific case, including provenance and conflict status. |
 
+In addition to the tools above, the assistant can read the case's **internal team message thread** — the firm-side discussion attached to the workflow, separate from the client-facing inbox conversation. Messages include their attachments (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Cases that don't have an internal thread return an empty list.
+
+> TODO: confirm the exact tool names exposed for `GET /user-workflows/:id/messages` and `GET /user-workflows/:id/attachments/:id/download` once they appear in the MCP tool registry.
+
 ### Workflow Templates
 
 | Tool | What it does |
@@ -116,6 +120,12 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 | `agencies_get` | Gets agency details. |
 | `agency_members_list` | Lists members of an agency. |
 | `agency_members_get` | Gets a specific agency member's details. |
+
+### Inbox Conversations
+
+The assistant can read messages on inbox conversations between the firm and a client. Message responses include any attachments on the message (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Non-document attachments return a null URL.
+
+> TODO: confirm the exact tool name exposed for `GET /conversations/:id/attachments/:id/download` once it appears in the MCP tool registry.
 
 ### Documentation
 
