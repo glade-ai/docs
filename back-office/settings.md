@@ -18,6 +18,7 @@ Settings control how your firm's back office behaves. This includes custom workf
 - When you archive a status that is currently assigned to one or more active workflows, a confirmation dialog shows how many workflows use it. You can proceed with archiving — those workflows are not affected — or cancel to leave the status active.
 - To view archived statuses on the Custom Statuses settings page, turn on the **Show archived** toggle. Each archived status shows **Unarchive** and **Delete** actions.
 - Archiving a status is reversible — use **Unarchive** to make it available in the workflow step dropdown again.
+- **Reordering statuses**: Active statuses on the Custom Statuses settings page have a drag handle on the left of each row. Drag a row up or down to change the order — an indicator shows where it will land. Releasing the row saves the new order, and statuses appear in that order across status pickers, dashboards, and reports. Edit, Archive, and Delete actions are briefly disabled while a reorder is being saved. Default statuses can be reordered (they cannot be deleted, only archived). Archived statuses are not reorderable.
 
 ### Workflow Roles
 
@@ -71,15 +72,6 @@ Settings control how your firm's back office behaves. This includes custom workf
 ### Follow-up Cadence
 
 - Controls how often automated follow-up reminders are sent to clients with outstanding tasks. You configure the interval (e.g., every 3 days), the unit (days or weeks), and the percentage of task completion that triggers the reminder.
-
-### Filing Packet AI Review
-
-When your firm uses AI-assisted document review for filing packets, you can customize the review instructions for each document type. This lets you tailor how the AI evaluates specific documents — for example, adding firm-specific checks or adjusting focus areas.
-
-- Access **Filing Packet AI Review Configs** from your dashboard to view and manage review instructions across all 20 supported document types.
-- Each document type shows the default review instructions. You can add an **override** (replaces the default entirely) or an **append** (adds to the default instructions).
-- Rows with active customizations are marked with a **Customized** tag so you can see at a glance which document types have firm-specific settings.
-- To remove a customization and revert to the default, use the **Clear** button on that row.
 
 ### Petition Settings
 
