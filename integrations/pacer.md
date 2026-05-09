@@ -111,6 +111,16 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
 
+### South Carolina (SCB) Chapter 7 individual filings
+
+- Individual Chapter 7 cases filed in the South Carolina Bankruptcy Court collect an additional questionnaire question about the local DeBN form: clients answer **Activate** or **Decline** for the Debtor's Election Re: Electronic Noticing. The answer is passed through to PACER so the SCB filing engine fills the right radio on the local form.
+- The question is shown only on Chapter 7 individual filings (it is hidden on joint petitions and on non-Chapter 7 filings) and is labeled to indicate it applies only to South Carolina filings — clients in other districts can ignore it.
+- If the question is left unanswered on a SCB Chapter 7 individual filing, the answer is omitted from the PACER submission. The SCB filing engine treats the missing answer as a configuration gap and surfaces it as a filing error.
+
+### Chapter 7 individual presumption-of-abuse page
+
+When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-1 line 14, Glade now fills the matching presumption fields on B122A-1 lines 40 and 42 with that same answer instead of leaving them blank. Because the lines are populated, PACER no longer renders the standalone "Presumption of Abuse" page during filing — the filing proceeds without that extra interstitial. Other income and expense fields wiped by the no-presumption answer continue to be cleared as before. The override applies only to Chapter 7 filings; cases on other chapters that carry stale prior answers from an earlier Chapter 7 session are not affected.
+
 ### Case transfers
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
@@ -121,6 +131,7 @@ Before a filing can be submitted, Glade validates that all required debtor field
 
 - For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
 - For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
+- For individual Chapter 7 filings, the **marital filing status** is also required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
 - Missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
