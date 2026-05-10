@@ -40,6 +40,7 @@ Online payments allow clients to pay invoices directly through Glade. Glade inte
 - For Confido, payment tokens are stored for reuse on future payments.
 - When a client pays a new invoice, any saved payment methods appear as selectable options alongside the option to enter new details.
 - Clients can add or remove saved payment methods from their profile.
+- If saving a Confido payment method fails because of invalid card or bank details, the client now sees the specific reason returned by the processor (for example, an invalid card number or unsupported account type) so they can correct the entry and try again. Previously these errors surfaced as a generic processing failure.
 
 ### Processing fees and surcharges
 
