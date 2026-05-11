@@ -47,37 +47,15 @@ Each document in the filing packet must be labeled with the correct ECF document
 - For **Chapter 7 business-debt cases** where the debtor is claiming exemption from the means test presumption of abuse, upload the B122A-1 Supplement and select **Statement of Debtor's Temporary Exclusion from Presumption of Abuse (B122A-1Supp)** from the document type dropdown. This is supported for all available districts. Filing this document labeled as "Other" causes a submission failure.
 - When a court requires individual debtor identification documents, select **PhotoID (Debtor 1)** or **PhotoID (Debtor 2)** for each debtor's photo identification, and **DeBN (Debtor 1)** or **DeBN (Debtor 2)** for each debtor's Declaration of Electronic Notice. The Debtor 1 variant is for the primary debtor; the Debtor 2 variant is for the co-debtor in a joint case.
 - For **Western District of Pennsylvania (PAWB)** Chapter 7 cases, **Local Form 1 — Declaration Re: Electronic Filing of Petition, Schedules & Statements** is available in the document type dropdown. This form is submitted through the EDSS portal alongside the SSN Statement — it is not part of the standard ECF filing packet. A Local Form 1 slot appears in the per-district document checklist for PAWB Chapter 7 workflows once the document is labeled and uploaded.
+- For **Florida Southern (FLSB)** Chapter 13 cases, **Local Form 67 — Certification of Compliance** is available in the document type dropdown. The form auto-surfaces in the FLSB Chapter 13 required-document checklist, and ad-hoc uploads from the case documents picker are accepted under common filename variants (with or without spaces, hyphens, underscores, or the full form name).
+- Glade also accepts non-canonical filename variants for **Verification of Creditor Matrix** uploads, so files named with run-together or otherwise normalized variants pass the filing packet's filename check instead of being rejected.
 - Use a named document type whenever one exists in the dropdown. The generic "Other" option is for documents that do not match any named type.
+- When you assign a custom filename to a document being added to PACER, Glade now preserves spaces, hyphens, parentheses, periods, plus signs, apostrophes, and accented letters in the filename. Filenames such as `Pay Advices`, `Tax Return 2024`, and `Photo ID (Debtor 1)` flow through to PACER as typed instead of being collapsed into a single run-on word. Only characters that filesystems or PACER cannot accept (such as path separators and control characters) are removed.
+- Filenames that contain only special characters and would resolve to an empty name are rejected at the form before they can be saved, so you see the validation message immediately rather than encountering a runtime error during filing.
 
 ### Filing Packet AI Review
 
-Before a filing is submitted, Glade automatically reviews each document in the filing packet and flags issues that could cause the court to reject the filing.
-
-- Each document row in the filing packet shows a status badge indicating the AI review result. The badge combines a Glade AI icon with a status indicator.
-- Available review statuses:
-  - **Evaluating** — AI review is in progress.
-  - **Approved** — Glade AI found no issues with the document.
-  - **Needs Review** — Glade AI flagged potential issues. Click the document to see a summary and a checklist of specific concerns.
-  - **Failed** — The review process encountered an error and could not complete.
-  - **Approved by Reviewer** — A team member has manually approved the document after reviewing it.
-- All document rows show a three-dot actions menu, including rows for documents that have not yet been uploaded. The **Remove** option is disabled on rows with no document attached.
-- Clicking a document opens a **Document Review Status** panel above the document preview. Click the panel header to expand or collapse it. The panel shows the document's status, an AI-generated summary with flagged issues listed as bullet points, and a checklist of validation items.
-- On documents with a **Needs Review** status, an **Approve Document** button lets a team member manually mark the document as approved after reviewing the flagged items.
-- Review results update in real time — when the AI finishes reviewing a document, the badge and review panel update automatically without requiring a page refresh.
-- To trigger AI review for a document that was uploaded before the review feature was active, open the document's three-dot options menu and select **Review by Glade AI**. The document transitions to **Evaluating** and then updates to its review result.
-
-### Customizing AI Review Instructions
-
-Law firms can customize the review instructions the AI uses when checking filing documents. From your dashboard, navigate to **Filing Packet AI Review Configs** to open the configuration page.
-
-The page lists all supported document types. For each type you can:
-
-- **Override** the default instructions — your text replaces the defaults entirely.
-- **Append** additional instructions — your text is added after the defaults.
-
-Rows with active customizations are tagged **Customized**. Click the clear button on a row to remove the customization and revert that document type to the default instructions.
-
-An info banner on the configuration page explains the difference between override and append behavior.
+Filing Packet AI Review is currently turned off. Filing packet uploads no longer trigger an automated AI review, the document review status panel and review badges have been removed from the PACER preview pane, and the Filing Packet AI Review configuration page is no longer in use. The feature is paused while the review experience is reworked.
 
 ### Filing fees
 
@@ -111,6 +89,16 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
 
+### South Carolina (SCB) Chapter 7 individual filings
+
+- Individual Chapter 7 cases filed in the South Carolina Bankruptcy Court collect an additional questionnaire question about the local DeBN form: clients answer **Activate** or **Decline** for the Debtor's Election Re: Electronic Noticing. The answer is passed through to PACER so the SCB filing engine fills the right radio on the local form.
+- The question is shown only on Chapter 7 individual filings (it is hidden on joint petitions and on non-Chapter 7 filings) and is labeled to indicate it applies only to South Carolina filings — clients in other districts can ignore it.
+- If the question is left unanswered on a SCB Chapter 7 individual filing, the answer is omitted from the PACER submission. The SCB filing engine treats the missing answer as a configuration gap and surfaces it as a filing error.
+
+### Chapter 7 individual presumption-of-abuse page
+
+When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-1 line 14, Glade now fills the matching presumption fields on B122A-1 lines 40 and 42 with that same answer instead of leaving them blank. Because the lines are populated, PACER no longer renders the standalone "Presumption of Abuse" page during filing — the filing proceeds without that extra interstitial. Other income and expense fields wiped by the no-presumption answer continue to be cleared as before. The override applies only to Chapter 7 filings; cases on other chapters that carry stale prior answers from an earlier Chapter 7 session are not affected.
+
 ### Case transfers
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
@@ -121,6 +109,7 @@ Before a filing can be submitted, Glade validates that all required debtor field
 
 - For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
 - For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
+- For individual Chapter 7 filings, the **marital filing status** is also required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
 - Missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
