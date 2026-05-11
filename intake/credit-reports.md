@@ -35,6 +35,10 @@ If a credit report pull fails:
 
 If a credit report is not available or not needed, you can skip the step. The skip option appears after canceling an error, or may be available from the start depending on your workflow configuration.
 
+### Imported real-estate addresses
+
+When Glade imports addresses from a credit report into the case as real-estate assets, it imports only addresses the client actually owns. Glade uses the credit report's owner-match indicator on each address to make this determination, so prior addresses where the client lived but did not own the property are no longer imported as real-estate assets even if they have transaction history.
+
 ## Configuration
 
 | Setting | Description |
