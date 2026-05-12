@@ -59,6 +59,7 @@ Glade integrates with Google Calendar to sync a firm's calendar availability int
 - If the Google OAuth token is revoked or expires without refresh, the user must reconnect.
 - Push notification watch subscriptions expire after 30 days and are auto-renewed. If renewal fails, sync falls back to the 24-hour background job.
 - Disconnecting an account soft-deletes all synced events from Glade but does not modify the Google Calendar.
+- If you revoke Glade's access to your Google account (for example, from your Google security settings or by changing your Google password), Glade detects this on the next sync attempt and automatically disconnects the calendar account. Synced calendars, watchers, and scheduled bookings are cleared, and you are notified that the connection has been removed. This prevents bookings from being scheduled against availability Glade can no longer see. To resume syncing, reconnect the account from the Calendar settings page.
 
 ## Related Features
 
