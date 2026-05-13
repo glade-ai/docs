@@ -57,6 +57,14 @@ The portal resolves a wide range of internal status values into four user-facing
 
 Within each group, items appear in the original order they would be encountered in the workflow.
 
+### Client timezone
+
+The portal captures and stores a timezone for each client so that times shown to the client — appointment slots, meeting times on the home page, and reminders — appear in the client's own local time, and so that automated messages such as task follow-ups respect the client's local hours of day.
+
+- When a client signs in or visits the portal after signup, Glade reads the timezone from their browser and saves it to their profile if no timezone has been stored yet. The client does not need to do anything for this to happen.
+- The client can change the saved timezone at any time from their portal profile, using a **Timezone** dropdown. Clients who travel or who normally use Glade from a different timezone than their device's setting can use this to lock the timezone to whatever they prefer.
+- The saved timezone is used both by the portal (to render meeting times in the client's local hours) and by Glade's outbound messaging (for example, the 8:00 AM–9:00 PM SMS delivery window for task follow-ups).
+
 ### Active status and tasks
 
 The portal's "active" indicators and the Your next step card are driven by the underlying entity status, not by the task system. If a client dismisses a task whose underlying item (for example a document checklist) is still open and assigned to them, the home page continues to surface that item as their next step with the correct Open button.
