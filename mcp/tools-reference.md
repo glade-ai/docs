@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Glade MCP Server provides 39 read-only tools organized into categories. You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
+The Glade MCP Server provides read-only tools across multiple categories, including profile, customers, cases, workflows, tasks, invoices, payments, payment plans, task efficiency, team members, organizations, agencies, court notices, dockets, and documentation. You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
 
 ## Key Behaviors
 
@@ -116,6 +116,22 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 | `agencies_get` | Gets agency details. |
 | `agency_members_list` | Lists members of an agency. |
 | `agency_members_get` | Gets a specific agency member's details. |
+
+### Court Notices
+
+| Tool | What it does |
+|------|-------------|
+| Court notices — list | Lists PACER court notices for a firm. Paginated. Filterable by case, workflow, notice type, and date range, so the assistant can answer questions like "what motions were filed last week on case X" without having to scan unrelated docket activity. |
+| Court notices — get | Returns the full content of a single court notice, including its body text and the IDs of any attachments. |
+| Court notice attachment — download | Returns a short-lived signed URL for a specific attachment on a court notice so the document can be retrieved. Non-document attachments return a null URL. |
+
+### Dockets
+
+| Tool | What it does |
+|------|-------------|
+| Docket — get | Returns the cached PACER docket for a case by case number, including the header information and every docket entry. Use this for questions about the complete historical record on a case rather than for recent activity (which Court Notices covers). |
+
+> TODO: Confirm the registered MCP tool names for the four endpoints above once the matching `glade-mcp-server` companion is settled (court notices list, court notices get, court notice attachment download, docket get).
 
 ### Documentation
 
