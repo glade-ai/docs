@@ -51,7 +51,7 @@ Settings control how your firm's back office behaves. This includes custom workf
 - **Notify on every customer message** sends a notification for every incoming client message when enabled.
 - **Notification phone number** is the phone number used for SMS notifications.
 - **Slack integration** sends notifications to a configured Slack channel.
-- **Support email** settings customize the sender name and address for outbound emails to clients.
+- **Support email** settings customize the sender name and address for outbound emails to clients. For attorney firms whose outbound mail goes from the shared Glade support address, the sender display name shown to clients defaults to the firm's name when no custom sender name has been set — so emails arrive labeled with the firm name rather than no name at all. A custom **support email sender name** still takes precedence when configured.
 - **Custom confirmation email message** lets you add custom text to payment confirmation emails.
 
 ### AI Settings
