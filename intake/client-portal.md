@@ -11,6 +11,10 @@ The client portal is where clients interact with your firm's workflows. Clients 
 - Clients start a workflow by following a link that walks them through the workflow's initial steps.
 - Each workflow step can include questionnaires, document collection, payments, bookings, e-signatures, and messaging.
 - Clients sign up or sign in through the portal. Each client is associated with your firm's account.
+- **Signing up with an email Glade already recognizes** — when a client tries to sign up with an email that Glade already has on file (for example, from a prior sales contact, demo, intake widget, or CRM import), the portal no longer bounces them with a generic "user already exists" error:
+  - If the email exists but no password has been set, Glade emails the client a one-time code and switches the form to a verification screen. Entering the code finishes the account and signs them in.
+  - If the email already has a password set, the form shows an inline error and a prominent **Sign in instead** button that opens the sign-in screen with the email prefilled.
+  - Refreshing the page mid-verification shows a "Session expired" panel with a button back to the sign-up screen — the in-progress sign-up is not silently lost without explanation, but it does have to be re-entered.
 - When adding a joint filer or collaborator to a case workflow at initiation, you can provide an optional phone number. When present, the phone number appears in the case initiation summary and is saved with that person's contact record.
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
 - The portal includes a branded "Client login portal" accessible from your public page.
