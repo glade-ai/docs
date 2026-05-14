@@ -12,7 +12,7 @@ Document collection enables your team to request specific files from clients as 
 - Each file slot tracks its upload status: **incomplete**, **complete**, or **action required**.
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
 - Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement. After a re-upload, the new file is correctly recognized as ready for review.
-- Documents can be renamed by clicking the document's name in the detail pane. The updated name saves immediately and is reflected in the checklist view.
+- Documents can be renamed by your team from the firm dashboard by clicking the document's name in the detail pane. The updated name saves immediately and is reflected in the checklist view. Clients viewing the same document from the client portal do not see the rename control — renaming is a firm-only action.
 - Files can be moved from one document request to another using a dropdown that lists the available destination requests. If the source document request is currently in review, a warning message asks you to confirm before proceeding — moving files out changes the review status. If all files in an in-review request are moved out, the request status resets from in review to in progress.
 - When all required documents are uploaded, the client can submit for review. Before submission, the system verifies that all required files are fully uploaded — if any required file is still incomplete, submission is blocked and the client sees an error message.
 - When a document request is in review and no files have been rejected, it is awaiting reviewer action.
