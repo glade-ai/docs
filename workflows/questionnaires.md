@@ -238,6 +238,10 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
+### Outdated Template Upgrade Prompt
+
+If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked.
+
 ### Re-opening
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
