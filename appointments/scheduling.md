@@ -23,6 +23,9 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - Individual team members can have their own separate availability schedules.
 - External calendar events from connected calendars (Google Calendar or Outlook) automatically block availability to prevent double-booking.
 - Only events marked as "busy" block availability. Events marked as "free" or "transparent" do not.
+- In addition to recurring availability, you can add **availability blocks** for specific date ranges. Each block has a type that determines its effect on bookable time:
+  - **Blocked** — removes the covered times from bookable availability. Clients cannot schedule into these windows. Use this for vacations, court dates, off-site days, or any other time you should not be booked.
+  - Other block types (for example, blocks used purely for visual annotation on the calendar) do not remove availability — only blocks marked as Blocked actually prevent new bookings.
 
 ### Availability management view
 
@@ -125,6 +128,7 @@ Each firm member's profile includes a **Meetings** tab that clients can visit to
 - Clients can view and manage their own bookings.
 - Additional collaborators can be granted access to specific bookings.
 - Workflow participants automatically receive appropriate access.
+- **Workflow bookings require explicit assignment**: When a booking is created as a step in a workflow, only people who are explicitly assigned to that booking (or who are members of the firm) can view, reschedule, or cancel it. A client being the subject of the booking is not enough on its own — for example, a signing or notarization booking that is only assigned to firm staff is hidden from the client's upcoming bookings list and the client cannot reschedule it. Add the client as an assignee on the booking if they should be able to manage it themselves.
 
 ## Configuration
 
