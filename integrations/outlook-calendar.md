@@ -13,6 +13,7 @@ Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's cal
 - After authorization, Glade discovers all calendars in the account (including shared calendars) and creates entries for each one.
 - Calendars start disabled — the user explicitly enables which calendars should sync.
 - The primary calendar is auto-detected based on Outlook's default.
+- **Connecting on behalf of another team member**: A firm administrator can run the connect flow for a specific team member (for example, when setting up a calendar for an attorney during onboarding). The resulting calendar account is attached to that team member rather than to the admin, so it appears under the target person's calendar list and their availability — not the admin's. Admins can only connect on behalf of someone who is already a team member of the firm.
 
 ### What syncs
 
