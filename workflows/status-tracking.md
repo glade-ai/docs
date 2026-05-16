@@ -38,6 +38,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
   - Moving to Filed and Pending records the filing date. Moving back to Data Collection or Processing clears the filing date.
   - Moving to Completed records the completion date.
 - **Sortable workflow list**: In the workflow list view, cases can be sorted by status change date, last assignment date, or by the **Assignees** column (alphabetically by the primary owner's name). Sorting by Assignees lets you group cases by responsible team member for review or handoff.
+- **Export unassigned workflows to CSV**: From the workflow list, you can export the current set of unassigned workflows to a CSV file. The export reflects the filters currently applied to the list, so narrowing by status or attorney before exporting limits the output to the matching cases. This is useful for triaging assignment backlogs offline or sharing the list with team leads outside Glade.
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
