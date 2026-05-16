@@ -64,6 +64,7 @@ Online payments allow clients to pay invoices directly through Glade. Glade inte
 - Payment processors notify Glade when a payment succeeds, fails, or is disputed.
 - Glade updates the payment status automatically based on these notifications — no manual intervention is needed for standard confirmations.
 - If a payment fails, the invoice status reflects the failure and the client can retry.
+- **Plain-English failure messages**: When a payment fails, the failed-payment email sent to the client uses a plain-English explanation of why the charge was declined — for example, "Your card was declined" or "Your card has expired." Raw processor error codes and developer-oriented messages are translated into customer-friendly wording so clients can understand what to fix before retrying. If a specific reason can't be mapped, the email falls back to a general "the payment was declined" message.
 
 ### Refunds
 
