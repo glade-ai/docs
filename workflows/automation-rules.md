@@ -51,3 +51,4 @@ Automation rules define what happens automatically when events occur during a ca
 - [Triggers](./triggers.md) — the event types that start or advance automation rules
 - [Task Templates](./task-templates.md) — reusable templates that define complete workflow configurations
 - [Status Tracking](./status-tracking.md) — how case status progresses as steps complete
+- [Court Notice Automations](./court-notice-automations.md) — automated emails that fire when PACER court notices arrive on a case
