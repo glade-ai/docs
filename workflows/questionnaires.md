@@ -116,6 +116,12 @@ Response history tracks when responses are modified, supporting undo and audit.
 
 Default options on single-select fields (configured in the questionnaire template) are automatically applied and saved when the questionnaire first loads. These defaults count as valid answers during validation — a field with a pre-set default is not flagged as incomplete.
 
+### Phone Number Fields
+
+Phone number fields default to the United States and format as the client types. A US number entered as `2125551234` displays as `+1 212-555-1234` — the country code, the area code, and dashes appear automatically without the client having to type them. Partial numbers format progressively, so `212` shows as `+1 212-` and `212555` as `+1 212-555-`, making it easy to tell at a glance how much of the number is filled in.
+
+The country selector next to the input is still available for international clients. Selecting a different country switches the formatting to that country's convention and updates the country code prefix.
+
 ### Currency Field Behavior
 
 By default, currency fields show $0.00 on first load. You can delete the value to leave the field blank — it stays blank after saving rather than resetting to $0.00. An empty currency value is treated as intentionally unset, distinct from a $0.00 value.
@@ -200,6 +206,18 @@ Each autofilled field shows a status indicator describing its current state:
 On Chapter 13 questionnaires, a **Plan Calculator** button appears in the form header. Clicking it opens the Chapter 13 Plan Calculator in a new tab alongside the questionnaire. The calculator uses case data to help attorneys analyze payment structures, classify claims, and prepare the repayment plan without leaving the questionnaire workflow.
 
 The Plan Calculator button only appears on questionnaires identified as Chapter 13. If the button is not visible on a Chapter 13 questionnaire, contact support to confirm the feature is enabled for your firm.
+
+### Non-Consumer Chapter 7 Means Test
+
+Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
+
+When the client's questionnaire indicates the case is non-consumer Chapter 7, Glade handles the means test paperwork automatically:
+
+- The Form B122A-1 "no presumption" answer is filled in for the client. No manual entry is needed.
+- The B122A-2 means test answers are skipped. Auto-fills that would have populated B122A-2 fields are blocked, so your team does not have to wipe them before filing.
+- The B122A-2 PDF is not generated for the case, and any previously generated copy is removed from the case documents. Form B122A-1 (and the B122A-1 Supplement, where the district requires it) continue to be generated.
+
+If a case was set up before this automation rolled out, your firm can request a one-time cleanup of existing non-consumer Chapter 7 cases — contact Glade support to coordinate.
 
 ### Case Data Sync Fields
 
