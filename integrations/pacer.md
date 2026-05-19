@@ -20,10 +20,14 @@ Glade currently supports automated filing in the following bankruptcy courts:
 - Florida Northern (FLNB)
 - Florida Southern (FLSB)
 - Idaho (IDB)
+- Kentucky Western (KYWB) — Chapter 7
+- Louisiana Eastern (LAEB) — Chapter 7
 - South Carolina (SCB)
-- Washington Western (WAWB)
+- Virginia Eastern (VAEB) — Chapter 7
+- Washington Eastern (WAEB) — Chapter 7
+- Washington Western (WAWB) — Chapter 7 and Chapter 13
 
-Courts not in this list are not available for automated filing.
+Districts that list a chapter (for example, Kentucky Western — Chapter 7) only support filings of the listed chapter. Districts without a chapter qualifier support all chapters Glade files (Chapter 7 and Chapter 13). Courts not in this list are not available for automated filing.
 
 ### Filing workflow
 
@@ -102,6 +106,14 @@ When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-
 ### Case transfers
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
+
+### Changing the chapter at petition compile time
+
+When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition must be re-compiled against the new chapter so the schedules and forms match. The pre-compile modal (Documents → **Compile Petition**) makes this switch visible at the moment of filing.
+
+- If the case's district supports more than one chapter, a **Chapter** selector appears in the compile modal next to the filing district banner. Picking a different chapter updates the case data immediately, so the next compile run uses the new chapter.
+- After changing the chapter, a **"Chapter changed. Recompile to refresh the petition."** note reminds you to click **Compile** so the regenerated petition reflects the new chapter. The note clears as soon as the new petition finishes compiling.
+- If the district only supports a single chapter, or the case is already filed, the selector is read-only and shows the current chapter as a chip — you can see the chapter at a glance but cannot change it.
 
 ### Required fields check before filing
 

@@ -66,6 +66,26 @@ Firms choose when invoices sync to QuickBooks:
 - The QuickBooks settings page shows: connection status, connected company name, and counts of synced customers, invoices, and payments.
 - Last sync timestamp is displayed.
 
+### QuickBooks Ledger report
+
+A **QuickBooks Ledger** report is available from the QuickBooks integration row in your firm's dashboard. The report lists every payment that has been synced to QuickBooks, giving your bookkeeper a side-by-side view of what's in Glade and what's been pushed to QuickBooks — useful when reconciling the two systems at month-end or when investigating a specific transaction.
+
+Each row shows the payment, the client and case it belongs to, the linked invoice, the payment date and amount, the provider that processed the payment, and the matching QuickBooks payment and invoice references.
+
+The report supports:
+
+- **Search** across payment, invoice, client, and case identifiers — paste an ID from either Glade or QuickBooks and the matching row appears.
+- **Status filter** to limit the report to specific payment statuses (for example, succeeded versus refunded).
+- **Provider filter** to narrow the report to a specific payment provider.
+- **Date range** filter on the payment date.
+- **Pagination** for firms with high payment volume.
+
+If the report fails to load, a toast appears so you know the load did not complete — refresh to retry.
+
+### Invoice line item rounding
+
+Invoice line item amounts are rounded to the nearest cent before being sent to QuickBooks. A line item priced at $19.99 with a quantity of 3, for example, syncs as $59.97 — the calculated amount and the unit price are each rounded to two decimal places, so the QuickBooks invoice total always matches what Glade shows your firm and your client. This prevents penny-level mismatches between Glade and QuickBooks caused by floating-point arithmetic.
+
 ### Disconnecting
 
 - Firms can disconnect QuickBooks at any time from the settings page.
