@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Glade MCP Server provides 39 read-only tools organized into categories. You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
+The Glade MCP Server provides read-only tools across multiple categories, including profile, customers, cases, workflows, tasks, invoices, payments, payment plans, task efficiency, team members, organizations, agencies, court notices, dockets, and documentation. You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
 
 ## Key Behaviors
 
@@ -46,6 +46,10 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 | `user_workflows_get` | Gets full case details including steps, data fields, collaborators, owners, and task summary. |
 | `case_data_schema_get` | Gets the global schema defining all structured case data fields (parties, attorneys, billing, IDs). |
 | `case_data_list` | Gets all resolved data for a specific case, including provenance and conflict status. |
+
+In addition to the tools above, the assistant can read the case's **internal team message thread** — the firm-side discussion attached to the workflow, separate from the client-facing inbox conversation. Messages include their attachments (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Cases that don't have an internal thread return an empty list.
+
+> TODO: confirm the exact tool names exposed for `GET /user-workflows/:id/messages` and `GET /user-workflows/:id/attachments/:id/download` once they appear in the MCP tool registry.
 
 ### Workflow Templates
 
@@ -116,6 +120,28 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 | `agencies_get` | Gets agency details. |
 | `agency_members_list` | Lists members of an agency. |
 | `agency_members_get` | Gets a specific agency member's details. |
+
+### Court Notices
+
+| Tool | What it does |
+|------|-------------|
+| Court notices — list | Lists PACER court notices for a firm. Paginated. Filterable by case, workflow, notice type, and date range, so the assistant can answer questions like "what motions were filed last week on case X" without having to scan unrelated docket activity. |
+| Court notices — get | Returns the full content of a single court notice, including its body text and the IDs of any attachments. |
+| Court notice attachment — download | Returns a short-lived signed URL for a specific attachment on a court notice so the document can be retrieved. Non-document attachments return a null URL. |
+
+### Dockets
+
+| Tool | What it does |
+|------|-------------|
+| Docket — get | Returns the cached PACER docket for a case by case number, including the header information and every docket entry. Use this for questions about the complete historical record on a case rather than for recent activity (which Court Notices covers). |
+
+> TODO: Confirm the registered MCP tool names for the four endpoints above once the matching `glade-mcp-server` companion is settled (court notices list, court notices get, court notice attachment download, docket get).
+
+### Inbox Conversations
+
+The assistant can read messages on inbox conversations between the firm and a client. Message responses include any attachments on the message (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Non-document attachments return a null URL.
+
+> TODO: confirm the exact tool name exposed for `GET /conversations/:id/attachments/:id/download` once it appears in the MCP tool registry.
 
 ### Documentation
 
