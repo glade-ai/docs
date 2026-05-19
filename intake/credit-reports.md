@@ -31,6 +31,17 @@ If a credit report pull fails:
   - **Cancel**: Clears the error state and shows a skip option, letting you continue the intake flow without a credit report.
 - Closing the error modal without taking an action preserves the error state. You can click the credit report card again later to bring the error modal back and choose what to do.
 
+#### Specific failure messages
+
+For common, known failure types Glade shows a specific, actionable message instead of a generic "pull failed" error, and stops retrying immediately so you see the result without waiting through repeat attempts:
+
+- **Invalid firm credentials**: tells you that the credit reporting service rejected your firm's credentials and to update them in Settings before retrying.
+- **Account locked**: tells you that your firm's account with the credit reporting service is locked and to contact their support before retrying.
+- **Invalid borrower data**: tells you that the credit bureau rejected the borrower's information and to verify the client's name, address, SSN, and date of birth before retrying.
+- **Access denied**: tells you that access was denied for this report and to contact support with the request ID shown in the message.
+
+Unknown error codes are still retried automatically. When one bureau returns an error inside an otherwise-usable multi-bureau report, the pull is not retried — the partial report is preserved.
+
 ### Skip Option
 
 If a credit report is not available or not needed, you can skip the step. The skip option appears after canceling an error, or may be available from the start depending on your workflow configuration.
