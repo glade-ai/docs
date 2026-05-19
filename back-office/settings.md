@@ -18,6 +18,7 @@ Settings control how your firm's back office behaves. This includes custom workf
 - When you archive a status that is currently assigned to one or more active workflows, a confirmation dialog shows how many workflows use it. You can proceed with archiving — those workflows are not affected — or cancel to leave the status active.
 - To view archived statuses on the Custom Statuses settings page, turn on the **Show archived** toggle. Each archived status shows **Unarchive** and **Delete** actions.
 - Archiving a status is reversible — use **Unarchive** to make it available in the workflow step dropdown again.
+- **Reordering statuses**: Active statuses on the Custom Statuses settings page have a drag handle on the left of each row. Drag a row up or down to change the order — an indicator shows where it will land. Releasing the row saves the new order, and statuses appear in that order across status pickers, dashboards, and reports. Edit, Archive, and Delete actions are briefly disabled while a reorder is being saved. Default statuses can be reordered (they cannot be deleted, only archived). Archived statuses are not reorderable.
 
 ### Workflow Roles
 
@@ -51,8 +52,9 @@ Settings control how your firm's back office behaves. This includes custom workf
 - **Notify on every customer message** sends a notification for every incoming client message when enabled.
 - **Notification phone number** is the phone number used for SMS notifications.
 - **Slack integration** sends notifications to a configured Slack channel.
-- **Support email** settings customize the sender name and address for outbound emails to clients.
+- **Support email** settings customize the sender name and address for outbound emails to clients. For attorney firms whose outbound mail goes from the shared Glade support address, the sender display name shown to clients defaults to the firm's name when no custom sender name has been set — so emails arrive labeled with the firm name rather than no name at all. A custom **support email sender name** still takes precedence when configured.
 - **Custom confirmation email message** lets you add custom text to payment confirmation emails.
+- **Outbound SMS sender number**: SMS messages your firm sends to clients (appointment reminders, task follow-ups, broadcasts) go out from a Glade-assigned phone number associated with your firm. New attorney firms have this sender number provisioned automatically as part of account setup, so SMS messaging works out of the box without a separate request. Firms set up before this default existed, or non-attorney firms, may need to have a sender number assigned before SMS can be delivered.
 
 ### AI Settings
 
@@ -71,15 +73,7 @@ Settings control how your firm's back office behaves. This includes custom workf
 ### Follow-up Cadence
 
 - Controls how often automated follow-up reminders are sent to clients with outstanding tasks. You configure the interval (e.g., every 3 days), the unit (days or weeks), and the percentage of task completion that triggers the reminder.
-
-### Filing Packet AI Review
-
-When your firm uses AI-assisted document review for filing packets, you can customize the review instructions for each document type. This lets you tailor how the AI evaluates specific documents — for example, adding firm-specific checks or adjusting focus areas.
-
-- Access **Filing Packet AI Review Configs** from your dashboard to view and manage review instructions across all 20 supported document types.
-- Each document type shows the default review instructions. You can add an **override** (replaces the default entirely) or an **append** (adds to the default instructions).
-- Rows with active customizations are marked with a **Customized** tag so you can see at a glance which document types have firm-specific settings.
-- To remove a customization and revert to the default, use the **Clear** button on that row.
+- Automated **SMS** follow-ups for outstanding tasks are only delivered between **8:00 AM and 9:00 PM** in the recipient's local time, in line with TCPA quiet-hours rules. If a follow-up would otherwise send outside that window, it is automatically rescheduled to the next 8:00 AM in the recipient's timezone — no message is dropped, just delayed. The recipient's timezone is taken from the client record; if it is not set, the assigned firm member's timezone is used, and if that is also missing the system falls back to Eastern Time. This window applies only to task follow-up SMS — appointment booking reminders, internal chat SMS, and email follow-ups are not affected.
 
 ### Petition Settings
 
