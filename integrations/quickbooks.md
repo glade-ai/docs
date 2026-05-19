@@ -38,6 +38,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 - Invoices sync with their full amount, line items, and date.
 - Line items are recorded against a configurable QuickBooks service item. By default, QuickBooks auto-selects the item; firms can set a specific item in the QuickBooks settings (see Configuration).
 - A private memo on the QuickBooks invoice includes the Glade invoice ID for cross-reference.
+- The QuickBooks invoice due date is set to the Glade invoice's creation date, so synced invoices show as due immediately rather than relying on QuickBooks' default customer terms. If a synced invoice is later out of date in QuickBooks, the next sync also updates its due date to match.
 - If an invoice is voided in Glade, the corresponding QuickBooks invoice is also marked as voided.
 - Edited invoices (new versions) sync as updates to the existing QuickBooks invoice.
 
