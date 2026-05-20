@@ -236,6 +236,12 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 **Submit Anyway** is also available when a required signature has been skipped — you can submit the questionnaire without completing the signature.
 
+When the signature confirmation modal appears at submission time, you have three choices:
+
+- **Sign** — apply or confirm the signature and submit.
+- **Skip** — submit while keeping any signature values that were already entered in the questionnaire. Use this when you have manually typed signatures earlier and want them preserved on the saved draft or PDF.
+- **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
+
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
 ### Outdated Template Upgrade Prompt
