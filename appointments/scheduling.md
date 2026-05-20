@@ -26,6 +26,9 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - In addition to recurring availability, you can add **availability blocks** for specific date ranges. Each block has a type that determines its effect on bookable time:
   - **Blocked** — removes the covered times from bookable availability. Clients cannot schedule into these windows. Use this for vacations, court dates, off-site days, or any other time you should not be booked.
   - Other block types (for example, blocks used purely for visual annotation on the calendar) do not remove availability — only blocks marked as Blocked actually prevent new bookings.
+- Blocked times are **hard blocks**. They always remove the covered slots from the booking calendar regardless of the product's concurrent booking limit — even a product that allows multiple overlapping bookings cannot be booked inside a blocked window.
+- A Blocked entry that is not assigned to a specific team member applies to **every team member**. Use this when you need to take the firm off the calendar for everyone at once (for example, an office closure) without creating one entry per team member.
+- Bookings cannot be created or rescheduled into a blocked window. Attempting to do so from a stale link or an out-of-date slot list is rejected with an error rather than silently saved.
 
 ### Availability management view
 
