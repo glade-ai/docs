@@ -140,6 +140,7 @@ A payment plan moves through the following statuses over its lifetime:
 - Changing the payment method on a plan applies to all future installments, not just the next one.
 - Maximum duration enforcement happens only at plan creation. It is not applied retroactively if the template limit changes after a plan is already active.
 - Payment plan health is monitored daily. Stalled or misconfigured plans are flagged to operations for review.
+- The daily health check also tops up plans whose schedule no longer covers the remaining balance — for example, after a client pre-pays installments and there are no longer enough upcoming payments to cover what's still due. New installments are added on the plan's original schedule (the start date plus the chosen interval), never on a date that falls before tomorrow, and never before an existing pre-paid installment that sits further out in the future. Months are honored: a plan whose installment day is the 31st falls back to the 28th in February and to the 30th in April, then returns to the 31st in months that have one, rather than drifting permanently to an earlier day.
 
 ## Related Features
 
