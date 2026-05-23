@@ -238,6 +238,15 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
+### Concurrent Edits to List Rows
+
+Questionnaires can be open in multiple browser sessions at once — for example, a paralegal and an attorney reviewing the same form, or one user editing the form while a teammate imports data into a list field. List and table rows are now preserved across those concurrent saves:
+
+- A row added by one user is not silently deleted when another user saves a stale view of the same list. Rows are only removed when someone explicitly deletes them, not because they were missing from another session's payload.
+- When two sessions update the same list in different orders (for example, one user sorts while another edits a specific row), real-time sync applies each update to the correct row by identity rather than by its position in the list — edits land where they should even when the row order has shifted.
+- When a user deletes a row locally and a concurrent update for that same row arrives from another session before the delete has finished syncing, the deleted row stays gone rather than reappearing in the form.
+- Bulk list replacements that happen automatically — such as **Import from client questionnaire**, **Populate from credit report**, the Income Organizer pull, and Case Data populate flows — now correctly delete the rows that were replaced, instead of leaving orphaned rows in the database that would re-appear later.
+
 ### Outdated Template Upgrade Prompt
 
 If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked.
