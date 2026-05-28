@@ -12,6 +12,10 @@ Glade integrates with PACER (Public Access to Court Electronic Records) to autom
 - Credentials are stored encrypted and linked to the firm's account.
 - PACER session tokens are cached to avoid repeated logins across filings.
 
+### PACER notice address
+
+Each firm is given its own dedicated address for receiving PACER court notices when the firm is created. Glade routes incoming court notices through this address to the firm's case activity timeline automatically — no extra setup is needed. The address is provisioned at the time the firm is set up; firms that existed before this was automatic have had their addresses backfilled.
+
 ### Supported courts
 
 Glade currently supports automated filing in the following bankruptcy courts:
