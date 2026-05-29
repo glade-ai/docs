@@ -8,7 +8,8 @@ Court notice automations send emails automatically when classified PACER court n
 
 - Each automation is owned by a creator (your firm) and listens for PACER notices that match its rules.
 - An automation has a **name**, an **enabled/disabled** toggle, a **match type** (the notice type to match — for example "Notice of Hearing"), optional **chapter** and **judge** filters, and a list of **recipients**.
-- When a matching notice is processed, the system loads case context, resolves recipients, fills in the email tokens, and sends the email through Glade's email service.
+- When a matching notice is processed, the system loads case context, resolves recipients, fills in the email tokens, and sends the email.
+- **Sender identity**: automation emails are sent from your firm owner's email address, and the sender name shown to recipients is your firm's name. Replies go to the firm owner.
 - Each fire is recorded as a run on the automation, so you can see when each automation last ran and whether it succeeded. The automation's **last run** time and **last run status** appear on the list view.
 - **Idempotency**: the same incoming court notice never triggers the same automation twice. If the same upstream event is processed again (for example after a retry), the duplicate fire is ignored.
 - **Failure isolation**: if one automation fails — for example because a recipient email is invalid — other automations matching the same notice still run.
@@ -35,13 +36,21 @@ If an automation has no resolvable recipients at fire time (for example because 
 
 ### Tokens in the email
 
-The email subject and body support a small set of tokens that are filled in at fire time:
+The email subject and body support a set of tokens that are filled in at fire time:
 
 - `{{caseNumber}}` — the PACER case number on the matched notice.
 - `{{noticeType}}` — the classified notice type that matched the automation.
 - `{{clientName}}` — the primary debtor's name on the case.
 - `{{judgeInitials}}` — the judge initials on the matched notice.
 - `{{firmName}}` — your firm's display name.
+
+In addition, automations can pull case-party and hearing details so the email reads like a personalized notice:
+
+- The **first debtor's name** and, for joint cases, the **second debtor's name**, taken from the people on the case.
+- The **341 meeting of creditors date and time**, taken from the linked court calendar entry for the case.
+- The **video hearing join details** (for example, the meeting link and dial-in information) when the notice is for a remote 341 meeting.
+
+> TODO: Confirm the exact token spellings for the debtor names, 341 meeting date/time, and video hearing join details once they are finalized in the email editor.
 
 Tokens are case-insensitive and tolerant of extra whitespace inside the braces. Unknown tokens render as empty strings — the email still sends, with the unknown token replaced by nothing.
 
@@ -55,14 +64,15 @@ Tokens are case-insensitive and tolerant of extra whitespace inside the braces. 
 | Chapter | Chapter 7, Chapter 13, or any. |
 | Judge | Specific judge or any. |
 | Recipients | Combination of case-party tokens, team members, and literal email addresses. |
-| Subject and body | Email content with optional tokens for case number, notice type, client name, judge initials, and firm name. |
+| Subject and body | Email content with optional tokens for case number, notice type, client name, judge initials, firm name, debtor names, the 341 meeting date and time, and video hearing join details. |
 
 Edits are tracked: each save records who made the change and when, alongside who originally created the automation.
 
 ## Edge Cases & Limitations
 
 - The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed.
-- Tokens beyond the five listed above are not supported. Unknown tokens render as empty strings.
+- Only the supported tokens listed above are recognized. Unknown tokens render as empty strings.
+- Hearing tokens depend on the linked court calendar entry. If a case has no 341 meeting scheduled or no video hearing details on file, those tokens render as empty strings.
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
 - Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
 - Failed runs are not retried automatically. The failure shows as the automation's last run status.
