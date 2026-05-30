@@ -12,6 +12,10 @@ Glade integrates with PACER (Public Access to Court Electronic Records) to autom
 - Credentials are stored encrypted and linked to the firm's account.
 - PACER session tokens are cached to avoid repeated logins across filings.
 
+### PACER notice address
+
+Each firm is given its own dedicated address for receiving PACER court notices when the firm is created. Glade routes incoming court notices through this address to the firm's case activity timeline automatically — no extra setup is needed. The address is provisioned at the time the firm is set up; firms that existed before this was automatic have had their addresses backfilled.
+
 ### Supported courts
 
 Glade currently supports automated filing in the following bankruptcy courts:
@@ -20,10 +24,14 @@ Glade currently supports automated filing in the following bankruptcy courts:
 - Florida Northern (FLNB)
 - Florida Southern (FLSB)
 - Idaho (IDB)
+- Kentucky Western (KYWB) — Chapter 7
+- Louisiana Eastern (LAEB) — Chapter 7
 - South Carolina (SCB)
-- Washington Western (WAWB)
+- Virginia Eastern (VAEB) — Chapter 7
+- Washington Eastern (WAEB) — Chapter 7
+- Washington Western (WAWB) — Chapter 7 and Chapter 13
 
-Courts not in this list are not available for automated filing.
+Districts that list a chapter (for example, Kentucky Western — Chapter 7) only support filings of the listed chapter. Districts without a chapter qualifier support all chapters Glade files (Chapter 7 and Chapter 13). Courts not in this list are not available for automated filing.
 
 ### Filing workflow
 
@@ -48,6 +56,15 @@ Each document in the filing packet must be labeled with the correct ECF document
 - When a court requires individual debtor identification documents, select **PhotoID (Debtor 1)** or **PhotoID (Debtor 2)** for each debtor's photo identification, and **DeBN (Debtor 1)** or **DeBN (Debtor 2)** for each debtor's Declaration of Electronic Notice. The Debtor 1 variant is for the primary debtor; the Debtor 2 variant is for the co-debtor in a joint case.
 - For **Western District of Pennsylvania (PAWB)** Chapter 7 cases, **Local Form 1 — Declaration Re: Electronic Filing of Petition, Schedules & Statements** is available in the document type dropdown. This form is submitted through the EDSS portal alongside the SSN Statement — it is not part of the standard ECF filing packet. A Local Form 1 slot appears in the per-district document checklist for PAWB Chapter 7 workflows once the document is labeled and uploaded.
 - For **Florida Southern (FLSB)** Chapter 13 cases, **Local Form 67 — Certification of Compliance** is available in the document type dropdown. The form auto-surfaces in the FLSB Chapter 13 required-document checklist, and ad-hoc uploads from the case documents picker are accepted under common filename variants (with or without spaces, hyphens, underscores, or the full form name).
+- Additional district-specific document types are available in the dropdown so attorneys filing in these courts can label uploads correctly instead of falling back to **Other**:
+  - **Ohio Southern (OHSB)** Chapter 7 — **Statement of Intent** (Statement of Intention for individuals filing under Chapter 7) and **Verification of Creditor Matrix** (OHSB filename variant) are selectable from the document type dropdown.
+  - **Washington Eastern (WAEB)** Chapter 7 — **Declaration Regarding Payments (LBR 1007-1)** is selectable from the document type dropdown.
+  - **New Mexico (NMB)** Chapter 7 — **Marital Status** is selectable from the document type dropdown.
+  - **Louisiana Eastern (LAEB)** Chapter 7 — **Tax Returns** is selectable from the document type dropdown.
+  - **Pennsylvania Western (PAWB)** Chapter 7 — `lf29.pdf` (the PAWB filename for the Verification of Creditor Matrix) is now accepted on upload in addition to the canonical name.
+  - **Means Exemption (Form 122A-1Supp)** is also recognized end-to-end across the catalog, validator, and runtime allowlist, so uploads that select this option no longer fail filename validation on the way to PACER.
+- For **Ohio Southern (OHSB)** Chapter 7 joint-debtor filings, **Statement 1015-2 — Joint Debtor Compliance (OHSB)** is available in the document type dropdown for the Joint Debtor Compliance Statement form (Statement 1015-2 with No Prior). Label the uploaded form with this document type so it is recognized at filing time — uploading it as **Other** prevents the OHSB filing engine from picking it up.
+- For **Washington Eastern (WAEB)** Chapter 7 cases, three additional installment-and-fee-related document slots are now available in the case's document checklist when the corresponding files are attached: **Form 103A — Application for Individual to Pay Filing Fee in Installments**, **Form 103B — Application to Have the Filing Fee Waived**, and **LBR 1007-1 — Declaration Regarding Payments**. Slots only render when a file is attached, so cases that pay the filing fee in a single transaction continue to show only the standard checklist. Common filename variants for the LBR 1007-1 declaration (with or without spaces, hyphens, or the full form name) are accepted on upload.
 - Glade also accepts non-canonical filename variants for **Verification of Creditor Matrix** uploads, so files named with run-together or otherwise normalized variants pass the filing packet's filename check instead of being rejected.
 - Use a named document type whenever one exists in the dropdown. The generic "Other" option is for documents that do not match any named type.
 - When you assign a custom filename to a document being added to PACER, Glade now preserves spaces, hyphens, parentheses, periods, plus signs, apostrophes, and accented letters in the filename. Filenames such as `Pay Advices`, `Tax Return 2024`, and `Photo ID (Debtor 1)` flow through to PACER as typed instead of being collapsed into a single run-on word. Only characters that filesystems or PACER cannot accept (such as path separators and control characters) are removed.
@@ -91,9 +108,12 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 
 ### South Carolina (SCB) Chapter 7 individual filings
 
-- Individual Chapter 7 cases filed in the South Carolina Bankruptcy Court collect an additional questionnaire question about the local DeBN form: clients answer **Activate** or **Decline** for the Debtor's Election Re: Electronic Noticing. The answer is passed through to PACER so the SCB filing engine fills the right radio on the local form.
-- The question is shown only on Chapter 7 individual filings (it is hidden on joint petitions and on non-Chapter 7 filings) and is labeled to indicate it applies only to South Carolina filings — clients in other districts can ignore it.
-- If the question is left unanswered on a SCB Chapter 7 individual filing, the answer is omitted from the PACER submission. The SCB filing engine treats the missing answer as a configuration gap and surfaces it as a filing error.
+- Individual Chapter 7 cases filed in the South Carolina Bankruptcy Court need a completed Debtor's Election Re: Electronic Noticing (DeBN) form for the primary debtor. Glade reads the election directly from the uploaded debtor 1 DeBN PDF — there is no separate questionnaire question to answer. Upload the signed DeBN form to the document slot during document collection and Glade extracts the elected action automatically.
+- The supported actions read from the form are **Activate**, **Deactivate**, **Update**, or **Decline**. The extracted answer is passed through to PACER so the SCB filing engine fills the matching radio on the local form.
+- Auto-extraction runs only on SCB Chapter 7 individual filings. Joint petitions and non-Chapter 7 filings do not require the DeBN extraction.
+- If no DeBN debtor 1 form has been uploaded by the time a qualifying SCB Chapter 7 individual case is submitted, the filing is blocked with an error naming the missing election so your team can add the document before retrying.
+- If the uploaded DeBN form cannot be parsed — for example, no radio button is selected on the PDF — the filing is also blocked with an error indicating the action could not be determined. Re-upload a clean copy of the form with one of the four supported actions selected to resolve the error.
+- Re-uploading a newer DeBN form supersedes the previously extracted answer. The most recent extraction wins, so correcting an earlier upload mistake is a matter of replacing the file in the document slot.
 
 ### Chapter 7 individual presumption-of-abuse page
 
@@ -103,6 +123,14 @@ When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
 
+### Changing the chapter at petition compile time
+
+When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition must be re-compiled against the new chapter so the schedules and forms match. The pre-compile modal (Documents → **Compile Petition**) makes this switch visible at the moment of filing.
+
+- If the case's district supports more than one chapter, a **Chapter** selector appears in the compile modal next to the filing district banner. Picking a different chapter updates the case data immediately, so the next compile run uses the new chapter.
+- After changing the chapter, a **"Chapter changed. Recompile to refresh the petition."** note reminds you to click **Compile** so the regenerated petition reflects the new chapter. The note clears as soon as the new petition finishes compiling.
+- If the district only supports a single chapter, or the case is already filed, the selector is read-only and shows the current chapter as a chip — you can see the chapter at a glance but cannot change it.
+
 ### Required fields check before filing
 
 Before a filing can be submitted, Glade validates that all required debtor fields are present. If any are missing, the filing is blocked at both the pre-filing preview and the ECF submission modal, and the missing fields are listed by name so your team can address them before re-attempting.
@@ -111,6 +139,7 @@ Before a filing can be submitted, Glade validates that all required debtor field
 - For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
 - For individual Chapter 7 filings, the **marital filing status** is also required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
+- Whether the case is joint or individual is read from the **Schedules** questionnaire only, not from custom client-intake forms or earlier questionnaires that may carry stale answers. Cases that were initially entered as joint and later corrected to individual (or vice versa) on the Schedules questionnaire reflect the corrected value at filing time, so the modal no longer demands a co-debtor's credit counseling date on a Chapter 7 Individual case whose intake form still has `Filing jointly = Yes`.
 - Missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
 
