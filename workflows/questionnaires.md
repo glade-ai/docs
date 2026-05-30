@@ -108,9 +108,19 @@ Questionnaires progress through statuses: **in progress**, **submitted for revie
 
 When using Glade's native form provider, initial values can be pre-populated from field mappings tied to the client's workflow or from the inheritance scheme. Clients fill out sections and fields through the client portal, with changes auto-saved and synced in real time.
 
+When two people edit the same questionnaire at the same time — for example, a client and a paralegal, or an attorney working alongside an AI autofill — each person's edits to different fields are preserved. If two edits target the same field, the newer value wins and the older one is discarded silently rather than producing a save error. Edits to other fields in the same save attempt still go through.
+
+When a list row is deleted, the values inside the row are deleted along with it. Restoring the row from **Removed Items** brings the inner field values back as they were.
+
 Response history tracks when responses are modified, supporting undo and audit.
 
 Default options on single-select fields (configured in the questionnaire template) are automatically applied and saved when the questionnaire first loads. These defaults count as valid answers during validation — a field with a pre-set default is not flagged as incomplete.
+
+### Phone Number Fields
+
+Phone number fields default to the United States and format as the client types. A US number entered as `2125551234` displays as `+1 212-555-1234` — the country code, the area code, and dashes appear automatically without the client having to type them. Partial numbers format progressively, so `212` shows as `+1 212-` and `212555` as `+1 212-555-`, making it easy to tell at a glance how much of the number is filled in.
+
+The country selector next to the input is still available for international clients. Selecting a different country switches the formatting to that country's convention and updates the country code prefix.
 
 ### Currency Field Behavior
 
@@ -181,6 +191,8 @@ Fields populated by autofill show a status indicator so you can see where the va
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
 
+Manual edits to fields in a list also stick when the AI auto-runs after rows have been added, removed, or reordered. For example, on the Bankruptcy Schedules questionnaire, the schedule classifier may run repeatedly as the form changes — moving a creditor from Schedule D to Schedule F by hand will not be reverted by a later automatic run.
+
 Each autofilled field shows a status indicator describing its current state:
 
 - **Synced with [source]** — the autofilled value is current and up to date with the source data.
@@ -195,6 +207,18 @@ On Chapter 13 questionnaires, a **Plan Calculator** button appears in the form h
 
 The Plan Calculator button only appears on questionnaires identified as Chapter 13. If the button is not visible on a Chapter 13 questionnaire, contact support to confirm the feature is enabled for your firm.
 
+### Non-Consumer Chapter 7 Means Test
+
+Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
+
+When the client's questionnaire indicates the case is non-consumer Chapter 7, Glade handles the means test paperwork automatically:
+
+- The Form B122A-1 "no presumption" answer is filled in for the client. No manual entry is needed.
+- The B122A-2 means test answers are skipped. Auto-fills that would have populated B122A-2 fields are blocked, so your team does not have to wipe them before filing.
+- The B122A-2 PDF is not generated for the case, and any previously generated copy is removed from the case documents. Form B122A-1 (and the B122A-1 Supplement, where the district requires it) continue to be generated.
+
+If a case was set up before this automation rolled out, your firm can request a one-time cleanup of existing non-consumer Chapter 7 cases — contact Glade support to coordinate.
+
 ### Case Data Sync Fields
 
 Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
@@ -208,6 +232,15 @@ Some list and table fields are linked directly to case entities such as creditor
 - When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
 - When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
 - Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+
+### Adding Creditors
+
+The add-creditor flow in bankruptcy questionnaires is optimized to keep firms with large saved-creditor lists fast and to reduce manual schedule selection.
+
+- Adding a creditor from the **Schedule E** tab defaults the new row's schedule to Schedule E. Adding from the **Schedule F** tab defaults to Schedule F. You can still change the schedule before saving, but the default matches the tab you're working from so the row lands on the right schedule without a manual pick.
+- The saved-creditor search appears at the top of the add-creditor dialog (above the schedule selector), labeled with a magnifying-glass icon and a **Search for a creditor** placeholder. It lets you reuse a creditor your firm has previously saved instead of re-entering details.
+- The saved-creditor search shows up to **100 matches** at a time. When more matches exist, a "Showing first 100 matches. Keep typing to narrow results." line appears at the bottom of the list — keep typing the creditor's name to narrow the result set. This keeps the dialog responsive for firms with tens of thousands of saved creditors.
+- Saving a creditor row shows a **"Creditor saved successfully"** toast so you have explicit confirmation the row was written. If you save a row with required fields still missing, the confirmation prompt reads **"Item incomplete. Save anyway?"** — confirming saves the row in its incomplete state for you to come back to later.
 
 ### Mobile Experience
 
@@ -236,7 +269,22 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 **Submit Anyway** is also available when a required signature has been skipped — you can submit the questionnaire without completing the signature.
 
+When the signature confirmation modal appears at submission time, you have three choices:
+
+- **Sign** — apply or confirm the signature and submit.
+- **Skip** — submit while keeping any signature values that were already entered in the questionnaire. Use this when you have manually typed signatures earlier and want them preserved on the saved draft or PDF.
+- **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
+
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
+
+### Concurrent Edits to List Rows
+
+Questionnaires can be open in multiple browser sessions at once — for example, a paralegal and an attorney reviewing the same form, or one user editing the form while a teammate imports data into a list field. List and table rows are now preserved across those concurrent saves:
+
+- A row added by one user is not silently deleted when another user saves a stale view of the same list. Rows are only removed when someone explicitly deletes them, not because they were missing from another session's payload.
+- When two sessions update the same list in different orders (for example, one user sorts while another edits a specific row), real-time sync applies each update to the correct row by identity rather than by its position in the list — edits land where they should even when the row order has shifted.
+- When a user deletes a row locally and a concurrent update for that same row arrives from another session before the delete has finished syncing, the deleted row stays gone rather than reappearing in the form.
+- Bulk list replacements that happen automatically — such as **Import from client questionnaire**, **Populate from credit report**, the Income Organizer pull, and Case Data populate flows — now correctly delete the rows that were replaced, instead of leaving orphaned rows in the database that would re-appear later.
 
 ### Outdated Template Upgrade Prompt
 
