@@ -2,7 +2,7 @@
 
 ## Overview
 
-Glade integrates with Abacus so attorneys can enroll bankruptcy clients in pre-filing credit counseling without leaving the platform. The integration replaces the manual step of opening Abacus's portal, re-typing client information, and copying the course link back into Glade. Enrollment, the course link, and the completion certificate all flow through the workflow step assigned to the client.
+Glade integrates with Abacus so attorneys can enroll bankruptcy clients in the required credit counseling courses — pre-filing credit counseling and post-filing debtor education — without leaving the platform. The integration replaces the manual step of opening Abacus's portal, re-typing client information, and copying the course link back into Glade. Enrollment, the course link, and the completion certificate all flow through the workflow step assigned to the client.
 
 ## Key Behaviors
 
@@ -13,8 +13,10 @@ Glade integrates with Abacus so attorneys can enroll bankruptcy clients in pre-f
 
 ### Enrolling a client
 
-- When a credit counseling step runs, the client (or the attorney's team) opens the credit counseling pane on that workflow step.
-- The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Names fall back to the client profile when the case data does not have first and last name split out.
+- When a credit counseling step runs, the client (or the attorney's team) opens the credit counseling pane on that workflow step. When the firm has Abacus connected, triggering the step also sends the enrollment request to the client automatically — the team no longer has to open the step and send it by hand, and the client receives the enrollment form right away. If Abacus is not connected, the step behaves as before and the enrollment is sent manually.
+- The credit counseling row shows the course type in its label — **Get Pre-Filing Credit Counseling** for pre-filing counseling and **Get Post-Filing Debtor Education** for post-filing debtor education — so it is clear which course is being requested. A **Skip** control sits inline on the row for steps that do not apply.
+- Enrolling a client carries a flat enrollment fee of $25, billed to the firm and shown on the credit counseling pane before the enrollment is sent.
+- The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Name, email, and phone fall back to the client profile when those values are missing from the case record (common for newly added clients).
 - Phone numbers that include a leading country code (for example, `+1 (312) 555-1234`) are accepted — the country code is stripped automatically before submission.
 - The district code field shows examples of valid codes (such as `ILN`, `NE`, `TXN`). Abbreviations like `NEB` are rejected by Abacus and should not be used.
 - For joint filings, spouse first name, last name, SSN last four, and date of birth are required before the form can be submitted.
@@ -24,6 +26,7 @@ Glade integrates with Abacus so attorneys can enroll bankruptcy clients in pre-f
 
 - The pane updates to show the assigned course link as soon as enrollment succeeds. The client can launch the course from inside Glade.
 - When Abacus posts back a certificate of completion, Glade attaches the PDF to the case automatically and marks the credit counseling record complete. Primary and spouse certificates appear as separate download links.
+- The certificate also appears in the workflow's Documents tab and is automatically included in the bankruptcy petition filing package, mapped to the credit counseling document slot — so it is ready to file without re-uploading.
 - Joint filings are not marked complete until certificates for every enrolled debtor have been received.
 
 ### Permissions
