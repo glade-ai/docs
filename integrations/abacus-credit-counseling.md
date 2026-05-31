@@ -14,9 +14,11 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 
 ### Enrolling a client
 
-- When a credit counseling step runs, the client (or the attorney's team) opens the credit counseling pane on that workflow step.
+- When a credit counseling step runs, the client (or the attorney's team) opens the credit counseling pane on that workflow step. When the firm has the integration connected, triggering the step also sends the enrollment request to the client automatically — the team no longer has to open the step and send it by hand, and the client receives the enrollment form right away. If no provider is connected, the step behaves as before and the enrollment is sent manually.
 - Glade picks the course type and provider automatically: before the case is filed, the client is enrolled in pre-filing credit counseling through Abacus; once the case has been filed, the client is enrolled in post-filing debtor education through Sage. The team does not choose the provider.
-- The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Names fall back to the client profile when the case data does not have first and last name split out.
+- The credit counseling row shows the course type in its label — **Get Pre-Filing Credit Counseling** for pre-filing counseling and **Get Post-Filing Debtor Education** for post-filing debtor education — so it is clear which course is being requested. A **Skip** control sits inline on the row for steps that do not apply.
+- Enrolling a client carries a flat enrollment fee of $25, billed to the firm and shown on the credit counseling pane before the enrollment is sent.
+- The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Name, email, and phone fall back to the client profile when those values are missing from the case record (common for newly added clients).
 - Phone numbers that include a leading country code (for example, `+1 (312) 555-1234`) are accepted — the country code is stripped automatically before submission.
 - The client's federal district is determined automatically from their address — there is no district field to fill in. Glade resolves it behind the scenes, falling back to the address ZIP code when needed, which covers the large majority of clients.
 - For joint filings, spouse first name, last name, SSN last four, and date of birth are required before the form can be submitted.
@@ -26,6 +28,7 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 
 - The pane updates to show the assigned course link as soon as enrollment succeeds. The client can launch the course from inside Glade.
 - When the provider posts back a certificate of completion, Glade attaches the PDF to the case automatically and marks the record complete. This works the same way for pre-filing credit counseling and post-filing debtor education. Primary and spouse certificates appear as separate download links.
+- The certificate also appears in the workflow's Documents tab and is automatically included in the bankruptcy petition filing package, mapped to the credit counseling document slot — so it is ready to file without re-uploading.
 - Joint filings are not marked complete until certificates for every enrolled debtor have been received.
 
 ### Permissions
