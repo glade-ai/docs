@@ -183,7 +183,7 @@ The invoice list supports date filtering. The date filters are labeled **Created
 
 ### Exporting invoice data
 
-Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation. The export includes the billed customer's **Email** and **Phone Number** alongside the existing invoice columns, so exported data has the contact details needed for follow-up and reconciliation without a second lookup.
+Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation. The export includes the billed customer's **Email** and **Phone Number** alongside the existing invoice columns, so exported data has the contact details needed for follow-up and reconciliation without a second lookup. The Phone Number column uses the client's contact phone number, falling back to the phone number on their login profile when no contact phone is on file — so the exported number matches the one your team uses to reach the client.
 
 ### QuickBooks integration
 
