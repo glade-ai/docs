@@ -141,6 +141,8 @@ Invoice changes are handled differently depending on what is being changed:
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
 
+Editing an invoice's line items also keeps the link between a line item and any custom terms that reference its amount. Retainer agreements and other custom-terms documents can reference an invoice amount (for example, an attorney-fee line item) so the dollar figure fills in automatically. Previously, editing the invoice's line items could drop that link, causing the custom-terms document to show a placeholder such as "[invoice:attorneyFees not set]" instead of the amount. Edits now preserve the reference unless you explicitly clear it, so retainers and engagement letters keep resolving to the correct dollar amount.
+
 ### Voiding an invoice
 
 - Any active (non-terminal) invoice can be voided by the firm.
