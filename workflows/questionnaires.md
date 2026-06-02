@@ -142,6 +142,10 @@ List-type fields allow you to click into individual rows to view or edit details
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 - Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel.
 
+### Selecting and Removing List Items
+
+List fields let you select rows and remove them in bulk. When you select a row that has duplicate sub-rows grouped under it, those duplicates are selected automatically along with the parent. The **Remove [N] selected** button counts only the rows you actually picked — the auto-selected duplicates are not added to the number — so selecting one creditor that has two duplicates reads **Remove 1 selected**, not Remove 3. Removing still deletes the selected row together with its duplicates.
+
 ### Resource Panel
 
 The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
@@ -285,6 +289,7 @@ Questionnaires can be open in multiple browser sessions at once — for example,
 - When two sessions update the same list in different orders (for example, one user sorts while another edits a specific row), real-time sync applies each update to the correct row by identity rather than by its position in the list — edits land where they should even when the row order has shifted.
 - When a user deletes a row locally and a concurrent update for that same row arrives from another session before the delete has finished syncing, the deleted row stays gone rather than reappearing in the form.
 - Bulk list replacements that happen automatically — such as **Import from client questionnaire**, **Populate from credit report**, the Income Organizer pull, and Case Data populate flows — now correctly delete the rows that were replaced, instead of leaving orphaned rows in the database that would re-appear later.
+- When you import a list from a client questionnaire, every imported value fills in completely the first time. Previously, if an imported row replaced an existing row in the same position, some cells could be left blank when their values happened to match the row being replaced. Re-importing the same list also no longer creates duplicate rows — the previously imported rows are replaced rather than stacked on top of the originals.
 
 ### Outdated Template Upgrade Prompt
 
