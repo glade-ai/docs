@@ -144,6 +144,19 @@ List-type fields allow you to click into individual rows to view or edit details
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 - Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel.
 
+### Selecting and Removing List Rows
+
+When a list row has duplicate sub-rows (for example, a creditor that appears on more than one schedule), selecting the parent row automatically selects its indented duplicates so they are removed together.
+
+The **Remove X selected** button in the list footer counts only the real items you picked, not the duplicates that were auto-selected along with them. Selecting one creditor that has two duplicates reads **Remove 1 selected**, not "Remove 3 selected." Removing still deletes the parent row and its duplicates together — only the displayed count excludes the duplicates.
+
+### Importing List Data from Another Questionnaire
+
+List fields can be populated from a client's other questionnaire using **Import from client questionnaire**. When you import:
+
+- Every cell on each imported row is saved, including cells whose value matches the row that was previously in that position. Imported rows no longer come back partially empty after a reload.
+- Re-importing before the page has refreshed does not create duplicate rows. The rows from the first import are replaced rather than stacked on top of, so the list reflects the latest import instead of doubling up.
+
 ### Resource Panel
 
 The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
