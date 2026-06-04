@@ -35,6 +35,7 @@ The client portal home gives the client a single view of where they stand across
 - **Balance card** — shows the paid/contracted ratio from the most recent case's invoices. When there are no invoices, or all invoices have been voided, the card reads "All paid up" with a full progress bar.
 - **Coming up rail** — surfaces the next scheduled meeting on a date tile.
 - **Top bar** — every page includes a global top bar with the firm's branding, a hamburger menu (Meetings, Home, Library, Support chat, and a "Visit {firm}" external link), a **Need help** popover with help videos, and an account menu. The firm logo links back to the home page.
+- **Loading state on first open** — when the home page first opens, it shows a brief loading placeholder while it gathers the client's steps, rather than momentarily showing "You're all caught up" before the real information appears.
 
 ### Multi-case clients
 
