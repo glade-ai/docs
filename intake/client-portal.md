@@ -69,6 +69,16 @@ The portal captures and stores a timezone for each client so that times shown to
 
 The portal's "active" indicators and the Your next step card are driven by the underlying entity status, not by the task system. If a client dismisses a task whose underlying item (for example a document checklist) is still open and assigned to them, the home page continues to surface that item as their next step with the correct Open button.
 
+### Live updates
+
+The client portal home keeps itself current without the client having to do anything. It refreshes on its own when:
+
+- the client completes or submits a task (for example finishing a questionnaire, uploading a document, or booking a meeting);
+- someone on the firm updates the case (for example marking a step complete or generating an invoice); and
+- the client returns to the portal tab after being away, or reconnects after losing their connection.
+
+Because the home updates automatically, there is no manual refresh step — the Your next step card, path timeline, and balance all reflect the latest state as soon as it changes.
+
 ## Configuration
 
 - You configure the portal experience through workflow templates that define the sequence of steps, triggers, and actions.
