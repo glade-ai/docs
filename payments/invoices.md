@@ -155,6 +155,15 @@ This approach preserves a clean history of what was billed and what changed, whi
 - Unlike voiding, skipping is reversible — a skipped invoice can be "unskipped" at any time to resume collection.
 - Common use cases: waived fees, pro bono arrangements, payment deferred to a later date.
 
+### Voided vs. refunded payments on an invoice
+
+When a payment on an invoice is reversed, the invoice shows the reversed amount with a label that reflects what actually happened to it:
+
+- **Refunded** — the payment settled and was later returned to the client.
+- **Voided** — the payment was cancelled before it settled, so no money changed hands.
+
+Voided and refunded amounts are labeled distinctly, so a cancelled payment is no longer shown as a refund. This keeps the invoice consistent with the firm's payment records and easier to reconcile.
+
 ### Client-facing experience
 
 When a client receives an invoice:
