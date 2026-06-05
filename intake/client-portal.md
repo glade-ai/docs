@@ -72,6 +72,16 @@ The portal's "active" indicators and the Your next step card are driven by the u
 - **Dismissing a task** — Every task in the home list has a trash icon that shows a **Dismiss task** label when hovered. Dismissing a task clears it from the client's list; it does not complete the underlying item. (The control was previously an unlabeled arrow that clients often mistook for "open" rather than "clear.")
 - **Respond to Comment tasks** — A "Respond to Comment" task opens the reply thread for that comment directly, so the client lands where they can reply rather than on the full conversation with the comment merely highlighted.
 
+### Live updates
+
+The client portal home keeps itself current without the client having to do anything. It refreshes on its own when:
+
+- the client completes or submits a task (for example finishing a questionnaire, uploading a document, or booking a meeting);
+- someone on the firm updates the case (for example marking a step complete or generating an invoice); and
+- the client returns to the portal tab after being away, or reconnects after losing their connection.
+
+Because the home updates automatically, there is no manual refresh step — the Your next step card, path timeline, and balance all reflect the latest state as soon as it changes.
+
 ## Configuration
 
 - You configure the portal experience through workflow templates that define the sequence of steps, triggers, and actions.
