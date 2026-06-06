@@ -69,6 +69,9 @@ The portal captures and stores a timezone for each client so that times shown to
 
 The portal's "active" indicators and the Your next step card are driven by the underlying entity status, not by the task system. If a client dismisses a task whose underlying item (for example a document checklist) is still open and assigned to them, the home page continues to surface that item as their next step with the correct Open button.
 
+- **Dismissing a task** — Every task in the home list has a trash icon that shows a **Dismiss task** label when hovered. Dismissing a task clears it from the client's list; it does not complete the underlying item. (The control was previously an unlabeled arrow that clients often mistook for "open" rather than "clear.")
+- **Respond to Comment tasks** — A "Respond to Comment" task opens the reply thread for that comment directly, so the client lands where they can reply rather than on the full conversation with the comment merely highlighted.
+
 ## Configuration
 
 - You configure the portal experience through workflow templates that define the sequence of steps, triggers, and actions.
