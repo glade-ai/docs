@@ -141,6 +141,8 @@ Invoice changes are handled differently depending on what is being changed:
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
 
+Editing a line item keeps its link to any custom-terms variable that references it. Some line items are referenced by name in custom terms documents (for example, a retainer agreement that pulls the attorney-fee amount from the invoice). Editing the invoice's line items no longer clears that link, so the referenced amount continues to render in the agreement instead of showing a "not set" placeholder.
+
 ### Voiding an invoice
 
 - Any active (non-terminal) invoice can be voided by the firm.
@@ -154,6 +156,15 @@ This approach preserves a clean history of what was billed and what changed, whi
 - Skipping cancels any active payment plan on the invoice.
 - Unlike voiding, skipping is reversible — a skipped invoice can be "unskipped" at any time to resume collection.
 - Common use cases: waived fees, pro bono arrangements, payment deferred to a later date.
+
+### Voided vs. refunded payments on an invoice
+
+When a payment on an invoice is reversed, the invoice shows the reversed amount with a label that reflects what actually happened to it:
+
+- **Refunded** — the payment settled and was later returned to the client.
+- **Voided** — the payment was cancelled before it settled, so no money changed hands.
+
+Voided and refunded amounts are labeled distinctly, so a cancelled payment is no longer shown as a refund. This keeps the invoice consistent with the firm's payment records and easier to reconcile.
 
 ### Client-facing experience
 
@@ -172,7 +183,7 @@ The invoice list supports date filtering. The date filters are labeled **Created
 
 ### Exporting invoice data
 
-Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation. The export includes the billed customer's **Email** and **Phone Number** alongside the existing invoice columns, so exported data has the contact details needed for follow-up and reconciliation without a second lookup.
+Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation. The export includes the billed customer's **Email** and **Phone Number** alongside the existing invoice columns, so exported data has the contact details needed for follow-up and reconciliation without a second lookup. The Phone Number column uses the client's contact phone number, falling back to the phone number on their login profile when no contact phone is on file — so the exported number matches the one your team uses to reach the client.
 
 ### QuickBooks integration
 
