@@ -19,6 +19,7 @@ Case management is the core back-office feature that lets your firm track client
 - When two data sources provide different values for the same case field (for example, a questionnaire response and a manually entered value disagree on a party's address), the system flags the field as conflicted. You can resolve the conflict by selecting which value should be authoritative. The selected value becomes the active value for that field immediately after resolution.
 - All case activity is logged, including status changes, document uploads, payments, form completions, e-signature requests, court notices, and owner assignment changes.
 - Cases support PACER integration for bankruptcy filings, including case number and court data tracking.
+- Searching by case number in the dashboard's global search finds the matching case even when that case number belongs to an **associated (non-primary) case** in a case group. Previously a case number stored on a linked, non-primary matter could be missed; searching now returns it. Searches by other fields (name, email, phone) continue to match primary cases.
 - Tags provide lightweight visual categorization (icon and text label) on case list views.
 - Collaborators on a case have specific permissions: ability to assign team members, invite other collaborators, and receive customer notifications. The system tracks how each collaborator was added (manually, as a customer, as an organization member, etc.).
 

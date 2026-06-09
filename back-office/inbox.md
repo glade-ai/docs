@@ -23,6 +23,12 @@ You can act on multiple notifications at once:
 - **Bulk mark as read**: After selecting one or more notifications, use the bulk mark-as-read action to mark them all as read at once. The change reflects immediately without a page reload.
 - **Bulk dismiss**: After selecting one or more notifications, use the bulk dismiss action to remove all selected notifications from your inbox view at once. The page automatically backfills with additional notifications if more are available, so the inbox stays populated.
 
+### Searching the Inbox
+
+- The inbox search box filters the list to notifications that match what you type. Searching narrows the inbox to matching items rather than leaving you on the full list.
+- A match can come from any of the fields shown on an inbox row — the client (workflow person) name, the sender of a message, the workflow name, or the task title. Searching is not case-sensitive.
+- Clearing the search box returns the inbox to the full, unfiltered list.
+
 ### Managing Individual Notifications
 
 - Each notification has a three-dot menu with options to mark it as read or dismiss it individually.
