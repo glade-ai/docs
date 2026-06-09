@@ -51,6 +51,15 @@ In addition to the tools above, the assistant can read the case's **internal tea
 
 > TODO: confirm the exact tool names exposed for `GET /user-workflows/:id/messages` and `GET /user-workflows/:id/attachments/:id/download` once they appear in the MCP tool registry.
 
+### Form Requests (Intake Form Answers)
+
+| Tool | What it does |
+|------|-------------|
+| `form_requests_list` | Lists intake form requests for a firm, optionally narrowed to a single case. Each entry includes the client's submitted answers as plain question-and-answer pairs. Paginated. |
+| `form_requests_get` | Gets a single form request with its full set of submitted answers as question-and-answer pairs. |
+
+These tools let the assistant read and summarize what a client entered on an intake form — for both the firm's intake forms and Glade questionnaires — so you can ask questions like "what did this client say about their assets?" without opening the case in the Glade app. The answers are returned with their question labels, so the assistant doesn't need to guess what each value means.
+
 ### Workflow Templates
 
 | Tool | What it does |
