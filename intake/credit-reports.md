@@ -12,10 +12,11 @@ Glade lets your team pull credit reports for clients as part of the intake proce
 - When you start a pull, Glade opens a modal to confirm the client's identity and consent before requesting the report.
 - After confirming, Glade retrieves the report and displays it within the workflow.
 - The action buttons in the modal are disabled while the request is in progress, preventing accidental duplicate submissions.
+- All phone numbers you enter in the modal — including the client's mobile number and contact phone — are included in the request to the credit reporting service. If a bureau requires a phone number that the report previously failed to match against, having mobile and contact phone present alongside the primary number reduces "invalid borrower data" rejections.
 
 ### Client Data Write-Through
 
-When you fill in a client's information in the credit report modal — including name, address, date of birth, phone number, and SSN — Glade automatically saves those fields back to the client's profile for any fields that are not already set. You only need to enter the information once: it is available in future credit report pulls and other workflows without re-entry.
+When you fill in a client's information in the credit report modal — including name, address, date of birth, phone number, contact phone, and SSN — Glade automatically saves those fields back to the client's profile for any fields that are not already set. You only need to enter the information once: it is available in future credit report pulls and other workflows without re-entry. Contact phone is saved alongside the primary phone number so the client's profile reflects every number you entered in the modal, not just the first one.
 
 - If any part of the client's address is already on file, the entire address block is left unchanged to avoid mixing data from different sources.
 - Only empty fields are filled in. Existing values are never overwritten.

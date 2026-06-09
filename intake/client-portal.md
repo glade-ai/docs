@@ -35,6 +35,7 @@ The client portal home gives the client a single view of where they stand across
 - **Balance card** — shows the paid/contracted ratio from the most recent case's invoices. When there are no invoices, or all invoices have been voided, the card reads "All paid up" with a full progress bar.
 - **Coming up rail** — surfaces the next scheduled meeting on a date tile.
 - **Top bar** — every page includes a global top bar with the firm's branding, a hamburger menu (Meetings, Home, Library, Support chat, and a "Visit {firm}" external link), a **Need help** popover with help videos, and an account menu. The firm logo links back to the home page.
+- **Loading state on first open** — when the home page first opens, it shows a brief loading placeholder while it gathers the client's steps, rather than momentarily showing "You're all caught up" before the real information appears.
 
 ### Multi-case clients
 
@@ -68,6 +69,19 @@ The portal captures and stores a timezone for each client so that times shown to
 ### Active status and tasks
 
 The portal's "active" indicators and the Your next step card are driven by the underlying entity status, not by the task system. If a client dismisses a task whose underlying item (for example a document checklist) is still open and assigned to them, the home page continues to surface that item as their next step with the correct Open button.
+
+- **Dismissing a task** — Every task in the home list has a trash icon that shows a **Dismiss task** label when hovered. Dismissing a task clears it from the client's list; it does not complete the underlying item. (The control was previously an unlabeled arrow that clients often mistook for "open" rather than "clear.")
+- **Respond to Comment tasks** — A "Respond to Comment" task opens the reply thread for that comment directly, so the client lands where they can reply rather than on the full conversation with the comment merely highlighted.
+
+### Live updates
+
+The client portal home keeps itself current without the client having to do anything. It refreshes on its own when:
+
+- the client completes or submits a task (for example finishing a questionnaire, uploading a document, or booking a meeting);
+- someone on the firm updates the case (for example marking a step complete or generating an invoice); and
+- the client returns to the portal tab after being away, or reconnects after losing their connection.
+
+Because the home updates automatically, there is no manual refresh step — the Your next step card, path timeline, and balance all reflect the latest state as soon as it changes.
 
 ## Configuration
 
