@@ -116,6 +116,8 @@ Response history tracks when responses are modified, supporting undo and audit.
 
 Default options on single-select fields (configured in the questionnaire template) are automatically applied and saved when the questionnaire first loads. These defaults count as valid answers during validation — a field with a pre-set default is not flagged as incomplete.
 
+A field inside a list can also be given a default **value** in the template, which is filled in automatically each time a new row is added. For example, on bankruptcy Schedule A/B a new property row can default the **% of asset owned by the debtor** to 100% — the common case for individual filers — so your team does not re-enter it on every property. The default applies only to newly-added rows; existing rows keep their values. The seeded value is saved with the row, so it persists after you save, and you can change it before or after saving.
+
 ### Phone Number Fields
 
 Phone number fields default to the United States and format as the client types. A US number entered as `2125551234` displays as `+1 212-555-1234` — the country code, the area code, and dashes appear automatically without the client having to type them. Partial numbers format progressively, so `212` shows as `+1 212-` and `212555` as `+1 212-555-`, making it easy to tell at a glance how much of the number is filled in.
@@ -141,6 +143,19 @@ List-type fields allow you to click into individual rows to view or edit details
 - A **Save & Next** button saves the current row and opens the next row immediately — no need to return to the full list between edits. **Previous** and **Next** buttons let you move between rows; if you have unsaved changes, you will be prompted before switching.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
 - Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel.
+
+### Selecting and Removing List Rows
+
+When a list row has duplicate sub-rows (for example, a creditor that appears on more than one schedule), selecting the parent row automatically selects its indented duplicates so they are removed together.
+
+The **Remove X selected** button in the list footer counts only the real items you picked, not the duplicates that were auto-selected along with them. Selecting one creditor that has two duplicates reads **Remove 1 selected**, not "Remove 3 selected." Removing still deletes the parent row and its duplicates together — only the displayed count excludes the duplicates.
+
+### Importing List Data from Another Questionnaire
+
+List fields can be populated from a client's other questionnaire using **Import from client questionnaire**. When you import:
+
+- Every cell on each imported row is saved, including cells whose value matches the row that was previously in that position. Imported rows no longer come back partially empty after a reload.
+- Re-importing before the page has refreshed does not create duplicate rows. The rows from the first import are replaced rather than stacked on top of, so the list reflects the latest import instead of doubling up.
 
 ### Resource Panel
 
@@ -285,6 +300,8 @@ Questionnaires can be open in multiple browser sessions at once — for example,
 - When two sessions update the same list in different orders (for example, one user sorts while another edits a specific row), real-time sync applies each update to the correct row by identity rather than by its position in the list — edits land where they should even when the row order has shifted.
 - When a user deletes a row locally and a concurrent update for that same row arrives from another session before the delete has finished syncing, the deleted row stays gone rather than reappearing in the form.
 - Bulk list replacements that happen automatically — such as **Import from client questionnaire**, **Populate from credit report**, the Income Organizer pull, and Case Data populate flows — now correctly delete the rows that were replaced, instead of leaving orphaned rows in the database that would re-appear later.
+- Deleting an item from a deduplicated list — for example, removing a creditor from the Bankruptcy Schedules Master Creditor List — now also removes the hidden duplicate entries grouped under it. Previously those duplicates were left behind and one would resurface as a visible row after the form reloaded, so a creditor you had just deleted appeared to come back. The removed creditor now stays gone after a refresh.
+- Deletions made in a linked list (a list that mirrors another list) now save reliably. Previously a row removed from a linked list could be silently ignored and reappear after reloading.
 
 ### Outdated Template Upgrade Prompt
 
