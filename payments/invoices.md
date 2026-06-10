@@ -84,6 +84,8 @@ When partial payments are enabled on an invoice:
 
 When partial payments are disabled, the client must pay the full balance in a single transaction.
 
+The **minimum amount** configured for payment plans does not apply to one-time custom payments. A client paying a single custom amount can pay any amount up to the balance due, even if it is below the payment-plan minimum installment threshold — that minimum only governs payment plan installments (see [Payment Plans](./payment-plans.md)).
+
 ### Payment plans
 
 Firms can set up installment-based payment plans on an invoice:
@@ -118,7 +120,8 @@ When payments are recorded, a receipt PDF can also be generated. PDFs are stored
 - **Client notification on invoice creation:** When an invoice is created or becomes payable, the client can receive an email with a link to view and pay the invoice.
 - **Payment confirmation:** When a payment succeeds, the client receives an email with the amount paid, remaining balance, and payment method used.
 - **Firm notification:** Firms can opt in to receive a notification when the first payment is made on an invoice.
-- **Payment follow-ups:** Templates can enable automatic payment reminder emails on a configurable schedule (e.g., every 3 days, weekly) for unpaid invoices.
+- **Payment follow-ups:** Templates can enable automatic payment reminder emails (and SMS reminders) on a configurable schedule (e.g., every 3 days, weekly) for unpaid invoices. Reminders are driven by the client's outstanding **Pay Invoice** task, and only continue while the invoice still has a balance to collect — that is, while it is **In Progress** or **Payment Failed**. They stop automatically once the invoice is **Paid**, **Voided**, **Skipped**, or **Edited** (replaced by a newer version), and once an active payment plan takes over collection. This prevents the situation where a client who has already paid — or whose invoice was edited and replaced — keeps receiving reminders on the old, no-longer-payable invoice.
+- **Pay Invoice task while a balance is owed:** Because reminders are tied to the Pay Invoice task, a client cannot remove themselves from (or dismiss) that task while the invoice still has an outstanding balance. Attempting to do so is blocked with a message explaining there is still a balance to pay. Once the invoice is paid in full — or voided or skipped — the task can be dismissed normally. This keeps reminders flowing to clients who still owe, so a dismissed task no longer silently strands a client without follow-ups.
 - Email notifications can be enabled or disabled per template.
 
 ### Permissions and access
@@ -211,7 +214,7 @@ Templates are the primary configuration tool for invoices. Each template defines
 |---------|-------------|
 | **Title** | Name of the template (e.g., "Standard consultation", "Flat fee — filing") |
 | **Line items** | Default charges with descriptions, prices, and quantities |
-| **Minimum amount** | Optional floor for the invoice total |
+| **Minimum amount** | Optional minimum installment amount for payment plans. Applies only to payment plan installments — it does not block one-time custom payments below this amount. |
 | **Payment methods** | Which methods are enabled: credit card, debit card, ACH |
 | **Debit card required** | Whether to force debit card only (lower fees) |
 | **Pass processing fees** | Whether to add processing fees as a surcharge to the client |
