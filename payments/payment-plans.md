@@ -93,6 +93,12 @@ A payment plan moves through the following statuses over its lifetime:
 - If a client's proposed plan exceeds the limit, they see an error asking them to increase the installment amount.
 - Firm staff can override this limit when setting up plans on behalf of clients.
 
+### Minimum installment amount
+
+- Invoice templates can set a **minimum amount** for payment plans. When set, each installment in a plan must be at least this amount.
+- The minimum is enforced when a plan is set up: a proposed plan whose installment falls below the minimum is rejected, prompting a larger installment (or a shorter schedule).
+- This minimum applies **only** to payment plan installments. It does not affect one-time custom payments on the invoice — a client paying a single custom amount can pay below this threshold (see [Invoices](./invoices.md)).
+
 ### Processing fees on payment plans
 
 - If "pass processing fees to customer" is enabled on the invoice, fees apply to each installment individually.
@@ -126,6 +132,7 @@ A payment plan moves through the following statuses over its lifetime:
 |---------|-------------|
 | Payment plan availability | Controlled by the invoice. Plans are available when partial payments are enabled. |
 | Maximum plan duration | Set on the invoice template. Limits how long a plan can extend, measured in months. |
+| Minimum installment amount | Set on the invoice template ("minimum amount"). Each plan installment must be at least this amount. Applies only to payment plans, not to one-time custom payments. |
 | Allowed frequencies | All four frequencies (weekly, biweekly, monthly, bimonthly) are always available. |
 | Payment method | The plan uses a single stored payment method selected at setup. Changing it applies to all future installments. |
 | Processing fee passthrough | If enabled on the invoice, processing fees are added to each installment at charge time. |
