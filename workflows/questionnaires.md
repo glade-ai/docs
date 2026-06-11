@@ -156,6 +156,8 @@ List fields can be populated from a client's other questionnaire using **Import 
 
 - Every cell on each imported row is saved, including cells whose value matches the row that was previously in that position. Imported rows no longer come back partially empty after a reload.
 - Re-importing before the page has refreshed does not create duplicate rows. The rows from the first import are replaced rather than stacked on top of, so the list reflects the latest import instead of doubling up.
+- Whether you import manually or a list is pre-filled automatically from another questionnaire on the same case, the copied rows stay linked to the same case record entity as their source rows. Imported assets, creditors, and other list items appear in case data and update the existing entity instead of creating a duplicate — so copying a property or creditor list no longer produces a second set of entities on the case.
+- After importing, rows keep their correct positions and values when the page refreshes, instead of showing blank leading rows.
 
 ### Resource Panel
 
