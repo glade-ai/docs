@@ -48,6 +48,8 @@ Linked fields let one field's value automatically propagate to another field wit
 
 Fields can reference other list fields to create cross-references between data sets. For example, a creditor select field can reference a creditor list so clients choose from items they have already entered.
 
+When you choose a creditor from a referenced creditor list — for example, in the SOFA Part 3 "creditors paid over $600" selection or other creditor dropdowns — each option is identified by the creditor's **account number** underneath the name. This makes creditors that share a name distinguishable: a client with several accounts at the same bank shows one option per account number, instead of several identical-looking entries labeled with an internal identifier. Referenced lists other than creditors are unaffected.
+
 ### Table Columns
 
 List fields can be displayed in table view. Table columns have settings for editability and visibility, controlling how the data appears and whether clients can modify values inline. The "Visible in table view" setting is available for all fields within a list, including fields nested inside explanation sections at any depth.
