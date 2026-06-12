@@ -74,6 +74,15 @@ Each document in the filing packet must be labeled with the correct ECF document
 
 Filing Packet AI Review is currently turned off. Filing packet uploads no longer trigger an automated AI review, the document review status panel and review badges have been removed from the PACER preview pane, and the Filing Packet AI Review configuration page is no longer in use. The feature is paused while the review experience is reworked.
 
+### Chapter 13 plan status in the filing packet
+
+For Chapter 13 cases in districts where Glade generates the Chapter 13 repayment plan, the filing packet preview shows the status of the plan document so you can confirm it is current before filing. The plan is reviewed in the packet preview because it is filed as a separate document, not folded into the consolidated petition.
+
+- **Outdated plan** — When the plan attached to the packet was generated from a plan version that is no longer the current published one, the plan row shows an **Outdated** tag. Regenerate the plan so the filed copy reflects the latest figures.
+- **Missing plan** — When the plan row is missing and the district supports plan generation with a published plan available, the row shows a **Generate it from the plan calculator** hint pointing you to the [Chapter 13 Plan Calculator](../workflows/questionnaires.md). Plan generation happens in the calculator; the packet preview only reports the status.
+
+This status appears only for Chapter 13 packets in plan-generation districts. Other packets make no plan-status check.
+
 ### Filing fees
 
 - PACER charges a filing fee per case, determined by court and chapter type.
