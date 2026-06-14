@@ -337,6 +337,7 @@ When a questionnaire generates multiple documents — for example, filled court 
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire (or re-open a submitted one) to apply new values from the case record.
+- When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
 
