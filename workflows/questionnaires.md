@@ -226,6 +226,17 @@ On Chapter 13 questionnaires, a **Plan Calculator** button appears in the form h
 
 The Plan Calculator button only appears on questionnaires identified as Chapter 13. If the button is not visible on a Chapter 13 questionnaire, contact support to confirm the feature is enabled for your firm.
 
+#### Plan Elections
+
+Some entries on the Chapter 13 plan are choices the calculator does not compute for you. You set these directly in the calculator, and they appear on the generated plan:
+
+- **Vesting of estate property** — when property of the estate vests back in the debtor (for example, at plan confirmation or at discharge).
+- **Plan payment method** — how the debtor makes plan payments to the trustee.
+- **Tax-refund treatment** — how the debtor's tax refunds are handled during the plan.
+- **Amended sections** — the list of plan sections being amended, when you are filing an amended plan.
+
+Each election offers the standard choices plus an **Other** option with a free-text box for anything outside the preset list. These elections are optional — a plan with one left blank still generates, and the calculator flags any blank election so you can fill it before filing. If the list of amended sections is longer than the space on the form, the calculator warns you that it will not all fit.
+
 ### Non-Consumer Chapter 7 Means Test
 
 Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
@@ -251,6 +262,15 @@ Some list and table fields are linked directly to case entities such as creditor
 - When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
 - When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
 - Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+
+### Creditor Duplicate Status
+
+When you mark a creditor as a duplicate of another in a bankruptcy questionnaire, that status is saved to the case record and stays consistent everywhere the case's creditors appear:
+
+- The duplicate mark syncs to the case record and to other questionnaires on the same case. The client and Schedules questionnaires keep their duplicate marks in step while both are open, so marking a creditor as a duplicate in one is reflected in the other.
+- When a new questionnaire is seeded from the case record — for example, when Schedules is started — creditors already marked as duplicates come in already marked, instead of being dropped from the new list.
+- Manual duplicate marks are preserved. Starting a new questionnaire no longer re-derives duplicates from scratch, so a creditor you marked by hand — for example, two creditors with the same name but no account number, which automatic matching cannot link on its own — stays marked.
+- Un-marking a creditor clears its duplicate status the same way, across the case record and the other questionnaires.
 
 ### Adding Creditors
 
@@ -337,6 +357,7 @@ When a questionnaire generates multiple documents — for example, filled court 
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire (or re-open a submitted one) to apply new values from the case record.
+- When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
 
