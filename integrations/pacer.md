@@ -115,13 +115,14 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
 
-### South Carolina (SCB) Chapter 7 individual filings
+### South Carolina (SCB) Chapter 7 filings
 
-- Individual Chapter 7 cases filed in the South Carolina Bankruptcy Court need a completed Debtor's Election Re: Electronic Noticing (DeBN) form for the primary debtor. Glade reads the election directly from the uploaded debtor 1 DeBN PDF — there is no separate questionnaire question to answer. Upload the signed DeBN form to the document slot during document collection and Glade extracts the elected action automatically.
+- Chapter 7 cases filed in the South Carolina Bankruptcy Court need a completed Debtor's Election Re: Electronic Noticing (DeBN) form for each filer. Glade reads the election directly from the uploaded DeBN PDF — there is no separate questionnaire question to answer. Upload the signed DeBN form to the document slot during document collection and Glade extracts the elected action automatically.
+- For an individual case, upload the debtor 1 DeBN form. For a joint case, upload a DeBN form for each debtor — both the debtor 1 and debtor 2 elections are read and sent to PACER.
 - The supported actions read from the form are **Activate**, **Deactivate**, **Update**, or **Decline**. The extracted answer is passed through to PACER so the SCB filing engine fills the matching radio on the local form.
-- Auto-extraction runs only on SCB Chapter 7 individual filings. Joint petitions and non-Chapter 7 filings do not require the DeBN extraction.
-- If no DeBN debtor 1 form has been uploaded by the time a qualifying SCB Chapter 7 individual case is submitted, the filing is blocked with an error naming the missing election so your team can add the document before retrying.
-- If the uploaded DeBN form cannot be parsed — for example, no radio button is selected on the PDF — the filing is also blocked with an error indicating the action could not be determined. Re-upload a clean copy of the form with one of the four supported actions selected to resolve the error.
+- Auto-extraction runs on both individual and joint SCB Chapter 7 filings. Non-Chapter 7 filings do not require the DeBN extraction.
+- If a required DeBN form has not been uploaded by the time a qualifying SCB Chapter 7 case is submitted, the filing is blocked with an error naming the missing election so your team can add the document before retrying. On a joint case, the election is required for both debtors — a missing form for either filer blocks the filing.
+- If an uploaded DeBN form cannot be parsed — for example, no radio button is selected on the PDF — the filing is also blocked with an error indicating the action could not be determined. Re-upload a clean copy of the form with one of the four supported actions selected to resolve the error.
 - Re-uploading a newer DeBN form supersedes the previously extracted answer. The most recent extraction wins, so correcting an earlier upload mistake is a matter of replacing the file in the document slot.
 
 ### Chapter 7 individual presumption-of-abuse page
