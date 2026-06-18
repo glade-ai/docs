@@ -108,6 +108,14 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Inbox notifications link directly to the case's status tab.
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
 
+### Filing deficiencies
+
+Sometimes a case is accepted by the court but one or more required documents are rejected and must be re-filed by hand in PACER — a "filed with deficiency" outcome. Glade surfaces this state persistently across the case so it is not missed after the live filing view is closed.
+
+- An **action-required banner** appears on the case listing the specific forms that still need to be filed manually in PACER. The banner stays visible until the deficiency is addressed, rather than appearing only while the submission is running.
+- On the Case Status tab, the filing card shows a **Filed with deficiency** heading and a **View Submission** button that opens the submission details, so you can see exactly which documents were rejected.
+- The status updates live — if a filing's status changes while you are viewing the case, the banner and the status card refresh without a manual reload.
+
 ### 341 meeting notices
 
 Glade processes incoming court notices about 341 meetings (meetings of creditors) and displays the name of the trustee who will conduct the meeting.
