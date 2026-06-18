@@ -9,7 +9,7 @@ Reporting provides your firm with operational and financial visibility into your
 ### Intake Status Report
 
 - Lists all primary cases for your firm within a date range, showing client info, workflow name, status, consultation date, intake lead, assigned paralegal, recommended case type, and last activity.
-- You can filter by workflow status, intake lead, and paralegal.
+- You can filter by workflow status, intake lead, and paralegal. You can also narrow the report by **workflow type**, **service type**, and **retainer type** to focus on a specific kind of case, the service the client signed up for, or the type of retainer agreement in place. These selectors can be combined with each other and with the existing filters, and each accepts up to 500 selections at a time.
 - Shows associated workflows alongside the initial workflow, including any recommended case types.
 - Consultation dates come from the booking associated with the initial workflow.
 - Paginated for dashboard display; supports full CSV export.
@@ -71,6 +71,7 @@ Reporting provides your firm with operational and financial visibility into your
 - **Date range**: All workflow reports require or accept a start date and end date.
 - **Team member filter**: The documents report accepts an optional list of team members to include.
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
+- **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 
