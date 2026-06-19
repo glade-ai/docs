@@ -17,11 +17,15 @@ Payment plans allow clients to pay invoices in scheduled installments rather tha
 ### Supported frequencies
 
 - **Weekly** — every 7 days
-- **Biweekly** — every 14 days
+- **Every two weeks** — every 14 days (this option was previously labeled "Biweekly")
+- **Semi-monthly (1st & 15th)** — twice a month, billed on the 1st and the 15th
 - **Monthly** — every calendar month
-- **Bimonthly** — every 2 calendar months
 
-All four frequencies are always available; there is no setting to restrict which frequencies a client can choose.
+These frequencies are available to anyone setting up a new plan; there is no setting to restrict which one a client can choose.
+
+When you choose **semi-monthly**, the first installment moves forward to the next 1st or 15th on or after the start date you pick, and the remaining installments then fall on the 1st and 15th of each month. Every other frequency starts on the exact start date you choose.
+
+**About "Bimonthly":** Plans created before semi-monthly billing was introduced may use a **Bimonthly** frequency, which bills once every two months. Bimonthly is no longer offered when setting up a new plan, but existing bimonthly plans keep running and continue to display as "Every 2 months."
 
 ### How installments work
 
@@ -133,7 +137,7 @@ A payment plan moves through the following statuses over its lifetime:
 | Payment plan availability | Controlled by the invoice. Plans are available when partial payments are enabled. |
 | Maximum plan duration | Set on the invoice template. Limits how long a plan can extend, measured in months. |
 | Minimum installment amount | Set on the invoice template ("minimum amount"). Each plan installment must be at least this amount. Applies only to payment plans, not to one-time custom payments. |
-| Allowed frequencies | All four frequencies (weekly, biweekly, monthly, bimonthly) are always available. |
+| Allowed frequencies | Weekly, every two weeks, semi-monthly (1st & 15th), and monthly are available for new plans. Bimonthly (every two months) is no longer offered for new plans but continues to run on existing plans. |
 | Payment method | The plan uses a single stored payment method selected at setup. Changing it applies to all future installments. |
 | Processing fee passthrough | If enabled on the invoice, processing fees are added to each installment at charge time. |
 | Email notifications | Plan creation and failure notifications are gated by the invoice template's email notification settings. |
