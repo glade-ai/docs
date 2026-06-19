@@ -25,6 +25,15 @@ When a paystub is in YTD mode and includes overtime pay:
 
 In per-paycheck mode, amounts are taken directly from the pay period figures.
 
+### Means Test Income Window
+
+For the Chapter 7 means test, a debtor's Current Monthly Income is the average of income across the six full calendar months before the month the case is filed. Glade anchors this six-month window to the **last completed calendar month**, so a month that is still in progress is never included.
+
+- A pay stub dated in the current (still-running) month does not pull the window forward or drop the earliest month. For example, a case worked in June averages December through May, not January through June.
+- Cases whose most recent pay stub already falls in a prior month are unaffected — the window is not forced to add empty current-month figures, so the average is not artificially lowered.
+
+This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures to the means test instead; see [Document Collection](./document-collection.md).
+
 ### Paystub Data Extraction
 
 When a paystub document is uploaded to a case, Glade extracts income fields automatically. YTD fields (such as year-to-date gross pay and year-to-date overtime) are used when the income source is set to YTD mode.
