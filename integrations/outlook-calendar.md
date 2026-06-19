@@ -2,14 +2,15 @@
 
 ## Overview
 
-Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's calendar availability into the Glade booking system. Firm members connect their Microsoft account, and Glade pulls busy events from their selected calendars to block off unavailable time slots. When a client books an appointment through Glade, the booking is pushed back to the firm member's Outlook calendar.
+Glade integrates with Microsoft Outlook to sync a firm's calendar availability into the Glade booking system. Both work or school accounts (Microsoft 365) and personal Microsoft accounts (such as `@outlook.com`) can be connected. Firm members connect their Microsoft account, and Glade pulls busy events from their selected calendars to block off unavailable time slots. When a client books an appointment through Glade, the booking is pushed back to the firm member's Outlook calendar.
 
 ## Key Behaviors
 
 ### Connecting Outlook
 
 - Firm members connect from the Calendar settings page by clicking "Connect Outlook."
-- The Microsoft OAuth flow prompts the user to grant calendar read/write and offline access.
+- Both work or school accounts (Microsoft 365) and personal Microsoft accounts (such as `@outlook.com`) can be connected.
+- The Microsoft sign-in flow prompts the user to grant calendar read/write and offline access. The consent screen appears **every time** you connect or reconnect, so any permissions Glade has added since your last connection are always presented for approval. If you reconnect after a Glade update, expect to see the consent screen again even if you previously authorized Outlook.
 - After authorization, Glade discovers all calendars in the account (including shared calendars) and creates entries for each one.
 - Calendars start disabled — the user explicitly enables which calendars should sync.
 - The primary calendar is auto-detected based on Outlook's default.
@@ -54,6 +55,7 @@ Glade integrates with Microsoft Outlook (via Microsoft 365) to sync a firm's cal
 
 - Sync is one-way for availability — Glade reads events from Outlook but does not modify existing Outlook events. Only Glade-created booking events are written back to Outlook.
 - Events marked as `showAs: "free"` in Outlook are not synced.
+- Personal Microsoft accounts (such as `@outlook.com`) can connect and sync their own calendars, but cannot sync **shared** calendars. Shared-calendar sync is available only on work or school (Microsoft 365) accounts.
 - All-day events are supported and block the entire day. Glade converts all-day event times to the user's timezone.
 - The sync window covers the next 3 months — events further out are not synced.
 - Unlike Google Calendar, Outlook does not support push notification webhooks in Glade's current implementation. Sync relies on the manual trigger and the 24-hour background job. Stale or expired delta links are recovered automatically during the next sync run (manual or scheduled).
