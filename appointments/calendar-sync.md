@@ -4,6 +4,8 @@
 
 Calendar sync connects Glade with external calendar providers — Google Calendar and Microsoft Outlook — to keep appointments synchronized and prevent double-booking. When connected, external calendar events automatically block availability in Glade's scheduling system, and Glade bookings appear on the firm's external calendar. Sync happens in real time through push notifications from each provider.
 
+In addition to bookings, Glade can place court hearings (such as 341 Meetings of Creditors) detected from court notices onto the assigned team member's connected calendar. This is off by default and turned on per firm by Glade.
+
 ## Key Behaviors
 
 ### Supported providers
@@ -67,6 +69,18 @@ Calendar sync connects Glade with external calendar providers — Google Calenda
 - Availability blocking applies per team member. A member's external events only affect their own availability.
 - When a client books with a specific team member, only that member's calendar conflicts are checked.
 
+### Court hearing sync
+
+When enabled for a firm, court hearings that Glade detects from court notices are automatically added to the assigned team member's primary connected calendar (Google or Outlook). This is separate from booking sync — it puts hearings the firm is already tracking onto the calendars team members actually use.
+
+- The hearing lands on the **primary calendar of the case's assigned team member** (the workflow owner). Both Google and Outlook are supported.
+- The event is informational only: no guests are invited and **no invitation or notification emails are sent** to anyone, and no video link is added.
+- The event title combines the hearing type, client name, and case number. The description includes details such as the case number, trustee, judge, courtroom, location, and any dial-in information for virtual hearings, along with a note that Glade added it from a court notice. The default duration is one hour, since notices carry a start time but no end time. The location is the courtroom, or "Zoom" for a virtual hearing.
+- A synced hearing also **blocks bookable availability**, so clients can't book the team member during the hearing.
+- For 341 Meetings, a continued or amended notice for the same case replaces the earlier calendar event rather than creating a duplicate.
+
+This feature is off by default and is turned on per firm by Glade.
+
 ## Configuration
 
 | Setting | Description |
@@ -75,6 +89,7 @@ Calendar sync connects Glade with external calendar providers — Google Calenda
 | Enabled calendars | Which specific calendars from each account are actively synced. |
 | Primary calendar | The calendar where Glade creates booking events. |
 | Per-team-member setup | Each team member connects and manages their own calendars independently. |
+| Court hearing sync | Whether detected court hearings are added to assigned team members' calendars. Off by default; enabled per firm by Glade. |
 
 ## Edge Cases & Limitations
 
@@ -86,9 +101,13 @@ Calendar sync connects Glade with external calendar providers — Google Calenda
 - There is no manual "sync now" button. Sync happens automatically via webhooks.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
 - All-day events are handled based on the firm's configured timezone.
+- Court hearing sync only adds **future** hearings, and only when the case is linked to a team member who has a connected calendar. Unresolved cases are skipped.
+- A hearing that is vacated or cancelled with no replacement time is not yet removed from the calendar. De-duplication of repeat notices currently applies only to 341 Meetings.
+- Unlike inbound booking sync (which reads only event times), court hearing events Glade creates carry full hearing details.
 
 ## Related Features
 
 - [Scheduling](./scheduling.md)
 - [Reminders](./reminders.md)
 - [Video Consultations](./video-consultations.md)
+- [PACER](../integrations/pacer.md) — court hearing notices that feed calendar sync originate from court systems.
