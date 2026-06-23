@@ -2,16 +2,23 @@
 
 ## Overview
 
-The Income Organizer is a tool in bankruptcy workflows that helps attorneys review and organize a client's income data for court form preparation. It collects income from paystubs and other sources, calculates monthly amounts, and feeds the results into bankruptcy schedules — primarily Schedule I (Current Monthly Income of the Debtor).
+The Income Organizer is a tool in bankruptcy workflows that helps attorneys review and organize a client's income data for court form preparation. It collects income from paystubs and other sources, calculates monthly amounts, and feeds the results into bankruptcy schedules — Schedule I (Current Monthly Income of the Debtor) and the Chapter 7 means test, including the median income screen.
 
 ## Key Behaviors
 
 ### Income Calculation Modes
 
-Each income source (such as a paystub) can be set to one of two calculation modes:
+Each income source (such as a paystub) can be set to one of these calculation modes:
 
 - **Per-paycheck mode**: income amounts are taken directly from individual pay period values.
 - **YTD (year-to-date) mode**: monthly amounts are derived by dividing the year-to-date totals by the number of pay periods elapsed. Use this mode when per-period figures are unavailable or less accurate than the running YTD totals.
+- **YTD period method**: estimates average monthly income by comparing the year-to-date totals on the paystubs that bracket a chosen six-month period, then dividing the bracketed gross by six. You pick a **filing (test) month**, and Glade treats the six full months before that month as the period to measure. Use this mode to base the figure on a defined window rather than on the full running year-to-date total.
+
+### Period Method Preview
+
+When you choose the YTD period method, a preview shows how the figure is built before you apply it: the filing month you selected, the six-month period that falls before it, how many paystubs were used as the start and end anchors, the breakdown rows that make up the calculation, and the resulting monthly gross. The filing month defaults to the month after the latest paystub that carries year-to-date data, and you can change it.
+
+If you also apply the period method to the means test, a warning banner flags it as a non-standard calculation method so you can confirm it against the case's requirements before relying on it.
 
 ### Schedule I Contributions Preview
 
@@ -32,7 +39,17 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 - A pay stub dated in the current (still-running) month does not pull the window forward or drop the earliest month. For example, a case worked in June averages December through May, not January through June.
 - Cases whose most recent pay stub already falls in a prior month are unaffected — the window is not forced to add empty current-month figures, so the average is not artificially lowered.
 
-This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures to the means test instead; see [Document Collection](./document-collection.md).
+This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures, or the YTD period method, to the means test instead; see [Document Collection](./document-collection.md).
+
+### Chapter 7 Median Income Screen
+
+The median income screen compares the client's annualized current monthly income directly against the household median income for their state and family size — deductions are not subtracted from this comparison. The result is shown clearly:
+
+- A green check with the amount the client is **under** the median, per month, when income is below median.
+- A red X with the amount the client is **over** the median, per month, when income is above median.
+- The corresponding annual over/under amount is shown alongside the monthly figure.
+
+Amounts of zero display as `$0.00` rather than a dash. When income or median data is missing, the screen shows a neutral state instead of a pass or fail.
 
 ### Paystub Data Extraction
 
@@ -52,7 +69,8 @@ Some older income organizers may need their paystub data re-extracted (for examp
 
 | Setting | Description |
 |---------|-------------|
-| Calculation mode | Per-paycheck or YTD, set per income source |
+| Calculation mode | Per-paycheck, YTD, or YTD period method, set per income source |
+| Filing (test) month | For the YTD period method, sets the month whose preceding six full months form the period being measured |
 | Pay frequency | Used to convert YTD amounts to monthly figures (e.g., weekly = 52 periods/year) |
 
 ## Edge Cases & Limitations
@@ -60,6 +78,7 @@ Some older income organizers may need their paystub data re-extracted (for examp
 - If a paystub does not include YTD overtime data, overtime shows as $0 in YTD mode — no error is shown. This is expected for clients without overtime.
 - The Schedule I Contributions preview reflects the current saved state of the income sources. If you have made changes without saving, save first before reviewing the preview.
 - YTD calculations depend on accurate pay period counts. If the number of pay periods elapsed is incorrect, monthly figures will be off proportionally.
+- The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
 

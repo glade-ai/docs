@@ -179,6 +179,17 @@ While filling out certain forms (for example, Bankruptcy Schedules), a **Source 
 
 The questionnaire content and the resource panel scroll independently — scrolling through a long questionnaire does not affect the position of the resource panel, and vice versa.
 
+### Property Liens on Schedule A/B
+
+On a Schedule A/B property, you can attach more than one lien to the same property. The property's lien field lets you search for and select existing secured creditors from the Master Creditor List, and you can add as many as apply.
+
+- As you select liens, the property's **total claim amount** updates automatically to the sum of the selected creditors' balances.
+- A summary below the selector shows the **total liens** (with a count of how many) and the **equity after liens** — the property's value minus the total liens, which never goes below zero.
+- The same creditor can't be selected twice on one property: liens already chosen drop out of the remaining choices, and the option to add another lien is disabled once every available lien is selected or while an empty selection is open.
+- A selected creditor with a blank or zero balance adds nothing to the total.
+
+The Exemptions Calculator uses the summed total of the selected liens when calculating equity available to exempt. If no liens have been selected for a property, it falls back to the single lien amount entered directly on the property.
+
 ### Exemptions Calculator
 
 When working on bankruptcy Schedule A/B, Schedule C, or the Master Creditor List, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
