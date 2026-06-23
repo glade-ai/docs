@@ -31,6 +31,15 @@ The invoice total is calculated as the sum of (unit price x quantity) for each l
 
 Line items can be defined on a template and copied automatically when creating an invoice, or added and edited manually on individual invoices.
 
+### Invoice note
+
+An invoice can carry an optional **invoice note** — a short, plain-text message shown to the client on the invoice. Firms use it to explain what is due and when, such as how and by when the invoice is expected to be paid.
+
+- The note can be set on an invoice template, so every invoice created from that template starts with the same message.
+- When a case is started from a template, the note pre-fills from the template and can be edited before the invoice is sent.
+- Staff can add or change the note directly on an existing invoice at any time. Editing the note does not create a new invoice version and does not change the invoice's status — it is separate from making a correction to line items or amounts.
+- The note is visible to the client. It appears next to the balance due in the client portal and on each invoice in the case invoice list, which both clients and firm staff can see.
+
 ### Invoice lifecycle
 
 An invoice moves through a series of statuses as it progresses from creation to payment:
@@ -135,7 +144,7 @@ When payments are recorded, a receipt PDF can also be generated. PDFs are stored
 
 Invoice changes are handled differently depending on what is being changed:
 
-- **Settings changes** (title, payment configuration, enabled payment methods) can be updated directly on an active invoice without creating a new version.
+- **Settings changes** (title, payment configuration, enabled payment methods, the invoice note) can be updated directly on an active invoice without creating a new version.
 - **Line item or amount changes** on an invoice that has already been sent or partially paid trigger versioning:
   - The original invoice is marked as "Edited" and becomes read-only.
   - A new invoice is created with the updated line items and amounts.
@@ -180,6 +189,8 @@ When a client receives an invoice:
 5. If payment plans are available, the client can set up an installment schedule.
 6. If client modifications are disabled by the firm, the client sees a message explaining that changes are not permitted on this invoice.
 
+If the firm has added an invoice note, it appears alongside the balance due so the client sees the payment instructions up front. When a client has more than one unpaid invoice, selecting their balance opens a short picker to choose which invoice to pay; a client with a single unpaid invoice goes straight to that invoice.
+
 ### Filtering and searching invoices
 
 The invoice list supports date filtering. The date filters are labeled **Created from** and **Created to**, and filter invoices by their creation date. Both filters can be set independently or together to narrow the list to a specific time window.
@@ -214,6 +225,7 @@ Templates are the primary configuration tool for invoices. Each template defines
 |---------|-------------|
 | **Title** | Name of the template (e.g., "Standard consultation", "Flat fee — filing") |
 | **Line items** | Default charges with descriptions, prices, and quantities |
+| **Invoice note** | Optional customer-visible message shown on the invoice, describing how and when payment is expected |
 | **Minimum amount** | Optional minimum installment amount for payment plans. Applies only to payment plan installments — it does not block one-time custom payments below this amount. |
 | **Payment methods** | Which methods are enabled: credit card, debit card, ACH |
 | **Debit card required** | Whether to force debit card only (lower fees) |
