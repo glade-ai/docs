@@ -14,6 +14,13 @@ Glade lets your team pull credit reports for clients as part of the intake proce
 - The action buttons in the modal are disabled while the request is in progress, preventing accidental duplicate submissions.
 - All phone numbers you enter in the modal — including the client's mobile number and contact phone — are included in the request to the credit reporting service. If a bureau requires a phone number that the report previously failed to match against, having mobile and contact phone present alongside the primary number reduces "invalid borrower data" rejections.
 
+### Joint Filing Safeguards
+
+In a joint credit report pull, you enter the main debtor and the co-debtor on separate, visually similar steps, which makes it easy to accidentally enter one person's information for the other. Before the report is pulled, Glade compares the two dates of birth you entered. If they are identical, a confirmation appears naming each debtor (for example, "Main debtor and co-debtor have the same date of birth — is this correct?").
+
+- Identical dates of birth can be legitimate (for example, twins), so this only asks you to confirm. You can confirm and continue, or go back to correct the entry.
+- The check runs only on joint pulls. Single-debtor pulls are unaffected.
+
 ### Client Data Write-Through
 
 When you fill in a client's information in the credit report modal — including name, address, date of birth, phone number, contact phone, and SSN — Glade automatically saves those fields back to the client's profile for any fields that are not already set. You only need to enter the information once: it is available in future credit report pulls and other workflows without re-entry. Contact phone is saved alongside the primary phone number so the client's profile reflects every number you entered in the modal, not just the first one.
