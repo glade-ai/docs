@@ -19,9 +19,11 @@ Payment tracking in Glade provides firms with a complete view of all payment act
 |--------|---------|
 | Succeeded | Payment completed successfully. |
 | Pending | Payment submitted to the processor, awaiting confirmation. |
-| Failed | Payment was declined or encountered an error. |
+| Failed | Payment was declined or encountered an error. Only payment plan installments are retried automatically — see below. |
 | Voided | Payment was cancelled before settlement. |
 | Requires payment method | Payment initiated but awaiting a payment method. This is uncommon and typically an internal state. |
+
+A failed payment only shows retry messaging ("We will retry this payment...") when it is a payment plan installment, because automatic retries apply only to plan installments. A failed one-off payment shows "Failed" — or the specific decline reason, when one is available — with no retry promise, since one-off charges are never retried automatically. See [Payment Plans](./payment-plans.md) for how installment retries work.
 
 ### Viewing payment history
 
