@@ -23,7 +23,7 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 ## Edge Cases & Limitations
 
 - Each email and phone number must be unique across all contacts. If a contact's email or phone needs to change (e.g., during deduplication), the old values are preserved internally.
-- Archived contacts are excluded from the standard member list but are not permanently deleted.
+- Archived contacts are excluded from the standard member list but are not permanently deleted. When you archive a contact, its email address is released so the same email can be saved on another contact. Previously an archived contact kept its email reserved, so trying to reuse that email on an active contact returned an "already taken" error even though the only conflict was an archived record. The archived contact's original email is still retained internally for audit and sign-in purposes.
 - Company employee relationships and person-to-person associations are two separate concepts — linking someone as a company employee does not automatically create a person-to-person association.
 - A person only appears in your contacts list if they have a client record with your firm.
 
