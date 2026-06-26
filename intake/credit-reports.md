@@ -68,6 +68,7 @@ When Glade imports addresses from a credit report into the case as real-estate a
 
 - Credit report pulls are billed from the first pull at the standard rate. There is no trial or free pull before billing begins.
 - The pull attempt limit is enforced per case. Once the limit is reached, no further pulls can be initiated for that case.
+- The owned-property filter on imported real-estate addresses applies to reports pulled or refreshed after this behavior took effect. If an owned property is missing from the imported real estate on a report that was pulled earlier, re-pull the report to apply the current filter.
 - If a credit report is pulled successfully but the workflow's **Get Credit Report** step does not clear right away — for example, the report was retrieved but the finalizing step was interrupted by a timeout — Glade reconciles it automatically. Retrying the pull completes the existing report instead of pulling a new one, so you are not charged a second time, and a periodic background check completes any stranded report on its own (typically within about 15 minutes). You do not need to re-pull a report that already came back successfully.
 
 ## Related Features
