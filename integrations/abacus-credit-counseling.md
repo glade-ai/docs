@@ -10,6 +10,7 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 
 - Attorneys connect their firm to Abacus from the integrations area of the dashboard. The setup flow registers the firm with Abacus and stores the credentials needed to enroll clients.
 - The same connection covers post-filing debtor education through Sage — there is no separate Sage setup to complete.
+- Abacus is not the only pre-filing credit counseling provider. A firm can instead connect **Evergreen Financial Counseling** for pre-filing credit counseling; see [Evergreen Credit Counseling](./evergreen-credit-counseling.md). The credit counseling step works the same way regardless of which provider the firm has connected.
 - Once connected, a workflow can include a credit counseling step. The same step handles both pre-filing credit counseling and post-filing debtor education.
 
 ### Enrolling a client
