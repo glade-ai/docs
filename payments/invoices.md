@@ -190,7 +190,7 @@ When a client receives an invoice:
 5. If payment plans are available, the client can set up an installment schedule.
 6. If client modifications are disabled by the firm, the client sees a message explaining that changes are not permitted on this invoice.
 
-If the firm has added an invoice note, it appears alongside the balance due so the client sees the payment instructions up front. When a client has more than one unpaid invoice, selecting their balance opens a short picker to choose which invoice to pay; a client with a single unpaid invoice goes straight to that invoice.
+If the firm has added an invoice note, it appears alongside the balance due so the client sees the payment instructions up front. When a client has more than one unpaid invoice, selecting their balance opens a short picker to choose which invoice to pay; a client with a single unpaid invoice goes straight to that invoice. Invoices that are still **Generating** — those without a final amount assigned yet — are not listed in this picker and are not counted toward the displayed balance, so the client does not see duplicate "$0.00" rows for invoices that are still being prepared.
 
 ### Filtering and searching invoices
 

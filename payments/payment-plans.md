@@ -123,6 +123,7 @@ A payment plan moves through the following statuses over its lifetime:
 - The client sees the full installment schedule before confirming.
 - Duration warnings appear if the plan approaches or exceeds the maximum duration limit.
 - After setup, payments are charged automatically with no further action required from the client.
+- When a client's invoice is on an active plan, the client portal home Balance card reflects it: the card shows the installment amount and cadence (for example, "$200.00 monthly") and the next payment date, so a client paying down a balance sees their plan summarized at a glance. Completed or canceled plans are not shown there.
 
 ### Firm management experience
 
