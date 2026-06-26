@@ -106,6 +106,12 @@ An AI summary can be enabled to generate a summary of the questionnaire response
 
 Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **completed**, and **skipped**.
 
+### How a submitted questionnaire appears to the client
+
+When a questionnaire uses the review workflow, a client who has submitted it sees it marked **Submitted — under review** with a clock icon, and the "Complete this task" prompt is removed — so the client can tell the questionnaire is already in and does not look like it still needs their attention. Your team's dashboard continues to show "Review required by you" for the same questionnaire.
+
+Anyone with view or edit access who opens a questionnaire that is not currently editable for them — for example, a client opening a questionnaire they have already submitted for review, or a view-only team member opening one that is still in progress — sees the questionnaire's answers in read-only form. Previously some of these combinations showed a "We are generating your form results…" message that never cleared (most noticeably after submitting a questionnaire for review from the client's own profile); that stuck message no longer appears for anyone who has permission to view the questionnaire.
+
 ### Filling Out Forms
 
 When using Glade's native form provider, initial values can be pre-populated from field mappings tied to the client's workflow or from the inheritance scheme. Clients fill out sections and fields through the client portal, with changes auto-saved and synced in real time.
