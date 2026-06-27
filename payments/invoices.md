@@ -150,6 +150,7 @@ Invoice changes are handled differently depending on what is being changed:
   - A new invoice is created with the updated line items and amounts.
   - The new invoice references the original, maintaining a complete audit trail.
   - Any credits from payments already made on the original invoice carry forward to the new version.
+  - Payments stay attached to the active invoice version, including ACH / bank-transfer payments. If a bank transfer confirms *after* the invoice has been edited, the confirmation is applied to the new active version rather than stranding the payment on the read-only original — so a paid ACH payment no longer disappears from the invoice when it is edited around the same time the payment settles.
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
 
