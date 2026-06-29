@@ -265,6 +265,13 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - Every finalized version of the plan is kept in the Documents tab as chronological version history. The most recent version is the one used for court filing; earlier versions stay available for reference rather than being replaced.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
 
+#### Secured Claims With an Arrearage Cure
+
+When a secured creditor — for example a mortgage servicer — is both maintained going forward and has past-due arrears to cure, the generated plan lists that creditor as a **single line** in the secured-claims section. The ongoing payment and the arrearage cure amount appear together on that one line rather than as two separate rows for the same creditor.
+
+- You can set the arrearage cure's own **first and last payment months** — the months the cure payments start and stop — separately from the ongoing payment. When you set these in the calculator, they carry through to the generated plan.
+- Clearing an override field back to blank — collateral value, contract payment, or interest rate — restores the value from the questionnaire for that creditor rather than leaving it empty, so a cleared field no longer wipes the underlying figure.
+
 ### Non-Consumer Chapter 7 Means Test
 
 Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
