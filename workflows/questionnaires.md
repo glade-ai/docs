@@ -254,6 +254,13 @@ Some entries on the Chapter 13 plan are choices the calculator does not compute 
 
 Each election offers the standard choices plus an **Other** option with a free-text box for anything outside the preset list. These elections are optional — a plan with one left blank still generates, and the calculator flags any blank election so you can fill it before filing. If the list of amended sections is longer than the space on the form, the calculator warns you that it will not all fit.
 
+#### Secured Claims With an Arrearage Cure
+
+When a secured creditor — for example a mortgage servicer — is both maintained going forward and has past-due arrears to cure, the generated plan lists that creditor as a **single line** in the secured-claims section. The ongoing payment and the arrearage cure amount appear together on that one line rather than as two separate rows for the same creditor.
+
+- You can set the arrearage cure's own **first and last payment months** — the months the cure payments start and stop — separately from the ongoing payment. When you set these in the calculator, they carry through to the generated plan.
+- Clearing an override field back to blank — collateral value, contract payment, or interest rate — restores the value from the questionnaire for that creditor rather than leaving it empty, so a cleared field no longer wipes the underlying figure.
+
 ### Non-Consumer Chapter 7 Means Test
 
 Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
