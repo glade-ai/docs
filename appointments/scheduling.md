@@ -70,6 +70,7 @@ Each booking moves through a series of statuses over its lifetime:
 - Bookings can be assigned to specific team members within the firm.
 - A default team member can be set per product, so new bookings are pre-assigned.
 - Team members can be reassigned after booking.
+- A booking created without a specific team member is treated as belonging to the calendar owner and is shown under the owner's name. When you filter the bookings list (or the **Your appointments** widget) by the calendar owner, these unassigned bookings appear alongside the ones explicitly assigned to the owner. Filtering by any other team member shows only the bookings explicitly assigned to that person.
 - When connected to a workflow, team assignment follows workflow rules.
 - Each team member's individual availability is checked when assigning.
 - When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
