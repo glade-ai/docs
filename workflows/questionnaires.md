@@ -254,6 +254,13 @@ Some entries on the Chapter 13 plan are choices the calculator does not compute 
 
 Each election offers the standard choices plus an **Other** option with a free-text box for anything outside the preset list. These elections are optional — a plan with one left blank still generates, and the calculator flags any blank election so you can fill it before filing. If the list of amended sections is longer than the space on the form, the calculator warns you that it will not all fit.
 
+#### Generated Plan Document
+
+When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores it, so the workflow's Documents tab reflects the version you just finalized instead of an out-of-date copy.
+
+- Every finalized version of the plan is kept in the Documents tab as chronological version history. The most recent version is the one used for court filing; earlier versions stay available for reference rather than being replaced.
+- Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
+
 ### Non-Consumer Chapter 7 Means Test
 
 Some Chapter 7 cases are non-consumer debt cases — the debtor's debts are primarily business rather than consumer in nature. Those cases follow the "no presumption of abuse" branch of Form B122A-1 (line 14a) and never need Form B122A-2 (the full means test calculation).
@@ -279,6 +286,14 @@ Some list and table fields are linked directly to case entities such as creditor
 - When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
 - When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
 - Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+
+### Deleting and Restoring Case Data Entities
+
+Case records hold entities such as creditors and assets that feed synced questionnaire lists. When an entity is deleted from the case record, it is removed from live lists, entity counts, and any synced questionnaires — but it is not erased. The deletion is recorded so your team can review what was removed and undo it.
+
+- Each deletion is kept with who deleted it and when, and is retained as history rather than silently discarded. Restoring an entity is recorded the same way.
+- Deleted entities appear in a removed-items view. Restoring an entity returns it to the case record and re-creates its corresponding questionnaire row with the values it had.
+- Deleting entities from the case record keeps synced questionnaire lists in step: the matching rows are removed, and the remaining rows in a sync-enabled list continue to show their values. Previously, deleting case-data entities could leave blank rows where the deleted items used to be in lists such as "Your Property"; those rows now display correctly, and the deleted items still appear under Removed Items.
 
 ### Creditor Duplicate Status
 
