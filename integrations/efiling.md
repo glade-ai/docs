@@ -15,6 +15,12 @@ Glade integrates with electronic court filing systems to let you submit cases di
 - **Inbox notifications**: When a filing event occurs (such as a status update from the court), you receive a notification in the Glade inbox. Clicking the notification takes you directly to the Case Status tab for that case so you can review the current filing status without navigating manually.
 - Direct links to a case opened via an inbox notification automatically open the Case Status tab.
 
+### Why a filing is blocked
+
+When a filing cannot be submitted, the eFiling modal explains the specific reason instead of showing a generic error, so your team knows what to address before trying again. Common reasons include missing required case information, missing required documents, a filing district that has not been set up for the case, and permission restrictions. The same explanation appears in the modal's alert and in the accompanying notification.
+
+When a filing is blocked because the case's filing district has not been set up, a **Fix this** action appears inline. Completing the district setup from that prompt clears the block, so you can continue the submission without leaving the filing flow.
+
 ### PDF flattening in filing packets
 
 Court electronic filing systems (CM/ECF) reject PDFs that contain editable layers such as fillable form fields, annotations, or sticky notes. Client-uploaded documents — cover sheets, local forms, photo IDs, mortgage statements — frequently arrive as non-flat PDFs and would otherwise cause the court to reject the packet.
