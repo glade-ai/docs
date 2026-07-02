@@ -68,6 +68,7 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Each team member connects and manages their own calendar accounts.
 - Availability blocking applies per team member. A member's external events only affect their own availability.
 - When a client books with a specific team member, only that member's calendar conflicts are checked.
+- When a booking is reassigned to a different team member and then rescheduled, its calendar event moves with it: Glade creates the event on the newly assigned member's connected calendar and removes it from the previous member's calendar, so the appointment always lands on the calendar of the person actually assigned. Previously the event could stay on the original member's calendar or fail to appear on the new member's.
 
 ### Court hearing sync
 
