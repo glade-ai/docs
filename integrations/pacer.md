@@ -142,6 +142,15 @@ When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
 
+### Case number matching across formats
+
+Courts write the same case number in several different formats — for example `26-18233`, `26-bk-18233`, and `0:26-bk-18233` — and some districts add the assigned judge's initials on the end (for example `8:25-bk-08186-RCT`). Glade treats all of these as the same case number when it links court notices and when you search, so a difference in format no longer prevents a match.
+
+- **Incoming court notices** link to the right case even when the notice writes the case number in a different format than the one stored on the workflow. Previously an exact-text mismatch could leave a notice unlinked, so notices for a case could pile up without ever attaching to its activity timeline.
+- **Dashboard case-number search** matches a workflow regardless of which format you type. Searching for `26-18233` finds a case stored as `26-bk-18233` or `0:26-bk-18233`, and the reverse also works.
+
+Notices that were already stranded by an earlier format mismatch are not re-linked on their own. If a case is missing court notices you expected to see, contact Glade to re-sync it.
+
 ### Changing the chapter at petition compile time
 
 When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition must be re-compiled against the new chapter so the schedules and forms match. The pre-compile modal (Documents → **Compile Petition**) makes this switch visible at the moment of filing.
