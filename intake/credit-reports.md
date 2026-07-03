@@ -48,6 +48,8 @@ For common, known failure types Glade shows a specific, actionable message inste
 - **Invalid borrower data**: tells you that the credit bureau rejected the borrower's information and to verify the client's name, address, SSN, and date of birth before retrying.
 - **Access denied**: tells you that access was denied for this report and to contact support with the request ID shown in the message.
 
+On a **joint pull**, each borrower's failure is reported separately, with its own specific reason and the borrower's name. When both the main debtor and co-debtor fail, you see what went wrong for each person — rather than a single generic message for only the first failure — so you can correct the right borrower's information before retrying. Each borrower's name is shown exactly as it was submitted to the credit bureau.
+
 Unknown error codes are still retried automatically. When one bureau returns an error inside an otherwise-usable multi-bureau report, the pull is not retried — the partial report is preserved.
 
 ### Skip Option
