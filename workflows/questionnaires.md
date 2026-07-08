@@ -138,6 +138,10 @@ By default, currency fields show $0.00 on first load. You can delete the value t
 
 If the questionnaire template has **Default to blank** enabled for a currency field, that field starts empty rather than showing $0.00. Enabling or disabling this setting is done in the questionnaire template editor by your firm's template administrator.
 
+### Marking a Value as Unknown
+
+On bankruptcy Schedule A/B, an asset's current value can be marked **Unknown** (or overridden with custom text) instead of a dollar amount. When that value feeds a calculated line — for example, a figure carried onto another line or copied to Schedule C — the calculated line now shows **Unknown** (or the entered text) rather than $0.00. This matches how the value already appears in the answer view, and it carries through to both the live preview and the generated and filed petition. Section and part totals that are meant to stay numeric continue to show a dollar amount.
+
 ### List Row Detail Views
 
 List-type fields allow you to click into individual rows to view or edit details:
@@ -317,6 +321,12 @@ The mobile layout is only visible to clients accessing the questionnaire on a mo
 
 If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
 
+### Navigating to Fields with Errors
+
+When a section or subsection shows a validation-error badge, clicking the badge opens a dialog that lists every field in that subsection still needing attention, each with its label and error message. Selecting a field takes you straight to it — switching to the right subsection if needed — scrolls it into view, focuses it, and briefly highlights it, so you can fix each issue without scanning the whole subsection by eye.
+
+Completion and error counts treat a deliberate **0** or a **No** (false) answer as a valid, complete response. Number and yes/no fields answered this way are no longer counted as incomplete, so the badge counts reflect only fields that are genuinely unanswered.
+
 ### Submitting with Incomplete Fields
 
 When you click **Submit Questionnaire** and required fields are missing, a **Fields Need Attention** dialog opens immediately. The dialog shows how many fields are incomplete and which sections they are in (up to five sections are listed by their position in the form, with a count of any additional). The dialog only lists sections with errors that are currently visible and actionable — sections whose errors only come from hidden or non-actionable fields are not flagged, so completed sections no longer appear in the dialog as needing attention. Submission is only blocked when at least one visible, actionable error remains. You must check the acknowledgment checkbox before the **Submit Anyway** button becomes active. Clicking **Submit Anyway** bypasses validation and submits the form — useful when a field is not applicable to a particular client and cannot be left blank under normal validation rules. Clicking **Continue Editing** closes the dialog and leaves the questionnaire open for further editing. If you complete all incomplete fields before clicking Submit again, the form submits directly without the dialog appearing.
@@ -374,6 +384,7 @@ When a questionnaire generates multiple documents — for example, filled court 
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire (or re-open a submitted one) to apply new values from the case record.
+- Required-field validation skips list rows that will not be filed. Rows merged into another as duplicates (for example, deduplicated creditors) and rows explicitly marked to omit from the petition are not checked for missing required fields, so leftover data on those rows does not block submission.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
