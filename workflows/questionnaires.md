@@ -333,6 +333,22 @@ When the signature confirmation modal appears at submission time, you have three
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
+### Petition Check Summary
+
+Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time:
+
+- Summary tiles at the top count the outstanding **validation errors**, the **sections affected**, the **incomplete dates**, and the **incomplete signatures**, so you can gauge the overall state at a glance.
+- Below the tiles, every outstanding issue is grouped by section and subsection in an expandable list. Each entry shows the field label and what is wrong, and a **Go to field** action takes you straight to that field — switching sections if needed, scrolling it into view, and focusing it.
+- Issues on list rows are included in both the counts and the list. Previously, required-field issues inside a list row — for example, blank fields on a row of the Master Property List — could be dropped from the section badges and this summary when the row took its section from the parent list, so a list with many missing fields might read as a single issue or none. All of a row's outstanding issues now appear.
+- Standalone date fields — such as a date of birth or the date a debt was incurred — appear in the normal issue list and section badges alongside every other field, rather than being separated into their own tile where they were easy to overlook.
+
+Glade validates signature, date, and currency answers precisely so the check's counts match what you see on the form:
+
+- A signature that is missing its date flags the date field itself, not just a generic "signature and date are required" message, so you can tell which part is missing.
+- A signature mark with no name after it (an empty electronic-signature placeholder) is not accepted as a completed signature.
+- A date that is present but not a recognizable date is flagged as **invalid** rather than passing silently. A date entered as free-form text, instead of picked from the calendar, counts as filled.
+- A currency amount marked **Unknown** or overridden with explanatory text counts as an answered field and is no longer reported as missing.
+
 ### Concurrent Edits to List Rows
 
 Questionnaires can be open in multiple browser sessions at once — for example, a paralegal and an attorney reviewing the same form, or one user editing the form while a teammate imports data into a list field. List and table rows are now preserved across those concurrent saves:
