@@ -36,7 +36,7 @@ Staff management controls who has access to your firm's back office and what the
 
 ## Edge Cases & Limitations
 
-- If a team member is removed, their existing case assignments are not automatically removed. Those assignments persist until manually updated.
+- When a team member is removed, their workflow **ownership** assignments are cleared automatically. A departed member no longer appears as an owner on their workflows and no longer keeps owner-derived access — for example, they are dropped from the group that can view a workflow's invoices. Other manual references to that person (for example, a mention in a note) are not swept up automatically and may need to be updated by hand.
 - Organization membership validation prevents adding someone who is already a paying customer, but it does not prevent the reverse (an organization member later becoming a direct paying customer).
 
 ## Related Features
