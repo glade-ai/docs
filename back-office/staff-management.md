@@ -18,6 +18,7 @@ Staff management controls who has access to your firm's back office and what the
   - Control which team members appear in specific report views
 - **Case ownership**: You can assign one or more team members to a case. Each owner can have specific workflow roles on that case (e.g., one person might be the Paralegal on case A but Intake Lead on case B).
 - **Editing team member details**: A team member's name and email address can be updated directly from the staff management interface. Keeping email addresses current ensures the team member retains access to their cases and workflows — changing an email address that is out of sync with the person's actual account can cause their assigned workflows to become inaccessible.
+- **Adding a firm billing payment method**: Adding the payment card on file for your firm's own Glade billing is no longer limited to the firm owner. A team member can add a firm billing card without being the owner, and Glade records which team member added each card so there is a clear trail of who set up a payment method.
 - **Organizations** belong to your firm and represent client-side groups. Each organization has an owner and members. Organization members have granular permissions:
   - Assign team members to cases
   - Invite other collaborators
