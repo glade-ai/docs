@@ -352,6 +352,13 @@ If you try to save responses on a questionnaire whose template version is no lon
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
 
+When you re-open a completed questionnaire, Glade checks whether the case data it draws from has changed since the questionnaire was last in sync:
+
+- **Nothing changed** — case data sync turns back on automatically. Edits to the case record flow into the questionnaire again, just as they did before it was submitted, and no action is needed.
+- **Case data changed** — sync stays off so the newer case data does not silently overwrite the re-opened answers, and a warning banner appears at the top of the questionnaire: *"This questionnaire is out of sync with case data."* The banner is shown to team members with edit permission.
+
+The out-of-sync banner includes a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns sync back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+
 ### Collaborators
 
 Collaborators (additional team members) can be assigned to questionnaires with view or edit permissions.
@@ -373,7 +380,7 @@ When a questionnaire generates multiple documents — for example, filled court 
 - Clearing a required date field and saving leaves the field in an invalid state — it is treated as empty, not as a valid cleared value, so validation correctly flags it as required.
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
-- Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire (or re-open a submitted one) to apply new values from the case record.
+- Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening](#re-opening)).
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
