@@ -5,6 +5,7 @@ Client onboarding — the portal experience and intake flow for new clients.
 ## Features
 
 - [Client Portal](./client-portal.md)
+- [Bank Statements](./bank-statements.md)
 
 ## Workflow Steps
 
