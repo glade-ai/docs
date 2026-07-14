@@ -17,7 +17,12 @@ Case management is the core back-office feature that lets your firm track client
 - A case can be marked as the primary case, with associated sub-workflows linked to it. Associated workflows appear together in intake status reports.
 - Case data supports both single-value fields (e.g., debtor SSN, attorney info) and repeatable items (e.g., creditors, assets). The system preserves a full history of field changes for audit purposes.
 - When two data sources provide different values for the same case field (for example, a questionnaire response and a manually entered value disagree on a party's address), the system flags the field as conflicted. You can resolve the conflict by selecting which value should be authoritative. The selected value becomes the active value for that field immediately after resolution.
-- All case activity is logged, including status changes, document uploads, payments, form completions, e-signature requests, court notices, and owner assignment changes.
+- All case activity is logged, including status changes, document uploads, payments, form completions, e-signature requests, court notices, and owner assignment changes. The activity log also records high-value actions that were previously not captured:
+  - **Petition Check** — when a Petition Check is run, the log records it along with which required fields were still missing, so you can see when the case was validated and what was outstanding at the time.
+  - **Case document generation** — when a case document is generated, the log records that the document was created.
+  - **PACER filing** — when a case is successfully filed with PACER, the log records "Filed case with PACER" so the filing is part of the case's audit trail.
+
+  These entries are deduplicated, so repeating the same action (for example, re-running a Petition Check or retrying a filing submission) does not clutter the log with duplicate entries.
 - Cases support PACER integration for bankruptcy filings, including case number and court data tracking.
 - Searching by case number in the dashboard's global search finds the matching case even when that case number belongs to an **associated (non-primary) case** in a case group. Previously a case number stored on a linked, non-primary matter could be missed; searching now returns it. Searches by other fields (name, email, phone) continue to match primary cases.
 - Tags provide lightweight visual categorization (icon and text label) on case list views.
