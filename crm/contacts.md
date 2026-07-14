@@ -11,7 +11,7 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 - **Companies** are separate records your firm can create to represent organizations. Each company stores a name, email, phone number, and point of contact. Companies can have employees linked to them.
 - **Associated users** represent relationships between people — for example, family members sharing a legal matter. Associations are automatic in both directions: if you link Person A to Person B, Person B is also linked back to Person A, and all existing associations are connected transitively.
 - When adding an associated user, you provide their name and email. If the email matches an existing user, they are linked directly. If the email is new, a new contact is created automatically.
-- The member detail view provides tabs for: information, conversation, documents, forms, cases, invoices, order history, payment methods, AI follow-up cadence, and notes.
+- The member detail view provides tabs for: information, conversation, documents, forms, cases, invoices, order history, payment methods, AI follow-up cadence, and internal notes. The internal notes tab is labeled **Internal Notes** so it is not confused with the client-facing conversation.
 - Your 5 most recently viewed members are tracked for quick access.
 
 ## Configuration
