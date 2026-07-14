@@ -2,7 +2,9 @@
 
 ## Overview
 
-Notes let your team attach internal annotations to client records. Notes are visible only to your team — clients cannot see them. Access notes through the **Notes** tab on a client's detail view — it is the second tab in the member profile, right after the overview. They are a lightweight way to record observations, reminders, or context that does not belong in the client-facing conversation.
+Notes let your team attach internal annotations to client records. Notes are visible only to your team — clients cannot see them. Access notes through the **Internal Notes** tab on a client's detail view — it is the second tab in the member profile, right after the overview. They are a lightweight way to record observations, reminders, or context that does not belong in the client-facing conversation.
+
+The tab is labeled **Internal Notes** to make it clear the content stays private to your team, so it is not confused with the client-facing **Discussion** tab. Internal notes never appear in the client conversation.
 
 ## Key Behaviors
 
