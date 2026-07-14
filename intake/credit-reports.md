@@ -21,6 +21,14 @@ In a joint credit report pull, you enter the main debtor and the co-debtor on se
 - Identical dates of birth can be legitimate (for example, twins), so this only asks you to confirm. You can confirm and continue, or go back to correct the entry.
 - The check runs only on joint pulls. Single-debtor pulls are unaffected.
 
+### Adding a Second Debtor to an Existing Pull
+
+On a joint case, you can pull the second debtor's credit report after the first debtor's report has already come back — for example, when a spouse is added to the case later. When you do this, Glade pulls and bills for only the newly added debtor:
+
+- A debtor whose report has already been pulled is skipped. Glade does not request their report from the credit bureau a second time, so there is no second hard inquiry on their credit file and no duplicate charge.
+- Only the newly added debtor's report is pulled, and it is placed correctly as the secondary debtor so their information populates the right fields.
+- Because pricing on a joint report differs from a single-debtor report, a firm that adds a second debtor after an initial single pull may want to review the invoice for the case to confirm the total is correct.
+
 ### Client Data Write-Through
 
 When you fill in a client's information in the credit report modal — including name, address, date of birth, phone number, contact phone, and SSN — Glade automatically saves those fields back to the client's profile for any fields that are not already set. You only need to enter the information once: it is available in future credit report pulls and other workflows without re-entry. Contact phone is saved alongside the primary phone number so the client's profile reflects every number you entered in the modal, not just the first one.
