@@ -20,12 +20,14 @@ Each firm is given its own dedicated address for receiving PACER court notices w
 
 Glade currently supports automated filing in the following bankruptcy courts:
 
+- Alabama Northern (ALNB) — Chapter 7 (individual filings only; joint petitions are not yet supported)
 - Florida Middle (FLMB)
 - Florida Northern (FLNB)
 - Florida Southern (FLSB)
 - Idaho (IDB)
 - Kentucky Western (KYWB) — Chapter 7
 - Louisiana Eastern (LAEB) — Chapter 7
+- Maryland (MDB) — Chapter 7
 - South Carolina (SCB)
 - Virginia Eastern (VAEB) — Chapter 7
 - Washington Eastern (WAEB) — Chapter 7
@@ -56,6 +58,7 @@ Each document in the filing packet must be labeled with the correct ECF document
 - When a court requires individual debtor identification documents, select **PhotoID (Debtor 1)** or **PhotoID (Debtor 2)** for each debtor's photo identification, and **DeBN (Debtor 1)** or **DeBN (Debtor 2)** for each debtor's Declaration of Electronic Notice. The Debtor 1 variant is for the primary debtor; the Debtor 2 variant is for the co-debtor in a joint case.
 - For **Western District of Pennsylvania (PAWB)** Chapter 7 cases, **Local Form 1 — Declaration Re: Electronic Filing of Petition, Schedules & Statements** is available in the document type dropdown. This form is submitted through the EDSS portal alongside the SSN Statement — it is not part of the standard ECF filing packet. A Local Form 1 slot appears in the per-district document checklist for PAWB Chapter 7 workflows once the document is labeled and uploaded.
 - For **Florida Southern (FLSB)** Chapter 13 cases, **Local Form 67 — Certification of Compliance** is available in the document type dropdown. The form auto-surfaces in the FLSB Chapter 13 required-document checklist, and ad-hoc uploads from the case documents picker are accepted under common filename variants (with or without spaces, hyphens, underscores, or the full form name).
+- For **Maryland (MDB)** Chapter 7 cases, **Form 108 — Statement of Intention** is filed as a separate case-open document rather than folded into the consolidated petition. It has its own **Statement of Intent** slot in the district's document checklist, and common filename variants for the form are recognized automatically so the upload lands in that slot instead of falling back to **Other**.
 - Additional district-specific document types are available in the dropdown so attorneys filing in these courts can label uploads correctly instead of falling back to **Other**:
   - **Ohio Southern (OHSB)** Chapter 7 — **Statement of Intent** (Statement of Intention for individuals filing under Chapter 7) and **Verification of Creditor Matrix** (OHSB filename variant) are selectable from the document type dropdown.
   - **Washington Eastern (WAEB)** Chapter 7 — **Declaration Regarding Payments (LBR 1007-1)** is selectable from the document type dropdown.
@@ -131,7 +134,7 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 - The supported actions read from the form are **Activate**, **Deactivate**, **Update**, or **Decline**. The extracted answer is passed through to PACER so the SCB filing engine fills the matching radio on the local form.
 - Auto-extraction runs on both individual and joint SCB Chapter 7 filings. Non-Chapter 7 filings do not require the DeBN extraction.
 - If a required DeBN form has not been uploaded by the time a qualifying SCB Chapter 7 case is submitted, the filing is blocked with an error naming the missing election so your team can add the document before retrying. On a joint case, the election is required for both debtors — a missing form for either filer blocks the filing.
-- If an uploaded DeBN form cannot be parsed — for example, no radio button is selected on the PDF — the filing is also blocked with an error indicating the action could not be determined. Re-upload a clean copy of the form with one of the four supported actions selected to resolve the error.
+- If an uploaded DeBN form cannot be parsed — for example, no radio button is selected on the form — the filing modal shows an inline **election picker** so you can recover without leaving the filing. Pick the election the debtor signed (**Activate**, **Deactivate**, **Update**, or **Decline**) and submit again; Glade saves the choice to the case and retries the filing. On a joint case, a picker appears for each debtor whose election could not be read. Re-uploading a clean copy of the form is still an option if you prefer to fix the source document.
 - Re-uploading a newer DeBN form supersedes the previously extracted answer. The most recent extraction wins, so correcting an earlier upload mistake is a matter of replacing the file in the document slot.
 
 ### Chapter 7 individual presumption-of-abuse page
@@ -141,6 +144,15 @@ When a Chapter 7 individual case explicitly indicates "no presumption" on B122A-
 ### Case transfers
 
 When a bankruptcy case is transferred to a different court and assigned a new case number, PACER sends electronic notices to the new case number. Glade automatically associates those incoming notices with the original workflow, so your case activity timeline stays complete without manual re-linking. The association is based on the transfer notice in the PACER email, which identifies the originating case number.
+
+### Case number matching across formats
+
+Courts write the same case number in several different formats — for example `26-18233`, `26-bk-18233`, and `0:26-bk-18233` — and some districts add the assigned judge's initials on the end (for example `8:25-bk-08186-RCT`). Glade treats all of these as the same case number when it links court notices and when you search, so a difference in format no longer prevents a match.
+
+- **Incoming court notices** link to the right case even when the notice writes the case number in a different format than the one stored on the workflow. Previously an exact-text mismatch could leave a notice unlinked, so notices for a case could pile up without ever attaching to its activity timeline.
+- **Dashboard case-number search** matches a workflow regardless of which format you type. Searching for `26-18233` finds a case stored as `26-bk-18233` or `0:26-bk-18233`, and the reverse also works.
+
+Notices that were already stranded by an earlier format mismatch are not re-linked on their own. If a case is missing court notices you expected to see, contact Glade to re-sync it.
 
 ### Changing the chapter at petition compile time
 
