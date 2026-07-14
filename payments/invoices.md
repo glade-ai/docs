@@ -150,6 +150,7 @@ Invoice changes are handled differently depending on what is being changed:
   - A new invoice is created with the updated line items and amounts.
   - The new invoice references the original, maintaining a complete audit trail.
   - Any credits from payments already made on the original invoice carry forward to the new version.
+  - Payments stay attached to the active invoice version, including ACH / bank-transfer payments. If a bank transfer confirms *after* the invoice has been edited, the confirmation is applied to the new active version rather than stranding the payment on the read-only original — so a paid ACH payment no longer disappears from the invoice when it is edited around the same time the payment settles.
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
 
@@ -189,7 +190,7 @@ When a client receives an invoice:
 5. If payment plans are available, the client can set up an installment schedule.
 6. If client modifications are disabled by the firm, the client sees a message explaining that changes are not permitted on this invoice.
 
-If the firm has added an invoice note, it appears alongside the balance due so the client sees the payment instructions up front. When a client has more than one unpaid invoice, selecting their balance opens a short picker to choose which invoice to pay; a client with a single unpaid invoice goes straight to that invoice.
+If the firm has added an invoice note, it appears alongside the balance due so the client sees the payment instructions up front. When a client has more than one unpaid invoice, selecting their balance opens a short picker to choose which invoice to pay; a client with a single unpaid invoice goes straight to that invoice. Invoices that are still **Generating** — those without a final amount assigned yet — are not listed in this picker and are not counted toward the displayed balance, so the client does not see duplicate "$0.00" rows for invoices that are still being prepared.
 
 ### Filtering and searching invoices
 
