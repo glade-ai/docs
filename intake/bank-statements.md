@@ -10,6 +10,7 @@ The Bank Statements Organizer collects a client's bank statements for a case. Th
 
 - The client connects a bank account through the Bank Statements Organizer. Once the account is connected, Glade collects the statements available from it.
 - Some banks require the client to sign in through the bank's own secure login screen. Consent to share statements is captured during that connection step, so statements load after the client finishes connecting. This applies to major banks that use a secure bank-login connection (for example, large national banks and brokerages).
+- When a bank statements step is active on a client's case, a **Connect Bank Account** task appears in the client's portal home task list, alongside their other outstanding tasks. Opening the task takes the client straight to the Bank Statements Organizer. Previously the organizer was only reachable from within the workflow itself, so the step could be easy to miss on the home page. The task clears on its own once the client connects the account or the step is skipped.
 
 ### Viewing Statements
 
