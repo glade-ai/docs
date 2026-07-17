@@ -87,6 +87,16 @@ On paystubs that print current-period and year-to-date figures side by side, the
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
 - **Removing a paystub**: When you delete a paystub from the Income Organizer, the income data that came from it is removed along with it. A removed paystub no longer lingers as a leftover row in the client's income data.
 
+### Documents With No Extractable Data
+
+Some uploads are classified as a type the Income Organizer cannot pull income figures from — for example, a profit-and-loss statement dropped into an income slot. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
+
+- The row shows a muted **"No extracted data"** label with a short explanation, and the processing animation stops.
+- Numeric cells show a dash (**—**) rather than **$0.00**, so an empty row is not mistaken for a real zero.
+- The **Include in Monthly Totals** and **Include in Means Test** checkboxes are disabled and there is no **Edit** button, so a blank row cannot be pulled into the income or means-test calculations.
+
+Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
+
 ### Automatic Re-extraction on Workflow Load
 
 Some older income organizers may need their paystub data re-extracted (for example, after a backend improvement to how paystub data is read). Glade handles this automatically:
