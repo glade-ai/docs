@@ -56,6 +56,16 @@ Amounts of zero display as `$0.00` rather than a dash. When income or median dat
 
 When a paystub document is uploaded to a case, Glade extracts income fields automatically. YTD fields (such as year-to-date gross pay and year-to-date overtime) are used when the income source is set to YTD mode.
 
+### Documents With No Extractable Data
+
+Some uploads are classified as a type the Income Organizer cannot pull income figures from — for example, a profit-and-loss statement dropped into an income slot. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
+
+- The row shows a muted **"No extracted data"** label with a short explanation, and the processing animation stops.
+- Numeric cells show a dash (**—**) rather than **$0.00**, so an empty row is not mistaken for a real zero.
+- The **Include in Monthly Totals** and **Include in Means Test** checkboxes are disabled and there is no **Edit** button, so a blank row cannot be pulled into the income or means-test calculations.
+
+Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
+
 ### Automatic Re-extraction on Workflow Load
 
 Some older income organizers may need their paystub data re-extracted (for example, after a backend improvement to how paystub data is read). Glade handles this automatically:
