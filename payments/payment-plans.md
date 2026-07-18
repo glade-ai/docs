@@ -64,6 +64,17 @@ A payment plan moves through the following statuses over its lifetime:
 - Payment plan charges are processed as off-session payments. If a card requires 3D Secure authentication, the client receives a notification to complete authentication separately — the system does not attempt an automatic 3D Secure challenge during a retry. This prevents spurious authentication prompts for clients whose cards have 3D Secure enabled.
 - **Pending payment guard**: If a payment attempt is already in progress when a new charge or retry is due, the system waits for the in-flight attempt to resolve before initiating another. This prevents duplicate charges and eliminates the spurious failure notifications that would otherwise occur when a retry is triggered while a previous attempt is still processing.
 
+### Rescheduling a retrying installment
+
+When an installment is **Retrying** — its initial charge failed and an automatic retry is still pending — firm staff can move it to a new date from the transactions dashboard. Open the installment's actions menu and choose **Edit installment**, then pick a new date.
+
+- The new date must be at least tomorrow in the firm's time zone. If the retry's original date has already passed, the date picker starts on tomorrow instead of the stale past date.
+- Saving a new date returns the installment to **Upcoming**, clears the pending retry, and schedules a fresh charge attempt for the date you chose.
+- Only the date can be changed from this menu on a retrying installment. The delete option is not offered for retrying rows — it remains available only for upcoming installments dated in the future.
+- The charge is scheduled for the exact date you pick; it no longer shifts by a day for firms in certain time zones.
+
+Previously the actions menu appeared only for upcoming installments with a future date. Because a retry's date is always in the past, a stuck retry could not be moved or recovered from the dashboard and required manual intervention on the payment data. Firm staff can now resolve it directly.
+
 ### Modifying a payment plan
 
 - Firms can modify an active payment plan at any time.
@@ -129,7 +140,7 @@ A payment plan moves through the following statuses over its lifetime:
 
 - Firms view and manage payment plans from the transactions dashboard.
 - Plan details show: status, frequency, installment amount, next payment date, and payment history. Deferred installments appear in the schedule alongside upcoming and paid ones, so you can see the full picture of what has been collected, postponed, and is still expected.
-- Firms can modify plan settings, cancel plans, or adjust individual installments from this view.
+- Firms can modify plan settings, cancel plans, or adjust individual installments from this view — including rescheduling an installment that is stuck retrying.
 
 ## Configuration
 
