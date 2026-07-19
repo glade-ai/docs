@@ -263,6 +263,7 @@ Each election offers the standard choices plus an **Other** option with a free-t
 When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores it, so the workflow's Documents tab reflects the version you just finalized instead of an out-of-date copy.
 
 - Every finalized version of the plan is kept in the Documents tab as chronological version history. The most recent version is the one used for court filing; earlier versions stay available for reference rather than being replaced.
+- All finalized versions appear together under a single **Chapter 13 Plans** folder, listed as individual files. Each version is no longer split out into its own separate folder, so you can see the full version history of the plan in one place.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
 
 #### Secured Claims With an Arrearage Cure
@@ -403,9 +404,12 @@ Questionnaires can be re-opened with a message explaining why, returning them to
 When you re-open a completed questionnaire, Glade checks whether the case data it draws from has changed since the questionnaire was last in sync:
 
 - **Nothing changed** — case data sync turns back on automatically. Edits to the case record flow into the questionnaire again, just as they did before it was submitted, and no action is needed.
-- **Case data changed** — sync stays off so the newer case data does not silently overwrite the re-opened answers, and a warning banner appears at the top of the questionnaire: *"This questionnaire is out of sync with case data."* The banner is shown to team members with edit permission.
+- **Case data changed** — sync stays off so the newer case data does not silently overwrite the re-opened answers, and a warning banner appears at the top of the questionnaire. The banner is shown to team members with edit permission.
 
-The out-of-sync banner includes a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns sync back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+The banner offers an action to reconnect the questionnaire to case data. Depending on how your firm's case-data syncing is set up, it works one of two ways:
+
+- **Reconnect without changing answers** — the banner explains the questionnaire is no longer syncing with case data and offers a **Reconnect to case data** action. Choosing it simply turns syncing back on: your current answers are kept exactly as they are, and there is no confirmation prompt. From then on, edits to the questionnaire flow back into the case record — and into downstream documents such as the petition — again. Use this when a reopened questionnaire's edits have stopped carrying over to the rest of the case.
+- **Get back in sync (replaces answers)** — the banner explains the questionnaire is out of sync and offers a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns syncing back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
 
 ### Collaborators
 
