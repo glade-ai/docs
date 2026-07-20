@@ -22,7 +22,9 @@ Sections organize fields within a questionnaire. Each section has a label, optio
 
 Fields define individual form inputs. Each field belongs to a section and has properties including label, type, required flag, placeholder, hint, validation rules, options (for select fields), and display configuration.
 
-Supported field types include: short text, long text, numeric, number, currency, date, phone number, SSN, name, US address, international address, single select, multi-select, list, table, percent, and domain-specific types like creditor select, court division select, bankruptcy statute select, and median income.
+Supported field types include: short text, long text, numeric, number, currency, date, phone number, SSN, name, US address, international address, single select, multi-select, list, table, percent, and domain-specific types like creditor select, court division select, bankruptcy statute select, median income, and means test summary.
+
+The **means test summary** field is a read-only display field rather than an input. Instead of collecting an answer from the client, it shows a consolidated summary of the case's means test information. A single field type serves all four Means Test forms — the Chapter 7 forms (B122A-1 and B122A-2) and the Chapter 13 forms (B122C-1 and B122C-2) — and displays the summary appropriate to the form it appears on.
 
 Currency fields support a **Default to blank** setting in the template editor. When enabled, the field starts empty instead of showing $0.00 when first loaded. This is useful for optional amounts where a $0.00 default would be misleading.
 
