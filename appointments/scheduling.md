@@ -28,7 +28,8 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
   - Other block types (for example, blocks used purely for visual annotation on the calendar) do not remove availability — only blocks marked as Blocked actually prevent new bookings.
 - Blocked times are **hard blocks**. They always remove the covered slots from the booking calendar regardless of the product's concurrent booking limit — even a product that allows multiple overlapping bookings cannot be booked inside a blocked window.
 - A Blocked entry that is not assigned to a specific team member applies to **every team member**. Use this when you need to take the firm off the calendar for everyone at once (for example, an office closure) without creating one entry per team member.
-- Bookings cannot be created or rescheduled into a blocked window. Attempting to do so from a stale link or an out-of-date slot list is rejected with an error rather than silently saved.
+- Firm team members can deliberately book or reschedule into a blocked window using **Schedule Anyway**. When a team member picks a blocked (or otherwise conflicting) slot, Glade asks them to confirm; confirming overrides the block and saves the booking. This lets a firm keep its calendar blocked to pause new bookings while still moving an existing appointment into that time — no need to temporarily reopen the calendar first.
+- Clients and other non-team members cannot book into blocked time even if they reach a blocked slot. For them, attempting to create or reschedule into a blocked window — for example from a stale link or an out-of-date slot list — is rejected with an error rather than silently saved.
 
 ### Availability management view
 
@@ -83,6 +84,7 @@ Each booking moves through a series of statuses over its lifetime:
 - By default, clients cannot reschedule within 48 hours of the appointment start time. This protects firms from last-minute schedule changes.
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
+- When a firm blocks calendar time to pause new bookings, firm staff can still move an existing appointment into that blocked time by confirming **Schedule Anyway** when they select the blocked slot. Clients cannot reschedule into blocked time this way.
 - Team members can also reschedule bookings that are in canceled or completed status by assigning a new time, returning them to scheduled status and recreating associated calendar events, reminders, and email notifications.
 - Clients and their workflow collaborators (for example, a spouse on a joint case) can reschedule a booking from its attachment card in the workflow Discussion view even after the appointment time has passed. Past bookings on the path render with a completion check and a "Completed on …" subtitle, but the card stays clickable so the client can pick a new time.
 - A **canceled** booking on a workflow step stays actionable: its attachment card reads **"Canceled, select a new time"** and the **View** button opens the scheduler so the client or attorney can choose a new slot. Picking a time revives the same booking — it returns to scheduled status rather than requiring a brand-new booking. (If the canceled booking still has its original time, the scheduler opens on a review screen showing that time; tap **Reschedule** to reach slot selection.) Cards for **skipped** bookings remain disabled.
@@ -107,9 +109,10 @@ Each booking moves through a series of statuses over its lifetime:
 ### Timezone handling
 
 - Firms define availability in their local timezone.
-- Clients see available times converted to their own timezone.
-- All bookings are stored in the firm's timezone internally.
-- The system validates timezone inputs and defaults to US/Eastern if not specified.
+- Each client sees available times, and their booked appointment time, in their own timezone. Glade uses the timezone the client is booking from rather than assuming the firm's timezone.
+- Every client-facing reference to an appointment shows the time in the recipient's own timezone — the booking confirmation, email and text reminders, client-portal messages, and the calendar invite. A client in Eastern time who books a "2:30 PM" slot with a firm that operates in Pacific time sees 2:30 PM Eastern everywhere, and the calendar invite lands at the correct local time. Previously these could show the firm's time instead, so an appointment could appear at the wrong hour on the client's calendar and invites.
+- Firm-facing views and internal staff notifications continue to show appointment times in the firm's timezone.
+- The system validates timezone inputs and defaults to US/Eastern if a timezone cannot be determined.
 
 ### User Profile Meetings
 
