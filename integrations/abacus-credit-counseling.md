@@ -21,6 +21,7 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 - The credit counseling row shows the course type in its label — **Get Pre-Filing Credit Counseling** for pre-filing counseling and **Get Post-Filing Debtor Education** for post-filing debtor education — so it is clear which course is being requested. A **Skip** control sits inline on the row for steps that do not apply.
 - Enrolling a client carries a flat enrollment fee of $25, billed to the firm and shown on the credit counseling pane before the enrollment is sent.
 - The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Name, email, and phone fall back to the client profile when those values are missing from the case record (common for newly added clients).
+- The client's full legal name is sent to the provider exactly as recorded — middle names are kept, and hyphenated or multi-part last names are preserved rather than being shortened or stripped. This matters because the provider matches the completion certificate back to the client by name: a shortened or altered name can create a duplicate provider record that the certificate never attaches to, leaving the case stuck waiting on a certificate that looks missing.
 - Phone numbers that include a leading country code (for example, `+1 (312) 555-1234`) are accepted — the country code is stripped automatically before submission.
 - The client's federal district is determined automatically from their address — there is no district field to fill in. Glade resolves it behind the scenes, falling back to the address ZIP code when needed, which covers the large majority of clients.
 - For joint filings, spouse first name, last name, SSN last four, and date of birth are required before the form can be submitted.
@@ -52,6 +53,7 @@ Each credit counseling record has its own permission list. The attorney's team m
 - Workflows created before per-case case data was always available still prefill the enrollment form — the form falls back to the workflow's own data store when no case ID is set.
 - If a debtor is re-enrolled in Abacus's test environment, Glade reuses the same Abacus client ID by reassigning it from any completed record that still held it. This has no effect in production because Abacus issues unique IDs for real enrollments.
 - In rare cases where the client's district cannot be determined from their address automatically, enrollment may need a corrected or more complete address before it can be sent.
+- Enrollments sent before full names were preserved may have created a duplicate record on the provider's side under a shortened or altered name. Those older cases can stay stuck waiting on a certificate and may need the provider record cleaned up by hand before the certificate attaches.
 
 ## Related Features
 
