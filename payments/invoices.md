@@ -150,6 +150,7 @@ Invoice changes are handled differently depending on what is being changed:
   - A new invoice is created with the updated line items and amounts.
   - The new invoice references the original, maintaining a complete audit trail.
   - Any credits from payments already made on the original invoice carry forward to the new version.
+  - If those carried-over payments already cover the new total — for example, when you edit an invoice that was already paid in full, or lower the amount so what the client already paid now covers it — the new version is marked **Paid** right away instead of showing a balance still due for money that was already collected. Anything that depends on the invoice being paid (workflow steps that were waiting on payment, payment-plan completion) advances just as it would after a normal final payment. If a balance still remains after the carried-over payments are applied, the new version stays payable (**In Progress**) for the difference.
   - Payments stay attached to the active invoice version, including ACH / bank-transfer payments. If a bank transfer confirms *after* the invoice has been edited, the confirmation is applied to the new active version rather than stranding the payment on the read-only original — so a paid ACH payment no longer disappears from the invoice when it is edited around the same time the payment settles.
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
