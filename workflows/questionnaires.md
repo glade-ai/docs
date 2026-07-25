@@ -124,6 +124,8 @@ Response history tracks when responses are modified, supporting undo and audit.
 
 Default options on single-select fields (configured in the questionnaire template) are saved automatically when the questionnaire is created, so the displayed default is recorded as a real answer from the start — even if the client never opens the section that contains the field. Because the answer is stored up front, a field with a pre-set default counts as a valid answer during validation (it is not flagged as incomplete) and the default reliably appears on any generated PDF court form, including checkbox selections such as a "No" answer on the Statement of Financial Affairs. This applies to single-select fields that are always visible at the top level of the form; fields hidden behind conditional logic are still filled in when their section first appears. Questionnaires started as a copy of another questionnaire inherit the original's answers and are not re-defaulted.
 
+A field that starts out at its template default — for example a currency field showing $0.00 — is still eligible for autofill the first time the questionnaire loads. Fields such as the applicable median family income on Chapter 7 Form 122A-1 now populate from the client's state and household size on open, instead of sitting at $0.00 with no indication that anything was missing. Values you have typed yourself are never replaced by this initial pass.
+
 A field inside a list can also be given a default **value** in the template, which is filled in automatically each time a new row is added. For example, on bankruptcy Schedule A/B a new property row can default the **% of asset owned by the debtor** to 100% — the common case for individual filers — so your team does not re-enter it on every property. The default applies only to newly-added rows; existing rows keep their values. The seeded value is saved with the row, so it persists after you save, and you can change it before or after saving.
 
 ### Phone Number Fields
@@ -414,6 +416,8 @@ Collaborators (additional team members) can be assigned to questionnaires with v
 ### Completion
 
 When a questionnaire is completed, it triggers downstream workflow steps, updates case data, generates compiled documents, creates tasks, and sends notifications.
+
+Links between related case records — a creditor and the property securing it, or a property and the lien against it — are re-checked once every record the questionnaire creates exists. A link entered on only one side of the pair (for example, choosing the collateral on a creditor without also adding the lien from the property) is applied rather than dropped. Previously these one-sided links could go missing on the case and only appear after the questionnaire was submitted a second time.
 
 When a questionnaire generates multiple documents — for example, filled court forms alongside supplemental documents such as a creditor matrix — the documents appear in the case document list in a consistent order: filled court forms first, followed by other questionnaire-generated documents. This ordering is maintained even when new sections are added to the questionnaire after some documents have already been created.
 
