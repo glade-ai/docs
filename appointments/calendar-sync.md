@@ -38,6 +38,9 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Outlook uses Microsoft Graph subscriptions. Glade receives real-time notifications when Outlook events change.
 - No manual sync is needed. Changes are picked up automatically.
 - Google webhook subscriptions auto-renew before expiration (approximately 30 days).
+- If Glade cannot process a change right away — for example, during a brief Google or Microsoft outage — it keeps trying until the change goes through. Previously a momentary failure dropped the update silently and the calendar stayed out of step until the next change came in.
+- Changes to the same calendar are processed one at a time in the order they arrive, so a rapid burst of edits cannot overwrite one another.
+- A calendar that has been deleted at the provider stops syncing instead of being retried. Disconnect and reconnect the account if you delete a synced calendar and later recreate it.
 
 ### Connecting a calendar account
 
