@@ -24,6 +24,7 @@ Document collection enables your team to request specific files from clients as 
 - When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
 - Document requests support collaborator assignment, allowing multiple team members to participate in review.
 - A document request can be marked as "for your team" (e.g., the attorney uploads documents) rather than for the client.
+- **Submitting a "for your team" checklist is silent by default.** When your team submits a firm-owned checklist for review, the client is not emailed and no client review task is created — useful while a petition is still being drafted or while training staff on a live case. A **Notify client** checkbox appears on the submit prompts (both the rename step and the ready-to-submit confirmation); check it when the draft is genuinely ready for the client to look at, and the client is notified and given access to review the checklist as before. Submitting silently also withdraws client review access if an earlier submission had granted it, so reopening and resubmitting silently never leaves the checklist open in the portal. Checklists assigned to clients are unaffected — submitting those notifies your team as it always has.
 
 ### The Documents tab
 
