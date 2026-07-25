@@ -66,12 +66,21 @@ Reporting provides your firm with operational and financial visibility into your
 
 - Tracks attorney filing data from PACER, aggregated by state and district.
 
+### Custom Reports
+
+> TODO: Document how custom reports are built, saved, and exported. This section currently covers only the filter behavior that changed recently.
+
+- **Workflow type**: Selecting a workflow type returns cases built on *every* version of that template, not just the version your firm is using today. Firms that edit a template regularly accumulate many versions, and cases started on an earlier version used to be left out — so a count of filed cases could come back far lower than the true figure. The list of workflow types to choose from also includes types whose templates are no longer active, so historical case types remain reportable.
+- **Completion event**: A **Retainer not signed** option returns cases that have an active retainer still awaiting signature. It is the mirror of **Retainer signed** — a case with no retainer at all matches neither option.
+- **Pending client tasks**: Segments cases by whether the client still has an incomplete task assigned to them. Both the "has pending" and "no pending" selections now return accurate results; previously selecting either could produce results that did not match the filter.
+
 ## Configuration
 
 - **Date range**: All workflow reports require or accept a start date and end date.
 - **Team member filter**: The documents report accepts an optional list of team members to include.
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
+- **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), and pending client tasks. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 
