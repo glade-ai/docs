@@ -25,7 +25,7 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 - An expired certificate does not count. If the certificate on file is more than 180 days old, enrollment proceeds normally.
 - The enrollment form is prefilled from the case record — primary debtor name, date of birth, address, phone, email, and spouse details on joint filings. Name, email, and phone fall back to the client profile when those values are missing from the case record (common for newly added clients).
 - Phone numbers that include a leading country code (for example, `+1 (312) 555-1234`) are accepted — the country code is stripped automatically before submission.
-- The client's federal district is determined automatically from their address — there is no district field to fill in. Glade resolves it behind the scenes, falling back to the address ZIP code when needed, which covers the large majority of clients.
+- The client's federal district is determined automatically from their address — there is no district field to fill in. Glade resolves it behind the scenes, falling back to the address ZIP code when needed. Every U.S. county is now covered, so enrollments no longer fail for clients in counties that were previously missing from Glade's lookup.
 - For joint filings, spouse first name, last name, SSN last four, and date of birth are required before the form can be submitted.
 - On submission, Glade sends the enrollment to the provider and stores the course link returned for the client.
 
@@ -75,7 +75,7 @@ Each credit counseling record has its own permission list. The attorney's team m
 - Whether a client gets credit counseling or debtor education is driven by whether the case has been filed. A case that has not been filed yet always enrolls in pre-filing credit counseling.
 - Workflows created before per-case case data was always available still prefill the enrollment form — the form falls back to the workflow's own data store when no case ID is set.
 - If a debtor is re-enrolled in Abacus's test environment, Glade reuses the same Abacus client ID by reassigning it from any completed record that still held it. This has no effect in production because Abacus issues unique IDs for real enrollments.
-- In rare cases where the client's district cannot be determined from their address automatically, enrollment may need a corrected or more complete address before it can be sent. Coverage is extended as gaps are found — Jacksonville and the rest of Duval County, Florida were recently added, so clients at those addresses no longer fail to enroll because their district could not be resolved.
+- In rare cases where the client's district cannot be determined from their address automatically, enrollment stops right away rather than being retried, and reports the address as the reason. Correct or complete the client's address and send the enrollment again. Coverage is extended as gaps are found — Jacksonville and the rest of Duval County, Florida were recently added, so clients at those addresses no longer fail to enroll because their district could not be resolved.
 - A certificate uploaded to the wrong case or for the wrong course cannot be removed by your team. Contact Glade support to have it cleared so the correct certificate can be attached.
 
 ## Related Features
