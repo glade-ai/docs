@@ -251,7 +251,6 @@ Deselecting all documents returns the footer to the standard download options. Y
 - If a filing partially succeeds (some documents uploaded but fee payment fails), the submission is marked as failed. The attorney may need to complete the filing manually in PACER.
 - Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
-- The **Filed at date** on a manually registered case is saved as soon as you enter it, but it is only displayed back to you for the rest of that session. After a page reload the field appears blank again even though the date is stored — there is no need to re-enter it. Showing the saved date on later visits is a planned follow-up.
 
 ## Related Features
 
