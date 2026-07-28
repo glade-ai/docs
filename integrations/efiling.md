@@ -21,6 +21,29 @@ When a filing cannot be submitted, the eFiling modal explains the specific reaso
 
 When a filing is blocked because the case's filing district has not been set up, a **Fix this** action appears inline. Completing the district setup from that prompt clears the block, so you can continue the submission without leaving the filing flow.
 
+### Pre-filing review
+
+Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
+
+Three checks are active:
+
+| Check | What it looks for | Severity |
+|-------|-------------------|----------|
+| Required documents in the packet | Every document the filing district requires for the case's chapter is present in the packet | Blocking |
+| Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
+| Petition out of date | The compiled petition is older than the case data behind it | Advisory |
+
+- **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
+- **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
+- Documents a district requires **only when they apply** are not reported as missing when they are absent — they have to be valid only if they are provided.
+- Documents that apply only to joint filings are required on joint cases and skipped on individual cases. If Glade cannot yet tell whether the case is joint, that document is reported as not evaluated rather than as missing, so an individual filing is never blocked over a joint-only form.
+- If the district's required-document list cannot be determined at all, the review reports the check as not evaluated instead of blocking the filing.
+- **A missing document may now block where it previously only warned.** Because required-document status comes from each district's rules, a document the district marks as required is treated as gating. Pay advices are the common case: in districts whose rules require them, a missing paystubs file now blocks submission rather than showing a warning.
+
+Other checks — credit counseling recency, Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are turned off for this first release and are planned for later ones. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
+
+> TODO: Confirm the exact condition under which the Statement of Intention check applies. It is a conditional requirement tied to the case's secured claims and fee election rather than one that applies to every Chapter 7 filing.
+
 ### Recognized documents uploaded outside the filing modal
 
 Some court documents — for example, documents pulled from PACER — belong in a specific slot of the electronic filing packet. When you add such a document through the case's normal document area instead of from inside the eFiling modal, Glade now recognizes documents whose file name matches a known filing document and automatically places them in the correct packet slot.
