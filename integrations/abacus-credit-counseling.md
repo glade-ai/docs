@@ -33,6 +33,27 @@ Glade integrates with outside education providers so attorneys can enroll bankru
 - The certificate also appears in the workflow's Documents tab and is automatically included in the bankruptcy petition filing package, mapped to the credit counseling document slot — so it is ready to file without re-uploading.
 - Joint filings are not marked complete until certificates for every enrolled debtor have been received.
 
+### The completion date on the certificate
+
+The date the client actually finished the briefing is read off the certificate and recorded on the case, separately for the primary debtor and the spouse.
+
+- Previously the date on record was the moment the certificate reached Glade rather than the date printed on it. For a briefing completed through a provider outside Glade and attached to the case later, the two can be months apart — and for an externally attached certificate there was no completion date on record at all.
+- This applies both to certificates the provider posts back and to certificates your team attaches from outside Glade. Which debtor a certificate belongs to is taken from the record it was filed against, so a spouse's certificate is recorded against the spouse.
+- If a debtor re-takes a briefing whose certificate had expired, the newer certificate's date replaces the older one on the case.
+- Pre-filing credit counseling and post-filing debtor education certificates are both attached the same way, but only the pre-filing briefing's completion date is used for the pre-filing checks below.
+- Certificates already on file before this became available keep the date Glade recorded when they arrived. Re-run the extraction on a certificate if you need the printed date picked up.
+
+### Certificate recency before filing
+
+Because a pre-filing briefing must be completed within 180 days of the petition being filed, the pre-filing review checks each debtor's certificate date before a filing can be submitted.
+
+- A briefing completed more than 180 days ago is raised as a **blocking** finding — the filing does not proceed until an attorney reviews and signs off on it.
+- A briefing that is inside the 180 days but nearing the end of it is raised as an **advisory** finding, so you can see a certificate that is about to expire while there is still time to have the client re-take the course. Advisories do not block a filing.
+- On joint filings, each debtor's certificate is checked separately, so one debtor's expired briefing is reported on its own.
+- Where the printed date could not be read off a certificate, the date Glade received it is used for the check instead.
+
+> TODO: Confirm these recency and expiring-soon checks are switched on in production. They ship as part of the pre-filing review rule set, which is enabled per environment, and an earlier rollout deliberately held the credit counseling checks back.
+
 ### Permissions
 
 Each credit counseling record has its own permission list. The attorney's team manages which client-portal users can view and act on the record — for example, when only one spouse should see and complete the course.
@@ -51,7 +72,8 @@ Each credit counseling record has its own permission list. The attorney's team m
 - Whether a client gets credit counseling or debtor education is driven by whether the case has been filed. A case that has not been filed yet always enrolls in pre-filing credit counseling.
 - Workflows created before per-case case data was always available still prefill the enrollment form — the form falls back to the workflow's own data store when no case ID is set.
 - If a debtor is re-enrolled in Abacus's test environment, Glade reuses the same Abacus client ID by reassigning it from any completed record that still held it. This has no effect in production because Abacus issues unique IDs for real enrollments.
-- In rare cases where the client's district cannot be determined from their address automatically, enrollment may need a corrected or more complete address before it can be sent.
+- In rare cases where the client's district cannot be determined from their address automatically, enrollment may need a corrected or more complete address before it can be sent. Coverage is extended as gaps are found — Jacksonville and the rest of Duval County, Florida were recently added, so clients at those addresses no longer fail to enroll because their district could not be resolved.
+- A certificate uploaded to the wrong case or for the wrong course cannot be removed by your team. Contact Glade support to have it cleared so the correct certificate can be attached.
 
 ## Related Features
 
