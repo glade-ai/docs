@@ -56,6 +56,10 @@ List fields can be displayed in table view. Table columns have settings for edit
 
 Table columns are sortable. Currency and percent columns sort by their numeric value; date columns sort chronologically. This means sorting a currency column orders rows from lowest to highest dollar amount (or vice versa), not alphabetically by the displayed text. Sort order is preserved when you switch between the default view and full screen view — sorting a column in full screen keeps that ordering when you return to the standard view.
 
+A list's display toggles — for example **Show duplicates** and **Show zero'd accounts** on the creditor list — are available in full screen view as well as the standard view. They appear in the full screen toolbar and share their setting with the standard view, so a toggle you change in full screen still reflects that state when you exit. Previously these toggles sat underneath the full screen overlay and could not be reached without leaving full screen first.
+
+Dropdowns that list options alphabetically sort without regard to capitalization, so a list of names reads `Aaron, alice, bob, Zack` rather than putting every capitalized entry ahead of the lowercase ones.
+
 ### PDF Fill Mappings
 
 PDF fill mappings connect questionnaire fields to PDF template fields, enabling automatic generation of filled court forms and legal documents from questionnaire responses. Individual fields connect to specific PDF fields, and each section can reference a PDF template.
@@ -200,6 +204,16 @@ On a Schedule A/B property, you can attach more than one lien to the same proper
 
 The Exemptions Calculator uses the summed total of the selected liens when calculating equity available to exempt. If no liens have been selected for a property, it falls back to the single lien amount entered directly on the property.
 
+### Property Summary
+
+A **Property summary** button on the Schedule A/B property section opens a summary of the case's properties side by side, with each property's value, equity, the exemption claimed against it, and any unexempt amount.
+
+- The **Equity** column is the property's value minus the liens attached to it, and never goes below zero. Previously it showed the property's value before liens — so a residence worth $520,000 against a $519,000 mortgage read as $520,000 of equity, and a vehicle that was fully underwater read as though it had positive equity. The summary now agrees with the lien detail on the property row and with the Exemptions Calculator.
+- An exemption claimed at 100% of fair market value claims the equity remaining after liens, not the property's full value.
+- The **Unexempt** column never goes below zero. A $15,000 homestead exemption claimed against $1,000 of real equity shows as fully exempt rather than as a negative amount.
+
+If your team reviewed a property summary before this correction, re-check the equity figures on any case with liened property — the corrected figures are lower, and a property that appeared to hold equity may hold none.
+
 ### Exemptions Calculator
 
 When working on bankruptcy Schedule A/B, Schedule C, or the Master Creditor List, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
@@ -226,6 +240,14 @@ Fields populated by autofill show a status indicator so you can see where the va
 - **Error** — The autofill encountered a problem and could not set the value. Shown with a red warning icon and a re-run button.
 - **Edited** — You have manually changed the value after it was autofilled. Shown with a violet pencil icon and a re-run button if you want to restore the autofilled value.
 - **Not yet run** — The autofill has not been applied yet. Shown as a blue **Import Autofill** pill. Click it to trigger the autofill.
+
+#### Autofills From Reference Data
+
+Some autofills fill a field from reference data Glade already holds for the case rather than from a document or an AI inference — the IRS standard deduction amounts on the Chapter 7 means test (Form 122A-2) are the common example.
+
+These fields populate when you open the questionnaire, with no action needed from you. Previously they arrived empty and only filled in after you triggered them by hand, which was easy to miss and left the means test showing no deductions. You can still re-run one of these autofills at any time to pick up changed case data, and a value you have entered or corrected by hand is not overwritten.
+
+The national standard deduction amounts — including food and clothing — are selected using the debtor's state and household size together. An amount that was filled in before this behavior was corrected may have used another state's figure, so re-check the deductions on any means test prepared earlier and re-run the autofill to refresh them.
 
 ### AI Autofills
 
@@ -257,6 +279,22 @@ Some entries on the Chapter 13 plan are choices the calculator does not compute 
 - **Amended sections** — the list of plan sections being amended, when you are filing an amended plan.
 
 Each election offers the standard choices plus an **Other** option with a free-text box for anything outside the preset list. These elections are optional — a plan with one left blank still generates, and the calculator flags any blank election so you can fill it before filing. If the list of amended sections is longer than the space on the form, the calculator warns you that it will not all fit.
+
+#### Lump-Sum Payments
+
+Alongside the regular monthly plan payment, you can schedule one-time lump-sum contributions to the trustee — a tax refund, a bonus, or the proceeds of a sale, for example. Each entry records:
+
+- The **amount** of the payment.
+- The **date** the payment is anticipated, as a calendar date.
+- A short **description** of where the money comes from, so the plan says what the payment is.
+
+How lump sums are used:
+
+- They count toward the plan's total funding, its payment schedule, and the trustee fee. The figures on a finalized plan match what the calculator shows, so the printed plan and the calculator no longer disagree about total funding.
+- On the Northern District of Georgia plan, each lump sum prints on the "additional payments to the trustee" line as the amount, the date, and the description — for example, `$4,500 on 10/15/2026 (tax refund)`. The description is left off when you have not entered one. Entries print in date order, earliest first.
+- That section of the form has room for two lines. If you enter more lump sums than fit, the calculator warns you that they will not all print.
+- An entry with no amount, or with a date before the plan's start date, is left off the plan.
+- Lump sums recorded before dates and descriptions were available still print in their original form, showing the amount and the plan month it falls in rather than a calendar date.
 
 #### Generated Plan Document
 
@@ -400,12 +438,14 @@ If you try to save responses on a questionnaire whose template version is no lon
 
 Questionnaires can be re-opened with a message explaining why, returning them to "in progress" status.
 
-When you re-open a completed questionnaire, Glade checks whether the case data it draws from has changed since the questionnaire was last in sync:
+When you click **Edit** on a completed questionnaire, Glade first checks whether the case data it draws from has changed since the questionnaire was last in sync, and asks you what to do about it before the questionnaire re-opens:
 
-- **Nothing changed** — case data sync turns back on automatically. Edits to the case record flow into the questionnaire again, just as they did before it was submitted, and no action is needed.
-- **Case data changed** — sync stays off so the newer case data does not silently overwrite the re-opened answers, and a warning banner appears at the top of the questionnaire: *"This questionnaire is out of sync with case data."* The banner is shown to team members with edit permission.
+- **Nothing changed** — no prompt appears. The questionnaire re-opens immediately and case data sync turns back on automatically, so edits to the case record flow into the questionnaire again just as they did before it was submitted. The out-of-sync banner does not appear at all in this case — previously it could flash briefly on re-open and then disappear on a page refresh, which looked like a problem when there was none.
+- **Case data changed** — a confirmation appears *before* the questionnaire re-opens, so you decide how to handle the difference up front rather than after you are already editing. You have two choices:
+  - **Get back in sync** — the questionnaire re-opens and its answers are replaced with the latest case data, and sync turns back on. Because this overwrites existing answers, it is a deliberate, confirmed step.
+  - **Keep current answers** — the questionnaire re-opens with the answers as they were, and sync stays off so the newer case data does not overwrite them.
 
-The out-of-sync banner includes a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns sync back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+If you choose to keep the current answers, a warning banner appears at the top of the questionnaire — *"This questionnaire is out of sync with case data."* — with a **Get back in sync** action, so you can still bring the answers up to date later. The banner is shown to team members with edit permission.
 
 ### Collaborators
 

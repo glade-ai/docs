@@ -32,6 +32,30 @@ When a paystub is in YTD mode and includes overtime pay:
 
 In per-paycheck mode, amounts are taken directly from the pay period figures.
 
+### How the Schedule I Monthly Figure Is Averaged
+
+Schedule I reports a monthly figure, so Glade groups the collected income by calendar month and averages the monthly totals — it does not divide the total by the number of paystubs collected.
+
+- For a client paid every two weeks, the two (or three) paychecks that fall in the same month are added together first, and the monthly figure is the average of those monthly totals. Previously the figure was the total divided by the paystub count, which reported roughly one paycheck as a month of income and understated Schedule I for anyone not paid monthly.
+- Non-employment income is grouped the same way. When more than one document is attached to the same non-employment source, the amounts for that source are added together within each month rather than treated as separate sources.
+- Clients paid monthly are unaffected — one paystub per month means the two methods produce the same figure.
+
+If you have reviewed a Schedule I figure that was calculated before this change, re-check it against the paystubs on the case: the corrected figure is generally higher for clients paid weekly, biweekly, or semi-monthly.
+
+### Including and Excluding Income Records
+
+Each income record carries its own switches for whether it counts toward Schedule I and whether it counts toward the means test. Turning one off is a deliberate choice your team makes about that record, and Glade preserves it:
+
+- Excluding a record stays excluded when the underlying document is read again — for example after a re-upload, a re-run of the extraction, or an automatic background retry. Previously any re-read of the document silently switched the record back to counted, in both the income organizer and the means test, so a record your team had deliberately left out could reappear in the totals without anyone changing it.
+- A first-time extraction still starts with the record counted, and a document Glade could not read keeps its record out of the totals until a later successful read.
+
+### Income Records and Their Source
+
+Every income record is tied to an income source (an employer or a non-employment source) on the case. A record that is not tied to a source contributes $0 to Schedule I and the means test and shows as having incomplete details.
+
+- When a paystub is read before its income source exists on the case — for example, the client uploads before the employer has been added, or the source is configured later — the record is linked to the source as soon as the source appears. Previously the record stayed unlinked indefinitely, quietly contributing nothing to the totals.
+- If you see an income record flagged as having incomplete details, confirm the matching income source exists on the case.
+
 ### Means Test Income Window
 
 For the Chapter 7 means test, a debtor's Current Monthly Income is the average of income across the six full calendar months before the month the case is filed. Glade anchors this six-month window to the **last completed calendar month**, so a month that is still in progress is never included.
@@ -73,6 +97,8 @@ Some older income organizers may need their paystub data re-extracted (for examp
 | Calculation mode | Per-paycheck, YTD, or YTD period method, set per income source |
 | Filing (test) month | For the YTD period method, sets the month whose preceding six full months form the period being measured |
 | Pay frequency | Used to convert YTD amounts to monthly figures (e.g., weekly = 52 periods/year) |
+| Count toward Schedule I | Whether an individual income record is included in the Schedule I figure. Set per record; preserved when the document is read again |
+| Count toward means test | Whether an individual income record is included in the means test. Set per record; preserved when the document is read again |
 
 ## Edge Cases & Limitations
 
