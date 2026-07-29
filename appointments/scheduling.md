@@ -75,6 +75,15 @@ Each booking moves through a series of statuses over its lifetime:
 - Each team member's individual availability is checked when assigning.
 - When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
 
+### Which team member the Bookings section is showing
+
+The Bookings section has List, Calendar, and Team views, and the team member you are looking at carries across them. Whoever you have selected stays selected as you move between views, so you no longer have to re-pick them each time.
+
+- Opening a booking in List view and switching to Calendar shows **that booking's team member's** calendar. Previously the calendar reset to the appointment type's default assignee, so opening one team member's booking could land you on someone else's calendar.
+- **Block this Time** applies to the team member currently selected, rather than always to the appointment type's default assignee. Check who is selected before blocking time.
+- The Team view's team member filter lists every member of the firm, including people with no appointments booked. Previously anyone without a booking dropped out of the filter entirely, so they could not be selected.
+- Once you have picked a team member by hand, that choice stays put — a change to the appointment type's default assignee, or bookings reloading in the background, does not switch the view away from the person you chose.
+
 ### Rescheduling
 
 - Both clients and firm staff can reschedule appointments.
