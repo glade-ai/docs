@@ -13,6 +13,8 @@ Document collection enables your team to request specific files from clients as 
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
 - When an uploaded document feeds automatic data extraction, its data is applied to the case no matter who uploaded it — the client, a spouse or other party on a joint case, firm staff or a paralegal, or a workflow collaborator. Previously, extracted data was dropped whenever the uploader was not the case's primary client; now any authorized uploader's document contributes its extracted data.
 - Files can be rejected by a reviewer with a rejection message, which sets the file status to "action required" and notifies the client. Clients can then re-upload a replacement. After a re-upload, the new file is correctly recognized as ready for review.
+- The rejection notice on a file clears once a replacement is accepted. A file only shows the rejection message while it is actually marked "action required" — accepting a replacement removes the notice instead of leaving the earlier rejection displayed on an accepted file. Previously the notice stuck around after acceptance, which made resolved requests look like they still needed the client's attention.
+- **The delete control on an uploaded file deletes it.** Clicking the trash icon next to a file used to open the file for viewing instead, so the only way to remove a document was to open it and use **Remove** from the document view. The trash icon now removes the file directly, and the drag handle in the same cluster of controls responds again too.
 - Documents can be renamed by firm staff working from the dashboard by clicking the document's name in the detail pane. The updated name saves immediately and is reflected in the checklist view. Clients viewing the same documents in the client portal do not see a rename affordance — file names submitted by clients are not editable from the client side. The submit-for-review AI rename prompt is also limited to firm dashboard users.
 - **AI-suggested file names** can be reviewed and applied in bulk before submitting a document request for review. The bulk rename modal lists each file with its current name and the AI-suggested name; each suggestion is editable inline and starts **un-approved** so nothing is renamed without your explicit OK. The modal includes a reminder that "Approved renames will overwrite the current file names" and, once you start approving suggestions, an in-modal warning tallies how many existing names will be overwritten ("This will overwrite N existing file names"). The footer button shows the same count — for example, **Apply 3 Renames** — and is disabled until at least one suggestion is approved.
 - Files can be moved from one document request to another using a dropdown that lists the available destination requests. If the source document request is currently in review, a warning message asks you to confirm before proceeding — moving files out changes the review status. If all files in an in-review request are moved out, the request status resets from in review to in progress.
@@ -22,6 +24,17 @@ Document collection enables your team to request specific files from clients as 
 - When a document request is completed, it triggers downstream workflow steps, task updates, activity logging, email notifications, and real-time notifications.
 - Document requests support collaborator assignment, allowing multiple team members to participate in review.
 - A document request can be marked as "for your team" (e.g., the attorney uploads documents) rather than for the client.
+
+### The Documents tab
+
+The Documents tab collects everything gathered on a case in one place, organized into the same sub-groups as the Document Checklist. It is available from the side panel, the full-screen view, the modal, and the document pane, and all of them show the same organization.
+
+- **Sub-groups follow where a file actually sits**, so the Documents tab and the Document Checklist agree on which checklist item a document belongs to. Files that had been moved between checklist items previously stayed grouped under the item they were originally uploaded to, so a document could appear in the wrong place — or look missing — on the Documents tab while the checklist showed it correctly.
+- **Moving a file renames it to match its new home.** When a file is moved to a different checklist item, its name updates along with its location. Documents your team added manually keep the name they were given and are not renamed by a move.
+- **Requested files that have not been uploaded yet still appear**, as empty placeholder rows, so the tab shows the full picture of what has been asked for rather than only what has arrived.
+- **Each file appears once.** A file referenced by more than one part of a case — including a case where a step can be reached by more than one path — is listed a single time instead of being duplicated.
+- **The item count matches what you can see.** The "N items" label on a group counts the rows actually shown, including placeholders for files not yet uploaded.
+- **Downloading a group as a zip produces the same folder structure** you see on screen.
 
 ## Configuration
 
@@ -54,6 +67,9 @@ Document collection enables your team to request specific files from clients as 
 - Archiving a document request template prevents it from being used in new workflows but does not affect existing assignments.
 - Identity document extraction (driver's licenses and passports) is currently turned off. Enter each filer's name, date of birth, and address manually until automatic extraction returns.
 - When an insurance card lists more than one vehicle, only the first vehicle on the card is extracted. Add any additional vehicles manually.
+- Files moved between checklist items **before** the Documents tab grouping fix may still display the name they carried in their old location, even though they are now grouped correctly. Renaming the file from the detail pane corrects it.
+
+> TODO: Confirm whether the one-off repair of historical document names has been run in production. If it has, the limitation above can be removed.
 
 ## Related Features
 
