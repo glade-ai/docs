@@ -132,7 +132,7 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - **Schedule Anyway** works both when creating a booking and when rescheduling one. Previously it was only honored on the reschedule path — on a new booking the click appeared to do nothing and the appointment was never created. If your team hit that and worked around it by booking a non-conflicting time and then rescheduling into the conflict, that workaround is no longer necessary.
 - **Schedule Anyway** does not override a Blocked availability entry. Blocked windows remain hard blocks and cannot be booked into.
 
-> TODO: Two source changes describe **Schedule Anyway** and Blocked availability differently and need reconciling before this section is trusted. `noodle-api#8163` / `noodle-frontend#11143` (DEV-36010) shipped an override that lets firm team members confirm **Schedule Anyway** into a *blocked* window — described under [Availability and blocked time](#availability-and-blocked-time) above. `noodle-frontend#11162` (DEV-36939) documents blocked windows as a hard boundary the override does not cross. Confirm which holds today and delete the statement that does not.
+> TODO: Two source changes describe **Schedule Anyway** and Blocked availability differently and need reconciling before this section is trusted. `noodle-api#8163` / `noodle-frontend#11143` (DEV-36010) shipped an override that lets firm team members confirm **Schedule Anyway** into a *blocked* window — described under [Defining availability](#defining-availability) above. `noodle-frontend#11162` (DEV-36939) documents blocked windows as a hard boundary the override does not cross. Confirm which holds today and delete the statement that does not.
 
 ### User Profile Meetings
 
