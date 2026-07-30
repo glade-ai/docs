@@ -10,6 +10,7 @@ This is useful for firms that run paid advertising or want to track how clients 
 
 - When a client completes a **booking**, a tracking event fires on the booking confirmation page using the firm's Google Analytics measurement ID and Meta pixel ID.
 - When a client completes a **payment or purchase**, a tracking event fires on the payment confirmation page using both IDs.
+- Purchase confirmation tracking works for the purchasing client, who is not a member of your firm. Between **10 July and 30 July 2026** it did not: a permissions change stopped the confirmation page from reading the firm's measurement IDs when the visitor was a customer, so no purchase conversion events fired at all during that window. Nothing was logged and no error was shown, so a firm would only notice as missing conversions in Google Analytics or Meta. Booking confirmation tracking was unaffected.
 - Glade's own internal analytics continue to run alongside the firm's tracking — enabling the firm's IDs does not replace Glade's tracking.
 - Both integrations are independent. A firm can enable Google Analytics only, Meta only, or both.
 
@@ -29,6 +30,7 @@ To connect an integration, open the settings modal for the relevant service, ent
 - Tracking only fires on confirmation pages (booking confirmation and payment/purchase confirmation). It does not fire on other pages in Glade.
 - If a client's browser blocks third-party tracking (ad blockers, browser privacy settings), events may not be captured. This is outside Glade's control.
 - Setting up conversions, audiences, or ad campaigns based on the tracked events is done in Google Analytics or Meta — Glade only fires the events.
+- Purchase conversion events missed between 10 July and 30 July 2026 cannot be backfilled. Reporting that spans that window under-counts purchase conversions, so treat comparisons against it with care. Booking conversions in the same period are unaffected.
 
 ## Related Features
 

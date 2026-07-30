@@ -174,6 +174,23 @@ Before a filing can be submitted, Glade validates that all required debtor field
 - Missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
 
+### Required documents check before filing
+
+Alongside the required fields check, Glade checks the filing packet against the document slots the case's district actually requires, and reports anything missing before submission.
+
+- **Findings name the document they are about.** Each missing required document is reported using the district's own label for that slot — "Payment Advices", for example — so a packet missing several documents produces one clearly-titled finding per document. Previously every one of those findings carried the same generic title, so a case missing three documents showed three identical rows and you had to open each to learn what it meant.
+- **Four fee and means-test forms are now hard-required when the case calls for them**, and a missing one blocks like any other required document:
+  - **Form 103A** (application to pay the filing fee in installments) and **Form 103B** (application for a fee waiver) — required when the debtor has elected that fee treatment.
+  - **Form 122A-2** (Chapter 7 means test calculation) and **Form 122C-2** (Chapter 13 calculation) — required for above-median cases.
+  These four were previously checked only if they had already been uploaded; their absence produced no finding at all. A Chapter 7 case where the debtor elected fee installments could reach filing with no Form 103A while the review reported "All required documents attached". If your team relied on that message alone, re-check any case filed before this change that involved a fee installment election, a fee waiver, or an above-median means test.
+- Each of the four is demanded only when the case's own answers call for it. Form 103A is not required on a Chapter 7 filing where the debtor paid the fee outright.
+
+### Credit counseling checks before filing
+
+- Recency findings state the **date the briefing was completed** and the **date the certificate remains valid through**, rather than only reporting pass or fail. This makes it possible to see how much time is left on a certificate, and to audit afterwards which date the check was actually assessing.
+- Findings also record **which date was used** — the date printed on the certificate, or the date the certificate reached Glade. The two can be months apart when a briefing was completed with a provider outside Glade and the certificate attached later.
+- **The credit counseling certificate's own row in the packet is flagged when a check about it fails.** Previously only the petition document could show a "Needs attention" marker, so a blocking credit counseling finding left the certificate row looking fine and the problem had to be found in the review results.
+
 ### Preventing duplicate filings
 
 Before a filing proceeds, Glade checks whether the case already has an assigned case number or an in-progress filing. Depending on the situation, you will see one of two states in the pre-filing dialog:
@@ -214,6 +231,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 
 - Only bankruptcy cases (Chapters 7 and 13) are supported. Other case types (civil, criminal, appellate) are not available.
 - Filing requires a complete document packet — missing required documents cause the submission to fail.
+- The required documents check reports on the separate documents in the filing packet. Forms that are folded into the consolidated petition rather than filed as their own document are not reported individually.
 - Courts outside the supported list cannot be filed to through Glade.
 - Filing is asynchronous and takes 7–10 minutes. The attorney does not need to keep the page open.
 - If the PACER session token expires mid-filing, the submission fails and can be retried.
