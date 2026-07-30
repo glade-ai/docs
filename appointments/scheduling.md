@@ -46,7 +46,7 @@ Clicking a service in either view opens the availability editor directly — you
 1. The client views the firm's product or service listing. For free sessions, the booking button reads **Book a call**; for paid sessions it shows the session price.
 2. The client selects a product and initiates scheduling.
 3. A calendar displays available dates and time slots.
-4. Times are shown in the client's local timezone, converted from the firm's timezone.
+4. Times are shown in the client's own timezone, with a timezone picker above the slot list if they want to view them in a different one.
 5. The client selects a date and time.
 6. The booking is confirmed and created.
 7. If the product has video conferencing enabled, a meeting link is generated automatically.
@@ -107,9 +107,18 @@ Each booking moves through a series of statuses over its lifetime:
 ### Timezone handling
 
 - Firms define availability in their local timezone.
-- Clients see available times converted to their own timezone.
-- All bookings are stored in the firm's timezone internally.
+- Clients booking an appointment see every time in **their own** timezone, not the firm's. This applies to the slot list, the review screen before confirming, the booking confirmation, the cart, the Meetings tab on a firm member's profile, and the next-consultation widget on the client's home page.
+- A timezone picker sits above the slot list so a client can view times in a different timezone — useful when they are travelling or booking on behalf of someone else. Changing it re-sorts the slots into that timezone's days, and the choice is saved to the client's profile so later bookings open in the same timezone.
+- The picker starts on the client's saved profile timezone if they have one, otherwise the timezone their device reports.
+- Whichever timezone is on screen, the client books the exact moment they clicked. A client in Eastern time booking a "2:30 PM" slot from a Pacific-time firm gets 2:30 PM Eastern, and the firm sees the matching time on their own calendar.
+- Firm-side views — the Bookings section and the firm dashboard — continue to show times in the firm's timezone.
 - The system validates timezone inputs and defaults to US/Eastern if not specified.
+
+### Booking into a conflicting time
+
+- When a selected slot conflicts with an existing booking, the scheduler flags the conflict and offers **Schedule Anyway** so a team member can double-book deliberately.
+- **Schedule Anyway** works both when creating a booking and when rescheduling one. Previously it was only honored on the reschedule path — on a new booking the click appeared to do nothing and the appointment was never created. If your team hit that and worked around it by booking a non-conflicting time and then rescheduling into the conflict, that workaround is no longer necessary.
+- **Schedule Anyway** does not override a Blocked availability entry. Blocked windows remain hard blocks and cannot be booked into.
 
 ### User Profile Meetings
 
