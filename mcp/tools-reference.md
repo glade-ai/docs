@@ -165,6 +165,8 @@ The assistant can read messages on inbox conversations between the firm and a cl
 - **Creator ID required** — most tools require a creator ID. The AI gets this automatically from `persons_me`, but if you belong to multiple firms, you may need to specify which one.
 - **Date filters use ISO 8601** — date parameters expect ISO 8601 format (e.g., `2025-01-15T00:00:00Z`). The AI handles this conversion from natural language.
 - **Pagination** — list tools default to 20 results per page with a maximum of 100. For very large datasets, the AI may need to make multiple requests.
+- **Payment plan listings honor the page size.** `payment_plans_list` previously ignored it and returned every payment plan on the firm in a single response, which made bulk financial questions slow to answer and, for firms with many plans, time out before returning anything. If your assistant has been failing or stalling on broad payment plan questions, retry them.
+- **Out-of-range page sizes are adjusted rather than rejected.** On the invoice, payment, and payment plan listings, a page size above 100 is reduced to 100 and a page size below 1 is raised to 1, instead of returning an error.
 - **No write operations** — if you ask the AI to change something, it will tell you the change needs to be made in the Glade app.
 
 ## Related Features
