@@ -18,6 +18,14 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-07-31 10:09:46-04:00 · [PR #327](https://github.com/glade-ai/docs/pull/327)
+
+### payments/payment-plans
+- Documented that firm staff can reschedule an installment stuck in **Retrying** from the transactions dashboard via **Edit installment**: the new date must be at least tomorrow in the firm's time zone, saving returns the installment to **Upcoming** and schedules a fresh charge, delete is not offered on retrying rows, and the charge lands on the exact date picked (no day shift). Sources: noodle-frontend#11135, noodle-api#8022 (DEV-31666).
+
+### payments/invoices
+- Documented that editing an already-paid invoice (or lowering the amount so carried-over payments cover the new total) marks the new invoice version **Paid** immediately instead of leaving a phantom outstanding balance, and that dependent workflow steps and payment-plan completion advance as they would after a normal final payment. A remaining balance still leaves the new version payable (**In Progress**) for the difference. Source: noodle-api#8075 (DEV-34491).
+
 ## 2026-06-19 13:34:55-04:00 · [PR #243](https://github.com/glade-ai/docs/pull/243)
 
 no details available
