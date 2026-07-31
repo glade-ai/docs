@@ -111,6 +111,7 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Screenshots are captured at key steps for debugging failed submissions.
 - Inbox notifications link directly to the case's status tab.
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
+- For a case your firm filed outside Glade and then recorded in Glade, the **Filed at** date on the PACER case number panel is the court's actual filing date, which is usually earlier than the day someone entered the case. Your own team can now read that date back after entering it — it stays visible on the panel when you reload the case or come back to it another day. Previously only Glade staff could read the value, so the panel showed the date as unset to the firm even though it had been saved, and an attorney could re-enter the same date repeatedly without it ever appearing. Each firm sees only its own cases.
 
 ### Filing deficiencies
 
@@ -119,6 +120,17 @@ Sometimes a case is accepted by the court but one or more required documents are
 - An **action-required banner** appears on the case listing the specific forms that still need to be filed manually in PACER. The banner stays visible until the deficiency is addressed, rather than appearing only while the submission is running.
 - On the Case Status tab, the filing card shows a **Filed with deficiency** heading and a **View Submission** button that opens the submission details, so you can see exactly which documents were rejected.
 - The status updates live — if a filing's status changes while you are viewing the case, the banner and the status card refresh without a manual reload.
+- **One task per rejected document.** Glade creates a separate cure task for each document the court rejected, each titled after its own document, rather than a single task covering all of them. Your team can divide the work and see at a glance how many documents are still outstanding. See [Status Tracking](../workflows/status-tracking.md) for how these tasks are assigned.
+- **Completing a task clears that document.** After you file a rejected document by hand in PACER, mark its task complete and that document is cleared from the case's deficiency. The action-required banner narrows to the documents that remain and disappears once the last one is cleared. Previously the banner stayed up even after every document had been re-filed, and clearing it required contacting Glade.
+
+> TODO: Confirm in production that completing a cure task clears the document from the banner. The court-integration side of this behavior was still pending when the change shipped, and a failure there is reported internally rather than shown to the user — so a banner that still lists an already-filed document should be raised with Glade.
+
+### Recording a case filed outside Glade
+
+When a case is filed directly in PACER instead of through Glade, your team can register it against the workflow from the dashboard's case-status widget, so Glade tracks it alongside cases it filed itself.
+
+- Enter the court-assigned case number to register the case. The registration is attributed to your firm, so the case appears in your firm's case-status views and reports next to cases filed through Glade. Previously a manually registered case was not attributed to the firm and could be missing from those reports.
+- **Filed at date** — an optional date field records the date the court actually accepted the filing, which is often earlier than the day someone entered the case into Glade. After you save it, the date is shown read-only next to the case number.
 
 ### 341 meeting notices
 
@@ -166,13 +178,30 @@ When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition
 
 Before a filing can be submitted, Glade validates that all required debtor fields are present. If any are missing, the filing is blocked at both the pre-filing preview and the ECF submission modal, and the missing fields are listed by name so your team can address them before re-attempting.
 
-- For individual Chapter 7 and Chapter 13 filings, the **credit counseling completion date** is required. If it is missing from the case questionnaire, the eFiling modal shows a warning listing the missing fields.
-- For joint filings with two debtors, both the primary and co-debtor credit counseling completion dates must be present.
-- For individual Chapter 7 filings, the **marital filing status** is also required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
+- The **credit counseling completion date** is no longer part of this check. A Chapter 7 or Chapter 13 filing is no longer stopped because that date is absent from the case questionnaire — firms whose Schedules questionnaire does not ask for it can file with the certificate itself as the record of completion, for individual and joint cases alike. Whether the briefing is recent enough to satisfy § 109(h) is assessed by the pre-filing review instead of by this check, so a stale certificate is raised for an attorney to review rather than blocking the filing outright with no explanation.
+- For individual Chapter 7 filings, the **marital filing status** is required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
-- Whether the case is joint or individual is read from the **Schedules** questionnaire only, not from custom client-intake forms or earlier questionnaires that may carry stale answers. Cases that were initially entered as joint and later corrected to individual (or vice versa) on the Schedules questionnaire reflect the corrected value at filing time, so the modal no longer demands a co-debtor's credit counseling date on a Chapter 7 Individual case whose intake form still has `Filing jointly = Yes`.
-- Missing fields are shown with labels — for example, "Credit counseling completion date (Debtor 1)" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
+- Whether the case is joint or individual is read from the **Schedules** questionnaire only, not from custom client-intake forms or earlier questionnaires that may carry stale answers. Cases that were initially entered as joint and later corrected to individual (or vice versa) on the Schedules questionnaire reflect the corrected value at filing time.
+  - Checks that only apply to a second debtor use the same answer. On an individual filing where nothing else on the case indicates whether it is joint or individual, those checks no longer report an unresolved second-debtor result — an individual Chapter 7 stops showing a "(Debtor 2)" line for things like a co-debtor's briefing or Social Security number.
+- Missing fields are shown with labels — for example, "Marital filing status" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
+
+### Required documents check before filing
+
+Alongside the required fields check, Glade checks the filing packet against the document slots the case's district actually requires, and reports anything missing before submission.
+
+- **Findings name the document they are about.** Each missing required document is reported using the district's own label for that slot — "Payment Advices", for example — so a packet missing several documents produces one clearly-titled finding per document. Previously every one of those findings carried the same generic title, so a case missing three documents showed three identical rows and you had to open each to learn what it meant.
+- **Four fee and means-test forms are now hard-required when the case calls for them**, and a missing one blocks like any other required document:
+  - **Form 103A** (application to pay the filing fee in installments) and **Form 103B** (application for a fee waiver) — required when the debtor has elected that fee treatment.
+  - **Form 122A-2** (Chapter 7 means test calculation) and **Form 122C-2** (Chapter 13 calculation) — required for above-median cases.
+  These four were previously checked only if they had already been uploaded; their absence produced no finding at all. A Chapter 7 case where the debtor elected fee installments could reach filing with no Form 103A while the review reported "All required documents attached". If your team relied on that message alone, re-check any case filed before this change that involved a fee installment election, a fee waiver, or an above-median means test.
+- Each of the four is demanded only when the case's own answers call for it. Form 103A is not required on a Chapter 7 filing where the debtor paid the fee outright.
+
+### Credit counseling checks before filing
+
+- Recency findings state the **date the briefing was completed** and the **date the certificate remains valid through**, rather than only reporting pass or fail. This makes it possible to see how much time is left on a certificate, and to audit afterwards which date the check was actually assessing.
+- Findings also record **which date was used** — the date printed on the certificate, or the date the certificate reached Glade. The two can be months apart when a briefing was completed with a provider outside Glade and the certificate attached later.
+- **The credit counseling certificate's own row in the packet is flagged when a check about it fails.** Previously only the petition document could show a "Needs attention" marker, so a blocking credit counseling finding left the certificate row looking fine and the problem had to be found in the review results.
 
 ### Preventing duplicate filings
 
@@ -214,6 +243,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 
 - Only bankruptcy cases (Chapters 7 and 13) are supported. Other case types (civil, criminal, appellate) are not available.
 - Filing requires a complete document packet — missing required documents cause the submission to fail.
+- The required documents check reports on the separate documents in the filing packet. Forms that are folded into the consolidated petition rather than filed as their own document are not reported individually.
 - Courts outside the supported list cannot be filed to through Glade.
 - Filing is asynchronous and takes 7–10 minutes. The attorney does not need to keep the page open.
 - If the PACER session token expires mid-filing, the submission fails and can be retried.
