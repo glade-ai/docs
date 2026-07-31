@@ -37,6 +37,17 @@ Reporting provides your firm with operational and financial visibility into your
 - You can filter by hearing type, attorney, judge, trustee, client, and case number. Filter options are dynamically populated from existing calendar data.
 - CSV export formats dates and times in your firm's configured timezone.
 
+### Court Notices
+
+Court notices are reportable in their own right, with **one row per notice received from PACER** rather than one row per case. This matters because most of the court notices a firm receives are never matched to a workflow in Glade, so they cannot be reached through any case-based report.
+
+- Each row carries the detail printed on the notice: the case name and case number, the notice type, the document number, the judge's initials, the trustee's name, the courtroom and its location, the video hearing (Zoom) details, and the date Glade received the notice.
+- **Client column**: for a notice linked to a workflow, this is the client on that case. For an unlinked notice, it falls back to the case name written on the notice itself — which is the only client identifier an unlinked notice carries.
+- **Linked / unlinked filter**: narrow the report to notices that are linked to a workflow, or to those that are not. For many firms the large majority of notices are unlinked, so this filter is usually the first thing to set — reviewing unlinked notices is how you find court activity that never reached a case.
+- **Notice-type filter**: filter by any combination of named notice types, and by **Unassigned** — the notices Glade could not classify, precisely the ones that need someone to look at them (previously reachable only by scrolling past everything already classified). Unassigned combines with the named types rather than replacing them, so a named type and the unclassified bucket can be reviewed in one list; selecting it alone narrows to the unclassified notices, and selecting nothing still returns everything.
+- **Search** matches the case name as well as the client's name, so a notice can be found by the name shown in its Client column. Previously the search only looked at client records, which meant the name displayed on an unlinked row could not be searched for.
+- **CSV export** returns the same columns as the on-screen report and respects the filters you have applied, so a filtered export and the report you are looking at agree.
+
 ### Sales Overview
 
 - Shows payment volume, transaction count, and average transaction amount for a configurable lookback period (default 30 days), with percentage change compared to the previous equivalent period.
@@ -151,14 +162,6 @@ Payment reports can be filtered and sorted by:
 - **Date order** — sort oldest-first or newest-first. Paging through a large payment report is stable: payments that share the same timestamp (every charge in one payment-plan run, for example) keep a consistent order instead of some rows repeating on one page and going missing from another.
 
 Choosing several statuses and the older single-status filter at the same time is not allowed — the report asks you to use one or the other. **Refunded** is not a payment status; a refund is recorded as an amount returned on a payment, so it is only available through the single-status filter.
-### Court Notices
-
-The Court Notices report lists the court notices Glade has received from PACER for your firm, and can be filtered by notice type.
-
-- **Unassigned** is available as a notice-type option alongside the named types. Selecting it returns the notices Glade could not classify — precisely the ones that need someone to look at them. Previously an unclassified notice could only be reached by scrolling past everything that had been classified.
-- **Unassigned** combines with the named types rather than replacing them, so you can review every Notice of Hearing together with everything unclassified in a single list. Selecting it on its own narrows the report to the unclassified notices; selecting nothing at all still returns everything.
-- The CSV export applies the same selection, so an export filtered to **Unassigned** contains the same notices as the report on screen.
-
 ## Configuration
 
 - **Date range**: All workflow reports require or accept a start date and end date.
@@ -167,6 +170,7 @@ The Court Notices report lists the court notices Glade has received from PACER f
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
 - **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), pending client tasks, and court district. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
 - **Court notice type filter**: The Court Notices report filters by any combination of named notice types plus **Unassigned**. Options are derived from the notice types Glade has classified for your firm; there is no setting that controls the list.
+- **Linked filter**: The court notices report accepts a linked/unlinked selection to include only notices attached to a workflow, or only those not attached to one. Leaving it unset includes both.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
@@ -180,6 +184,8 @@ The Court Notices report lists the court notices Glade has received from PACER f
 - The sales overview rounds monetary values to 2 decimal places. Percentage change shows 0% when the previous period had no records, rather than showing "N/A".
 - The conversion metrics report aggregates across all time since your firm was created. For firms with long histories, this report may be slow to load.
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
+- An unlinked court notice has no client record behind it, so columns that come from the case — rather than from the notice itself — are empty on those rows. The case name on the notice is what identifies the client.
+- Text taken from a court notice is exported to CSV as plain text even when it begins with a character a spreadsheet would otherwise read as a formula, so party and trustee names open as written.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
 - The **Reaffirmation agreement** column reports what the schedules questionnaire says, not what was ultimately filed. A reaffirmation agreement decided outside the questionnaire, or changed after the petition went out, is not reflected until the questionnaire is updated.
