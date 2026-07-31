@@ -19,6 +19,9 @@ The Exemptions Calculator is a panel available in bankruptcy cases that helps at
 - Non-exempt rows are highlighted in red with bold text so over-limit items stand out.
 - A **Only show non-exempt** toggle filters both tabs to display only properties or exemptions with a non-exempt balance, letting you focus on items that need attention.
 - When viewing Schedule A/B, property names are clickable links that navigate to the property's detail view. Property links are not shown when viewing from Schedule C.
+- **Totals update as you type.** Editing an exemption amount on the Exemptions List, or a property value on the Master Property List, recalculates the summary on each keystroke. Previously the figures only moved once you clicked or tabbed out of the field, so the totals read $0 while an amount was being entered — a common source of confusion when learning the calculator. Any autofill notice on the field stays visible while you type.
+- Live recalculation does not save anything. The calculator modal still requires an explicit submit to record your changes.
+- Equity is worked out the same way everywhere it appears on a case — the Exemptions Calculator, the lien detail on a property row, the **Property summary** on Schedule A/B, and the Chapter 13 liquidation analysis all subtract the same set of liens from the same asset value. The Property summary previously showed pre-lien value in its Equity column and so could disagree with this panel on the same case; the two now match. See [Questionnaires](./questionnaires.md) for the Property summary.
 
 ## Configuration
 
