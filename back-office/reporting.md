@@ -37,6 +37,16 @@ Reporting provides your firm with operational and financial visibility into your
 - You can filter by hearing type, attorney, judge, trustee, client, and case number. Filter options are dynamically populated from existing calendar data.
 - CSV export formats dates and times in your firm's configured timezone.
 
+### Court Notices
+
+Court notices are reportable in their own right, with **one row per notice received from PACER** rather than one row per case. This matters because most of the court notices a firm receives are never matched to a workflow in Glade, so they cannot be reached through any case-based report.
+
+- Each row carries the detail printed on the notice: the case name and case number, the notice type, the document number, the judge's initials, the trustee's name, the courtroom and its location, the video hearing (Zoom) details, and the date Glade received the notice.
+- **Client column**: for a notice linked to a workflow, this is the client on that case. For an unlinked notice, it falls back to the case name written on the notice itself — which is the only client identifier an unlinked notice carries.
+- **Linked / unlinked filter**: narrow the report to notices that are linked to a workflow, or to those that are not. For many firms the large majority of notices are unlinked, so this filter is usually the first thing to set — reviewing unlinked notices is how you find court activity that never reached a case.
+- **Search** matches the case name as well as the client's name, so a notice can be found by the name shown in its Client column. Previously the search only looked at client records, which meant the name displayed on an unlinked row could not be searched for.
+- **CSV export** returns the same columns as the on-screen report and respects the filters you have applied, so a filtered export and the report you are looking at agree.
+
 ### Sales Overview
 
 - Shows payment volume, transaction count, and average transaction amount for a configurable lookback period (default 30 days), with percentage change compared to the previous equivalent period.
@@ -72,6 +82,7 @@ Reporting provides your firm with operational and financial visibility into your
 - **Team member filter**: The documents report accepts an optional list of team members to include.
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
+- **Linked filter**: The court notices report accepts a linked/unlinked selection to include only notices attached to a workflow, or only those not attached to one. Leaving it unset includes both.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 
@@ -80,6 +91,8 @@ Reporting provides your firm with operational and financial visibility into your
 - The sales overview rounds monetary values to 2 decimal places. Percentage change shows 0% when the previous period had no records, rather than showing "N/A".
 - The conversion metrics report aggregates across all time since your firm was created. For firms with long histories, this report may be slow to load.
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
+- An unlinked court notice has no client record behind it, so columns that come from the case — rather than from the notice itself — are empty on those rows. The case name on the notice is what identifies the client.
+- Text taken from a court notice is exported to CSV as plain text even when it begins with a character a spreadsheet would otherwise read as a formula, so party and trustee names open as written.
 - Task efficiency lookups are limited to 100 items per request.
 
 ## Related Features
