@@ -72,6 +72,15 @@ Dynamic PDF templates support generated PDFs with custom layouts and assets, goi
 
 Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses.
 
+**When an autofill may overwrite an answer.** An answer someone typed by hand is protected — an autofill does not replace it. Two situations are treated as *not yet an answer*, so an autofill fills them:
+
+- **The field is empty.** A field left blank, holding only spaces, or holding an empty value counts as unanswered even if a person was the last to touch it.
+- **The field says No and the computed result is Yes.** A Yes/No field answered "No" is upgraded to "Yes" once the data behind it says yes — for example, a Schedule A/B category answered "No" before anything was entered on the Master Property List is upgraded once matching assets are added there.
+
+Both situations previously blocked the autofill for good, so a Schedule A/B category answered early — left blank, or answered "No" — never picked up assets added later and the generated schedule shipped without them. If your team has been re-checking Schedule A/B by hand for assets that failed to carry over, that is no longer necessary. Free text someone has actually written is still never overwritten.
+
+**Combining several rows into one answer.** An autofill that draws from a list can join every matching row into a single answer instead of taking only the first one. This matters on Schedule A/B lines that ask for one brief description covering several items — several tax refunds, or several claims — where previously only the first row's description reached the field and the rest were dropped without any indication. Amounts can be totalled the same way. The joined text carries through to the generated PDF as well, so a schedule that previously printed a single description now prints all of them.
+
 ### Assignees
 
 Assignees can be configured at the field level and at the questionnaire level, controlling which team members are responsible for specific fields or the entire questionnaire.
@@ -449,13 +458,25 @@ When you click **Edit** on a completed questionnaire, Glade first checks whether
 
 - **Nothing changed** — no prompt appears. The questionnaire re-opens immediately and case data sync turns back on automatically, so edits to the case record flow into the questionnaire again just as they did before it was submitted. The out-of-sync banner does not appear at all in this case — previously it could flash briefly on re-open and then disappear on a page refresh, which looked like a problem when there was none.
 - **Case data changed** — a confirmation appears *before* the questionnaire re-opens, so you decide how to handle the difference up front rather than after you are already editing. You have two choices:
-  - **Get back in sync** — the questionnaire re-opens and its answers are replaced with the latest case data, and sync turns back on. Because this overwrites existing answers, it is a deliberate, confirmed step.
+  - **Get back in sync** — the questionnaire re-opens, you review the changes case data would make and choose which of them to apply, and sync turns back on. See [Reviewing changes before you sync](#reviewing-changes-before-you-sync).
   - **Keep current answers** — the questionnaire re-opens with the answers as they were, and sync stays off so the newer case data does not overwrite them.
 
 If you choose to keep the current answers, a warning banner appears at the top of the questionnaire, with an action to reconnect it to case data. The banner is shown to team members with edit permission. Depending on how your firm's case-data syncing is set up, the action works one of two ways:
 
 - **Reconnect without changing answers** — the banner explains the questionnaire is no longer syncing with case data and offers a **Reconnect to case data** action. Choosing it simply turns syncing back on: your current answers are kept exactly as they are, and there is no confirmation prompt. From then on, edits to the questionnaire flow back into the case record — and into downstream documents such as the petition — again. Use this when a reopened questionnaire's edits have stopped carrying over to the rest of the case.
-- **Get back in sync (replaces answers)** — the banner reads *"This questionnaire is out of sync with case data."* and offers a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns syncing back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+- **Get back in sync (replaces answers)** — the banner reads *"This questionnaire is out of sync with case data."* and offers a **Get back in sync** action. Choosing it opens the preview described below, where you decide which of the pending changes to take. After you apply, Glade turns syncing back on and clears the banner.
+
+### Reviewing changes before you sync
+
+**Get back in sync** does not overwrite anything until you have seen what it would do. Choosing it opens a preview listing each change the sync would make, with a checkbox on every one:
+
+- Only values that have actually drifted since the questionnaire last synced are listed. Values that already agree are left out, so the list is the difference rather than the whole case record.
+- Changes are grouped by filer — primary and secondary — and labelled the way the Case Data panel labels them. Amounts, addresses, and Yes/No answers are formatted for reading rather than shown raw.
+- Individual field changes and whole records (a creditor or an asset, for example) are listed separately, and each can be taken or left alone.
+- Applying replaces only what you checked. Anything left unchecked keeps the answer it has now.
+- Applying with nothing checked reconnects the questionnaire to case data without changing a single answer — this is the way to resume syncing while keeping the answers exactly as they are.
+
+Previously **Get back in sync** replaced every answer with the current case record in one step. There was no way to see the list first, and no way to take some changes while leaving others, so a sync could quietly pull in a change an attorney would have declined — or be avoided entirely because of that risk.
 
 ### Collaborators
 
@@ -483,6 +504,7 @@ The creditor mailing matrix is assembled from every party who should receive not
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening](#re-opening)).
+- A field that appears only once another field carries an amount — for example the **Specify** box on Schedule I line 8h, shown once "Other monthly income" has a figure in it — is validated like any other required field. It is highlighted when empty, counted in its section's badge, and listed in the Petition Check. Fields gated on a money amount this way were previously treated as hidden and skipped by validation altogether, so a package could reach ready-to-file with an unnamed income line on a sworn schedule. Re-run the Petition Check on cases prepared before this correction to catch any that got through.
 - Required-field validation skips list rows that will not be filed. Rows merged into another as duplicates (for example, deduplicated creditors) and rows explicitly marked to omit from the petition are not checked for missing required fields, so leftover data on those rows does not block submission.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 

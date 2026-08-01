@@ -82,6 +82,12 @@ When a paystub document is uploaded to a case, Glade extracts income fields auto
 
 On paystubs that print current-period and year-to-date figures side by side, the two columns are kept apart: the pay-period gross is read from the current-period column and the year-to-date gross from the YTD column. Previously a year-to-date total could be recorded as the pay-period gross while the YTD figure was left blank, which showed income amounts that did not match the paystub and could overstate the monthly averages carried onto Schedule I and the means test.
 
+**Deductions printed in two columns.** Some paystubs — government back-pay stubs are the common case — list each deduction twice, once as the current pay period amount and once as an adjusted amount. Glade adds the two together for each deduction rather than reading only the current column. Previously the adjusted column was ignored, which understated the client's total deductions and, on the Chapter 7 means test, overstated the income remaining after them.
+
+**Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
+
+**Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
+
 ### Correcting and Removing Income Sources
 
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
@@ -123,6 +129,7 @@ Some older income organizers may need their paystub data re-extracted (for examp
 - The Schedule I Contributions preview reflects the current saved state of the income sources. If you have made changes without saving, save first before reviewing the preview.
 - YTD calculations depend on accurate pay period counts. If the number of pay periods elapsed is incorrect, monthly figures will be off proportionally.
 - Paystubs extracted before the current/year-to-date column handling was corrected are not re-read automatically. If an existing row shows a year-to-date figure in its pay-period gross, re-run extraction on that row or correct the extracted data by hand.
+- The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
