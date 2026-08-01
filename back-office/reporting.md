@@ -81,6 +81,19 @@ Custom reports let your firm build its own view over case data, choosing the col
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
+- **Duplicating a report.** A **Duplicate** action on a saved report creates a copy carrying the same description, filters, sorting, and columns, so building a near-identical variant is a copy plus one edit rather than a rebuild from a blank report.
+  - The copy is named after the original with a copy number — `Weekly filings Copy 1`, then `Copy 2`, and so on. Duplicating a copy continues that sequence instead of stacking markers, so duplicating `Weekly filings Copy 1` gives you `Weekly filings Copy 2`.
+  - Numbering carries on past the highest number already in use rather than filling gaps, so renaming or deleting a copy in the middle of the sequence does not cause the next duplicate to reuse its number. Once every copy is gone, numbering restarts at 1.
+  - The copy is recorded as authored by whoever duplicated it, not by whoever created the original.
+  - A very long report name is shortened to make room for the copy number.
+
+### Court Notices
+
+The Court Notices report lists the court notices Glade has received from PACER for your firm, and can be filtered by notice type.
+
+- **Unassigned** is available as a notice-type option alongside the named types. Selecting it returns the notices Glade could not classify — precisely the ones that need someone to look at them. Previously an unclassified notice could only be reached by scrolling past everything that had been classified.
+- **Unassigned** combines with the named types rather than replacing them, so you can review every Notice of Hearing together with everything unclassified in a single list. Selecting it on its own narrows the report to the unclassified notices; selecting nothing at all still returns everything.
+- The CSV export applies the same selection, so an export filtered to **Unassigned** contains the same notices as the report on screen.
 
 ## Configuration
 
@@ -89,6 +102,7 @@ Custom reports let your firm build its own view over case data, choosing the col
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
 - **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), and pending client tasks. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
+- **Court notice type filter**: The Court Notices report filters by any combination of named notice types plus **Unassigned**. Options are derived from the notice types Glade has classified for your firm; there is no setting that controls the list.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
