@@ -130,6 +130,18 @@ These tools let the assistant read and summarize what a client entered on an int
 | `agency_members_list` | Lists members of an agency. |
 | `agency_members_get` | Gets a specific agency member's details. |
 
+### eFiling
+
+These tools let a firm run its own review over a case before it is filed — its own AI assistant, its own criteria — using the same information the eFiling packet screen shows.
+
+| Tool | What it does |
+|------|-------------|
+| eFiling packet — get | Returns a case's whole filing packet in one read: the district resolved for the case, every document slot that district requires with the file currently occupying it, whether the packet is ready to send to PACER, and the pre-filing review's findings. Use this for "is this case ready to file" questions — the alternative is assembling the district, the documents, and the review from separate reads and hoping they describe the same moment. |
+| eFiling district — get | Returns the district resolved for a case, including its filing method and any filing notes. |
+| Filing review — get | Returns the most recent pre-filing review for a case with its findings, including which findings an attorney has signed off on and which have been dismissed. Paginated. |
+
+> TODO: Confirm the registered MCP tool names for the three eFiling tools once the matching `glade-mcp-server` companion is settled.
+
 ### Court Notices
 
 | Tool | What it does |
@@ -167,6 +179,9 @@ The assistant can read messages on inbox conversations between the firm and a cl
 - **Pagination** — list tools default to 20 results per page with a maximum of 100. For very large datasets, the AI may need to make multiple requests.
 - **Payment plan listings honor the page size.** `payment_plans_list` previously ignored it and returned every payment plan on the firm in a single response, which made bulk financial questions slow to answer and, for firms with many plans, time out before returning anything. If your assistant has been failing or stalling on broad payment plan questions, retry them.
 - **Out-of-range page sizes are adjusted rather than rejected.** On the invoice, payment, and payment plan listings, a page size above 100 is reduced to 100 and a page size below 1 is raised to 1, instead of returning an error.
+- **Review counts cover the whole review, not the page you asked for.** On the filing review, the tallies are counted across every finding in the run even when the findings themselves come back a page at a time, so a count never under-reports because the review spans more than one page. Blocking failures are counted two ways: the total, and how many are still unresolved. An attorney signing off on a finding clears the gate for filing but does not change what the review reports.
+- **A packet is still readable where pre-filing review is switched off**, and comes back with no review attached. That is a different answer from a review that is switched on but has never been run, and the two stay distinguishable — so "not configured" is never mistaken for "reviewed and clean".
+- **Case data is not exposed over MCP.** The eFiling tools cover the packet, the district, and the review; the case's creditor and property records are not available to the assistant, so a review it runs works from the filing packet rather than from the underlying case data.
 - **No write operations** — if you ask the AI to change something, it will tell you the change needs to be made in the Glade app.
 
 ## Related Features
