@@ -120,6 +120,12 @@ On paystubs that print current-period and year-to-date figures side by side, the
 
 When Glade reads a paystub on its own — on upload, on a re-read, or during a background catch-up — the itemized breakdown it extracts is kept. Individual earnings lines and individual deduction lines stay as separate entries. Previously an automatic read also wrote its column totals back over that breakdown, collapsing the itemized lines into a single total and sometimes leaving a stray "other" post-tax deduction entry that was not on the paystub. Figures your team enters or corrects by hand — including months and income items you add yourself — continue to update the income data as before.
 
+**Deductions printed in two columns.** Some paystubs — government back-pay stubs are the common case — list each deduction twice, once as the current pay period amount and once as an adjusted amount. Glade adds the two together for each deduction rather than reading only the current column. Previously the adjusted column was ignored, which understated the client's total deductions and, on the Chapter 7 means test, overstated the income remaining after them.
+
+**Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
+
+**Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
+
 ### Custom Types in the Income Breakdown
 
 When you edit an income record's breakdown — the individual earnings and deduction lines behind a paystub — each line's type is chosen from a list of the types Glade recognizes for that column.
@@ -130,6 +136,13 @@ When you edit an income record's breakdown — the individual earnings and deduc
 - Columns that recognize only a single type keep a fixed list with no custom option, and columns with no predefined types remain free text as before.
 
 Free-text entry was unavailable for a period after the breakdown editor moved to picking from lists. If your team worked around it by folding an unusual deduction into another line, you can record it under its own name again.
+=======
+**Deductions printed in two columns.** Some paystubs — government back-pay stubs are the common case — list each deduction twice, once as the current pay period amount and once as an adjusted amount. Glade adds the two together for each deduction rather than reading only the current column. Previously the adjusted column was ignored, which understated the client's total deductions and, on the Chapter 7 means test, overstated the income remaining after them.
+
+**Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
+
+**Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
+>>>>>>> 0447ce7 (docs(workflows): paystub extraction, Schedule A/B autofills, selective case-data sync)
 
 ### Correcting and Removing Income Sources
 
@@ -191,6 +204,7 @@ Some older income organizers may need their paystub data re-extracted (for examp
 - Latest paystub mode produces no figure at all when the pay frequency is missing, rather than assuming one. Select the frequency to calculate.
 - Latest paystub mode affects Schedule I only. It is not available for the means test, which always uses the standard six-month calculation.
 - Income sources configured before latest paystub mode existed continue to use the method they were set to. They are not migrated automatically.
+- The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
