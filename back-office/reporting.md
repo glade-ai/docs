@@ -100,6 +100,11 @@ Every saved report shows the team member who created it, with their name and pro
   - The column is for display. Sorting or filtering the report by client address is not available.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
 - **An export now matches the report it came from.** The file is built from the report itself rather than assembled out of the pages on screen, so every column you selected is in it — including columns your firm defined for its own workflow roles, which used to be dropped from the file without warning — and the report's filters and sort order are carried through. Rows beyond the page you are looking at are included. Exports work the same way on case, court notice, and payments reports. If your firm compared an export against the report on screen and found columns or rows missing, re-run it.
+- **Duplicating a report.** A **Duplicate** action on a saved report creates a copy carrying the same description, filters, sorting, and columns, so building a near-identical variant is a copy plus one edit rather than a rebuild from a blank report.
+  - The copy is named after the original with a copy number — `Weekly filings Copy 1`, then `Copy 2`, and so on. Duplicating a copy continues that sequence instead of stacking markers, so duplicating `Weekly filings Copy 1` gives you `Weekly filings Copy 2`.
+  - Numbering carries on past the highest number already in use rather than filling gaps, so renaming or deleting a copy in the middle of the sequence does not cause the next duplicate to reuse its number. Once every copy is gone, numbering restarts at 1.
+  - The copy is recorded as authored by whoever duplicated it, not by whoever created the original.
+  - A very long report name is shortened to make room for the copy number.
 - **Reaffirmation agreement**: A column and a matching filter report whether a case intends to reaffirm any debt. A case counts as reaffirming when at least one creditor on the bankruptcy schedules questionnaire's creditor list answers the statement-of-intention question — "What do you intend to do with the property that secures the debt?" — with **Retain the property and enter into a Reaffirmation Agreement**. One qualifying creditor is enough for the whole case.
   - Only creditors listed on **Schedule D** are considered. The same intention question is asked on every creditor row, and rows on Schedules E/F/G carry a default answer that does not indicate an intention about secured property, so counting them would report cases as answered when nothing was decided.
   - Creditor rows excluded from the petition are ignored.
@@ -146,6 +151,13 @@ Payment reports can be filtered and sorted by:
 - **Date order** — sort oldest-first or newest-first. Paging through a large payment report is stable: payments that share the same timestamp (every charge in one payment-plan run, for example) keep a consistent order instead of some rows repeating on one page and going missing from another.
 
 Choosing several statuses and the older single-status filter at the same time is not allowed — the report asks you to use one or the other. **Refunded** is not a payment status; a refund is recorded as an amount returned on a payment, so it is only available through the single-status filter.
+### Court Notices
+
+The Court Notices report lists the court notices Glade has received from PACER for your firm, and can be filtered by notice type.
+
+- **Unassigned** is available as a notice-type option alongside the named types. Selecting it returns the notices Glade could not classify — precisely the ones that need someone to look at them. Previously an unclassified notice could only be reached by scrolling past everything that had been classified.
+- **Unassigned** combines with the named types rather than replacing them, so you can review every Notice of Hearing together with everything unclassified in a single list. Selecting it on its own narrows the report to the unclassified notices; selecting nothing at all still returns everything.
+- The CSV export applies the same selection, so an export filtered to **Unassigned** contains the same notices as the report on screen.
 
 ## Configuration
 
@@ -154,6 +166,7 @@ Choosing several statuses and the older single-status filter at the same time is
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
 - **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), pending client tasks, and court district. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
+- **Court notice type filter**: The Court Notices report filters by any combination of named notice types plus **Unassigned**. Options are derived from the notice types Glade has classified for your firm; there is no setting that controls the list.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
