@@ -83,6 +83,8 @@ PDF fill mappings connect questionnaire fields to PDF template fields, enabling 
 
 Dynamic PDF templates support generated PDFs with custom layouts and assets, going beyond simple field-to-field mapping.
 
+Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
+
 ### Autofills
 
 Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses.
