@@ -82,6 +82,8 @@ When a paystub document is uploaded to a case, Glade extracts income fields auto
 
 On paystubs that print current-period and year-to-date figures side by side, the two columns are kept apart: the pay-period gross is read from the current-period column and the year-to-date gross from the YTD column. Previously a year-to-date total could be recorded as the pay-period gross while the YTD figure was left blank, which showed income amounts that did not match the paystub and could overstate the monthly averages carried onto Schedule I and the means test.
 
+When Glade reads a paystub on its own — on upload, on a re-read, or during a background catch-up — the itemized breakdown it extracts is kept. Individual earnings lines and individual deduction lines stay as separate entries. Previously an automatic read also wrote its column totals back over that breakdown, collapsing the itemized lines into a single total and sometimes leaving a stray "other" post-tax deduction entry that was not on the paystub. Figures your team enters or corrects by hand — including months and income items you add yourself — continue to update the income data as before.
+
 ### Correcting and Removing Income Sources
 
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
