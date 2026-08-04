@@ -83,6 +83,18 @@ Previously the actions menu appeared only for upcoming installments with a futur
 - When a plan is modified, the remaining schedule is recalculated to reflect the new settings. Any values you have manually entered for the plan — such as the installment amount — are preserved and take precedence over recalculated defaults.
 - Clients cannot modify their own plans. Only firms can make changes.
 
+### What happens to a plan when the invoice is edited
+
+Editing an invoice's line items or amounts replaces it with a new version (see [Invoices](./invoices.md)). An active payment plan moves across to the new version rather than being canceled, so the client's autopay arrangement stays in place and their stored payment method keeps being charged on schedule.
+
+- The plan and its remaining schedule carry over to the new invoice. Nothing is canceled and the client is not asked to set the plan up again.
+- **If the edit raises the invoice total** and the plan's remaining installments no longer cover what is due, installments are added on the plan's existing schedule until the full balance is covered.
+- **If the edit lowers the invoice total** and the plan is now scheduled to collect more than is due, the schedule is left alone. Trimming it is a decision for your team — review the plan and adjust or remove the surplus installments yourself.
+- **If the payments already collected cover the new total**, the remaining scheduled installments are canceled and no further charges are made.
+- The plan is recorded as updated rather than canceled, so the case history shows the plan continuing across the edit.
+
+Previously, editing an invoice canceled any active payment plan on it, silently ending the client's autopay agreement — the plan had to be rebuilt by hand and the client re-entered their payment details. If your team avoided editing invoices for this reason, it is now safe.
+
 ### Canceling a payment plan
 
 - Firms can cancel an active plan at any time.
@@ -162,6 +174,7 @@ Previously the actions menu appeared only for upcoming installments with a futur
 - If all retry attempts fail for an installment, manual intervention by the firm may be needed to resolve the outstanding amount.
 - Changing the payment method on a plan applies to all future installments, not just the next one.
 - Maximum duration enforcement happens only at plan creation. It is not applied retroactively if the template limit changes after a plan is already active.
+- When an invoice edit lowers the total, a plan that is now over-scheduled is not trimmed automatically. Review the remaining installments and remove or reduce the surplus yourself.
 - Payment plan health is monitored daily. Stalled or misconfigured plans are flagged to operations for review.
 - The daily health check also tops up plans whose schedule no longer covers the remaining balance — for example, after a client pre-pays installments and there are no longer enough upcoming payments to cover what's still due. New installments are added on the plan's original schedule (the start date plus the chosen interval), never on a date that falls before tomorrow, and never before an existing pre-paid installment that sits further out in the future. Months are honored: a plan whose installment day is the 31st falls back to the 28th in February and to the 30th in April, then returns to the 31st in months that have one, rather than drifting permanently to an earlier day.
 
