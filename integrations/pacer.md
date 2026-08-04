@@ -122,6 +122,12 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
 - For a case your firm filed outside Glade and then recorded in Glade, the **Filed at** date on the PACER case number panel is the court's actual filing date, which is usually earlier than the day someone entered the case. Your own team can now read that date back after entering it — it stays visible on the panel when you reload the case or come back to it another day. Previously only Glade staff could read the value, so the panel showed the date as unset to the firm even though it had been saved, and an attorney could re-enter the same date repeatedly without it ever appearing. Each firm sees only its own cases.
 
+### PACER login failures
+
+When a filing fails because Glade could not log in to PACER, the case status dashboard reports **"PACER login failed."** without advising you to check your credentials.
+
+Login failures are frequently not a credential problem — a two-factor prompt that timed out while waiting is the most common cause — so the message no longer points your team at credentials that are usually correct. Where a more specific reason is available, it appears in the case's filing log. Retry the filing first; only re-enter your PACER details if the failures continue.
+
 ### Filing deficiencies
 
 Sometimes a case is accepted by the court but one or more required documents are rejected and must be re-filed by hand in PACER — a "filed with deficiency" outcome. Glade surfaces this state persistently across the case so it is not missed after the live filing view is closed.
@@ -238,6 +244,7 @@ Before a filing can be submitted, Glade validates that all required debtor field
   - Checks that only apply to a second debtor use the same answer. On an individual filing where nothing else on the case indicates whether it is joint or individual, those checks no longer report an unresolved second-debtor result — an individual Chapter 7 stops showing a "(Debtor 2)" line for things like a co-debtor's briefing or Social Security number.
 - Missing fields are shown with labels — for example, "Marital filing status" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
+- **When the check itself reports a problem with the data, that problem is shown.** Some failures are not about a blank field but about a value the check cannot work with — an address whose county cannot be identified, for example. Those now appear as the specific problem to fix, in both the pre-filing warnings dialog and the submission modal. Previously any failure of this kind read as "Required-Fields Check Unavailable — retry shortly", which looked like a Glade outage and left teams retrying a filing that would never succeed until the underlying data was corrected. A genuine outage still reports as unavailable, so the two are now distinguishable.
 
 ### Required documents check before filing
 
