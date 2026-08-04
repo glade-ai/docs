@@ -2,7 +2,7 @@
 
 ## Overview
 
-Court notice automations send emails automatically when classified PACER court notices arrive on a case. Your firm sets up rules that match incoming notice types, and Glade fires the configured emails to the right recipients with the right context — without anyone on your team having to watch the inbox. Automations are managed under **Workflow Reports → Court Notices → Automations**.
+Court notice automations act automatically when classified PACER court notices arrive on a case — sending emails and creating tasks. Your firm sets up rules that match incoming notice types, and Glade fires the configured actions to the right recipients with the right context — without anyone on your team having to watch the inbox. Automations are managed under **Workflow Reports → Court Notices → Automations**.
 
 ## Key Behaviors
 
@@ -69,6 +69,38 @@ Every court notice now carries the **docket text** and **docket number** recorde
 
 Notices that arrived before this was fixed still have blank video hearing details. Contact Glade to have those cases re-processed if your team relies on those tokens.
 
+### Creating a task from an automation
+
+As well as sending an email, an automation can create a task on the case when it fires. Who that task is assigned to can depend on the notice, using **assignment rules**.
+
+Each rule combines up to three conditions with a list of the people to assign:
+
+| Condition | Matches on |
+|-----------|-----------|
+| **Chapter** | Chapter 7 or Chapter 13, compared the same way as the automation's own chapter filter |
+| **Judge** | The judge on the notice, compared by initials and case-insensitive, the same way as the automation's judge filter |
+| **Trustee** | The trustee named on the notice. Trustee names are free text, so they are compared ignoring capitalization and surrounding spaces |
+
+This lets one automation route work the way your firm actually divides it — Chapter 13 notices to the Chapter 13 paralegal, notices in front of one judge to the person who covers that judge, anything from a particular trustee to both.
+
+**How the conditions combine:**
+
+- Each condition is joined to the next by **and** or **or**, and the rule is read strictly left to right: chapter, then judge, then trustee. There is no precedence between **and** and **or** — "chapter **and** judge **or** trustee" means "(chapter and judge) or trustee", never "chapter and (judge or trustee)". Order your conditions with that in mind.
+- A condition you leave blank drops out of the rule entirely, along with the operator that joined it. It is not treated as a match. A rule with a chapter and a trustee joined by **or**, and no judge, matches a notice that is either in that chapter or from that trustee.
+- A rule with all three conditions blank always matches. Use one as a catch-all so notices that fit none of your specific rules still land with someone.
+
+**How assignees are worked out when the automation fires:**
+
+- Every rule is evaluated against the notice, and **one task** is created — not one per rule and not one per person.
+- The assignees from every rule that matched are combined. Someone named by two matching rules is assigned to the task once.
+- If no rule matches the notice, no task is created and the run is recorded as skipped.
+- If rules matched but none of their assignees can be resolved — for example every one of them was a team member who has since been removed — no task is created and the run is recorded as skipped.
+- An automation with two separate task actions still creates two tasks, as before.
+
+The trustee picker is populated from the trustees who have actually appeared on PACER notices for your firm in the last 12 months, most frequent first — the same way the judge picker works.
+
+Automations set up before assignment rules existed keep working unchanged. Their single list of assignees reads as one rule with no conditions, so the same people are assigned on every firing until you add conditions.
+
 ### Recipients
 
 Recipients are the people who receive the email when the automation fires. Three recipient kinds are supported and can be combined on a single automation:
@@ -122,6 +154,7 @@ Tokens are case-insensitive and tolerant of extra whitespace inside the braces. 
 | Chapter | Chapter 7, Chapter 13, or any. |
 | Judge | Specific judge or any. |
 | Recipients | Combination of case-party tokens, team members, and literal email addresses. |
+| Assignment rules | For an automation that creates a task: a list of rules, each with an optional chapter, judge, and trustee condition joined by **and**/**or**, plus the people to assign. At least one assignee per rule. |
 | Subject and body | Email content with optional tokens for case number, notice type, client name, judge initials, firm name, debtor names, the 341 meeting date and time, and video hearing join details. |
 
 Edits are tracked: each save records who made the change and when, alongside who originally created the automation.
@@ -136,7 +169,10 @@ Edits are tracked: each save records who made the change and when, alongside who
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
 - Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
 - Failed runs are not retried automatically. The failure shows as the automation's last run status.
-- Branching or conditional logic inside a single automation is not supported. Use separate automations for separate scenarios.
+- Conditional logic inside a single automation is limited to assignment rules on a task action — they decide *who* a task goes to, not whether the automation fires or what the email says. The automation's own trigger has no branching; use separate automations for separate scenarios.
+- Assignment-rule conditions cover chapter, judge, and trustee only. There is no condition on other notice details.
+- Assignment-rule conditions are evaluated strictly left to right with no operator precedence. A rule that mixes **and** and **or** may not mean what it reads like at a glance — check the grouping described above.
+- A rule whose conditions are all blank matches every notice. Leaving a rule empty by accident assigns its people to every firing.
 - Action titles are not recorded on a run's history. A run identifies which action fired, but if you rename an action later, past runs reflect the current title rather than the one in place when they ran.
 - The find bar searches automation names, match types, and action titles. It does not search email subject or body text, recipients, or judge filters.
 

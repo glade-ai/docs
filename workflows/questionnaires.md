@@ -161,6 +161,20 @@ By default, currency fields show $0.00 on first load. You can delete the value t
 
 If the questionnaire template has **Default to blank** enabled for a currency field, that field starts empty rather than showing $0.00. Enabling or disabling this setting is done in the questionnaire template editor by your firm's template administrator.
 
+When an autofill fills a currency field but cannot work out an amount, the field is set to **$0.00** rather than being left with no amount at all. Previously a field in this state could print as a blank line on the generated petition — a sworn figure with nothing in it. Anything that represents a deliberate answer is left exactly as it is and is never replaced by the $0.00 default:
+
+- a value marked **Unknown**,
+- a value **overridden with text**, and
+- an amount you have entered yourself.
+
+### Court Division
+
+The **court division** field lists the divisions belonging to the case's filing district. Where a district has only one division to file in, that division is selected for you when the field is still empty, so the questionnaire is not held up by a choice with only one answer.
+
+- Districts with more than one division still require you to pick one.
+- Divisions that exist only as electronic-filing variants of another division are not offered, and divisions that appear more than once in the underlying court list are shown once.
+- Auto-selection only fills an empty field. A division you have chosen is never replaced.
+
 ### Marking a Value as Unknown
 
 On bankruptcy Schedule A/B, an asset's current value can be marked **Unknown** (or overridden with custom text) instead of a dollar amount. When that value feeds a calculated line — for example, a figure carried onto another line or copied to Schedule C — the calculated line now shows **Unknown** (or the entered text) rather than $0.00. This matches how the value already appears in the answer view, and it carries through to both the live preview and the generated and filed petition. Section and part totals that are meant to stay numeric continue to show a dollar amount.
@@ -297,6 +311,13 @@ Glade does not replace a value you entered by hand with an autofilled one. That 
 
 Both were silent. If your team reviewed list or table data and found figures that did not match what was entered, the values are worth re-checking against the source documents; nothing was flagged at the time.
 
+#### Autofills That Combine Several Values
+
+Some autofills gather several values into one field — for example collecting the descriptions of a client's assets onto a single line of a court form.
+
+- The values are separated by a **semicolon and a space**, not a comma. Free-text entries such as asset descriptions routinely contain commas of their own, which made a comma-separated line impossible to read as a list.
+- Lines filled before this change may still use commas. Re-run the autofill on the field to re-join it with semicolons.
+
 ### AI Autofills
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
@@ -372,6 +393,8 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - All finalized versions appear together under a single **Chapter 13 Plans** folder, listed as individual files. Each version is no longer split out into its own separate folder, so you can see the full version history of the plan in one place.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
 - A claim whose treatment does not carry interest — a pro-rata secured treatment, for example — prints a blank interest rate rather than a figure. On the Northern District of Ohio plan form, changing a claim to one of these treatments used to leave the rate from the treatment you selected before it sitting in the §3.2 and §3.3 rate cells, so the plan showed an interest rate for a claim that pays none.
+- **Dollar signs come from the value, not the form.** A money entry that holds a number prints with a dollar sign — `$1,234`. A money entry you have **overridden with text** prints exactly the text you typed, so `TBD` prints as `TBD` rather than `$TBD`. A money entry with no value at all prints as an empty cell rather than a lone `$`.
+- Every amount in the plan's payment schedule carries a dollar sign, including the first one. Previously the first amount in a schedule printed bare while the rest were marked.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
@@ -434,6 +457,24 @@ Case records hold entities such as creditors and assets that feed synced questio
 - Deleted entities appear in a removed-items view. Restoring an entity returns it to the case record and re-creates its corresponding questionnaire row with the values it had.
 - Deleting entities from the case record keeps synced questionnaire lists in step: the matching rows are removed, and the remaining rows in a sync-enabled list continue to show their values. Previously, deleting case-data entities could leave blank rows where the deleted items used to be in lists such as "Your Property"; those rows now display correctly, and the deleted items still appear under Removed Items.
 - **Removal history on a removed item.** Opening an item in the removed-items view shows every time it was removed or restored, oldest first, with who did it and when. An item that was removed, restored, and removed again shows all three events rather than only the most recent one — so on an amended schedule your team can explain why an asset or creditor is no longer on the petition. Removals Glade carries out on its own, such as a credit report resync, a questionnaire resync, or duplicate cleanup, are recorded with no person named against them.
+
+### Blank Rows Are Not Written to the Case Record
+
+An empty row left behind in a questionnaire list — a creditor row someone started and abandoned, a blank property row — is not written to the case record. Only rows with at least one field filled in create a creditor, asset, or other case entity.
+
+- A blank row alongside filled rows is skipped; its filled siblings are still saved as normal.
+- A partly-filled row is kept. Only rows where every field is empty (or contains nothing but spaces) are dropped.
+- Nameless entries created before this took effect are cleaned up the next time the questionnaire syncs — they are treated as no longer present and removed from the case record.
+
+Blank creditor rows previously became nameless creditors on the case, which then spread into the schedules and could leave them unusable until someone cleaned the case record up by hand.
+
+### Upgrading a Questionnaire and Case Data
+
+Upgrading a questionnaire to a newer template version does not remove case data that the questionnaire does not cover.
+
+- Property, creditors, and other case entities that came from elsewhere — a sibling questionnaire, a credit report import, your team entering them directly — survive the upgrade.
+- Case entities are only cleared out during an upgrade when the questionnaire being upgraded is the bankruptcy schedules questionnaire *and* it is actively syncing with case data. That is the only case where the form genuinely owns those lists.
+- Previously, upgrading any questionnaire cleared every live asset and creditor that the new version did not contain. Upgrading a form with no property list, for example, could wipe all of the case's property. If a case lost case-data entries after a questionnaire upgrade, restore them from the removed-items view (see [Deleting and Restoring Case Data Entities](#deleting-and-restoring-case-data-entities)).
 
 ### Creditor Duplicate Status
 
@@ -499,6 +540,17 @@ When the signature confirmation modal appears at submission time, you have three
 - **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
+
+### Generating a Draft Petition
+
+While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. Three actions sit together on the form: **Check petition**, **Generate draft**, and **Submit petition**.
+
+- **Generate draft** builds the petition PDF from the answers as they stand right now. The schedules task stays open, the workflow does not advance, and the client is not notified. Only **Submit petition** does those things, and its behavior is unchanged.
+- You can generate a draft as many times as you need while you keep editing. Each run produces a fresh PDF from the current answers.
+- A short status message appears while the PDF is being assembled. When it is ready, a **Draft petition generated** message with an **Open draft** link stays on the form — the link opens that exact draft in a new tab, so you can come back to it after the status message has gone.
+- Clicking **Generate draft** again while a draft is already being built does not start a second run.
+
+Generating a draft is available to your team on a supported bankruptcy schedules questionnaire. Previously the only way to produce a petition PDF was to submit the questionnaire, which also completed the schedules task and moved the case forward — so a paralegal who wanted a copy to check had to advance the case to get one.
 
 ### Petition Check Summary
 
@@ -592,6 +644,15 @@ If you choose to keep the current answers, a warning banner appears at the top o
 
 - **Reconnect without changing answers** — the banner explains the questionnaire is no longer syncing with case data and offers a **Reconnect to case data** action. Choosing it simply turns syncing back on: your current answers are kept exactly as they are, and there is no confirmation prompt. From then on, edits to the questionnaire flow back into the case record — and into downstream documents such as the petition — again. Use this when a reopened questionnaire's edits have stopped carrying over to the rest of the case.
 - **Get back in sync (replaces answers)** — the banner reads *"This questionnaire is out of sync with case data."* and offers a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns syncing back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+
+#### What the sync preview shows
+
+Before you apply anything, the **Get back in sync** preview shows what would change, as a before-and-after comparison rather than only the incoming value. This lets you judge each difference on its merits instead of accepting the whole set on trust.
+
+- **Individual fields** show the questionnaire's current answer alongside the value from the case record — *current → proposed*. Where the questionnaire has no answer yet, the row reads as setting the value rather than changing it.
+- **Existing creditors and properties** show a per-field comparison of only the fields that would actually change. Previously these rows were labeled just "Update", with no indication of which details differed or by how much — so the only way to know was to apply the change and compare afterwards.
+- **New creditors and properties** are shown as additions with the values that would be added. There is nothing to compare against for these.
+- You choose which changes to apply. Applying nothing at all simply reconnects the questionnaire to case data without overwriting any answers.
 
 ### Editing a Completed Questionnaire After the Petition Is Drafted
 
