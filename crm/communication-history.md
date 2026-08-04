@@ -29,6 +29,16 @@ Case conversations — the discussions attached to a client's active workflow �
 - Only team members can reply to an internal note. Clients cannot post replies in an internal note thread.
 - Tagged team members on an internal note or its replies receive the standard internal note email notification — but the client is never included.
 
+#### Editing an internal note
+
+An internal note can be edited after it is posted. While you are editing:
+
+- Pressing **Enter** starts a new line, so you can write a multi-paragraph note without it being posted early. Previously Enter submitted the edit immediately — paralegals adding a second paragraph to an existing note had it saved mid-thought and had to re-open it to continue.
+- Saving is always deliberate: use the **Save** button when the note reads the way you want.
+- Mentioning a teammate with `@` works as it always has. While the mention list is open, Enter picks the highlighted person rather than adding a line break.
+
+Writing a new note is unchanged — Enter has always added a line there.
+
 ## Configuration
 
 - **AI toggle**: Enable or disable AI responses on a per-conversation basis. Requires team member permissions.
