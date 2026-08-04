@@ -72,6 +72,17 @@ Custom reports let your firm build its own view over case data, choosing the col
 
 > TODO: This section documents only the filter and column behavior confirmed by recent changes. Building, saving, and sharing a custom report is not yet described — fill in from the custom report builder.
 
+#### Who created a report
+
+Every saved report shows the team member who created it, with their name and profile photo on the report card, so a firm with dozens of saved reports can tell at a glance whose view each one is.
+
+- The person shown is the report's original creator. It does not change when someone else edits the report.
+- A **Created by me** filter narrows the report list to the reports you created. Combine it with the search box to find your own saved view quickly.
+- If the person who created a report has since been removed from the firm, the report still lists and remains usable — it simply shows no creator.
+
+#### Filtering a report
+
+- **Attorney**: An **Unassigned** option returns only cases with no attorney assigned, so you can find cases that still need an attorney on them. It is an exclusive choice — selecting **Unassigned** returns unassigned cases only, rather than combining with specific attorneys you have also picked.
 - The **Workflow type** filter lists only case types your firm can actually be working: a type appears if it has an active attorney-case template, or if at least one case has ever been opened under it.
   - This is a deliberate narrowing. The filter previously listed every workflow template that had ever existed on the firm, which included abandoned "New Workflow" drafts and per-service utility templates that were never used for client matters — one firm saw 52 options where roughly 30 were meaningful. If your list of workflow types is much shorter than it used to be, nothing has been deleted; the unusable entries are simply no longer offered.
   - **Archived case types that have real cases behind them remain selectable.** An archived "… with Filing" type that your firm filed cases under still appears, so historical reporting on it is unaffected.
@@ -81,6 +92,36 @@ Custom reports let your firm build its own view over case data, choosing the col
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
+
+#### Date filters
+
+When you filter a report by a date — cases filed in a range, court notices received in a range — the days you pick are treated as whole calendar days in your firm's time zone.
+
+- Picking a single day returns everything that happened on that day, from midnight to midnight in your firm's time zone. An end date includes the whole of that day rather than stopping at the start of it.
+- Because the boundaries follow your firm's time zone, a report run in the afternoon returns the same rows as the same report run that evening. Previously the day boundaries were fixed to UTC, so firms outside UTC could see records from the edge of a neighboring day included or dropped.
+- If your firm has no time zone configured in settings, day boundaries fall back to UTC. Set your firm's time zone if your date-filtered reports look shifted by a few hours. See [Settings](./settings.md).
+- A date that is not a real calendar date (for example, February 31) is rejected with an error rather than being silently rolled forward to the next valid day.
+
+#### Searching within a filtered report
+
+The search box narrows whatever the filters have already returned — it never widens it.
+
+- A search term can only reduce the rows a filter returned. It cannot surface a case the filters exclude, and it cannot hide a case the filters include.
+- Previously a search term could silently cancel out some filters, so the same report with and without a search term disagreed about which cases belonged in it. A report filtered to cases filed this month, for example, could return unrelated cases from other months as soon as anyone typed in the search box. If your team stopped trusting search on a filtered report, try it again.
+
+#### Payments reports
+
+Payments are available as a custom report subject, so your firm can build a saved view over its payment records the same way it does over cases — for example, *payments that failed in the last 7 days on a case with a payment plan*.
+
+Payment reports can be filtered and sorted by:
+
+- **Payment status** — one or several statuses at a time (for example, failed and pending together). This replaces having to pick a single status.
+- **On a payment plan** — restrict to payments that are part of a payment plan, or to payments that are not.
+- **Invoice** — restrict to the payments made against one invoice.
+- **Payment method** — search by payment method to narrow to a particular card or bank account.
+- **Date order** — sort oldest-first or newest-first. Paging through a large payment report is stable: payments that share the same timestamp (every charge in one payment-plan run, for example) keep a consistent order instead of some rows repeating on one page and going missing from another.
+
+Choosing several statuses and the older single-status filter at the same time is not allowed — the report asks you to use one or the other. **Refunded** is not a payment status; a refund is recorded as an amount returned on a payment, so it is only available through the single-status filter.
 
 ## Configuration
 
@@ -92,6 +133,8 @@ Custom reports let your firm build its own view over case data, choosing the col
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
+- **Custom report date filters**: Day boundaries follow your firm's configured time zone. There is no per-report time zone setting. A firm with no time zone configured falls back to UTC.
+- **Payments report filters**: Payment status (one or more), payment-plan membership, a specific invoice, payment method search, and date sort order. There is no setting that enables these — they are available on any payments report.
 
 ## Edge Cases & Limitations
 
@@ -100,6 +143,10 @@ Custom reports let your firm build its own view over case data, choosing the col
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
+- The **Created by me** filter on the report list matches the report's original creator only. There is no filter for "reports I have edited".
+- A payments report cannot combine the multi-select **Payment status** filter with the older single-status filter. Use one or the other.
+- **Refunded** is not selectable in the multi-select payment status filter, because a refund is an amount returned on a payment rather than a status the payment sits in.
+- Custom report date filters interpret the days you pick in your firm's time zone. Reports run before this was corrected may have included or omitted records at the edges of the range — re-run any date-filtered report whose totals looked slightly off.
 
 ## Related Features
 
