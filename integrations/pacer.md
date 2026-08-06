@@ -103,6 +103,7 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - When the filing completes, the header shows a green check and "Filing completed." When it fails, a red indicator and "Filing failed" appear.
 - If you cancel a filing in progress, the header shows "Cancellation pending" until the cancellation is confirmed.
 - Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
+- **Three failure reasons that used to show no detail now explain themselves.** A filing that stopped because the PACER login did not finish loading, because a required file was missing from the packet, or because the court site landed on a page Glade did not expect used to leave the progress detail empty and show only a generic "Case sync failed" message on the dashboard. Each of these now reports its own explanation, so your team can tell a court-site problem worth retrying from a packet problem it has to fix first. Other failure reasons were already explained and are unchanged.
 
 ### Status tracking
 
