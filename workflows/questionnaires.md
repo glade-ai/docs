@@ -350,6 +350,7 @@ Case records hold entities such as creditors and assets that feed synced questio
 - Each deletion is kept with who deleted it and when, and is retained as history rather than silently discarded. Restoring an entity is recorded the same way.
 - Deleted entities appear in a removed-items view. Restoring an entity returns it to the case record and re-creates its corresponding questionnaire row with the values it had.
 - Deleting entities from the case record keeps synced questionnaire lists in step: the matching rows are removed, and the remaining rows in a sync-enabled list continue to show their values. Previously, deleting case-data entities could leave blank rows where the deleted items used to be in lists such as "Your Property"; those rows now display correctly, and the deleted items still appear under Removed Items.
+- **Removal history on a removed item.** Opening an item in the removed-items view shows every time it was removed or restored, oldest first, with who did it and when. An item that was removed, restored, and removed again shows all three events rather than only the most recent one — so on an amended schedule your team can explain why an asset or creditor is no longer on the petition. Removals Glade carries out on its own, such as a credit report resync, a questionnaire resync, or duplicate cleanup, are recorded with no person named against them.
 
 ### Creditor Duplicate Status
 
@@ -391,6 +392,12 @@ If you navigate to a questionnaire you are not assigned to and are not a member 
 ### Navigating to Fields with Errors
 
 When a section or subsection shows a validation-error badge, clicking the badge opens a dialog that lists every field in that subsection still needing attention, each with its label and error message. Selecting a field takes you straight to it — switching to the right subsection if needed — scrolls it into view, focuses it, and briefly highlights it, so you can fix each issue without scanning the whole subsection by eye.
+
+Every issue leads with the label of the field it belongs to, so an entry reads **8b. Interest and dividends — 'Amount' is required** rather than a bare *'Amount' is required* that could belong to any line on the form. Where the message already names the field, the label is not repeated.
+
+Issues on a table cell also name the column they sit in, next to the subsection — for example **Part 2: Give Details About Monthly Income · Debtor 1**. A questionnaire table repeats the same fields across columns, so without this, a form such as Schedule I's income table produced runs of identical entries (eight consecutive *'Amount' is required* lines) with no way to tell which line or which debtor each one was for.
+
+Composite fields — an address, a name, a currency amount — list each missing part under one heading rather than as unattributed fragments: **Firm address — 'City' is required; 'State' is required; 'ZIP Code' is required**.
 
 Completion and error counts treat a deliberate **0** or a **No** (false) answer as a valid, complete response. Number and yes/no fields answered this way are no longer counted as incomplete, so the badge counts reflect only fields that are genuinely unanswered.
 
@@ -484,6 +491,7 @@ The creditor mailing matrix is assembled from every party who should receive not
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening](#re-opening)).
 - Required-field validation skips list rows that will not be filed. Rows merged into another as duplicates (for example, deduplicated creditors) and rows explicitly marked to omit from the petition are not checked for missing required fields, so leftover data on those rows does not block submission.
+- Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
