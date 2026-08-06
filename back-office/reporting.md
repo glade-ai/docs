@@ -88,6 +88,7 @@ Custom reports let your firm build its own view over case data, choosing the col
   - An address that exists only on the client record in the Clients panel, and was never written to case data, shows as blank. If a case shows an address on screen but not in the report, that is the reason — contact Glade support if you need those addresses brought across.
   - The column is for display. Sorting or filtering the report by client address is not available.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
+- **An export now matches the report it came from.** The file is built from the report itself rather than assembled out of the pages on screen, so every column you selected is in it — including columns your firm defined for its own workflow roles, which used to be dropped from the file without warning — and the report's filters and sort order are carried through. Rows beyond the page you are looking at are included. Exports work the same way on case, court notice, and payments reports. If your firm compared an export against the report on screen and found columns or rows missing, re-run it.
 - **Reaffirmation agreement**: A column and a matching filter report whether a case intends to reaffirm any debt. A case counts as reaffirming when at least one creditor on the bankruptcy schedules questionnaire's creditor list answers the statement-of-intention question — "What do you intend to do with the property that secures the debt?" — with **Retain the property and enter into a Reaffirmation Agreement**. One qualifying creditor is enough for the whole case.
   - Only creditors listed on **Schedule D** are considered. The same intention question is asked on every creditor row, and rows on Schedules E/F/G carry a default answer that does not indicate an intention about secured property, so counting them would report cases as answered when nothing was decided.
   - Creditor rows excluded from the petition are ignored.
@@ -130,6 +131,8 @@ Alongside the personal dashboard each person sees on their own homepage, a firm 
 - A named dashboard cannot reuse the name of another named dashboard at the same firm, regardless of capitalization.
 - The **Court district** filter only returns cases with a district assigned to them. Cases that record a district as free text but have none assigned are excluded from a filtered report.
 - The **Client address** column is blank for a case whose address was never written to case data, including cases whose address is held only on the client record. It cannot be sorted or filtered on.
+- A custom report export covers up to **50,000 rows**. A report with more rows than that exports the first 50,000 — narrow the filters and export in batches if your firm needs the rest.
+- A very large export can run out of time before the file is produced, in which case the export fails rather than returning a partial file. Filter the report down and run it again.
 
 ## Related Features
 
