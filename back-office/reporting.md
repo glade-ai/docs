@@ -81,6 +81,7 @@ Custom reports let your firm build its own view over case data, choosing the col
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
+- **An export now matches the report it came from.** The file is built from the report itself rather than assembled out of the pages on screen, so every column you selected is in it — including columns your firm defined for its own workflow roles, which used to be dropped from the file without warning — and the report's filters and sort order are carried through. Rows beyond the page you are looking at are included. Exports work the same way on case, court notice, and payments reports. If your firm compared an export against the report on screen and found columns or rows missing, re-run it.
 
 ## Configuration
 
@@ -100,6 +101,8 @@ Custom reports let your firm build its own view over case data, choosing the col
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
+- A custom report export covers up to **50,000 rows**. A report with more rows than that exports the first 50,000 — narrow the filters and export in batches if your firm needs the rest.
+- A very large export can run out of time before the file is produced, in which case the export fails rather than returning a partial file. Filter the report down and run it again.
 
 ## Related Features
 
