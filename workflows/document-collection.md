@@ -38,6 +38,12 @@ The Documents tab collects everything gathered on a case in one place, organized
 - **The item count matches what you can see.** The "N items" label on a group counts the rows actually shown, including placeholders for files not yet uploaded.
 - **Downloading a group as a zip produces the same folder structure** you see on screen.
 
+### Previewing documents and forms
+
+Previews always render as paper — dark text on a white page — whether or not you are using Glade's dark appearance. This covers previews of uploaded documents, generated PDFs, and both the preview and the edit view of court forms.
+
+Previously a preview took its background from the surrounding page, so a team member working in the dark appearance could open a court form and find the form's black text sitting on a dark background, leaving parts of it hard or impossible to read. Downloaded and filed copies were never affected — they have always come out as white paper with dark text.
+
 ## Configuration
 
 - **Document request templates** define the title, followup settings, auto-assignment behavior, archival status, type, and whether it is for your team.
