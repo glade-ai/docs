@@ -560,6 +560,12 @@ Questionnaires can be open in multiple browser sessions at once — for example,
 - Deleting an item from a deduplicated list — for example, removing a creditor from the Bankruptcy Schedules Master Creditor List — now also removes the hidden duplicate entries grouped under it. Previously those duplicates were left behind and one would resurface as a visible row after the form reloaded, so a creditor you had just deleted appeared to come back. The removed creditor now stays gone after a refresh.
 - Deletions made in a linked list (a list that mirrors another list) now save reliably. Previously a row removed from a linked list could be silently ignored and reappear after reloading.
 
+### Very Large Questionnaires
+
+Questionnaires with hundreds of list rows stay responsive while you work in them. On the largest bankruptcy schedules — a master property or creditor list running to several hundred rows — the form could previously stall long enough that the browser offered to close the page, most often while autofilled and calculated values were being recalculated after an edit. Editing, saving, and moving between sections on those forms now proceed without that pause.
+
+Nothing about how answers are recorded changed, and there is no setting to adjust — only how quickly the form keeps up with you.
+
 ### Outdated Template Upgrade Prompt
 
 If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked.
