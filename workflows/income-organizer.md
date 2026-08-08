@@ -97,6 +97,14 @@ Some uploads are classified as a type the Income Organizer cannot pull income fi
 
 Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
 
+### Working Behind the Edit Income Data Panel
+
+**Edit income data** opens as a floating panel you can drag aside, so you can read a paystub or the organizer's own table while entering figures. It behaves that way from the moment it opens: the page behind it scrolls and responds to clicks straight away.
+
+Previously the panel blocked everything behind it until you grabbed its **Drag to move** handle. Until you did, the income table would not scroll and the application read as frozen — with no indication that dragging the panel was what released it. If your team learned to grab the handle first, or avoided the panel on longer income tables, neither is necessary now.
+
+This applies to Glade's draggable panels generally, including the PDF preview panel, all of which are meant to be moved aside and worked alongside rather than dismissed.
+
 ### Automatic Re-extraction on Workflow Load
 
 Some older income organizers may need their paystub data re-extracted (for example, after a backend improvement to how paystub data is read). Glade handles this automatically:
