@@ -62,6 +62,20 @@ Credit counseling recency was held back from the first release and has since bee
 
 > TODO: Confirm the exact condition under which the Statement of Intention check applies. It is a conditional requirement tied to the case's secured claims and fee election rather than one that applies to every Chapter 7 filing.
 
+#### Skeleton filings
+
+A skeleton filing submits only the minimum set of documents a district accepts to open a case, with the remaining schedules and forms filed afterwards. The pre-filing review now takes that into account:
+
+- When a case is submitted as a skeleton filing, the required-documents check reads the district's **skeleton packet** requirements instead of its full-packet requirements. A document the district requires only in the complete packet no longer blocks a valid skeleton submission.
+- Documents a district requires only when they apply are treated the same way in skeleton mode as in a full filing — absent is not the same as missing.
+- The filing packet checklist and the list of expected documents still show the district's full shape either way. Only what the review treats as *required* changes; nothing disappears from the packet view.
+- Filings that are not marked as skeleton are unchanged and continue to be checked against the district's complete required-document list.
+- Each review records the mode it ran in, so a result can be read back against whether it was checked as a skeleton or a full packet.
+
+Skeleton requirements are defined per district, alongside that district's other filing rules. Kentucky Eastern is now set up for electronic filing, with its required documents pre-selected for skeleton submissions.
+
+> TODO: Confirm where a filing is marked as a skeleton filing — whether it is a choice in the eFiling modal at submission time or a setting on the case.
+
 ### Recognized documents uploaded outside the filing modal
 
 Some court documents — for example, documents pulled from PACER — belong in a specific slot of the electronic filing packet. When you add such a document through the case's normal document area instead of from inside the eFiling modal, Glade now recognizes documents whose file name matches a known filing document and automatically places them in the correct packet slot.
