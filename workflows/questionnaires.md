@@ -288,6 +288,15 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 - **Arrearage cure amounts** can be populated on line 34 of Forms 122A-2 and 122C-2 from the arrearages recorded on the Master Creditor List. Each active creditor with an arrearage above zero produces one row carrying the creditor name, the secured property, and the total cure amount. Creditors with a zero arrearage, and creditors excluded as above, produce no row.
 - The **monthly cure amount** on that line is not set by this autofill — it continues to be calculated from the total cure amount, so re-running the autofill does not disturb it.
 
+#### Autofills and Values You Typed in List and Table Rows
+
+Glade does not replace a value you entered by hand with an autofilled one. That protection applies to fields inside list and table rows — creditors, properties, income lines — as it does everywhere else on the form. It had stopped working there:
+
+- **An autofill could overwrite a value your team typed into a list or table row.** Glade failed to recognise the row's existing value as manually entered and treated the field as empty and therefore safe to fill. Every list and table field was affected. A figure a paralegal had corrected could be quietly replaced by an autofilled one, with nothing in the form to indicate the correction had been lost.
+- **A value calculated for one row could be written into a different row.** With a row's detail view open, an autofill computed for another row could land on the open row's field instead, overwriting whatever was there — including a manually entered value, which was never checked before the write. Values computed for any row other than the one you have open are now skipped rather than redirected, so a value never lands on a row it was not calculated for.
+
+Both were silent. If your team reviewed list or table data and found figures that did not match what was entered, the values are worth re-checking against the source documents; nothing was flagged at the time.
+
 ### AI Autofills
 
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
@@ -605,6 +614,13 @@ Links between related case records — a creditor and the property securing it, 
 When a questionnaire generates multiple documents — for example, filled court forms alongside supplemental documents such as a creditor matrix — the documents appear in the case document list in a consistent order: filled court forms first, followed by other questionnaire-generated documents. This ordering is maintained even when new sections are added to the questionnaire after some documents have already been created.
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
+
+The creditor matrix is also included in the **petition draft** — the review copy generated when the Schedules Builder questionnaire is submitted. Firms read this draft page by page with the debtor at the signing appointment, so anything left out of it is not reviewed with the client. The matrix is appended as the final pages:
+
+- It is added at the end, so the page numbering of everything before it is unchanged and signature pages fall where they did before.
+- It is treated as a review page, not a page requiring a signature — the debtor reads it, but is not asked to sign it.
+- If the matrix cannot be generated for some reason, the draft is still produced without it rather than failing outright. If a draft comes out with no matrix at the end, generate it again.
+- This applies to the draft only. The petition compiled for filing does not include the matrix in its pages — the matrix is filed as its own document in the packet.
 
 ## Edge Cases & Limitations
 

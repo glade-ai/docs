@@ -46,6 +46,29 @@ A trigger has three parts. All must match for the automation to fire:
 
 The judge picker is populated from the judges who have actually appeared on PACER notices for your firm in the last 12 months, sorted by how often they appear so the most common judges are at the top.
 
+### How notices are classified
+
+Because the trigger is an exact match on notice type, what an automation fires on depends entirely on how the incoming notice was classified. Classification now works from the notice itself before falling back to interpretation: when a notice carries a recognisable official form number or filing title, that identifier decides the type outright, so the same document is classified the same way every time rather than being read afresh on each arrival.
+
+Several types were added or narrowed:
+
+- **Means test and income statements are now four distinct types** rather than one general classification — Chapter 7 Statement of Current Monthly Income (Form 122A-1), Chapter 7 Means Test Calculation (Form 122A-2), Chapter 13 Statement of Current Monthly Income (Form 122C-1), and Chapter 13 Calculation of Disposable Income (Form 122C-2). An automation can now target the specific form and chapter instead of firing on all of them.
+- **Three new types** are available: Statement of Financial Affairs, Notice to Court of Intent to Argue, and Withdrawal and Substitution of Attorney.
+- **521 Compliance** is only applied when the notice explicitly cites Section 521. Notices that merely resemble a compliance notice are no longer classified this way.
+- **Investigating Asset** is now limited to trustee reports that explicitly describe an ongoing investigation into estate property. Recovered-asset and claims-bar notices, routine 341 meeting reports, no-distribution reports, and final reports are classified as what they are and no longer land here. An automation set up to watch for asset investigations fires on far fewer, more relevant notices as a result.
+
+**Notices already on your cases are not reclassified.** These rules apply to notices received from now on. A notice that arrived under the old classification keeps the type it was given, and an automation matching a new type will not fire retroactively for it.
+
+### Docket text on a notice
+
+Every court notice now carries the **docket text** and **docket number** recorded on the docket entry it came from. Both appear in the notice list, in the notice detail view, and in CSV and report exports, so your team can read the court's own wording for an entry without opening the notice or looking it up on PACER. Notices already on your cases show their docket text immediately.
+
+### Video hearing details on Florida Southern 341 notices
+
+341 meeting notices from the Southern District of Florida publish their video hearing details in a format Glade could not previously read, so the meeting ID, passcode, and dial-in number were left blank — and any automation email using the video hearing tokens sent with those details missing. These notices are now parsed into the meeting ID, passcode, and phone number, and the tokens fill in as expected.
+
+Notices that arrived before this was fixed still have blank video hearing details. Contact Glade to have those cases re-processed if your team relies on those tokens.
+
 ### Recipients
 
 Recipients are the people who receive the email when the automation fires. Three recipient kinds are supported and can be combined on a single automation:
@@ -105,7 +128,8 @@ Edits are tracked: each save records who made the change and when, alongside who
 
 ## Edge Cases & Limitations
 
-- The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed.
+- The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed. This matters where a single type has been split into several: an automation that watched for means test and current-monthly-income notices needs one automation per form to keep the same coverage.
+- Classification changes apply only to notices received after the change. Notices already on your cases keep the type they were originally given.
 - Only the supported tokens listed above are recognized. Unknown tokens render as empty strings.
 - Hearing tokens depend on the linked court calendar entry. If a case has no 341 meeting scheduled or no video hearing details on file, those tokens render as empty strings.
 - The case-caption fallback for debtor names only supplies a name. It does not link the notice to a case, so the other case-context tokens on an unlinked notice stay empty.
