@@ -42,6 +42,19 @@ Select-type fields define their options as a list of choices, each with a label,
 
 Sections and fields can be dynamically shown or hidden based on the values of other fields. Conditions use an expression system with variables that reference other fields or external data.
 
+Conditions can be built two ways: a guided builder where you pick a field and a comparison, and an advanced mode where you write the condition yourself.
+
+#### Conditions on currency fields
+
+A currency answer carries more than a number — it also records the currency and whether the amount was marked unknown. A condition built on a currency field now compares the **dollar amount**, which is almost always what the author intends.
+
+- A condition such as "greater than 0" on a currency field works as written. Previously the comparison was made against the whole answer rather than the amount, so it could never be true — a section set to appear when an amount was above zero stayed hidden no matter what the client entered.
+- **Existing conditions are left exactly as they are.** The fix applies only to conditions created from now on. Editing a different condition in the same rule does not silently change how an existing currency condition behaves. To pick up the new behavior on a condition built earlier, delete it and add it again.
+- **Filled / Not filled reads the amount too**, on conditions created from now on. A currency field holding $0.00 counts as *not filled* under a newly created condition. If you want a rule that fires whenever the client has touched the field at all, including a deliberate $0.00, check the amount rather than using **Filled**.
+- Conditions written by hand in advanced mode are unchanged — the amount is not selected for you there, so keep writing those conditions the way you do today.
+
+> TODO: Confirm the in-product names for the guided builder and advanced mode, and whether the guidance above should name the specific controls.
+
 ### Linked Fields
 
 Linked fields let one field's value automatically propagate to another field within or across sections, keeping data synchronized. Changes propagate in real time as clients fill out the form.
