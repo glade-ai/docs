@@ -308,6 +308,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - All finalized versions appear together under a single **Chapter 13 Plans** folder, listed as individual files. Each version is no longer split out into its own separate folder, so you can see the full version history of the plan in one place.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
+- **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
 
 #### Secured Claims With an Arrearage Cure
@@ -425,6 +426,21 @@ Glade validates signature, date, and currency answers precisely so the check's c
 - A signature mark with no name after it (an empty electronic-signature placeholder) is not accepted as a completed signature.
 - A date that is present but not a recognizable date is flagged as **invalid** rather than passing silently. A date entered as free-form text, instead of picked from the calendar, counts as filled.
 - A currency amount marked **Unknown** or overridden with explanatory text counts as an answered field and is no longer reported as missing.
+
+### Cross-Form Consistency Checks
+
+Some answers have to agree with each other across different forms in the petition package. Glade compares them and reports a contradiction while the questionnaire is being authored, rather than leaving it to be found at the court.
+
+The checks currently cover business and self-employment income, which has been the most common source of a self-contradicting petition — gig or business income picked up on **Schedule I line 8a** while the petition's own business question is left unanswered.
+
+- **Business income reported without the sole-proprietor disclosure.** When Schedule I line 8a or **Form 122A-1 line 5** (gross receipts) reports business income, but petition **question 12** — *"Are you a sole proprietor of any full or part time business?"* — does not reflect it, the check flags the discrepancy.
+- **Business income reported without a matching Statement of Financial Affairs answer.** When Schedule I line 8a reports business income but **SOFA question 27** does not, the check flags the discrepancy.
+- **Findings point at the answer you need to change.** The sole-proprietor check reports against question 12 itself, so you are taken to the field that needs correcting rather than to a neighboring one.
+- These findings are **blocking**, which means they raise the submit-anyway confirmation described under [Submitting with Incomplete Fields](#submitting-with-incomplete-fields) rather than preventing submission outright. An attorney who has reviewed the discrepancy and is satisfied the answers are correct can still submit.
+
+A further check comparing question 12 against **SOFA question 4** (business gross income) and **SOFA question 27** is built but not yet switched on. It is held back because the two questions cover different periods — question 12 asks about a business the debtor runs *now*, while question 27 looks back four years and question 4 covers the two prior calendar years. A debtor whose business closed before filing answers question 27 *Yes* and question 12 *No*, both correctly, and the check would interrupt them anyway.
+
+> TODO: Confirm which petition questionnaire templates these checks are active on. They are turned on per template rather than across the board, so a firm may not see them on every petition questionnaire yet.
 
 ### Concurrent Edits to List Rows
 

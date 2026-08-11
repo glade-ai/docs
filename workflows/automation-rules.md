@@ -16,6 +16,7 @@ Automation rules define what happens automatically when events occur during a ca
   - **Send e-signature request** — sends a document for the client to sign electronically
   - **Send document request** — asks the client to upload specific documents
   - **Send email** — sends an email notification
+- **Send message actions can attach case-document forms.** A questionnaire marked as a case document — one your team fills in on the firm's behalf rather than sending out cold — can be attached to a workflow message like any other form. Previously these attachments failed: the step was marked failed, the client never received the form, and retrying failed the same way, because the attachment was checked as though the client were the one requesting the form. Sending a case-document form directly from the dashboard is unchanged and still limited to team members of the firm that owns the template.
 - After an action completes, the system enables the next trigger in the sequence. That next trigger waits for the client to take the required action (such as completing a questionnaire or uploading a document) before the workflow continues.
 - Workflows can apply to a specific service or apply globally across all services for your firm.
 - A workflow can be in one of three states: **active**, **draft**, or **stale**. Only active workflows run automatically.
