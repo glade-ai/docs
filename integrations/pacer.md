@@ -94,6 +94,14 @@ This status appears only for Chapter 13 packets in plan-generation districts. Ot
 - Payment is retried up to 3 times if the initial attempt fails.
 - The transaction number from PACER is recorded on the submission.
 
+### Attorney compensation disclosure (Form 2030)
+
+The attorney compensation amount disclosed on Form 2030 is read from the case questionnaire and carried into the filing.
+
+- Glade reads the amount from whichever compensation question the case's Form 2030 actually uses. Firms are on several versions of the form, and the answer may be a currency amount, typed text (including a formatted figure such as `1,600.00`), or a choice from a list — all of these are read correctly. Previously Glade looked for the answer on a retired version of the form only, so the amount reached the court blank on every filing.
+- A fee of **$0** — pro bono representation — is carried through as zero rather than treated as unanswered.
+- If the question has not been answered, or the answer is not a readable amount, the compensation figure is left unset. In districts that require it, this blocks the filing until the question is answered on the questionnaire.
+
 ### Filing progress panel
 
 A filing progress panel appears in the bottom-right corner of the screen when a PACER filing is running. It persists as you navigate to other pages — you do not need to stay on the filing tab to monitor progress.
@@ -138,6 +146,18 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
+
+### Proof of claim documents and the claims register
+
+Glade captures the proofs of claim creditors file against your case and organizes them into a claims register at the case level, so your team can review what has been claimed without opening each court notice one at a time.
+
+- **The claim PDF is captured.** Proof of claim notices link their document from the notice's claim number rather than a document number. Glade now recognizes both, so the claim PDF is stored with the case and appears in the Court Notices document column. Previously that column was empty for proof of claim notices and the document had to be retrieved from PACER by hand.
+- **Claims are listed per case.** The claims register shows every claim filed against the case, with a summary across all claims and a detail view for each one, instead of requiring the picture to be reassembled from individual notices.
+- **Claim details are extracted.** For each claim, Glade reads the creditor's name and address and the claimed amounts — total, secured, priority, and unsecured.
+- **Each claim shows its current state and its history.** Glade tracks where a claim stands now separately from the record of events on that claim, so later activity updates the claim without erasing what came before. Notices that arrive out of order do not leave the current state wrong.
+- **Certificates of Service are recognized from the notice subject**, so a notice that says what it is is classified without waiting on document analysis.
+- **A notice that arrives before its case is identified is not lost.** When a court notice cannot be matched to a case at the time it arrives and is associated with the workflow later, Glade extracts the claim information at that point.
+- Claims are visible only to the firm that owns the case.
 
 ### South Carolina (SCB) Chapter 7 filings
 
@@ -251,6 +271,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 - If a filing partially succeeds (some documents uploaded but fee payment fails), the submission is marked as failed. The attorney may need to complete the filing manually in PACER.
 - Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
+- The claims register covers proofs of claim received from the point the feature became available. Claims filed against a case before then are not added to the register on their own — contact Glade if a case needs its earlier claims brought in.
 
 ## Related Features
 
