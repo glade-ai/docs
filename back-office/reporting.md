@@ -80,6 +80,13 @@ Custom reports let your firm build its own view over case data, choosing the col
 - **Pending client tasks**: Segments cases by whether the client still has an incomplete task assigned to them. Both the "has pending" and "no pending" selections now return accurate results; previously selecting either could produce results that did not match the filter.
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
+- **Court district**: The report can be narrowed to one or more court districts, so you can answer "which cases are filed in these districts?" rather than only seeing the district on each row. The filter applies to the report on screen and to its CSV export.
+  - It matches on the district assigned to the case, not on district text typed into case data. The same court is often written several different ways by hand, which cannot be filtered on reliably.
+  - A case with no assigned district is not returned by a district filter, even if a district name appears elsewhere on it.
+- The **Client address** column reads the client's address from case data — the same address shown on the case's own case-data panel, written there by questionnaire sync, credit report pulls, and document extraction. The column was previously blank for most cases because it read an older location that almost nothing writes to any more; more than 10,000 cases across 51 firms had an address on file and an empty cell.
+  - Each part of the address resolves on its own, so a case with a street but no ZIP still shows the street.
+  - An address that exists only on the client record in the Clients panel, and was never written to case data, shows as blank. If a case shows an address on screen but not in the report, that is the reason — contact Glade support if you need those addresses brought across.
+  - The column is for display. Sorting or filtering the report by client address is not available.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
 
 ## Configuration
@@ -88,7 +95,7 @@ Custom reports let your firm build its own view over case data, choosing the col
 - **Team member filter**: The documents report accepts an optional list of team members to include.
 - **Workflow status filter**: The intake status report accepts an optional list of statuses to filter by.
 - **Workflow / service / retainer type filters**: The intake status report also accepts optional lists of workflow types, service types, and retainer types. Each list is capped at 500 entries.
-- **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), and pending client tasks. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
+- **Custom report filters**: Custom reports filter by workflow type (matching all versions of the selected template), completion event (including "retainer signed" and "retainer not signed"), pending client tasks, and court district. Workflow type selections are not subject to the 500-entry cap that applies to the intake status report's filters, so a firm with a large number of template versions can still select every type it needs.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
@@ -100,6 +107,8 @@ Custom reports let your firm build its own view over case data, choosing the col
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
+- The **Court district** filter only returns cases with a district assigned to them. Cases that record a district as free text but have none assigned are excluded from a filtered report.
+- The **Client address** column is blank for a case whose address was never written to case data, including cases whose address is held only on the client record. It cannot be sorted or filtered on.
 
 ## Related Features
 
