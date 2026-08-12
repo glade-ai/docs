@@ -24,6 +24,15 @@ Each income source (such as a paystub) can be set to one of these calculation mo
 - **YTD (year-to-date) mode**: monthly amounts are derived by dividing the year-to-date totals by the number of pay periods elapsed. Use this mode when per-period figures are unavailable or less accurate than the running YTD totals.
 - **YTD period method**: estimates average monthly income by comparing the year-to-date totals on the paystubs that bracket a chosen six-month period, then dividing the bracketed gross by six. You pick a **filing (test) month**, and Glade treats the six full months before that month as the period to measure. Use this mode to base the figure on a defined window rather than on the full running year-to-date total.
 
+### Where to Set the Calculation Mode
+
+The calculation mode is set from an **Income calculation** action in the income organizer header, available while table view is open. It was previously a small **Calculation:** button tucked inside the Employer cell of each row, which meant opening table view and then finding the right row for something that is set on most cases.
+
+- The header action names the mode currently in effect — for example **Calculation: All Paystubs** or **Calculation: YTD**. When the case's employment sources are set to different modes, it reads **Calculation: Mixed**.
+- If the case has more than one employment income source, opening the action asks which source you are setting before showing the settings. With a single employment source it opens straight onto that source's settings.
+- Changes are applied with **Apply Changes**, as before. If you switch to a different income source with unapplied changes, Glade asks whether to discard them — declining leaves you on the source you were editing.
+- Only employment income sources are listed. Non-employment income (Social Security, rental income, and similar) does not use these modes and is not offered.
+
 ### Period Method Preview
 
 When you choose the YTD period method, a preview shows how the figure is built before you apply it: the filing month you selected, the six-month period that falls before it, how many paystubs were used as the start and end anchors, the breakdown rows that make up the calculation, and the resulting monthly gross. The filing month defaults to the month after the latest paystub that carries year-to-date data, and you can change it.
@@ -58,6 +67,7 @@ Each income record carries its own switches for whether it counts toward Schedul
 
 - Excluding a record stays excluded when the underlying document is read again — for example after a re-upload, a re-run of the extraction, or an automatic background retry. Previously any re-read of the document silently switched the record back to counted, in both the income organizer and the means test, so a record your team had deliberately left out could reappear in the totals without anyone changing it.
 - A first-time extraction still starts with the record counted, and a document Glade could not read keeps its record out of the totals until a later successful read.
+- **Clearing the switches holds on the first try.** Turning **Include in Monthly Totals** or **Include in Means Test** off — for a whole income source or for one record — sticks, including on organizers with many paystubs and while AI is still reading uploaded documents in the background. Previously rows could re-check themselves moments after being cleared, so the same action had to be repeated several times before it held; that only happened on busy organizers, which is why it looked intermittent. If a change cannot be saved, the switch returns to its previous position and an error message appears, rather than appearing to save and then reverting on the next refresh.
 
 ### Income Records and Their Source
 
@@ -126,7 +136,7 @@ Some older income organizers may need their paystub data re-extracted (for examp
 
 | Setting | Description |
 |---------|-------------|
-| Calculation mode | Per-paycheck, YTD, or YTD period method, set per income source |
+| Calculation mode | Per-paycheck, YTD, or YTD period method, set per employment income source from the **Income calculation** action in the organizer header (table view) |
 | Filing (test) month | For the YTD period method, sets the month whose preceding six full months form the period being measured |
 | Pay frequency | Used to convert YTD amounts to monthly figures (e.g., weekly = 52 periods/year) |
 | Count toward Schedule I | Whether an individual income record is included in the Schedule I figure. Set per record; preserved when the document is read again |
