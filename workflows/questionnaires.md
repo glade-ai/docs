@@ -34,6 +34,8 @@ Fields support validation rules including minimum and maximum values, minimum an
 
 When a field fails validation, the field itself is visually highlighted — input borders, checkboxes, radio buttons, and date pickers change to indicate the error — and an error message appears below the field. This applies to all field types including short text, long text, date, address, and select fields.
 
+Dropdown fields follow the same layout as every other field type: the label turns red, the box is outlined, and the message appears once, below the box. Previously a dropdown such as **District of:** printed its message twice — once above the box and once below — while the field beside it showed a single message underneath, so the same error looked different on two adjacent fields.
+
 ### Field Options
 
 Select-type fields define their options as a list of choices, each with a label, key, default flag, and optional PDF fill key.
@@ -245,6 +247,17 @@ Fields populated by autofill show a status indicator so you can see where the va
 - **Edited** — You have manually changed the value after it was autofilled. Shown with a violet pencil icon and a re-run button if you want to restore the autofilled value.
 - **Not yet run** — The autofill has not been applied yet. Shown as a blue **Import Autofill** pill. Click it to trigger the autofill.
 
+#### Fields That Both Sync With Case Data and Autofill
+
+Some fields are set up to sync with case data *and* to be populated by an autofill — most of the income lines on Schedule I are in this position, since they are filled from the Income Organizer. On these fields the indicator names the source the current value actually came from:
+
+- A value that came from an autofill reads as populated from that source (for example, **Populated from Internal data**) and keeps its re-run control, so you can refresh it. Clicking the indicator opens the autofill's explanation panel.
+- A value that case data genuinely produced still reads **Synced with case data** and opens the case data view, and a value you have typed over still reads **Manually overridden** with the option to revert.
+
+Previously any field with a case data connection claimed to be synced with case data even when something else had filled it, and the re-run control was hidden — so on a Schedule I income line filled from the Income Organizer, there was no way to refresh the value and the stated source was wrong. Where the value is refreshed from and where edits are saved has not changed; only the reported source and the availability of the re-run control.
+
+> TODO: Confirm the in-product wording of the "Populated from Internal data" label — the underlying source name may read differently to a preparer.
+
 #### Autofills From Reference Data
 
 Some autofills fill a field from reference data Glade already holds for the case rather than from a document or an AI inference — the IRS standard deduction amounts on the Chapter 7 means test (Form 122A-2) are the common example.
@@ -252,6 +265,15 @@ Some autofills fill a field from reference data Glade already holds for the case
 These fields populate when you open the questionnaire, with no action needed from you. Previously they arrived empty and only filled in after you triggered them by hand, which was easy to miss and left the means test showing no deductions. You can still re-run one of these autofills at any time to pick up changed case data, and a value you have entered or corrected by hand is not overwritten.
 
 The national standard deduction amounts — including food and clothing — are selected using the debtor's state and household size together. An amount that was filled in before this behavior was corrected may have used another state's figure, so re-check the deductions on any means test prepared earlier and re-run the autofill to refresh them.
+
+#### Secured Debt Deductions on the Means Test
+
+The autofills that carry secured debts onto the means test forms — mortgages, vehicles, and other secured debts on Form 122A-2 (Chapter 7) and Form 122C-2 (Chapter 13) — read the case's Master Creditor List and only bring across creditors that are actually being filed:
+
+- Creditors marked as omitted from the petition, creditors that have been removed, and the hidden duplicate entries grouped under another creditor are left out. Previously these were copied onto the form, so zeroed-out accounts and credit-report duplicates appeared as separate deduction rows that had to be deleted by hand.
+- Where a creditor has no linked property, the property description entered on the creditor itself is used, so the collateral column is filled rather than left blank.
+- **Arrearage cure amounts** can be populated on line 34 of Forms 122A-2 and 122C-2 from the arrearages recorded on the Master Creditor List. Each active creditor with an arrearage above zero produces one row carrying the creditor name, the secured property, and the total cure amount. Creditors with a zero arrearage, and creditors excluded as above, produce no row.
+- The **monthly cure amount** on that line is not set by this autofill — it continues to be calculated from the total cure amount, so re-running the autofill does not disturb it.
 
 ### AI Autofills
 
@@ -307,6 +329,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - Every finalized version of the plan is kept in the Documents tab as chronological version history. The most recent version is the one used for court filing; earlier versions stay available for reference rather than being replaced.
 - All finalized versions appear together under a single **Chapter 13 Plans** folder, listed as individual files. Each version is no longer split out into its own separate folder, so you can see the full version history of the plan in one place.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
+- A claim whose treatment does not carry interest — a pro-rata secured treatment, for example — prints a blank interest rate rather than a figure. On the Northern District of Ohio plan form, changing a claim to one of these treatments used to leave the rate from the treatment you selected before it sitting in the §3.2 and §3.3 rate cells, so the plan showed an interest rate for a claim that pays none.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
 
@@ -419,6 +442,15 @@ Before a client or preparer submits a petition questionnaire, a **Petition Check
 - Issues on list rows are included in both the counts and the list. Previously, required-field issues inside a list row — for example, blank fields on a row of the Master Property List — could be dropped from the section badges and this summary when the row took its section from the parent list, so a list with many missing fields might read as a single issue or none. All of a row's outstanding issues now appear.
 - Standalone date fields — such as a date of birth or the date a debt was incurred — appear in the normal issue list and section badges alongside every other field, rather than being separated into their own tile where they were easy to overlook.
 
+Each row is laid out as the field label, the subsection it sits in, and then the finding itself in a speech bubble pointing at the Glade AI mark, so a several-sentence cross-check explanation reads as commentary from the assistant rather than competing for urgency with a four-word required-field message. Findings previously printed inline in warning orange, at the same weight whether they were one word or a paragraph.
+
+The findings themselves are written to say only what is wrong, since the row already names the field:
+
+- A missing answer reads **Required** rather than restating the whole question back to you — a difference that mattered most on long labels, where a single question could fill five lines of the dialog.
+- Related wordings follow the same pattern: **At least one entry required**, **Invalid date**, **Must be a valid number**.
+- **Findings about part of a field keep naming that part.** On a name, address, or amount that is only partly filled, the finding still reads `'Last Name' is required`, `'ZIP Code' is required`, or `'Amount' is required` — the label alone does not tell you which piece is missing.
+- Messages your firm's template administrator wrote on a validation rule are shown exactly as written and are not shortened.
+
 Glade validates signature, date, and currency answers precisely so the check's counts match what you see on the form:
 
 - A signature that is missing its date flags the date field itself, not just a generic "signature and date are required" message, so you can tell which part is missing.
@@ -484,6 +516,7 @@ The creditor mailing matrix is assembled from every party who should receive not
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening](#re-opening)).
 - Required-field validation skips list rows that will not be filed. Rows merged into another as duplicates (for example, deduplicated creditors) and rows explicitly marked to omit from the petition are not checked for missing required fields, so leftover data on those rows does not block submission.
+- A field that is connected to case data but has never been populated still reports itself as synced with case data and offers no re-run control, because there is no value on it whose source could say otherwise. Fill or autofill the field once and the indicator reports its real source.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
