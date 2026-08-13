@@ -171,6 +171,19 @@ Editing a line item keeps its link to any custom-terms variable that references 
 - Unlike voiding, skipping is reversible — a skipped invoice can be "unskipped" at any time to resume collection.
 - Common use cases: waived fees, pro bono arrangements, payment deferred to a later date.
 
+### Invoices on a deleted case
+
+When a case is deleted, the invoices that belonged to it are no longer listed anywhere your team bills from.
+
+- Deleting a case does not change its invoices — each one keeps whatever status it held at the moment the case was deleted. Previously those invoices kept listing as live, so a case deleted mid-payment left behind an invoice showing a status like **Payment Requested** and a balance that nobody could pay, with no case to open it from and no way to tell it apart from a real invoice.
+- Invoices belonging to a deleted case are now hidden from the firm's Invoices list and its CSV export, the Invoices tab on a client's record, and the client's own invoice list in the portal.
+- **Invoices not tied to a case are unaffected.** An invoice raised on its own still lists normally.
+- Nothing about the invoice itself is altered — no amounts, statuses, or payment records change. Only what appears in the lists changes.
+- Opening an invoice by its direct link still works, so an invoice that needs to be formally voided can still be reached and voided.
+- Payments already collected against a hidden invoice stay visible in your payment records. A payment that succeeded before the case was deleted remains on the Payments list for reconciliation, even though its invoice no longer appears in the invoice lists.
+
+This most often shows up when a case is deleted and re-created shortly afterwards — for example, a retainer case set up incorrectly and rebuilt a few minutes later. A payment already in flight moves to the replacement case's invoice, and the original is left behind. The client was only ever billed once, but the account could look as though they owed the amount twice.
+
 ### Voided vs. refunded payments on an invoice
 
 When a payment on an invoice is reversed, the invoice shows the reversed amount with a label that reflects what actually happened to it:
@@ -266,6 +279,8 @@ When connecting an invoice template to a workflow:
 - **ACH settlement time:** ACH / bank transfer payments may take several business days to settle, during which the payment shows as pending.
 - **Processing fee variability:** The exact surcharge amount when passing processing fees to the client depends on the payment method used and current processor rates. The amount is calculated at the time of payment, not when the invoice is created.
 - **QuickBooks sync timing:** Invoice data syncs to QuickBooks when the invoice becomes payable and when payments complete. Changes made directly in QuickBooks are not synced back to Glade.
+- **Invoices on deleted cases are hidden, not voided:** Hiding is based on the case having been deleted, not on whether money was collected. An invoice on a deleted case that had a successful payment against it is hidden along with the rest, so its total no longer appears in the invoice lists or the CSV export. The payment itself stays on the Payments list, so the money is still accounted for — but if you need the invoice back in view, it has to be reached by its direct link.
+- **A case's invoice totals can still be off after payments are moved between invoices:** When a payment is re-pointed from one invoice to another and the original case is *not* deleted, the original invoice can keep a stale status and continue to count toward the balance shown on reports. Contact support if a case shows a balance that does not match what the client actually owes.
 
 ## Related Features
 
