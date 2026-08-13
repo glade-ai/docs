@@ -336,6 +336,23 @@ When a secured creditor — for example a mortgage servicer — is both maintain
 
 - You can set the arrearage cure's own **first and last payment months** — the months the cure payments start and stop — separately from the ongoing payment. When you set these in the calculator, they carry through to the generated plan.
 - Clearing an override field back to blank — collateral value, contract payment, or interest rate — restores the value from the questionnaire for that creditor rather than leaving it empty, so a cleared field no longer wipes the underlying figure.
+- On the **Northern District of Ohio** plan form, the ongoing installment and the arrearage cure are combined onto one line per creditor, as that district's form requires. The arrearage amount, its interest rate, and the monthly cure payment all appear on the creditor's own line, and no separate arrearage row is listed. The **current installment** on that line is the payment from the plan's payout schedule rather than the contract payment, so it reflects what the plan actually pays. The trustee-payments exhibit continues to count both the ongoing payment and the cure.
+
+#### Unsecured Creditor Pool on the Ohio Northern Plan
+
+The unsecured creditors section of the Northern District of Ohio plan shows one figure, not two:
+
+- If you have entered a pool amount by hand, that amount is used and the liquidation minimum is not also shown. Your entry takes priority.
+- If you have not entered one, the liquidation minimum — the amount unsecured creditors would receive in a Chapter 7 liquidation — is shown as the reference figure.
+
+Previously both could appear, which left the plan stating a minimum that your manual figure was meant to replace.
+
+#### Plan Form Explanation
+
+The plan preview's **Explanation** view describes what each field on the plan form means. Those descriptions are grouped under a heading for each part of the plan document — the case caption, then each numbered part, and the trustee-payments exhibit where the district's form has one — so you can collapse the parts you are not working on and find the field you are looking at. Previously every description arrived as one unbroken list under a single heading.
+
+- Grouping is available on the plan forms for the **Northern District of Georgia** and the **Northern District of Ohio**.
+- Only parts of the form that have mapped fields get a heading. A part that is fixed text with nothing to fill in — for example vesting on the Northern District of Georgia form — has no heading rather than an empty one.
 
 ### Non-Consumer Chapter 7 Means Test
 
@@ -492,6 +509,27 @@ If you choose to keep the current answers, a warning banner appears at the top o
 
 - **Reconnect without changing answers** — the banner explains the questionnaire is no longer syncing with case data and offers a **Reconnect to case data** action. Choosing it simply turns syncing back on: your current answers are kept exactly as they are, and there is no confirmation prompt. From then on, edits to the questionnaire flow back into the case record — and into downstream documents such as the petition — again. Use this when a reopened questionnaire's edits have stopped carrying over to the rest of the case.
 - **Get back in sync (replaces answers)** — the banner reads *"This questionnaire is out of sync with case data."* and offers a **Get back in sync** action. Choosing it opens a confirmation explaining that the questionnaire's current answers will be replaced with the latest case data. After you confirm, Glade overwrites the answers with the current case data, turns syncing back on, and clears the banner. Because this replaces existing answers, it is a deliberate, confirmed step rather than something that happens automatically.
+
+### Editing a Completed Questionnaire After the Petition Is Drafted
+
+When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuilds the case's petition draft packet on its own — the filled court forms, the **Petition (Draft)** document, and the **Signature Pages** — so Forms & Schedules shows the edit instead of an out-of-date packet. Previously the packet stayed as it was at completion, and a correction made afterward did not reach the draft until someone regenerated it by hand.
+
+- Rebuilding happens only for a questionnaire that has already been completed. Saves made while a questionnaire is still in progress do not rebuild anything; the packet is first produced when the questionnaire is completed.
+- The replacement documents are put in place before the previous ones are removed, so the case is never left with no draft.
+- If a rebuild produces no signature pages, the earlier Signature Pages file is still removed rather than leaving an obsolete packet on the case.
+- Several edits saved in quick succession produce one rebuild from the latest answers, not one per save.
+- Only the documents are rebuilt. Downstream workflow steps, notifications, and tasks that ran when the questionnaire was first completed are not triggered again.
+- This applies to Glade's own questionnaire templates. Questionnaires on an external form provider are not rebuilt this way.
+
+### Free-Text Dates on the Statement of Financial Affairs
+
+Some Statement of Financial Affairs answers accept a free-text date instead of a single calendar day — for example, entering `May, Jun, & Jul 2026` for a series of payments to one creditor, or for the month an account was closed.
+
+What you type is what prints. The text you entered appears on the generated draft and the filed form, matching what the in-form preview has always shown. Previously the preview showed your text but the generated and filed copies replaced it with one system-picked calendar date — so `May, Jun, & Jul 2026` filed as `05/01/2026`, and a firm reviewing only the preview had no way to see that the filed form disagreed.
+
+- This applies to the payment, transfer, and closed-account date questions on Form 107 where a text override is offered.
+- Dates entered as an ordinary calendar date continue to print as `MM/DD/YYYY`.
+- If your firm filed Form 107 with text overrides before this was corrected, regenerate the draft on those cases so the filed forms carry the text you entered.
 
 ### Collaborators
 

@@ -14,6 +14,28 @@ Court notice automations send emails automatically when classified PACER court n
 - **Idempotency**: the same incoming court notice never triggers the same automation twice. If the same upstream event is processed again (for example after a retry), the duplicate fire is ignored.
 - **Failure isolation**: if one automation fails — for example because a recipient email is invalid — other automations matching the same notice still run.
 
+### Naming an individual action
+
+An automation can carry more than one action — several emails, or an email alongside a task. Each action can be given its own **action title**, so a list of three emails reads as "Chase trustee", "Notify debtor", and "Flag for review" instead of three identical "Send email" cards you have to open one at a time to tell apart.
+
+- The title is a label for your team only. It is not shown to recipients and does not appear in the email.
+- Titles are optional. An action left untitled continues to show its action type.
+- A title can be up to 200 characters. Leaving it blank, or entering only spaces, clears it.
+- An action's title is separate from the title of any task the action creates — naming an action does not change the task your clients or team see.
+
+> TODO: Confirm the label and location of the action title field in the automation editor.
+
+### Finding an automation
+
+The find bar on the automations list matches on whole words in any order, across the automation's name, its match type, and its actions' titles.
+
+- Searching `trustee email` finds an automation named "Email trustee" — word order does not matter, and the words do not have to be next to each other.
+- All the words you type must appear in the same place: `chase trustee` matches an action titled "Chase trustee", but not an automation named "Chase" with an unrelated action titled "Trustee".
+- Titles on disabled or deleted actions are not matched.
+- The result count reflects the filtered list.
+
+Previously the find bar matched only against the whole automation name and match type, start to finish, so searching `trustee email` returned nothing for an automation named "Email trustee".
+
 ### Triggers and filters
 
 A trigger has three parts. All must match for the automation to fire:
@@ -71,6 +93,7 @@ Tokens are case-insensitive and tolerant of extra whitespace inside the braces. 
 | Setting | Description |
 |---------|-------------|
 | Name | Display name shown on the automations list. |
+| Action title | Optional label for an individual action within the automation, up to 200 characters. Internal only — not shown to recipients. |
 | Enabled | Whether the automation runs. Disabled automations are ignored. |
 | Match type | Notice type to match (exact). |
 | Chapter | Chapter 7, Chapter 13, or any. |
@@ -90,6 +113,8 @@ Edits are tracked: each save records who made the change and when, alongside who
 - Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
 - Failed runs are not retried automatically. The failure shows as the automation's last run status.
 - Branching or conditional logic inside a single automation is not supported. Use separate automations for separate scenarios.
+- Action titles are not recorded on a run's history. A run identifies which action fired, but if you rename an action later, past runs reflect the current title rather than the one in place when they ran.
+- The find bar searches automation names, match types, and action titles. It does not search email subject or body text, recipients, or judge filters.
 
 ## Related Features
 
