@@ -31,6 +31,7 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Events marked as "free" or "transparent" in the external calendar do not block availability.
 - When a client views available time slots, any time covered by an external "busy" event is hidden.
 - This prevents double-booking across Glade and external calendars.
+- The block is enforced when a booking is saved, not only when slots are displayed. A booking that would overlap a busy event on the assigned team member's synced calendar is refused — including when a booking is rescheduled, and when a scheduled booking is reassigned to a team member who has a conflicting event. A firm team member can still override with **Schedule Anyway**; clients cannot. Only calendars enabled for syncing are checked.
 
 ### Real-time sync
 
@@ -103,6 +104,7 @@ This feature is off by default and is turned on per firm by Glade.
 - If a Google or Outlook OAuth token expires and cannot be auto-refreshed, the user must manually reconnect.
 - Changes made directly to a synced event in the external calendar (after Glade created it) are not synced back to Glade.
 - There is no manual "sync now" button. Sync happens automatically via webhooks.
+- Only events that have reached Glade can block a booking. If a team member marks time as busy in Outlook and that change has not synced through, Glade does not know about it and will not stop a booking in that window.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
 - All-day events are handled based on the firm's configured timezone.
 - Court hearing sync only adds **future** hearings, and only when the case is linked to a team member who has a connected calendar. Unresolved cases are skipped.
