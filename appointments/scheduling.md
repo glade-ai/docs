@@ -24,6 +24,7 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - External calendar events from connected calendars (Google Calendar or Outlook) automatically block availability to prevent double-booking.
 - Only events marked as "busy" block availability. Events marked as "free" or "transparent" do not.
 - A synced calendar event counts against the product's concurrent booking limit rather than blocking the slot outright. On a product that allows one booking per slot, an event on the assigned team member's calendar closes that slot. On a product that allows several, the event takes one place and the remaining places stay bookable. The Glade booking and the calendar event Glade created for it count as one, not two.
+- A synced calendar event does more than hide the slot — it is also enforced when a booking is saved. Creating, rescheduling, or reassigning a booking on top of a hearing or meeting already on the assigned team member's synced calendar is rejected. Previously only Glade's own Blocked windows were enforced at save time, so a slot list that was out of date — or a booking written by a staff member covering for someone else — could still land a client on top of a court hearing. Firm team members can override deliberately with **Schedule Anyway**.
 - In addition to recurring availability, you can add **availability blocks** for specific date ranges. Each block has a type that determines its effect on bookable time:
   - **Blocked** — removes the covered times from bookable availability. Clients cannot schedule into these windows. Use this for vacations, court dates, off-site days, or any other time you should not be booked.
   - Other block types (for example, blocks used purely for visual annotation on the calendar) do not remove availability — only blocks marked as Blocked actually prevent new bookings.
@@ -132,6 +133,9 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - When a selected slot conflicts with an existing booking, the scheduler flags the conflict and offers **Schedule Anyway** so a team member can double-book deliberately.
 - **Schedule Anyway** works both when creating a booking and when rescheduling one. Previously it was only honored on the reschedule path — on a new booking the click appeared to do nothing and the appointment was never created. If your team hit that and worked around it by booking a non-conflicting time and then rescheduling into the conflict, that workaround is no longer necessary.
 - **Schedule Anyway** also covers a **Blocked** availability window. A firm team member who selects a blocked slot is asked to confirm, and confirming saves the booking into that window — so a firm can keep its calendar blocked to pause new bookings while still moving an appointment into that time. Clients and other non-team members cannot book into blocked time this way; for them a blocked window remains a hard block. See [Defining availability](#defining-availability).
+- **Events on a synced calendar are treated the same way.** An appointment that would overlap a hearing, meeting, or other busy event on the assigned team member's connected calendar is refused unless a team member confirms **Schedule Anyway**. This applies when creating a booking, when rescheduling one, and when reassigning a scheduled booking to a different team member — so covering for a colleague no longer risks booking a client over that colleague's court hearing.
+- Moving a booking is not blocked by the calendar event Glade created for the booking itself, so rescheduling an appointment to a new time works normally.
+- Only calendars that are switched on for syncing are checked. An event on a calendar the team member has disabled does not block the booking, matching what the slot list shows.
 
 ### Booking a slot that is already full
 
@@ -192,6 +196,8 @@ Each firm member's profile includes a **Meetings** tab that clients can visit to
 - The full-slot check applies to bookings that have an assigned team member. A booking with nobody assigned has no calendar to check against, so the limit is not enforced for it.
 - If no team member availability is configured for a product, the product may show no available time slots.
 - External calendar events marked as "free" do not block availability. Only "busy" events create blocks.
+- Enforcement against synced events depends on the event having reached Glade. A commitment a team member blocked out directly in Outlook that has not yet synced is not known to Glade and does not prevent a booking.
+- A booking with no assigned team member is not checked against any synced calendar, since there is no team member whose calendar to compare it with.
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
 
