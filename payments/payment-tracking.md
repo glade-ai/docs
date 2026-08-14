@@ -36,6 +36,9 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 
 - Filter by status: All, Succeeded, Refunded, Failed, or Voided.
 - Filter by date range. The default range is the current month.
+- A date range covers whole calendar days in **your firm's timezone**, and both the start and end day are included. Selecting the 1st through the 6th returns everything from the start of the 1st to the end of the 6th, and selecting a single day returns that day. Previously the range ended at the beginning of the last day named, so that day's activity was dropped and a single-day range returned nothing at all.
+- The same range rule applies everywhere a date filter appears on the Transactions dashboard — the payments list, the revenue summary, the refunds list, the payouts tab, and both CSV exports. The figures at the top of the page therefore cover exactly the same days as the rows beneath them.
+- A date that does not exist, such as February 31, is rejected rather than quietly interpreted as a nearby date.
 - Free-text search works across customer name, invoice ID, workflow name, and payout ID.
 - All filters combine. For example, a firm can search for a specific customer's failed payments within a date range.
 
@@ -123,6 +126,7 @@ When a client files a dispute with their card issuer against a payment processed
 - Payout timing depends on the payment processor and the firm's bank. Glade displays the expected delivery date but cannot guarantee exact timing.
 - ACH payments may show as pending for several business days before settling.
 - Revenue summary statistics reflect only the currently visible filtered data, not all-time totals. Changing the date range or status filter updates the displayed metrics.
+- Date ranges are interpreted in the firm's timezone, which is set in firm settings. A firm whose timezone is set incorrectly gets day boundaries drawn in the wrong place, so activity near midnight can fall into the neighboring day. Reports run before this behavior shipped may not reconcile with the same range run today — the earlier run was missing its final day.
 - Processing fee refund amounts are calculated proportionally. They may not exactly match the original fee when only a partial refund is issued.
 - CSV exports are limited to the current filter criteria. To export all data, clear all filters first.
 

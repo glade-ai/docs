@@ -197,6 +197,8 @@ If the firm has added an invoice note, it appears alongside the balance due so t
 
 The invoice list supports date filtering. The date filters are labeled **Created from** and **Created to**, and filter invoices by their creation date. Both filters can be set independently or together to narrow the list to a specific time window.
 
+Both dates are whole calendar days in **your firm's timezone**, and both ends are included. Picking the 1st and the 6th returns everything created from the start of the 1st through the end of the 6th; picking the same date for both returns that one day. Previously the range stopped at the beginning of the day you named rather than the end of it, so the last day selected was always missing and a single-day range came back empty — which read as "nothing was billed that day" rather than as a filtering problem. If your team learned to set the end date a day later than they meant, that adjustment now over-selects by a day and should be dropped.
+
 ### Exporting invoice data
 
 Firms can export their full invoice list as a CSV file for use in accounting software, reporting, or reconciliation. The export includes the billed customer's **Email** and **Phone Number** alongside the existing invoice columns, so exported data has the contact details needed for follow-up and reconciliation without a second lookup. The Phone Number column uses the client's contact phone number, falling back to the phone number on their login profile when no contact phone is on file — so the exported number matches the one your team uses to reach the client.
