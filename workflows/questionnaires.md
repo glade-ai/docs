@@ -446,6 +446,15 @@ Once a check has run, the results stay available while you work through them:
 - The count stays current as you fix errors on the form. Resolving a field lowers the number without a second check.
 - Previously the results dialog closed as soon as you navigated to a field, and getting back to the findings meant re-running the whole check, which is slow and interrupts correction work.
 
+**Issues are listed in the order they appear on the form.** Working the list from top to bottom walks you down the questionnaire in one pass, rather than sending you back and forth through it:
+
+- Within a section, entries follow the subsection tabs left to right, then field order within each tab. An issue on a field that sits above the tab strip comes before the tabbed subsections.
+- Issues on a list or table row sit with the field they belong to, instead of being collected after every ordinary field in the section. A table reads down each row before moving to the next column, and a list reads each row's fields together — so both of a joint case's debtors are grouped rather than interleaved.
+- A list's own issue comes before the issues on its rows.
+- Severity no longer controls the order. Blockers and advisories are interleaved in form order, and each entry is tagged with its severity so you can still tell them apart. Previously every blocker was listed ahead of every advisory, which reordered the list around a distinction the entries gave no visible sign of.
+- **Go to first error** lands on the earliest failing field in the form rather than an arbitrary one.
+- The order is stable. Re-running the check on an unchanged questionnaire produces the same list in the same order; previously it could come back differently each time.
+
 Glade validates signature, date, and currency answers precisely so the check's counts match what you see on the form:
 
 - A signature that is missing its date flags the date field itself, not just a generic "signature and date are required" message, so you can tell which part is missing.

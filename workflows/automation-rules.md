@@ -13,7 +13,7 @@ Automation rules define what happens automatically when events occur during a ca
 - The available action types are:
   - **Send message** — sends a message to the client, optionally with attachments such as invoices, questionnaires, document requests, booking links, custom terms, credit report requests, e-signature requests, or payment gates
   - **Generate all case PDFs** — compiles and generates all PDF documents for the case
-  - **Send e-signature request** — sends a document for the client to sign electronically
+  - **Send e-signature request** — sends a document for the client to sign electronically (see [E-Signatures](./e-signatures.md))
   - **Send document request** — asks the client to upload specific documents
   - **Send email** — sends an email notification
 - After an action completes, the system enables the next trigger in the sequence. That next trigger waits for the client to take the required action (such as completing a questionnaire or uploading a document) before the workflow continues.

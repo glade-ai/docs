@@ -6,6 +6,16 @@ The Income Organizer is a tool in bankruptcy workflows that helps attorneys revi
 
 ## Key Behaviors
 
+### More Than One Organizer on a Case
+
+A case can carry more than one income organizer — typically one for the primary debtor and a second for a joint debtor or a non-filing spouse. Every organizer on the case is now visible and usable, where previously only the first one could be reached.
+
+- Where a questionnaire offers **Source Data** links, each organizer appears as its own labeled entry (for example, *Income Organizer · Pay Organizer (Debtor 1)*). Opening an entry takes you to that organizer. A case with only one organizer shows a single unlabeled link, exactly as before.
+- On an organizer's detail page, a badge names whose income it holds — **Primary**, **Debtor 2**, or **Non-filing spouse**. The badge only appears when the case has more than one organizer, so single-organizer cases are unchanged.
+- Importing income into a questionnaire is not limited to one organizer. The import pulls from every income organizer on the case, so a joint case fills both Schedule I columns from a single import.
+
+Before this, an attorney could not see or add income for a non-filing spouse even after a second organizer existed on the case — the interface showed only the first one it found.
+
 ### Income Calculation Modes
 
 Each income source (such as a paystub) can be set to one of these calculation modes:
@@ -86,6 +96,11 @@ On paystubs that print current-period and year-to-date figures side by side, the
 
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
 - **Removing a paystub**: When you delete a paystub from the Income Organizer, the income data that came from it is removed along with it. A removed paystub no longer lingers as a leftover row in the client's income data.
+- **Closing the Add Income Source window**: Adding an employment income source and then closing the window discards the new source only when nothing has been uploaded to it. Once a paystub has been uploaded — or is still uploading — closing the window keeps the source and its paystubs.
+  - **Back** is disabled once paystubs exist or are in flight, and hovering it explains why. Use **Close** instead; the source and its paystubs are kept.
+  - Closing after an upload refreshes the organizer so the source you just added is visible in the list without a reload.
+  - Upload controls are briefly unavailable while Glade confirms what has been uploaded. If that check cannot complete, the source is kept rather than discarded.
+  - Previously, closing or going back after uploading paystubs deleted the source and its files without warning. On joint cases this most often hit the second debtor's employment source: the upload appeared to succeed, and the source and its paystubs were gone afterwards with no indication anything had been removed. If your team has lost a Debtor 2 employment source this way, re-add it — the files have to be uploaded again.
 
 ### Documents With No Extractable Data
 
@@ -123,6 +138,7 @@ Some older income organizers may need their paystub data re-extracted (for examp
 - The Schedule I Contributions preview reflects the current saved state of the income sources. If you have made changes without saving, save first before reviewing the preview.
 - YTD calculations depend on accurate pay period counts. If the number of pay periods elapsed is incorrect, monthly figures will be off proportionally.
 - Paystubs extracted before the current/year-to-date column handling was corrected are not re-read automatically. If an existing row shows a year-to-date figure in its pay-period gross, re-run extraction on that row or correct the extracted data by hand.
+- The debtor badge on an organizer's detail page only appears when the case has more than one income organizer. A single-organizer case shows no badge, which is not an indication that the organizer is unlabeled.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
