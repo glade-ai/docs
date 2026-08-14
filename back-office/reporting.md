@@ -81,6 +81,22 @@ Custom reports let your firm build its own view over case data, choosing the col
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
+- **Reaffirmation agreement**: A column and a matching filter report whether a case intends to reaffirm any debt. A case counts as reaffirming when at least one creditor on the bankruptcy schedules questionnaire's creditor list answers the statement-of-intention question — "What do you intend to do with the property that secures the debt?" — with **Retain the property and enter into a Reaffirmation Agreement**. One qualifying creditor is enough for the whole case.
+  - Only creditors listed on **Schedule D** are considered. The same intention question is asked on every creditor row, and rows on Schedules E/F/G carry a default answer that does not indicate an intention about secured property, so counting them would report cases as answered when nothing was decided.
+  - Creditor rows excluded from the petition are ignored.
+  - The filter offers reaffirming and non-reaffirming selections plus a **not answered** selection. A case whose bankruptcy schedules questionnaire has not been filled in — a consultation or a turned-down matter, for example — has no answer to give and falls under **not answered** rather than under "no".
+  - The lease-assumption question on the same form ("Will the lease be assumed?") is **not** available as a column or filter.
+
+### Dashboards
+
+Alongside the personal dashboard each person sees on their own homepage, a firm can build **named dashboards** that everyone at the firm shares.
+
+- A named dashboard belongs to the firm, not to the person who created it. Every member sees the same dashboard and the same widgets on it.
+- Dashboard names are unique within the firm, and matching ignores capitalization — "Intake" and "intake" are treated as the same name.
+- Widgets are added to a named dashboard, reordered, and removed the same way they are on the personal homepage dashboard. Each widget keeps its own filters, sorting, and choice of columns.
+- Personal homepage dashboards are unaffected. Each person still has exactly one, and it stays private to them.
+
+> TODO: Confirm where named dashboards are created and managed in the interface, and whether any firm-level permission controls who can create or edit them.
 
 ## Configuration
 
@@ -92,6 +108,8 @@ Custom reports let your firm build its own view over case data, choosing the col
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
+- **Reaffirmation agreement**: Nothing to configure. The answer is read from the bankruptcy schedules questionnaire and updates as the questionnaire is filled in.
+- **Named dashboards**: Created per firm and shared by everyone in it. Names must be unique within the firm.
 
 ## Edge Cases & Limitations
 
@@ -100,6 +118,9 @@ Custom reports let your firm build its own view over case data, choosing the col
 - Court calendar entries only appear for timed hearings. If all hearings on a docket entry are all-day events, nothing appears on the calendar.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
+- The **Reaffirmation agreement** column reports what the schedules questionnaire says, not what was ultimately filed. A reaffirmation agreement decided outside the questionnaire, or changed after the petition went out, is not reflected until the questionnaire is updated.
+- Cases with no bankruptcy schedules questionnaire are reported as **not answered** on the reaffirmation column. This is the expected result for consultations and non-bankruptcy matters, and it is distinct from a case that answered "no".
+- A named dashboard cannot reuse the name of another named dashboard at the same firm, regardless of capitalization.
 
 ## Related Features
 
