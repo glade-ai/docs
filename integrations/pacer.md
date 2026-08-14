@@ -166,6 +166,28 @@ Courts write the same case number in several different formats — for example `
 
 Notices that were already stranded by an earlier format mismatch are not re-linked on their own. If a case is missing court notices you expected to see, contact Glade to re-sync it.
 
+### Case numbers when a case has more than one workflow
+
+A single matter often carries several workflows — a retainer alongside a filing workflow, or a new workflow created when a case converts from one chapter to another. The court case number is recorded on the workflow the case was actually filed under, not on all of them.
+
+- Every workflow in the group now **displays** the case number, taking it from whichever sibling holds one. Opening the retainer on a filed case shows the docket number instead of a blank field. Where more than one sibling carries a number, the most recently created one is shown.
+- The case number is displayed, not copied. It still belongs to the workflow the case was filed under, which is what keeps incoming court notices attached to the right workflow.
+- **Reports and filters that match on case number are unchanged.** They match the workflow that actually carries the number, so a report segmenting cases by whether a case number is present continues to count each matter once rather than once per workflow in the group.
+
+### Claim notices with more than one document
+
+Proof-of-claim notices from PACER can carry several documents — the claim form plus its attachments. All of them are captured.
+
+- Every document on the notice is saved, and each keeps the part number the court assigned it, so a multi-part claim can be read in the order the court filed it.
+- Claim documents are named from the creditor, claim number, case number, and part, so they are identifiable in the case's document list without opening each one.
+- An amended claim number on the notice is recorded as the claim number. Previously an amended value that Glade could not read fell back to the case number, which made the document harder to identify.
+- **Capture status and the reason for any failure are shown.** If one document on a claim cannot be retrieved, the rest are still captured and the notice reports what failed rather than appearing complete.
+- A retry picks up only the documents that are still missing; documents already captured are not fetched again.
+- Anything the court returns that is not a readable PDF — a sign-in page or an error page, for example — is rejected rather than saved as if it were the document. Previously these could be stored as PDFs that would not open.
+- **Attaching a claim PDF by hand is supported.** When a document cannot be captured automatically, uploading it to the case keeps its connection to the PACER claim it belongs to, so it is found by the same case and claim reference as automatically captured documents rather than sitting as an unrelated file.
+
+Claims captured before this behavior shipped are not re-processed. If an older claim is missing attachments, capture them again or attach them by hand.
+
 ### Changing the chapter at petition compile time
 
 When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition must be re-compiled against the new chapter so the schedules and forms match. The pre-compile modal (Documents → **Compile Petition**) makes this switch visible at the moment of filing.
