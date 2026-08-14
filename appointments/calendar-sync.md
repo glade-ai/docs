@@ -31,6 +31,7 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Events marked as "free" or "transparent" in the external calendar do not block availability.
 - When a client views available time slots, any time covered by an external "busy" event is hidden.
 - This prevents double-booking across Glade and external calendars.
+- A "busy" event occupies one place in the slot rather than closing it outright. On an appointment type that allows a single booking per slot — the default — that closes the slot. On an appointment type configured for several concurrent bookings, the event takes one place and the rest stay open. The event Glade itself puts on the calendar for a booking is not counted a second time on top of the booking.
 
 ### Real-time sync
 
