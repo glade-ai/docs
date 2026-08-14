@@ -10,6 +10,7 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [Status Tracking](./status-tracking.md)
 - [Questionnaires](./questionnaires.md)
 - [Document Collection](./document-collection.md)
+- [E-Signatures](./e-signatures.md)
 - [Credit Counseling](./credit-counseling.md)
 - [Exemptions Calculator](./exemptions-calculator.md)
 - [Payment Gates](./payment-gates.md)
