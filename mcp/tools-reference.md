@@ -134,9 +134,13 @@ These tools let the assistant read and summarize what a client entered on an int
 
 | Tool | What it does |
 |------|-------------|
-| Court notices — list | Lists PACER court notices for a firm. Paginated. Filterable by case, workflow, notice type, and date range, so the assistant can answer questions like "what motions were filed last week on case X" without having to scan unrelated docket activity. |
+| Court notices — list | Lists PACER court notices for a firm. Paginated. Filterable by case, workflow, notice type, and date range, so the assistant can answer questions like "what motions were filed last week on case X" without having to scan unrelated docket activity. Asking about one workflow returns the notices for the whole matter — see below. |
 | Court notices — get | Returns the full content of a single court notice, including its body text and the IDs of any attachments. |
 | Court notice attachment — download | Returns a short-lived signed URL for a specific attachment on a court notice so the document can be retrieved. Non-document attachments return a null URL. |
+
+**Court notices cover the whole matter, not one workflow.** A matter often carries several workflows — a retainer alongside a filing workflow, or a new one created when a case converts chapter — and court notices are attached to whichever workflow the case was filed under. Asking the assistant about a case returns its notices regardless of which workflow you name, so a question asked against the retainer no longer comes back empty on a case with an active docket.
+
+Notices from a different matter are never included. Only workflows belonging to the same case are considered.
 
 ### Dockets
 
