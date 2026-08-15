@@ -27,13 +27,14 @@ When a filing is blocked by Glade's pre-filing review, the modal names the speci
 
 Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
 
-Three checks are active:
+Four checks are active:
 
 | Check | What it looks for | Severity |
 |-------|-------------------|----------|
 | Required documents in the packet | Every document the filing district requires for the case's chapter is present in the packet | Blocking |
 | Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
 | Petition out of date | The compiled petition is older than the case data behind it | Advisory |
+| Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -41,6 +42,18 @@ Three checks are active:
 - Documents that apply only to joint filings are required on joint cases and skipped on individual cases. If Glade cannot yet tell whether the case is joint, that document is reported as not evaluated rather than as missing, so an individual filing is never blocked over a joint-only form.
 - If the district's required-document list cannot be determined at all, the review reports the check as not evaluated instead of blocking the filing.
 - **A missing document may now block where it previously only warned.** Because required-document status comes from each district's rules, a document the district marks as required is treated as gating. Pay advices are the common case: in districts whose rules require them, a missing paystubs file now blocks submission rather than showing a warning.
+
+#### Required signatures on the petition
+
+The signature check reads the assembled petition that is actually about to be filed and confirms that everyone required to sign it has done so.
+
+- **Who it expects to have signed** — the debtor on every case, the second debtor on a joint case, and the attorney when the debtor is represented. If Glade cannot tell from the case whether the debtor is represented, the check does not assume they are unrepresented.
+- **Where it looks** — across the whole filing bundle, not one form. That includes the petition itself, the attorney and fee forms, the declaration about the schedules, the statement of financial affairs, the statement of intention, and the verification of the creditor matrix, plus any other signature block it finds in the document.
+- **What counts as a signature** — typed, electronically signed, or handwritten on a printed and scanned page all count. Firms that print, sign in ink, and re-upload are covered the same as firms that sign electronically.
+- **What it reports** — **Passed**, **Failed** with the signer who is missing and the form they are missing from, or **Inconclusive** when it cannot read the document or is not confident enough to call it. An explanation in plain English appears next to the other pre-filing findings.
+- **It does not gate filing.** The check is advisory for now: it warns and can be set aside, and a Failed or Inconclusive result never blocks submission. Treat it as a second pair of eyes on the packet, not as a guarantee.
+
+Because it reads the pages rather than checking a stored answer, the check is deliberately cautious — it reports Inconclusive rather than guessing on a court filing. An Inconclusive result means the check could not reach a verdict, not that a signature is missing.
 
 Credit counseling recency was held back from the first release and has since been switched on — see [Certificate recency before filing](./abacus-credit-counseling.md) for what it reports. The remaining checks — Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are still turned off and are planned for later releases. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
 
@@ -85,6 +98,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - If you navigate away from a case mid-filing, the filing continues in the background. When you return, historical events are replayed so the progress panel is up to date.
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
+- The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
+- The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
 
 ## Related Features
 
