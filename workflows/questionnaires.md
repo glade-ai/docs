@@ -284,6 +284,8 @@ Some entries on the Chapter 13 plan are choices the calculator does not compute 
 
 Each election offers the standard choices plus an **Other** option with a free-text box for anything outside the preset list. These elections are optional — a plan with one left blank still generates, and the calculator flags any blank election so you can fill it before filing. If the list of amended sections is longer than the space on the form, the calculator warns you that it will not all fit.
 
+On the **Northern District of Ohio** plan, an unanswered plan payment method is now flagged the same way it already was on the Northern District of Georgia plan. Previously that section printed blank with no warning at all, so a plan could go out with no payment method elected and nothing to indicate it. An **Other** election whose description is left empty is treated as unanswered and raises the same warning, since a blank "Other" prints identically to no election. Choosing payroll deduction, direct payment, or **Other** with a description clears the warning. The unanswered election also appears in the plan's completeness report.
+
 #### Lump-Sum Payments
 
 Alongside the regular monthly plan payment, you can schedule one-time lump-sum contributions to the trustee — a tax refund, a bonus, or the proceeds of a sale, for example. Each entry records:
@@ -299,6 +301,24 @@ How lump sums are used:
 - That section of the form has room for two lines. If you enter more lump sums than fit, the calculator warns you that they will not all print.
 - An entry with no amount, or with a date before the plan's start date, is left off the plan.
 - Lump sums recorded before dates and descriptions were available still print in their original form, showing the amount and the plan month it falls in rather than a calendar date.
+
+#### Amounts Promised to Unsecured Creditors
+
+The plan's general-unsecured section states a minimum the plan will pay to unsecured creditors. That figure now prints the amount the plan actually delivers to unsecured creditors after every other treatment is funded, rather than the ceiling your firm set on the unsecured pool.
+
+- Previously the printed figure was the pool ceiling. On a plan whose funding does not reach that ceiling, the form promised more than the plan pays — a plan paying $11,700 to unsecured creditors could print "at least $50,000".
+- The two figures are the same on a plan funded to the ceiling, so plans that were fully funded are unchanged.
+- This applies to both the Northern District of Georgia and Northern District of Ohio plans.
+
+If your firm filed a plan with an unsecured pool ceiling set on it before this correction, check the stated minimum against what the plan actually pays.
+
+#### Lien Avoidance and Collateral Value
+
+When a secured claim is treated as a lien avoidance, the plan's lien-avoidance worksheet and the secured amount the plan schedules for that creditor now use the same numbers.
+
+- Glade derives the claim's collateral value from the worksheet entries you fill in — the lien amount, other liens against the property, the exemption claimed, and the property's value — using the same impairment test the worksheet itself applies.
+- Previously the worksheet and the plan's secured split were computed from separate inputs, so a worksheet showing a lien as fully avoided could sit alongside a plan that still scheduled a secured payment to that creditor.
+- A collateral value you enter directly as an override still wins over the value derived from the worksheet.
 
 #### Generated Plan Document
 
@@ -418,6 +438,7 @@ Before a client or preparer submits a petition questionnaire, a **Petition Check
 - Below the tiles, every outstanding issue is grouped by section and subsection in an expandable list. Each entry shows the field label and what is wrong, and a **Go to field** action takes you straight to that field — switching sections if needed, scrolling it into view, and focusing it.
 - Issues on list rows are included in both the counts and the list. Previously, required-field issues inside a list row — for example, blank fields on a row of the Master Property List — could be dropped from the section badges and this summary when the row took its section from the parent list, so a list with many missing fields might read as a single issue or none. All of a row's outstanding issues now appear.
 - Standalone date fields — such as a date of birth or the date a debt was incurred — appear in the normal issue list and section badges alongside every other field, rather than being separated into their own tile where they were easy to overlook.
+- **Issues on fields the form never shows are left out.** A section that is divided into subsection tabs displays its fields inside those tabs. A leftover field belonging to no tab is not displayed anywhere, so it can never be filled in — and when such a field was marked required, it produced a permanent blocking issue with no way to resolve it, sometimes with nothing but a generic label to identify it. **Go to field** had nowhere to take you. These issues no longer appear in the Petition Check dialog, in the section and subsection badge counts, or in the count that gates submission. Fields you can actually reach are unaffected, including fields on sections that have no subsection tabs at all and the means-test summary fields that appear on every tab.
 
 Glade validates signature, date, and currency answers precisely so the check's counts match what you see on the form:
 

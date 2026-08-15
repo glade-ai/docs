@@ -47,10 +47,31 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Case-filed activity**: When a case is filed electronically through the court's PACER system, a **Case Filed** entry is added to the case's activity history and appears in the Recent Activity view, reading "*name* filed the case via PACER." When a filed case is instead recorded manually — for example, a staff member registering a filing or resolving a filing deficiency — the entry reads "*name* registered the filed case," since it was not submitted through PACER. Cases whose status is changed to a filed status still show that as a status-change entry, so a single filing is never recorded twice.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
+- **Time-sensitive filing deadline**: A case can be marked as having to reach the court by a specific calendar date — an emergency Chapter 13 ahead of a foreclosure sale or a wage garnishment, for example. This is separate from the filed date, which records when a case was actually filed. See [Time-sensitive filing deadlines](#time-sensitive-filing-deadlines) below.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
 - **Filing deficiency tasks**: When a case is filed manually (rather than through Glade's automated filing) and the court submission goes out missing required documents, Glade automatically creates an urgent task for **each** missing document, titled after that document. Previously a single task covered all of them at once. Every task references the affected filing and is assigned to both the team member who initiated the filing and the firm owner, so the missing documents can be addressed before the court's cure deadline. Splitting them per document lets your team divide the work and track what is still outstanding. Completing a task also clears that document from the case's filing deficiency, so the case's action-required banner narrows to the documents that remain — see [PACER Integration](../integrations/pacer.md) for the banner itself. Manual filings with no missing documents do not generate these tasks.
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
+
+### Time-sensitive filing deadlines
+
+Some cases have to be filed with the court by a particular date — an emergency Chapter 13 filed ahead of a foreclosure sale, or a case racing a wage garnishment. Glade tracks that date on the case so your team can find these cases and work them in order rather than remembering them by hand.
+
+- **Setting a deadline** — a case's settings let you record a **filing deadline** as a calendar date, plus an optional **reason** explaining why the case is time sensitive. Recording a deadline is what marks a case as time sensitive; a case with no deadline is not time sensitive.
+- **Setting one at case creation** — the deadline and reason can also be entered when a staff member initiates a case, so an emergency filing carries its deadline from the moment it exists. A reason on its own is not accepted — the reason has to attach to a deadline.
+- **Who set it** — Glade records which team member recorded the deadline and when. On a case created with a deadline, the person who created the case is recorded.
+- **Clearing a deadline** — clearing the deadline also clears the reason and the record of who set it. The case is no longer time sensitive.
+- **The date does not shift** — the deadline is a calendar day the court cares about, so it reads the same regardless of anyone's timezone.
+- **Filtering, sorting, and reporting** — the workflow list can be filtered to time-sensitive cases only (or to cases that are not time sensitive), narrowed to deadlines falling inside a date range, and sorted by deadline. Cases with no deadline sort to the end in both directions. The cases CSV export includes a filing-deadline column and honors the same filters, so "which cases are due this week" can be answered as a list or as a spreadsheet.
+
+#### Deadlines across related cases
+
+A matter can carry several cases at once — an associated filing alongside the main one, or a new case created when a chapter converts. Each case carries its own deadline, because associated filings can genuinely be due on different dates.
+
+- A case joining a matter that is already marked time sensitive **inherits the most recent deadline** on that matter, along with its reason and the record of who set it, provided the joining case has no deadline of its own.
+- A case created with its own deadline keeps that deadline instead of inheriting.
+- Answering explicitly that a new case is **not** time sensitive suppresses inheritance — it stays unmarked.
+- When you create an associated case, the wizard shows the matter's most recent deadline so you can carry it over or override it deliberately.
 
 ## Configuration
 
@@ -66,6 +87,8 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - Archiving a default status (one that shipped with your firm setup) does not delete it — it is preserved for historical reference but removed from the picker. Default statuses cannot be deleted, only archived.
 - The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
+- The workflow list filters, the deadline sort, and the CSV export read the filing deadline from the matter's main case. A deadline set directly on a non-main case in the same matter is saved and shown on that case, but does not surface in those list views.
+- The filing deadline is not a status. Setting one does not change the case's status, and passing the deadline does not move the case or raise an alert on its own.
 
 ## Related Features
 

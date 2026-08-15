@@ -50,6 +50,18 @@ In addition, automations can pull case-party and hearing details so the email re
 - The **341 meeting of creditors date and time**, taken from the linked court calendar entry for the case.
 - The **video hearing join details** (for example, the meeting link and dial-in information) when the notice is for a remote 341 meeting.
 
+#### Debtor names on notices that are not linked to a case
+
+Not every incoming court notice is matched to a case in Glade. When a notice is unlinked, the debtor and client name tokens have no client record to read from, and the email previously went out addressed to nobody — a discharge congratulations message opening "Dear ," is the case firms reported.
+
+- When the notice is linked to a case, the client's name on that case is used, exactly as before. A linked name always wins.
+- When the notice is not linked, or the linked client has no name on file, Glade falls back to the debtor name in the case caption carried on the court notice itself, and strips the trailing case-number text so only the name is inserted.
+- If neither source has a name, the token still renders as empty and the email still sends.
+
+#### Hearing tokens when a notice carries more than one hearing
+
+A single court notice can schedule more than one hearing — a confirmation hearing and a 341 meeting in the same docket entry, for example. When that happens, the hearing tokens use the **341 meeting**, so an email written for the meeting of creditors quotes the meeting date rather than whichever hearing happened to be listed first.
+
 > TODO: Confirm the exact token spellings for the debtor names, 341 meeting date/time, and video hearing join details once they are finalized in the email editor.
 
 Tokens are case-insensitive and tolerant of extra whitespace inside the braces. Unknown tokens render as empty strings — the email still sends, with the unknown token replaced by nothing.
@@ -73,6 +85,7 @@ Edits are tracked: each save records who made the change and when, alongside who
 - The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed.
 - Only the supported tokens listed above are recognized. Unknown tokens render as empty strings.
 - Hearing tokens depend on the linked court calendar entry. If a case has no 341 meeting scheduled or no video hearing details on file, those tokens render as empty strings.
+- The case-caption fallback for debtor names only supplies a name. It does not link the notice to a case, so the other case-context tokens on an unlinked notice stay empty.
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
 - Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
 - Failed runs are not retried automatically. The failure shows as the automation's last run status.
