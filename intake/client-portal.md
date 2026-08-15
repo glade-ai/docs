@@ -78,6 +78,14 @@ The portal's "active" indicators and the Your next step card are driven by the u
 - **Connect Bank Account task** — When a bank statements step is active on the client's case, a **Connect Bank Account** task appears on the portal home alongside the client's other tasks. Opening it takes the client straight to the Bank Statements Organizer, and the task clears once the client connects an account or the step is skipped. See [Bank Statements](./bank-statements.md).
 - **Tasks from linked workflows** — When a client's workflow is linked to other workflows, the client tasks from those linked workflows also appear on the portal home. The client sees every task assigned to them in one place, not only the tasks on their main workflow.
 
+### Signing documents
+
+When a client opens an e-signature request from the portal, the document fills the window beneath the page header, so they can read the pages they are being asked to sign and scroll through the document in place.
+
+- Previously the document opened in a narrow strip roughly the height of a single line, on a page that offered no way to enlarge it. The full document was there and could be scrolled, but a client sent a 50-page petition to sign was reading it through a slot — and could reasonably have signed without being able to review it. If a client tells you they could not read a document they were sent to sign, this is the cause, and re-sending is not necessary: reopening the same link now shows it correctly.
+- The same correction applies to the version your team sees when opening a signature request from the dashboard. There, a request whose description ran to several lines could push the bottom of the document out of view; the document now sizes itself to whatever space the header leaves.
+- On a short screen or a phone, the document keeps a readable minimum size and scrolls inside the page rather than shrinking to fit.
+
 ### Live updates
 
 The client portal home keeps itself current without the client having to do anything. It refreshes on its own when:
