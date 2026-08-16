@@ -419,6 +419,12 @@ Before a client or preparer submits a petition questionnaire, a **Petition Check
 - Issues on list rows are included in both the counts and the list. Previously, required-field issues inside a list row — for example, blank fields on a row of the Master Property List — could be dropped from the section badges and this summary when the row took its section from the parent list, so a list with many missing fields might read as a single issue or none. All of a row's outstanding issues now appear.
 - Standalone date fields — such as a date of birth or the date a debt was incurred — appear in the normal issue list and section badges alongside every other field, rather than being separated into their own tile where they were easy to overlook.
 
+Once a check has run, the results stay available while you work through them:
+
+- A shield icon with a count of the outstanding findings remains in the questionnaire header. Selecting it reopens the results you already have, without running the check again — so going back to the list after correcting a field is immediate.
+- The count stays current as you fix errors on the form. Resolving a field lowers the number without a second check.
+- Previously the results dialog closed as soon as you navigated to a field, and getting back to the findings meant re-running the whole check, which is slow and interrupts correction work.
+
 Glade validates signature, date, and currency answers precisely so the check's counts match what you see on the form:
 
 - A signature that is missing its date flags the date field itself, not just a generic "signature and date are required" message, so you can tell which part is missing.

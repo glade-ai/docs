@@ -52,6 +52,16 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
 
+### Dismissing and restoring tasks
+
+The task list lets each team member clear items they no longer need to watch, without changing what anyone else sees or who the work belongs to.
+
+- **Dismissing is per person.** Dismissing a task removes it from your own list only — everyone else, including whoever the task is assigned to, still sees it. Dismissals are remembered, so a task you cleared does not reappear the next time you open the list.
+- **You can dismiss a task you are not assigned to.** Any team member who can see a task can dismiss it, including unassigned tasks and tasks that are already complete. Dismissing never reassigns the task or takes it away from another team member. Previously, dismissing a task that was assigned to someone else appeared to work but had no effect.
+- **Restoring brings a task back.** A dismissed task can be restored to your list. If dismissing it also dropped your own assignment, restoring gives that assignment back; if you were not assigned at the time, restoring leaves assignment untouched.
+- **Filtering by dismissal state.** The list shows **active** tasks by default — everything you have not dismissed. You can switch it to show **dismissed** tasks only, or **all** tasks regardless of dismissal.
+- **Including completed tasks.** A separate setting adds completed tasks to the list alongside incomplete ones. It is off by default and is independent of the dismissal filter, so the two can be combined in any way — completed work you have not dismissed, dismissed work that is still open, and so on. The list previously showed incomplete tasks only, with no way to bring completed ones back into view.
+
 ## Configuration
 
 - **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
@@ -66,6 +76,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - Archiving a default status (one that shipped with your firm setup) does not delete it — it is preserved for historical reference but removed from the picker. Default statuses cannot be deleted, only archived.
 - The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
+- Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
 
 ## Related Features
 
