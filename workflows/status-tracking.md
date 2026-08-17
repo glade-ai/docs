@@ -15,6 +15,10 @@ Status tracking governs how a case's status and progress change over its lifecyc
   - **Last status change** — when the case's status was most recently updated
   - **Last assignment change** — when the case's assigned team member(s) were most recently changed
 - **Automatic status updates**: When a workflow trigger completes, the case status can automatically update to a specific value. This is configured per workflow step, so workflow designers control exactly when status transitions happen.
+- **Automatic status update when a case is filed**: A case that is e-filed and comes back with a court case number can move to your firm's filed status on its own, instead of waiting for someone to change it by hand. Your firm adds a **Case Filed** step to its workflow template and sets that step's status to whichever status it uses for filed cases — firms name this differently ("Case Filed", "Filed", the built-in "Filed and Pending"), and the step points at whichever one you use. Cases filed manually with a case number recorded count the same as ones filed through PACER.
+  - This applies to cases started after your firm publishes a template containing the step. Cases already in flight stay on the template version they started on and continue to be moved by hand; there is no retroactive update.
+  - It runs once. A re-filing, or a filing deficiency resolved later, does not move the case backward or re-apply the status, and a case that has already moved past the filed status stays where it is.
+  - Only the case that was filed moves. If the same client has two open matters that both carry the step, filing one leaves the other alone.
 - **Automatic progress calculation**: After each trigger completes, the system recalculates the case's progress, step counts, and task counts based on what has been completed so far.
 - **Automatic completion**: When all workflow steps are done, the system automatically transitions the case to "Completed" status. Attorney-case type workflows may have specialized completion logic for certain case types.
 - **Manual status changes**: Your team can manually change a case's status at any time.
@@ -47,15 +51,47 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Case-filed activity**: When a case is filed electronically through the court's PACER system, a **Case Filed** entry is added to the case's activity history and appears in the Recent Activity view, reading "*name* filed the case via PACER." When a filed case is instead recorded manually — for example, a staff member registering a filing or resolving a filing deficiency — the entry reads "*name* registered the filed case," since it was not submitted through PACER. Cases whose status is changed to a filed status still show that as a status-change entry, so a single filing is never recorded twice.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
+- **Time-sensitive filing deadline**: A case can be marked as having to reach the court by a specific calendar date — an emergency Chapter 13 ahead of a foreclosure sale or a wage garnishment, for example. This is separate from the filed date, which records when a case was actually filed. See [Time-sensitive filing deadlines](#time-sensitive-filing-deadlines) below.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
 - **Filing deficiency tasks**: When a case is filed manually (rather than through Glade's automated filing) and the court submission goes out missing required documents, Glade automatically creates an urgent task for **each** missing document, titled after that document. Previously a single task covered all of them at once. Every task references the affected filing and is assigned to both the team member who initiated the filing and the firm owner, so the missing documents can be addressed before the court's cure deadline. Splitting them per document lets your team divide the work and track what is still outstanding. Completing a task also clears that document from the case's filing deficiency, so the case's action-required banner narrows to the documents that remain — see [PACER Integration](../integrations/pacer.md) for the banner itself. Manual filings with no missing documents do not generate these tasks.
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
 
+### Dismissing and restoring tasks
+
+The task list lets each team member clear items they no longer need to watch, without changing what anyone else sees or who the work belongs to.
+
+- **Dismissing is per person.** Dismissing a task removes it from your own list only — everyone else, including whoever the task is assigned to, still sees it. Dismissals are remembered, so a task you cleared does not reappear the next time you open the list.
+- **You can dismiss a task you are not assigned to.** Any team member who can see a task can dismiss it, including unassigned tasks and tasks that are already complete. Dismissing never reassigns the task or takes it away from another team member. Previously, dismissing a task that was assigned to someone else appeared to work but had no effect.
+- **Restoring brings a task back.** A dismissed task can be restored to your list. If dismissing it also dropped your own assignment, restoring gives that assignment back; if you were not assigned at the time, restoring leaves assignment untouched.
+- **Filtering by dismissal state.** The list shows **active** tasks by default — everything you have not dismissed. You can switch it to show **dismissed** tasks only, or **all** tasks regardless of dismissal.
+- **Including completed tasks.** A separate setting adds completed tasks to the list alongside incomplete ones. It is off by default and is independent of the dismissal filter, so the two can be combined in any way — completed work you have not dismissed, dismissed work that is still open, and so on. The list previously showed incomplete tasks only, with no way to bring completed ones back into view.
+
+### Time-sensitive filing deadlines
+
+Some cases have to be filed with the court by a particular date — an emergency Chapter 13 filed ahead of a foreclosure sale, or a case racing a wage garnishment. Glade tracks that date on the case so your team can find these cases and work them in order rather than remembering them by hand.
+
+- **Setting a deadline** — a case's settings let you record a **filing deadline** as a calendar date, plus an optional **reason** explaining why the case is time sensitive. Recording a deadline is what marks a case as time sensitive; a case with no deadline is not time sensitive.
+- **Setting one at case creation** — the deadline and reason can also be entered when a staff member initiates a case, so an emergency filing carries its deadline from the moment it exists. A reason on its own is not accepted — the reason has to attach to a deadline.
+- **Who set it** — Glade records which team member recorded the deadline and when. On a case created with a deadline, the person who created the case is recorded.
+- **Clearing a deadline** — clearing the deadline also clears the reason and the record of who set it. The case is no longer time sensitive.
+- **The date does not shift** — the deadline is a calendar day the court cares about, so it reads the same regardless of anyone's timezone.
+- **Filtering, sorting, and reporting** — the workflow list can be filtered to time-sensitive cases only (or to cases that are not time sensitive), narrowed to deadlines falling inside a date range, and sorted by deadline. Cases with no deadline sort to the end in both directions. The cases CSV export includes a filing-deadline column and honors the same filters, so "which cases are due this week" can be answered as a list or as a spreadsheet.
+
+#### Deadlines across related cases
+
+A matter can carry several cases at once — an associated filing alongside the main one, or a new case created when a chapter converts. Each case carries its own deadline, because associated filings can genuinely be due on different dates.
+
+- A case joining a matter that is already marked time sensitive **inherits the most recent deadline** on that matter, along with its reason and the record of who set it, provided the joining case has no deadline of its own.
+- A case created with its own deadline keeps that deadline instead of inheriting.
+- Answering explicitly that a new case is **not** time sensitive suppresses inheritance — it stays unmarked.
+- When you create an associated case, the wizard shows the matter's most recent deadline so you can carry it over or override it deliberately.
+
 ## Configuration
 
 - **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
 - **Status per workflow step**: Individual workflow steps can specify a status that the case automatically transitions to when that step's trigger completes.
+- **Case Filed step**: A workflow template can include a **Case Filed** step whose status is applied when the case is e-filed and receives a case number. Set the step's status to your firm's own filed status; no other configuration is required, and the step is added to a template like any other.
 - **Workflow type**: The workflow type ("basic" or "attorney case") affects how automatic status progression and completion logic behave.
 
 ## Edge Cases & Limitations
@@ -66,6 +102,9 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - Archiving a default status (one that shipped with your firm setup) does not delete it — it is preserved for historical reference but removed from the picker. Default statuses cannot be deleted, only archived.
 - The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
+- Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
+- The workflow list filters, the deadline sort, and the CSV export read the filing deadline from the matter's main case. A deadline set directly on a non-main case in the same matter is saved and shown on that case, but does not surface in those list views.
+- The filing deadline is not a status. Setting one does not change the case's status, and passing the deadline does not move the case or raise an alert on its own.
 
 ## Related Features
 

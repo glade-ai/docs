@@ -25,6 +25,20 @@ Task templates are predefined, reusable configurations that set up an entire wor
 - Templates support conditional attachments — certain attachments on a message can appear only when specific conditions are met.
 - Default team member assignments can be specified in the template and are applied to the workflow when it is created.
 
+### Step owner assignments when a template comes from another firm
+
+Some workflow steps are gated on a **team role** — the step waits for someone holding a named role, such as an Intake Team or Documents Team role, to pick it up. Team roles belong to the firm that created them.
+
+When a template is copied to a **different** firm — for example, one of Glade's starter templates applied during onboarding — role-based owner assignments from the originating firm are left out, because the new firm has no way to satisfy a role it does not have.
+
+- Steps arrive without the originating firm's role gates, so a case can move through them.
+- The handoff tasks that would have asked for one of those roles are not created.
+- Previously these gates were copied across as-is. Because the roles did not exist at the destination firm, cases stopped part-way through and could not advance, and the handoff prompt displayed an internal identifier instead of a role name.
+- Owner assignments are treated as each firm's own process configuration rather than portable template content. Set up the role gates you want on your own copy of the template after it is created.
+- Re-importing a template **within** the same firm keeps its owner assignments — only copies that cross firms drop them.
+
+If your firm has cases that were stuck at a handoff step, or a handoff prompt showing a string of letters and numbers instead of a role name, contact Glade support: those cases need a one-time cleanup to release them.
+
 ## Configuration
 
 - **Template name**: Unique identifier used to look up and apply the template.
@@ -46,6 +60,7 @@ Task templates are predefined, reusable configurations that set up an entire wor
 - If applying a template fails partway through, some components may be partially created. The process is not all-or-nothing.
 - All components in a template reference each other by name. If a referenced name does not exist within the template, the process fails.
 - The version number is informational only. The system does not enforce version compatibility.
+- Role-based step owner assignments are not carried across firms. A workflow created from another firm's template needs its owner assignments configured again on the destination firm's own template.
 
 ## Related Features
 
