@@ -73,6 +73,9 @@ Each document in the filing packet must be labeled with the correct ECF document
 - When you save documents to the filing packet and the save does not go through, the document selection window stays open and shows the specific reason it failed (for example, the exact validation message), so you can correct the problem and try again. Previously the window could close on a failed save without anything being saved, and only a generic error was shown.
 - When you assign a custom filename to a document being added to PACER, Glade now preserves spaces, hyphens, parentheses, periods, plus signs, apostrophes, and accented letters in the filename. Filenames such as `Pay Advices`, `Tax Return 2024`, and `Photo ID (Debtor 1)` flow through to PACER as typed instead of being collapsed into a single run-on word. Only characters that filesystems or PACER cannot accept (such as path separators and control characters) are removed.
 - Filenames that contain only special characters and would resolve to an empty name are rejected at the form before they can be saved, so you see the validation message immediately rather than encountering a runtime error during filing.
+- **A document type the district does not accept is refused, not quietly dropped.** When you label a document by hand and the filing district's rules do not accept that type for the case, the save fails with an error explaining the problem. Previously the save appeared to succeed while the label was silently cleared, so the document went back to being unlabelled — and the packet was a file short at filing time with nothing on screen to say why. Check any document you labelled and later found unlabelled again; it was most likely refused by the district's rules rather than lost.
+- The district check recognises every way a district can accept a document — as its own upload, folded into the case-open bundle, combined with other files, or excluded from the packet under a specific filename. A document type a district genuinely accepts is no longer refused because it happens to be accepted in one of the less common ways.
+- Automatic labelling is unchanged. When Glade cannot match a document to a district's slot on its own, it still leaves the document unlabelled rather than guessing at a type, so nothing is filed under a label nobody chose.
 
 ### Filing Packet AI Review
 
@@ -94,6 +97,14 @@ This status appears only for Chapter 13 packets in plan-generation districts. Ot
 - Payment is retried up to 3 times if the initial attempt fails.
 - The transaction number from PACER is recorded on the submission.
 
+### Attorney compensation disclosure (Form 2030)
+
+The attorney compensation amount disclosed on Form 2030 is read from the case questionnaire and carried into the filing.
+
+- Glade reads the amount from whichever compensation question the case's Form 2030 actually uses. Firms are on several versions of the form, and the answer may be a currency amount, typed text (including a formatted figure such as `1,600.00`), or a choice from a list — all of these are read correctly. Previously Glade looked for the answer on a retired version of the form only, so the amount reached the court blank on every filing.
+- A fee of **$0** — pro bono representation — is carried through as zero rather than treated as unanswered.
+- If the question has not been answered, or the answer is not a readable amount, the compensation figure is left unset. In districts that require it, this blocks the filing until the question is answered on the questionnaire.
+
 ### Filing progress panel
 
 A filing progress panel appears in the bottom-right corner of the screen when a PACER filing is running. It persists as you navigate to other pages — you do not need to stay on the filing tab to monitor progress.
@@ -103,6 +114,7 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - When the filing completes, the header shows a green check and "Filing completed." When it fails, a red indicator and "Filing failed" appear.
 - If you cancel a filing in progress, the header shows "Cancellation pending" until the cancellation is confirmed.
 - Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
+- **Three failure reasons that used to show no detail now explain themselves.** A filing that stopped because the PACER login did not finish loading, because a required file was missing from the packet, or because the court site landed on a page Glade did not expect used to leave the progress detail empty and show only a generic "Case sync failed" message on the dashboard. Each of these now reports its own explanation, so your team can tell a court-site problem worth retrying from a packet problem it has to fix first. Other failure reasons were already explained and are unchanged.
 
 ### Status tracking
 
@@ -112,6 +124,12 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Inbox notifications link directly to the case's status tab.
 - The assigned PACER case number is shown in the workflow header. Clicking the case number copies it to your clipboard, making it easy to paste into other tools or communications.
 - For a case your firm filed outside Glade and then recorded in Glade, the **Filed at** date on the PACER case number panel is the court's actual filing date, which is usually earlier than the day someone entered the case. Your own team can now read that date back after entering it — it stays visible on the panel when you reload the case or come back to it another day. Previously only Glade staff could read the value, so the panel showed the date as unset to the firm even though it had been saved, and an attorney could re-enter the same date repeatedly without it ever appearing. Each firm sees only its own cases.
+
+### PACER login failures
+
+When a filing fails because Glade could not log in to PACER, the case status dashboard reports **"PACER login failed."** without advising you to check your credentials.
+
+Login failures are frequently not a credential problem — a two-factor prompt that timed out while waiting is the most common cause — so the message no longer points your team at credentials that are usually correct. Where a more specific reason is available, it appears in the case's filing log. Retry the filing first; only re-enter your PACER details if the failures continue.
 
 ### Filing deficiencies
 
@@ -138,6 +156,28 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
+
+### Notices scheduling several hearings at once
+
+Some courts set more than one hearing in a single notice — a confirmation hearing on one date and a 341 meeting on another, in the same docket entry. Glade records **each** hearing separately, matching every date to the hearing type named beside it.
+
+- Previously only one hearing per notice was captured, and the date and the hearing type could come from different hearings — so a notice could produce a single entry showing a 341 meeting label against the confirmation hearing's date, with the other hearing missing altogether.
+- When a notice is processed again — after a rescheduling notice, for example — Glade reconciles the hearings it already recorded against the notice: missing hearings are added and entries that no longer match are removed, so an earlier mismatched entry is corrected rather than duplicated.
+- Each recorded hearing flows through to the rest of Glade independently: it appears on the case, and (where court hearing sync is enabled) creates its own calendar event. See [Calendar Sync](../appointments/calendar-sync.md).
+
+Notices processed before this correction are not revisited automatically. If your firm files in a district that routinely issues combined notices, ask Glade to reprocess your court notices for the affected date range.
+
+### Proof of claim documents and the claims register
+
+Glade captures the proofs of claim creditors file against your case and organizes them into a claims register at the case level, so your team can review what has been claimed without opening each court notice one at a time.
+
+- **The claim PDF is captured.** Proof of claim notices link their document from the notice's claim number rather than a document number. Glade now recognizes both, so the claim PDF is stored with the case and appears in the Court Notices document column. Previously that column was empty for proof of claim notices and the document had to be retrieved from PACER by hand.
+- **Claims are listed per case.** The claims register shows every claim filed against the case, with a summary across all claims and a detail view for each one, instead of requiring the picture to be reassembled from individual notices.
+- **Claim details are extracted.** For each claim, Glade reads the creditor's name and address and the claimed amounts — total, secured, priority, and unsecured.
+- **Each claim shows its current state and its history.** Glade tracks where a claim stands now separately from the record of events on that claim, so later activity updates the claim without erasing what came before. Notices that arrive out of order do not leave the current state wrong.
+- **Certificates of Service are recognized from the notice subject**, so a notice that says what it is is classified without waiting on document analysis.
+- **A notice that arrives before its case is identified is not lost.** When a court notice cannot be matched to a case at the time it arrives and is associated with the workflow later, Glade extracts the claim information at that point.
+- Claims are visible only to the firm that owns the case.
 
 ### South Carolina (SCB) Chapter 7 filings
 
@@ -166,6 +206,28 @@ Courts write the same case number in several different formats — for example `
 
 Notices that were already stranded by an earlier format mismatch are not re-linked on their own. If a case is missing court notices you expected to see, contact Glade to re-sync it.
 
+### Case numbers when a case has more than one workflow
+
+A single matter often carries several workflows — a retainer alongside a filing workflow, or a new workflow created when a case converts from one chapter to another. The court case number is recorded on the workflow the case was actually filed under, not on all of them.
+
+- Every workflow in the group now **displays** the case number, taking it from whichever sibling holds one. Opening the retainer on a filed case shows the docket number instead of a blank field. Where more than one sibling carries a number, the most recently created one is shown.
+- The case number is displayed, not copied. It still belongs to the workflow the case was filed under, which is what keeps incoming court notices attached to the right workflow.
+- **Reports and filters that match on case number are unchanged.** They match the workflow that actually carries the number, so a report segmenting cases by whether a case number is present continues to count each matter once rather than once per workflow in the group.
+
+### Claim notices with more than one document
+
+Proof-of-claim notices from PACER can carry several documents — the claim form plus its attachments. All of them are captured.
+
+- Every document on the notice is saved, and each keeps the part number the court assigned it, so a multi-part claim can be read in the order the court filed it.
+- Claim documents are named from the creditor, claim number, case number, and part, so they are identifiable in the case's document list without opening each one.
+- An amended claim number on the notice is recorded as the claim number. Previously an amended value that Glade could not read fell back to the case number, which made the document harder to identify.
+- **Capture status and the reason for any failure are shown.** If one document on a claim cannot be retrieved, the rest are still captured and the notice reports what failed rather than appearing complete.
+- A retry picks up only the documents that are still missing; documents already captured are not fetched again.
+- Anything the court returns that is not a readable PDF — a sign-in page or an error page, for example — is rejected rather than saved as if it were the document. Previously these could be stored as PDFs that would not open.
+- **Attaching a claim PDF by hand is supported.** When a document cannot be captured automatically, uploading it to the case keeps its connection to the PACER claim it belongs to, so it is found by the same case and claim reference as automatically captured documents rather than sitting as an unrelated file.
+
+Claims captured before this behavior shipped are not re-processed. If an older claim is missing attachments, capture them again or attach them by hand.
+
 ### Changing the chapter at petition compile time
 
 When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition must be re-compiled against the new chapter so the schedules and forms match. The pre-compile modal (Documents → **Compile Petition**) makes this switch visible at the moment of filing.
@@ -185,6 +247,7 @@ Before a filing can be submitted, Glade validates that all required debtor field
   - Checks that only apply to a second debtor use the same answer. On an individual filing where nothing else on the case indicates whether it is joint or individual, those checks no longer report an unresolved second-debtor result — an individual Chapter 7 stops showing a "(Debtor 2)" line for things like a co-debtor's briefing or Social Security number.
 - Missing fields are shown with labels — for example, "Marital filing status" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
+- **When the check itself reports a problem with the data, that problem is shown.** Some failures are not about a blank field but about a value the check cannot work with — an address whose county cannot be identified, for example. Those now appear as the specific problem to fix, in both the pre-filing warnings dialog and the submission modal. Previously any failure of this kind read as "Required-Fields Check Unavailable — retry shortly", which looked like a Glade outage and left teams retrying a filing that would never succeed until the underlying data was corrected. A genuine outage still reports as unavailable, so the two are now distinguishable.
 
 ### Required documents check before filing
 
@@ -251,6 +314,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 - If a filing partially succeeds (some documents uploaded but fee payment fails), the submission is marked as failed. The attorney may need to complete the filing manually in PACER.
 - Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
+- The claims register covers proofs of claim received from the point the feature became available. Claims filed against a case before then are not added to the register on their own — contact Glade if a case needs its earlier claims brought in.
 
 ## Related Features
 

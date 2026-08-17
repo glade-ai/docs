@@ -32,11 +32,17 @@ Glade integrates with Microsoft Outlook to sync a firm's calendar availability i
 - **Delta sync** (default): Uses Microsoft's delta links to fetch only events that changed since the last sync. Fast and efficient.
 - **Full sync** (initial and fallback): Fetches all events for the next 3 months. Used on first connection and when the delta link is invalidated.
 - If the delta link expires or becomes stale (for example, after a long sync gap or a mailbox migration), Microsoft Graph signals this condition and Glade automatically resets the link and performs a full sync to recover. This recovery happens within the current sync run — there is no need to wait for the next scheduled sync cycle.
+- Microsoft reports an expired delta link in several different ways depending on the state of the link. Glade treats every one of them as a signal to reset and re-sync. Previously only a few specific signals were recognized; any other one left the calendar retrying the same failing request instead of recovering, so it could stop picking up changes indefinitely until someone disconnected and reconnected the account.
 
 ### Sync triggers
 
 - **Manual**: The user clicks "Sync Now" from the calendar settings page. Returns a summary showing calendars synced, events created/updated/deleted, and sync mode used.
-- **Automatic**: A background job syncs calendars that have not been synced in the last 24 hours.
+- **Real-time**: Microsoft notifies Glade when an event on a connected calendar changes, and Glade pulls the change in straight away. This is the normal path.
+- **Automatic catch-up**: A background job runs every hour and force-syncs any enabled calendar that has not synced in the last **two hours**, or that has never synced at all. This is the backstop for calendars whose real-time notifications have lapsed or gone quiet.
+
+Previously the catch-up job only picked up calendars that had gone a full day without syncing, and skipped calendars that had never synced. A busy block a firm member added by hand in Outlook could therefore stay invisible to Glade — and the time stay bookable — for more than 24 hours, or indefinitely on a newly enabled calendar. The catch-up fetches only what has changed since the last sync where Microsoft supports it, so the shorter window does not slow syncing down.
+
+If Glade cannot set up the real-time notification subscription when a calendar is connected or refreshed, it retries within the hour rather than waiting until the subscription would have expired two days later.
 
 ### Availability blocking
 
@@ -59,7 +65,8 @@ Glade integrates with Microsoft Outlook to sync a firm's calendar availability i
 - Personal Microsoft accounts (such as `@outlook.com`) can connect and sync their own calendars, but cannot sync **shared** calendars. Shared-calendar sync is available only on work or school (Microsoft 365) accounts.
 - All-day events are supported and block the entire day. Glade converts all-day event times to the user's timezone.
 - The sync window covers the next 3 months — events further out are not synced.
-- Unlike Google Calendar, Outlook does not support push notification webhooks in Glade's current implementation. Sync relies on the manual trigger and the 24-hour background job. Stale or expired delta links are recovered automatically during the next sync run (manual or scheduled).
+- Real-time notifications from Microsoft are the primary sync path, with the hourly catch-up job and the manual trigger as backstops. Stale or expired delta links are recovered automatically during the next sync run (real-time, manual, or scheduled), no matter which of the several ways Microsoft signals that the link has expired — Glade treats every one of them as a prompt to reset the link and re-sync, rather than only a few specific signals as before.
+- A calendar you have disabled is never synced by the catch-up job, however long it has been stale. Re-enable it to resume syncing.
 - If the Microsoft OAuth token is permanently revoked — for example, because you changed your Microsoft password, revoked the app permission in your Microsoft account settings, or the refresh token has permanently expired — Glade automatically disconnects the calendar account and notifies your firm so your team knows to reconnect. Sync stops immediately rather than continuing to fail silently. Reconnect from Calendar settings to restore availability blocking and booking sync.
 - Disconnecting an account soft-deletes all synced events from Glade but does not modify the Outlook calendar.
 - Rate limiting from Microsoft Graph API is handled with retry logic and exponential backoff.
