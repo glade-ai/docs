@@ -136,13 +136,6 @@ When you edit an income record's breakdown — the individual earnings and deduc
 - Columns that recognize only a single type keep a fixed list with no custom option, and columns with no predefined types remain free text as before.
 
 Free-text entry was unavailable for a period after the breakdown editor moved to picking from lists. If your team worked around it by folding an unusual deduction into another line, you can record it under its own name again.
-=======
-**Deductions printed in two columns.** Some paystubs — government back-pay stubs are the common case — list each deduction twice, once as the current pay period amount and once as an adjusted amount. Glade adds the two together for each deduction rather than reading only the current column. Previously the adjusted column was ignored, which understated the client's total deductions and, on the Chapter 7 means test, overstated the income remaining after them.
-
-**Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
-
-**Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
->>>>>>> 0447ce7 (docs(workflows): paystub extraction, Schedule A/B autofills, selective case-data sync)
 
 ### Correcting and Removing Income Sources
 

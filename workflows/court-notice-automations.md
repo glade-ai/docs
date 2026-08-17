@@ -201,27 +201,20 @@ Edits are tracked: each save records who made the change and when, alongside who
 - The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed. This matters where a single type has been split into several: an automation that watched for means test and current-monthly-income notices needs one automation per form to keep the same coverage.
 - Classification changes apply only to notices received after the change. Notices already on your cases keep the type they were originally given.
 - Only the supported tokens listed above are recognized. Unknown tokens render as empty strings.
-<<<<<<< HEAD
-- Hearing tokens depend on the linked court calendar entry. If a case has no 341 meeting scheduled or no video hearing details on file, those tokens render as empty strings.
+- Hearing tokens are filled from the linked court calendar entry or from the notice itself. If neither states a 341 meeting time, or the notice carries no video hearing details, those tokens render as empty strings.
 - The case-caption fallback for debtor names only supplies a name. It does not link the notice to a case, so the other case-context tokens on an unlinked notice stay empty.
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
 - Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
-- Failed runs are not retried automatically. The failure shows as the automation's last run status.
+- Failed runs are not retried automatically. The failure shows as the automation's last run status, and the run's per-action results show which action failed.
+- Emails sent before the 341 meeting details fix went out with the meeting date, time, and join details blank. Those emails are not resent — if clients were sent a 341 notice missing its meeting details, follow up manually.
+- Tasks created by an automation appear in the inbox and in the newer task views. They may not yet appear in the older dashboard task lists, which show only a fixed set of task kinds.
+- A **Create task** action needs the notice to be linked to a workflow. Court notices that never matched a workflow — the majority of notices for many firms — cannot raise a task, so an automation whose only action is Create task will show runs as skipped on those notices. Pair it with a **Send email** action if someone should still be told.
 - Conditional logic inside a single automation is limited to assignment rules on a task action — they decide *who* a task goes to, not whether the automation fires or what the email says. The automation's own trigger has no branching; use separate automations for separate scenarios.
 - Assignment-rule conditions cover chapter, judge, and trustee only. There is no condition on other notice details.
 - Assignment-rule conditions are evaluated strictly left to right with no operator precedence. A rule that mixes **and** and **or** may not mean what it reads like at a glance — check the grouping described above.
 - A rule whose conditions are all blank matches every notice. Leaving a rule empty by accident assigns its people to every firing.
 - Action titles are not recorded on a run's history. A run identifies which action fired, but if you rename an action later, past runs reflect the current title rather than the one in place when they ran.
 - The find bar searches automation names, match types, and action titles. It does not search email subject or body text, recipients, or judge filters.
-=======
-- Hearing tokens are filled from the linked court calendar entry or from the notice itself. If neither states a 341 meeting time, or the notice carries no video hearing details, those tokens render as empty strings.
-- Emails sent before the 341 meeting details fix went out with the meeting date, time, and join details blank. Those emails are not resent — if clients were sent a 341 notice missing its meeting details, follow up manually.
-- If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
-- Tasks created by an automation appear in the inbox and in the newer task views. They may not yet appear in the older dashboard task lists, which show only a fixed set of task kinds.
-- A **Create task** action needs the notice to be linked to a workflow. Court notices that never matched a workflow — the majority of notices for many firms — cannot raise a task, so an automation whose only action is Create task will show runs as skipped on those notices. Pair it with a **Send email** action if someone should still be told.
-- Failed runs are not retried automatically. The failure shows as the automation's last run status, and the run's per-action results show which action failed.
-- Branching or conditional logic inside a single automation is not supported. Use separate automations for separate scenarios.
->>>>>>> d35651e (docs(workflows): court notice multi-action model, 341 meeting details, inline PDF previews)
 
 ## Related Features
 
