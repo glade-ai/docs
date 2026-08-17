@@ -127,6 +127,7 @@ When payments are recorded, a receipt PDF can also be generated. PDFs are stored
 ### Notifications
 
 - **Client notification on invoice creation:** When an invoice is created or becomes payable, the client can receive an email with a link to view and pay the invoice.
+- **Invoice emails wait for an unsigned retainer:** If the case has a retainer agreement the client has not signed yet, invoice emails are held back rather than sent. This applies to the email sent when an invoice is created, when it becomes payable, and when a collaborator is added to it. Once the client signs the retainer — or the retainer is skipped — the held email is sent, so nothing is lost. This stops clients being asked to pay before they have agreed to representation, which was a common source of confused calls to firms. The invoice itself is created and payable as normal in the meantime; only the email is deferred. Cases with no retainer agreement are unaffected and their invoice emails send immediately. See [Custom Terms](../workflows/custom-terms.md).
 - **Payment confirmation:** When a payment succeeds, the client receives an email with the amount paid, remaining balance, and payment method used.
 - **Firm notification:** Firms can opt in to receive a notification when the first payment is made on an invoice.
 - **Payment follow-ups:** Templates can enable automatic payment reminder emails (and SMS reminders) on a configurable schedule (e.g., every 3 days, weekly) for unpaid invoices. Reminders are driven by the client's outstanding **Pay Invoice** task, and only continue while the invoice still has a balance to collect — that is, while it is **In Progress** or **Payment Failed**. They stop automatically once the invoice is **Paid**, **Voided**, **Skipped**, or **Edited** (replaced by a newer version), and once an active payment plan takes over collection. This prevents the situation where a client who has already paid — or whose invoice was edited and replaced — keeps receiving reminders on the old, no-longer-payable invoice.
@@ -151,6 +152,7 @@ Invoice changes are handled differently depending on what is being changed:
   - The new invoice references the original, maintaining a complete audit trail.
   - Any credits from payments already made on the original invoice carry forward to the new version.
   - If those carried-over payments already cover the new total — for example, when you edit an invoice that was already paid in full, or lower the amount so what the client already paid now covers it — the new version is marked **Paid** right away instead of showing a balance still due for money that was already collected. Anything that depends on the invoice being paid (workflow steps that were waiting on payment, payment-plan completion) advances just as it would after a normal final payment. If a balance still remains after the carried-over payments are applied, the new version stays payable (**In Progress**) for the difference.
+  - An active payment plan on the original invoice moves to the new version instead of being canceled, so the client's autopay arrangement survives the edit. If the new total is higher and the plan no longer collects enough, installments are added to cover the difference; if the carried-over payments already cover the new total, the remaining installments are canceled. See [Payment Plans](./payment-plans.md).
   - Payments stay attached to the active invoice version, including ACH / bank-transfer payments. If a bank transfer confirms *after* the invoice has been edited, the confirmation is applied to the new active version rather than stranding the payment on the read-only original — so a paid ACH payment no longer disappears from the invoice when it is edited around the same time the payment settles.
 
 This approach preserves a clean history of what was billed and what changed, which is important for legal billing compliance and client transparency.
@@ -170,6 +172,19 @@ Editing a line item keeps its link to any custom-terms variable that references 
 - Skipping cancels any active payment plan on the invoice.
 - Unlike voiding, skipping is reversible — a skipped invoice can be "unskipped" at any time to resume collection.
 - Common use cases: waived fees, pro bono arrangements, payment deferred to a later date.
+
+### Invoices on a deleted case
+
+When a case is deleted, the invoices that belonged to it are no longer listed anywhere your team bills from.
+
+- Deleting a case does not change its invoices — each one keeps whatever status it held at the moment the case was deleted. Previously those invoices kept listing as live, so a case deleted mid-payment left behind an invoice showing a status like **Payment Requested** and a balance that nobody could pay, with no case to open it from and no way to tell it apart from a real invoice.
+- Invoices belonging to a deleted case are now hidden from the firm's Invoices list and its CSV export, the Invoices tab on a client's record, and the client's own invoice list in the portal.
+- **Invoices not tied to a case are unaffected.** An invoice raised on its own still lists normally.
+- Nothing about the invoice itself is altered — no amounts, statuses, or payment records change. Only what appears in the lists changes.
+- Opening an invoice by its direct link still works, so an invoice that needs to be formally voided can still be reached and voided.
+- Payments already collected against a hidden invoice stay visible in your payment records. A payment that succeeded before the case was deleted remains on the Payments list for reconciliation, even though its invoice no longer appears in the invoice lists.
+
+This most often shows up when a case is deleted and re-created shortly afterwards — for example, a retainer case set up incorrectly and rebuilt a few minutes later. A payment already in flight moves to the replacement case's invoice, and the original is left behind. The client was only ever billed once, but the account could look as though they owed the amount twice.
 
 ### Voided vs. refunded payments on an invoice
 
@@ -196,6 +211,8 @@ If the firm has added an invoice note, it appears alongside the balance due so t
 ### Filtering and searching invoices
 
 The invoice list supports date filtering. The date filters are labeled **Created from** and **Created to**, and filter invoices by their creation date. Both filters can be set independently or together to narrow the list to a specific time window.
+
+Both dates are whole calendar days in **your firm's timezone**, and both ends are included. Picking the 1st and the 6th returns everything created from the start of the 1st through the end of the 6th; picking the same date for both returns that one day. Previously the range stopped at the beginning of the day you named rather than the end of it, so the last day selected was always missing and a single-day range came back empty — which read as "nothing was billed that day" rather than as a filtering problem. If your team learned to set the end date a day later than they meant, that adjustment now over-selects by a day and should be dropped.
 
 ### Exporting invoice data
 
@@ -261,9 +278,12 @@ When connecting an invoice template to a workflow:
 - **Voiding is permanent:** Once an invoice is voided, it cannot be restored. If the firm still needs to bill the client, a new invoice must be created.
 - **Edited invoices are read-only:** When an invoice is versioned due to line item changes, the original becomes permanently read-only. All future activity happens on the new version.
 - **Payment plan failures:** If a scheduled installment fails and retries are exhausted, the payment plan may need manual intervention from the firm.
+- **Deferred invoice emails cover the invoice email only.** Payment plan reminders and the client's Pay Invoice task are not held back while a retainer is unsigned — only the invoice email itself is deferred.
 - **ACH settlement time:** ACH / bank transfer payments may take several business days to settle, during which the payment shows as pending.
 - **Processing fee variability:** The exact surcharge amount when passing processing fees to the client depends on the payment method used and current processor rates. The amount is calculated at the time of payment, not when the invoice is created.
 - **QuickBooks sync timing:** Invoice data syncs to QuickBooks when the invoice becomes payable and when payments complete. Changes made directly in QuickBooks are not synced back to Glade.
+- **Invoices on deleted cases are hidden, not voided:** Hiding is based on the case having been deleted, not on whether money was collected. An invoice on a deleted case that had a successful payment against it is hidden along with the rest, so its total no longer appears in the invoice lists or the CSV export. The payment itself stays on the Payments list, so the money is still accounted for — but if you need the invoice back in view, it has to be reached by its direct link.
+- **A case's invoice totals can still be off after payments are moved between invoices:** When a payment is re-pointed from one invoice to another and the original case is *not* deleted, the original invoice can keep a stale status and continue to count toward the balance shown on reports. Contact support if a case shows a balance that does not match what the client actually owes.
 
 ## Related Features
 
