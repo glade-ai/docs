@@ -31,6 +31,8 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Events marked as "free" or "transparent" in the external calendar do not block availability.
 - When a client views available time slots, any time covered by an external "busy" event is hidden.
 - This prevents double-booking across Glade and external calendars.
+- A "busy" event occupies one place in the slot rather than closing it outright. On an appointment type that allows a single booking per slot — the default — that closes the slot. On an appointment type configured for several concurrent bookings, the event takes one place and the rest stay open. The event Glade itself puts on the calendar for a booking is not counted a second time on top of the booking.
+- The block is enforced when a booking is saved, not only when slots are displayed. A booking that would overlap a busy event on the assigned team member's synced calendar is refused — including when a booking is rescheduled, and when a scheduled booking is reassigned to a team member who has a conflicting event. A firm team member can still override with **Schedule Anyway**; clients cannot. Only calendars enabled for syncing are checked.
 
 ### Real-time sync
 
@@ -41,6 +43,16 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - If Glade cannot process a change right away — for example, during a brief Google or Microsoft outage — it keeps trying until the change goes through. Previously a momentary failure dropped the update silently and the calendar stayed out of step until the next change came in.
 - Changes to the same calendar are processed one at a time in the order they arrive, so a rapid burst of edits cannot overwrite one another.
 - A calendar that has been deleted at the provider stops syncing instead of being retried. Disconnect and reconnect the account if you delete a synced calendar and later recreate it.
+
+#### When provider notifications go quiet
+
+Real-time notifications are the normal path, but a provider subscription can lapse or fall silent. A background job runs every hour and catches those calendars up, so an event that never triggered a notification still lands in Glade.
+
+- Any enabled calendar that has not synced in the last **two hours** is pulled in by the catch-up job. Previously the job waited until a calendar had gone a full day without syncing, so a busy-block added by hand could stay invisible to Glade — and stay bookable over — for more than 24 hours.
+- A calendar that has **never** synced is picked up as well. Previously those were skipped entirely, so a newly enabled calendar whose first notification never arrived was never caught up.
+- Calendars that have synced recently are left alone, and disabled calendars are never synced, however stale they are.
+- The catch-up fetches only what changed since the last sync where the provider supports it, so tightening the window does not slow syncing down.
+- If Glade cannot establish a real-time subscription with Outlook, it retries within the hour instead of waiting until the subscription would have expired two days later. A calendar therefore does not sit without live updates for days after a single failure.
 
 ### Connecting a calendar account
 
@@ -83,6 +95,16 @@ When enabled for a firm, court hearings that Glade detects from court notices ar
 - A synced hearing also **blocks bookable availability**, so clients can't book the team member during the hearing.
 - For 341 Meetings, a continued or amended notice for the same case replaces the earlier calendar event rather than creating a duplicate.
 
+#### Notices that schedule more than one hearing
+
+A single court notice often sets more than one hearing — a confirmation hearing and a 341 meeting of creditors in the same entry is a common pattern in some districts. Glade reads **every** hearing date on the notice and creates a separate calendar entry for each one, matching each date to the hearing type named next to it.
+
+- Previously only one hearing per notice was recorded, and it could be labeled with the wrong hearing type — a notice setting a confirmation hearing for one date and a 341 meeting for another could produce a single entry carrying one date with the other's label. A team relying on the calendar would have missed the second hearing entirely.
+- When a notice is processed again — for example after a rescheduling notice arrives — Glade reconciles what it already has: it adds hearings that are missing and removes entries that no longer match the notice, so a previously mislabeled entry is corrected rather than left alongside the right one.
+- Each hearing on the notice produces its own calendar event on the assigned team member's calendar, and each blocks availability for its own time.
+
+Hearings recorded before this correction are not revisited automatically. If your firm works in a district that issues combined notices, ask Glade to reprocess your court notices for the affected period so the missing and mislabeled hearings are corrected.
+
 This feature is off by default and is turned on per firm by Glade.
 
 ## Configuration
@@ -102,11 +124,13 @@ This feature is off by default and is turned on per firm by Glade.
 - The sync window covers the next three months. Events further in the future are not synced until they fall within that window.
 - If a Google or Outlook OAuth token expires and cannot be auto-refreshed, the user must manually reconnect.
 - Changes made directly to a synced event in the external calendar (after Glade created it) are not synced back to Glade.
-- There is no manual "sync now" button. Sync happens automatically via webhooks.
+- There is no manual "sync now" button on this screen. Sync happens automatically through provider notifications, backed by the hourly catch-up job described above.
+- Only events that have reached Glade can block a booking. If a team member marks time as busy in Outlook and that change has not synced through, Glade does not know about it and will not stop a booking in that window.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
 - All-day events are handled based on the firm's configured timezone.
 - Court hearing sync only adds **future** hearings, and only when the case is linked to a team member who has a connected calendar. Unresolved cases are skipped.
 - A hearing that is vacated or cancelled with no replacement time is not yet removed from the calendar. De-duplication of repeat notices currently applies only to 341 Meetings.
+- Reading multiple hearings from one notice depends on each date being named alongside a recognizable hearing type in the notice text. A date the notice does not label is paired with the nearest hearing type it can find.
 - Unlike inbound booking sync (which reads only event times), court hearing events Glade creates carry full hearing details.
 
 ## Related Features
