@@ -6,6 +6,16 @@ The client portal is where clients interact with your firm's workflows. Clients 
 
 ## Key Behaviors
 
+### Which portal your clients see
+
+Glade has a redesigned client portal — the version described throughout this page, with the **Your next step** hero card, path timeline, and balance card. It is now used by **every bankruptcy firm**, rather than by a hand-maintained list of firms.
+
+- Any firm set up as a bankruptcy practice gets the redesigned portal automatically, including firms onboarded from now on. Previously each firm had to be added by hand, so newly onboarded firms stayed on the older portal until someone remembered to add them.
+- Firms outside that practice area continue on the previous portal, and individual firms can still be switched over on request.
+- Which portal a client sees follows the **firm whose portal they are visiting**, not the client's own account. A client who works with more than one firm sees each firm's own portal.
+
+### General behavior
+
 - Clients reach the portal through a link you share or through a workflow landing page that describes the workflow and provides an entry point.
 - The portal URL is branded to your firm using your unique URL slug (e.g., `yourfirm.glade.app/...`).
 - Clients start a workflow by following a link that walks them through the workflow's initial steps.
@@ -27,8 +37,10 @@ The client portal home gives the client a single view of where they stand across
   - When there is an outstanding task, the card shows the task and a button to open it.
   - When the client has nothing outstanding but a meeting is scheduled, the card shows the booking title and date with framing such as "Your meeting is today", "Your meeting is tomorrow", or "Your meeting is coming up".
   - When the client is fully caught up with no upcoming meeting, the card shows "You're all caught up" with contextual copy describing what's happening on the firm's side (under review, firm working, upcoming, or nothing).
+  - When the client has no outstanding case work but does have a comment from the firm awaiting a reply, that comment becomes the next step instead of "You're all caught up". Case work takes priority — a comment is offered only when nothing else is active.
   - Every "all caught up" variant includes an **Ask a question** link that takes the client into the most recent active case with the chat panel open so they can leave a comment for the team.
 - **Path timeline** — beneath the hero card, the home page lists every step and attachment across the client's active case (document checklists, questionnaires, agreements, signatures, bookings, invoices, credit reports). Items are grouped by status: completed → under review → scheduled → active → upcoming. Active items show the assigned team members (or "No assignees yet" if none have been picked).
+- **Comments awaiting a reply appear on the timeline too** — a comment or discussion the client has been asked to respond to shows as an active row with a chat icon and a **Reply** action, even though it is not a step in the workflow. Previously the home page listed only workflow steps, so a client could be shown "You're all caught up" while the firm's own follow-up list held dozens of outstanding "Respond to Comment" tasks for that same client.
 - **Open buttons** — only items the client can actually act on right now show an Open button. Items that haven't been triggered yet, or that are waiting on the firm, render as upcoming without a button.
 - **Voided e-signatures are hidden** — a voided e-signature request is removed from the client's path. Because a voided signature cannot be acted on, it does not appear as an item and is not counted toward its step's assignments, so the client no longer sees a dead "document voided" card or a stray prompt to finish an assignment that no longer exists. The firm's own dashboard and chat still show the voided indicator.
 - **Booking states** — bookings on the path appear in three sub-states: **Active now** (no time picked yet — the client needs to schedule), **Scheduled** (time is set, with a date subtitle), or **Completed** (the meeting has passed). Imminent meetings include a "Today, …" or "Tomorrow, …" prefix on the date.
@@ -38,6 +50,16 @@ The client portal home gives the client a single view of where they stand across
 - **Coming up rail** — surfaces the next scheduled meeting on a date tile.
 - **Top bar** — every page includes a global top bar with the firm's branding, a hamburger menu (Meetings, Home, Library, Support chat, and a "Visit {firm}" external link), a **Need help** popover with help videos, and an account menu. The firm logo links back to the home page.
 - **Loading state on first open** — when the home page first opens, it shows a brief loading placeholder while it gathers the client's steps, rather than momentarily showing "You're all caught up" before the real information appears.
+- **Status badges on active path items** are easier to read against their background than they previously were.
+
+### Opening an item from the path
+
+Selecting a questionnaire, document checklist, agreement, invoice, or other item from the path timeline opens it as its **own full page**, rather than as a panel layered over the home page.
+
+- Each item page carries a **Back** button that returns the client to their portal home.
+- Because each item has its own page, a client can be sent a link that opens straight to one specific item — a particular questionnaire or checklist — instead of landing on the home page and having to find it. This is useful when your team is walking a client through one outstanding thing over the phone.
+- A client who arrives on an item directly from a link still lands back on their portal home when they use **Back**, rather than reaching a dead end.
+- This applies to the client portal only. How your own team opens the same items from the firm dashboard is unchanged.
 
 ### Multi-case clients
 
@@ -72,11 +94,22 @@ The portal captures and stores a timezone for each client so that times shown to
 
 The portal's "active" indicators and the Your next step card are driven by the underlying entity status, not by the task system. If a client dismisses a task whose underlying item (for example a document checklist) is still open and assigned to them, the home page continues to surface that item as their next step with the correct Open button.
 
-- **Dismissing a task** — Every task in the home list has a trash icon that shows a **Dismiss task** label when hovered. Dismissing a task clears it from the client's list; it does not complete the underlying item. (The control was previously an unlabeled arrow that clients often mistook for "open" rather than "clear.")
-- **Respond to Comment tasks** — A "Respond to Comment" task opens the reply thread for that comment directly, so the client lands where they can reply rather than on the full conversation with the comment merely highlighted.
+- **Dismissing a task** — Dismissing a task clears it from the client's list; it does not complete the underlying item. Where the control is offered, it is a trash icon that shows a **Dismiss task** label when hovered. (It was previously an unlabeled arrow that clients often mistook for "open" rather than "clear.") Dismissing only removes the task from the client's own list — the task stays on your team's list, so nothing is lost from the firm's side when a client clears one.
+- **Items on the path timeline can no longer be dismissed.** The dismiss control has been removed from path items, so a client cannot clear a step from their own path — a step they need to complete stays visible until it is done or your team removes it.
+
+  > TODO: Confirm which client-portal surfaces still offer the dismiss control now that path items do not, so this section can name them.
+- **Respond to Comment tasks** — A "Respond to Comment" task opens the reply thread for that comment directly, so the client lands where they can reply rather than on the full conversation with the comment merely highlighted. On a comment row the dismiss control reads **No reply needed** rather than "Dismiss task", which is what dismissing one actually means — the client is saying the comment does not need an answer, not that the conversation is closed. Your team still sees the comment and the task afterward.
 - **Credit counseling enrollment task** — When the firm sends a credit counseling enrollment request, a task to enroll appears on the client's portal home, labeled **Get Pre-Filing Credit Counseling** before the case is filed (or **Get Post-Filing Debtor Education** afterward). Opening the task takes the client straight to the enrollment form. On joint filings, both debtors receive the task. The task clears on its own once enrollment is completed or skipped, and the client receives automated follow-up reminders to enroll while it remains outstanding. The accompanying "enrollment details needed" message now opens the enrollment card directly, instead of pointing to a button that was not shown.
 - **Connect Bank Account task** — When a bank statements step is active on the client's case, a **Connect Bank Account** task appears on the portal home alongside the client's other tasks. Opening it takes the client straight to the Bank Statements Organizer, and the task clears once the client connects an account or the step is skipped. See [Bank Statements](./bank-statements.md).
 - **Tasks from linked workflows** — When a client's workflow is linked to other workflows, the client tasks from those linked workflows also appear on the portal home. The client sees every task assigned to them in one place, not only the tasks on their main workflow.
+
+### Signing documents
+
+When a client opens an e-signature request from the portal, the document fills the window beneath the page header, so they can read the pages they are being asked to sign and scroll through the document in place.
+
+- Previously the document opened in a narrow strip roughly the height of a single line, on a page that offered no way to enlarge it. The full document was there and could be scrolled, but a client sent a 50-page petition to sign was reading it through a slot — and could reasonably have signed without being able to review it. If a client tells you they could not read a document they were sent to sign, this is the cause, and re-sending is not necessary: reopening the same link now shows it correctly.
+- The same correction applies to the version your team sees when opening a signature request from the dashboard. There, a request whose description ran to several lines could push the bottom of the document out of view; the document now sizes itself to whatever space the header leaves.
+- On a short screen or a phone, the document keeps a readable minimum size and scrolls inside the page rather than shrinking to fit.
 
 ### Live updates
 
@@ -90,6 +123,7 @@ Because the home updates automatically, there is no manual refresh step — the 
 
 ## Configuration
 
+- The redesigned portal is applied automatically to bankruptcy firms; there is no per-firm setting to turn on. Firms in other practice areas that want it can request it from Glade.
 - You configure the portal experience through workflow templates that define the sequence of steps, triggers, and actions.
 - Workflow landing pages are available for specific practice areas (e.g., bankruptcy, immigration, personal injury) and describe the workflow before a client begins.
 - Products control pricing and sale state (free, not for sale, or on sale) for workflows that require payment.

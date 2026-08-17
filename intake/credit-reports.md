@@ -64,6 +64,23 @@ Unknown error codes are still retried automatically. When one bureau returns an 
 
 If a credit report is not available or not needed, you can skip the step. The skip option appears after canceling an error, or may be available from the start depending on your workflow configuration.
 
+### Imported creditor names
+
+Credit bureaus report creditor and account names in all capitals. Glade converts them to normal reading case as the report is imported, so they read cleanly in the client questionnaire and on Schedules D, E, and F without anyone re-typing them by hand.
+
+- Bank initialisms and legal entity suffixes stay capitalized. `CREDIT ONE BANK NA` imports as `Credit One Bank NA`, `EXETER FINANCE LLC` as `Exeter Finance LLC`, and `MACYS/CBNA` as `Macys/CBNA` — rather than as `Na`, `Llc`, and `Cbna`. Since these names are filed with the court, getting the suffixes right is the difference between a name that can be filed as-is and one that still needs correcting.
+- Only names that arrive entirely in capitals are reformatted. A name that already carries mixed case — because someone at your firm corrected it, or because the bureau sent it that way — is left exactly as it is.
+
+### Collection accounts and the original creditor
+
+A collection account is reported under the collection agency's name, which tells you who to notice but not what the debt was for. Matching those accounts against a client's paper bills previously meant cross-referencing them by hand.
+
+- Glade now records the **original creditor** on each collection account alongside the collection agency. The agency stays the account name, and the original creditor is carried onto Schedule F.
+- Where the report provides the original creditor as its own field, Glade reads it directly. Where the bureau states it only as a remark on the account (for example, `ORIGINAL CREDITOR: PROGRESSIVE, ASSIGNED ON 10/22`), Glade reads it out of that remark. Both are recognized, including reports where the same debt appears as two agency rows from different bureaus and only one of them spells out the original creditor.
+- Remarks are only read on collection accounts, so descriptive text on an ordinary account is not mistaken for a creditor name.
+- The original creditor is treated like any other imported value — your team can correct it, and a correction takes precedence over what the report said.
+- Some reports list collection accounts in a section separate from the client's other accounts. Those accounts were previously not imported at all; they now come through with the rest.
+
 ### Imported real-estate addresses
 
 When Glade imports addresses from a credit report into the case as real-estate assets, it imports only addresses the client actually owns. Glade uses the credit report's owner-match indicator on each address to make this determination, so prior addresses where the client lived but did not own the property are no longer imported as real-estate assets even if they have transaction history.
@@ -79,6 +96,10 @@ When Glade imports addresses from a credit report into the case as real-estate a
 - Credit report pulls are billed from the first pull at the standard rate. There is no trial or free pull before billing begins.
 - The pull attempt limit is enforced per case. Once the limit is reached, no further pulls can be initiated for that case.
 - The owned-property filter on imported real-estate addresses applies to reports pulled or refreshed after this behavior took effect. If an owned property is missing from the imported real estate on a report that was pulled earlier, re-pull the report to apply the current filter.
+- Creditor name formatting applies as a report is imported. Names on reports pulled before this behavior took effect keep the all-capitals form they were imported with — re-pull the report to apply the current formatting, or correct the names directly.
+- An abbreviation that is neither a recognized initialism nor a normal word may stay capitalized — `SW STDNT SRV`, for example. The name is still readable and filed as shown; correct it by hand if the court copy needs it spelled out.
+- The original creditor is recorded only when the report names one. A collection account whose report gives no original creditor shows the agency alone, as before.
+- A creditor that arrives from the report with no address at all — some collection agencies come through this way — opens for editing with empty address fields, and appears normally in creditor lists and pickers. Previously such a creditor could stop the creditor form or the list from loading at all. An address is still required before the creditor can be saved, so fill it in before filing.
 - If a credit report is pulled successfully but the workflow's **Get Credit Report** step does not clear right away — for example, the report was retrieved but the finalizing step was interrupted by a timeout — Glade reconciles it automatically. Retrying the pull completes the existing report instead of pulling a new one, so you are not charged a second time, and a periodic background check completes any stranded report on its own (typically within about 15 minutes). You do not need to re-pull a report that already came back successfully.
 
 ## Related Features
