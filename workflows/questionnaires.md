@@ -542,6 +542,21 @@ When you click **Submit Questionnaire** and required fields are missing, a **Fie
 
 When a questionnaire is submitted this way, an entry is recorded in the workflow activity timeline showing the questionnaire name and the number of required fields that were left unanswered. This gives your team a full audit trail of bypass submissions.
 
+**Who can submit anyway.** Waiving a blocking issue is limited to firm owners, firm Admins, and Glade Admins. Everyone else — case workers, paralegals, and clients working in the portal — still sees the full list of what needs attention, but the acknowledgment checkbox and the **Submit Anyway** button appear disabled, with a note reading *"Only an Admin can submit a questionnaire that has fields needing attention."* They can correct the flagged fields and submit normally; they cannot push a petition past a blocker. This applies on the firm dashboard and in the client portal alike.
+
+**Findings that do not block are shown, not waived.** Not every finding stops a filing. When a submit turns up findings but none of them block:
+
+- The review dialog still opens, so the findings are read rather than passing unseen.
+- There is no acknowledgment checkbox and no Admin restriction — the action is a plain **Submit**, available to anyone who can edit the questionnaire, including a client filling out their own forms.
+- Nothing is recorded as a bypass in the workflow activity timeline, and the dialog does not describe the filing as incomplete, because nothing was waived.
+- A required signature is still confirmed at submission time in the usual way.
+
+When at least one blocking finding is present, the dialog behaves exactly as described above — acknowledgment, **Submit Anyway**, Admin only, and an activity entry — even if advisory findings are listed alongside it.
+
+Informational findings on their own do not interrupt a submit at all. They appear in **Check petition** (see [Petition Check Summary](#petition-check-summary)), which is where to look for them.
+
+Previously the dialog was decided by which button opened it rather than by what the findings said. A submit whose findings were all advisory went through in silence and those findings were never shown to anyone who did not separately run Check petition. Expect one extra confirmation step on those submissions where there was none before.
+
 **Submit Anyway** is also available when a required signature has been skipped — you can submit the questionnaire without completing the signature.
 
 When the signature confirmation modal appears at submission time, you have three choices:
@@ -578,6 +593,7 @@ Once a check has run, the results stay available while you work through them:
 - A shield icon with a count of the outstanding findings remains in the questionnaire header. Selecting it reopens the results you already have, without running the check again — so going back to the list after correcting a field is immediate.
 - The count stays current as you fix errors on the form. Resolving a field lowers the number without a second check.
 - Previously the results dialog closed as soon as you navigated to a field, and getting back to the findings meant re-running the whole check, which is slow and interrupts correction work.
+- **The results open whatever the check found.** A run that turned up only advisory or informational findings used to show a "No validation issues found" message and no dialog, while reopening the same results from the header shield listed them in full — so the same check appeared to contradict itself between the first click and the second. Both routes now open the results for any finding, and the "no issues found" message appears only when the check genuinely found nothing.
 
 **Issues are listed in the order they appear on the form.** Working the list from top to bottom walks you down the questionnaire in one pass, rather than sending you back and forth through it:
 
