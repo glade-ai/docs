@@ -35,17 +35,22 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 
 | Tool | What it does |
 |------|-------------|
-| `customers_list` | Lists customers for a firm. Paginated. |
+| `customers_list` | Lists customers for a firm. Can be narrowed by a search term matching name, email, phone, contact phone, date of birth, or the last four digits of a Social Security number. Paginated. |
 | `customers_get` | Gets a customer's full profile including contact info and preferences. |
 
 ### Cases & Workflows
 
 | Tool | What it does |
 |------|-------------|
-| `user_workflows_list` | Lists cases for a firm. Filter by status, assignee, last activity date, or workflow template. |
+| `user_workflows_list` | Lists cases for a firm. Filter by status, assignee, last activity date, or workflow template, or narrow by a search term matching the client's name or email, the case number, or the name or email of another person on the case. Paginated. |
 | `user_workflows_get` | Gets full case details including steps, data fields, collaborators, owners, and task summary. |
 | `case_data_schema_get` | Gets the global schema defining all structured case data fields (parties, attorneys, billing, IDs). |
 | `case_data_list` | Gets all resolved data for a specific case, including provenance and conflict status. |
+
+**Finding one client or one case by name.** Both list tools accept a search term, so the assistant can answer "what's the status of Maria Alvarez's case" with a single lookup. Previously neither could filter by name, so the only way to find one client was to page through the firm's whole list — hundreds of requests on a large firm, and slow enough that broad questions often stalled or gave up before producing an answer. If your assistant has struggled to find a specific client or case by name, retry those questions.
+
+- Searching cases also matches other people on the case, so a case can be found by a spouse's or co-debtor's name as well as the primary client's.
+- Case numbers are matched as a whole value rather than word by word, so a case number never matches a different case that happens to share a fragment of it.
 
 In addition to the tools above, the assistant can read the case's **internal team message thread** — the firm-side discussion attached to the workflow, separate from the client-facing inbox conversation. Messages include their attachments (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Cases that don't have an internal thread return an empty list.
 
