@@ -32,7 +32,7 @@ When a filing is blocked by Glade's pre-filing review, the modal names the speci
 
 Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
 
-Four checks are active:
+Five checks are active:
 
 | Check | What it looks for | Severity |
 |-------|-------------------|----------|
@@ -40,6 +40,7 @@ Four checks are active:
 | Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
+| Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -49,7 +50,14 @@ Four checks are active:
 - **A check that could not reach a conclusion says so.** When a check depends on case information that is missing, its finding is worded as unresolved and names the check, rather than asserting that the case failed it. Previously an inconclusive result was written in exactly the same language as a genuine failure, so a check that simply had nothing to go on read as a defect in the case — and teams went looking for a problem that was not there. Treat an unresolved finding as "supply the missing information and run the review again", not as something to correct on the petition.
 - **Every check needs the case's chapter.** Glade works it out from the case record, falling back to the chapter recorded on the case itself and then to the rest of the case's data. Previously the chapter was read from one place only, so a case where it had not been recorded there — typically a case opened without a case type set — had every check come back as not evaluated for a missing chapter, and the review produced nothing usable. If the chapter genuinely cannot be determined, the checks still report as not evaluated rather than passing.
 - **A missing document may now block where it previously only warned.** Because required-document status comes from each district's rules, a document the district marks as required is treated as gating. Pay advices are the common case: in districts whose rules require them, a missing paystubs file now blocks submission rather than showing a warning.
+- **The second debtor's pay advices are governed by the district's rules too.** On a joint filing, whether Debtor 2's pay advices are required now comes from the filing district's document list like every other requirement, and appears as its own named item in the pre-filing review. Previously this rule sat inside the filing engine instead of the district's document list, and a joint case whose second debtor legitimately had no pay advices — because they are unemployed, retired, or self-employed — failed at submission with an error that nothing in Glade could clear, no matter how many times the packet was reviewed and signed off.
 - **"Petition out of date" reflects the petition's own inputs.** It is raised when the case data or the questionnaire answers the petition is built from have changed since it was compiled. Adding a supporting document to the filing packet no longer raises it — the petition is a merge of the selected forms and schedules, so an unrelated PDF added alongside them does not make it out of date. Previously any addition to the packet flagged the petition and prompted a recompile that changed nothing.
+
+#### Who can clear a blocking finding
+
+Signing off on a blocking finding so a filing can proceed is limited to firm owners, firm Admins, and Glade Admins. Other team members working the case see the review and everything it found, and can work through the items, but cannot set a blocker aside to let the filing through. A decision to file over a known problem stays with someone accountable for it.
+
+A **debtor with no pay advices to file** is the case where this matters most in practice. Setting that requirement aside is reserved to Glade — contact support on a joint case whose second debtor has no pay advices, and the item can be cleared so the filing proceeds. Your firm's own attorneys cannot waive it themselves.
 
 #### Required signatures on the petition
 
@@ -60,8 +68,27 @@ The signature check reads the assembled petition that is actually about to be fi
 - **What counts as a signature** — typed, electronically signed, or handwritten on a printed and scanned page all count. Firms that print, sign in ink, and re-upload are covered the same as firms that sign electronically.
 - **What it reports** — **Passed**, **Failed** with the signer who is missing and the form they are missing from, or **Inconclusive** when it cannot read the document or is not confident enough to call it. An explanation in plain English appears next to the other pre-filing findings.
 - **It does not gate filing.** The check is advisory for now: it warns and can be set aside, and a Failed or Inconclusive result never blocks submission. Treat it as a second pair of eyes on the packet, not as a guarantee.
+- **It re-reads the petition when the petition changes, not on every review.** Because the check reads the assembled document, it runs again after the petition is regenerated, or when someone asks for the review to be run manually. On the automatic refreshes that follow unrelated edits — a change to case data, a questionnaire save — it keeps its most recent verdict, which stays listed with its explanation rather than disappearing or being recalculated against a petition that has not moved. If you have corrected signatures on the source documents and want a fresh verdict, regenerate the petition or run the review manually.
 
 Because it reads the pages rather than checking a stored answer, the check is deliberately cautious — it reports Inconclusive rather than guessing on a court filing. An Inconclusive result means the check could not reach a verdict, not that a signature is missing.
+
+#### Duplicate creditors
+
+This check reads the creditor mailing matrix the case is about to file and flags creditors that look like the same party listed twice. It catches the kinds of near-duplicate that exact matching cannot:
+
+- Typos and abbreviations in a creditor's name.
+- The same address written with a nine-digit ZIP on one entry and a five-digit ZIP on another.
+- A creditor named two different ways that mean the same company — for example a bank's trading name alongside its full legal name.
+- The same creditor listed at two different addresses, raised so someone can decide which address is correct.
+
+**It never merges anything.** The check reports what it found and leaves the decision to the attorney. Dropping a creditor that turns out to be genuinely separate is a notice problem, so no entry is removed from the matrix on the strength of this check.
+
+- It is **advisory** — it does not gate submission, and it can be dismissed like the other advisory findings.
+- Creditors that share a mailing address without sharing a name — several creditors using the same lockbox or P.O. box, for example — are not reported as duplicates. That is a normal arrangement, not a mistake.
+- The check reads matrices in the different layouts districts use, including multi-column layouts.
+- It runs as part of the case's first pre-filing review and on any review you run by hand. Rebuild the matrix and run the review again after correcting the creditor list.
+
+Straightforward duplicates — the same creditor at the same address, differing only in ZIP format, capitalization, or punctuation — are already collapsed when the matrix is built and never reach this check. See [Questionnaires](../workflows/questionnaires.md) for how the matrix is assembled.
 
 Credit counseling recency was held back from the first release and has since been switched on — see [Certificate recency before filing](./abacus-credit-counseling.md) for what it reports. The remaining checks — Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are still turned off and are planned for later releases. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
 
@@ -127,6 +154,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
 - The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
+- The duplicate-creditor check needs the case's creditor matrix to have been generated. Where there is no matrix to read, it reports as unresolved rather than passing, and no creditors are examined.
+- The duplicate-creditor check reports judgment calls for a person to settle. It does not correct the creditor list, and a finding it raises is not by itself evidence that two creditors are the same party.
 
 ## Related Features
 

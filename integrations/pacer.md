@@ -76,6 +76,7 @@ Each document in the filing packet must be labeled with the correct ECF document
 - **A document type the district does not accept is refused, not quietly dropped.** When you label a document by hand and the filing district's rules do not accept that type for the case, the save fails with an error explaining the problem. Previously the save appeared to succeed while the label was silently cleared, so the document went back to being unlabelled — and the packet was a file short at filing time with nothing on screen to say why. Check any document you labelled and later found unlabelled again; it was most likely refused by the district's rules rather than lost.
 - The district check recognises every way a district can accept a document — as its own upload, folded into the case-open bundle, combined with other files, or excluded from the packet under a specific filename. A document type a district genuinely accepts is no longer refused because it happens to be accepted in one of the less common ways.
 - Automatic labelling is unchanged. When Glade cannot match a document to a district's slot on its own, it still leaves the document unlabelled rather than guessing at a type, so nothing is filed under a label nobody chose.
+- **A form that is built into the petition does not also appear as its own packet row.** Where a district folds a form into the consolidated petition — Form 122A-1 is the common one — that form is no longer labelled as a separate filing document, so it stops appearing in the filing packet as a standalone row alongside the petition that already contains it. This now holds on every case; previously it applied only to some, and on the rest staff had to clear the label on the form by hand before each submission. If your team has been doing that as a routine step before filing, it is no longer needed.
 
 ### Filing Packet AI Review
 
@@ -200,6 +201,8 @@ When a bankruptcy case is transferred to a different court and assigned a new ca
 ### Case number matching across formats
 
 Courts write the same case number in several different formats — for example `26-18233`, `26-bk-18233`, and `0:26-bk-18233` — and some districts add the assigned judge's initials on the end (for example `8:25-bk-08186-RCT`). Glade treats all of these as the same case number when it links court notices and when you search, so a difference in format no longer prevents a match.
+
+A **four-digit year** is recognized as well. Some court portals write the year in full, as `2026-12345` rather than `26-12345`. Both forms are now read as the same case, so a number copied from one of those portals links and searches the same way as a number written the usual way.
 
 - **Incoming court notices** link to the right case even when the notice writes the case number in a different format than the one stored on the workflow. Previously an exact-text mismatch could leave a notice unlinked, so notices for a case could pile up without ever attaching to its activity timeline.
 - **Dashboard case-number search** matches a workflow regardless of which format you type. Searching for `26-18233` finds a case stored as `26-bk-18233` or `0:26-bk-18233`, and the reverse also works.
