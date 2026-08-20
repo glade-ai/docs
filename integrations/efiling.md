@@ -32,7 +32,7 @@ When a filing is blocked by Glade's pre-filing review, the modal names the speci
 
 Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
 
-Four checks are active:
+Five checks are active:
 
 | Check | What it looks for | Severity |
 |-------|-------------------|----------|
@@ -40,6 +40,7 @@ Four checks are active:
 | Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
+| Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -62,6 +63,24 @@ The signature check reads the assembled petition that is actually about to be fi
 - **It does not gate filing.** The check is advisory for now: it warns and can be set aside, and a Failed or Inconclusive result never blocks submission. Treat it as a second pair of eyes on the packet, not as a guarantee.
 
 Because it reads the pages rather than checking a stored answer, the check is deliberately cautious — it reports Inconclusive rather than guessing on a court filing. An Inconclusive result means the check could not reach a verdict, not that a signature is missing.
+
+#### Duplicate creditors
+
+This check reads the creditor mailing matrix the case is about to file and flags creditors that look like the same party listed twice. It catches the kinds of near-duplicate that exact matching cannot:
+
+- Typos and abbreviations in a creditor's name.
+- The same address written with a nine-digit ZIP on one entry and a five-digit ZIP on another.
+- A creditor named two different ways that mean the same company — for example a bank's trading name alongside its full legal name.
+- The same creditor listed at two different addresses, raised so someone can decide which address is correct.
+
+**It never merges anything.** The check reports what it found and leaves the decision to the attorney. Dropping a creditor that turns out to be genuinely separate is a notice problem, so no entry is removed from the matrix on the strength of this check.
+
+- It is **advisory** — it does not gate submission, and it can be dismissed like the other advisory findings.
+- Creditors that share a mailing address without sharing a name — several creditors using the same lockbox or P.O. box, for example — are not reported as duplicates. That is a normal arrangement, not a mistake.
+- The check reads matrices in the layouts different districts use, including the multi-column layout used by North Carolina and Maryland.
+- It runs as part of the case's first pre-filing review and on any review you run by hand. Rebuild the matrix and run the review again after correcting the creditor list.
+
+Straightforward duplicates — the same creditor at the same address, differing only in ZIP format, capitalization, or punctuation — are already collapsed when the matrix is built and never reach this check. See [Questionnaires](../workflows/questionnaires.md) for how the matrix is assembled.
 
 Credit counseling recency was held back from the first release and has since been switched on — see [Certificate recency before filing](./abacus-credit-counseling.md) for what it reports. The remaining checks — Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are still turned off and are planned for later releases. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
 
@@ -127,6 +146,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
 - The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
+- The duplicate-creditor check needs the case's creditor matrix to have been generated. Where there is no matrix to read, it reports as unresolved rather than passing, and no creditors are examined.
+- The duplicate-creditor check reports judgment calls for a person to settle. It does not correct the creditor list, and a finding it raises is not by itself evidence that two creditors are the same party.
 
 ## Related Features
 
