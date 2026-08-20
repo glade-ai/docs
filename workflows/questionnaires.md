@@ -36,6 +36,20 @@ When a field fails validation, the field itself is visually highlighted — inpu
 
 Dropdown fields follow the same layout as every other field type: the label turns red, the box is outlined, and the message appears once, below the box. Previously a dropdown such as **District of:** printed its message twice — once above the box and once below — while the field beside it showed a single message underneath, so the same error looked different on two adjacent fields.
 
+#### Validation rules on a cell of a table or list
+
+Your firm's template administrator can write validation rules that check one field against another across the form. A rule can now be anchored on a **cell inside a table or a list** — for example, Form 122A-1 line 5 for Debtor 1 — rather than only on a standalone field.
+
+- These rules previously did not run at all. A rule anchored on a cell was skipped silently: it was switched on, it appeared in the rule list, and it never produced a finding. If your firm wrote rules against a table cell and never saw them fire, that is why.
+- **A rule is checked once per column of a table, or once per row of a list**, and each column or row that fails produces its own finding pointing at that cell. On a joint case, a rule on a two-debtor table is checked for both debtors.
+- **A column that nobody has filled in is still checked.** A table column left untouched is a real column with unanswered cells, not an absent one.
+- A rule can be narrowed to a **single column** where it is only meant to apply to one debtor.
+- Where a rule is written incorrectly — it points at a cell that cannot be found, for example — that is reported once against the rule itself rather than repeated on every row.
+
+Because a rule written for one debtor is otherwise checked against both, a rule that means "at least one debtor" needs to be either narrowed to a column or rewritten to ask the question once across the whole table. Otherwise a joint case where only one debtor runs a business can raise a blocking finding on the other debtor's column that nobody can clear.
+
+> TODO: Confirm which rules your firm's templates ship with this enabled, and where a rule is narrowed to a single column in the template editor. The set of rules switched on at release was still being reviewed rule by rule.
+
 ### Field Options
 
 Select-type fields define their options as a list of choices, each with a label, key, default flag, and optional PDF fill key.
@@ -82,6 +96,19 @@ Dropdowns that list options alphabetically sort without regard to capitalization
 PDF fill mappings connect questionnaire fields to PDF template fields, enabling automatic generation of filled court forms and legal documents from questionnaire responses. Individual fields connect to specific PDF fields, and each section can reference a PDF template.
 
 Dynamic PDF templates support generated PDFs with custom layouts and assets, going beyond simple field-to-field mapping.
+
+#### Supplemental and local court forms
+
+Alongside the official bankruptcy forms, Glade can generate supplemental forms that a district requires or that support an answer on an official form. Two are newly available:
+
+- **Schedule I line 8a business statement** — the *Financial Review of the Debtor's Business* attachment that supports the business-income line on Schedule I. A section on the questionnaire collects each business's name, its gross receipts, and the twenty official expense lines; total expenses and net income are calculated for you. The generated attachment prints **one page per business**. The section appears only when Schedule I line 8a carries an amount for either debtor.
+- **Texas Southern Schedule C-1** — the *Supplemental Exemption Analysis* local form filed with the petition in the Southern District of Texas. It is entirely computed: every asset category is carried across from Schedules A/B, C, and D and totalled into gross value, encumbrances, equity, exempt, and non-exempt columns. There is nothing extra to fill in — completing the schedules produces the form. The section appears only on cases filing in the Southern District of Texas.
+
+Equity on the Texas form is worked out per asset before the category is totalled, and never goes below zero, so an asset with liens above its value contributes nothing rather than a negative amount. An exemption claimed at 100% of fair market value is capped at the equity remaining after liens.
+
+Both forms are added to your firm's questionnaire template by Glade rather than switched on in the template editor. Contact support if your firm files in these situations and does not see the section.
+
+> TODO: Confirm which firms and templates these sections have been added to. They are rolled out per firm rather than to everyone at once.
 
 Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
 
@@ -408,6 +435,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - Every amount in the plan's payment schedule carries a dollar sign, including the first one. Previously the first amount in a schedule printed bare while the rest were marked.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
+- **Southern District of Ohio** cases can now generate a Chapter 13 plan as well, on the district's Local Form 3015-1. It works the same way: the plan form is available from the calculator for any case that resolves to the district, it is built from the district's own figures, and there is no per-firm setting to switch on. Cases in the district that previously had no plan form available can now produce one. Check the trustee details on the first Southern Ohio plan your firm generates before filing it — the district's figures are newly set up, and the trustee names in particular are worth confirming against your own records.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
 
 #### Secured Claims With an Arrearage Cure
@@ -563,6 +591,16 @@ While you are still working on a bankruptcy schedules questionnaire, you can gen
 
 Generating a draft is available to your team on a supported bankruptcy schedules questionnaire. Previously the only way to produce a petition PDF was to submit the questionnaire, which also completed the schedules task and moved the case forward — so a paralegal who wanted a copy to check had to advance the case to get one.
 
+#### The draft is marked as a draft
+
+Every page of the **Petition (Draft)** document carries a marking down the right-hand margin: the Glade mark, the word **DRAFT** repeated down the page, and a shield showing how many blocking issues the petition check found at the moment the draft was built.
+
+- The marking exists so a printed draft cannot be mistaken for the filing copy once it is off the screen and in a stack of paper on a desk.
+- The **shield count matches the Petition Check badge** — it counts blocking findings, and it leaves out signature fields, exactly as the badge in the questionnaire header does. It is a snapshot from when the draft was generated, so it does not move as you correct fields; generate a new draft to refresh it.
+- **Signature Pages are not marked.** The pages a client signs in ink come from the unmarked copy, so nothing overprints a signature block.
+- **The petition compiled for filing is not marked.** Only the draft carries it.
+- If the marking or the issue count cannot be produced for some reason, the draft is still generated — just without the marking — rather than the generation failing.
+
 ### Petition Check Summary
 
 Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time:
@@ -711,6 +749,17 @@ Links between related case records — a creditor and the property securing it, 
 When a questionnaire generates multiple documents — for example, filled court forms alongside supplemental documents such as a creditor matrix — the documents appear in the case document list in a consistent order: filled court forms first, followed by other questionnaire-generated documents. This ordering is maintained even when new sections are added to the questionnaire after some documents have already been created.
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
+
+#### How duplicate entries are collapsed
+
+The same creditor entered more than once produces one entry on the matrix rather than several. Two changes make that more reliable:
+
+- **A nine-digit ZIP and its five-digit form are treated as the same address.** An entry at `60184-1234` and one at `60184` are the same creditor, and are collapsed into one. Previously they were kept as two separate notice entries for the same party.
+- **The more complete address is the one that prints.** Where the same creditor appears with both forms, the matrix keeps the nine-digit ZIP. Which entry your team happened to add first no longer decides which address the court sees.
+- Capitalization, punctuation, and stray spacing in a creditor's name or address no longer prevent two entries from being recognized as the same one.
+- **Genuinely different ZIP codes stay separate.** `60184` and `60185` are two addresses and produce two entries. Glade does not merge creditors that differ in a way it cannot be sure about — dropping a genuinely distinct creditor from the mailing matrix is a notice problem, so the collapse is deliberately conservative.
+
+The same rules apply to both the **Creditor Matrix** document and the creditor list submitted to the court, so the two always agree. A matrix that had no duplicates in it is unchanged.
 
 The creditor matrix is also included in the **petition draft** — the review copy generated when the Schedules Builder questionnaire is submitted. Firms read this draft page by page with the debtor at the signing appointment, so anything left out of it is not reviewed with the client. The matrix is appended as the final pages:
 
