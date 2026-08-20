@@ -202,7 +202,7 @@ When a bankruptcy case is transferred to a different court and assigned a new ca
 
 Courts write the same case number in several different formats — for example `26-18233`, `26-bk-18233`, and `0:26-bk-18233` — and some districts add the assigned judge's initials on the end (for example `8:25-bk-08186-RCT`). Glade treats all of these as the same case number when it links court notices and when you search, so a difference in format no longer prevents a match.
 
-A **four-digit year** is recognized as well. Some court portals — California Eastern is the one firms hit most — write the year in full, as `2026-12345` rather than `26-12345`. Both forms are now read as the same case, so a number copied from one of those portals links and searches the same way as a number written the usual way.
+A **four-digit year** is recognized as well. Some court portals write the year in full, as `2026-12345` rather than `26-12345`. Both forms are now read as the same case, so a number copied from one of those portals links and searches the same way as a number written the usual way.
 
 - **Incoming court notices** link to the right case even when the notice writes the case number in a different format than the one stored on the workflow. Previously an exact-text mismatch could leave a notice unlinked, so notices for a case could pile up without ever attaching to its activity timeline.
 - **Dashboard case-number search** matches a workflow regardless of which format you type. Searching for `26-18233` finds a case stored as `26-bk-18233` or `0:26-bk-18233`, and the reverse also works.

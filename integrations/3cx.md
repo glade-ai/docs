@@ -22,8 +22,8 @@ The 3CX integration lets a firm's 3CX phone system look a caller up in Glade whi
 
 Where a firm routes calls by office, the court division on the case is translated into the office label the firm's call flow expects.
 
-- Tennessee divisions are translated to the firm's office labels — Nashville, Northern, and Southern.
-- Divisions in other districts, including the Northern and Southern Districts of Georgia, are returned as they are recorded on the case and are not translated to those labels. A call flow that branches on a specific office name needs to account for that.
+- Where Glade has been set up with a firm's office labels for a district, the case's division is translated to the matching label.
+- Divisions in districts that have not been configured this way are returned as they are recorded on the case and are not translated. A call flow that branches on a specific office name needs to account for that.
 
 ## Configuration
 
@@ -43,7 +43,7 @@ To set the integration up, contact Glade support with your 3CX configuration. Th
 - Matching is exact on the last ten digits of a phone number. A client who calls from a number that is not on their record in Glade is not matched — add the number to the client's record for future calls.
 - A client with several people on their case is matched on whichever record carries the calling number. The lookup returns that person, not everyone on the case.
 - Firms moving to this from an older in-house lookup should re-check any call-flow branch that tests for a specific value. Case status and office names are returned as Glade records them, which may not be the codes an older flow was written against, and the log number some older flows tested for is not provided at all.
-- Divisions outside Tennessee are not translated to office labels — see above.
+- Divisions in districts that have not been configured for office-label translation are returned as recorded — see above.
 
 ## Related Features
 
