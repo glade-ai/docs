@@ -157,7 +157,7 @@ In addition, automations can pull case-party and hearing details so the email re
 
 - The **first debtor's name** and, for joint cases, the **second debtor's name**, taken from the people on the case.
 - The **341 meeting of creditors date and time**, taken from the linked court calendar entry for the case, or read directly from the notice when the court calendar entry for the case has not been created yet. A 341 notice and the calendar entry it produces are handled at the same moment, so the automation often used to run a fraction of a second before the calendar entry existed — which left the meeting date and time blank on the email even though the notice itself stated them. Those details now fill in either way, and the case number is no longer the only token that reliably renders on a 341 notice.
-- The **video hearing join details** (for example, the meeting link, meeting ID, and passcode) when the notice is for a remote 341 meeting. Glade reads the Zoom details out of the notice text, including formats that name the trustee's meeting room without a colon before the meeting ID — the style used in the Western District of Pennsylvania, for example. Notices written that way previously produced no video hearing details at all.
+- The **video hearing join details** (for example, the meeting link, meeting ID, and passcode) when the notice is for a remote 341 meeting. Glade reads the Zoom details out of the notice text, including formats that name the trustee's meeting room without a colon before the meeting ID. Notices written that way previously produced no video hearing details at all.
 
 #### The dial-in number is no longer included by default
 
