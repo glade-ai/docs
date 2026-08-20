@@ -13,6 +13,7 @@ Connections between Glade and external tools, platforms, and AI assistants.
 - [USCIS Integration](./uscis.md)
 - [Credit Counseling & Debtor Education](./abacus-credit-counseling.md)
 - [Evergreen Credit Counseling](./evergreen-credit-counseling.md)
+- [3CX Phone System Integration](./3cx.md)
 - [Google Calendar Integration](./google-calendar.md)
 - [Outlook Calendar Integration](./outlook-calendar.md)
 - [Analytics Tracking (Google Analytics & Meta)](./analytics-tracking.md)
