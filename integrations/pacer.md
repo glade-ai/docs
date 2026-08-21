@@ -259,10 +259,22 @@ When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition
 - After changing the chapter, a **"Chapter changed. Recompile to refresh the petition."** note reminds you to click **Compile** so the regenerated petition reflects the new chapter. The note clears as soon as the new petition finishes compiling.
 - If the district only supports a single chapter, or the case is already filed, the selector is read-only and shows the current chapter as a chip — you can see the chapter at a glance but cannot change it.
 
+### Chapter on a matter that holds both a Chapter 7 and a Chapter 13 workflow
+
+A matter can carry workflows for both chapters at once — most often when a case converts, and the original workflow is kept alongside the new one. Each workflow now uses **its own chapter** when Glade builds the filing packet and runs the pre-filing review.
+
+- Previously a single chapter was resolved for the whole group, so one workflow's chapter was applied to the other. A Chapter 13 workflow sitting alongside a Chapter 7 could be prepared against the Chapter 7 template for the district — pulling in Form 122A-1, which the case does not need, and offering no slot for the Chapter 13 Plan.
+- The packet preview, the filing packet checklist, and the pre-filing review all read the chapter from the workflow you are working in.
+- Submission to the court was already taking the chapter from the case's Schedules questionnaire and was not affected. It was the packet and the review that could disagree with it.
+- Closed workflows on the same matter — archived, canceled, or completed — are ignored when Glade works out which chapters a matter currently holds. A workflow that finished as a Chapter 7 no longer makes a live Chapter 13 matter look like a mixed one.
+
+Cases prepared before this was corrected are not rebuilt on their own. If a packet was assembled against the wrong chapter, recompile the petition on the affected workflow and re-run the pre-filing review.
+
 ### Required fields check before filing
 
 Before a filing can be submitted, Glade validates that all required debtor fields are present. If any are missing, the filing is blocked at both the pre-filing preview and the ECF submission modal, and the missing fields are listed by name so your team can address them before re-attempting.
 
+- **The court's own required answers are checked in the pre-filing review too.** The answers the court asks for when a case is opened — nature of debts, fee treatment, prior filings, estimated creditors, assets and liabilities, county, marital filing status, and the means-test presumption — are evaluated as part of the pre-filing review, each as its own named item. A gap that used to appear only once a submission was already under way is now visible in the review panel beforehand. What each district asks for differs, so the items you see reflect the case's own court. See [Pre-filing review](./efiling.md#pre-filing-review).
 - The **credit counseling completion date** is no longer part of this check. A Chapter 7 or Chapter 13 filing is no longer stopped because that date is absent from the case questionnaire — firms whose Schedules questionnaire does not ask for it can file with the certificate itself as the record of completion, for individual and joint cases alike. Whether the briefing is recent enough to satisfy § 109(h) is assessed by the pre-filing review instead of by this check, so a stale certificate is raised for an attorney to review rather than blocking the filing outright with no explanation.
 - For individual Chapter 7 filings, the **marital filing status** is required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.

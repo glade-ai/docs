@@ -59,6 +59,7 @@ The following checks are active:
 | Debtor's county recognized | The county on each debtor's address is one Glade recognizes for that state | Blocking |
 | Case already has a case number | The case has not already been assigned a number by the court | Blocking |
 | A filing is already in progress | No other filing is underway on the case | Blocking |
+| District supports a joint petition | The filing district accepts joint petitions, on a case being filed jointly | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
@@ -153,6 +154,33 @@ This check reads the creditor mailing matrix the case is about to file and flags
 
 Straightforward duplicates — the same creditor at the same address, differing only in ZIP format, capitalization, or punctuation — are already collapsed when the matrix is built and never reach this check. See [Questionnaires](../workflows/questionnaires.md) for how the matrix is assembled.
 
+#### The court's own required answers are checked before you file
+
+Opening a case with the court asks for a set of answers beyond the petition itself — the nature of the debtor's debts, the fee treatment elected, prior filings, the estimated number of creditors, estimated assets and liabilities, the county, marital filing status, and the means-test presumption. A missing or contradictory answer used to stop the filing **during** submission, appearing as a "Required-Fields Check Failed" message partway through, with the case left to retry.
+
+- These are now checked as part of the pre-filing review, so a missing answer is named in the review panel **before** anyone starts a submission.
+- Each answer is reported as its own blocking item naming what is missing, rather than one combined failure.
+- Which answers are required depends on the filing district — courts do not all ask for the same things — so the review reflects what the case's own court expects.
+- The consistency of the joint-filing answers is checked as well: a case that says it is filed jointly in one place and individually in another is reported rather than being sent to the court to be rejected.
+- Submission still runs its own check at the moment you file, so nothing gets through on a stale review. The difference is that the problem is visible earlier and described in the same place as every other finding.
+
+#### Joint petitions in districts that do not accept them
+
+Some districts do not accept joint petitions. A joint case in one of those districts was previously submitted anyway and failed after the fact, with the rejection arriving by email rather than in Glade.
+
+- A joint filing in a district that does not support joint petitions is now a blocking pre-filing finding, and names the district it applies to.
+- An individual filing raises nothing — the check does not apply.
+- If Glade cannot yet tell whether the case is joint, or cannot resolve the district's rules, the check reports as unresolved rather than passing, so a joint case is never let through on an assumption.
+
+#### A county the court's filing system does not recognize
+
+The court's filing system identifies the debtor's county by a standard code, and Glade has to translate the county written on the case into that code. Occasionally it cannot — a county name that exists in more than one state, or an address whose ZIP code points at a neighboring state, are the usual causes.
+
+- This is now reported as a **blocking pre-filing finding that names the county and state it could not identify**, so your team can see immediately what the obstruction is and which address to check.
+- Previously the same situation produced a dead-end error partway through the required-fields check, with no route to a fix and no indication of which value was at fault.
+- Start by checking the debtor's address, since the wrong state on an otherwise correct county is the most common cause. Where the address is right and the county is genuinely one Glade does not yet recognize, contact support — the list of counties is maintained by Glade and the addition is quick.
+- Submission itself still refuses to proceed on an unrecognized county. The check makes the reason visible early rather than changing whether the filing can go ahead.
+
 Credit counseling recency was held back from the first release and has since been switched on — see [Certificate recency before filing](./abacus-credit-counseling.md) for what it reports. The remaining checks — Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are still turned off and are planned for later releases. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
 
 > TODO: Confirm the exact condition under which the Statement of Intention check applies. It is a conditional requirement tied to the case's secured claims and fee election rather than one that applies to every Chapter 7 filing.
@@ -216,6 +244,7 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - If you navigate away from a case mid-filing, the filing continues in the background. When you return, historical events are replayed so the progress panel is up to date.
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
 - An unrecognized county is reported by the pre-filing review as a blocking item on the debtor it belongs to, with a suggestion where Glade can offer one. Correcting the address clears it. A county that is spelled correctly and still not recognized needs Glade to add it — contact support with the case and the county.
+- The court's required answers and the joint-petition rule are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
 - The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
