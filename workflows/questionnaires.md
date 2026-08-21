@@ -656,6 +656,21 @@ Glade validates signature, date, and currency answers precisely so the check's c
 - A date that is present but not a recognizable date is flagged as **invalid** rather than passing silently. A date entered as free-form text, instead of picked from the calendar, counts as filled.
 - A currency amount marked **Unknown** or overridden with explanatory text counts as an answered field and is no longer reported as missing.
 
+#### Rules that check answers inside tables and lists
+
+A validation rule can be written against a single cell of a table or a list — "Form 122A-1 line 5, Debtor 1", for example, rather than a standalone field. Rules written that way are now evaluated and their findings appear in the Petition Check results alongside every other issue.
+
+- Previously a rule anchored on a table or list cell was skipped silently. It produced no finding whether the answer was right or wrong, so a template could look fully checked while a substantial share of its rules never ran. On the standard bankruptcy schedules template this covered a large part of the business-disclosure cross-checks.
+- A rule reads the cell in the row it is anchored to, so a check comparing Debtor 1's figure against Debtor 2's compares the right two cells rather than the first value it finds in the column.
+- **Expect to see findings on petitions that previously reported none.** A questionnaire that passed the check before may now raise issues on answers that were always wrong but never examined. These are real findings, not a new restriction.
+
+#### Rules that compare two answers
+
+Some rules exist to confirm that two answers match — an address entered in two places, identity details repeated across forms — or that they differ, such as a creditor's address that must not be the debtor's own.
+
+- **A blank answer on either side passes.** A comparison rule does not fire on an answer that has not been filled in yet, so working through a questionnaire from the top does not produce a cascade of mismatch warnings on fields you have not reached. Missing answers are reported by the ordinary required-field check instead.
+- Once both answers are present, the comparison is made and any mismatch is reported as a normal finding, with the message your firm's template administrator wrote on the rule.
+
 ### Cross-Form Consistency Checks
 
 Some answers have to agree with each other across different forms in the petition package. Glade compares them and reports a contradiction while the questionnaire is being authored, rather than leaving it to be found at the court.
