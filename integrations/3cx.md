@@ -27,15 +27,26 @@ Where a firm routes calls by office, the court division on the case is translate
 
 ## Configuration
 
-The integration is set up by Glade rather than from a settings screen in the app.
+Your firm sets the integration up itself, from **Account → Integrations**, where **3CX** appears alongside the other integrations.
 
 | Setting | Description |
 |---------|-------------|
-| Access credential | Glade issues your firm a long-lived credential that identifies your firm. It is entered into 3CX once, in both the CRM lookup configuration and the call-flow configuration. |
+| Access credential | The key that identifies your firm to the lookup. Your firm generates it from Account → Integrations and enters it into 3CX once, in both the CRM lookup configuration and the call-flow configuration. |
 | Lookup by | Phone number or email address. Both are supported; 3CX normally sends the caller's number. |
-| Office labels | The office or division names your call flow branches on. Tell Glade which labels your flow expects so divisions can be translated to them. |
+| Office labels | The office or division names your call flow branches on. Tell Glade support which labels your flow expects so divisions can be translated to them. |
 
-To set the integration up, contact Glade support with your 3CX configuration. The credential is specific to your firm and should be treated like any other system password — anyone holding it can look your firm's clients up by phone number.
+### Managing the access credential
+
+Opening **3CX** from the Integrations list gives your firm the actions it previously had to ask Glade support to run:
+
+- **Connect** generates the firm's key and shows it. Any member of your firm can do this.
+- Once connected, the key can be **shown again and copied** from the same place, so nobody needs to have saved it at the moment it was created. It is masked until you choose to reveal it.
+- **Regenerate** issues a fresh key. The previous key stops working immediately, so 3CX has to be updated with the new one before the lookup will answer again.
+- **Disconnect** revokes the key. Lookups stop being answered at once — a key that was pasted into 3CX before disconnecting no longer works.
+
+Treat the key like any other system password: anyone holding it can look your firm's clients up by phone number. If it has been shared beyond the people who need it, regenerate it and update 3CX.
+
+Firms already using a key that Glade issued for them by hand keep working as they are. The first time you use **Connect**, the firm switches to the key shown on that screen and the older one stops being accepted.
 
 ## Edge Cases & Limitations
 

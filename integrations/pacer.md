@@ -50,6 +50,24 @@ Districts that list a chapter (for example, Kentucky Western — Chapter 7) only
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
 
+### When the case upload files are produced
+
+The three files the court's case upload step reads — the debtor information file, the creditor information file, and the Creditor Matrix PDF — are built **once, when the schedules questionnaire is completed**. What the attorney reviews is what is filed.
+
+- Compiling the petition uses the files as they already stand. Submitting the filing uses them as they already stand. Neither step rebuilds them.
+- To produce new files, edit the schedules questionnaire and submit it again. That is the only thing that regenerates them.
+- Previously the files were rebuilt at the moment of submission, from whatever the answers said at that instant — so a filing could go to the court as a version nobody had looked at.
+
+**A known consequence.** Editing a questionnaire that has already been completed regenerates the petition PDF but not the creditor file or the Creditor Matrix. Until the questionnaire is submitted again, those two can be behind the current answers. Re-submit the schedules questionnaire after editing a completed one if the creditor list has changed.
+
+### Negative amounts are caught before the files are built
+
+Court case upload rejects a negative dollar amount outright, which used to surface as a filing failure with nothing in it to say which figure was at fault. Glade now checks the case's currency answers first:
+
+- If any amount that the court expects to be zero or positive is negative, the filing is stopped before the files are generated and **every offending figure is named**, so all of them can be corrected in one pass rather than one failed submission at a time.
+- Three figures that are legitimately allowed to run negative are exempted and reported to the court as `0.00`: monthly net income, monthly disposable income, and sixty-month disposable income. A genuine Schedule J or means-test deficit does not block a filing.
+- The problem is reported as a specific error on the filing rather than producing an empty debtor information file, which is how it previously failed.
+
 ### Filing packet document types
 
 Each document in the filing packet must be labeled with the correct ECF document type. The document type dropdown in the filing packet lists named options for all commonly filed documents. Selecting the correct type ensures courts can identify each file — courts including FLMB and FLSB reject filings that contain unrecognized filenames.
@@ -318,6 +336,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 - Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
 - The claims register covers proofs of claim received from the point the feature became available. Claims filed against a case before then are not added to the register on their own — contact Glade if a case needs its earlier claims brought in.
+- The creditor information file and the Creditor Matrix are only rebuilt when the schedules questionnaire is submitted. Editing a completed questionnaire refreshes the petition PDF but leaves those two behind until the questionnaire is submitted again — see [When the case upload files are produced](#when-the-case-upload-files-are-produced).
 
 ## Related Features
 
