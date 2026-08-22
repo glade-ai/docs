@@ -50,6 +50,18 @@ Because a rule written for one debtor is otherwise checked against both, a rule 
 
 > TODO: Confirm which rules your firm's templates ship with this enabled, and where a rule is narrowed to a single column in the template editor. The set of rules switched on at release was still being reviewed rule by rule.
 
+#### When a rule's answers have not been given yet
+
+A rule that compares fields cannot reach a verdict until the fields it reads have been answered. Where one of them is still blank, Glade reports the blank rather than the comparison:
+
+- The rule's own message is withheld, and a finding reading **Needed to check '<field name>'** appears on the blank field instead, carrying the rule's severity. The finding names the field the rule is anchored on, so it is clear which check is waiting.
+- The finding sits on the field that needs the answer, which is the one you can act on — not on the field the rule reports against.
+- Once the blank field is answered, the finding clears and the rule is evaluated normally, raising its own message only if the answers genuinely disagree.
+
+Previously a rule fired its full message as soon as one of its inputs was blank — telling a filer their answers contradicted each other before they had given one of the answers. Working down a long form produced a run of contradiction warnings that cleared themselves as the filer caught up.
+
+**Not every blank means "not answered yet".** Your firm's template administrator can mark an individual field a rule reads as one that is allowed to be blank, so the rule is evaluated with the blank treated as nothing rather than as a missing answer. The distinction is between an amount that is blank because there is none — no income of that kind, a column a single filer does not have — and an answer that is blank because the filer has not reached it. The setting is per field per rule, so the same field can be required in one rule and optional in another.
+
 ### Field Options
 
 Select-type fields define their options as a list of choices, each with a label, key, default flag, and optional PDF fill key.
@@ -101,7 +113,15 @@ Dynamic PDF templates support generated PDFs with custom layouts and assets, goi
 
 Alongside the official bankruptcy forms, Glade can generate supplemental forms that a district requires or that support an answer on an official form. One is newly available:
 
-- **Schedule I line 8a business statement** — the *Financial Review of the Debtor's Business* attachment that supports the business-income line on Schedule I. A section on the questionnaire collects each business's name, its gross receipts, and the twenty official expense lines; total expenses and net income are calculated for you. The generated attachment prints **one page per business**. The section appears only when Schedule I line 8a carries an amount for either debtor.
+- **Schedule I line 8a business statement** — the *Financial Review of the Debtor's Business* attachment that supports the business-income line on Schedule I. A section on the questionnaire collects each business's name, its gross receipts, and the twenty official expense lines; total expenses and net income are calculated for you. The generated attachment prints **one page per business**. The section appears only when Schedule I line 8a carries an amount for either debtor — including a business reporting a loss, since a negative figure on line 8a is still business income to disclose.
+
+Three corrections to how that attachment is produced:
+
+- **It stays in the petition packet.** The attachment is no longer dropped when the petition's documents are regenerated. Previously it was removed from the packet on every regeneration, so a firm that had filled the section in could compile the petition and find the statement gone, with nothing on screen to say why.
+- **Only real businesses print.** Opening the section pre-renders a set of blank business rows, and every row with anything on it used to produce a page — two businesses could generate a twenty-four-page supplement, twenty-two pages of it near-blank. A row now reaches the attachment only when it has a business name or a gross amount on it.
+- **The pages are numbered.** The footer continues the numbering of the form the attachment follows. Because Form 106I is two pages, the first business prints as page 3, the second as page 4, and so on.
+
+These apply to documents generated from here on; re-generate the petition on a case prepared earlier to pick them up.
 
 Equity on the Texas form is worked out per asset before the category is totalled, and never goes below zero, so an asset with liens above its value contributes nothing rather than a negative amount. An exemption claimed at 100% of fair market value is capped at the equity remaining after liens.
 
@@ -182,7 +202,16 @@ When a list row is deleted, the values inside the row are deleted along with it.
 
 Response history tracks when responses are modified, supporting undo and audit.
 
-Default options on single-select fields (configured in the questionnaire template) are saved automatically when the questionnaire is created, so the displayed default is recorded as a real answer from the start — even if the client never opens the section that contains the field. Because the answer is stored up front, a field with a pre-set default counts as a valid answer during validation (it is not flagged as incomplete) and the default reliably appears on any generated PDF court form, including checkbox selections such as a "No" answer on the Statement of Financial Affairs. This applies to single-select fields that are always visible at the top level of the form; fields hidden behind conditional logic are still filled in when their section first appears. Questionnaires started as a copy of another questionnaire inherit the original's answers and are not re-defaulted.
+Default values configured in the questionnaire template are saved automatically when the questionnaire is set up, so a displayed default is recorded as a real answer from the start — even if nobody ever opens the section that contains the field. This covers every kind of field the template can carry a default for, not only single-select options, and it covers the cells of list and table rows that already exist as well as top-level fields.
+
+Because the answer is stored up front:
+
+- A field showing a default counts as answered during validation and is not flagged as incomplete. Previously a filer could see the answer on screen while the Petition Check reported the field as blank.
+- The default appears on any generated PDF court form, including checkbox selections such as a **No** answer on the Statement of Financial Affairs. Previously those lines printed blank on a sworn document.
+
+Answers already given are never touched — a default is only written where the field has no answer at all. Questionnaires started as a copy of another questionnaire inherit the original's answers and are not re-defaulted.
+
+> TODO: Confirm what happens to fields a *newer template version* introduces on a questionnaire that is upgraded in place — whether their defaults are written at upgrade time or only once the field is touched.
 
 Template defaults are filled in as the last step of setting up a new questionnaire, after any information Glade already holds on the case has been carried across. A default therefore only ever fills a field that has no answer yet — it never replaces something the case record already knows, so a client's real figure is not shadowed by a template placeholder. Because the defaults are in place before anyone opens the form, the duplicate check that runs on a newly created list sees them too.
 
@@ -232,7 +261,7 @@ List-type fields allow you to click into individual rows to view or edit details
 - When a list row references items in another section (for example, an exemption row linked to a property), the detail header shows the parent item's name as context so you always know which item you are editing.
 - A **Save & Next** button saves the current row and opens the next row immediately — no need to return to the full list between edits. **Previous** and **Next** buttons let you move between rows; if you have unsaved changes, you will be prompted before switching.
 - The Save button shows a loading indicator while the save is in progress. After saving, the view returns to the full list.
-- Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel.
+- Deleted list rows are accessible via the **Removed Items** option on the list field. Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown. Rows can be restored from this panel; see [Restoring Removed List Items](#restoring-removed-list-items).
 
 ### Selecting and Removing List Rows
 
@@ -246,12 +275,25 @@ The **Remove X selected** button in the list footer counts only the real items y
 
 **The one-off import actions have been removed.** The questionnaire's overflow menu no longer offers **Import from credit report**, **Import case data**, or **Import from client questionnaire**, and the master and client creditor lists no longer carry an **Import** dropdown.
 
-These actions copied a whole list over the top of the answers already on the form, which is how a schedule an attorney had prepared could revert to older client-supplied data in a single click. Case data sync is now the one route by which a credit report, a client questionnaire, or the case record reaches the schedules — it applies changes as they happen and lets you review them first, rather than replacing a list wholesale. See [Case Data Sync Fields](#case-data-sync-fields) and [Reviewing changes before you sync](#reviewing-changes-before-you-sync).
+These actions copied a whole list over the top of the answers already on the form, which is how a schedule an attorney had prepared could revert to older client-supplied data in a single click. The credit report import had additionally stopped working — it reported that no creditors had been imported even on cases whose credit report held them. Case data sync is now the one route by which a credit report, a client questionnaire, or the case record reaches the schedules — it applies changes as they happen and lets you review them first, rather than replacing a list wholesale. See [Case Data Sync Fields](#case-data-sync-fields) and [Reviewing changes before you sync](#reviewing-changes-before-you-sync).
 
 - **Run Deduplicator** is unchanged and still sits on both creditor lists.
-- **Pay organizer and income organizer imports are unaffected.** **Import data from pay organizer** still appears on a case that has a pay organizer, and the Means Test section keeps **Import Data from Income Organizer**.
+- **Pay organizer and income organizer imports are unaffected.** **Import data from pay organizer** still appears on a case that has a pay organizer, and the Means Test section keeps **Import Data from Income Organizer**. Pay organizers are not yet carried by case data sync, so those two are still how income figures reach the schedules.
 
 Lists that are pre-filled automatically from another questionnaire on the same case continue to work as before. The copied rows stay linked to the same case record entity as their source rows, so pre-filled assets, creditors, and other list items update the existing entity in case data instead of creating a duplicate, and they keep their positions and values when the page refreshes.
+
+### Restoring Removed List Items
+
+Rows removed from a list are kept under **Removed Items** on the list field and can be put back from there. Restoring a row returns the original row rather than re-entering its values as a new one:
+
+- The row keeps the place it had in the list, so a list your team has sorted comes back in the order you left it.
+- If the row was marked as a duplicate of another creditor, or had duplicates grouped under it, those links come back with it. Restoring no longer costs your team the deduplication work they had already done.
+- The row stays attached to the creditor, asset, or other case record it was already linked to, instead of creating a second, near-empty copy of it on the case.
+- Only rows that had at least one field filled in appear in Removed Items — completely empty rows are not shown.
+
+Previously a restore re-added the values as brand-new rows. On a master creditor list that had been deduplicated and sorted, restoring meant the duplicate links and the sort order were gone and the case record picked up a set of near-empty creditors alongside the real ones — hours of re-work on a large list.
+
+> Restoring a row whose case record entry was deleted at the same time brings the questionnaire row back but leaves that entry deleted until the row is next edited. If a restored creditor or asset is missing from the case record, open the row and save it.
 
 ### Resource Panel
 
@@ -569,6 +611,15 @@ Upgrading a questionnaire to a newer template version does not remove case data 
 - A questionnaire whose syncing was switched off deliberately, whether by submission or by your team, stays switched off through an upgrade. Turn it back on from the questionnaire itself when you want it (see [Re-opening](#re-opening)).
 - This stops further overwrites; it does not undo any that already happened. If prepared schedules on a case were replaced with older client answers, the replaced values need correcting on the case.
 
+**An upgrade no longer empties a prepared list.** Opening a schedules questionnaire on a case whose template had moved to a newer version could remove most of the case's creditors and assets — on one reported case, 102 of 149 creditors were gone the next morning, with only the deduplicated ones left behind. The upgrade was reading the freshly-copied list back before it had finished being written, saw nothing there, and treated the case's creditors as though they had been deleted. It now reads the list as it stood before the upgrade, which is settled and complete.
+
+Two safeguards sit behind that, so a bad read can no longer take a list with it:
+
+- If the upgrade reads back an empty list while it is about to remove entries, it stops and removes nothing.
+- If it would remove ten or more entries and more than half of what it looked at, it stops and removes nothing.
+
+In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
+
 ### Creditor Duplicate Status
 
 When you mark a creditor as a duplicate of another in a bankruptcy questionnaire, that status is saved to the case record and stays consistent everywhere the case's creditors appear:
@@ -577,6 +628,8 @@ When you mark a creditor as a duplicate of another in a bankruptcy questionnaire
 - When a new questionnaire is seeded from the case record — for example, when Schedules is started — creditors already marked as duplicates come in already marked, instead of being dropped from the new list.
 - Manual duplicate marks are preserved. Starting a new questionnaire no longer re-derives duplicates from scratch, so a creditor you marked by hand — for example, two creditors with the same name but no account number, which automatic matching cannot link on its own — stays marked.
 - Un-marking a creditor clears its duplicate status the same way, across the case record and the other questionnaires.
+
+**A list that has duplicates says so.** Rows marked as a duplicate are hidden from the list, and the list now carries a banner above it reading **"N items are currently marked as duplicate in this list"**, with a **Show Duplicates** action next to it for revealing them. The banner counts the hidden rows and appears only when the list actually has some — a list with no duplicates shows neither the banner nor the action. Previously the only sign that items had been tucked away was a small **Show duplicates** toggle, which was easy to miss, so a Master Creditor List could look shorter than it was with nothing to indicate why.
 
 ### Adding Creditors
 
@@ -726,6 +779,17 @@ Glade validates signature, date, and currency answers precisely so the check's c
 - A signature mark with no name after it (an empty electronic-signature placeholder) is not accepted as a completed signature.
 - A date that is present but not a recognizable date is flagged as **invalid** rather than passing silently. A date entered as free-form text, instead of picked from the calendar, counts as filled.
 - A currency amount marked **Unknown** or overridden with explanatory text counts as an answered field and is no longer reported as missing.
+
+#### Findings appear on the field itself
+
+Not every finding blocks a submission, and the ones that do not are now shown on the field they name, not only in the check dialog.
+
+- An advisory or informational finding prints as a note directly beneath its field, with its severity named and the message written out in full. A cell inside a table or a list row carries its note the same way.
+- The field is not marked as failing: its border and label stay as they are, and the finding does not gate the submit. Only blocking findings turn a field red, and they appear as they always have — a blocking finding is not repeated as a second note.
+- Colour follows severity consistently everywhere a finding is shown. Blocking findings are red, advisory findings amber, and informational findings grey — the same treatment in the field note, the Petition Check dialog, and the subsection popover.
+- Findings listed in the subsection popover are now tagged with their severity, matching the Petition Check dialog. Previously the popover printed every message in the same warning colour with no tag, so an advisory note and a blocker looked identical. Where the popover collapses several findings into a single "N issues in the list" line, that line takes the strictest severity among them.
+
+Previously **Go to field** on an advisory finding took you to a field that looked completely clean — the message existed in the dialog and in the subsection popover, but nowhere on the form — which read as a broken check rather than as a finding you were meant to act on.
 
 ### Cross-Form Consistency Checks
 
