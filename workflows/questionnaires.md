@@ -105,6 +105,8 @@ Alongside the official bankruptcy forms, Glade can generate supplemental forms t
 
 Equity on the Texas form is worked out per asset before the category is totalled, and never goes below zero, so an asset with liens above its value contributes nothing rather than a negative amount. An exemption claimed at 100% of fair market value is capped at the equity remaining after liens.
 
+The questionnaire fields for the Texas exemptions schedule are labelled with the same wording the printed form uses for its columns — for example **1. Real Estate — Total Encumbrances** and **Totals — Total Amount Non-Exempt**. Earlier labels used internal shorthand such as *— Enc* and *— Gross*, carried a line reference that meant nothing to a filer, and spelled the non-exempt column two different ways, so it was hard to tell which column of the form a field corresponded to. Only the wording changed: answers already recorded are unaffected, and the generated form is unchanged.
+
 Both forms are added to your firm's questionnaire template by Glade rather than switched on in the template editor. Contact support if your firm files in these situations and does not see the section.
 
 > TODO: Confirm which firms and templates these sections have been added to. They are rolled out per firm rather than to everyone at once.
@@ -181,6 +183,8 @@ When a list row is deleted, the values inside the row are deleted along with it.
 Response history tracks when responses are modified, supporting undo and audit.
 
 Default options on single-select fields (configured in the questionnaire template) are saved automatically when the questionnaire is created, so the displayed default is recorded as a real answer from the start — even if the client never opens the section that contains the field. Because the answer is stored up front, a field with a pre-set default counts as a valid answer during validation (it is not flagged as incomplete) and the default reliably appears on any generated PDF court form, including checkbox selections such as a "No" answer on the Statement of Financial Affairs. This applies to single-select fields that are always visible at the top level of the form; fields hidden behind conditional logic are still filled in when their section first appears. Questionnaires started as a copy of another questionnaire inherit the original's answers and are not re-defaulted.
+
+Template defaults are filled in as the last step of setting up a new questionnaire, after any information Glade already holds on the case has been carried across. A default therefore only ever fills a field that has no answer yet — it never replaces something the case record already knows, so a client's real figure is not shadowed by a template placeholder. Because the defaults are in place before anyone opens the form, the duplicate check that runs on a newly created list sees them too.
 
 A field that starts out at its template default — for example a currency field showing $0.00 — is still eligible for autofill the first time the questionnaire loads. Fields such as the applicable median family income on Chapter 7 Form 122A-1 now populate from the client's state and household size on open, instead of sitting at $0.00 with no indication that anything was missing. Values you have typed yourself are never replaced by this initial pass.
 
