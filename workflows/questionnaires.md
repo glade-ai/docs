@@ -236,14 +236,16 @@ When a list row has duplicate sub-rows (for example, a creditor that appears on 
 
 The **Remove X selected** button in the list footer counts only the real items you picked, not the duplicates that were auto-selected along with them. Selecting one creditor that has two duplicates reads **Remove 1 selected**, not "Remove 3 selected." Removing still deletes the parent row and its duplicates together — only the displayed count excludes the duplicates.
 
-### Importing List Data from Another Questionnaire
+### Importing List Data Into a Questionnaire
 
-List fields can be populated from a client's other questionnaire using **Import from client questionnaire**. When you import:
+**The one-off import actions have been removed.** The questionnaire's overflow menu no longer offers **Import from credit report**, **Import case data**, or **Import from client questionnaire**, and the master and client creditor lists no longer carry an **Import** dropdown.
 
-- Every cell on each imported row is saved, including cells whose value matches the row that was previously in that position. Imported rows no longer come back partially empty after a reload.
-- Re-importing before the page has refreshed does not create duplicate rows. The rows from the first import are replaced rather than stacked on top of, so the list reflects the latest import instead of doubling up.
-- Whether you import manually or a list is pre-filled automatically from another questionnaire on the same case, the copied rows stay linked to the same case record entity as their source rows. Imported assets, creditors, and other list items appear in case data and update the existing entity instead of creating a duplicate — so copying a property or creditor list no longer produces a second set of entities on the case.
-- After importing, rows keep their correct positions and values when the page refreshes, instead of showing blank leading rows.
+These actions copied a whole list over the top of the answers already on the form, which is how a schedule an attorney had prepared could revert to older client-supplied data in a single click. Case data sync is now the one route by which a credit report, a client questionnaire, or the case record reaches the schedules — it applies changes as they happen and lets you review them first, rather than replacing a list wholesale. See [Case Data Sync Fields](#case-data-sync-fields) and [Reviewing changes before you sync](#reviewing-changes-before-you-sync).
+
+- **Run Deduplicator** is unchanged and still sits on both creditor lists.
+- **Pay organizer and income organizer imports are unaffected.** **Import data from pay organizer** still appears on a case that has a pay organizer, and the Means Test section keeps **Import Data from Income Organizer**.
+
+Lists that are pre-filled automatically from another questionnaire on the same case continue to work as before. The copied rows stay linked to the same case record entity as their source rows, so pre-filled assets, creditors, and other list items update the existing entity in case data instead of creating a duplicate, and they keep their positions and values when the page refreshes.
 
 ### Resource Panel
 
@@ -513,6 +515,12 @@ Upgrading a questionnaire to a newer template version does not remove case data 
 - Case entities are only cleared out during an upgrade when the questionnaire being upgraded is the bankruptcy schedules questionnaire *and* it is actively syncing with case data. That is the only case where the form genuinely owns those lists.
 - Previously, upgrading any questionnaire cleared every live asset and creditor that the new version did not contain. Upgrading a form with no property list, for example, could wipe all of the case's property. If a case lost case-data entries after a questionnaire upgrade, restore them from the removed-items view (see [Deleting and Restoring Case Data Entities](#deleting-and-restoring-case-data-entities)).
 
+**An upgrade does not switch case data sync back on for a questionnaire that had it switched off.** Submitting a questionnaire stops it syncing, deliberately, so that a form the client has already handed in cannot go on overwriting the case record — or be overwritten itself. Until this correction, an upgrade re-enabled syncing on any questionnaire that was not marked *completed*, and a questionnaire sitting in **submitted for review** is not completed. Because the schedules template is republished often and questionnaires upgrade when they are opened, a client questionnaire that had been submitted weeks earlier could quietly become an authoritative source again and push its stale answers back over schedules an attorney had prepared since.
+
+- Syncing is now re-enabled by an upgrade only where the questionnaire is still **in progress** and has never synced — the case the re-enabling was written for, where a template gains its first case data connections.
+- A questionnaire whose syncing was switched off deliberately, whether by submission or by your team, stays switched off through an upgrade. Turn it back on from the questionnaire itself when you want it (see [Re-opening](#re-opening)).
+- This stops further overwrites; it does not undo any that already happened. If prepared schedules on a case were replaced with older client answers, the replaced values need correcting on the case.
+
 ### Creditor Duplicate Status
 
 When you mark a creditor as a duplicate of another in a bankruptcy questionnaire, that status is saved to the case record and stays consistent everywhere the case's creditors appear:
@@ -598,6 +606,7 @@ When a questionnaire is submitted using Submit Anyway, the workflow activity tim
 While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. Three actions sit together on the form: **Check petition**, **Generate draft**, and **Submit petition**.
 
 - **Generate draft** builds the petition PDF from the answers as they stand right now. The schedules task stays open, the workflow does not advance, and the client is not notified. Only **Submit petition** does those things, and its behavior is unchanged.
+- **Generate draft** offers two choices — the marked draft described below, and an unmarked copy for signing. See [An unmarked copy for signatures](#an-unmarked-copy-for-signatures).
 - You can generate a draft as many times as you need while you keep editing. Each run produces a fresh PDF from the current answers.
 - A short status message appears while the PDF is being assembled. When it is ready, a **Draft petition generated** message with an **Open draft** link stays on the form — the link opens that exact draft in a new tab, so you can come back to it after the status message has gone.
 - Clicking **Generate draft** again while a draft is already being built does not start a second run.
@@ -613,6 +622,20 @@ Every page of the **Petition (Draft)** document carries a marking down the right
 - **Signature Pages are not marked.** The pages a client signs in ink come from the unmarked copy, so nothing overprints a signature block.
 - **The petition compiled for filing is not marked.** Only the draft carries it.
 - If the marking or the issue count cannot be produced for some reason, the draft is still generated — just without the marking — rather than the generation failing.
+
+#### An unmarked copy for signatures
+
+The marking down the margin is what makes the draft unsuitable to sign, so **Generate draft** also produces an unmarked copy on request. Choosing it opens two options:
+
+- **Generate draft petition (with watermark)** — the marked **Petition (Draft)** document described above. This is what the button has always done.
+- **Generate petition for signatures** — the same petition, built from the same answers, with no marking. It is saved as **Petition for Signatures (Draft)** in Forms & Schedules, next to the marked draft rather than in place of it.
+
+Use the second when you are collecting wet-ink signatures from the debtor before the case is ready to file, and the first when you want a review copy that cannot be mistaken for the filing version.
+
+- Both documents are produced when you ask for the unmarked one, so the marked draft stays available.
+- **The two never drift apart.** Once a case has an unmarked copy, it is rebuilt every time the draft is regenerated — by hand or automatically — so the pages the debtor signs always match the current draft.
+- The **Open draft** link after generation opens whichever document you asked for.
+- If the unmarked copy cannot be produced, the action reports an error rather than quietly handing back the marked draft in its place.
 
 ### Petition Check Summary
 
@@ -678,9 +701,19 @@ Questionnaires can be open in multiple browser sessions at once — for example,
 - A row added by one user is not silently deleted when another user saves a stale view of the same list. Rows are only removed when someone explicitly deletes them, not because they were missing from another session's payload.
 - When two sessions update the same list in different orders (for example, one user sorts while another edits a specific row), real-time sync applies each update to the correct row by identity rather than by its position in the list — edits land where they should even when the row order has shifted.
 - When a user deletes a row locally and a concurrent update for that same row arrives from another session before the delete has finished syncing, the deleted row stays gone rather than reappearing in the form.
-- Bulk list replacements that happen automatically — such as **Import from client questionnaire**, **Populate from credit report**, the Income Organizer pull, and Case Data populate flows — now correctly delete the rows that were replaced, instead of leaving orphaned rows in the database that would re-appear later.
+- Bulk list replacements that happen automatically — the Income Organizer pull and case data populate flows, for example — correctly delete the rows that were replaced, instead of leaving orphaned rows behind that would re-appear later.
 - Deleting an item from a deduplicated list — for example, removing a creditor from the Bankruptcy Schedules Master Creditor List — now also removes the hidden duplicate entries grouped under it. Previously those duplicates were left behind and one would resurface as a visible row after the form reloaded, so a creditor you had just deleted appeared to come back. The removed creditor now stays gone after a refresh.
 - Deletions made in a linked list (a list that mirrors another list) now save reliably. Previously a row removed from a linked list could be silently ignored and reappear after reloading.
+
+### Lists That Have Had Rows Deleted
+
+Deleting a row from a list leaves a gap in the list's stored ordering, and on a long list those gaps could break the form outright. Opening an affected bankruptcy schedules questionnaire and then opening a creditor row's detail tabs — the **Collateral** tab on a Schedule D creditor was the reported case — or clicking **Add item** replaced the whole questionnaire with a full-page error, with no way forward but to reload the page.
+
+- Lists are now rebuilt without the gaps. Every row is kept, in the same order and with the same values — nothing is added, removed, or reordered.
+- **Attribution on the rows after a deleted row is correct.** "Last edited" and the source badge on each row could previously read the details of a neighbouring row on any list where something had been deleted. That also let an autofill overwrite an answer someone had typed, because the form was reading the wrong row's history when deciding whether the value was hand-entered.
+- Petition Check findings on a list point at the row they belong to rather than at a nearby one, and a finding is no longer dropped from the results because the row it belonged to had shifted.
+- **Table columns are unaffected.** A table's columns keep their own positions, and an untouched column stays empty rather than sliding data under a different column heading.
+- A questionnaire in this state tidies its own stored ordering the first time anyone saves it, so an affected case stops being affected as soon as your team edits it.
 
 ### Very Large Questionnaires
 
@@ -763,6 +796,18 @@ Links between related case records — a creditor and the property securing it, 
 When a questionnaire generates multiple documents — for example, filled court forms alongside supplemental documents such as a creditor matrix — the documents appear in the case document list in a consistent order: filled court forms first, followed by other questionnaire-generated documents. This ordering is maintained even when new sections are added to the questionnaire after some documents have already been created.
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
+
+#### Keeping a creditor off the matrix but on the schedules
+
+The Master Creditor List carries an **Omit from creditor matrix** checkbox. A creditor checked this way is left out of both the **Creditor Matrix** document and the creditor list submitted to the court, while staying everywhere else it belongs — on its schedule, in case data, in the Chapter 13 calculator, and on the filled schedule PDFs.
+
+This is for the creditor a case has to disclose but should not notice. The usual example is a landlord on Schedule G where the debtor is current on the lease and is not rejecting it: the lease is disclosed, but there is no reason to mail the landlord notice of the case.
+
+- **It is a different control from Omit from PDFs**, which takes the creditor off the schedules as well as the matrix. Use **Omit from PDFs** when the creditor should not appear at all, and **Omit from creditor matrix** when the creditor must still be disclosed on a schedule.
+- A creditor checked **Omit from PDFs** is still left off the matrix, as before. Checking either one keeps the creditor off the mailing matrix.
+- Both the Creditor Matrix document and the court's creditor list honor the checkbox, so the two agree.
+
+> TODO: Confirm whether omitting a creditor from the matrix is recorded on the case activity feed. A follow-up change to log who omitted or restored a creditor was planned but is not part of this behavior yet.
 
 #### How duplicate entries are collapsed
 
