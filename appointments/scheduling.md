@@ -164,6 +164,15 @@ Each firm member's profile includes a **Meetings** tab that clients can visit to
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
 - When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
+#### Email when a team member is assigned a Schedule Appointment task
+
+When a team member is newly assigned to a **Schedule Appointment** task on a case, they receive an email telling them so, with a link to the case. Reassigning the task now reaches the new assignee — previously nothing was sent, and a task could sit with someone who had no idea it was theirs.
+
+- **Only the people newly added get the email.** Bookings re-check their assignees whenever they are created, rescheduled, skipped, canceled, or unscheduled, and when collaborators change. Someone who was already on the task is not emailed again each time one of those happens.
+- **You are not emailed about your own action.** Assigning the task to yourself sends nothing.
+- **This covers the Schedule Appointment task only.** Other task types — responding to a discussion, reviewing a document request, and the rest — do not send an assignment email. A task asking a client to pick from your availability is also excluded, because the case owners already receive their own notification for it.
+- No setting is involved: the email is on for every firm.
+
 ### Permissions and access
 
 - Firm users always have full access to manage bookings.
