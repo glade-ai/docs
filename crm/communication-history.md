@@ -39,6 +39,17 @@ An internal note can be edited after it is posted. While you are editing:
 
 Writing a new note is unchanged — Enter has always added a line there.
 
+### Case discussions stay with their own case
+
+A reply you post in a case discussion is always filed against the case open in front of you.
+
+- Opening a reply from a notification or a shared link and then moving to a different case used to be able to leave the earlier thread open underneath. A reply written at that point could be filed under one case while appearing in another's discussion. A small number of messages across the platform were affected, and at least one client saw another client's case details in their portal as a result. Those messages have been corrected.
+- **A thread that cannot be opened now says so.** If a thread belongs to a different case, or fails to load, the discussion shows an error and the reply box stays disabled until you close the thread. Previously it looked like a thread with no messages yet, so it was easy to reply into.
+- The reply box is briefly unavailable while a thread loads. This is deliberate — it stops a reply written in that moment from being filed as a new top-level comment instead of a reply.
+- A direct link to a comment opens only if that comment belongs to a case you have access to.
+
+None of this changes how you write or read a discussion on the case you are working on.
+
 ## Configuration
 
 - **AI toggle**: Enable or disable AI responses on a per-conversation basis. Requires team member permissions.
