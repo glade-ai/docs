@@ -324,6 +324,16 @@ Previously any field with a case data connection claimed to be synced with case 
 
 > TODO: Confirm the in-product wording of the "Populated from Internal data" label — the underlying source name may read differently to a preparer.
 
+#### Overriding a Schedule I or Means Test figure the calculator produced
+
+The Schedule I and Means Test lines the Income Organizer calculates are handled differently from ordinary case data sync fields, because an attorney's correction to one of them needs to survive the next recalculation.
+
+- These fields name the calculator as their source rather than reading **Synced with case data**.
+- **A figure you type over sticks.** The field reads **Manually overridden**, and a later Income Organizer recalculation leaves it alone. Previously the most recent recalculation won, so a correction an attorney made could be replaced without warning the next time income figures changed.
+- **Re-run is always available on these fields**, whether or not you have edited them. Using it puts the calculator's current output back on the field and hands the line back to the calculator, so a later recalculation updates it again.
+- Because these figures are calculated rather than stored on the case record, the re-run control replaces the case data view on them — there is no case record entry behind the line to open.
+- Ordinary case data sync fields are unchanged: editing one still leaves it on case data with the usual revert option.
+
 #### Autofills From Reference Data
 
 Some autofills fill a field from reference data Glade already holds for the case rather than from a document or an AI inference — the IRS standard deduction amounts on the Chapter 7 means test (Form 122A-2) are the common example.
@@ -496,6 +506,8 @@ If a case was set up before this automation rolled out, your firm can request a 
 Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
 
 When you edit a case data sync field, the updated value saves automatically and syncs to the case record immediately — no extra confirmation step is required.
+
+Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
 
 #### Turning sync off for one questionnaire
 
@@ -760,6 +772,20 @@ Before you apply anything, the **Get back in sync** preview shows what would cha
 - **Existing creditors and properties** show a per-field comparison of only the fields that would actually change. Previously these rows were labeled just "Update", with no indication of which details differed or by how much — so the only way to know was to apply the change and compare afterwards.
 - **New creditors and properties** are shown as additions with the values that would be added. There is nothing to compare against for these.
 - You choose which changes to apply. Applying nothing at all simply reconnects the questionnaire to case data without overwriting any answers.
+
+### Compare case data
+
+**Get back in sync** only appears when Glade has detected drift since the last sync, and the list it shows is scoped to that drift. There are cases where the questionnaire and the case record genuinely disagree but no banner appears — most often after a schedules upgrade, and most visibly with creditors, where a case record can hold creditors the questionnaire has omitted, or creditors that came from a credit report and never reached the form. The default creditor list looks empty or short, and nothing offers to fix it.
+
+**Compare case data** is a manual action you can run at any time on the bankruptcy schedules questionnaire. It compares the whole questionnaire against the whole case record, rather than only what has drifted, and it includes rows the questionnaire has omitted.
+
+- Each difference is listed as one of: **only in the case record**, **only in the questionnaire**, **the two hold different values**, or **omitted on the questionnaire but present in the case record**.
+- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row.
+- Taking **Use case data** on an omitted row brings that row back onto the form, so a creditor list that appeared short fills out to match the case record's creditors.
+- After you apply, syncing is turned back on and the questionnaire is marked as in sync.
+- The out-of-sync banner and its **Get back in sync** preview are unchanged. Use **Compare case data** when you suspect a difference the banner is not reporting; use the banner when it appears.
+
+> TODO: Confirm where **Compare case data** appears in the questionnaire — header action or overflow menu — and whether it is limited to team members with edit permission.
 
 ### Editing a Completed Questionnaire After the Petition Is Drafted
 
