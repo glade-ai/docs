@@ -32,12 +32,14 @@ When a filing is blocked by Glade's pre-filing review, the modal names the speci
 
 Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
 
-Five checks are active:
+The following checks are active:
 
 | Check | What it looks for | Severity |
 |-------|-------------------|----------|
 | Required documents in the packet | Every document the filing district requires for the case's chapter is present in the packet | Blocking |
 | Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
+| Debtor type supported by the district | The case's debtor type is one Glade can file in that district | Blocking |
+| Negative amounts on the case-upload data | None of the dollar figures sent to the court with the case can be negative | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
@@ -52,6 +54,20 @@ Five checks are active:
 - **A missing document may now block where it previously only warned.** Because required-document status comes from each district's rules, a document the district marks as required is treated as gating. Pay advices are the common case: in districts whose rules require them, a missing paystubs file now blocks submission rather than showing a warning.
 - **The second debtor's pay advices are governed by the district's rules too.** On a joint filing, whether Debtor 2's pay advices are required now comes from the filing district's document list like every other requirement, and appears as its own named item in the pre-filing review. Previously this rule sat inside the filing engine instead of the district's document list, and a joint case whose second debtor legitimately had no pay advices — because they are unemployed, retired, or self-employed — failed at submission with an error that nothing in Glade could clear, no matter how many times the packet was reviewed and signed off.
 - **"Petition out of date" reflects the petition's own inputs.** It is raised when the case data or the questionnaire answers the petition is built from have changed since it was compiled. Adding a supporting document to the filing packet no longer raises it — the petition is a merge of the selected forms and schedules, so an unrelated PDF added alongside them does not make it out of date. Previously any addition to the packet flagged the petition and prompted a recompile that changed nothing.
+
+#### Debtor type supported by the district
+
+Glade files cases for individual debtors. A case recorded as a corporation or a partnership is reported at review time as a debtor type the district cannot take, naming both the debtor type and the district, instead of failing at submission with a message that pointed at nothing you could fix.
+
+- A debtor type Glade does not recognise at all is not treated as unsupported — the check reports itself as unresolved rather than blocking a case over an entry it cannot read.
+- This is a check on what Glade can file today, not on the court's own rules. Districts that begin accepting other debtor types will be enabled individually.
+
+#### Negative amounts on the case-upload data
+
+Alongside the petition, Glade sends the court a data file describing the case. None of the dollar figures in it can be negative. A negative figure — a monthly income line entered below zero, for example — is caught at review time and the finding **names the fields that are negative**, so you can go to them directly.
+
+- Previously a negative amount was not caught. It failed quietly while the file was being built, so the first sign of trouble came at submission with nothing to identify the cause.
+- The lines a court expects to be able to go negative are excluded and do not trip the check.
 
 #### Who can clear a blocking finding
 
