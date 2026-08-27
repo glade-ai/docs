@@ -24,7 +24,7 @@ Glade automatically sends appointment reminders to both clients and firm members
 ### Reminder updates on reschedule
 
 - When a booking is rescheduled, all associated reminders automatically update to reflect the new time.
-- Client reminders recalculate to 30 minutes before the new start time.
+- Client reminders recalculate to 30 minutes before the new start time. Rescheduling only ever moves a reminder closer to the appointment, never further away.
 - Firm member reminders recalculate to the day before the new date.
 - If the booking is rescheduled to a different time on the same day, the firm member reminder timing stays unchanged since the day-before trigger date has not changed.
 
@@ -81,7 +81,8 @@ Reminder timing (30 minutes for clients, day-before at 5:00 PM for firms) is not
 - Clients cannot reschedule or cancel directly from a reminder email or text. They must log into the platform.
 - If the firm's timezone is set incorrectly, firm member reminders may arrive at the wrong time.
 - There is no push notification channel. Reminders are limited to email and SMS.
-- If a booking is created less than 30 minutes before the start time, the client reminder may not have time to send.
+- If a booking is created less than 30 minutes before the start time, the client reminder may not have time to send. The same applies to a booking rescheduled to less than 30 minutes out — the reminder goes out on the next send cycle rather than being skipped.
+- **Rescheduled bookings and early reminders.** Until recently, rescheduling a booking whose reminder had not yet gone out moved that reminder to the morning of the appointment instead of 30 minutes before it, so clients were told their appointment was "in 30 minutes" hours ahead of time. Reschedules now set the reminder 30 minutes before the new start time. A small number of reminders that were already scheduled under the old behavior can still arrive early; if a client reports a reminder at the wrong time, check whether the appointment was rescheduled before this was corrected. Bookings that were never rescheduled were never affected.
 
 ## Related Features
 
