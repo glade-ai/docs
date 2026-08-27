@@ -20,6 +20,9 @@ Staff management controls who has access to your firm's back office and what the
 - **Editing team member details**: A team member's name and email address can be updated directly from the staff management interface. Keeping email addresses current ensures the team member retains access to their cases and workflows — changing an email address that is out of sync with the person's actual account can cause their assigned workflows to become inaccessible.
 - **Adding a firm billing payment method**: Adding the payment card on file for your firm's own Glade billing is no longer limited to the firm owner. A team member can add a firm billing card without being the owner, and Glade records which team member added each card so there is a clear trail of who set up a payment method.
 - **Attorney addresses accept lettered unit numbers**: The Suite/Apt field on an attorney's mailing and physical address accepts letters as well as digits, so `3A`, `B`, and `12-C` save as entered. These fields previously accepted digits only and silently dropped everything else on save — `3A` came back as `3` — which put an incomplete address on anything generated from the attorney's record. Check any attorney whose suite or unit number contains a letter and re-enter it if it was truncated.
+- **More than one filing attorney profile per person**: An attorney who files in more than one state can hold a separate filing profile for each — its own mailing and physical address, phone numbers, and bar and licensing details — all recorded against the same team member. Add each profile from the Attorney Information page. The email address on a filing profile is contact information that appears on the filing, not a separate login, so the same address is expected on every profile for that person. Previously only one profile could exist per team member: a second one failed to save, and the workaround was to invent a second email address for the same attorney, which is not necessary.
+  - One profile per firm remains the default filing attorney. Marking a new profile as the default clears the flag from the previous one.
+  - Deleting a profile removes only that profile and leaves the attorney's others in place. Previously a delete often removed nothing at all.
 - **Organizations** belong to your firm and represent client-side groups. Each organization has an owner and members. Organization members have granular permissions:
   - Assign team members to cases
   - Invite other collaborators
@@ -39,6 +42,7 @@ Staff management controls who has access to your firm's back office and what the
 
 - When a team member is removed, their workflow **ownership** assignments are cleared automatically. A departed member no longer appears as an owner on their workflows and no longer keeps owner-derived access — for example, they are dropped from the group that can view a workflow's invoices. Other manual references to that person (for example, a mention in a note) are not swept up automatically and may need to be updated by hand.
 - Organization membership validation prevents adding someone who is already a paying customer, but it does not prevent the reverse (an organization member later becoming a direct paying customer).
+- Two filing profiles for the same attorney carry the same name, so a list that asks you to choose a filing attorney can show that name twice. Tell them apart by the state on the profile's mailing address, and confirm you have picked the right one before filing.
 
 ## Related Features
 
