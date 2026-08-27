@@ -79,6 +79,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - **The Date column is the calendar day in your firm's timezone**, so a payment reads the same date in the export as it does in the Transactions table. Previously the export used UTC: a payment taken at 11:45pm Eastern on 31 August appeared as 31 August on screen and 1 September in the file, which is exactly the kind of disagreement that shows up during a month-end close.
 - The payments themselves were never affected — only how their date was written into the file. **Re-export any period whose totals did not reconcile**, particularly around month ends; the corrected file will move those late-evening payments back into the month they belong to.
 - Payout data can also be exported separately as its own CSV file.
+- Payment plans have their own export on the Payment Plans section, covering every plan that has not been canceled. Unlike the payments export, it is not narrowed by the dashboard's date range — see [Payment Plans](./payment-plans.md).
 
 ### Email notifications
 
