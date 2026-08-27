@@ -77,6 +77,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - The export respects current filters, including date range, status, and search terms.
 - CSV columns include: Customer, Amount, Currency, Refunded Amount, Discounts, Glade Fee, Processing Fee, Customer-Paid Fees, Tax, Net, Account, Description, Product Title, Price Title, Notes, Date, Payment Plan (yes/no), and Workflow.
 - Payout data can also be exported separately as its own CSV file.
+- Payment plans have their own export on the Payment Plans section, covering every plan that has not been canceled. Unlike the payments export, it is not narrowed by the dashboard's date range — see [Payment Plans](./payment-plans.md).
 
 ### Email notifications
 
