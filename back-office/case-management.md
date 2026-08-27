@@ -24,8 +24,11 @@ Case management is the core back-office feature that lets your firm track client
   - **Petition Check** — when a Petition Check is run, the log records it along with which required fields were still missing, so you can see when the case was validated and what was outstanding at the time.
   - **Case document generation** — when a case document is generated, the log records that the document was created.
   - **PACER filing** — when a case is successfully filed with PACER, the log records "Filed case with PACER" so the filing is part of the case's audit trail.
+  - **Creditors omitted from or restored to the creditor matrix** — when a creditor is left off the creditor mailing matrix, or put back on it, the log records which creditor it was and which team member made the change, so the decision has a name and a date against it.
 
   These entries are deduplicated, so repeating the same action (for example, re-running a Petition Check or retrying a filing submission) does not clutter the log with duplicate entries.
+
+  Creditor matrix entries are recorded when the schedules questionnaire is completed rather than at the moment the checkbox is ticked, because that is the point at which the matrix is compiled. Completing the questionnaire again without changing any of the checkboxes adds nothing, and regenerating the matrix as part of a filing does not add entries of its own.
 - Cases support PACER integration for bankruptcy filings, including case number and court data tracking.
 - A case's bankruptcy chapter is read correctly regardless of how it was recorded. Chapters saved by older versions of Glade were stored in a different form, and on those cases the chapter used to display as an unformatted value, while opening it for editing showed no chapter selected at all — as though the case had none. Both now show the recorded chapter. Nothing needs to be re-entered, and no stored value was changed. A chapter value Glade cannot interpret displays as a dash rather than as raw text.
 - Searching by case number in the dashboard's global search finds the matching case even when that case number belongs to an **associated (non-primary) case** in a case group. Previously a case number stored on a linked, non-primary matter could be missed; searching now returns it. Searches by other fields (name, email, phone) continue to match primary cases.
@@ -45,6 +48,8 @@ Case management is the core back-office feature that lets your firm track client
 - Custom statuses are free-text values, so entering an unrecognized status name does not produce an error. Make sure status names match exactly.
 - Removing a repeatable item (e.g., a creditor) hides it from views but preserves its data history for audit purposes. It is not permanently deleted.
 - Clearing a field value creates a new history entry rather than erasing previous values, so the full edit history is always retained.
+- Creditor matrix entries in the activity log may appear with an unformatted label until the display text for them is finished. The creditor named on the entry and the team member it is attributed to are correct.
+- Because creditor matrix entries are written when the schedules questionnaire is completed, a checkbox ticked and then unticked before completion leaves no entry — the log records the state the matrix was compiled with, not every intermediate change.
 - The previous status of a case is only recorded when a status change occurs. Newly created cases do not have a previous status.
 
 ## Related Features
