@@ -55,6 +55,16 @@ Clicking a service in either view opens the availability editor directly — you
 7. If the product has video conferencing enabled, a meeting link is generated automatically.
 8. The client receives a confirmation with booking details.
 
+### While the booking calendar is loading
+
+A consultation calendar has to fetch a month's availability before it can show which days are open. Until that finishes, the calendar makes it clear it is still loading rather than showing an answer it does not have yet.
+
+- **A day with no availability data yet is not shown as booked.** The whole grid is covered by a loading indicator until the month's availability arrives, and days grey out as unavailable only once Glade actually knows they are.
+- Previously a month that had not loaded looked exactly like a month with nothing free. Receptionists reading a grey calendar told callers there were no consultation slots when there were — the calendar was simply still fetching. If your team has been turning bookings away on a full-looking calendar, this is the likely cause.
+- Once the month has loaded, days that are genuinely booked or unavailable grey out as they always did.
+- **Months load in well under a second in typical cases.** A month's availability is fetched in one go rather than day by day, so the wait that made the loading state noticeable in the first place is largely gone.
+- If adding a session to the cart does not complete within about ten seconds, the attempt stops and reports the failure instead of leaving the button spinning indefinitely. Try again, or reload the calendar.
+
 ### Booking lifecycle
 
 Each booking moves through a series of statuses over its lifetime:
@@ -164,6 +174,15 @@ Each firm member's profile includes a **Meetings** tab that clients can visit to
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
 - When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
+#### Email when a team member is assigned a Schedule Appointment task
+
+When a team member is newly assigned to a **Schedule Appointment** task on a case, they receive an email telling them so, with a link to the case. Reassigning the task now reaches the new assignee — previously nothing was sent, and a task could sit with someone who had no idea it was theirs.
+
+- **Only the people newly added get the email.** Bookings re-check their assignees whenever they are created, rescheduled, skipped, canceled, or unscheduled, and when collaborators change. Someone who was already on the task is not emailed again each time one of those happens.
+- **You are not emailed about your own action.** Assigning the task to yourself sends nothing.
+- **This covers the Schedule Appointment task only.** Other task types — responding to a discussion, reviewing a document request, and the rest — do not send an assignment email. A task asking a client to pick from your availability is also excluded, because the case owners already receive their own notification for it.
+- No setting is involved: the email is on for every firm.
+
 ### Permissions and access
 
 - Firm users always have full access to manage bookings.
@@ -199,6 +218,7 @@ Each firm member's profile includes a **Meetings** tab that clients can visit to
 - Enforcement against synced events depends on the event having reached Glade. A commitment a team member blocked out directly in Outlook that has not yet synced is not known to Glade and does not prevent a booking.
 - A booking with no assigned team member is not checked against any synced calendar, since there is no team member whose calendar to compare it with.
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
+- A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
 
 ## Related Features
