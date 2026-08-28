@@ -236,6 +236,8 @@ When a list row has duplicate sub-rows (for example, a creditor that appears on 
 
 The **Remove X selected** button in the list footer counts only the real items you picked, not the duplicates that were auto-selected along with them. Selecting one creditor that has two duplicates reads **Remove 1 selected**, not "Remove 3 selected." Removing still deletes the parent row and its duplicates together — only the displayed count excludes the duplicates.
 
+**Add Item starts a blank row.** Removing a row and then clicking **Add Item** straight away gives you an empty row to fill in. For a period, the new row could open pre-filled with another row's answers — most noticeable on the property lists, where a freshly added item arrived carrying a neighbouring item's details. Rows that shifted position because of the removal also load their own answers rather than the answers of the row that used to sit in that place.
+
 ### Importing List Data from Another Questionnaire
 
 List fields can be populated from a client's other questionnaire using **Import from client questionnaire**. When you import:
@@ -361,6 +363,20 @@ When an AI agent autofills a group of related fields (for example, property exem
 
 Manual edits to fields in a list also stick when the AI auto-runs after rows have been added, removed, or reordered. For example, on the Bankruptcy Schedules questionnaire, the schedule classifier may run repeatedly as the form changes — moving a creditor from Schedule D to Schedule F by hand will not be reverted by a later automatic run.
 
+#### Re-running an agent over a list
+
+The agents that fill a whole list — exemptions on Schedule C, vehicles, secured debts, mortgages, and arrearages — **replace** the rows from the previous run rather than adding a second set alongside them.
+
+- Running the exemptions agent a second time used to leave the earlier claims in place underneath the new ones, so each run doubled the Schedule C list and the extra rows had to be deleted one at a time. The same could happen on the other list agents and when importing into a list.
+- **Duplicates already sitting on a case are not cleaned up.** If a list on one of your cases was doubled by an earlier re-run, delete the extra rows once; re-running the agent from now on will not add more.
+- A re-run **updates the rows that are already there** instead of rebuilding the list from scratch, so an exemption claim stays attached to the property it was claimed against. The generated Schedule C, the property's link to its exemption, and the Chapter 13 liquidation analysis all continue to point at the right claim after a re-run.
+- Changing a claim from a custom amount to the property's full market value clears the amount and the explanation that went with it, rather than leaving the earlier figure on the row.
+
+Two things to be aware of when you re-run:
+
+- A claim you added or edited by hand can be overwritten by a later run of the agent when it sits on a property the agent also produces a claim for. Values elsewhere in the questionnaire are untouched.
+- Re-running the vehicles agent when it finds nothing to claim leaves the previous run's rows in place. Clear them yourself if the earlier result no longer applies.
+
 Each autofilled field shows a status indicator describing its current state:
 
 - **Synced with [source]** — the autofilled value is current and up to date with the source data.
@@ -434,6 +450,9 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - Every amount in the plan's payment schedule carries a dollar sign, including the first one. Previously the first amount in a schedule printed bare while the rest were marked.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
+- **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
+
+> TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
 
 #### Secured Claims With an Arrearage Cure
@@ -477,6 +496,19 @@ If a case was set up before this automation rolled out, your firm can request a 
 Some questionnaire fields are linked to case data — they display a value pulled from the case record rather than a standalone response. These fields show the synced value by default.
 
 When you edit a case data sync field, the updated value saves automatically and syncs to the case record immediately — no extra confirmation step is required.
+
+#### Turning sync off for one questionnaire
+
+You can stop a single questionnaire from syncing with case data without waiting for an out-of-sync banner to offer it. On an in-progress Glade questionnaire, the same three-dot menu that holds the questionnaire's other actions offers:
+
+- **Disable case data sync** while the questionnaire is syncing. You are asked to confirm, and syncing stops for that questionnaire only. Answers already on the form are left exactly as they are.
+- **Re-enable case data sync** while syncing is off. Choosing it only turns syncing back on — no answer is replaced, and there is nothing to review first. Use this when a questionnaire's edits have stopped carrying over to the rest of the case.
+
+A disable you make from the menu is remembered through submission. Submitting a questionnaire turns syncing off, and re-opening one normally turns it back on again when the case data behind it has not changed — so a questionnaire you had deliberately disconnected used to reconnect itself the moment someone submitted and re-opened it. It now stays disconnected until you turn syncing back on yourself.
+
+- Turning syncing back on — from the menu, or from the out-of-sync banner — clears the manual disable. From then on, submitting and re-opening reconnects the questionnaire automatically again, as it does for any other questionnaire.
+- **Re-enable is not offered in the menu while the out-of-sync banner is showing.** Use the banner's own action in that case, so you see which values case data would change before anything is replaced. See [Reviewing changes before you sync](#reviewing-changes-before-you-sync).
+- Upgrading the questionnaire to a newer template version does not reconnect a questionnaire you disabled by hand.
 
 ### Entity-Bound List Fields
 

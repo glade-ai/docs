@@ -21,6 +21,25 @@ Custom terms are agreement templates — such as retainer agreements and engagem
 - When clients encounter a custom terms step in a workflow, the document is displayed in the same Times New Roman rendering as the editor preview.
 - Clients must actively accept the terms to complete the workflow step.
 
+### Editing the details on a client's agreement
+
+**Edit details** changes the values filled into a client's agreement — the retainer amount, the fee, the time frame, and the like. Saving it updates every place those values are shown, not only the agreement itself:
+
+- The **Details** panel above the agreement and the **Context** sidebar beside it are brought in line with what you saved, alongside the body of the agreement. Previously only the body picked up the change: a retainer edited from $500 to $1,000 read $1,000 in the agreement and $500 in both panels, with nothing your team could do to correct them.
+- Agreements already showing an older value are corrected the next time someone saves **Edit details** on them. Nothing is repaired in bulk, so an agreement nobody re-saves keeps the values it is showing now.
+- **Saving writes every detail, not only the one you changed.** Edit details submits all of the agreement's values together, so the panels are brought in line with the terms as a set. Where your firm enters a value in the sidebar that the agreement works out for itself — an amount taken from an invoice, for example — saving replaces the sidebar's figure with the agreement's. Check the sidebar after a save if your firm relies on entering those separately.
+
+Two kinds of value are deliberately left alone, because **Edit details** cannot produce them:
+
+- Context values that name a person, and those chosen from a fixed list — a case type, for example.
+- A detail that feeds more than one context value on the same workflow. Neither is changed rather than Glade guessing which one you meant, so those keep their existing values.
+
+### Who signs a manual-signature agreement
+
+When an agreement is set to be signed by an attorney and you assign attorneys through **Assign collaborators**, the signature and its accompanying task go to the **first attorney in the list you assigned**. If an attorney who was already the signatory is still among those assigned, they stay the signatory. Assigning no attorney at all clears the signatory as before.
+
+This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
+
 ## Configuration
 
 Custom terms templates are created and managed from the firm's template library. Each template requires a name and a body. Once created, a template can be referenced as a step in a workflow template.
