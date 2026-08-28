@@ -46,6 +46,26 @@ Every run records a result for each action it ran, so you can tell which part of
 
 The recipients an email was actually sent to are recorded on the run, so the history shows who was contacted at the time rather than who would be contacted today.
 
+### Re-sending an automation email
+
+A run's email can be sent again from the automation's run history — useful when the first send failed, when a recipient deleted it, or when the template has since been corrected and the notice needs to go out with the right wording.
+
+- The email is rebuilt from the automation's **current** template and re-sent against the **original** notice, so a correction to the subject or body is reflected in the re-sent message while the case and hearing details stay those of the notice that triggered the run.
+- Re-sending does not create a second run, does not create another task, and does not count as another firing of the automation. The run's history records the re-send in place rather than as a duplicate entry.
+- Recipients are resolved again at the moment you re-send, so someone who has since left the firm is dropped and a corrected address is used.
+
+> TODO: Confirm where the re-send action appears on a run in the automations UI, and which roles can use it.
+
+### Line breaks and paragraphs in the email
+
+The email you compose is sent with its spacing intact.
+
+- A single line break in the editor arrives as a single line break. Writing `Date:` and `Time:` on consecutive lines produces two adjacent rows in the recipient's mail client, not two paragraphs with a gap between them.
+- A blank line between two blocks of text starts a new paragraph, with the spacing you would expect.
+- Bulleted and numbered lists and headings keep their spacing as well.
+
+Recipients using Gmail and Outlook see the same spacing as everyone else. Emails sent before this was corrected went out either with the line breaks stripped or with every line separated by a full paragraph gap; those messages are not resent.
+
 ### Naming an individual action
 
 An automation can carry more than one action — several emails, or an email alongside a task. Each action can be given its own **action title**, so a list of three emails reads as "Chase trustee", "Notify debtor", and "Flag for review" instead of three identical "Send email" cards you have to open one at a time to tell apart.
@@ -86,6 +106,7 @@ Several types were added or narrowed:
 
 - **Means test and income statements are now four distinct types** rather than one general classification — Chapter 7 Statement of Current Monthly Income (Form 122A-1), Chapter 7 Means Test Calculation (Form 122A-2), Chapter 13 Statement of Current Monthly Income (Form 122C-1), and Chapter 13 Calculation of Disposable Income (Form 122C-2). An automation can now target the specific form and chapter instead of firing on all of them.
 - **Three new types** are available: Statement of Financial Affairs, Notice to Court of Intent to Argue, and Withdrawal and Substitution of Attorney.
+- **Adversary Complaint** is available as a type. A complaint opening an adversary proceeding against a debtor now classifies as Adversary Complaint instead of arriving with no type at all, so these notices can be filtered on the court notices list and used as an automation's match type. Only the complaint itself is classified this way — later filings in the same adversary proceeding, such as answers, summonses, and motions, are not.
 - **521 Compliance** is only applied when the notice explicitly cites Section 521. Notices that merely resemble a compliance notice are no longer classified this way.
 - **Investigating Asset** is now limited to trustee reports that explicitly describe an ongoing investigation into estate property. Recovered-asset and claims-bar notices, routine 341 meeting reports, no-distribution reports, and final reports are classified as what they are and no longer land here. An automation set up to watch for asset investigations fires on far fewer, more relevant notices as a result.
 
@@ -216,8 +237,10 @@ Edits are tracked: each save records who made the change and when, alongside who
 - The video hearing details token no longer includes the Zoom dial-in number. A firm that needs the dial-in number in its 341 emails has to add the separate phone token to each template that should carry it.
 - The case-caption fallback for debtor names only supplies a name. It does not link the notice to a case, so the other case-context tokens on an unlinked notice stay empty.
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
-- Run history (every individual fire of an automation) is not yet surfaced in the UI. The automation list shows the most recent run time and status only.
-- Failed runs are not retried automatically. The failure shows as the automation's last run status, and the run's per-action results show which action failed.
+- The automation list itself shows the most recent run time and status only. Individual fires are read from the automation's run history.
+- Failed runs are not retried automatically. The failure shows as the automation's last run status, and the run's per-action results show which action failed. Re-sending the email from the run history is the manual equivalent for a send that did not land.
+- Re-sending an email re-sends only the email. A **Create task** action on the same automation is not run again, so a run that failed to create its task is not repaired by a re-send.
+- A re-sent email uses the automation's template as it stands now. There is no way to re-send the message exactly as it was originally worded once the template has been edited.
 - The fallback to the Glade support address is a delivery safeguard, not a substitute for verifying your firm's sending address. It applies per message, so every automation email keeps going out from the support address until the firm's own address is verified.
 - Emails sent before the 341 meeting details fix went out with the meeting date, time, and join details blank. Those emails are not resent — if clients were sent a 341 notice missing its meeting details, follow up manually.
 - Tasks created by an automation appear in the inbox and in the newer task views. They may not yet appear in the older dashboard task lists, which show only a fixed set of task kinds.

@@ -85,6 +85,35 @@ Each income record carries its own switches for whether it counts toward Schedul
 - A first-time extraction still starts with the record counted, and a document Glade could not read keeps its record out of the totals until a later successful read.
 - **Clearing the switches holds on the first try.** Turning **Include in Monthly Totals** or **Include in Means Test** off — for a whole income source or for one record — sticks, including on organizers with many paystubs and while AI is still reading uploaded documents in the background. Previously rows could re-check themselves moments after being cleared, so the same action had to be repeated several times before it held; that only happened on busy organizers, which is why it looked intermittent. If a change cannot be saved, the switch returns to its previous position and an error message appears, rather than appearing to save and then reverting on the next refresh.
 
+### Feeding Schedule I and the Means Test Questionnaire
+
+An income organizer's calculated results flow into the case's Schedule I and Means Test questionnaire fields, so the figures your team settles in the organizer are the ones the questionnaire shows.
+
+- **New organizers do this from the moment they are created.** Previously a new organizer was created switched off, and its results sat in the organizer without ever reaching the questionnaire until someone had it turned on — so a case could show a complete income organizer alongside blank or stale Schedule I and Means Test answers.
+- Organizers created before this change keep whatever setting they are on. If an existing organizer's figures are not reaching the questionnaire, ask Glade support to switch it on for that organizer.
+- Only income organizers feed the questionnaire this way. An ordinary document request — a checklist of files to collect — does not.
+- A figure the questionnaire has picked up this way can still be overridden by hand on the questionnaire, and the override is kept (see [Questionnaires](./questionnaires.md)).
+
+### Editing a Row That Is Still Queued for Analysis
+
+An uploaded paystub normally has its figures read automatically, but that read can lag, fail, or not have run yet — the row shows as queued for analysis in the meantime. Those rows are editable.
+
+- Open the row and enter the figures from the paystub yourself. There is no need to wait for the automatic read or to re-upload the file. Previously these rows could not be edited at all, so a paystub the reader could not handle was a dead end on the case.
+- If the automatic read later succeeds on the same file, it updates the row you filled in rather than adding a second row for the same paystub.
+- The **Include in Monthly Totals** and **Include in Means Test** choices already recorded against that upload are carried over, so a file your team had excluded stays excluded.
+
+### Hand-Entered Income Counts Toward the Totals
+
+A month can hold both an automatically read paystub and a figure your team entered by hand — a stub the reader could not make out, for example.
+
+- Records your team entered by hand now count toward Schedule I and the means test alongside the automatically read ones. Previously a hand-entered record was discarded whenever the same month also held an automatically read paystub, so the transcribed figure contributed $0 and both Schedule I and the means test came out low. If your team has transcribed a paystub by hand, re-check that month's figures.
+- The same applied to a business or farm month recorded as expenses only, with no income line. Those months are counted too.
+- Genuinely empty placeholder rows — no earnings, no overtime, no gross, no expenses — are still left out of the totals, so an empty row does not dilute a month's average.
+
+### After You Edit an Income Record
+
+When you change the individual earnings lines behind a paystub, the pay-period gross is recalculated from the lines you left in place. Everything that reads that figure — the organizer's own table, the income-remaining-after-deductions figure, and Schedule I — reflects the edit straight away. Previously the gross stayed at its pre-edit value, so a corrected paystub still reported the original figure everywhere the summary was used.
+
 ### Income Records and Their Source
 
 Every income record is tied to an income source (an employer or a non-employment source) on the case. A record that is not tied to a source contributes $0 to Schedule I and the means test and shows as having incomplete details.
@@ -210,7 +239,10 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - Latest paystub mode affects Schedule I only. It is not available for the means test, which always uses the standard six-month calculation.
 - Income sources configured before latest paystub mode existed continue to use the method they were set to. They are not migrated automatically.
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
+- **Net pay per period is not recalculated after an edit the way gross is.** Editing the earnings lines behind a paystub updates the pay-period gross; the net figure keeps the value it was read or entered with. Check it against the paystub after a substantial edit.
+- Switching a new income organizer's results through to the Schedule I and Means Test questionnaire happens automatically only for organizers created from this point on. Older organizers are not switched on retroactively.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
+- **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
 
