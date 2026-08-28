@@ -18,7 +18,13 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 
 - **Member list filters**: All, Subscribed, Free, Unverified. Additional filters exist for legal workflow states (retained, booked consultation, filed case).
 - **Sort options**: Control the ordering of the member list.
-- **Search**: Filter members by name, email, phone number, or profile notes.
+- **Search**: Filter members by name, email, phone number, date of birth, or profile notes.
+
+### Searching and filtering the contacts list
+
+- **The legal workflow filters work.** **Leads**, **Booked**, **Retained**, and **Filed** each returned an error rather than a result, on every attempt, for every firm. Searching by date of birth failed the same way. Both now return results normally. If your team had written these off as broken, they are worth using again.
+- **Browsing and searching are fast on large contact lists.** A firm with a very large client list could previously wait several seconds to open the Contacts tab, and a name search could hang for minutes — long enough to occupy the whole platform and slow other work down. Opening the list and searching it now return in well under a second in normal use.
+- Searching client notes is included in that. A note search previously read through every note in the firm, which is what produced the longest waits.
 
 ## Edge Cases & Limitations
 
@@ -26,6 +32,7 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 - Archived contacts are excluded from the standard member list but are not permanently deleted. When you archive a contact, its email address is released so the same email can be saved on another contact. Previously an archived contact kept its email reserved, so trying to reuse that email on an active contact returned an "already taken" error even though the only conflict was an archived record. The archived contact's original email is still retained internally for audit and sign-in purposes.
 - Company employee relationships and person-to-person associations are two separate concepts — linking someone as a company employee does not automatically create a person-to-person association.
 - A person only appears in your contacts list if they have a client record with your firm.
+- Filtering to contacts who have a name recorded does not apply to matches on phone number or date of birth. A contact with no name who matches on one of those still appears in the results.
 
 ## Related Features
 
