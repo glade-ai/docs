@@ -24,7 +24,21 @@ When the required-fields check reports a problem with the case's data rather tha
 
 When a filing is blocked because the case's filing district has not been set up, a **Fix this** action appears inline. Completing the district setup from that prompt clears the block, so you can continue the submission without leaving the filing flow.
 
-A filing can also be held up because Glade cannot finish its check of the case's required fields, which shows as the required-fields check being unavailable rather than as a specific item to fix. This is not something your team can resolve on the case — contact support with the case and the county, as it usually means Glade needs to recognize a county spelling. Cases in **McKean County, Pennsylvania** were affected until August 2026 and file normally now.
+A filing can also be held up because Glade cannot finish its check of the case's required fields, which shows as the required-fields check being unavailable rather than as a specific item to fix. This is not something your team can resolve on the case — contact support with the case, as it usually means Glade needs to correct something behind the scenes.
+
+### An unrecognized county
+
+When the county on a debtor's address is not one Glade recognizes for that state, the pre-filing review reports it as a blocking item against that debtor, naming the county as it was entered. It is now handled like any other review item rather than stopping the required-fields check or the submission with an unexplained error, so the problem is described in one place alongside everything else the review found.
+
+Where Glade can tell what the county was meant to be, the finding says so:
+
+- **A county that exists in another state** is named with that state — up to three of them. The usual cause is the wrong state on the address rather than a mistyped county.
+- **A county spelled one character away from a real county in the same state** is offered as a "did you mean" suggestion.
+- **Where there is no confident answer** — nothing close, or two candidates equally close — the finding says the county could not be matched and asks you to contact support, rather than guessing at one.
+
+Suggestions are there to read. Glade never substitutes a suggested county on its own, because filing under the wrong county is worse than being asked to check. Correct the address on the case and run the review again.
+
+Cases in **McKean County, Pennsylvania** were affected by an unrecognized spelling until August 2026 and file normally now.
 
 When a filing is blocked by Glade's pre-filing review, the modal names the specific items that need attention — for example, "Form 122A-1 is not in the filing packet" — so your team can go straight to what is missing. Previously this case showed an unhelpful internal label with no indication of which forms were at fault. If a filing is blocked by more than 20 items at once, the first 20 are listed followed by a count of how many more remain. In the rare case where the review blocks a filing but reports no specifics, the modal asks you to resolve the flagged review items and try again.
 
@@ -32,15 +46,26 @@ When a filing is blocked by Glade's pre-filing review, the modal names the speci
 
 Before a petition can be submitted, Glade runs a set of automated checks against the case and reports what needs attention. Each finding is either **blocking** — submission is gated until the item is resolved or an attorney signs off on it — or **advisory**, which flags the issue without gating submission.
 
-Five checks are active:
+The following checks are active:
 
 | Check | What it looks for | Severity |
 |-------|-------------------|----------|
 | Required documents in the packet | Every document the filing district requires for the case's chapter is present in the packet | Blocking |
 | Statement of Intention required | The Statement of Intention (Form 108) is included on a Chapter 7 case that needs one | Blocking |
+| Debtor type supported by the district | The case's debtor type is one Glade can file in that district | Blocking |
+| Negative amounts on the case-upload data | None of the dollar figures sent to the court with the case can be negative | Blocking |
+| Documents the district can place | Every document in the packet maps to a filing slot the district accepts | Blocking |
+| Required filing fields | Every debtor field the filing needs has an answer | Blocking |
+| Debtor's county recognized | The county on each debtor's address is one Glade recognizes for that state | Blocking |
+| Case already has a case number | The case has not already been assigned a number by the court | Blocking |
+| A filing is already in progress | No other filing is underway on the case | Blocking |
+| District supports a joint petition | The filing district accepts joint petitions, on a case being filed jointly | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
+| A recent filing attempt on the case | The case was attempted recently enough to be worth a second look before trying again | Advisory |
+| Schedule I / J figures missing | (Chapter 7) The income and expense figures the surplus comparison needs are present | Advisory |
+| Court notice matched to a client | A court notice held on the case matches this client | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -52,6 +77,45 @@ Five checks are active:
 - **A missing document may now block where it previously only warned.** Because required-document status comes from each district's rules, a document the district marks as required is treated as gating. Pay advices are the common case: in districts whose rules require them, a missing paystubs file now blocks submission rather than showing a warning.
 - **The second debtor's pay advices are governed by the district's rules too.** On a joint filing, whether Debtor 2's pay advices are required now comes from the filing district's document list like every other requirement, and appears as its own named item in the pre-filing review. Previously this rule sat inside the filing engine instead of the district's document list, and a joint case whose second debtor legitimately had no pay advices — because they are unemployed, retired, or self-employed — failed at submission with an error that nothing in Glade could clear, no matter how many times the packet was reviewed and signed off.
 - **"Petition out of date" reflects the petition's own inputs.** It is raised when the case data or the questionnaire answers the petition is built from have changed since it was compiled. Adding a supporting document to the filing packet no longer raises it — the petition is a merge of the selected forms and schedules, so an unrelated PDF added alongside them does not make it out of date. Previously any addition to the packet flagged the petition and prompted a recompile that changed nothing.
+
+#### Debtor type supported by the district
+
+Glade files cases for individual debtors. A case recorded as a corporation or a partnership is reported at review time as a debtor type the district cannot take, naming both the debtor type and the district, instead of failing at submission with a message that pointed at nothing you could fix.
+
+- A debtor type Glade does not recognise at all is not treated as unsupported — the check reports itself as unresolved rather than blocking a case over an entry it cannot read.
+- This is a check on what Glade can file today, not on the court's own rules. Districts that begin accepting other debtor types will be enabled individually.
+
+#### Negative amounts on the case-upload data
+
+Alongside the petition, Glade sends the court a data file describing the case. None of the dollar figures in it can be negative. A negative figure — a monthly income line entered below zero, for example — is caught at review time and the finding **names the fields that are negative**, so you can go to them directly.
+
+- Previously a negative amount was not caught. It failed quietly while the file was being built, so the first sign of trouble came at submission with nothing to identify the cause.
+- The lines a court expects to be able to go negative are excluded and do not trip the check.
+
+#### Checks that used to appear only at submission
+
+Several warnings used to exist only in the pre-filing dialog that opens at the moment you submit. They are now review checks like any other, so they appear on the review your team works through rather than arriving as a surprise on the last click:
+
+- **The case already has a case number**, and **a filing is already in progress on the case**, are blocking.
+- **A recent filing attempt on the case** is advisory.
+- **Missing required filing fields** is blocking, and the finding names the fields. This is the same set of fields as the [required fields check](./pacer.md#required-fields-check-before-filing).
+- **Schedule I and J figures missing on a Chapter 7 case** is advisory. This is what feeds the surplus comparison described at the top of this page; where the figures are not there to compare, the review says so instead of the comparison silently not happening.
+- **A court notice on the case matching this client** is advisory.
+
+The dialog at submission time still behaves as it always has — see [Preventing duplicate filings](./pacer.md#preventing-duplicate-filings) for how a hard block and a soft warning differ there. What changed is that the same information is now visible earlier.
+
+Each of these fails closed. Where a check cannot gather what it needs — the case's filing history is unreadable, for example — it reports as unresolved rather than passing, so a check with nothing to go on never quietly clears a filing.
+
+> TODO: Confirm what the court notice check is comparing and what a firm should do about a finding from it. The source change lists it as an advisory rule migrated from the existing pre-filing warnings, but not the condition that raises it.
+
+#### Documents the district cannot place
+
+Every document in the filing packet has to map to a slot the district's filing system accepts. Where one does not, the review reports it as a blocking item naming the document, so your team can replace or remove it before submitting.
+
+- Previously this failed at submission with an internal error and no indication of which file was at fault, so there was nothing to act on and nothing to retry that would behave differently.
+- **Each unplaceable document is its own item**, so a packet with three of them names all three rather than stopping at the first.
+- The same file listed twice produces one item, not two.
+- If Glade cannot work out whether the packet's documents can be placed at all, the check reports as unresolved rather than passing.
 
 #### Who can clear a blocking finding
 
@@ -89,6 +153,33 @@ This check reads the creditor mailing matrix the case is about to file and flags
 - It runs as part of the case's first pre-filing review and on any review you run by hand. Rebuild the matrix and run the review again after correcting the creditor list.
 
 Straightforward duplicates — the same creditor at the same address, differing only in ZIP format, capitalization, or punctuation — are already collapsed when the matrix is built and never reach this check. See [Questionnaires](../workflows/questionnaires.md) for how the matrix is assembled.
+
+#### The court's own required answers are checked before you file
+
+Opening a case with the court asks for a set of answers beyond the petition itself — the nature of the debtor's debts, the fee treatment elected, prior filings, the estimated number of creditors, estimated assets and liabilities, the county, marital filing status, and the means-test presumption. A missing or contradictory answer used to stop the filing **during** submission, appearing as a "Required-Fields Check Failed" message partway through, with the case left to retry.
+
+- These are now checked as part of the pre-filing review, so a missing answer is named in the review panel **before** anyone starts a submission.
+- Each answer is reported as its own blocking item naming what is missing, rather than one combined failure.
+- Which answers are required depends on the filing district — courts do not all ask for the same things — so the review reflects what the case's own court expects.
+- The consistency of the joint-filing answers is checked as well: a case that says it is filed jointly in one place and individually in another is reported rather than being sent to the court to be rejected.
+- Submission still runs its own check at the moment you file, so nothing gets through on a stale review. The difference is that the problem is visible earlier and described in the same place as every other finding.
+
+#### Joint petitions in districts that do not accept them
+
+Some districts do not accept joint petitions. A joint case in one of those districts was previously submitted anyway and failed after the fact, with the rejection arriving by email rather than in Glade.
+
+- A joint filing in a district that does not support joint petitions is now a blocking pre-filing finding, and names the district it applies to.
+- An individual filing raises nothing — the check does not apply.
+- If Glade cannot yet tell whether the case is joint, or cannot resolve the district's rules, the check reports as unresolved rather than passing, so a joint case is never let through on an assumption.
+
+#### A county the court's filing system does not recognize
+
+The court's filing system identifies the debtor's county by a standard code, and Glade has to translate the county written on the case into that code. Occasionally it cannot — a county name that exists in more than one state, or an address whose ZIP code points at a neighboring state, are the usual causes.
+
+- This is now reported as a **blocking pre-filing finding that names the county and state it could not identify**, so your team can see immediately what the obstruction is and which address to check.
+- Previously the same situation produced a dead-end error partway through the required-fields check, with no route to a fix and no indication of which value was at fault.
+- Start by checking the debtor's address, since the wrong state on an otherwise correct county is the most common cause. Where the address is right and the county is genuinely one Glade does not yet recognize, contact support — the list of counties is maintained by Glade and the addition is quick.
+- Submission itself still refuses to proceed on an unrecognized county. The check makes the reason visible early rather than changing whether the filing can go ahead.
 
 Credit counseling recency was held back from the first release and has since been switched on — see [Certificate recency before filing](./abacus-credit-counseling.md) for what it reports. The remaining checks — Social Security number completeness, fee-waiver and installment applications, and prior-discharge advisories — are still turned off and are planned for later releases. The review catches a specific set of problems; it is not a substitute for reviewing the packet.
 
@@ -128,6 +219,8 @@ Court electronic filing systems (CM/ECF) reject PDFs that contain editable layer
 
 Some documents are required by a district's rules and must not be dropped from the petition before filing. When you prepare a petition, any document the district marks as required is pre-checked and **locked** in the document list — it shows a **Required for filing** note and cannot be unchecked or removed, and range-selection skips over it. This prevents a required document from being left out by accident. For example, Florida Middle District Chapter 7 petitions require the Creditor Matrix and the Verification of Creditor Matrix, so both are locked into the packet. Other pre-checked documents that the district does not mark as required stay freely toggleable, so you can include or exclude them as needed.
 
+**Glade's own petition output is not offered as an input.** The documents Glade compiles for the case — **Petition**, **Petition (Draft)**, **Petition for Signatures (Draft)**, and **Signature Pages** — are not selectable in the Prepare Petition document list. They are what the compile produces, not material to fold into it, and picking one built a petition containing a copy of an earlier petition. How each of these documents is filed is unchanged; only their appearance in the selection list is.
+
 Which documents a district expects, and whether each is filed inside the petition or as its own file, is configured per district and chapter by Glade. **Eastern District of Kentucky** Chapter 7 cases now include **Form 103A** — the application to pay the filing fee in installments — as its own document in the packet. It appears only when the case elects to pay the fee in installments, and not when a fee waiver is requested instead. Previously the form had no slot in the packet for that district, so filers electing installments could not include it. If your district is missing a form your court requires, contact support to have it configured.
 
 Some districts fold a form into the petition itself rather than expecting it as its own file — North Carolina Eastern Chapter 7, for example, builds Form 122A-1 and Form 2030 into the petition. Those forms have no separate slot in the packet, and Glade no longer reports them as missing documents. A compliant filing in one of these districts is no longer held up over a form that is already inside the petition. A form the district does expect as its own file is still flagged when it is genuinely absent, including a form that is both built into the petition and filed separately.
@@ -150,7 +243,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 
 - If you navigate away from a case mid-filing, the filing continues in the background. When you return, historical events are replayed so the progress panel is up to date.
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
-- The required-fields check depends on Glade recognizing the debtor's county as written on the case. An unrecognized county spelling makes the check unavailable and blocks the filing, and cannot be worked around by re-entering the county — it needs a fix from Glade.
+- An unrecognized county is reported by the pre-filing review as a blocking item on the debtor it belongs to, with a suggestion where Glade can offer one. Correcting the address clears it. A county that is spelled correctly and still not recognized needs Glade to add it — contact support with the case and the county.
+- The court's required answers and the joint-petition rule are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
 - The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.

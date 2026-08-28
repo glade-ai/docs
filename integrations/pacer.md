@@ -50,6 +50,24 @@ Districts that list a chapter (for example, Kentucky Western — Chapter 7) only
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
 
+### When the case upload files are produced
+
+The three files the court's case upload step reads — the debtor information file, the creditor information file, and the Creditor Matrix PDF — are built **once, when the schedules questionnaire is completed**. What the attorney reviews is what is filed.
+
+- Compiling the petition uses the files as they already stand. Submitting the filing uses them as they already stand. Neither step rebuilds them.
+- To produce new files, edit the schedules questionnaire and submit it again. That is the only thing that regenerates them.
+- Previously the files were rebuilt at the moment of submission, from whatever the answers said at that instant — so a filing could go to the court as a version nobody had looked at.
+
+**A known consequence.** Editing a questionnaire that has already been completed regenerates the petition PDF but not the creditor file or the Creditor Matrix. Until the questionnaire is submitted again, those two can be behind the current answers. Re-submit the schedules questionnaire after editing a completed one if the creditor list has changed.
+
+### Negative amounts are caught before the files are built
+
+Court case upload rejects a negative dollar amount outright, which used to surface as a filing failure with nothing in it to say which figure was at fault. Glade now checks the case's currency answers first:
+
+- If any amount that the court expects to be zero or positive is negative, the filing is stopped before the files are generated and **every offending figure is named**, so all of them can be corrected in one pass rather than one failed submission at a time.
+- Three figures that are legitimately allowed to run negative are exempted and reported to the court as `0.00`: monthly net income, monthly disposable income, and sixty-month disposable income. A genuine Schedule J or means-test deficit does not block a filing.
+- The problem is reported as a specific error on the filing rather than producing an empty debtor information file, which is how it previously failed.
+
 ### Filing packet document types
 
 Each document in the filing packet must be labeled with the correct ECF document type. The document type dropdown in the filing packet lists named options for all commonly filed documents. Selecting the correct type ensures courts can identify each file — courts including FLMB and FLSB reject filings that contain unrecognized filenames.
@@ -100,11 +118,13 @@ This status appears only for Chapter 13 packets in plan-generation districts. Ot
 
 ### Attorney compensation disclosure (Form 2030)
 
-The attorney compensation amount disclosed on Form 2030 is read from the case questionnaire and carried into the filing.
+The attorney compensation amount disclosed on Form 2030 is taken from the fee recorded on the case, and falls back to the case questionnaire when the case has no fee recorded.
 
-- Glade reads the amount from whichever compensation question the case's Form 2030 actually uses. Firms are on several versions of the form, and the answer may be a currency amount, typed text (including a formatted figure such as `1,600.00`), or a choice from a list — all of these are read correctly. Previously Glade looked for the answer on a retired version of the form only, so the amount reached the court blank on every filing.
-- A fee of **$0** — pro bono representation — is carried through as zero rather than treated as unanswered.
-- If the question has not been answered, or the answer is not a readable amount, the compensation figure is left unset. In districts that require it, this blocks the filing until the question is answered on the questionnaire.
+- Glade uses the **amount the firm agreed to accept** from the case's billing details. This is the figure your team already enters when setting the case's fees, so the disclosure matches what the client was quoted without anyone re-keying it onto the questionnaire.
+- If the case carries no agreed amount, Glade falls back to the compensation question on the questionnaire. It reads the amount from whichever compensation question the case's Form 2030 actually uses. Firms are on several versions of the form, and the answer may be a currency amount, typed text (including a formatted figure such as `1,600.00`), or a choice from a list — all of these are read correctly.
+- The fallback previously had to find the answer on the same questionnaire the Form 2030 question belongs to. On most cases the fee is answered on a different questionnaire for that case, so the amount reached the court blank on the large majority of filings. Reading the case's recorded fee first closes that gap.
+- A fee of **$0** — pro bono representation — is carried through as zero rather than treated as unanswered, from either source.
+- If the case has no recorded fee and the questionnaire question has not been answered (or the answer is not a readable amount), the compensation figure is left unset. In districts that require it, this blocks the filing until the fee is recorded on the case or the question is answered on the questionnaire.
 
 ### Filing progress panel
 
@@ -239,10 +259,22 @@ When a case switches between Chapter 7 and Chapter 13 mid-workflow, the petition
 - After changing the chapter, a **"Chapter changed. Recompile to refresh the petition."** note reminds you to click **Compile** so the regenerated petition reflects the new chapter. The note clears as soon as the new petition finishes compiling.
 - If the district only supports a single chapter, or the case is already filed, the selector is read-only and shows the current chapter as a chip — you can see the chapter at a glance but cannot change it.
 
+### Chapter on a matter that holds both a Chapter 7 and a Chapter 13 workflow
+
+A matter can carry workflows for both chapters at once — most often when a case converts, and the original workflow is kept alongside the new one. Each workflow now uses **its own chapter** when Glade builds the filing packet and runs the pre-filing review.
+
+- Previously a single chapter was resolved for the whole group, so one workflow's chapter was applied to the other. A Chapter 13 workflow sitting alongside a Chapter 7 could be prepared against the Chapter 7 template for the district — pulling in Form 122A-1, which the case does not need, and offering no slot for the Chapter 13 Plan.
+- The packet preview, the filing packet checklist, and the pre-filing review all read the chapter from the workflow you are working in.
+- Submission to the court was already taking the chapter from the case's Schedules questionnaire and was not affected. It was the packet and the review that could disagree with it.
+- Closed workflows on the same matter — archived, canceled, or completed — are ignored when Glade works out which chapters a matter currently holds. A workflow that finished as a Chapter 7 no longer makes a live Chapter 13 matter look like a mixed one.
+
+Cases prepared before this was corrected are not rebuilt on their own. If a packet was assembled against the wrong chapter, recompile the petition on the affected workflow and re-run the pre-filing review.
+
 ### Required fields check before filing
 
 Before a filing can be submitted, Glade validates that all required debtor fields are present. If any are missing, the filing is blocked at both the pre-filing preview and the ECF submission modal, and the missing fields are listed by name so your team can address them before re-attempting.
 
+- **The court's own required answers are checked in the pre-filing review too.** The answers the court asks for when a case is opened — nature of debts, fee treatment, prior filings, estimated creditors, assets and liabilities, county, marital filing status, and the means-test presumption — are evaluated as part of the pre-filing review, each as its own named item. A gap that used to appear only once a submission was already under way is now visible in the review panel beforehand. What each district asks for differs, so the items you see reflect the case's own court. See [Pre-filing review](./efiling.md#pre-filing-review).
 - The **credit counseling completion date** is no longer part of this check. A Chapter 7 or Chapter 13 filing is no longer stopped because that date is absent from the case questionnaire — firms whose Schedules questionnaire does not ask for it can file with the certificate itself as the record of completion, for individual and joint cases alike. Whether the briefing is recent enough to satisfy § 109(h) is assessed by the pre-filing review instead of by this check, so a stale certificate is raised for an attorney to review rather than blocking the filing outright with no explanation.
 - For individual Chapter 7 filings, the **marital filing status** is required. Submission is blocked if the answer is missing from the questionnaire, and the missing field is named in the eFiling error so the team can fill it before retrying. For joint Chapter 7 filings, when the questionnaire indicates the petition is filed jointly but the marital filing status answer was not provided, Glade infers "Married, filing jointly" automatically — joint Chapter 7 filings no longer fail because of an unanswered marital status question.
 - Glade checks these fields in the questionnaire data — if the information has been collected but not yet saved, save the questionnaire before initiating the filing.
@@ -250,7 +282,9 @@ Before a filing can be submitted, Glade validates that all required debtor field
   - Checks that only apply to a second debtor use the same answer. On an individual filing where nothing else on the case indicates whether it is joint or individual, those checks no longer report an unresolved second-debtor result — an individual Chapter 7 stops showing a "(Debtor 2)" line for things like a co-debtor's briefing or Social Security number.
 - Missing fields are shown with labels — for example, "Marital filing status" — so you can identify exactly what needs to be filled in. An **Open questionnaire** link in the error state takes you directly to the case questionnaire.
 - If a filing attempt fails because required fields are still missing at the point of submission, the eFiling modal names the specific missing fields so your team knows exactly what to complete before retrying.
-- **When the check itself reports a problem with the data, that problem is shown.** Some failures are not about a blank field but about a value the check cannot work with — an address whose county cannot be identified, for example. Those now appear as the specific problem to fix, in both the pre-filing warnings dialog and the submission modal. Previously any failure of this kind read as "Required-Fields Check Unavailable — retry shortly", which looked like a Glade outage and left teams retrying a filing that would never succeed until the underlying data was corrected. A genuine outage still reports as unavailable, so the two are now distinguishable.
+- **When the check itself reports a problem with the data, that problem is shown.** Some failures are not about a blank field but about a value the check cannot work with. Those appear as the specific problem to fix, in both the pre-filing warnings dialog and the submission modal. Previously any failure of this kind read as "Required-Fields Check Unavailable — retry shortly", which looked like a Glade outage and left teams retrying a filing that would never succeed until the underlying data was corrected. A genuine outage still reports as unavailable, so the two are now distinguishable.
+- **An unrecognized county no longer stops this check, or the submission.** An address whose county Glade cannot identify used to end the check with an error modal at both the pre-filing preview and the point of submission. It is now raised by the pre-filing review as its own blocking item against the debtor it belongs to, with a suggested county where one can be offered — so the case is gated in the same place as everything else that needs attention, and with something to act on. See [An unrecognized county](./efiling.md#an-unrecognized-county). The check still reports every other missing or unusable field as it did before.
+- **The same checks now also run as part of the pre-filing review.** Missing required fields appear there as a blocking item alongside the rest of the review's findings, rather than only in the dialog at submission. See [Pre-filing review](./efiling.md#pre-filing-review).
 
 ### Required documents check before filing
 
@@ -277,6 +311,8 @@ Before a filing proceeds, Glade checks whether the case already has an assigned 
 - **Soft warning** — If a recent filing attempt exists but does not meet the hard-block conditions, you can review the details and continue by checking an acknowledgment checkbox and clicking **Continue Anyway**.
 
 At the moment you click the final submit button, Glade performs a fresh check. If the status has changed to a hard-block condition while the dialog was open, the submission is blocked and you will see a toast and an updated alert banner.
+
+These three situations — an existing case number, a filing already in progress, and a recent filing attempt — are also reported by the pre-filing review, so your team sees them while working through the review rather than only when the submission dialog opens. The dialog itself behaves exactly as described above. See [Pre-filing review](./efiling.md#pre-filing-review).
 
 ### Compiling selected documents for amendments
 
@@ -318,6 +354,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 - Once a case number is assigned, Glade hard-blocks any further automated filing attempts for that case. To file again (e.g., for an amended petition), contact support or file directly in PACER.
 - Reconnecting after a credential change requires re-entering the 2FA key.
 - The claims register covers proofs of claim received from the point the feature became available. Claims filed against a case before then are not added to the register on their own — contact Glade if a case needs its earlier claims brought in.
+- The creditor information file and the Creditor Matrix are only rebuilt when the schedules questionnaire is submitted. Editing a completed questionnaire refreshes the petition PDF but leaves those two behind until the questionnaire is submitted again — see [When the case upload files are produced](#when-the-case-upload-files-are-produced).
 
 ## Related Features
 
