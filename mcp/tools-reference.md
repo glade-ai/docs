@@ -22,7 +22,7 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 
 | Tool | What it does |
 |------|-------------|
-| `persons_me` | Returns your profile and all your relationships — which creators (firms) you belong to, your teams, organizations, and agencies. This is the starting point for most queries. |
+| `persons_me` | Returns your profile and all your relationships — which creators (firms) you belong to, your teams, organizations, and agencies, plus the date your profile was created. This is the starting point for most queries. |
 
 ### Creators (Firms)
 
@@ -35,8 +35,10 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 
 | Tool | What it does |
 |------|-------------|
-| `customers_list` | Lists customers for a firm. Can be narrowed by a search term matching name, email, phone, contact phone, date of birth, or the last four digits of a Social Security number. Paginated. |
-| `customers_get` | Gets a customer's full profile including contact info and preferences. |
+| `customers_list` | Lists customers for a firm. Can be narrowed by a search term matching name, email, phone, contact phone, date of birth, or the last four digits of a Social Security number. Each customer carries the date their record was created. Paginated. |
+| `customers_get` | Gets a customer's full profile including contact info, preferences, and the date the record was created. |
+
+Because each customer now carries the date their record was created, the assistant can answer questions about clients by period — how many came in last quarter, or what the lead-source split looked like for the clients who signed up in a given year. Those questions previously came back empty because there was no date to group by.
 
 ### Cases & Workflows
 
@@ -228,8 +230,11 @@ How these are guarded:
 - **A packet is still readable where pre-filing review is switched off**, and comes back with no review attached. That is a different answer from a review that is switched on but has never been run, and the two stay distinguishable — so "not configured" is never mistaken for "reviewed and clean".
 - **Case data is not exposed over MCP.** The eFiling tools cover the packet, the district, and the review; the case's creditor and property records are not available to the assistant, so a review it runs works from the filing packet rather than from the underlying case data.
 - **Listing one person's tasks now works.** Asking for the tasks assigned to a specific team member used to fail outright, leaving the assistant with nothing but an unfiltered list of every task at the firm. If your assistant has been unable to answer "what is Sarah working on", retry it.
+- **Reading a long questionnaire's answers now works.** Asking the assistant about the answers on a full bankruptcy petition questionnaire used to fail with an upstream server error, because far more detail was being sent back than the assistant needed — the reply grew large enough on a long form that it never arrived. Only what the assistant reads is returned now: each question's label, the answer, and the choices behind a dropdown or multiple-choice answer, so a selected option still reads as its label rather than a code. Shorter questionnaires were never affected, and listing questionnaires always worked. If your assistant has failed on questions about a client's petition answers, retry them.
+- **Correcting a client's email no longer reports a failure after it saved.** Changing a client's email address through the assistant could come back as an upstream server error even though the change had already been applied — so the assistant would report a failure, try again, and leave your team unsure which state the record was in. The change now reports success. An email address already in use by someone else is still refused, and it is refused before anything is saved.
 - **Write actions are limited to the list above**, and only where your firm has them enabled. For anything else, the assistant will tell you the change needs to be made in the Glade app.
 - **Creating a report does not run it.** The assistant saves a custom report to your firm's dashboard with the columns and filters you described; open it in Glade to read the rows or export them.
+- **Grouping by date is done by the assistant, not by Glade.** Customer records carry the date they were created, but the customer tools have no date filter and no totals of their own. To answer a question about a period, the assistant reads the customers and counts them itself — which means a firm with a large client list may take several requests to answer, and a very broad question may not be answerable in one go. Narrow the question to the period you care about where you can.
 
 ## Related Features
 
