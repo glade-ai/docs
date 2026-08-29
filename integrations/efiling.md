@@ -20,7 +20,7 @@ Glade integrates with electronic court filing systems to let you submit cases di
 
 When a filing cannot be submitted, the eFiling modal explains the specific reason instead of showing a generic error, so your team knows what to address before trying again. Common reasons include missing required case information, missing required documents, a filing district that has not been set up for the case, and permission restrictions. The same explanation appears in the modal's alert and in the accompanying notification.
 
-When the required-fields check reports a problem with the case's data rather than a missing field — an address whose county cannot be identified, for example — the specific problem is named in the pre-filing warnings dialog and in the submission modal, so your team can correct the data. Previously these were reported as the check being temporarily unavailable, which read as a Glade outage and invited retries that could not succeed. See [Required fields check before filing](./pacer.md).
+When the required-fields check reports a problem with the case's data rather than a missing field — an address whose county cannot be identified, for example — the specific problem is named in the pre-filing review and in the submission modal, so your team can correct the data. Previously these were reported as the check being temporarily unavailable, which read as a Glade outage and invited retries that could not succeed. See [Required fields check before filing](./pacer.md).
 
 When a filing is blocked because the case's filing district has not been set up, a **Fix this** action appears inline. Completing the district setup from that prompt clears the block, so you can continue the submission without leaving the filing flow.
 
@@ -59,7 +59,10 @@ The following checks are active:
 | Debtor's county recognized | The county on each debtor's address is one Glade recognizes for that state | Blocking |
 | Case already has a case number | The case has not already been assigned a number by the court | Blocking |
 | A filing is already in progress | No other filing is underway on the case | Blocking |
-| District supports a joint petition | The filing district accepts joint petitions, on a case being filed jointly | Blocking |
+| District supports a joint petition | The filing district accepts joint petitions for the chapter being filed, on a case being filed jointly | Blocking |
+| Non-filing spouse accepted by the district | The district accepts a married debtor filing individually with a non-filing spouse | Blocking |
+| Presumption of abuse (Idaho) | On an Idaho Chapter 7 means-test case, the presumption of abuse is answered "no" | Blocking |
+| Court office identified | The case's division resolves to an office the court's filing system recognizes | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
@@ -94,7 +97,7 @@ Alongside the petition, Glade sends the court a data file describing the case. N
 
 #### Checks that used to appear only at submission
 
-Several warnings used to exist only in the pre-filing dialog that opens at the moment you submit. They are now review checks like any other, so they appear on the review your team works through rather than arriving as a surprise on the last click:
+Several warnings used to exist only in a dialog that opened at the moment you submit. They are now review checks like any other, so they appear on the review your team works through rather than arriving as a surprise on the last click:
 
 - **The case already has a case number**, and **a filing is already in progress on the case**, are blocking.
 - **A recent filing attempt on the case** is advisory.
@@ -102,7 +105,7 @@ Several warnings used to exist only in the pre-filing dialog that opens at the m
 - **Schedule I and J figures missing on a Chapter 7 case** is advisory. This is what feeds the surplus comparison described at the top of this page; where the figures are not there to compare, the review says so instead of the comparison silently not happening.
 - **A court notice on the case matching this client** is advisory.
 
-The dialog at submission time still behaves as it always has — see [Preventing duplicate filings](./pacer.md#preventing-duplicate-filings) for how a hard block and a soft warning differ there. What changed is that the same information is now visible earlier.
+That dialog has since been retired — see [Where pre-filing checks run](#where-pre-filing-checks-run). The distinction between a hard block and a soft warning is unchanged, and is now expressed as the blocking and advisory severities in the review; [Preventing duplicate filings](./pacer.md#preventing-duplicate-filings) describes how it applies to a repeat filing attempt.
 
 Each of these fails closed. Where a check cannot gather what it needs — the case's filing history is unreadable, for example — it reports as unresolved rather than passing, so a check with nothing to go on never quietly clears a filing.
 
@@ -171,6 +174,27 @@ Some districts do not accept joint petitions. A joint case in one of those distr
 - A joint filing in a district that does not support joint petitions is now a blocking pre-filing finding, and names the district it applies to.
 - An individual filing raises nothing — the check does not apply.
 - If Glade cannot yet tell whether the case is joint, or cannot resolve the district's rules, the check reports as unresolved rather than passing, so a joint case is never let through on an assumption.
+
+**Some districts accept joint petitions in one chapter but not another.** Whether a district takes a joint filing can depend on the chapter, so the check reads the district's rule for the chapter the case is actually being filed under rather than a single yes-or-no answer for the district.
+
+- **Pennsylvania Western** and **North Carolina Eastern** accept joint Chapter 7 petitions but not joint Chapter 13 petitions. A joint Chapter 13 case in either district is blocked at pre-filing review, where it previously passed the review and then failed at submission with a message that pointed at nothing on the case.
+- Districts with no chapter-specific rule are unchanged and continue to be treated the same way in every chapter.
+
+#### District rules that used to fail at submission
+
+Three further district requirements are now pre-filing findings rather than failures that surfaced only when a submission was already underway. Each previously cleared the review, so a firm reached **Sync to PACER** and the submission died with a generic error.
+
+- **New Mexico and a non-filing spouse.** New Mexico does not accept a married debtor filing individually with a non-filing spouse. The finding says the case cannot be e-filed in New Mexico and to contact support. It does not suggest converting the case to a joint filing — a genuine non-filing spouse is not a data-entry mistake, and switching to joint would be the wrong correction.
+- **Idaho and the presumption of abuse.** Idaho requires the presumption of abuse to be answered "no" on a Chapter 7 case that completes the means test. A case answering otherwise is blocked at review.
+- **A division that does not resolve to a court office.** The court's filing system identifies the office handling the case from the case's division. Where the division is missing or does not map to an office, the filing is blocked at review, naming the problem, instead of failing during submission. Idaho and **Florida Northern** are the districts where this arises in practice; set the case's division to clear it.
+
+### Where pre-filing checks run
+
+Every pre-filing rule lives in the pre-filing review. There is no longer a separate set of warnings computed at the moment you submit that could disagree with what the review reported.
+
+- The review is the single place a filing is gated. A filing blocked by a rule is stopped at submission with the specific rules that failed, named — so a case that passes the review passes for the same reasons at submit time.
+- The older dialog that raised its own required-field warnings on the last click has been removed, along with the duplicate rules behind it. Nothing your team relied on is no longer checked; the same conditions are enforced, in one place, and visible earlier.
+- An unrecognized county is one of these. It is now reported by the review and, if you submit anyway, refused at submit time naming the county lookup as the rule that failed.
 
 #### A county the court's filing system does not recognize
 
@@ -245,6 +269,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
 - An unrecognized county is reported by the pre-filing review as a blocking item on the debtor it belongs to, with a suggestion where Glade can offer one. Correcting the address clears it. A county that is spelled correctly and still not recognized needs Glade to add it — contact support with the case and the county.
 - The court's required answers and the joint-petition rule are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
+- Whether a district accepts a joint petition is now answered per chapter. A district's general joint-petition setting still applies wherever no chapter-specific rule has been recorded for it, so a district that blocks joint filings in only one chapter needs that rule recorded before the review can tell the difference — contact support if a district's joint-filing behavior does not match its local rules.
+- The New Mexico non-filing-spouse rule blocks the filing and cannot be cleared on the case. Contact support for a case in that position rather than converting it to a joint filing.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
 - The petition signature check needs the compiled petition to be available. If the petition cannot be read, the check reports Inconclusive rather than passing or failing.
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
