@@ -131,6 +131,28 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 
 This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures, or the YTD period method, to the means test instead; see [Document Collection](./document-collection.md).
 
+### Long-Form Means Test Deductions
+
+The means test deduction lines — taxes, involuntary deductions, life insurance, court-ordered payments, health care and HSA contributions, and (on Chapter 13) mandatory retirement — are calculated from the paystubs on the case instead of being typed in by hand. The figures reach the deduction lines of **Form 122A-2** (Chapter 7) and **Form 122C-2** (Chapter 13).
+
+- The amounts are worked out from the same paystubs the organizer already holds, averaged by month the way Schedule I figures are. Records excluded from the means test, and non-means-test income such as Social Security, are left out.
+- Figures appear on the forms after the organizer recalculates. Adding a paystub or correcting one and recalculating brings the deduction lines with it.
+- This is separate from the current monthly income calculation that fills Forms 122A-1 and 122C-1. That calculation is unchanged; the deduction lines are what is new.
+- **Mandatory retirement is counted once.** It is applied to the deduction line for it and is not also subtracted further down the Chapter 13 form, so disposable income is not reduced twice for the same contribution.
+- On the questionnaire, these fields name the long form means test calculator as their source. Overriding one by hand sticks through later recalculations — see [Questionnaires](./questionnaires.md).
+
+Lines the paystubs cannot answer are left blank rather than filled with `$0.00`, so a line you still need to answer is visibly unanswered instead of reading as a zero somebody meant.
+
+### Two Paystubs With the Same Pay Date
+
+A client can have more than one distinct paystub carrying the same pay date — a regular check plus a bonus, or a correction issued the same day. All of them are kept.
+
+- Each uploaded document appears as its own row. Previously only one of them survived, and the others stayed in the queued-for-analysis bucket indefinitely even though Glade had already read them.
+- Because the row that survived was picked afresh on each load, Schedule I figures could change on their own from one refresh to the next. They no longer do.
+- Re-reading the same document still updates its existing row rather than adding a second one, so a re-upload or a re-run of the extraction does not double a month.
+
+If your team has an organizer where paystubs stayed stuck on **Queued for analysis** after extraction finished, re-open it — the affected stubs appear as ordinary rows, and the month's Schedule I figure should be re-checked, since it was previously calculated from only one of them.
+
 ### Chapter 7 Median Income Screen
 
 The median income screen compares the client's annualized current monthly income directly against the household median income for their state and family size — deductions are not subtracted from this comparison. The result is shown clearly:
@@ -243,6 +265,10 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - Switching a new income organizer's results through to the Schedule I and Means Test questionnaire happens automatically only for organizers created from this point on. Older organizers are not switched on retroactively.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 - **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
+
+- The long-form means test deduction lines are calculated for the household as a whole, which is what Forms 122A-2 and 122C-2 ask for. They are not broken out per debtor on the forms.
+- Deduction lines the paystubs do not answer are left blank. A blank line is not a calculated zero — check it against the case before filing.
+- Deduction figures appear only after the organizer recalculates. An organizer that has not been recalculated since these lines existed shows them empty; recalculate it to fill them.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
 

@@ -382,6 +382,8 @@ The Schedule I and Means Test lines the Income Organizer calculates are handled 
 - Because these figures are calculated rather than stored on the case record, the re-run control replaces the case data view on them — there is no case record entry behind the line to open.
 - Ordinary case data sync fields are unchanged: editing one still leaves it on case data with the usual revert option.
 
+The deduction lines on the long-form means test — Form 122A-2 (Chapter 7) and Form 122C-2 (Chapter 13) — name the **long form means test calculator** as their source, separately from the current monthly income lines on Forms 122A-1 and 122C-1, which name the means test calculator. The two are different calculations and reading which one filled a line matters when you are checking a figure against the paystubs. These lines previously read **Synced with case data**, which pointed at a case record entry that does not exist for them. A figure you type over on one of them reads **Manually overridden** and still names the calculator behind it, and **Re-run** behaves as it does on the other calculator lines.
+
 #### Autofills From Reference Data
 
 Some autofills fill a field from reference data Glade already holds for the case rather than from a document or an AI inference — the IRS standard deduction amounts on the Chapter 7 means test (Form 122A-2) are the common example.
@@ -509,6 +511,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
+- **District of Colorado** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 3015-1.1, on the same terms — available from the calculator, built from the district's own recorded figures, with no per-firm setting to switch on. Colorado's plan form has sections the calculator does not work out for you; fill those in from the plan calculator's own inputs before finalizing, as they print blank otherwise.
 
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
@@ -895,13 +898,16 @@ Before you apply anything, the **Get back in sync** preview shows what would cha
 
 **Compare case data** is a manual action you can run at any time on the bankruptcy schedules questionnaire. It compares the whole questionnaire against the whole case record, rather than only what has drifted, and it includes rows the questionnaire has omitted.
 
+You reach it from the questionnaire's three-dot menu — the same menu that holds the questionnaire's other actions — on an in-progress Glade questionnaire. It is offered alongside **Disable case data sync**, described under [Turning sync off for one questionnaire](#turning-sync-off-for-one-questionnaire).
+
 - Each difference is listed as one of: **only in the case record**, **only in the questionnaire**, **the two hold different values**, or **omitted on the questionnaire but present in the case record**.
-- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row.
+- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row. **Use case data** is preselected on every row, so applying without changing anything takes the case record's version throughout; switch the rows you want to keep from the form before applying.
+- Creditors that came from a credit report and never reached the form are listed here, as are creditors the questionnaire has marked omitted. These are the two that the out-of-sync banner hides.
 - Taking **Use case data** on an omitted row brings that row back onto the form, so a creditor list that appeared short fills out to match the case record's creditors.
 - After you apply, syncing is turned back on and the questionnaire is marked as in sync.
 - The out-of-sync banner and its **Get back in sync** preview are unchanged. Use **Compare case data** when you suspect a difference the banner is not reporting; use the banner when it appears.
 
-> TODO: Confirm where **Compare case data** appears in the questionnaire — header action or overflow menu — and whether it is limited to team members with edit permission.
+> TODO: Confirm whether **Compare case data** is limited to team members with edit permission.
 
 ### Editing a Completed Questionnaire After the Petition Is Drafted
 

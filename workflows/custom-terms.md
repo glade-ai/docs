@@ -34,6 +34,17 @@ Two kinds of value are deliberately left alone, because **Edit details** cannot 
 - Context values that name a person, and those chosen from a fixed list — a case type, for example.
 - A detail that feeds more than one context value on the same workflow. Neither is changed rather than Glade guessing which one you meant, so those keep their existing values.
 
+### Printing an agreement for wet-ink signing
+
+A firm can produce a complete, unsigned copy of a client's agreement to print and sign in ink, before the client has signed anything electronically. The copy carries the firm's letterhead and every detail filled in — the retainer amount, the fee, the attorney's name — exactly as the client would see it, with the signature lines left blank.
+
+- The signature blocks print as empty ruled **By** and **Name** lines. They are not filled with the attorney's or client's name, and no handwritten signature image appears, so nothing on the page suggests it has already been signed.
+- **Producing this copy does not sign, complete, or alter the agreement.** The client-facing e-signature step is untouched, the agreement stays unsigned, and the copy is not recorded as the executed document. If the client goes on to sign electronically, that produces the executed agreement as normal.
+- It is available only while the agreement is still awaiting signature and has already been generated for the client. An agreement that has been signed, one that was skipped, and one that has not been generated yet cannot produce this copy.
+- It is available to your firm's team members. Clients cannot produce it.
+
+> TODO: Confirm where this action appears on the agreement and the file name the downloaded copy is given.
+
 ### Who signs a manual-signature agreement
 
 When an agreement is set to be signed by an attorney and you assign attorneys through **Assign collaborators**, the signature and its accompanying task go to the **first attorney in the list you assigned**. If an attorney who was already the signatory is still among those assigned, they stay the signatory. Assigning no attorney at all clears the signatory as before.
