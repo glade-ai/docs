@@ -427,6 +427,8 @@ The Schedule I and Means Test lines the Income Organizer calculates are handled 
 - Because these figures are calculated rather than stored on the case record, the re-run control replaces the case data view on them — there is no case record entry behind the line to open.
 - Ordinary case data sync fields are unchanged: editing one still leaves it on case data with the usual revert option.
 
+The deduction lines on the long-form means test — Form 122A-2 (Chapter 7) and Form 122C-2 (Chapter 13) — name the **long form means test calculator** as their source, separately from the current monthly income lines on Forms 122A-1 and 122C-1, which name the means test calculator. The two are different calculations and reading which one filled a line matters when you are checking a figure against the paystubs. These lines previously read **Synced with case data**, which pointed at a case record entry that does not exist for them. A figure you type over on one of them reads **Manually overridden** and still names the calculator behind it, and **Re-run** behaves as it does on the other calculator lines.
+
 #### Autofills From Reference Data
 
 Some autofills fill a field from reference data Glade already holds for the case rather than from a document or an AI inference — the IRS standard deduction amounts on the Chapter 7 means test (Form 122A-2) are the common example.
@@ -577,6 +579,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - **Eastern District of Washington** cases can generate a Chapter 13 plan on the district's Local Form 2083. As with the other plan-generation districts, the form is available from the calculator and there is no per-firm setting to switch on. Two points need checking by hand on this district's form until they are resolved:
   - **A contract the debtor is assuming but paying directly has nowhere correct to go.** Local Form 2083 pays assumed contracts through the trustee, and the form treats a contract not listed as assumed as rejected — whether or not it appears anywhere else on the plan. Choosing to assume a contract while paying it outside the plan therefore does not say what you mean on this form. Review any such contract before filing.
   - The district's **no-look attorney fee cap and trustee fee percentage** are still the national defaults rather than figures recorded for this district. The fee cap prints on the plan and is what the plan's attorney-fee section is checked against, so confirm both before relying on a generated plan.
+- **District of Colorado** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 3015-1.1, on the same terms — available from the calculator, built from the district's own recorded figures, with no per-firm setting to switch on. Colorado's plan form has sections the calculator does not work out for you; fill those in from the plan calculator's own inputs before finalizing, as they print blank otherwise.
 
 > TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
 
@@ -973,13 +976,16 @@ Before you apply anything, the **Get back in sync** preview shows what would cha
 
 **Compare case data** is a manual action you can run at any time on the bankruptcy schedules questionnaire. It compares the whole questionnaire against the whole case record, rather than only what has drifted, and it includes rows the questionnaire has omitted.
 
+You reach it from the questionnaire's three-dot menu — the same menu that holds the questionnaire's other actions — on an in-progress Glade questionnaire. It is offered alongside **Disable case data sync**, described under [Turning sync off for one questionnaire](#turning-sync-off-for-one-questionnaire).
+
 - Each difference is listed as one of: **only in the case record**, **only in the questionnaire**, **the two hold different values**, or **omitted on the questionnaire but present in the case record**.
-- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row.
+- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row. **Use case data** is preselected on every row, so applying without changing anything takes the case record's version throughout; switch the rows you want to keep from the form before applying.
+- Creditors that came from a credit report and never reached the form are listed here, as are creditors the questionnaire has marked omitted. These are the two that the out-of-sync banner hides.
 - Taking **Use case data** on an omitted row brings that row back onto the form, so a creditor list that appeared short fills out to match the case record's creditors.
 - After you apply, syncing is turned back on and the questionnaire is marked as in sync.
 - The out-of-sync banner and its **Get back in sync** preview are unchanged. Use **Compare case data** when you suspect a difference the banner is not reporting; use the banner when it appears.
 
-> TODO: Confirm where **Compare case data** appears in the questionnaire — header action or overflow menu — and whether it is limited to team members with edit permission.
+> TODO: Confirm whether **Compare case data** is limited to team members with edit permission.
 
 ### Editing a Completed Questionnaire After the Petition Is Drafted
 

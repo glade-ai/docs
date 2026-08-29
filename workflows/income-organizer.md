@@ -131,6 +131,28 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 
 This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures, or the YTD period method, to the means test instead; see [Document Collection](./document-collection.md).
 
+### Long-Form Means Test Deductions
+
+The means test deduction lines — taxes, involuntary deductions, life insurance, court-ordered payments, health care and HSA contributions, and (on Chapter 13) mandatory retirement — are calculated from the paystubs on the case instead of being typed in by hand. The figures reach the deduction lines of **Form 122A-2** (Chapter 7) and **Form 122C-2** (Chapter 13).
+
+- The amounts are worked out from the same paystubs the organizer already holds, averaged by month the way Schedule I figures are. Records excluded from the means test, and non-means-test income such as Social Security, are left out.
+- Figures appear on the forms after the organizer recalculates. Adding a paystub or correcting one and recalculating brings the deduction lines with it.
+- This is separate from the current monthly income calculation that fills Forms 122A-1 and 122C-1. That calculation is unchanged; the deduction lines are what is new.
+- **Mandatory retirement is counted once.** It is applied to the deduction line for it and is not also subtracted further down the Chapter 13 form, so disposable income is not reduced twice for the same contribution.
+- On the questionnaire, these fields name the long form means test calculator as their source. Overriding one by hand sticks through later recalculations — see [Questionnaires](./questionnaires.md).
+
+Lines the paystubs cannot answer are left blank rather than filled with `$0.00`, so a line you still need to answer is visibly unanswered instead of reading as a zero somebody meant.
+
+### Two Paystubs With the Same Pay Date
+
+A client can have more than one distinct paystub carrying the same pay date — a regular check plus a bonus, or a correction issued the same day. All of them are kept.
+
+- Each uploaded document appears as its own row. Previously only one of them survived, and the others stayed in the queued-for-analysis bucket indefinitely even though Glade had already read them.
+- Because the row that survived was picked afresh on each load, Schedule I figures could change on their own from one refresh to the next. They no longer do.
+- Re-reading the same document still updates its existing row rather than adding a second one, so a re-upload or a re-run of the extraction does not double a month.
+
+If your team has an organizer where paystubs stayed stuck on **Queued for analysis** after extraction finished, re-open it — the affected stubs appear as ordinary rows, and the month's Schedule I figure should be re-checked, since it was previously calculated from only one of them.
+
 ### Chapter 7 Median Income Screen
 
 The median income screen compares the client's annualized current monthly income directly against the household median income for their state and family size — deductions are not subtracted from this comparison. The result is shown clearly:
@@ -262,6 +284,9 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 
 - Only a limited number of businesses get their own per-business attachment detail on Schedule I. A debtor holding more than that still gets a correct business income total; the individual breakdowns beyond the limit are not carried onto the form. Contact Glade if a case needs more.
 - Business and rental sources that were on a case before profit & loss statements were supported are brought across by a one-off setup Glade runs. Contact Glade if an older source has no place to upload its statements.
+- The long-form means test deduction lines are calculated for the household as a whole, which is what Forms 122A-2 and 122C-2 ask for. They are not broken out per debtor on the forms.
+- Deduction lines the paystubs do not answer are left blank. A blank line is not a calculated zero — check it against the case before filing.
+- Deduction figures appear only after the organizer recalculates. An organizer that has not been recalculated since these lines existed shows them empty; recalculate it to fill them.
 
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
 
