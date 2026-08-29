@@ -26,9 +26,12 @@ Glade does not host video sessions itself. All video functionality depends on th
 
 ### Joining a video consultation
 
-- **Clients** see a "Join" button on their booking card in the client portal. Clicking it opens the meeting link in a new browser tab.
+- **Clients** see a labelled **Join meeting** button in three places in the client portal: on the portal home when a meeting is today, in the **Coming up** card, and on the meeting's own card under the meeting title. Clicking any of them opens the meeting link in a new browser tab.
 - **Firm members** see an "Open meeting link" or "Join Meeting" button on the booking detail page in the dashboard.
 - Both parties are taken to the video platform's native interface (Google Meet or Microsoft Teams), where standard video call features are available.
+- Where a booking has no meeting link, the portal shows a **View meetings** link to the client's bookings page instead, and the meeting card shows no join button. Nothing on the page suggests a link that is not there.
+
+For a period the client-side button was missing: it was shown only to firm members, and in the redesigned portal the only way in was an unlabelled row in the **Coming up** card. Clients in that position had to find the meeting link in their calendar invite email instead. The button is present on all three surfaces again.
 
 ### When meeting links appear
 
@@ -81,7 +84,8 @@ Glade does not host video sessions itself. All video functionality depends on th
 
 ## Edge Cases & Limitations
 
-- Video links are only generated if the firm has a connected calendar provider (Google or Outlook). Without a connected calendar, no meeting link is created even if the product has video enabled.
+- Video links are only generated if the firm has a connected calendar provider (Google or Outlook). Without a connected calendar, no meeting link is created even if the product has video enabled. Bookings in that state show **View meetings** in the client portal rather than a join button.
+- A client with several active matters may be taken past the portal home to their case, in which case the **Meetings** tab is where their bookings and join buttons are. The home page's meeting surfaces are not the only route in, but they are the most direct one.
 - If the connected calendar's OAuth token expires, new bookings may not generate meeting links until the calendar is reconnected.
 - There is no in-app video interface. Users are always redirected to the external video platform.
 - Recording, waiting room, and admission controls are managed entirely by the video platform, not by Glade.
