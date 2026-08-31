@@ -31,6 +31,10 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 - Customers are matched by email address. If a customer with the same email already exists in QuickBooks, Glade reuses that record rather than creating a new one.
 - Customer name and email are synced.
 - A customer must have an email address in Glade to sync to QuickBooks.
+- **A name QuickBooks already has in use no longer costs you the payment.** QuickBooks requires a unique name across all of its customers, vendors, and employees, so a client whose name already appears there — often a namesake with a different email address, or no email at all — could not be created. Two things now happen instead of the sync giving up:
+  - If the record already in QuickBooks has the **same email address** as the Glade client, Glade links to that record rather than trying to create a second one. Inactive records are checked too, so a client archived in QuickBooks is reused rather than duplicated.
+  - If the email is different, Glade creates the client under a distinguishing name — their name followed by their email address — so a genuinely different person with the same name still reaches your books.
+- Previously a name collision stopped the whole payment sync for that client and the payment was never pushed to QuickBooks. There was nothing on screen to say so, and firms lost a handful of payments a month this way, typically noticing only at reconciliation. **Payments missed before this was corrected are not synced retroactively** — enter them in QuickBooks by hand. Use the [QuickBooks Ledger report](#quickbooks-ledger-report) to identify which Glade payments have no QuickBooks record.
 - When **Invoice sync timing** is set to "On First Payment", customers are not pushed to QuickBooks when they are created or updated in Glade. Instead, the customer record is created in QuickBooks only when their first payment is processed. This ensures customers appear in QuickBooks at the same time as their first invoice and payment, keeping the books clean for firms that use cash-basis accounting. If a customer already has a payment recorded in QuickBooks (their first payment has been processed), subsequent updates to their name, email, or phone in Glade still sync immediately.
 
 ### Invoice sync
@@ -115,7 +119,7 @@ Invoice line item amounts are rounded to the nearest cent before being sent to Q
 - One-way sync only — changes made in QuickBooks (editing an invoice, adding a payment) do not flow back to Glade.
 - One QuickBooks company per Glade account — connecting a different company requires disconnecting first.
 - Customers without an email address in Glade cannot sync to QuickBooks.
-- Customers are matched by email only — if the same person has different emails in Glade and QuickBooks, a duplicate may be created.
+- Customers are matched by email only — if the same person has different emails in Glade and QuickBooks, a duplicate may be created. Where the name is also already in use, that duplicate carries the client's email address in its display name, which is what allows it to exist alongside the original. Merging the two records is done in QuickBooks.
 - Payments are written once to QuickBooks and never updated afterward — refunds create separate records.
 - Line items sync against the configured service item; if that item is later deleted in QuickBooks, Glade automatically clears the stale setting and falls back to QuickBooks' default item on the next sync.
 - Customer address and phone number do not sync — only name and email.
