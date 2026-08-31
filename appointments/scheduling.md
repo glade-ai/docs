@@ -14,6 +14,7 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - Products can enable or disable automatic video conference link generation.
 - Products can set a concurrent booking limit, which controls how many overlapping bookings are allowed in the same time slot. The default is 1.
 - A custom confirmation message can be configured per product and is shown to clients after booking.
+- Each appointment type can be given a calendar color, used to tint its bookings on the firm's booking calendar. See [Color-coding appointment types on the calendar](#color-coding-appointment-types-on-the-calendar).
 
 ### Defining availability
 
@@ -96,6 +97,18 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - **Block this Time** applies to the team member currently selected, rather than always to the appointment type's default assignee. Check who is selected before blocking time.
 - The Team view's team member filter lists every member of the firm, including people with no appointments booked. Previously anyone without a booking dropped out of the filter entirely, so they could not be selected.
 - Once you have picked a team member by hand, that choice stays put — a change to the appointment type's default assignee, or bookings reloading in the background, does not switch the view away from the person you chose.
+
+### Color-coding appointment types on the calendar
+
+Each appointment type can be given a color. Bookings of that type are tinted with it on the firm's booking calendar, so the calendar shows at a glance which kind of appointment each block is — a consultation, a signing, a status check-in.
+
+- The color is set on the appointment type itself, alongside its other settings, and applies to every booking of that type.
+- Your firm picks the colors. No color carries a fixed meaning and there is no preset mapping, so choose whatever scheme matches how your team reads the calendar.
+- **The color follows the appointment type, not the team member.** Two appointment types assigned to the same person show as two colors; one appointment type spread across several team members shows as one.
+- Appointment types have no color until you set one, so a firm that has not chosen colors sees the calendar exactly as before. Clearing a color returns that type's bookings to the standard appearance.
+- This is a display setting. It does not affect availability, booking rules, assignment, or reminders.
+
+> TODO: Confirm where the color is chosen in the dashboard, whether a palette is offered or any color can be picked, and whether the color appears anywhere other than the booking calendar.
 
 ### Rescheduling
 
@@ -206,6 +219,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Custom confirmation message | Message shown to the client after booking is confirmed. |
 | Availability patterns | Days of the week and start/end times, configured per team member. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
+| Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
 
 ## Edge Cases & Limitations
 
@@ -220,6 +234,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
+- Calendar colors are read from the appointment type each time the calendar is drawn, so changing a color re-tints that type's existing bookings as well as new ones. There is no way to color one booking differently from others of the same type.
 
 ## Related Features
 
