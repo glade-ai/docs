@@ -39,6 +39,28 @@ An internal note can be edited after it is posted. While you are editing:
 
 Writing a new note is unchanged — Enter has always added a line there.
 
+(Notes on a client's profile — the **Internal Notes** tab on the client record — are a separate feature with their own rules. See [Notes](notes.md).)
+
+#### Who can edit or delete an internal note
+
+- The person who wrote an internal note can always edit or delete it.
+- **A firm administrator can also edit or delete an internal note written by anyone else at the firm.** This covers the two situations firms actually run into: tidying a note left behind by someone who has since left the firm, and clearing a note filed on the wrong case. Previously only the author could touch a note, so a note from a departed colleague could not be corrected or removed by anybody.
+- **This applies to internal notes only.** A client-facing comment can still only be edited or deleted by the person who wrote it. An administrator cannot rewrite or remove a colleague's message to a client — rewriting something the client has already read is a different act from tidying an internal record, and it is deliberately not permitted.
+- Administrator access is scoped to the firm that owns the case. It gives no access to another firm's notes.
+- The Edit and Delete controls appear only where you can actually use them, so what is offered matches what is allowed.
+
+### Stopping an AI reply while it is being written
+
+An AI reply can be stopped part-way through, and stopping it now stops the work behind it rather than only the text on screen.
+
+- The reply halts as soon as you stop it. The assistant does not go on to take further action on the case — it will not book an appointment, raise an invoice, or send a message after you have stopped it.
+- **Nothing arrives after you stop.** Previously the assistant kept running in the background: it could continue carrying out actions and then post its finished reply into the conversation moments later, so a message you had cancelled turned up anyway. Because the assistant can act on the case and not only write, a stop that did not stop was the more serious half of this.
+- The portion of the reply already written stays in the conversation, matching what was on screen at the moment you stopped, so a useful partial answer is not thrown away.
+- **One limit.** An action the assistant had already begun when you stopped it may still finish. Stopping reliably prevents anything *further*, but a step already under way cannot be pulled back. Check the case if you stopped a reply mid-action.
+- A reply that stops on its own because it has taken too long behaves the same way, and is not treated as an error.
+
+> TODO: Confirm which surfaces offer the stop control and how it is labeled, and whether a client chatting from the portal can stop a reply as well as a team member.
+
 ### Case discussions stay with their own case
 
 A reply you post in a case discussion is always filed against the case open in front of you.
@@ -61,6 +83,9 @@ None of this changes how you write or read a discussion on the case you are work
 - Lead conversations are those where the client has fulfilled all associated purchases and subscriptions.
 - When a client is archived, their conversations with your firm are also archived.
 - Case-specific conversations (internal team discussions about a case) are separate from client-facing conversations.
+- A firm administrator's ability to edit and delete other people's messages covers internal notes only. There is no way for anyone other than the author to change a client-facing comment.
+- A note whose author has left the firm can now be edited or deleted, but only by an administrator. Other team members still cannot.
+- Stopping an AI reply cannot undo an action the assistant had already started. If a duplicate booking or invoice appears after a stop, that action was already in progress and needs to be removed by hand.
 
 ## Related Features
 
