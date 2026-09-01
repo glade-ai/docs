@@ -67,6 +67,9 @@ Court case upload rejects a negative dollar amount outright, which used to surfa
 - If any amount that the court expects to be zero or positive is negative, the filing is stopped before the files are generated and **every offending figure is named**, so all of them can be corrected in one pass rather than one failed submission at a time.
 - Three figures that are legitimately allowed to run negative are exempted and reported to the court as `0.00`: monthly net income, monthly disposable income, and sixty-month disposable income. A genuine Schedule J or means-test deficit does not block a filing.
 - The problem is reported as a specific error on the filing rather than producing an empty debtor information file, which is how it previously failed.
+- **On a Chapter 13 case, the Chapter 7 means-test income figures are ignored.** Chapter 13 questionnaires still carry the Chapter 7 means test (Form 122A-1) alongside the Chapter 13 one (Form 122C-1), and a debtor with a net business loss can drive the Chapter 7 per-debtor income line below zero. That figure is not the case's current monthly income on a Chapter 13 — the Chapter 13 form supplies it — so it is reported as `0.00` and no longer stops the debtor information file being built. Chapter 7 cases are unchanged: a negative figure on that line still stops the filing, because the court would reject it.
+
+A Chapter 13 case that previously failed this way produced everything except the debtor information file, since the other documents are generated independently. The file is not created retroactively — **regenerate the case's documents** to produce it.
 
 ### Filing packet document types
 
