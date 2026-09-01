@@ -24,7 +24,7 @@ Case management is the core back-office feature that lets your firm track client
   - **Petition Check** — when a Petition Check is run, the log records it along with which required fields were still missing, so you can see when the case was validated and what was outstanding at the time.
   - **Case document generation** — when a case document is generated, the log records that the document was created.
   - **PACER filing** — when a case is successfully filed with PACER, the log records "Filed case with PACER" so the filing is part of the case's audit trail.
-  - **Creditors omitted from or restored to the creditor matrix** — when a creditor is left off the creditor mailing matrix, or put back on it, the log records which creditor it was and which team member made the change, so the decision has a name and a date against it.
+  - **Creditors omitted from or restored to the creditor matrix** — when a creditor is left off the creditor mailing matrix, or put back on it, the log records which creditor it was and which team member made the change, so the decision has a name and a date against it. The entry reads **Omitted from creditor matrix** or **Restored to creditor matrix**, with the creditor's name beside it. These entries record a decision rather than a step someone worked through, so they carry no action of their own and show a dash in that column. The case overview's Recent Activity panel uses the same wording — for example, "Dana omitted Midland Funding from the creditor matrix."
 
   These entries are deduplicated, so repeating the same action (for example, re-running a Petition Check or retrying a filing submission) does not clutter the log with duplicate entries.
 
@@ -48,7 +48,7 @@ Case management is the core back-office feature that lets your firm track client
 - Custom statuses are free-text values, so entering an unrecognized status name does not produce an error. Make sure status names match exactly.
 - Removing a repeatable item (e.g., a creditor) hides it from views but preserves its data history for audit purposes. It is not permanently deleted.
 - Clearing a field value creates a new history entry rather than erasing previous values, so the full edit history is always retained.
-- Creditor matrix entries in the activity log may appear with an unformatted label until the display text for them is finished. The creditor named on the entry and the team member it is attributed to are correct.
+- Creditor matrix entries recorded before their wording was added to the activity log still read as a questionnaire completion, showing the questionnaire's name in place of the creditor's. The creditor and the team member behind those older entries were recorded correctly and are unchanged; only how they read in the log was wrong. Entries recorded from this point on read as described above.
 - Because creditor matrix entries are written when the schedules questionnaire is completed, a checkbox ticked and then unticked before completion leaves no entry — the log records the state the matrix was compiled with, not every intermediate change.
 - The previous status of a case is only recorded when a status change occurs. Newly created cases do not have a previous status.
 
