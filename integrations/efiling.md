@@ -63,6 +63,7 @@ The following checks are active:
 | Non-filing spouse accepted by the district | The district accepts a married debtor filing individually with a non-filing spouse | Blocking |
 | Presumption of abuse (Idaho) | On an Idaho Chapter 7 means-test case, the presumption of abuse is answered "no" | Blocking |
 | Court office identified | The case's division resolves to an office the court's filing system recognizes | Blocking |
+| An attorney is assigned to file | The case has a filing attorney, either assigned on the case or set as the firm's default | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
@@ -87,6 +88,18 @@ Glade files cases for individual debtors. A case recorded as a corporation or a 
 
 - A debtor type Glade does not recognise at all is not treated as unsupported — the check reports itself as unresolved rather than blocking a case over an entry it cannot read.
 - This is a check on what Glade can file today, not on the court's own rules. Districts that begin accepting other debtor types will be enabled individually.
+
+#### An attorney is assigned to file
+
+A case can be prepared with the attorney left as **None**, and nothing used to stop it being submitted that way. On a firm whose account files for more than one attorney, the court's filing system then asks who the filing is for and the submission fails at that point — late, and with nothing on the case to say what was missing.
+
+The review now checks this up front and blocks submission until an attorney is resolved.
+
+- The check passes when an attorney is **assigned to the case**, or when your firm has a **default filing attorney** set. A solo firm with a default set continues to pass without assigning anyone case by case.
+- It applies to Chapter 7 and Chapter 13 alike, in every district.
+- This check fails closed. If Glade cannot determine your firm's default filing attorney, the case is blocked rather than allowed through, so a filing is never released on an unanswered question about who is filing it.
+
+Firms that file for several attorneys should confirm that cases carry an assignment, or that a default is set, before the next filing — a case with neither is blocked from this point on where it previously reached the court and failed there.
 
 #### Negative amounts on the case-upload data
 
