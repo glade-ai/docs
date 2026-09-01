@@ -509,6 +509,11 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
+- **Eastern District of Washington** cases can generate a Chapter 13 plan on the district's Local Form 2083. As with the other plan-generation districts, the form is available from the calculator and there is no per-firm setting to switch on. Two points need checking by hand on this district's form until they are resolved:
+  - **A contract the debtor is assuming but paying directly has nowhere correct to go.** Local Form 2083 pays assumed contracts through the trustee, and the form treats a contract not listed as assumed as rejected — whether or not it appears anywhere else on the plan. Choosing to assume a contract while paying it outside the plan therefore does not say what you mean on this form. Review any such contract before filing.
+  - The district's **no-look attorney fee cap and trustee fee percentage** are still the national defaults rather than figures recorded for this district. The fee cap prints on the plan and is what the plan's attorney-fee section is checked against, so confirm both before relying on a generated plan.
+
+> TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
 
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
@@ -699,6 +704,14 @@ When the signature confirmation modal appears at submission time, you have three
 - **Sign** — apply or confirm the signature and submit.
 - **Skip** — submit while keeping any signature values that were already entered in the questionnaire. Use this when you have manually typed signatures earlier and want them preserved on the saved draft or PDF.
 - **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
+
+#### Where the names on generated signatures come from
+
+When signatures are generated for a bankruptcy schedules questionnaire, each signer's typed name is taken from the name recorded on the case — the debtor's, the spouse's on a joint case, and the attorney's, each read as separate first, middle, and last name entries.
+
+- **Middle names now appear.** The debtor's and the spouse's names previously came from a single combined name that had nowhere to hold a middle name, so a middle name recorded on the case never reached their signature. The attorney's name was read from a different record again. All three signers now read from the same place.
+- Where a signer has no name recorded on the case, Glade falls back to the name it used before, so a case that was signing correctly continues to.
+- Correct a name that comes out wrong on the case record rather than on the signature itself, and the next generated signature picks it up.
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
@@ -938,6 +951,18 @@ When a questionnaire generates multiple documents — for example, filled court 
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
 
+#### Creditors are alphabetized on Schedules D and E/F
+
+When the schedules are filled, the creditors on **Schedule D** and **Schedule E/F** are put in alphabetical order by creditor name. Each part of Form 106E/F is ordered independently, so the priority creditors in Part 1 run A→Z and the nonpriority creditors in Part 2 start again at A.
+
+- Previously these schedules printed creditors in the order the rows happened to sit in the Master Creditor List, which is the order they were added. The creditors loaded from the credit report arrived alphabetically, and everything added afterwards — by hand, or from the case record — was appended to the end. A filed schedule could therefore show two or three alphabetical runs stacked on top of each other, which is the state trustees have raised with firms.
+- The **Creditor Matrix** and the creditor list sent to the court were always alphabetized and are unchanged. It was only the schedules that could disagree with them.
+- A row with no creditor name on it sorts to the bottom, so a half-filled row cannot take the first line of a schedule.
+- Only the Master Creditor List is ordered. The **others to be notified** lists on Schedule D and Schedule E/F are separate lists and are not sorted — check with your trustee whether they expect those alphabetized too.
+- Existing cases are corrected the next time the petition is generated. Nothing needs to be re-entered, and a case already filed is unaffected.
+
+The order shown in the questionnaire itself is still the order the rows were added, so the on-screen list will not match the filed schedule. The **Sort** action on the Master Creditor List reorders the stored rows if you want the two to agree.
+
 #### Keeping a creditor off the matrix but on the schedules
 
 The Master Creditor List carries an **Omit from creditor matrix** checkbox. A creditor checked this way is left out of both the **Creditor Matrix** document and the creditor list submitted to the court, while staying everywhere else it belongs — on its schedule, in case data, in the Chapter 13 calculator, and on the filled schedule PDFs.
@@ -948,7 +973,7 @@ This is for the creditor a case has to disclose but should not notice. The usual
 - A creditor checked **Omit from PDFs** is still left off the matrix, as before. Checking either one keeps the creditor off the mailing matrix.
 - Both the Creditor Matrix document and the court's creditor list honor the checkbox, so the two agree.
 
-> TODO: Confirm whether omitting a creditor from the matrix is recorded on the case activity feed. A follow-up change to log who omitted or restored a creditor was planned but is not part of this behavior yet.
+- **Omitting or restoring a creditor is recorded on the case.** The activity log names the creditor and the team member who made the change, so the decision has a name and a date against it. The entry is written when the schedules questionnaire is completed, since that is when the matrix is compiled. See [Case Management](../back-office/case-management.md).
 
 #### How duplicate entries are collapsed
 
