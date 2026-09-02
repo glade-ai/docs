@@ -137,6 +137,16 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
 - **Three failure reasons that used to show no detail now explain themselves.** A filing that stopped because the PACER login did not finish loading, because a required file was missing from the packet, or because the court site landed on a page Glade did not expect used to leave the progress detail empty and show only a generic "Case sync failed" message on the dashboard. Each of these now reports its own explanation, so your team can tell a court-site problem worth retrying from a packet problem it has to fix first. Other failure reasons were already explained and are unchanged.
 
+### Watching a filing as it runs
+
+While a filing is under way, the case's submission pane shows a live view of the court site as Glade works through it, so your team can watch what is happening rather than waiting on step labels alone.
+
+- **When the live view is not available, Glade says so.** If the connection carrying the live view drops, the pane shows a **Live preview unavailable** message. Previously the underlying browser tool's own disconnect screen was left on display, which is unbranded, means nothing to a paralegal, and looks like the filing itself has broken.
+- A short grace period covers a view that is still connecting, so opening a case at the moment a filing starts does not flash the unavailable message before the picture arrives.
+- **A screenshot of the current step is shown in preference to the live view** where one is available, so there is still something to look at when the live connection is down.
+- **A retry brings the live view back.** When a filing is re-attempted after a failure, the pane re-arms and shows the new attempt rather than staying on the previous one's ending state.
+- The live view is a window onto the filing, not the filing itself. Losing it does not stop or affect the submission, which continues to run and reports its outcome as normal. See [Filing progress panel](#filing-progress-panel) and [Status tracking](#status-tracking) for where the result appears.
+
 ### Status tracking
 
 - Submission status values: in progress, succeeded, failed, or manual (attorney filed outside Glade).
