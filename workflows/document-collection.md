@@ -37,6 +37,16 @@ Document collection enables your team to request specific files from clients as 
 - A document request can be marked as "for your team" (e.g., the attorney uploads documents) rather than for the client.
 - **Submitting a "for your team" checklist is silent by default.** When your team submits a firm-owned checklist for review, the client is not emailed and no client review task is created — useful while a petition is still being drafted or while training staff on a live case. A **Notify client** checkbox appears on the submit prompts (both the rename step and the ready-to-submit confirmation); check it when the draft is genuinely ready for the client to look at, and the client is notified and given access to review the checklist as before. Submitting silently also withdraws client review access if an earlier submission had granted it, so reopening and resubmitting silently never leaves the checklist open in the portal. Checklists assigned to clients are unaffected — submitting those notifies your team as it always has.
 
+### Adding a document after a checklist is complete
+
+A client can re-open their own completed checklist to add a document that turns up afterwards — a newer bank statement, a replacement ID, something your team asked for in a follow-up. Previously they had to message the firm and wait for a staff member to re-open it for them.
+
+- **Re-open document request** is available to the client on any completed checklist of theirs. It was previously offered only on checklists your team owns, which a client rarely sees.
+- Uploading into a completed checklist re-opens it, and the file's actions menu says so: on a completed checklist the option reads **Reopen & upload more documents** rather than **Upload more**, so the client knows before they act that the checklist is going back to your team.
+- The completion message a client sees on a finished checklist now points them at that menu, instead of offering only a link to the chat.
+- Re-opening returns the checklist to **in progress**. The client uploads, submits for review as normal, and it comes back to your team for review like any other submission.
+- **Submit for Review works immediately after a re-open.** The button used to stay stuck in a loading state for the rest of the visit once a checklist had been re-opened or completed, which broke the last step of exactly this loop — the client could re-open and upload but never submit.
+
 ### The Documents tab
 
 The Documents tab collects everything gathered on a case in one place, organized into the same sub-groups as the Document Checklist. It is available from the side panel, the full-screen view, the modal, and the document pane, and all of them show the same organization.
