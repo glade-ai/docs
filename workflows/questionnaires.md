@@ -133,6 +133,14 @@ Both forms are added to your firm's questionnaire template by Glade rather than 
 
 Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
 
+#### Business and other interests on Schedule A/B line 19
+
+Line 19 of Schedule A/B asks for the debtor's interests in businesses that are not publicly traded. The generated petition prints the **name recorded on the entry together with the brief description** entered alongside it, on the one line the form provides.
+
+Previously only the name reached the form and the brief description was dropped, so a line that had been filled in on the questionnaire printed as a bare name with no indication of what the interest actually is. Entries with no brief description print the name on its own, as before.
+
+Petitions generated before this change are not rebuilt. Re-generate the petition on a case whose line 19 entries carry a description if the filed copy should show it.
+
 ### Autofills
 
 Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses.
@@ -300,6 +308,8 @@ Previously a restore re-added the values as brand-new rows. On a master creditor
 The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
 
 The panel scrolls independently of the questionnaire content. Scrolling through the form does not move the resource panel, and scrolling the panel does not move the form.
+
+This now holds for the panel opened with **Show External Data** as well. It stays pinned in view as you work down a long form and scrolls within its own bounds. Previously that panel moved with the page, so it disappeared off the top of the screen as soon as you scrolled past the first few questions — the point at which you are most likely to want to check a figure against it. On a narrow screen the two columns stack and the panel scrolls with the rest of the page, as it always has.
 
 ### Chapter 13 Plan Calculator
 
@@ -487,6 +497,14 @@ The plan's general-unsecured section states a minimum the plan will pay to unsec
 - This applies to both the Northern District of Georgia and Northern District of Ohio plans.
 
 If your firm filed a plan with an unsecured pool ceiling set on it before this correction, check the stated minimum against what the plan actually pays.
+
+**A plan that pays nothing to unsecured creditors states the plain remainder.** On the Northern District of Georgia plan, the general-unsecured section offers two elections: pay whatever funds remain, or pay the larger of a stated dollar figure and the funds remaining. Where your firm has set a ceiling on the unsecured pool and nothing actually reaches general unsecured creditors, the plan now takes the first election.
+
+- Previously setting any ceiling took the second election regardless of amount, so a plan delivering nothing to the pool printed a promise to pay "the larger of the sum of $0.00 and the funds remaining" — a statement that says nothing and reads as an unfinished form.
+- This covers both ways the pool can come to nothing: a ceiling entered as $0, and a positive ceiling that the plan's funding never reaches.
+- Plans that do deliver a positive amount to unsecured creditors are unchanged and keep the stated-figure election.
+
+This affects the Northern District of Georgia plan only.
 
 #### Lien Avoidance and Collateral Value
 
