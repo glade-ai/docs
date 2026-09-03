@@ -176,13 +176,29 @@ Free-text entry was unavailable for a period after the breakdown editor moved to
   - Upload controls are briefly unavailable while Glade confirms what has been uploaded. If that check cannot complete, the source is kept rather than discarded.
   - Previously, closing or going back after uploading paystubs deleted the source and its files without warning. On joint cases this most often hit the second debtor's employment source: the upload appeared to succeed, and the source and its paystubs were gone afterwards with no indication anything had been removed. If your team has lost a Debtor 2 employment source this way, re-add it — the files have to be uploaded again.
 
+### Business and Rental Income From a Profit & Loss Statement
+
+A business or rental income source holds its own profit & loss statements, and the figures on those statements feed the business income line of Schedule I.
+
+- **Adding a business or rental income source creates a place to upload its statements.** Each source is recorded as a business in its own right, and each statement uploaded against it is kept as its own record of the period it covers.
+- **An uploaded statement is read automatically.** Glade records the statement's income and expense lines as they are printed, the period the statement covers, and the totals printed on it, then sorts the expense lines into the itemized expense categories Schedule I asks for. Previously a profit & loss statement could not be read at all — it settled as a document with no extractable data, and the itemized expense lines had no source anywhere on the case, so they had to be entered by hand.
+- **Nothing is computed from the statement by the reader.** The monthly figures Schedule I needs are worked out from the recorded values afterwards, so the numbers on the statement stay exactly as the client's bookkeeper printed them.
+- **Every business on the case reaches Schedule I.** The business income line totals every business the debtor holds, and each business also carries its own figures for the per-business attachment the form asks for. Previously only one business's figures reached the questionnaire, and a debtor with two businesses had one business's numbers presented as the whole of the line — an understated income figure on a form signed under penalty of perjury. **Re-check the business income line on any case with more than one business or rental source.**
+- **Correcting a statement updates Schedule I straight away.** Edit the statement's recorded values — or delete a statement that should not be counted — and the monthly figures follow on their own. Previously nothing watched these values: the organizer's own panel read correctly while the questionnaire kept serving the earlier figures until someone happened to open the calculator.
+- **A business with no statement, or a statement whose period cannot be determined, contributes nothing rather than a zero.** A zero would read as a business that earned nothing, which is a different claim from one whose figures are not in yet.
+- Every statement uploaded against a source is kept. A newer statement does not replace an earlier one.
+- Each parsed record shows which uploaded document it came from.
+
+> TODO: Confirm where profit & loss statements are uploaded from and where the parsed statement is reviewed and corrected, so those steps can be documented here.
+
 ### Documents With No Extractable Data
 
-Some uploads are classified as a type the Income Organizer cannot pull income figures from — for example, a profit-and-loss statement dropped into an income slot. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
+Some uploads are classified as a type the Income Organizer cannot pull income figures from — a profit & loss statement dropped into a paystub slot rather than onto a business or rental source, for example. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
 
 - The row shows a muted **"No extracted data"** label with a short explanation, and the processing animation stops.
 - Numeric cells show a dash (**—**) rather than **$0.00**, so an empty row is not mistaken for a real zero.
 - The **Include in Monthly Totals** and **Include in Means Test** checkboxes are disabled and there is no **Edit** button, so a blank row cannot be pulled into the income or means-test calculations.
+- **The row records what the document was recognized as.** Where Glade identified the document but cannot read income figures out of it in that slot, the row keeps the recognized type — so it can be presented as an unsupported document rather than sharing one blank label with a paystub the reader simply could not make out. Rows that settled before this change carry no type; re-run AI on the row to record it.
 
 Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
 
@@ -244,7 +260,12 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 - **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
 
+- Only a limited number of businesses get their own per-business attachment detail on Schedule I. A debtor holding more than that still gets a correct business income total; the individual breakdowns beyond the limit are not carried onto the form. Contact Glade if a case needs more.
+- Business and rental sources that were on a case before profit & loss statements were supported are brought across by a one-off setup Glade runs. Contact Glade if an older source has no place to upload its statements.
+
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
+
+> TODO: Confirm the number of businesses that receive their own Schedule I attachment breakdown, and what a firm sees when a case exceeds it.
 
 ## Related Features
 

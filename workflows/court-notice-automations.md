@@ -98,6 +98,15 @@ A trigger has three parts. All must match for the automation to fire:
 
 The judge picker is populated from the judges who have actually appeared on PACER notices for your firm in the last 12 months, sorted by how often they appear so the most common judges are at the top.
 
+#### Notices that arrive before the case is linked
+
+A court notice can reach Glade before it has been matched to a case. Case-opening notices do this by construction: the court issues its notice the instant a petition is filed, so it routinely arrives a few seconds ahead of the case number Glade matches it on. While a notice is unlinked there is no case for the chapter and judge filters to read, so an automation carrying either filter could not match it — and the notice then linked to its case moments later and looked entirely correct in the notice list, with nothing to show that its automation had been abandoned.
+
+- **An automation is evaluated again when its notice is linked to a case.** A notice that could not be matched while it was unlinked gets a second evaluation as soon as the link exists, so the automation fires as intended.
+- Linking never causes a second firing. An automation that already ran on the notice is not run again.
+- **Voluntary Petition automations were affected most.** An automation with a chapter or judge filter fired on a minority of the case-opening notices it should have; one with neither filter was unaffected, because it had nothing on the case to check.
+- Nothing on your existing automations needs changing.
+
 ### How notices are classified
 
 Because the trigger is an exact match on notice type, what an automation fires on depends entirely on how the incoming notice was classified. Classification now works from the notice itself before falling back to interpretation: when a notice carries a recognisable official form number or filing title, that identifier decides the type outright, so the same document is classified the same way every time rather than being read afresh on each arrival.
@@ -239,6 +248,7 @@ Edits are tracked: each save records who made the change and when, alongside who
 - If a recipient is a soft-deleted team member, that recipient is skipped at fire time. The automation still fires for any remaining recipients.
 - The automation list itself shows the most recent run time and status only. Individual fires are read from the automation's run history.
 - Failed runs are not retried automatically. The failure shows as the automation's last run status, and the run's per-action results show which action failed. Re-sending the email from the run history is the manual equivalent for a send that did not land.
+- Notices that were missed while they were still unlinked are not fired retroactively. If your firm relies on a filtered Voluntary Petition automation, expect it to start firing where it previously stayed silent, and handle any earlier case-opening notices by hand.
 - Re-sending an email re-sends only the email. A **Create task** action on the same automation is not run again, so a run that failed to create its task is not repaired by a re-send.
 - A re-sent email uses the automation's template as it stands now. There is no way to re-send the message exactly as it was originally worded once the template has been edited.
 - The fallback to the Glade support address is a delivery safeguard, not a substitute for verifying your firm's sending address. It applies per message, so every automation email keeps going out from the support address until the firm's own address is verified.
