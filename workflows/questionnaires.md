@@ -414,6 +414,9 @@ Some autofills gather several values into one field — for example collecting t
 
 - The values are separated by a **semicolon and a space**, not a comma. Free-text entries such as asset descriptions routinely contain commas of their own, which made a comma-separated line impossible to read as a list.
 - Lines filled before this change may still use commas. Re-run the autofill on the field to re-join it with semicolons.
+- **Every row's description is carried onto the form, not only the first.** Some Schedule A/B description lines were joining only the first row in a category, so a client with three deposit accounts or three business interests had two of the descriptions dropped from the generated petition. All of the rows in the category are now joined. Where a **Describe** field on Schedule A/B had no autofill attached to it at all, one is set up, so the descriptions reach the form instead of being captured on the questionnaire and going no further.
+- **Where the printed form has no separate description slot, the description is combined with the name.** Line 17 of Schedule A/B (deposits of money — checking, savings, and similar accounts) has nowhere on the official form to print a brief description, so the description is printed alongside the institution name in the one field the form provides. Firms had been typing the institution and the description into the name field together as a workaround; that is no longer necessary. An entry with no brief description prints the institution name on its own, as before.
+- Petitions generated before these corrections keep the text they were generated with. Re-generate the petition on a case whose Schedule A/B descriptions should appear on the filed copy.
 
 ### AI Autofills
 
@@ -434,6 +437,15 @@ Two things to be aware of when you re-run:
 
 - A claim you added or edited by hand can be overwritten by a later run of the agent when it sits on a property the agent also produces a claim for. Values elsewhere in the questionnaire are untouched.
 - Re-running the vehicles agent when it finds nothing to claim leaves the previous run's rows in place. Clear them yourself if the earlier result no longer applies.
+
+#### Exemption claims at 100% of fair market value
+
+When the exemptions agent claims a property at 100% of its fair market value, the claim carries that fair market value as its dollar amount.
+
+- Previously these claims were recorded at **$0.00** while the agent's own explanation alongside them said it was claiming the full fair market value — so Schedule C showed a claim worth nothing against a property the agent had decided to exempt in full. Properties whose ownership was recorded as unknown were affected most.
+- **Claims already recorded this way are not repaired.** Re-run the exemptions agent on any case where a 100%-of-fair-market-value claim reads as $0.00, and check Schedule C before filing.
+
+> TODO: Confirm what the agent records when the property has no fair market value entered against it — whether the claim is left unpriced, skipped, or recorded at zero.
 
 Each autofilled field shows a status indicator describing its current state:
 
