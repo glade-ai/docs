@@ -76,6 +76,8 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - Firms can export payment data as a CSV file for use in accounting software or reporting.
 - The export respects current filters, including date range, status, and search terms.
 - CSV columns include: Customer, Amount, Currency, Refunded Amount, Discounts, Glade Fee, Processing Fee, Customer-Paid Fees, Tax, Net, Account, Description, Product Title, Price Title, Notes, Date, Payment Plan (yes/no), and Workflow.
+- **The Date column is the calendar day in your firm's timezone**, so a payment reads the same date in the export as it does in the Transactions table. Previously the export used UTC: a payment taken at 11:45pm Eastern on 31 August appeared as 31 August on screen and 1 September in the file, which is exactly the kind of disagreement that shows up during a month-end close.
+- The payments themselves were never affected — only how their date was written into the file. **Re-export any period whose totals did not reconcile**, particularly around month ends; the corrected file will move those late-evening payments back into the month they belong to.
 - Payout data can also be exported separately as its own CSV file.
 
 ### Email notifications
@@ -139,6 +141,8 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 - Date ranges are interpreted in the firm's timezone, which is set in firm settings. A firm whose timezone is set incorrectly gets day boundaries drawn in the wrong place, so activity near midnight can fall into the neighboring day. Reports run before this behavior shipped may not reconcile with the same range run today — the earlier run was missing its final day.
 - Processing fee refund amounts are calculated proportionally. They may not exactly match the original fee when only a partial refund is issued.
 - CSV exports are limited to the current filter criteria. To export all data, clear all filters first.
+- The export Date column falls back to UTC for a firm with no timezone set in firm settings. If your exported dates look shifted, check the firm timezone first.
+- Exports produced before this correction still carry UTC dates. Nothing re-dates a file that has already been downloaded, or a spreadsheet built from one — re-export rather than adjusting the old file.
 
 ## Related Features
 
