@@ -69,6 +69,7 @@ The following checks are active:
 | A recent filing attempt on the case | The case was attempted recently enough to be worth a second look before trying again | Advisory |
 | Schedule I / J figures missing | (Chapter 7) The income and expense figures the surplus comparison needs are present | Advisory |
 | Court notice matched to a client | A court notice held on the case matches this client | Advisory |
+| Document the district will accept electronically | Every tagged document in the packet is one the district's filing system will accept for this case as it stands | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -119,6 +120,18 @@ Every document in the filing packet has to map to a slot the district's filing s
 - **Each unplaceable document is its own item**, so a packet with three of them names all three rather than stopping at the first.
 - The same file listed twice produces one item, not two.
 - If Glade cannot work out whether the packet's documents can be placed at all, the check reports as unresolved rather than passing.
+
+#### A document the district will not accept electronically
+
+Separate from whether a document can be *placed* on a filing slot, a district decides which documents it will take electronically at all — and that answer depends on the case as well as the district. A district may not accept a particular form electronically in any circumstances, or may accept it only for a case of a certain shape.
+
+- Each tagged document in the packet that the district will not accept for this case raises its own advisory finding naming that document, so a packet with several names all of them.
+- **This is what a firm previously learned from a rejection after filing.** A document the court's system would not take came back as a post-submission rejection with nothing on the case to point at; the finding moves that to before you submit.
+- **It is advisory, so the review will let you file past it** — but the court's system will not. Filing over one of these findings means the submission fails at the court rather than at the review. Treat it as a rejection you have been shown early, not as an optional warning.
+- Only documents actually in the packet are checked. An expected slot with nothing in it raises nothing here.
+- Where Glade cannot determine whether the district accepts a document, no finding is raised for it.
+
+This is a different check from [Documents the district cannot place](#documents-the-district-cannot-place), which is blocking and asks whether a document maps to a filing slot at all. A document can map to a slot perfectly well and still be one the district will not take electronically.
 
 #### Who can clear a blocking finding
 
@@ -276,6 +289,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
 - The duplicate-creditor check needs the case's creditor matrix to have been generated. Where there is no matrix to read, it reports as unresolved rather than passing, and no creditors are examined.
 - The duplicate-creditor check reports judgment calls for a person to settle. It does not correct the creditor list, and a finding it raises is not by itself evidence that two creditors are the same party.
+- The check on whether a district will accept a document electronically is advisory, so a filing can proceed past it. The court's system will still refuse the document — filing over the finding converts an early warning into a rejection after submission.
+- A district's answer about a document can depend on the shape of the case, so the same document can raise a finding on one case and none on another in the same district.
 
 ## Related Features
 
