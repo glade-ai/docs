@@ -103,6 +103,17 @@ A list's display toggles — for example **Show duplicates** and **Show zero'd a
 
 Dropdowns that list options alphabetically sort without regard to capitalization, so a list of names reads `Aaron, alice, bob, Zack` rather than putting every capitalized entry ahead of the lowercase ones.
 
+#### Flipping a table's rows and columns
+
+A table normally runs its fields **down** the visual rows. A **flip rows and columns** setting on the table turns that around, so each field becomes a visual column and the table reads the conventional way — one column per question, one row per entry. Firms that were reproducing a court form or an internal worksheet with a fixed column layout previously had to work against the default orientation.
+
+- The setting is on the table itself and is available on tables only. Lists that are not displayed as a table are unaffected.
+- **It changes the layout, not the answers.** Turning it on or off rearranges how the table is drawn; answers already recorded stay attached to the same questions and are neither moved nor cleared. A questionnaire part-way through being filled in can be flipped without losing anything.
+- Everything else about the table behaves as before — saving as you type, validation, live updates between people working on the same form, and how the answers land on a generated PDF.
+- New tables are created unflipped, so nothing changes for a template nobody edits.
+
+> TODO: Confirm the exact label of the setting in the template editor and where it sits among the table's other settings.
+
 ### PDF Fill Mappings
 
 PDF fill mappings connect questionnaire fields to PDF template fields, enabling automatic generation of filled court forms and legal documents from questionnaire responses. Individual fields connect to specific PDF fields, and each section can reference a PDF template.

@@ -46,6 +46,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Export unassigned workflows to CSV**: From the workflow list, you can export the current set of unassigned workflows to a CSV file. The export reflects the filters currently applied to the list, so narrowing by status or attorney before exporting limits the output to the matching cases. This is useful for triaging assignment backlogs offline or sharing the list with team leads outside Glade.
 - **Last Payment Made column**: The workflow list table includes a **Last Payment Made** column showing the timestamp of the most recent payment received on the case. The column is blank for cases that have not received a payment yet.
 - **Workflow tags**: Workflows can be labeled with tags to group related cases. Each tag is a short label with an optional emoji icon. The workflow list shows a **Tags** column, and the list filters include a tag filter — pick one or more tags to narrow the list to workflows carrying any of the selected tags (selecting several tags shows cases that match any one of them). When tagging workflows, you can choose from the tags your firm already uses, so the same label and icon stay consistent across cases.
+- **Workflow labels**: A firm-managed set of labels can be applied to cases, several at a time. Labels are separate from tags and do not replace them. See [Workflow labels](#workflow-labels) below.
 - **Filter and pagination persistence**: Filter selections (status, assignees, attorney, settlement status), search term, sort order, and page number persist while you navigate within the dashboard. Returning to the workflow list keeps your previous view in place instead of resetting to defaults. Use the **Reset** link in the filters bar to clear all selections and return to page 1; the link appears whenever any filter is applied or you are past page 1.
 - **Unassigned filter**: The assignment filter includes an **Unassigned** option (under an *Assignment Status* group) so you can isolate workflows with no current owner. The workflow list also accepts deep links that pre-apply filters — for example, opening the list from the dashboard's unassigned-workflows widget or from the paralegal report seeds the assignee, status, attorney, or settlement-status filters automatically.
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
@@ -56,6 +57,19 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Filing deficiency tasks**: When a case is filed manually (rather than through Glade's automated filing) and the court submission goes out missing required documents, Glade automatically creates an urgent task for **each** missing document, titled after that document. Previously a single task covered all of them at once. Every task references the affected filing and is assigned to both the team member who initiated the filing and the firm owner, so the missing documents can be addressed before the court's cure deadline. Splitting them per document lets your team divide the work and track what is still outstanding. Completing a task also clears that document from the case's filing deficiency, so the case's action-required banner narrows to the documents that remain — see [PACER Integration](../integrations/pacer.md) for the banner itself. Manual filings with no missing documents do not generate these tasks.
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
+
+### Workflow labels
+
+Tags let anyone write whatever they like on a case, one per case. That makes them a good sticky note and a poor way to find anything: the same idea gets written five ways and none of them can be reported on. **Labels** are the controlled version — a list your firm agrees on once, then applies.
+
+- **Your firm builds the list.** Each label has a title and a color. Every firm starts with an empty list and nothing is pre-filled, so labels do nothing until someone sets them up.
+- **A case can carry several labels at once.** This is the main practical difference from tags, which remain one per case, freeform, and unchanged by this.
+- **Some labels carry a date.** A label can be set up to ask for a date when it is applied — *Do not file before*, *Foreclosure*, and similar. The date belongs to that case's use of the label, so the same label carries a different date on every case. Labels not set up for a date do not ask for one.
+- **Managing the list**: labels can be created, renamed, reordered, archived, and deleted. Archiving takes a label out of the picker without disturbing the cases already carrying it — the same way archiving a status works.
+- **Titles are unique within your firm**, and creating or renaming a label to a title already in use is refused rather than producing two labels that read identically.
+- **Finding cases by label**: the workflow list can be filtered by label — selecting several returns cases carrying any one of them — and sorted by label.
+
+> TODO: Confirm where the label list is managed in Settings, where labels are applied to a case, and how labels are displayed in the workflow list alongside the existing Tags column.
 
 ### Dismissing and restoring tasks
 
@@ -90,6 +104,7 @@ A matter can carry several cases at once — an associated filing alongside the 
 ## Configuration
 
 - **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
+- **Workflow labels**: Created and managed per firm. Each label has a title (unique within the firm) and a color, and can be set to ask for a date when it is applied. Labels can be reordered, archived, and deleted. No labels are created for you — every firm starts with an empty list and builds its own.
 - **Status per workflow step**: Individual workflow steps can specify a status that the case automatically transitions to when that step's trigger completes.
 - **Case Filed step**: A workflow template can include a **Case Filed** step whose status is applied when the case is e-filed and receives a case number. Set the step's status to your firm's own filed status; no other configuration is required, and the step is added to a template like any other.
 - **Workflow type**: The workflow type ("basic" or "attorney case") affects how automatic status progression and completion logic behave.
@@ -105,6 +120,9 @@ A matter can carry several cases at once — an associated filing alongside the 
 - Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
 - The workflow list filters, the deadline sort, and the CSV export read the filing deadline from the matter's main case. A deadline set directly on a non-main case in the same matter is saved and shown on that case, but does not surface in those list views.
 - The filing deadline is not a status. Setting one does not change the case's status, and passing the deadline does not move the case or raise an alert on its own.
+- Labels and tags are separate. Existing tags are not converted into labels, and building a label list does not remove or change the tags already on your cases.
+- A date can only be recorded against a label that was set up to accept one. Applying a date to any other label is refused, and the date has to be a real calendar date.
+- A label is not a status and carries no behavior of its own — applying one does not move the case, complete tasks, or suppress follow-ups the way a custom status can.
 
 ## Related Features
 
