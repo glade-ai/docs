@@ -109,6 +109,21 @@ Separately from what a booking asks the client, your firm can record **the count
 
 > TODO: Confirm where the served-counties list is edited in the dashboard, and what Glade does with it once recorded — whether it filters which appointment types a client in an unserved county is offered, drives office routing, or is reporting only. The setting is stored and editable; how it is acted on is not established from the source change.
 
+### Collecting the client's address when they book
+
+An appointment type can ask the client for their address as part of booking. Firms running several offices use this to route a new matter to the nearest one, and to see which parts of their advertising area are actually producing consultations.
+
+- **It is set per appointment type.** An appointment type that does not ask for an address shows no address fields at all, so a service with no use for one is unchanged.
+- **Where the client enters it** — on the **Enter your information** step, alongside name, email, and phone.
+- **Required means the whole address.** Street, city, state, and ZIP all have to be filled in; a city or a ZIP on its own is not enough.
+- The client types their street and picks from suggested addresses, which fills in the rest. Where the suggestion service cannot complete the address, Glade falls back to a second lookup so the city, state, and ZIP still arrive rather than being left blank.
+- **The client's county is worked out from the address** and shown under the fields. It is saved to the client's record along with the rest of the address, so nobody has to look it up again later. See [Client Records](../crm/client-records.md).
+- The address is saved on the client's record rather than copied onto the booking, so a booking always shows where the client lives now. Correcting an address once corrects it everywhere.
+- **Booking waits until Glade knows whether an address is needed.** Confirming is held for the moment it takes to load the appointment type's settings, so a service that requires an address can never take a booking without one.
+- Staff booking on a client's behalf can still record or correct an address afterwards on the client's record.
+
+> TODO: Confirm where the "require client address" setting is switched on for an appointment type, and where the address and county appear on the firm-side bookings list.
+
 ### While the booking calendar is loading
 
 A consultation calendar has to fetch a month's availability before it can show which days are open. Until that finishes, the calendar makes it clear it is still loading rather than showing an answer it does not have yet.
@@ -277,6 +292,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Counties served | The counties your firm's practice covers, recorded once for the firm. Empty until your firm records them. |
 | Minimum booking notice | How far ahead of the appointment a client must book: same day, 8, 24, 48, or 72 hours, or 5 or 7 days. Set per appointment type under Availability → Booking settings. Appointment types with nothing set allow same-day booking. |
 | Appointment outcomes | The firm's own list of labels recording what happened at an appointment (for example No show). Firm-defined and empty until you create them; can be reordered and archived. |
+| Require client address | Whether the client is asked for their address when booking this appointment type. Off for every existing appointment type until a firm turns it on. |
 
 ## Edge Cases & Limitations
 
@@ -299,6 +315,9 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - Changing the minimum booking notice does not affect appointments already booked. A client who booked before the change keeps their time.
 - A booking carries at most one outcome. Recording two things about the same appointment means choosing which one the label should capture, or noting the rest on the case.
 - Appointment outcomes are per firm. They are not shared between firms and nothing is set up in advance, so a new firm sees no outcome option on its bookings until the list is created.
+- A booking shows the client's **current** address, not the address they gave when they booked. A client who moves has their earlier bookings show the new address too — this is deliberate, since the firm works from one address per client, but it means the address on an old booking is not a record of where the client lived at the time.
+- The address requirement is enforced on the booking screens, not on the record itself. A staff member correcting a booking after the fact can save it without an address.
+- Turning the setting on does not go back and collect addresses for clients who already booked. Only bookings taken afterwards are asked.
 
 ## Related Features
 
