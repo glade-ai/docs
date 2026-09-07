@@ -124,6 +124,31 @@ Every saved report shows the team member who created it, with their name and pro
   - The filter offers reaffirming and non-reaffirming selections plus a **not answered** selection. A case whose bankruptcy schedules questionnaire has not been filled in — a consultation or a turned-down matter, for example — has no answer to give and falls under **not answered** rather than under "no".
   - The lease-assumption question on the same form ("Will the lease be assumed?") is **not** available as a column or filter.
 
+#### Time from retainer to filing
+
+A case report can measure how long each case took to get from its first signed retainer to the day it was filed, and roll those intervals up into an average and a median for the firm.
+
+- Two columns are available: **first retainer signed**, the date the earliest retainer on the case was signed, and **days to filing**, the number of calendar days from that date to the date the case was filed. Both are included in the report's CSV export when you select them.
+- The interval is measured in **calendar days**, including weekends and court holidays. A case retained and filed on the same day counts as **0 days**, not as blank.
+- The starting point is the **earliest** retainer signature across every workflow linked to the case, not the retainer on the row you are looking at. A client who signed one retainer at consultation and another when a second matter was opened is measured from the first signature.
+- The earliest signature is found regardless of how you have filtered the report. Narrowing a report to a particular retainer type changes which cases are returned, not which signature each case is measured from.
+- The measurement belongs to the case rather than to a workflow, so a case is counted once however many linked workflows sit under it.
+- A retainer that was deleted, or one whose signing step was skipped, is not counted. The earliest remaining signed retainer is used.
+- The filing date is the one recorded on the case, the same date the report's filed column shows.
+- Days are counted in your firm's time zone, so the interval matches the dates your team sees on the case. A firm with no time zone configured falls back to UTC — see [Settings](./settings.md).
+- Alongside the columns, the report gives an **average** and a **median** number of days with a count of the cases behind them, both overall and broken down by **month** or by **quarter**. Cases fall into a month or quarter by the date they were filed.
+- The overall average and median are calculated across the cases themselves rather than by averaging the monthly figures, so a month with three cases does not carry the same weight as a month with three hundred.
+- The report can be narrowed to **only the cases that have a measured interval**, which is how you get to the case list behind an average without a mix of measured and unmeasured cases in it.
+
+Two groups of cases are counted and reported separately instead of being folded into the average:
+
+- **Cases missing one of the two dates** — no signed retainer, or no filing date. This is what keeps cases imported into Glade already filed out of the figure: they carry a filing date but no retainer signed in Glade, so there is no interval to measure. A firm that migrated a back catalogue of filed cases sees them in this count rather than distorting its average.
+- **Cases whose filing date falls before the retainer was signed.** A negative interval is a data problem rather than a fast filing, so it is excluded.
+
+Both counts sit next to the average, so you can see how much of the case list the figure actually covers before quoting it.
+
+> TODO: Confirm where the retainer-to-filing average appears in the interface — the label on the "measured cases only" filter, and how the average is added to a dashboard.
+
 ### Dashboards
 
 Alongside the personal dashboard each person sees on their own homepage, a firm can build **named dashboards** that everyone at the firm shares.
@@ -181,6 +206,7 @@ Choosing several statuses and the older single-status filter at the same time is
 - **Named dashboards**: Created per firm and shared by everyone in it. Names must be unique within the firm.
 - **Custom report date filters**: Day boundaries follow your firm's configured time zone. There is no per-report time zone setting. A firm with no time zone configured falls back to UTC.
 - **Payments report filters**: Payment status (one or more), payment-plan membership, a specific invoice, payment method search, and date sort order. There is no setting that enables these — they are available on any payments report.
+- **Time from retainer to filing**: Nothing to configure. The dates are read from the retainer signatures on the case and from the case's recorded filing date. Choose a monthly or quarterly breakdown when you view the figure; day counting follows your firm's configured time zone, falling back to UTC if none is set.
 
 ## Edge Cases & Limitations
 
@@ -203,9 +229,14 @@ Choosing several statuses and the older single-status filter at the same time is
 - A payments report cannot combine the multi-select **Payment status** filter with the older single-status filter. Use one or the other.
 - **Refunded** is not selectable in the multi-select payment status filter, because a refund is an amount returned on a payment rather than a status the payment sits in.
 - Custom report date filters interpret the days you pick in your firm's time zone. Reports run before this was corrected may have included or omitted records at the edges of the range — re-run any date-filtered report whose totals looked slightly off.
+- **Days to filing** is blank on a case that has no signed retainer, on a case with no filing date, and on a case whose filing date falls before its retainer signature. These cases are counted in their own totals rather than being averaged in, so an average never quietly includes or guesses at them.
+- Cases imported into Glade already filed are not measured for time to filing, because the retainer behind them was never signed in Glade. There is no way to supply a retainer date for them after the fact.
+- A case with no filing date is counted in the overall totals but falls into no month or quarter, because the breakdown is keyed to the filing date. The monthly and quarterly counts therefore add up to less than the overall count on a firm with unfiled cases in the report.
+- Time to filing is a calendar-day count. There is no business-day measure, so an interval spanning a holiday weekend reads longer than the working days it took.
 
 ## Related Features
 
 - [Case Management](./case-management.md) — reports operate on case data and case statuses.
 - [Staff Management](./staff-management.md) — paralegal and documents reports segment by workflow role.
 - [Settings](./settings.md) — custom statuses affect status-based report columns; firm timezone affects CSV formatting.
+- [Custom Terms](../workflows/custom-terms.md) — retainer agreements are the signatures the time-to-filing measurement starts from.
