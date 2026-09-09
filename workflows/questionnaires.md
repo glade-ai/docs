@@ -282,6 +282,16 @@ These actions copied a whole list over the top of the answers already on the for
 
 Lists that are pre-filled automatically from another questionnaire on the same case continue to work as before. The copied rows stay linked to the same case record entity as their source rows, so pre-filled assets, creditors, and other list items update the existing entity in case data instead of creating a duplicate, and they keep their positions and values when the page refreshes.
 
+### Importing Income Organizer Figures
+
+**Import Data from Income Organizer** takes its figures from the results stored on the income organizer — the same numbers the organizer's own table shows.
+
+- Previously the import worked the figures out separately from the organizer, so the button could fill in numbers that disagreed with the organizer it claimed to be importing from. The two now agree because they come from the same place.
+- **The import replaces figures you have edited by hand.** The confirmation prompt has always warned that importing will overwrite changes made in the questionnaire, and that is now what it does. A calculator figure a paralegal typed over is replaced with the organizer's value and shown as coming from the case record. Editing a figure by hand normally protects it from being refreshed automatically, so the import is the one action that deliberately overrides that — which is why it asks first.
+- Imported figures stay put. Reloading the questionnaire shows what was imported rather than reverting to what was on the form before.
+- **If the organizer has nothing calculated yet, the import tells you so** rather than reporting success while filling in nothing. It reads *"No income organizer data available to import yet."*
+- Both places the import is offered — the button in the Schedule I section and the one on the questionnaire's details — behave the same way.
+
 ### Restoring Removed List Items
 
 Rows removed from a list are kept under **Removed Items** on the list field and can be put back from there. Restoring a row returns the original row rather than re-entering its values as a new one:
@@ -300,6 +310,16 @@ Previously a restore re-added the values as brand-new rows. On a master creditor
 The resource panel appears on the right side of the form and displays supplementary information and tools while you work — including autofill explanations, tutorial videos, reference data, and the Exemptions Calculator. All such content opens in the panel rather than as a separate popup dialog.
 
 The panel scrolls independently of the questionnaire content. Scrolling through the form does not move the resource panel, and scrolling the panel does not move the form.
+
+### Working in the Schedule Builder's Tables and Date Fields
+
+A set of layout problems in the Schedule Builder — things covering other things as you scrolled — have been corrected. They were side effects of making the page itself the scrolling surface so that the buttons at the bottom of a long form could be reached; that scrolling behavior is unchanged.
+
+- **A date field's calendar opens in full.** Picking a gift date on the Statement of Financial Affairs, or a signature date, no longer means scrolling around to find a calendar that has been cut off at the edge of the form.
+- **A table's filter row, header, and footer stay pinned only inside the table itself.** On Schedule F and Schedule D they could pin over the rows you were reading, so **Show Fillable PDFs**, **Show External Data**, **Source Data**, and the linked-field badges sat on top of the data instead of scrolling away with the page.
+- **The full screen table view is not covered by the form's own controls.** Entering full screen and scrolling now shows only the table.
+- **The field resource panel no longer pins itself to the page** as you scroll past it.
+- **The checkbox column reads clearly while you scroll sideways.** It stays in place as the table scrolls under it and now has a solid background, rather than letting the rows passing behind show through it.
 
 ### Chapter 13 Plan Calculator
 
@@ -389,6 +409,12 @@ Some autofills fill a field from reference data Glade already holds for the case
 These fields populate when you open the questionnaire, with no action needed from you. Previously they arrived empty and only filled in after you triggered them by hand, which was easy to miss and left the means test showing no deductions. You can still re-run one of these autofills at any time to pick up changed case data, and a value you have entered or corrected by hand is not overwritten.
 
 The national standard deduction amounts — including food and clothing — are selected using the debtor's state and household size together. An amount that was filled in before this behavior was corrected may have used another state's figure, so re-check the deductions on any means test prepared earlier and re-run the autofill to refresh them.
+
+**These fields were being blanked when they were refreshed away from the form.** An autofill of this kind runs in two places: on screen while you have the questionnaire open, and away from the form when the case's data changes or the questionnaire is upgraded. The second of those was not being given the reference data at all, so it worked the figure out from nothing — and because these are single fields rather than cells inside a list, an empty result *cleared* the field rather than leaving it alone. A correct figure the questionnaire had filled in could be replaced with a blank or a zero without anyone touching it.
+
+- On the current Bankruptcy Schedules template this affected 24 fields. They cover the IRS and Census means-test standards — median income, food and clothing, out-of-pocket health care, housing, and transportation — as well as court reference data such as the court division and the court multipliers. The exemptions tables and Chapter 13 district variables are held the same way.
+- Both routes now reach the same value, so a figure refreshed away from the form matches what the questionnaire computes on screen.
+- **Re-check these fields on any case prepared before this.** A means test deduction or a court division field sitting blank or at $0.00 is the symptom. Re-run the autofill on the field to fill it in correctly.
 
 #### Secured Debt Deductions on the Means Test
 
@@ -619,6 +645,14 @@ Two safeguards sit behind that, so a bad read can no longer take a list with it:
 - If it would remove ten or more entries and more than half of what it looked at, it stops and removes nothing.
 
 In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
+
+**Household details now reach the case record on an upgrade.** Dependents and marital status were only written to the case record when a questionnaire was *completed*. **Update now** upgrades a questionnaire that is still in progress and never completes it, so an attorney upgrading a live case saw a blank Household section even though the answers were sitting on the form.
+
+- **Dependents are copied onto the Household panel when the case has none.** Dependents already on the case are left exactly as they are, whatever they came from, and the rest of the case record is not resynced — only the dependents are seeded.
+- **The client's marital status is written across too**, so the Household panel shows whether the client is married and living together or married and separated without waiting for the filer to finish the form. Only these married answers are carried across this way.
+- Seeding is skipped when case data sync is switched off for the questionnaire, when the case already has dependents, or when Schedule I has no usable rows to read.
+- **In-progress cases pick this up on their next upgrade** — whether through **Update now** or any other template-version upgrade. A case that was upgraded before this took effect can be upgraded a second time to fill the details in, or the field can be re-saved on the form.
+- A case that was completed and never upgraded still needs the separate repair for completed schedules. Contact support with the case rather than re-entering the household by hand.
 
 ### Creditor Duplicate Status
 
@@ -985,6 +1019,10 @@ The creditor matrix is also included in the **petition draft** — the review co
 - A field that is connected to case data but has never been populated still reports itself as synced with case data and offers no re-run control, because there is no value on it whose source could say otherwise. Fill or autofill the field once and the indicator reports its real source.
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
+- **Import Data from Income Organizer** is the one action that overrides hand-edited calculator figures. There is no way to import while keeping a particular correction — re-enter the correction after importing.
+- Reference-data autofills that were blanked before the correction are not repaired automatically. Nothing on the field records that it was cleared rather than never filled, so a blank means-test deduction or court division field needs its autofill re-run to tell the difference.
+- An upgrade seeds dependents only when the case has none. A case whose dependents are partly entered — one of three on the case record — is left alone rather than topped up, so the remaining dependents have to be added by hand.
+- Marital status is carried across on upgrade only for the married answers. A client recorded as not married does not have that written to the case record this way.
 
 ## Related Features
 
