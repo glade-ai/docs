@@ -45,6 +45,30 @@ The tab has two sub-views:
 
 Clicking a service in either view opens the availability editor directly — you can update availability without leaving the Bookings section.
 
+### How far ahead a client must book
+
+Each appointment type carries a **minimum booking notice** — how much warning your firm needs before an appointment starts. It is set per appointment type under **Availability → Booking settings**, and the choices are same day, 8 hours, 24 hours, 48 hours, 72 hours, 5 days, or 7 days.
+
+- Time slots that fall inside the notice window are not offered to clients. A firm needing a day's warning shows tomorrow's slots but not this afternoon's.
+- **The window is enforced when the booking is saved, not just hidden on the calendar.** Previously it only controlled which slots were displayed, so a client working from a stale slot list, an old link, or a page left open could still book a time the calendar had deliberately hidden. That booking is now refused.
+- **Firm team members are not held to the window.** Staff booking a client in, or moving an existing appointment, can still use a time inside the notice period — useful for taking a same-day appointment over the phone on a service that otherwise requires notice.
+- An appointment type with no notice set allows same-day booking. Choosing **same day** explicitly has the same effect and is worth setting deliberately on services where same-day consultations are part of how your firm works.
+- This is a per-appointment-type setting, so a firm can require a week's notice for a signing while leaving consultations open same day.
+
+### Recording what happened at an appointment
+
+Your firm can keep its own list of appointment outcomes — **No show**, **Claimed**, or whatever labels match how your team works — and attach one to a booking after the fact. This is how the calendar and daily reports come to record what actually happened, rather than only whether the appointment was scheduled.
+
+- **Your firm defines the list.** Nothing is provided as a starting point, so every firm begins with an empty list and no outcome on any booking until someone creates them. Outcomes can be reordered so the ones your team uses most sit at the top.
+- **An outcome is separate from the booking's status.** Attaching one does not move the booking through its lifecycle — a completed appointment marked **No show** is still recorded as completed. The statuses in [Booking lifecycle](#booking-lifecycle) are unchanged.
+- **It is also separate from workflow custom statuses.** The two lists are kept apart deliberately: an appointment outcome carries none of the case-tracking behavior a workflow status does, and choosing one triggers nothing.
+- Only firm team members can set or clear a booking's outcome. Clients cannot.
+- An outcome has to belong to your firm and be currently in use — an archived or deleted outcome cannot be attached to a booking.
+- **Retiring an outcome does not rewrite history.** Archiving one keeps it on the bookings that already carry it while removing it from the list of choices, so past appointments stay readable.
+- The outcome appears on the booking and as an **Outcome** column in the bookings report and its spreadsheet export.
+
+> TODO: Confirm where the outcome list is managed in firm settings and where the outcome is chosen on an individual booking.
+
 ### Client booking flow
 
 1. The client views the firm's product or service listing. For free sessions, the booking button reads **Book a call**; for paid sessions it shows the session price.
@@ -220,6 +244,8 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Availability patterns | Days of the week and start/end times, configured per team member. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 | Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
+| Minimum booking notice | How far ahead of the appointment a client must book: same day, 8, 24, 48, or 72 hours, or 5 or 7 days. Set per appointment type under Availability → Booking settings. Appointment types with nothing set allow same-day booking. |
+| Appointment outcomes | The firm's own list of labels recording what happened at an appointment (for example No show). Firm-defined and empty until you create them; can be reordered and archived. |
 
 ## Edge Cases & Limitations
 
@@ -235,6 +261,10 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
 - Calendar colors are read from the appointment type each time the calendar is drawn, so changing a color re-tints that type's existing bookings as well as new ones. There is no way to color one booking differently from others of the same type.
+- The minimum booking notice applies to clients only. It does not stop a team member booking or moving an appointment inside the window, so it is not a way to protect a team member's time from their own colleagues — use a **Blocked** availability window for that.
+- Changing the minimum booking notice does not affect appointments already booked. A client who booked before the change keeps their time.
+- A booking carries at most one outcome. Recording two things about the same appointment means choosing which one the label should capture, or noting the rest on the case.
+- Appointment outcomes are per firm. They are not shared between firms and nothing is set up in advance, so a new firm sees no outcome option on its bookings until the list is created.
 
 ## Related Features
 
