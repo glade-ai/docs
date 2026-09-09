@@ -124,6 +124,15 @@ Re-pull when the report itself is unusable and the reason has been resolved — 
 
 > TODO: Confirm where the re-pull action appears on the credit report card and which roles can run it.
 
+### Creditors reach the case on the first successful pull
+
+On a joint case, creditors from the credit report now reach the case record as soon as the first debtor's report comes back, instead of waiting for every debtor.
+
+- Previously the import ran only once *all* debtors had a response. When a co-debtor never approved their own pull, the main debtor's accounts stayed inside the stored report and never reached the Master Creditor List — so attorneys saw creditors missing, or creditor addresses blank, until something else on the case happened to fill them in.
+- Each successful pull now imports its own creditors immediately.
+- When the co-debtor's report arrives later, its creditors are added alongside the first debtor's. The creditors already on the case keep their identity, their addresses, and any corrections your team made to them — they are not renumbered, duplicated, or replaced.
+- Reports that already completed keep using the existing import, so nothing needs re-running on a case that is already correct.
+
 ### Imported real-estate addresses
 
 When Glade imports addresses from a credit report into the case as real-estate assets, it imports only addresses the client actually owns. Glade uses the credit report's owner-match indicator on each address to make this determination, so prior addresses where the client lived but did not own the property are no longer imported as real-estate assets even if they have transaction history.
@@ -148,6 +157,7 @@ When Glade imports addresses from a credit report into the case as real-estate a
 - Re-pulling a debtor's report replaces the stored one rather than keeping both, so the empty report a freeze produced is not retained as a record of the attempt. Note what you need from it before re-pulling.
 - Re-pulling while the client's freeze is still in place returns another empty report, billed as a pull. Confirm with the client that the freeze has been lifted first.
 - The pull attempt limit counts re-pulls. On a case that has already used its attempts, the limit has to be raised in firm settings before a re-pull can run.
+- Importing creditors on the first successful pull does not reach back over joint reports that already completed. On a joint case where the main debtor's creditors never arrived and the report is already marked complete, contact support to have the stored report re-read rather than re-pulling.
 - If a credit report is pulled successfully but the workflow's **Get Credit Report** step does not clear right away — for example, the report was retrieved but the finalizing step was interrupted by a timeout — Glade reconciles it automatically. Retrying the pull completes the existing report instead of pulling a new one, so you are not charged a second time, and a periodic background check completes any stranded report on its own (typically within about 15 minutes). You do not need to re-pull a report that already came back successfully.
 
 ## Related Features
