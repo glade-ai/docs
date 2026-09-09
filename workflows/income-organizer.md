@@ -96,6 +96,27 @@ When you add a Social Security income source, Glade asks which benefit it is —
 - **The figures do not change.** Every Social Security source still adds into the single Schedule I line for Social Security (line 8e), and all of it stays out of the means test.
 - Sources recorded before benefit types existed keep working as they are. They carry no type and continue to report on the same Schedule I line.
 
+### Business and Rental Income on Schedule I
+
+Schedule I reports business, professional, and rental income on one line (line 8a). Where a business or rental source has a profit and loss statement — uploaded as a document or typed in by hand — that statement is what the line uses for that source.
+
+- **A statement takes precedence over the month-by-month entries for the same source.** Previously the line was derived only from the month entries, so a statement reached the per-business detail behind the line while the line itself ignored it. The organizer could show a figure built from a statement and a Schedule I line that disagreed with it.
+- **Precedence is decided per income source.** A business with a statement uses the statement; another business on the same case with only month entries carries on using those. Both still add into the same Schedule I line.
+- A source that has a statement and no month entries is still counted. It is no longer dropped for having nothing month-by-month behind it.
+- This matches how the organizer already treats year-to-date figures, where a document that summarizes a period supersedes the individual rows for that source.
+- The change takes effect the next time a case's figures are recalculated. Cases whose businesses have no statements are unaffected, and nothing needs re-running on them.
+
+If your team has reviewed a Schedule I line 8a figure on a case where a business has a profit and loss statement, re-check it — the line now reflects the statement.
+
+### Business Details When You Add an Income Source
+
+Adding a business or rental income source collects the business's details as part of the same dialog, and those details are saved onto the business record on the case as entered by your team.
+
+- Because a business record is created alongside the income source, the details you enter land on it directly rather than needing to be filled in separately afterwards.
+- The details are checked before anything is created, so a problem with what you entered is reported without leaving a half-created income source on the case.
+- **The business's name and income type are not entered here** — they come from the income source itself, so renaming the source keeps the business record in step rather than leaving the two to drift apart.
+- This applies to business and rental sources. Other income sources do not collect business details.
+
 ### Including and Excluding Income Records
 
 Each income record carries its own switches for whether it counts toward Schedule I and whether it counts toward the means test. Turning one off is a deliberate choice your team makes about that record, and Glade preserves it:
@@ -264,6 +285,10 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 - **Net pay per period is not recalculated after an edit the way gross is.** Editing the earnings lines behind a paystub updates the pay-period gross; the net figure keeps the value it was read or entered with. Check it against the paystub after a substantial edit.
 - Switching a new income organizer's results through to the Schedule I and Means Test questionnaire happens automatically only for organizers created from this point on. Older organizers are not switched on retroactively.
+- A profit and loss statement wins over the month entries for the same source on Schedule I line 8a. Where a business has both, the month entries are not added on top and are not shown as excluded — they are simply not what the line is built from. Remove the statement if the month entries are the figures you want.
+- Business details entered when an income source is created are saved on a best-effort basis alongside the source itself. If the source is created but the details do not appear on the business record, open the business and enter them there.
+
+> TODO: Confirm where a profit and loss statement is uploaded against a business source, and where the business's own details are viewed and edited on the case.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 - **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
 
