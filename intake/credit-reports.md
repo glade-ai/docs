@@ -103,6 +103,28 @@ A credit report pull can finish successfully and still leave the case with no cr
 - Property records Glade cannot read are now skipped individually. The accounts in the report come across regardless, and only the property record itself is left out.
 - **Reports already in this state are not repaired automatically.** If a case shows a completed credit report but no creditors from it, contact support to have the stored report re-read — do not re-pull, since pulls are billed from the first pull.
 
+### Re-pulling a report a security freeze left empty
+
+A client can place a security freeze on their own credit file. When one is in place, the bureau still returns a report — it simply contains nothing. Glade recognizes that a report came back frozen and offers to pull it again once the client has lifted the freeze.
+
+- **A frozen report reads as unusable rather than successful.** Previously a freeze arrived quietly inside an otherwise-normal report: the pull completed, the empty report was stored, and everything downstream read as a success. Once the client lifted the freeze there was no way for your team or support to pull again, because nothing on the case indicated the report had failed.
+- **Re-pulling clears the frozen report and requests a fresh one.** The empty report is replaced by the new one rather than sitting alongside it.
+- **Reports already on file are covered.** Glade reads the freeze from what it stored at the time, so a case where a client has since lifted a freeze can be re-pulled without anything being re-entered first. This matters because a freeze only becomes worth acting on *after* the pull.
+- **A re-pull is a new billable pull**, charged at the standard rate like any other, because the credit reporting service charges for each one.
+- **On a joint report, only the frozen debtor is pulled again.** A co-debtor whose report came back clean is left as it is — no second hard inquiry on their credit file and no second charge.
+- **Only a security freeze opens a re-pull.** Other bureau problems that still leave a usable report do not, and durable failures that leave the report slot empty are already covered by the ordinary retry described under [Error Handling](#error-handling).
+
+> TODO: Confirm where the re-pull action appears on the credit report card and which roles can run it.
+
+### Creditors reach the case on the first successful pull
+
+On a joint case, creditors from the credit report now reach the case record as soon as the first debtor's report comes back, instead of waiting for every debtor.
+
+- Previously the import ran only once *all* debtors had a response. When a co-debtor never approved their own pull, the main debtor's accounts stayed inside the stored report and never reached the Master Creditor List — so attorneys saw creditors missing, or creditor addresses blank, until something else on the case happened to fill them in.
+- Each successful pull now imports its own creditors immediately.
+- When the co-debtor's report arrives later, its creditors are added alongside the first debtor's. The creditors already on the case keep their identity, their addresses, and any corrections your team made to them — they are not renumbered, duplicated, or replaced.
+- Reports that already completed keep using the existing import, so nothing needs re-running on a case that is already correct.
+
 ### Imported real-estate addresses
 
 When Glade imports addresses from a credit report into the case as real-estate assets, it imports only addresses the client actually owns. Glade uses the credit report's owner-match indicator on each address to make this determination, so prior addresses where the client lived but did not own the property are no longer imported as real-estate assets even if they have transaction history.
@@ -124,6 +146,10 @@ When Glade imports addresses from a credit report into the case as real-estate a
 - A creditor that arrives from the report with no address at all — some collection agencies come through this way — opens for editing with empty address fields, and appears normally in creditor lists and pickers. Previously such a creditor could stop the creditor form or the list from loading at all. An address is still required before the creditor can be saved, so fill it in before filing.
 - Importing a report into case data adds the report's creditors and updates ones it has already contributed. It does not remove a creditor, so a creditor that should not be on the case has to be removed by hand.
 - A report that completed with no creditors because of an unreadable property record needs support to re-read the stored report. Re-pulling produces a fresh billable pull and is not the fix.
+- A security-freeze re-pull is only worth running once the client has actually lifted the freeze. Pulling again while the freeze is still in place returns another empty report and is billed as a pull.
+- The re-pull offer disappears once a re-pull succeeds, because it is the freeze on the stored report that produces the offer in the first place.
+- Re-pulling replaces the frozen report rather than keeping both, so there is no record of the empty attempt on the case afterwards.
+- Importing creditors on the first successful pull does not reach back over joint reports that already completed. On a joint case where the main debtor's creditors never arrived and the report is already marked complete, contact support to have the stored report re-read rather than re-pulling.
 - If a credit report is pulled successfully but the workflow's **Get Credit Report** step does not clear right away — for example, the report was retrieved but the finalizing step was interrupted by a timeout — Glade reconciles it automatically. Retrying the pull completes the existing report instead of pulling a new one, so you are not charged a second time, and a periodic background check completes any stranded report on its own (typically within about 15 minutes). You do not need to re-pull a report that already came back successfully.
 
 ## Related Features
