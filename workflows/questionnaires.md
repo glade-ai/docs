@@ -342,6 +342,21 @@ A **Property summary** button on the Schedule A/B property section opens a summa
 
 If your team reviewed a property summary before this correction, re-check the equity figures on any case with liened property — the corrected figures are lower, and a property that appeared to hold equity may hold none.
 
+### Personal Property on Schedule A/B Part 3
+
+Part 3 of Schedule A/B asks the debtor to describe their personal property under nine headings — household goods and furnishings, electronics, collectibles, sporting goods, firearms, clothes, jewelry, non-farm animals, and other items. On the generated petition, each item the case holds under a heading now prints on its own line under that heading, with its own description and its own value.
+
+- **Previously every item under a heading printed as one run of text in a single box.** A case with a sofa, a bed, a dining set, and a washer showed all four crammed into the household-goods description with one combined value, so the court copy did not show what each item was worth.
+- **The items come from the case's property list.** Whatever your team enters there under a category is what prints on that category's line, and each line prints only the items belonging to it — sporting goods do not appear under electronics.
+- **The total line is unchanged.** Part 3's total, and the yes/no answers on each heading, work as before.
+- **Adding or removing an item on the property list changes the printed rows** the next time the petition is generated. There is nothing to configure and no separate list to maintain for the form.
+
+This applies to cases on the current schedules template. **A case already in progress on an older version of the template keeps printing the way it did** — one combined row per heading, with the values it already had. Nothing is lost or blanked on those cases, but the itemized layout does not appear on them until the questionnaire is upgraded to the current template. See [Upgrading a Questionnaire and Case Data](#upgrading-a-questionnaire-and-case-data).
+
+If a Part 3 heading on a case you have already reviewed shows one combined entry, check which template version the questionnaire is on before treating it as a problem with the property list.
+
+> TODO: Confirm whether personal property a client enters on the client questionnaire arrives as separate property-list items, or whether it is still combined into one entry per category when it reaches the schedules.
+
 ### Exemptions Calculator
 
 When working on bankruptcy Schedule A/B, Schedule C, or the Master Creditor List, an **Exemptions Calculator** panel is available alongside the questionnaire. The panel shows how exemptions apply to the properties and assets you have entered.
@@ -1047,6 +1062,8 @@ The creditor matrix is also included in the **petition draft** — the review co
 - A field that is connected to case data but has never been populated still reports itself as synced with case data and offers no re-run control, because there is no value on it whose source could say otherwise. Fill or autofill the field once and the indicator reports its real source.
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
+- Itemized rows on Schedule A/B Part 3 appear only on cases whose schedules questionnaire is on the current template. A case in progress on an older version still prints one combined entry per heading. There is no way to switch a single case over other than upgrading its questionnaire, and upgrading carries the other behaviors described under [Upgrading a Questionnaire and Case Data](#upgrading-a-questionnaire-and-case-data).
+- Petitions already generated are not rebuilt. A draft or signature copy produced before the case was upgraded keeps the combined Part 3 entries it was printed with; generate the petition again to pick up the itemized rows.
 
 ## Related Features
 
