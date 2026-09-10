@@ -20,6 +20,20 @@ Settings control how your firm's back office behaves. This includes custom workf
 - Archiving a status is reversible — use **Unarchive** to make it available in the workflow step dropdown again.
 - **Reordering statuses**: Active statuses on the Custom Statuses settings page have a drag handle on the left of each row. Drag a row up or down to change the order — an indicator shows where it will land. Releasing the row saves the new order, and statuses appear in that order across status pickers, dashboards, and reports. Edit, Archive, and Delete actions are briefly disabled while a reorder is being saved. Default statuses can be reordered (they cannot be deleted, only archived). Archived statuses are not reorderable.
 
+### Lead Sources
+
+Your firm keeps its own list of **lead sources** — the channels new clients arrive through — and edits it in settings. The list is what the lead source picker offers when someone records where a client came from.
+
+- **The list belongs to your firm.** Other firms' channels are not offered to you and yours are not offered to them. Previously every firm chose from one shared, fixed list, so a firm's real channels could only be recorded through the free-text **Other** option — where they could not be grouped or counted in reports.
+- **Add, rename, reorder, and retire entries.** The order you set is the order the picker shows. Retiring an entry removes it from the picker for new clients.
+- **A name can only be used once in your firm**, whichever way it is capitalized, so the same channel cannot end up recorded two ways. Another firm using the same name is unrelated to yours.
+- **Retiring a lead source does not change clients already recorded under it.** A client who arrived through a channel your firm has since stopped using keeps that source on their record, so historical reporting stays intact. Re-adding the name later is allowed.
+- **Every firm starts with a default list** — Meta, Google local search ads, Google search ads, Phone, Billboard, and Building sign — which you can rename, reorder, or retire as you like. Firms that were already set up before this existed were given the same starting list. Editing your list does not affect what a newly created firm starts with.
+
+Some intake paths record a lead source without anyone using the picker — a call arriving through your firm's phone integration is stamped with its own source name, for example. A source recorded that way can appear on a client even though it is not an entry in your settings list, and retiring an entry does not stop those paths from recording it.
+
+> TODO: Confirm where the lead source is chosen on a client or lead record, and which reports group by it.
+
 ### Workflow Roles
 
 - Your firm defines named roles (e.g., "Paralegal", "Documents Team") that team members can be assigned to. Each role has a display rank that controls ordering in lists and reports.
@@ -113,6 +127,8 @@ Settings are primarily configured through the dashboard account page and individ
 - QuickBooks invoice sync is disabled unless you explicitly configure QuickBooks settings.
 - AI settings (system message, rules, chat prompt) accept free-form text with no length limit enforced in the interface.
 - Two workflow roles can share the same display rank, which may result in unpredictable ordering.
+- The lead source list is what the picker offers; it is not enforced on the value stored against a client. A source recorded by an automated intake path, or on a client from before the list was editable, can sit outside the list, and retiring an entry does not remove or rewrite it anywhere.
+- Retiring a lead source is not the same as deleting its history. The name stays on every client already recorded under it, so a retired channel continues to appear in reports covering earlier periods.
 
 ## Related Features
 
