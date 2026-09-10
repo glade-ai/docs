@@ -56,6 +56,25 @@ Clicking a service in either view opens the availability editor directly — you
 7. If the product has video conferencing enabled, a meeting link is generated automatically.
 8. The client receives a confirmation with booking details.
 
+### Asking a booking client for their county
+
+An appointment type can require the client to give their **county** when they book. This is for firms whose work depends on where the client lives — which office covers them, which court their case would be filed in, and whether the firm practices in their county at all.
+
+- **The requirement is set per appointment type**, and it is off until your firm turns it on. A service with no use for a county asks for nothing, so nothing changes for a firm that does not enable it.
+- **The client picks their county from a list rather than typing it.** The list is searchable by county name and can be narrowed to a state, so a client finds their county without needing to spell it the way the courts do. Picking from the list is what makes the answer usable downstream — a typed county has to be matched before it can be relied on, and misspellings are the usual reason that fails.
+- **Requiring the county is separate from requiring the client's address.** The two settings are independent: an appointment type can ask for one, both, or neither.
+- **Existing appointment types are unchanged.** Turning the requirement on affects bookings made afterwards. It does not go back and ask for a county on appointments already booked, and it does not block a client from managing a booking they made before the setting changed.
+
+### Counties your firm serves
+
+Separately from what a booking asks the client, your firm can record **the counties it serves** — the list of counties your practice covers.
+
+- The list is set once for the firm, not per appointment type or per team member.
+- Counties are chosen from the same searchable catalog the booking form uses, so the names your firm records and the ones clients pick from are the same names.
+- A firm that records nothing is treated as having no restriction recorded, which is how every firm starts.
+
+> TODO: Confirm where the served-counties list is edited in the dashboard, and what Glade does with it once recorded — whether it filters which appointment types a client in an unserved county is offered, drives office routing, or is reporting only. The setting is stored and editable; how it is acted on is not established from the source change.
+
 ### While the booking calendar is loading
 
 A consultation calendar has to fetch a month's availability before it can show which days are open. Until that finishes, the calendar makes it clear it is still loading rather than showing an answer it does not have yet.
@@ -220,6 +239,8 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Availability patterns | Days of the week and start/end times, configured per team member. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 | Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
+| Client county required | Whether a client booking this appointment type must give their county. Off until your firm turns it on. Independent of whether the client's address is required. |
+| Counties served | The counties your firm's practice covers, recorded once for the firm. Empty until your firm records them. |
 
 ## Edge Cases & Limitations
 
@@ -235,6 +256,9 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
 - Calendar colors are read from the appointment type each time the calendar is drawn, so changing a color re-tints that type's existing bookings as well as new ones. There is no way to color one booking differently from others of the same type.
+- Requiring the county on an appointment type applies to bookings made afterwards. Appointments already on the calendar have no county recorded against them, and there is no way to ask for one retroactively.
+- The county requirement and the counties your firm serves are two separate settings. Recording the counties your firm serves does not by itself require a client to give theirs, and requiring a client's county does not check it against your firm's list.
+- A county your firm needs that is not in the searchable catalog cannot be selected. Contact support with the county and state to have it added.
 
 ## Related Features
 
