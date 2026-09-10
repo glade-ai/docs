@@ -260,6 +260,17 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - Conversion is transparent — there is no setting to enable, and uploads continue to behave the same way. Only JPEG and PNG images are converted; other file types pass through unchanged.
 - If conversion fails for a particular image, Glade falls back to including the original file rather than blocking the filing, and reports the failure internally for follow-up.
 
+#### A photo that could not be converted stops the filing
+
+The fallback above — include the original file when conversion fails — is safe for a supporting document, but not for a slot the court expects to be a PDF. A photo of a signed form filed under a PDF name reaches the court as image data, and the court either rejects the packet or times out mid-submission with nothing to point at.
+
+- **A filing is now blocked before it starts when a packet slot the court expects as a PDF holds something that is not one.** The submission is refused, and the message names the documents at fault by the packet slot they occupy — for example, *Statement of Social Security (Form 121)* — so your team knows which upload to replace.
+- **Replace the file with a real PDF to clear it.** Re-uploading the same photo does not help; convert or re-scan it, or ask the client for a PDF. Conversion is attempted automatically first, so a photo that reaches this block is one Glade could not convert — most often a very large phone picture.
+- **The attorney override for missing required documents does not clear this block.** That override exists for a document your firm has decided the case does not need. A non-PDF in a PDF slot is not a missing document, it is a file the court cannot read, so signing off on it is not offered.
+- **Slots the court expects as plain text are unaffected.** The creditor and debtor data files a district takes as text files are still filed as text. The check applies only to slots whose expected format is PDF.
+
+This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *Signature Pages* had been tagged as Form 121. Conversion overflowed, the original JPEG went to the court under a `.pdf` name, and the filing timed out. Nothing on the case indicated why.
+
 ## Configuration
 
 > TODO: Document any per-workflow or per-firm eFiling configuration options, such as enabling PACER submissions on a workflow template.
@@ -277,6 +288,8 @@ Client-uploaded documents sometimes arrive as photos — for example, a phone pi
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
 - The duplicate-creditor check needs the case's creditor matrix to have been generated. Where there is no matrix to read, it reports as unresolved rather than passing, and no creditors are examined.
 - The duplicate-creditor check reports judgment calls for a person to settle. It does not correct the creditor list, and a finding it raises is not by itself evidence that two creditors are the same party.
+- The non-PDF check is decided from the packet slot the document occupies, not from inspecting the file your team recognizes it as. A file whose format Glade cannot determine at all is treated as not a PDF and blocks the filing, so a document that should be filable may need re-uploading before it is accepted.
+- Filings submitted before this check existed could reach the court with an image under a PDF name. If a packet was rejected or timed out without an explanation, check the tagged documents for a photo — the filing can be resubmitted once it is replaced.
 
 ## Related Features
 
