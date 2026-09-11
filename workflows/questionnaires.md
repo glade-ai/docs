@@ -421,6 +421,14 @@ When an AI agent autofills a group of related fields (for example, property exem
 
 Manual edits to fields in a list also stick when the AI auto-runs after rows have been added, removed, or reordered. For example, on the Bankruptcy Schedules questionnaire, the schedule classifier may run repeatedly as the form changes — moving a creditor from Schedule D to Schedule F by hand will not be reverted by a later automatic run.
 
+#### Firm instructions for the exemptions agent
+
+The exemptions agent follows the rules your firm has written for it under **Settings → Your AI agents**, and those rules take precedence over Glade's default exemption strategy. A firm that requires a custom dollar amount rather than a claim of 100% of fair market value, or that caps what may be claimed under a wildcard exemption, has that applied on every run.
+
+- The instructions used are the ones belonging to the firm the case is filed by, so a case opened from a shared template — or one being worked by Glade staff — still follows the filing firm's rules.
+- Previously these instructions were saved but never reached the agent, so every run followed the default strategy no matter what a firm had written. If your firm wrote instructions and found them ignored, re-run the exemptions agent on affected cases to pick them up, and re-check the claims on Schedule C.
+- **A claim of a custom dollar amount stays a custom dollar amount**, including when the amount happens to equal the property's value. Previously a figure equal to the value was recorded as a claim of 100% of fair market value instead, which clears the amount claimed — the opposite of what a firm asking for custom amounts wants.
+
 #### Re-running an agent over a list
 
 The agents that fill a whole list — exemptions on Schedule C, vehicles, secured debts, mortgages, and arrearages — **replace** the rows from the previous run rather than adding a second set alongside them.
