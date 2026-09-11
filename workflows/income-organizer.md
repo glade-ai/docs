@@ -88,6 +88,14 @@ Schedule I reports a monthly figure, so Glade groups the collected income by cal
 
 If you have reviewed a Schedule I figure that was calculated before this change, re-check it against the paystubs on the case: the corrected figure is generally higher for clients paid weekly, biweekly, or semi-monthly.
 
+### Social Security Benefit Types
+
+When you add a Social Security income source, Glade asks which benefit it is — retirement, SSDI, SSI, survivor, spousal, child, disabled adult child, or other. The type is required: the button that creates the source stays disabled until one is chosen.
+
+- Recording the type keeps several Social Security benefits on the same case distinguishable, so a client drawing both a retirement benefit and a survivor benefit reads clearly in the organizer rather than showing two entries with the same name.
+- **The figures do not change.** Every Social Security source still adds into the single Schedule I line for Social Security (line 8e), and all of it stays out of the means test.
+- Sources recorded before benefit types existed keep working as they are. They carry no type and continue to report on the same Schedule I line.
+
 ### Including and Excluding Income Records
 
 Each income record carries its own switches for whether it counts toward Schedule I and whether it counts toward the means test. Turning one off is a deliberate choice your team makes about that record, and Glade preserves it:
@@ -140,7 +148,9 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 - Cases whose most recent pay stub already falls in a prior month are unaffected — the window is not forced to add empty current-month figures, so the average is not artificially lowered.
 - Income sources that do not count toward the means test — Social Security and government assistance (such as welfare or food stamps) — are left out of the six-month average. They also do not anchor the window, so a benefit entry dated in the current (still-running) month does not pull the window forward and drop an earlier month. Previously a current-month government-assistance entry could shift the window forward and drop the earliest month's paychecks, understating the gross monthly income; excluded sources no longer affect the window. These sources still count where they belong elsewhere, such as on Schedule I.
 
-This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures, or the YTD period method, to the means test instead; see [Document Collection](./document-collection.md).
+- **A Schedule I calculation mode does not change Current Monthly Income.** Setting an employment source to YTD or to latest paystub shapes Schedule I and the long-form deduction lines only. The means test still averages the six full calendar months before filing, because that is what the statute and Forms 122A-1 / 122C-1 require. Previously Current Monthly Income followed whichever mode the source was set to, so a source on YTD or latest paystub produced a means-test figure that was not the six-month average. Re-check the means test on any case with an employment source set to one of those modes — the figure may have moved.
+
+This applies to the standard six-month means test calculation. The YTD period method can still be applied to the means test deliberately, which flags it as a non-standard calculation method; see [Period Method Preview](#period-method-preview).
 
 ### Chapter 7 Median Income Screen
 
@@ -180,6 +190,7 @@ Free-text entry was unavailable for a period after the breakdown editor moved to
 ### Correcting and Removing Income Sources
 
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
+- **Re-entering a value that would not hold**: A figure read from a document can be set aside — superseded by a later reading or by a correction elsewhere — which could leave the field with no current value at all. Re-typing the same number then looked like it saved and the field was blank again after a refresh, because Glade treated the entry as identical to the set-aside figure and recorded nothing. Entering the number again now records it as the current value and it survives the refresh. If your team gave up on a field that would not keep what was typed into it, try it again.
 - **Removing a paystub**: When you delete a paystub from the Income Organizer, the income data that came from it is removed along with it. A removed paystub no longer lingers as a leftover row in the client's income data.
 - **Closing the Add Income Source window**: Adding an employment income source and then closing the window discards the new source only when nothing has been uploaded to it. Once a paystub has been uploaded — or is still uploading — closing the window keeps the source and its paystubs.
   - **Back** is disabled once paystubs exist or are in flight, and hovering it explains why. Use **Close** instead; the source and its paystubs are kept.
@@ -248,6 +259,7 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - The debtor badge on an organizer's detail page only appears when the case has more than one income organizer. A single-organizer case shows no badge, which is not an indication that the organizer is unlabeled.
 - Latest paystub mode produces no figure at all when the pay frequency is missing, rather than assuming one. Select the frequency to calculate.
 - Latest paystub mode affects Schedule I only. It is not available for the means test, which always uses the standard six-month calculation.
+- Current Monthly Income is produced by two calculations while an older one is being retired, and the older one can still follow an employment source's Schedule I calculation mode. Where a case shows two different Current Monthly Income figures for a source set to YTD or latest paystub, the six-month average is the correct one.
 - Income sources configured before latest paystub mode existed continue to use the method they were set to. They are not migrated automatically.
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 - **Net pay per period is not recalculated after an edit the way gross is.** Editing the earnings lines behind a paystub updates the pay-period gross; the net figure keeps the value it was read or entered with. Check it against the paystub after a substantial edit.
