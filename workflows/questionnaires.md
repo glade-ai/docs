@@ -245,6 +245,14 @@ The **court division** field lists the divisions belonging to the case's filing 
 - Divisions that exist only as electronic-filing variants of another division are not offered, and divisions that appear more than once in the underlying court list are shown once.
 - Auto-selection only fills an empty field. A division you have chosen is never replaced.
 
+### Debtor County
+
+The debtor's filing county is worked out from the address on the case, by looking the address up rather than inferring it. The same address always produces the same county.
+
+- **No AI model is involved.** On questionnaires where this field is computed for you, the county was previously produced by an AI model, which returned plausible but wrong counties for some addresses. It is now a direct lookup.
+- The address has to be complete enough to identify. Where it cannot be resolved to a county, the field is left for you to fill in rather than filled with a guess.
+- A county that Glade does not recognize for the state blocks e-filing and is reported in the pre-filing review. See [Electronic Court Filing](../integrations/efiling.md).
+
 ### Marking a Value as Unknown
 
 On bankruptcy Schedule A/B, an asset's current value can be marked **Unknown** (or overridden with custom text) instead of a dollar amount. When that value feeds a calculated line — for example, a figure carried onto another line or copied to Schedule C — the calculated line now shows **Unknown** (or the entered text) rather than $0.00. This matches how the value already appears in the answer view, and it carries through to both the live preview and the generated and filed petition. Section and part totals that are meant to stay numeric continue to show a dollar amount.
@@ -537,6 +545,10 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
+- **Eastern District of Louisiana** cases can generate a Chapter 13 plan on the district's Model Plan — a local court form rather than Official Form 113. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on.
+
+> TODO: Confirm which claim treatments belong in §7.2.c of the Eastern District of Louisiana Model Plan. The section was switched on with no treatments assigned to it, so a claim that belongs there may not print on the generated plan.
+
 
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 - Versions finalized after a district change pick up the new figures. When you start the next version of a plan, it tracks the district's current values rather than inheriting the locked figures from the previous version. An amended plan therefore reflects the figures in effect at the moment you finalize it.
@@ -940,6 +952,7 @@ Before you apply anything, the **Get back in sync** preview shows what would cha
 - Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row.
 - Taking **Use case data** on an omitted row brings that row back onto the form, so a creditor list that appeared short fills out to match the case record's creditors.
 - After you apply, syncing is turned back on and the questionnaire is marked as in sync.
+- **Only the details this form actually asks about are compared.** Information that lives on the case record but has no question anywhere on the form — the attorney's bar number or the case type, for example — is no longer listed as a difference. Those rows were selectable but applying **Use case data** to one had no effect on the form, and they crowded out the disagreements worth reviewing. A question the form does ask that nobody has answered still appears, so you can pull a case record value onto the form.
 - The out-of-sync banner and its **Get back in sync** preview are unchanged. Use **Compare case data** when you suspect a difference the banner is not reporting; use the banner when it appears.
 
 > TODO: Confirm where **Compare case data** appears in the questionnaire — header action or overflow menu — and whether it is limited to team members with edit permission.
