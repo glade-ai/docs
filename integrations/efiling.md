@@ -119,6 +119,7 @@ Every document in the filing packet has to map to a slot the district's filing s
 - **Each unplaceable document is its own item**, so a packet with three of them names all three rather than stopping at the first.
 - The same file listed twice produces one item, not two.
 - If Glade cannot work out whether the packet's documents can be placed at all, the check reports as unresolved rather than passing.
+- **District of Puerto Rico cases are covered.** Since Puerto Rico was brought online as a filing district, this check could not recognize it and reported as unresolved on every case filed there — so an unplaceable document was never named before submission and instead failed at the court. Puerto Rico cases are now checked like any other district. If a Puerto Rico filing failed at the court with nothing in the review to explain it, run the review again; a packet problem will now be named.
 
 #### Who can clear a blocking finding
 
