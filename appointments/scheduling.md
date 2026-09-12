@@ -16,6 +16,16 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - A custom confirmation message can be configured per product and is shown to clients after booking.
 - Each appointment type can be given a calendar color, used to tint its bookings on the firm's booking calendar. See [Color-coding appointment types on the calendar](#color-coding-appointment-types-on-the-calendar).
 
+### Routing bookings to a calendar by county
+
+An appointment type can send its bookings to a particular calendar based on **the county the client is in**. A firm that covers several counties from different offices, or that has a different attorney responsible for each, can have a booking land on the right calendar when it is made rather than being moved by hand afterwards.
+
+- Rules are set per appointment type, one county to one calendar. A county with no rule on that appointment type is not routed.
+- **Routing only applies when it has an answer for every part of it.** The booking falls back to your firm's usual calendar selection — exactly as it worked before — when the appointment type has no county rules, when no county is recorded for the client, when the recorded county is not one Glade recognizes, or when no rule covers the client's county. A booking is never left without a calendar because routing did not resolve.
+- **An appointment type with no county rules is unchanged.** Nothing about your existing booking behavior changes until your firm sets a rule up.
+
+> TODO: Confirm where county routing rules are configured on an appointment type, and which county the rules match on — the one a client supplies at booking time or the one on their address in Glade.
+
 ### Defining availability
 
 - Firms set up recurring availability patterns by specifying days of the week and start/end times.
