@@ -67,6 +67,17 @@ When a paystub is in YTD mode and includes overtime pay:
 
 In per-paycheck mode, amounts are taken directly from the pay period figures.
 
+### Business and Rental Profit & Loss Statements
+
+A profit & loss statement for a business or a rental is recorded the way the document prints it — one entry per printed line, filed under the accounting category it belongs to — together with the period it covers and the totals printed on it. It is no longer folded into a handful of pre-summed figures as it is read.
+
+- **Each printed line can be corrected on its own.** Previously the figures were added up as the statement was read, so correcting a single line meant retyping the whole bucket it had been summed into, and there was no record of what the document itself said.
+- **The lines feed Schedule I line 8a.** Each accounting category is mapped onto the line 8a it belongs to and converted to a monthly figure, which is what the Schedule I section of the bankruptcy schedules questionnaire shows.
+- **A line Glade cannot read is withheld rather than guessed at.** Where a row cannot be resolved — no amount on it, a figure whose sign or units cannot be determined, or a row that does not fall under any category — the 8a lines that row would have contributed to are held back instead of publishing a total that is short by the unreadable amount. The lines that did resolve still publish, and the reason a line was withheld is recorded against the statement.
+- **Some placements are a judgment, and are flagged for review.** Where mapping an accounting category onto a line of the form is a decision rather than a rule — depreciation, cost of services, contract labor and advertising are the recurring ones — the placement is marked for an attorney to confirm rather than being applied silently.
+- **Business and rental sources are labeled separately**, so the two can be told apart in the organizer.
+- **Statements recorded before this change were converted.** An existing profit & loss statement keeps the line 8a figures it already produced — nothing has to be re-entered. Because the conversion had to place lines the newer model has no direct equivalent for, re-check line 8a on a case whose figures matter before relying on them.
+
 ### How the Schedule I Monthly Figure Is Averaged
 
 Schedule I reports a monthly figure, so Glade groups the collected income by calendar month and averages the monthly totals — it does not divide the total by the number of paystubs collected.
