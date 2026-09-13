@@ -361,6 +361,15 @@ Fields populated by autofill show a status indicator so you can see where the va
 - **Edited** — You have manually changed the value after it was autofilled. Shown with a violet pencil icon and a re-run button if you want to restore the autofilled value.
 - **Not yet run** — The autofill has not been applied yet. Shown as a blue **Import Autofill** pill. Click it to trigger the autofill.
 
+#### When an autofill is still working
+
+Some autofills are worked out in the background rather than the moment you click, and the field marks itself as recalculating while that happens.
+
+- **A background autofill that fails, or that finds nothing to fill the field with, now finishes.** It settles on the state that matches what happened — an error you can re-run, or a completed run that wrote no value. Previously a field in either position stayed marked as recalculating indefinitely. Reloading the questionnaire brought the same state back, there was no re-run control to click, and the only way past it was to type the value in by hand.
+- **The recalculating state is visible to everyone working in the questionnaire**, not only the person whose edit set it off. Two people preparing the same form see the same field marked as still working, so neither types over a figure that is about to arrive.
+
+> TODO: Confirm which questionnaire templates work their autofills out in the background. This section applies where values are calculated on Glade's side rather than in the form as you type, and the source change does not establish which templates are set up that way.
+
 #### Fields That Both Sync With Case Data and Autofill
 
 Some fields are set up to sync with case data *and* to be populated by an autofill — most of the income lines on Schedule I are in this position, since they are filled from the Income Organizer. On these fields the indicator names the source the current value actually came from:
@@ -442,6 +451,25 @@ Each autofilled field shows a status indicator describing its current state:
 - **Edited** — the field value was manually changed after autofill. A re-run button lets you re-apply the autofill if needed.
 - **Out of sync** — the source data has changed and the autofilled value may be stale. Re-run to update.
 - **Error** — the autofill encountered an error. A re-run button lets you try again.
+
+#### The Filing District an Agent Works Out
+
+Where the filing district is filled in for you, it is worked out from the **ZIP code of the client's first residence address** rather than from the address as a whole.
+
+- Handing over the whole address let other parts of it contradict the ZIP code. A city that sits across a district boundary from the ZIP code beside it could produce the wrong district, and nothing on the form indicated a disagreement had been resolved the wrong way.
+- **A case with no residence address, or a residence with no ZIP code, produces no district at all** rather than a guess. An empty field is the prompt to enter the district yourself.
+- The first row of the residence list is the one used. Removing a later row does not change which row counts as the first.
+- A ZIP code beginning with a zero is read as written.
+
+The filing district is worth re-checking on cases prepared before this change, along with the figures that follow from it. The median income comparison and the means test lookups are all selected by district, so a district that came out wrong carried into those figures as well.
+
+#### The Explanation Beside an AI-Filled Answer
+
+Clicking an AI-filled field's status indicator opens the explanation of how the agent reached the value. The explanation is recorded at the same moment as the answer it describes, so the two always refer to the same run.
+
+- Previously the explanation could be left behind — the answer updated on each automatic run while the explanation stayed at whatever the last hand-triggered re-run had recorded. A reviewer reading it was reading the reasoning for an answer that was no longer on the field.
+- Where two runs of the same agent overlap, a run that finishes against a version of the form that has since moved on writes neither an answer nor an explanation. A newer answer is not replaced by an older one, and its explanation is not either.
+- An agent that fills several fields at once records each field's explanation against that field, so accepting one field's result does not disturb another's.
 
 ### Chapter 13 Plan Calculator
 
