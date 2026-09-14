@@ -146,8 +146,17 @@ While a PACER filing is in progress, the submission view shows a live preview of
 
 - **The preview stays up for the whole run.** It appears once the filing reaches the court's site and remains until the filing finishes, however long that takes.
 - **A captured screenshot replaces it.** When Glade captures an image at a step in the filing, that image is shown in place of the live preview.
-- **It ends when the filing does.** On completion — succeeded, failed, or canceled — the preview closes and the case's status tab carries the outcome and the step history.
+- **It ends when the filing does.** On completion — succeeded, failed, or canceled — the live preview closes and the run is replaced by a recording of the session (see [Replaying a filing](#replaying-a-filing)); the case's status tab carries the outcome and the step history.
 - For a period, the preview disappeared roughly ten seconds into every filing and the pane read **Live preview unavailable** for the rest of the run. That was a fault in how the preview decided it was finished, not a sign of a problem with the filing itself, and it no longer happens. Filings that ran during that period were submitted normally.
+
+### Replaying a filing
+
+While a filing is running, the filing view shows the court's site as Glade works through it. Once the filing finishes, that view is replaced by a **recording of the session**, so your team can play back what actually happened on the court's site — which pages were reached, what was entered, and where it stopped — instead of working from a single still image of the final screen.
+
+- The recording covers the **most recent filing attempt** on the case. The still image of the last screen reached is still shown alongside it.
+- **An attempt with no recording says so immediately.** Older attempts, and any attempt made without a recording, are reported as unrecorded as soon as the view opens. Previously these sat in a loading state for about two minutes before giving up, which read as a recording still being prepared when there was nothing to prepare.
+
+> TODO: Confirm how long a filing recording stays available for playback, and whether a recording exists for attempts made before this was introduced.
 
 ### Status tracking
 

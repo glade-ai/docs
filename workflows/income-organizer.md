@@ -67,6 +67,17 @@ When a paystub is in YTD mode and includes overtime pay:
 
 In per-paycheck mode, amounts are taken directly from the pay period figures.
 
+### Business and Rental Profit & Loss Statements
+
+A profit & loss statement for a business or a rental is recorded the way the document prints it — one entry per printed line, filed under the accounting category it belongs to — together with the period it covers and the totals printed on it. It is no longer folded into a handful of pre-summed figures as it is read.
+
+- **Each printed line can be corrected on its own.** Previously the figures were added up as the statement was read, so correcting a single line meant retyping the whole bucket it had been summed into, and there was no record of what the document itself said.
+- **The lines feed Schedule I line 8a.** Each accounting category is mapped onto the line 8a it belongs to and converted to a monthly figure, which is what the Schedule I section of the bankruptcy schedules questionnaire shows.
+- **A line Glade cannot read is withheld rather than guessed at.** Where a row cannot be resolved — no amount on it, a figure whose sign or units cannot be determined, or a row that does not fall under any category — the 8a lines that row would have contributed to are held back instead of publishing a total that is short by the unreadable amount. The lines that did resolve still publish, and the reason a line was withheld is recorded against the statement.
+- **Some placements are a judgment, and are flagged for review.** Where mapping an accounting category onto a line of the form is a decision rather than a rule — depreciation, cost of services, contract labor and advertising are the recurring ones — the placement is marked for an attorney to confirm rather than being applied silently.
+- **Business and rental sources are labeled separately**, so the two can be told apart in the organizer.
+- **Statements recorded before this change were converted.** An existing profit & loss statement keeps the line 8a figures it already produced — nothing has to be re-entered. Because the conversion had to place lines the newer model has no direct equivalent for, re-check line 8a on a case whose figures matter before relying on them.
+
 ### How the Schedule I Monthly Figure Is Averaged
 
 Schedule I reports a monthly figure, so Glade groups the collected income by calendar month and averages the monthly totals — it does not divide the total by the number of paystubs collected.
@@ -76,6 +87,35 @@ Schedule I reports a monthly figure, so Glade groups the collected income by cal
 - Clients paid monthly are unaffected — one paystub per month means the two methods produce the same figure.
 
 If you have reviewed a Schedule I figure that was calculated before this change, re-check it against the paystubs on the case: the corrected figure is generally higher for clients paid weekly, biweekly, or semi-monthly.
+
+### Social Security Benefit Types
+
+When you add a Social Security income source, Glade asks which benefit it is — retirement, SSDI, SSI, survivor, spousal, child, disabled adult child, or other. The type is required: the button that creates the source stays disabled until one is chosen.
+
+- Recording the type keeps several Social Security benefits on the same case distinguishable, so a client drawing both a retirement benefit and a survivor benefit reads clearly in the organizer rather than showing two entries with the same name.
+- **The figures do not change.** Every Social Security source still adds into the single Schedule I line for Social Security (line 8e), and all of it stays out of the means test.
+- Sources recorded before benefit types existed keep working as they are. They carry no type and continue to report on the same Schedule I line.
+
+### Business and Rental Income on Schedule I
+
+Schedule I reports business, professional, and rental income on one line (line 8a). Where a business or rental source has a profit and loss statement — uploaded as a document or typed in by hand — that statement is what the line uses for that source.
+
+- **A statement takes precedence over the month-by-month entries for the same source.** Previously the line was derived only from the month entries, so a statement reached the per-business detail behind the line while the line itself ignored it. The organizer could show a figure built from a statement and a Schedule I line that disagreed with it.
+- **Precedence is decided per income source.** A business with a statement uses the statement; another business on the same case with only month entries carries on using those. Both still add into the same Schedule I line.
+- A source that has a statement and no month entries is still counted. It is no longer dropped for having nothing month-by-month behind it.
+- This matches how the organizer already treats year-to-date figures, where a document that summarizes a period supersedes the individual rows for that source.
+- The change takes effect the next time a case's figures are recalculated. Cases whose businesses have no statements are unaffected, and nothing needs re-running on them.
+
+If your team has reviewed a Schedule I line 8a figure on a case where a business has a profit and loss statement, re-check it — the line now reflects the statement.
+
+### Business Details When You Add an Income Source
+
+Adding a business or rental income source collects the business's details as part of the same dialog, and those details are saved onto the business record on the case as entered by your team.
+
+- Because a business record is created alongside the income source, the details you enter land on it directly rather than needing to be filled in separately afterwards.
+- The details are checked before anything is created, so a problem with what you entered is reported without leaving a half-created income source on the case.
+- **The business's name and income type are not entered here** — they come from the income source itself, so renaming the source keeps the business record in step rather than leaving the two to drift apart.
+- This applies to business and rental sources. Other income sources do not collect business details.
 
 ### Including and Excluding Income Records
 
@@ -129,7 +169,9 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 - Cases whose most recent pay stub already falls in a prior month are unaffected — the window is not forced to add empty current-month figures, so the average is not artificially lowered.
 - Income sources that do not count toward the means test — Social Security and government assistance (such as welfare or food stamps) — are left out of the six-month average. They also do not anchor the window, so a benefit entry dated in the current (still-running) month does not pull the window forward and drop an earlier month. Previously a current-month government-assistance entry could shift the window forward and drop the earliest month's paychecks, understating the gross monthly income; excluded sources no longer affect the window. These sources still count where they belong elsewhere, such as on Schedule I.
 
-This applies to the standard six-month means test calculation. You can still choose to apply a single employer's year-to-date figures, or the YTD period method, to the means test instead; see [Document Collection](./document-collection.md).
+- **A Schedule I calculation mode does not change Current Monthly Income.** Setting an employment source to YTD or to latest paystub shapes Schedule I and the long-form deduction lines only. The means test still averages the six full calendar months before filing, because that is what the statute and Forms 122A-1 / 122C-1 require. Previously Current Monthly Income followed whichever mode the source was set to, so a source on YTD or latest paystub produced a means-test figure that was not the six-month average. Re-check the means test on any case with an employment source set to one of those modes — the figure may have moved.
+
+This applies to the standard six-month means test calculation. The YTD period method can still be applied to the means test deliberately, which flags it as a non-standard calculation method; see [Period Method Preview](#period-method-preview).
 
 ### Chapter 7 Median Income Screen
 
@@ -169,6 +211,7 @@ Free-text entry was unavailable for a period after the breakdown editor moved to
 ### Correcting and Removing Income Sources
 
 - **Correcting an extracted value**: When you edit a paystub field in the Income Organizer that was originally filled by automatic document extraction, your correction becomes the current value for that field. It is no longer flagged as a conflict against the extracted figure, so you don't have to open the conflict view to record a trusted correction. If a later document extraction reads a value that disagrees with your entry, that new value is still held for your review rather than silently overwriting your correction.
+- **Re-entering a value that would not hold**: A figure read from a document can be set aside — superseded by a later reading or by a correction elsewhere — which could leave the field with no current value at all. Re-typing the same number then looked like it saved and the field was blank again after a refresh, because Glade treated the entry as identical to the set-aside figure and recorded nothing. Entering the number again now records it as the current value and it survives the refresh. If your team gave up on a field that would not keep what was typed into it, try it again.
 - **Removing a paystub**: When you delete a paystub from the Income Organizer, the income data that came from it is removed along with it. A removed paystub no longer lingers as a leftover row in the client's income data.
 - **Closing the Add Income Source window**: Adding an employment income source and then closing the window discards the new source only when nothing has been uploaded to it. Once a paystub has been uploaded — or is still uploading — closing the window keeps the source and its paystubs.
   - **Back** is disabled once paystubs exist or are in flight, and hovering it explains why. Use **Close** instead; the source and its paystubs are kept.
@@ -237,10 +280,15 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - The debtor badge on an organizer's detail page only appears when the case has more than one income organizer. A single-organizer case shows no badge, which is not an indication that the organizer is unlabeled.
 - Latest paystub mode produces no figure at all when the pay frequency is missing, rather than assuming one. Select the frequency to calculate.
 - Latest paystub mode affects Schedule I only. It is not available for the means test, which always uses the standard six-month calculation.
+- Current Monthly Income is produced by two calculations while an older one is being retired, and the older one can still follow an employment source's Schedule I calculation mode. Where a case shows two different Current Monthly Income figures for a source set to YTD or latest paystub, the six-month average is the correct one.
 - Income sources configured before latest paystub mode existed continue to use the method they were set to. They are not migrated automatically.
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 - **Net pay per period is not recalculated after an edit the way gross is.** Editing the earnings lines behind a paystub updates the pay-period gross; the net figure keeps the value it was read or entered with. Check it against the paystub after a substantial edit.
 - Switching a new income organizer's results through to the Schedule I and Means Test questionnaire happens automatically only for organizers created from this point on. Older organizers are not switched on retroactively.
+- A profit and loss statement wins over the month entries for the same source on Schedule I line 8a. Where a business has both, the month entries are not added on top and are not shown as excluded — they are simply not what the line is built from. Remove the statement if the month entries are the figures you want.
+- Business details entered when an income source is created are saved on a best-effort basis alongside the source itself. If the source is created but the details do not appear on the business record, open the business and enter them there.
+
+> TODO: Confirm where a profit and loss statement is uploaded against a business source, and where the business's own details are viewed and edited on the case.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 - **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
 

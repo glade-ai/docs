@@ -25,6 +25,10 @@ Glade has a redesigned client portal — the version described throughout this p
   - If the email exists but no password has been set, Glade emails the client a one-time code and switches the form to a verification screen. Entering the code finishes the account and signs them in.
   - If the email already has a password set, the form shows an inline error and a prominent **Sign in instead** button that opens the sign-in screen with the email prefilled.
   - Refreshing the page mid-verification shows a "Session expired" panel with a button back to the sign-up screen — the in-progress sign-up is not silently lost without explanation, but it does have to be re-entered.
+- **Password reset emails reach everyone.** A client who asks to reset their password is sent the reset email, whoever they are and whatever they have unsubscribed from previously.
+  - Anyone who had ever unsubscribed from a Glade email — a booking reminder, a digest, a follow-up — was silently blocked from receiving password reset mail from then on. Nothing indicated this: the portal accepted the request and showed its "check your inbox" screen, and the email was discarded before it was delivered. The only symptom was a client insisting they never received it.
+  - Password reset is treated as account mail rather than something a person can unsubscribe from, so it is no longer filtered against unsubscribe preferences. Every other kind of Glade email keeps its unsubscribe link and honours the client's choice exactly as before.
+  - This applies to anyone who signs in to Glade, including your own team members, not only clients in the portal. A client or colleague who reported a reset email never arriving can try again — no change to their subscription preferences is needed first.
 - When adding a joint filer or collaborator to a case workflow at initiation, you can provide an optional phone number. When present, the phone number appears in the case initiation summary and is saved with that person's contact record.
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
 - The portal includes a branded "Client login portal" accessible from your public page.
@@ -102,6 +106,21 @@ The portal's "active" indicators and the Your next step card are driven by the u
 - **Credit counseling enrollment task** — When the firm sends a credit counseling enrollment request, a task to enroll appears on the client's portal home, labeled **Get Pre-Filing Credit Counseling** before the case is filed (or **Get Post-Filing Debtor Education** afterward). Opening the task takes the client straight to the enrollment form. On joint filings, both debtors receive the task. The task clears on its own once enrollment is completed or skipped, and the client receives automated follow-up reminders to enroll while it remains outstanding. The accompanying "enrollment details needed" message now opens the enrollment card directly, instead of pointing to a button that was not shown.
 - **Connect Bank Account task** — When a bank statements step is active on the client's case, a **Connect Bank Account** task appears on the portal home alongside the client's other tasks. Opening it takes the client straight to the Bank Statements Organizer, and the task clears once the client connects an account or the step is skipped. See [Bank Statements](./bank-statements.md).
 - **Tasks from linked workflows** — When a client's workflow is linked to other workflows, the client tasks from those linked workflows also appear on the portal home. The client sees every task assigned to them in one place, not only the tasks on their main workflow.
+
+### Uploading files into a document folder
+
+When a client opens a folder inside a document request and uses **Upload more files**, the file they add appears in that folder.
+
+- Previously the upload finished but the file never showed up in the client's list. It was saved without being attached to the folder it was uploaded into, so the client had no way to tell whether it had worked — the usual result was the same file uploaded several times, none of them visible. Files uploaded this way before the correction are not attached retroactively; ask the client to upload them again.
+- If an upload genuinely fails, the client now sees an error message rather than nothing at all.
+- Your own team was never affected. Uploading into a folder from the firm dashboard has always worked.
+
+### The "Ready to submit for review?" prompt
+
+Once a client has uploaded what a document request asks for, the portal offers to submit it for review. Dismissing that prompt closes it, and it stays closed for the rest of the visit.
+
+- Previously dismissing the prompt could reopen it straight away, leaving the client unable to get past it and back to their files.
+- The prompt still returns when something on the request genuinely changes — for example when a new required file is added, or the client removes a document they had already uploaded.
 
 ### Signing documents
 
