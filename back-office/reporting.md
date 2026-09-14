@@ -50,6 +50,18 @@ Court notices are reportable in their own right, with **one row per notice recei
 - **Assignee and Attorney filters**: narrow the report to your own cases, or to one attorney's. Each filter also offers an **Unassigned** option that returns the notices whose column is empty, for any reason — the notice never matched a case, or it matched one with nobody on it. Between them, the two selections cover every notice, so nothing falls between the filter and the blank column.
 - **CSV export** returns the same columns as the on-screen report and respects the filters you have applied, so a filtered export and the report you are looking at agree.
 
+### Bookings Report
+
+The bookings list answers *"what is on the calendar"*. The bookings report answers a different question — *"which of our cases have appointments, and whose cases are they?"* — with **one row per booking** rather than one row per case.
+
+- Each row carries the client, the service booked, the appointment time, and the **assignees on the case the booking belongs to**. A firm can therefore see a paralegal's appointments without cross-referencing the case list by hand.
+- **Filter by case assignee**, including an option for bookings whose case has nobody assigned. This is separate from the existing filter on whose calendar a booking sits, and the two combine. Firms that book everything onto one shared calendar could not narrow to a person's own cases before — every booking carried the same calendar, so the calendar filter returned either nothing or everyone.
+- **The date range is optional.** Leaving it off returns every booking rather than none. It also brings in bookings that have no time on them at all — a service bought but never scheduled — which no date range can match. For firms that sell sessions ahead of scheduling them, these can be a large share of the total and were previously unreachable.
+- Paging through a long report is stable: bookings that share a time, and bookings with no time at all, keep a consistent order instead of some rows repeating on one page and going missing from another. Never-scheduled bookings sort to the end in both directions.
+- **CSV export reads the same data as the report on screen**, so a filtered export and the report it came from always agree about which bookings match.
+
+> TODO: Confirm where the bookings report is opened from in the dashboard and which columns can be added or removed.
+
 ### Sales Overview
 
 - Shows payment volume, transaction count, and average transaction amount for a configurable lookback period (default 30 days), with percentage change compared to the previous equivalent period.
@@ -147,6 +159,31 @@ Every saved report shows the team member who created it, with their name and pro
   - The filter offers reaffirming and non-reaffirming selections plus a **not answered** selection. A case whose bankruptcy schedules questionnaire has not been filled in — a consultation or a turned-down matter, for example — has no answer to give and falls under **not answered** rather than under "no".
   - The lease-assumption question on the same form ("Will the lease be assumed?") is **not** available as a column or filter.
 
+#### Time from retainer to filing
+
+A case report can measure how long each case took to get from its first signed retainer to the day it was filed, and roll those intervals up into an average and a median for the firm.
+
+- Two columns are available: **first retainer signed**, the date the earliest retainer on the case was signed, and **days to filing**, the number of calendar days from that date to the date the case was filed. Both are included in the report's CSV export when you select them.
+- The interval is measured in **calendar days**, including weekends and court holidays. A case retained and filed on the same day counts as **0 days**, not as blank.
+- The starting point is the **earliest** retainer signature across every workflow linked to the case, not the retainer on the row you are looking at. A client who signed one retainer at consultation and another when a second matter was opened is measured from the first signature.
+- The earliest signature is found regardless of how you have filtered the report. Narrowing a report to a particular retainer type changes which cases are returned, not which signature each case is measured from.
+- The measurement belongs to the case rather than to a workflow, so a case is counted once however many linked workflows sit under it.
+- A retainer that was deleted, or one whose signing step was skipped, is not counted. The earliest remaining signed retainer is used.
+- The filing date is the one recorded on the case, the same date the report's filed column shows.
+- Days are counted in your firm's time zone, so the interval matches the dates your team sees on the case. A firm with no time zone configured falls back to UTC — see [Settings](./settings.md).
+- Alongside the columns, the report gives an **average** and a **median** number of days with a count of the cases behind them, both overall and broken down by **month** or by **quarter**. Cases fall into a month or quarter by the date they were filed.
+- The overall average and median are calculated across the cases themselves rather than by averaging the monthly figures, so a month with three cases does not carry the same weight as a month with three hundred.
+- The report can be narrowed to **only the cases that have a measured interval**, which is how you get to the case list behind an average without a mix of measured and unmeasured cases in it.
+
+Two groups of cases are counted and reported separately instead of being folded into the average:
+
+- **Cases missing one of the two dates** — no signed retainer, or no filing date. This is what keeps cases imported into Glade already filed out of the figure: they carry a filing date but no retainer signed in Glade, so there is no interval to measure. A firm that migrated a back catalogue of filed cases sees them in this count rather than distorting its average.
+- **Cases whose filing date falls before the retainer was signed.** A negative interval is a data problem rather than a fast filing, so it is excluded.
+
+Both counts sit next to the average, so you can see how much of the case list the figure actually covers before quoting it.
+
+> TODO: Confirm where the retainer-to-filing average appears in the interface — the label on the "measured cases only" filter, and how the average is added to a dashboard.
+
 ### Dashboards
 
 Alongside the personal dashboard each person sees on their own homepage, a firm can build **named dashboards** that everyone at the firm shares.
@@ -197,6 +234,7 @@ Choosing several statuses and the older single-status filter at the same time is
 - **Court notice type filter**: The Court Notices report filters by any combination of named notice types plus **Unassigned**. Options are derived from the notice types Glade has classified for your firm; there is no setting that controls the list.
 - **Linked filter**: The court notices report accepts a linked/unlinked selection to include only notices attached to a workflow, or only those not attached to one. Leaving it unset includes both.
 - **Assignee and attorney filters**: The court notices report accepts a list of assignees and a list of attorneys, each with an optional **Unassigned** selection. They can be combined with each other and with the other court notice filters, and both apply to the CSV export as well as the report on screen. Options come from your firm's team roster and attorney list; there is no setting that controls them.
+- **Bookings report filters**: A date range (optional — leaving it off returns every booking), the calendar the booking sits on, and the assignees on the booking's case, with an option for cases that have nobody assigned. The calendar and case-assignee filters combine rather than replacing each other. There is no setting that enables these.
 - **Lookback period**: The sales overview accepts a number of days to look back (default 30).
 - **Firm timezone**: The court calendar CSV export uses your firm's timezone setting for date/time formatting. If no timezone is configured, it defaults to UTC.
 - **Custom report workflow type filter**: Options are derived automatically from your firm's active case types and the case types you have cases under. There is no setting that controls which types are listed.
@@ -204,7 +242,7 @@ Choosing several statuses and the older single-status filter at the same time is
 - **Named dashboards**: Created per firm and shared by everyone in it. Names must be unique within the firm.
 - **Custom report date filters**: Day boundaries follow your firm's configured time zone. There is no per-report time zone setting. A firm with no time zone configured falls back to UTC.
 - **Payments report filters**: Payment status (one or more), payment-plan membership, a specific invoice, payment method search, and date sort order. There is no setting that enables these — they are available on any payments report.
-- **Retainer-to-filing breakdown**: Week, month, or quarter. Weeks run Monday to Sunday and are cut to the report's date range. Nothing else to configure.
+- **Retainer-to-filing breakdown**: Week, month, or quarter. Weeks run Monday to Sunday and are cut to the report's date range. Nothing else to configure. The dates are read from the retainer signatures on the case and from the case's recorded filing date; day counting follows your firm's configured time zone, falling back to UTC if none is set.
 - **Appointments report address and county columns**: Selected on the report like any other column. There is no setting that enables them.
 
 ## Edge Cases & Limitations
@@ -215,6 +253,8 @@ Choosing several statuses and the older single-status filter at the same time is
 - An unlinked court notice has no client record behind it, so columns that come from the case — rather than from the notice itself — are empty on those rows. The case name on the notice is what identifies the client. This includes the Assignee and Attorney columns, which are read from the matched case.
 - A court notice has no assignee or attorney of its own. Reassigning a case changes what its notices report; there is no way to assign a notice to someone independently of the case it landed on.
 - Text taken from a court notice is exported to CSV as plain text even when it begins with a character a spreadsheet would otherwise read as a formula, so party and trustee names open as written.
+- **Canceled bookings are left out of the bookings report entirely**, and there is no filter that brings them back. A report of canceled appointments is not currently possible.
+- A booking that is not attached to a case has no assignees, so it is returned only by the unassigned selection on the case-assignee filter.
 - Task efficiency lookups are limited to 100 items per request.
 - A custom report's **Workflow type** filter does not list case types that have neither an active template nor any cases. A brand-new case type is not selectable until it is enabled or has its first case.
 - The **Reaffirmation agreement** column reports what the schedules questionnaire says, not what was ultimately filed. A reaffirmation agreement decided outside the questionnaire, or changed after the petition went out, is not reflected until the questionnaire is updated.
@@ -232,9 +272,14 @@ Choosing several statuses and the older single-status filter at the same time is
 - A payments report cannot combine the multi-select **Payment status** filter with the older single-status filter. Use one or the other.
 - **Refunded** is not selectable in the multi-select payment status filter, because a refund is an amount returned on a payment rather than a status the payment sits in.
 - Custom report date filters interpret the days you pick in your firm's time zone. Reports run before this was corrected may have included or omitted records at the edges of the range — re-run any date-filtered report whose totals looked slightly off.
+- **Days to filing** is blank on a case that has no signed retainer, on a case with no filing date, and on a case whose filing date falls before its retainer signature. These cases are counted in their own totals rather than being averaged in, so an average never quietly includes or guesses at them.
+- Cases imported into Glade already filed are not measured for time to filing, because the retainer behind them was never signed in Glade. There is no way to supply a retainer date for them after the fact.
+- A case with no filing date is counted in the overall totals but falls into no month or quarter, because the breakdown is keyed to the filing date. The monthly and quarterly counts therefore add up to less than the overall count on a firm with unfiled cases in the report.
+- Time to filing is a calendar-day count. There is no business-day measure, so an interval spanning a holiday weekend reads longer than the working days it took.
 
 ## Related Features
 
 - [Case Management](./case-management.md) — reports operate on case data and case statuses.
 - [Staff Management](./staff-management.md) — paralegal and documents reports segment by workflow role.
 - [Settings](./settings.md) — custom statuses affect status-based report columns; firm timezone affects CSV formatting.
+- [Custom Terms](../workflows/custom-terms.md) — retainer agreements are the signatures the time-to-filing measurement starts from.
