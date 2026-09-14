@@ -103,6 +103,17 @@ A list's display toggles — for example **Show duplicates** and **Show zero'd a
 
 Dropdowns that list options alphabetically sort without regard to capitalization, so a list of names reads `Aaron, alice, bob, Zack` rather than putting every capitalized entry ahead of the lowercase ones.
 
+#### Flipping a table's rows and columns
+
+A table normally runs its fields **down** the visual rows. A **flip rows and columns** setting on the table turns that around, so each field becomes a visual column and the table reads the conventional way — one column per question, one row per entry. Firms that were reproducing a court form or an internal worksheet with a fixed column layout previously had to work against the default orientation.
+
+- The setting is on the table itself and is available on tables only. Lists that are not displayed as a table are unaffected.
+- **It changes the layout, not the answers.** Turning it on or off rearranges how the table is drawn; answers already recorded stay attached to the same questions and are neither moved nor cleared. A questionnaire part-way through being filled in can be flipped without losing anything.
+- Everything else about the table behaves as before — saving as you type, validation, live updates between people working on the same form, and how the answers land on a generated PDF.
+- New tables are created unflipped, so nothing changes for a template nobody edits.
+
+> TODO: Confirm the exact label of the setting in the template editor and where it sits among the table's other settings.
+
 ### PDF Fill Mappings
 
 PDF fill mappings connect questionnaire fields to PDF template fields, enabling automatic generation of filled court forms and legal documents from questionnaire responses. Individual fields connect to specific PDF fields, and each section can reference a PDF template.
@@ -133,6 +144,14 @@ Both forms are added to your firm's questionnaire template by Glade rather than 
 
 Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
 
+#### Business and other interests on Schedule A/B line 19
+
+Line 19 of Schedule A/B asks for the debtor's interests in businesses that are not publicly traded. The generated petition prints the **name recorded on the entry together with the brief description** entered alongside it, on the one line the form provides.
+
+Previously only the name reached the form and the brief description was dropped, so a line that had been filled in on the questionnaire printed as a bare name with no indication of what the interest actually is. Entries with no brief description print the name on its own, as before.
+
+Petitions generated before this change are not rebuilt. Re-generate the petition on a case whose line 19 entries carry a description if the filed copy should show it.
+
 ### Autofills
 
 Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses.
@@ -145,6 +164,18 @@ Autofills populate field values from external data sources, AI inference, or com
 Both situations previously blocked the autofill for good, so a Schedule A/B category answered early — left blank, or answered "No" — never picked up assets added later and the generated schedule shipped without them. If your team has been re-checking Schedule A/B by hand for assets that failed to carry over, that is no longer necessary. Free text someone has actually written is still never overwritten.
 
 **Combining several rows into one answer.** An autofill that draws from a list can join every matching row into a single answer instead of taking only the first one. This matters on Schedule A/B lines that ask for one brief description covering several items — several tax refunds, or several claims — where previously only the first row's description reached the field and the rest were dropped without any indication. Amounts can be totalled the same way. The joined text carries through to the generated PDF as well, so a schedule that previously printed a single description now prints all of them.
+
+#### Locking a field to its autofilled value
+
+A field that has an autofill can be locked, so the value it computes is the only value the field can hold. Use this where the answer should stay system-owned — a figure carried from another form, a total the case record already knows — and a hand correction would put the questionnaire out of step with the rest of the case.
+
+- **Locking is available only on a field that has an autofill.** A field with nothing filling it cannot be locked, and removing a field's autofill unlocks it — there is no state where a field is locked with no source to fill it.
+- **A locked field is still shown.** It appears on the questionnaire as normal, with its value and the explanation of where that value came from, so whoever is filling the form can see the answer and understand it. What they cannot do is change it.
+- **The autofill still writes.** Locking blocks hand edits, not the autofill itself, so re-running or recalculating an autofill updates a locked field as it always did.
+- **Locking a field replaces whatever was typed into it.** If someone had already entered a value by hand before the field was locked, the next autofill overwrites it — unlike an unlocked field, where a hand-entered answer is protected. Check the values on a field before locking it if the existing answers matter.
+- **Fields are unlocked unless someone locks them.** Nothing changes on a questionnaire whose fields have not been locked.
+
+> TODO: Confirm where the lock setting appears in the template editor and what it is labelled there.
 
 ### Assignees
 
@@ -195,6 +226,8 @@ Anyone with view or edit access who opens a questionnaire that is not currently 
 ### Filling Out Forms
 
 When using Glade's native form provider, initial values can be pre-populated from field mappings tied to the client's workflow or from the inheritance scheme. Clients fill out sections and fields through the client portal, with changes auto-saved and synced in real time.
+
+**A lease no longer stops the client questionnaire from pre-filling the Schedules.** On a case where the client recorded a lease but has nothing on the client questionnaire's **Debts & liabilities** list, the Bankruptcy Schedules questionnaire now pre-fills from the client questionnaire as usual. Previously the whole client questionnaire failed to load as a source in that situation, so every Schedules field drawing from it — whether the debtors are filing jointly, marital status, employers, and the rest — came through blank with nothing on screen to explain why, and the answers had to be re-entered by hand. The lease is still carried across as a creditor for Schedule G, and cases that already had entries on Debts & liabilities are unaffected. If your team prepared Schedules on a case with a lease and found the client's answers missing, re-check that case against the client questionnaire.
 
 When two people edit the same questionnaire at the same time — for example, a client and a paralegal, or an attorney working alongside an AI autofill — each person's edits to different fields are preserved. If two edits target the same field, the newer value wins and the older one is discarded silently rather than producing a save error. Edits to other fields in the same save attempt still go through.
 
@@ -404,6 +437,16 @@ Fields populated by autofill show a status indicator so you can see where the va
 - **Edited** — You have manually changed the value after it was autofilled. Shown with a violet pencil icon and a re-run button if you want to restore the autofilled value.
 - **Not yet run** — The autofill has not been applied yet. Shown as a blue **Import Autofill** pill. Click it to trigger the autofill.
 
+#### Fields You Cannot Type Into
+
+Some autofilled fields are locked, meaning the value they are filled with is the value they keep. A locked field shows a lock icon alongside the description of where its value came from, and its input is greyed out.
+
+- **You can read it, you just cannot change it.** The value and its explanation are visible exactly as on any other autofilled field. Clicking the indicator still opens the autofill's explanation.
+- **The value keeps updating.** Because the autofill continues to run, a locked field picks up changes to the data behind it without anyone touching the form.
+- **On a locked row of a list or table, the row's cells cannot be edited either.** The whole row is held to what the autofill produced.
+- **A save that includes a locked field goes through without it.** If a change reaches a locked field as part of a larger save — for example an import, or edits to several fields at once — that one field is left alone and everything else in the save is applied. Nothing fails, and nothing from the skipped edit reaches the case record.
+- If a locked field holds a value you believe is wrong, correct the data the autofill reads rather than the field. Ask whoever maintains your firm's questionnaire templates if you need the field unlocked.
+
 #### When an autofill is still working
 
 Some autofills are worked out in the background rather than the moment you click, and the field marks itself as recalculating while that happens.
@@ -433,6 +476,8 @@ The Schedule I and Means Test lines the Income Organizer calculates are handled 
 - **Re-run is always available on these fields**, whether or not you have edited them. Using it puts the calculator's current output back on the field and hands the line back to the calculator, so a later recalculation updates it again.
 - Because these figures are calculated rather than stored on the case record, the re-run control replaces the case data view on them — there is no case record entry behind the line to open.
 - Ordinary case data sync fields are unchanged: editing one still leaves it on case data with the usual revert option.
+
+The deduction lines on the long-form means test — Form 122A-2 (Chapter 7) and Form 122C-2 (Chapter 13) — name the **long form means test calculator** as their source, separately from the current monthly income lines on Forms 122A-1 and 122C-1, which name the means test calculator. The two are different calculations and reading which one filled a line matters when you are checking a figure against the paystubs. These lines previously read **Synced with case data**, which pointed at a case record entry that does not exist for them. A figure you type over on one of them reads **Manually overridden** and still names the calculator behind it, and **Re-run** behaves as it does on the other calculator lines.
 
 #### Autofills From Reference Data
 
@@ -472,6 +517,9 @@ Some autofills gather several values into one field — for example collecting t
 
 - The values are separated by a **semicolon and a space**, not a comma. Free-text entries such as asset descriptions routinely contain commas of their own, which made a comma-separated line impossible to read as a list.
 - Lines filled before this change may still use commas. Re-run the autofill on the field to re-join it with semicolons.
+- **Every row's description is carried onto the form, not only the first.** Some Schedule A/B description lines were joining only the first row in a category, so a client with three deposit accounts or three business interests had two of the descriptions dropped from the generated petition. All of the rows in the category are now joined. Where a **Describe** field on Schedule A/B had no autofill attached to it at all, one is set up, so the descriptions reach the form instead of being captured on the questionnaire and going no further.
+- **Where the printed form has no separate description slot, the description is combined with the name.** Line 17 of Schedule A/B (deposits of money — checking, savings, and similar accounts) has nowhere on the official form to print a brief description, so the description is printed alongside the institution name in the one field the form provides. Firms had been typing the institution and the description into the name field together as a workaround; that is no longer necessary. An entry with no brief description prints the institution name on its own, as before.
+- Petitions generated before these corrections keep the text they were generated with. Re-generate the petition on a case whose Schedule A/B descriptions should appear on the filed copy.
 
 ### AI Autofills
 
@@ -500,6 +548,15 @@ Two things to be aware of when you re-run:
 
 - A claim you added or edited by hand can be overwritten by a later run of the agent when it sits on a property the agent also produces a claim for. Values elsewhere in the questionnaire are untouched.
 - Re-running the vehicles agent when it finds nothing to claim leaves the previous run's rows in place. Clear them yourself if the earlier result no longer applies.
+
+#### Exemption claims at 100% of fair market value
+
+When the exemptions agent claims a property at 100% of its fair market value, the claim carries that fair market value as its dollar amount.
+
+- Previously these claims were recorded at **$0.00** while the agent's own explanation alongside them said it was claiming the full fair market value — so Schedule C showed a claim worth nothing against a property the agent had decided to exempt in full. Properties whose ownership was recorded as unknown were affected most.
+- **Claims already recorded this way are not repaired.** Re-run the exemptions agent on any case where a 100%-of-fair-market-value claim reads as $0.00, and check Schedule C before filing.
+
+> TODO: Confirm what the agent records when the property has no fair market value entered against it — whether the claim is left unpriced, skipped, or recorded at zero.
 
 Each autofilled field shows a status indicator describing its current state:
 
@@ -573,6 +630,14 @@ The plan's general-unsecured section states a minimum the plan will pay to unsec
 
 If your firm filed a plan with an unsecured pool ceiling set on it before this correction, check the stated minimum against what the plan actually pays.
 
+**A plan that pays nothing to unsecured creditors states the plain remainder.** On the Northern District of Georgia plan, the general-unsecured section offers two elections: pay whatever funds remain, or pay the larger of a stated dollar figure and the funds remaining. Where your firm has set a ceiling on the unsecured pool and nothing actually reaches general unsecured creditors, the plan now takes the first election.
+
+- Previously setting any ceiling took the second election regardless of amount, so a plan delivering nothing to the pool printed a promise to pay "the larger of the sum of $0.00 and the funds remaining" — a statement that says nothing and reads as an unfinished form.
+- This covers both ways the pool can come to nothing: a ceiling entered as $0, and a positive ceiling that the plan's funding never reaches.
+- Plans that do deliver a positive amount to unsecured creditors are unchanged and keep the stated-figure election.
+
+This affects the Northern District of Georgia plan only.
+
 #### Lien Avoidance and Collateral Value
 
 When a secured claim is treated as a lien avoidance, the plan's lien-avoidance worksheet and the secured amount the plan schedules for that creditor now use the same numbers.
@@ -594,7 +659,13 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
 - **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
 - **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
+- **Eastern District of Washington** cases can generate a Chapter 13 plan on the district's Local Form 2083. As with the other plan-generation districts, the form is available from the calculator and there is no per-firm setting to switch on. Two points need checking by hand on this district's form until they are resolved:
+  - **A contract the debtor is assuming but paying directly has nowhere correct to go.** Local Form 2083 pays assumed contracts through the trustee, and the form treats a contract not listed as assumed as rejected — whether or not it appears anywhere else on the plan. Choosing to assume a contract while paying it outside the plan therefore does not say what you mean on this form. Review any such contract before filing.
+  - The district's **no-look attorney fee cap and trustee fee percentage** are still the national defaults rather than figures recorded for this district. The fee cap prints on the plan and is what the plan's attorney-fee section is checked against, so confirm both before relying on a generated plan.
+- **District of Colorado** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 3015-1.1, on the same terms — available from the calculator, built from the district's own recorded figures, with no per-firm setting to switch on. Colorado's plan form has sections the calculator does not work out for you; fill those in from the plan calculator's own inputs before finalizing, as they print blank otherwise.
 - **Eastern District of Louisiana** cases can generate a Chapter 13 plan on the district's Model Plan — a local court form rather than Official Form 113. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on.
+
+> TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
 
 > TODO: Confirm which claim treatments belong in §7.2.c of the Eastern District of Louisiana Model Plan. The section was switched on with no treatments assigned to it, so a claim that belongs there may not print on the generated plan.
 
@@ -796,6 +867,14 @@ When the signature confirmation modal appears at submission time, you have three
 - **Sign** — apply or confirm the signature and submit.
 - **Skip** — submit while keeping any signature values that were already entered in the questionnaire. Use this when you have manually typed signatures earlier and want them preserved on the saved draft or PDF.
 - **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
+
+#### Where the names on generated signatures come from
+
+When signatures are generated for a bankruptcy schedules questionnaire, each signer's typed name is taken from the name recorded on the case — the debtor's, the spouse's on a joint case, and the attorney's, each read as separate first, middle, and last name entries.
+
+- **Middle names now appear.** The debtor's and the spouse's names previously came from a single combined name that had nowhere to hold a middle name, so a middle name recorded on the case never reached their signature. The attorney's name was read from a different record again. All three signers now read from the same place.
+- Where a signer has no name recorded on the case, Glade falls back to the name it used before, so a case that was signing correctly continues to.
+- Correct a name that comes out wrong on the case record rather than on the signature itself, and the next generated signature picks it up.
 
 When a questionnaire is submitted using Submit Anyway, the workflow activity timeline records an entry showing that the questionnaire was submitted with the number of fields left unanswered. This lets your team see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
@@ -1005,14 +1084,17 @@ Before you apply anything, the **Get back in sync** preview shows what would cha
 
 **Compare case data** is a manual action you can run at any time on the bankruptcy schedules questionnaire. It compares the whole questionnaire against the whole case record, rather than only what has drifted, and it includes rows the questionnaire has omitted.
 
+You reach it from the questionnaire's three-dot menu — the same menu that holds the questionnaire's other actions — on an in-progress Glade questionnaire. It is offered alongside **Disable case data sync**, described under [Turning sync off for one questionnaire](#turning-sync-off-for-one-questionnaire).
+
 - Each difference is listed as one of: **only in the case record**, **only in the questionnaire**, **the two hold different values**, or **omitted on the questionnaire but present in the case record**.
-- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row.
+- Every row gives you both directions — **Use case data** or **Use questionnaire** — so you can pull a missing creditor onto the form or push a correction you made on the form back to the case record, row by row. **Use case data** is preselected on every row, so applying without changing anything takes the case record's version throughout; switch the rows you want to keep from the form before applying.
+- Creditors that came from a credit report and never reached the form are listed here, as are creditors the questionnaire has marked omitted. These are the two that the out-of-sync banner hides.
 - Taking **Use case data** on an omitted row brings that row back onto the form, so a creditor list that appeared short fills out to match the case record's creditors.
 - After you apply, syncing is turned back on and the questionnaire is marked as in sync.
 - **Only the details this form actually asks about are compared.** Information that lives on the case record but has no question anywhere on the form — the attorney's bar number or the case type, for example — is no longer listed as a difference. Those rows were selectable but applying **Use case data** to one had no effect on the form, and they crowded out the disagreements worth reviewing. A question the form does ask that nobody has answered still appears, so you can pull a case record value onto the form.
 - The out-of-sync banner and its **Get back in sync** preview are unchanged. Use **Compare case data** when you suspect a difference the banner is not reporting; use the banner when it appears.
 
-> TODO: Confirm where **Compare case data** appears in the questionnaire — header action or overflow menu — and whether it is limited to team members with edit permission.
+> TODO: Confirm whether **Compare case data** is limited to team members with edit permission.
 
 ### Editing a Completed Questionnaire After the Petition Is Drafted
 
@@ -1049,6 +1131,18 @@ When a questionnaire generates multiple documents — for example, filled court 
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
 
+#### Creditors are alphabetized on Schedules D and E/F
+
+When the schedules are filled, the creditors on **Schedule D** and **Schedule E/F** are put in alphabetical order by creditor name. Each part of Form 106E/F is ordered independently, so the priority creditors in Part 1 run A→Z and the nonpriority creditors in Part 2 start again at A.
+
+- Previously these schedules printed creditors in the order the rows happened to sit in the Master Creditor List, which is the order they were added. The creditors loaded from the credit report arrived alphabetically, and everything added afterwards — by hand, or from the case record — was appended to the end. A filed schedule could therefore show two or three alphabetical runs stacked on top of each other, which is the state trustees have raised with firms.
+- The **Creditor Matrix** and the creditor list sent to the court were always alphabetized and are unchanged. It was only the schedules that could disagree with them.
+- A row with no creditor name on it sorts to the bottom, so a half-filled row cannot take the first line of a schedule.
+- Only the Master Creditor List is ordered. The **others to be notified** lists on Schedule D and Schedule E/F are separate lists and are not sorted — check with your trustee whether they expect those alphabetized too.
+- Existing cases are corrected the next time the petition is generated. Nothing needs to be re-entered, and a case already filed is unaffected.
+
+The order shown in the questionnaire itself is still the order the rows were added, so the on-screen list will not match the filed schedule. The **Sort** action on the Master Creditor List reorders the stored rows if you want the two to agree.
+
 #### Keeping a creditor off the matrix but on the schedules
 
 The Master Creditor List carries an **Omit from creditor matrix** checkbox. A creditor checked this way is left out of both the **Creditor Matrix** document and the creditor list submitted to the court, while staying everywhere else it belongs — on its schedule, in case data, in the Chapter 13 calculator, and on the filled schedule PDFs.
@@ -1059,7 +1153,7 @@ This is for the creditor a case has to disclose but should not notice. The usual
 - A creditor checked **Omit from PDFs** is still left off the matrix, as before. Checking either one keeps the creditor off the mailing matrix.
 - Both the Creditor Matrix document and the court's creditor list honor the checkbox, so the two agree.
 
-> TODO: Confirm whether omitting a creditor from the matrix is recorded on the case activity feed. A follow-up change to log who omitted or restored a creditor was planned but is not part of this behavior yet.
+- **Omitting or restoring a creditor is recorded on the case.** The activity log names the creditor and the team member who made the change, so the decision has a name and a date against it. The entry is written when the schedules questionnaire is completed, since that is when the matrix is compiled. See [Case Management](../back-office/case-management.md).
 
 #### How duplicate entries are collapsed
 
@@ -1096,6 +1190,8 @@ The creditor matrix is also included in the **petition draft** — the review co
 - A field that is connected to case data but has never been populated still reports itself as synced with case data and offers no re-run control, because there is no value on it whose source could say otherwise. Fill or autofill the field once and the indicator reports its real source.
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
+- Locking a field is the one case where an autofill overwrites an answer someone typed. The protection that keeps hand-entered values from being replaced does not apply to a locked field, so a value entered before the field was locked is replaced the next time the autofill runs.
+- A locked field cannot be corrected from the questionnaire at all — not by the client, and not by an attorney or paralegal filling on the client's behalf. Fixing a wrong value means fixing the data the autofill reads, or having the field unlocked on the template.
 - Itemized rows on Schedule A/B Part 3 appear only on cases whose schedules questionnaire is on the current template. A case in progress on an older version still prints one combined entry per heading. There is no way to switch a single case over other than upgrading its questionnaire, and upgrading carries the other behaviors described under [Upgrading a Questionnaire and Case Data](#upgrading-a-questionnaire-and-case-data).
 - Petitions already generated are not rebuilt. A draft or signature copy produced before the case was upgraded keeps the combined Part 3 entries it was printed with; generate the petition again to pick up the itemized rows.
 - **Import Data from Income Organizer** is the one action that overrides hand-edited calculator figures. There is no way to import while keeping a particular correction — re-enter the correction after importing.

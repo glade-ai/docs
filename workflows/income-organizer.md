@@ -173,6 +173,28 @@ For the Chapter 7 means test, a debtor's Current Monthly Income is the average o
 
 This applies to the standard six-month means test calculation. The YTD period method can still be applied to the means test deliberately, which flags it as a non-standard calculation method; see [Period Method Preview](#period-method-preview).
 
+### Long-Form Means Test Deductions
+
+The means test deduction lines — taxes, involuntary deductions, life insurance, court-ordered payments, health care and HSA contributions, and (on Chapter 13) mandatory retirement — are calculated from the paystubs on the case instead of being typed in by hand. The figures reach the deduction lines of **Form 122A-2** (Chapter 7) and **Form 122C-2** (Chapter 13).
+
+- The amounts are worked out from the same paystubs the organizer already holds, averaged by month the way Schedule I figures are. Records excluded from the means test, and non-means-test income such as Social Security, are left out.
+- Figures appear on the forms after the organizer recalculates. Adding a paystub or correcting one and recalculating brings the deduction lines with it.
+- This is separate from the current monthly income calculation that fills Forms 122A-1 and 122C-1. That calculation is unchanged; the deduction lines are what is new.
+- **Mandatory retirement is counted once.** It is applied to the deduction line for it and is not also subtracted further down the Chapter 13 form, so disposable income is not reduced twice for the same contribution.
+- On the questionnaire, these fields name the long form means test calculator as their source. Overriding one by hand sticks through later recalculations — see [Questionnaires](./questionnaires.md).
+
+Lines the paystubs cannot answer are left blank rather than filled with `$0.00`, so a line you still need to answer is visibly unanswered instead of reading as a zero somebody meant.
+
+### Two Paystubs With the Same Pay Date
+
+A client can have more than one distinct paystub carrying the same pay date — a regular check plus a bonus, or a correction issued the same day. All of them are kept.
+
+- Each uploaded document appears as its own row. Previously only one of them survived, and the others stayed in the queued-for-analysis bucket indefinitely even though Glade had already read them.
+- Because the row that survived was picked afresh on each load, Schedule I figures could change on their own from one refresh to the next. They no longer do.
+- Re-reading the same document still updates its existing row rather than adding a second one, so a re-upload or a re-run of the extraction does not double a month.
+
+If your team has an organizer where paystubs stayed stuck on **Queued for analysis** after extraction finished, re-open it — the affected stubs appear as ordinary rows, and the month's Schedule I figure should be re-checked, since it was previously calculated from only one of them.
+
 ### Chapter 7 Median Income Screen
 
 The median income screen compares the client's annualized current monthly income directly against the household median income for their state and family size — deductions are not subtracted from this comparison. The result is shown clearly:
@@ -219,13 +241,29 @@ Free-text entry was unavailable for a period after the breakdown editor moved to
   - Upload controls are briefly unavailable while Glade confirms what has been uploaded. If that check cannot complete, the source is kept rather than discarded.
   - Previously, closing or going back after uploading paystubs deleted the source and its files without warning. On joint cases this most often hit the second debtor's employment source: the upload appeared to succeed, and the source and its paystubs were gone afterwards with no indication anything had been removed. If your team has lost a Debtor 2 employment source this way, re-add it — the files have to be uploaded again.
 
+### Business and Rental Income From a Profit & Loss Statement
+
+A business or rental income source holds its own profit & loss statements, and the figures on those statements feed the business income line of Schedule I.
+
+- **Adding a business or rental income source creates a place to upload its statements.** Each source is recorded as a business in its own right, and each statement uploaded against it is kept as its own record of the period it covers.
+- **An uploaded statement is read automatically.** Glade records the statement's income and expense lines as they are printed, the period the statement covers, and the totals printed on it, then sorts the expense lines into the itemized expense categories Schedule I asks for. Previously a profit & loss statement could not be read at all — it settled as a document with no extractable data, and the itemized expense lines had no source anywhere on the case, so they had to be entered by hand.
+- **Nothing is computed from the statement by the reader.** The monthly figures Schedule I needs are worked out from the recorded values afterwards, so the numbers on the statement stay exactly as the client's bookkeeper printed them.
+- **Every business on the case reaches Schedule I.** The business income line totals every business the debtor holds, and each business also carries its own figures for the per-business attachment the form asks for. Previously only one business's figures reached the questionnaire, and a debtor with two businesses had one business's numbers presented as the whole of the line — an understated income figure on a form signed under penalty of perjury. **Re-check the business income line on any case with more than one business or rental source.**
+- **Correcting a statement updates Schedule I straight away.** Edit the statement's recorded values — or delete a statement that should not be counted — and the monthly figures follow on their own. Previously nothing watched these values: the organizer's own panel read correctly while the questionnaire kept serving the earlier figures until someone happened to open the calculator.
+- **A business with no statement, or a statement whose period cannot be determined, contributes nothing rather than a zero.** A zero would read as a business that earned nothing, which is a different claim from one whose figures are not in yet.
+- Every statement uploaded against a source is kept. A newer statement does not replace an earlier one.
+- Each parsed record shows which uploaded document it came from.
+
+> TODO: Confirm where profit & loss statements are uploaded from and where the parsed statement is reviewed and corrected, so those steps can be documented here.
+
 ### Documents With No Extractable Data
 
-Some uploads are classified as a type the Income Organizer cannot pull income figures from — for example, a profit-and-loss statement dropped into an income slot. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
+Some uploads are classified as a type the Income Organizer cannot pull income figures from — a profit & loss statement dropped into a paystub slot rather than onto a business or rental source, for example. These rows settle into a clear terminal state instead of showing a spinner indefinitely:
 
 - The row shows a muted **"No extracted data"** label with a short explanation, and the processing animation stops.
 - Numeric cells show a dash (**—**) rather than **$0.00**, so an empty row is not mistaken for a real zero.
 - The **Include in Monthly Totals** and **Include in Means Test** checkboxes are disabled and there is no **Edit** button, so a blank row cannot be pulled into the income or means-test calculations.
+- **The row records what the document was recognized as.** Where Glade identified the document but cannot read income figures out of it in that slot, the row keeps the recognized type — so it can be presented as an unsupported document rather than sharing one blank label with a paystub the reader simply could not make out. Rows that settled before this change carry no type; re-run AI on the row to record it.
 
 Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
 
@@ -292,7 +330,15 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.
 - **A July filing month is measured against the end of June.** The six-month window for a July filing is January through June, and because year-to-date figures have not reset by then, the whole window can be read off a single paystub. Glade uses the last June paystub's year-to-date gross for this. Where there is no June paystub to read, it works back from the latest July stub by removing **every** July pay period from the year-to-date figure. Previously only one July pay period was removed, so on a case with more than one July paystub — biweekly pay, most often — the earlier July paychecks stayed inside the January-to-June total and the monthly gross on Schedule I came out too high. Organizers calculated before this was corrected keep the figures they were given; re-run the calculation on an affected July source to pick up the corrected figure.
 
+- Only a limited number of businesses get their own per-business attachment detail on Schedule I. A debtor holding more than that still gets a correct business income total; the individual breakdowns beyond the limit are not carried onto the form. Contact Glade if a case needs more.
+- Business and rental sources that were on a case before profit & loss statements were supported are brought across by a one-off setup Glade runs. Contact Glade if an older source has no place to upload its statements.
+- The long-form means test deduction lines are calculated for the household as a whole, which is what Forms 122A-2 and 122C-2 ask for. They are not broken out per debtor on the forms.
+- Deduction lines the paystubs do not answer are left blank. A blank line is not a calculated zero — check it against the case before filing.
+- Deduction figures appear only after the organizer recalculates. An organizer that has not been recalculated since these lines existed shows them empty; recalculate it to fill them.
+
 > TODO: Document how to open the Income Organizer from a workflow, how to add income sources, and how to mark the organizer complete.
+
+> TODO: Confirm the number of businesses that receive their own Schedule I attachment breakdown, and what a firm sees when a case exceeds it.
 
 ## Related Features
 
