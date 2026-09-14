@@ -18,6 +18,18 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-09-14 10:12:24-04:00 · [PR #484](https://github.com/glade-ai/docs/pull/484)
+
+### mcp/overview.md
+- Allowlisted the Cursor MCP custom-scheme redirect URI.
+
+### integrations/efiling.md
+- Restored Puerto Rico routability in the filing-review capability mirror.
+- PACER filing is blocked when PDF-named packet files are not actually PDFs.
+
+### integrations/pacer.md
+- PACER session replay is shown on the latest filing attempt.
+
 ## 2026-07-31 10:09:46-04:00 · [PR #327](https://github.com/glade-ai/docs/pull/327)
 
 ### payments/payment-plans
