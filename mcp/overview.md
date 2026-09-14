@@ -19,7 +19,10 @@ The Glade MCP server works with any MCP-compatible AI client, including:
 - **Claude Desktop** — connect via Settings > Integrations > Add custom integration.
 - **Claude Code** (command-line tool) — auto-discovers the server and prompts for login.
 - **Claude.ai** (web) — connect via Settings > Connectors > Add custom connector.
+- **Cursor** — add the server URL as a custom MCP server and complete the Glade login in your browser when prompted.
 - Other MCP-compatible clients that support OAuth 2.1 or bearer token authentication.
+
+Connecting from Cursor previously failed at the login step: the sign-in never completed and the client reported an error instead of finishing setup. It now completes normally, with no local workaround needed. If your firm gave up on connecting Cursor, try again.
 
 ### What you can access
 
@@ -109,6 +112,8 @@ Case data fields follow a structured schema covering primary and secondary parti
 **Claude Code**: Add the server URL to your MCP configuration and authenticate when prompted.
 
 **Claude.ai**: Go to Settings > Connectors > Add custom connector and enter the server URL.
+
+**Cursor**: Add the server URL as a custom MCP server and authenticate when prompted.
 
 ## Edge Cases & Limitations
 

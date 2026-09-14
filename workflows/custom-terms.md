@@ -40,6 +40,14 @@ When an agreement is set to be signed by an attorney and you assign attorneys th
 
 This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
 
+### When a joint signer has no signature slot
+
+On an agreement carrying more than one client signature slot — a joint retainer, typically — each slot is assigned to a particular signer. If the person signing has no slot assigned to them, for example because both slots were assigned to the attorney rather than one to each spouse, the attempt is refused with an error.
+
+- Previously the page refreshed with the signature still blank and the **Agree to terms** task still outstanding, and nothing explained why. The signer could try repeatedly and never complete the step.
+- When this happens, check who each signature slot on the agreement is assigned to and point the right slot at the spouse who is signing.
+- Agreements with a single client signature slot are unaffected. That slot is used whoever it is assigned to.
+
 ## Configuration
 
 Custom terms templates are created and managed from the firm's template library. Each template requires a name and a body. Once created, a template can be referenced as a step in a workflow template.

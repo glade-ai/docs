@@ -18,6 +18,26 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-09-14 10:13:11-04:00 · [PR #482](https://github.com/glade-ai/docs/pull/482)
+
+### appointments/scheduling.md
+- New "Routing bookings to a calendar by county" section — county-based calendar routing with safe fallback.
+- New "Asking a booking client for their county" and "Counties your firm serves" sections; added a "Client county required" and "Counties served" config row.
+- New "How far ahead a client must book" (minimum booking notice) section, enforced at save time with staff exempt; added an "Appointment outcomes" config row.
+- New "Collecting the client's address when they book" section; added a "Require client address" config row and address-related limitations.
+
+## 2026-09-14 10:12:24-04:00 · [PR #484](https://github.com/glade-ai/docs/pull/484)
+
+### mcp/overview.md
+- Allowlisted the Cursor MCP custom-scheme redirect URI.
+
+### integrations/efiling.md
+- Restored Puerto Rico routability in the filing-review capability mirror.
+- PACER filing is blocked when PDF-named packet files are not actually PDFs.
+
+### integrations/pacer.md
+- PACER session replay is shown on the latest filing attempt.
+
 ## 2026-07-31 10:09:46-04:00 · [PR #327](https://github.com/glade-ai/docs/pull/327)
 
 ### payments/payment-plans

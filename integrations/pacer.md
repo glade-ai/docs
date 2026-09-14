@@ -137,6 +137,15 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
 - **Three failure reasons that used to show no detail now explain themselves.** A filing that stopped because the PACER login did not finish loading, because a required file was missing from the packet, or because the court site landed on a page Glade did not expect used to leave the progress detail empty and show only a generic "Case sync failed" message on the dashboard. Each of these now reports its own explanation, so your team can tell a court-site problem worth retrying from a packet problem it has to fix first. Other failure reasons were already explained and are unchanged.
 
+### Replaying a filing
+
+While a filing is running, the filing view shows the court's site as Glade works through it. Once the filing finishes, that view is replaced by a **recording of the session**, so your team can play back what actually happened on the court's site — which pages were reached, what was entered, and where it stopped — instead of working from a single still image of the final screen.
+
+- The recording covers the **most recent filing attempt** on the case. The still image of the last screen reached is still shown alongside it.
+- **An attempt with no recording says so immediately.** Older attempts, and any attempt made without a recording, are reported as unrecorded as soon as the view opens. Previously these sat in a loading state for about two minutes before giving up, which read as a recording still being prepared when there was nothing to prepare.
+
+> TODO: Confirm how long a filing recording stays available for playback, and whether a recording exists for attempts made before this was introduced.
+
 ### Status tracking
 
 - Submission status values: in progress, succeeded, failed, or manual (attorney filed outside Glade).

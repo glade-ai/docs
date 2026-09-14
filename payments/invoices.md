@@ -259,6 +259,8 @@ Templates are the primary configuration tool for invoices. Each template defines
 
 Templates can be archived when no longer needed. Archiving does not affect invoices already created from the template.
 
+**Creating a template.** Saving a new template from the **New invoice template** dialog completes, and the template appears in your list ready to use. Previously the dialog refused the save and showed an error in place of creating the template, so a firm that needed a second template — a separate filing-fee template for court costs, for example — had no way to add one. Existing templates were never affected. If your team gave up on adding a template, try again.
+
 ### Per-invoice overrides
 
 All template settings can be overridden on individual invoices. This allows firms to use a template as a starting point and customize specific invoices as needed.
