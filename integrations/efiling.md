@@ -63,12 +63,19 @@ The following checks are active:
 | Non-filing spouse accepted by the district | The district accepts a married debtor filing individually with a non-filing spouse | Blocking |
 | Presumption of abuse (Idaho) | On an Idaho Chapter 7 means-test case, the presumption of abuse is answered "no" | Blocking |
 | Court office identified | The case's division resolves to an office the court's filing system recognizes | Blocking |
+| An attorney is assigned to file | The case has a filing attorney, either assigned on the case or set as the firm's default | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
 | Duplicate creditors | The creditor mailing matrix lists the same creditor more than once under slightly different details | Advisory |
 | A recent filing attempt on the case | The case was attempted recently enough to be worth a second look before trying again | Advisory |
 | Schedule I / J figures missing | (Chapter 7) The income and expense figures the surplus comparison needs are present | Advisory |
 | Court notice matched to a client | A court notice held on the case matches this client | Advisory |
+| Document the district will accept electronically | Every tagged document in the packet is one the district's filing system will accept for this case as it stands | Advisory |
+| Presumption of abuse answered (New Mexico) | On a New Mexico Chapter 7 case that is not exempt from the means test, the presumption of abuse is answered yes or no | Blocking |
+| Joint means-test-exempt filing (Ohio Southern) | The case is not a joint Chapter 7 filing claiming a means-test exemption, which Ohio Southern does not accept | Blocking |
+| Chapter supported for e-filing (New Mexico, Ohio Southern) | The chapter being filed is one Glade can e-file in that district | Blocking |
+| Duplicate filing slots | No two documents in the packet are assigned to the same filing slot | Advisory |
+| Incomplete PACER tags | Every tagged document in the packet carries the file the district's system needs | Advisory |
 
 - **Required documents come from each district's own rules.** Instead of a list maintained form by form, the check reads the required-document list for the case's filing district and chapter — the same list that drives the filing packet checklist. When a district's required documents change, the review follows automatically.
 - **Each missing document is reported as its own item.** A packet missing five required documents produces five blocking items, each naming the document, and each needing its own attorney sign-off. Signing off on one document does not clear the others, and withdrawing sign-off on one document re-gates only that document.
@@ -87,6 +94,18 @@ Glade files cases for individual debtors. A case recorded as a corporation or a 
 
 - A debtor type Glade does not recognise at all is not treated as unsupported — the check reports itself as unresolved rather than blocking a case over an entry it cannot read.
 - This is a check on what Glade can file today, not on the court's own rules. Districts that begin accepting other debtor types will be enabled individually.
+
+#### An attorney is assigned to file
+
+A case can be prepared with the attorney left as **None**, and nothing used to stop it being submitted that way. On a firm whose account files for more than one attorney, the court's filing system then asks who the filing is for and the submission fails at that point — late, and with nothing on the case to say what was missing.
+
+The review now checks this up front and blocks submission until an attorney is resolved.
+
+- The check passes when an attorney is **assigned to the case**, or when your firm has a **default filing attorney** set. A solo firm with a default set continues to pass without assigning anyone case by case.
+- It applies to Chapter 7 and Chapter 13 alike, in every district.
+- This check fails closed. If Glade cannot determine your firm's default filing attorney, the case is blocked rather than allowed through, so a filing is never released on an unanswered question about who is filing it.
+
+Firms that file for several attorneys should confirm that cases carry an assignment, or that a default is set, before the next filing — a case with neither is blocked from this point on where it previously reached the court and failed there.
 
 #### Negative amounts on the case-upload data
 
@@ -120,6 +139,18 @@ Every document in the filing packet has to map to a slot the district's filing s
 - The same file listed twice produces one item, not two.
 - If Glade cannot work out whether the packet's documents can be placed at all, the check reports as unresolved rather than passing.
 - **District of Puerto Rico cases are covered.** Since Puerto Rico was brought online as a filing district, this check could not recognize it and reported as unresolved on every case filed there — so an unplaceable document was never named before submission and instead failed at the court. Puerto Rico cases are now checked like any other district. If a Puerto Rico filing failed at the court with nothing in the review to explain it, run the review again; a packet problem will now be named.
+
+#### A document the district will not accept electronically
+
+Separate from whether a document can be *placed* on a filing slot, a district decides which documents it will take electronically at all — and that answer depends on the case as well as the district. A district may not accept a particular form electronically in any circumstances, or may accept it only for a case of a certain shape.
+
+- Each tagged document in the packet that the district will not accept for this case raises its own advisory finding naming that document, so a packet with several names all of them.
+- **This is what a firm previously learned from a rejection after filing.** A document the court's system would not take came back as a post-submission rejection with nothing on the case to point at; the finding moves that to before you submit.
+- **It is advisory, so the review will let you file past it** — but the court's system will not. Filing over one of these findings means the submission fails at the court rather than at the review. Treat it as a rejection you have been shown early, not as an optional warning.
+- Only documents actually in the packet are checked. An expected slot with nothing in it raises nothing here.
+- Where Glade cannot determine whether the district accepts a document, no finding is raised for it.
+
+This is a different check from [Documents the district cannot place](#documents-the-district-cannot-place), which is blocking and asks whether a document maps to a filing slot at all. A document can map to a slot perfectly well and still be one the district will not take electronically.
 
 #### Who can clear a blocking finding
 
@@ -188,6 +219,23 @@ Three further district requirements are now pre-filing findings rather than fail
 - **New Mexico and a non-filing spouse.** New Mexico does not accept a married debtor filing individually with a non-filing spouse. The finding says the case cannot be e-filed in New Mexico and to contact support. It does not suggest converting the case to a joint filing — a genuine non-filing spouse is not a data-entry mistake, and switching to joint would be the wrong correction.
 - **Idaho and the presumption of abuse.** Idaho requires the presumption of abuse to be answered "no" on a Chapter 7 case that completes the means test. A case answering otherwise is blocked at review.
 - **A division that does not resolve to a court office.** The court's filing system identifies the office handling the case from the case's division. Where the division is missing or does not map to an office, the filing is blocked at review, naming the problem, instead of failing during submission. Idaho and **Florida Northern** are the districts where this arises in practice; set the case's division to clear it.
+
+**The court office check now covers every district that needs one.** It was first switched on for Idaho and Florida Northern, and applies to all of the districts whose filing system requires a court office: Florida Middle, Florida Northern, Florida Southern, Idaho, Louisiana Eastern, New Mexico, Ohio Southern, Pennsylvania Western, South Carolina, Virginia Eastern, and Washington Western. In each of those, a case whose division does not resolve to an office is now stopped at review rather than at submission.
+
+Three further district requirements are checked at review for the same reason — each one previously cleared the review and then failed once a submission was already underway:
+
+- **New Mexico and the presumption of abuse.** On a New Mexico Chapter 7 case that is not exempt from the means test, the presumption of abuse has to be answered yes or no. A case that leaves it unanswered is blocked at review.
+- **Ohio Southern and a joint means-test-exempt filing.** Ohio Southern does not accept a joint Chapter 7 filing that claims an exemption from the means test. Such a case is blocked at review, naming the district.
+- **New Mexico and Ohio Southern take Chapter 7 only.** A Chapter 13 case in either district cannot be filed electronically through Glade. The finding says so and tells your team to file the Chapter 13 with the court directly. Both districts still support Chapter 13 as a case type in Glade — the limitation is on electronic filing, not on running the case.
+
+#### Packet integrity
+
+Two advisory findings look at how the packet itself is put together, so defects that used to surface as a failed submission are visible while the packet is still being reviewed.
+
+- **Two documents on the same filing slot.** Each document in the packet goes to a specific slot in the district's filing system, and a slot takes one document. Where two have been assigned to the same slot — two credit counseling certificates on the credit counseling slot is the case firms hit — the finding **names both documents** so you can tell which one to move or remove. Left in place, this fails at submission, and a filing can hard-fail repeatedly against every engine tried.
+- **A tagged document missing its file.** A document tagged for a filing slot has to carry the file the district's system will send. Where that link is missing, the finding names the document. These are older records; a tag created from now on cannot end up in this state.
+
+Both start as advisory, so neither gates a filing today — they are there to be read and cleared. **Expect findings on cases that have been sitting unfiled**: a platform-wide check found several hundred workflows with more than one document on a single slot, most of them not yet filed. Working through those findings before filing is the point of the check.
 
 ### Where pre-filing checks run
 
@@ -288,6 +336,11 @@ This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *S
 - The petition signature check is advisory and cannot currently be dismissed the way the other pre-filing findings can. It reappears on each review until the signatures are in place.
 - The duplicate-creditor check needs the case's creditor matrix to have been generated. Where there is no matrix to read, it reports as unresolved rather than passing, and no creditors are examined.
 - The duplicate-creditor check reports judgment calls for a person to settle. It does not correct the creditor list, and a finding it raises is not by itself evidence that two creditors are the same party.
+- The check on whether a district will accept a document electronically is advisory, so a filing can proceed past it. The court's system will still refuse the document — filing over the finding converts an early warning into a rejection after submission.
+- A district's answer about a document can depend on the shape of the case, so the same document can raise a finding on one case and none on another in the same district.
+- The New Mexico and Ohio Southern Chapter 7-only rule blocks electronic filing and cannot be cleared on the case. File the Chapter 13 with the court directly.
+- The packet integrity checks are advisory, so a packet with two documents on one filing slot can still be submitted — and will still fail at submission. Clear the finding rather than filing past it.
+- The duplicate-slot and incomplete-tag checks are not repaired automatically and no bulk clean-up has been run. Cases that have been waiting to file will surface findings for defects that have been sitting on them for some time.
 - The non-PDF check is decided from the packet slot the document occupies, not from inspecting the file your team recognizes it as. A file whose format Glade cannot determine at all is treated as not a PDF and blocks the filing, so a document that should be filable may need re-uploading before it is accepted.
 - Filings submitted before this check existed could reach the court with an image under a PDF name. If a packet was rejected or timed out without an explanation, check the tagged documents for a photo — the filing can be resubmitted once it is replaced.
 

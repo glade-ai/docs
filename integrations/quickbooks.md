@@ -43,6 +43,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 - Line items are recorded against a configurable QuickBooks service item. By default, QuickBooks auto-selects the item; firms can set a specific item in the QuickBooks settings (see Configuration).
 - A private memo on the QuickBooks invoice includes the Glade invoice ID for cross-reference.
 - The QuickBooks invoice due date is set to the Glade invoice's creation date, so synced invoices show as due immediately rather than relying on QuickBooks' default customer terms. If a synced invoice is later out of date in QuickBooks, the next sync also updates its due date to match.
+- **The invoice date is set explicitly rather than left to QuickBooks.** Glade sends both the transaction date and the due date on every synced invoice. Previously the transaction date was omitted, so QuickBooks stamped the invoice with the day the sync happened to run — which is normally the same day, but is the wrong day for an invoice that syncs after a delay or a retry.
 - If an invoice is voided in Glade, the corresponding QuickBooks invoice is also marked as voided.
 - Edited invoices (new versions) sync as updates to the existing QuickBooks invoice.
 
@@ -86,6 +87,15 @@ The report supports:
 
 If the report fails to load, a toast appears so you know the load did not complete — refresh to retry.
 
+### What date a record carries in QuickBooks
+
+Every date Glade writes to QuickBooks is the **Eastern Time** calendar day, not the UTC day.
+
+- A payment carries the Eastern-time day it succeeded on. A payment taken at 11:45pm Eastern on the last day of a month stays on that day and in that month, where it previously landed on the first of the next month.
+- Invoices carry their own date the same way.
+- This matters most at month-end close: a late-evening transaction on the 31st used to fall into the following month's books, so the two months' totals in QuickBooks did not match what Glade reported for the same periods.
+- **Records already in QuickBooks are not corrected.** If your firm reconciled a month-end close before this change, check for late-evening transactions sitting on the first of the following month and re-date them in QuickBooks.
+
 ### Invoice line item rounding
 
 Invoice line item amounts are rounded to the nearest cent before being sent to QuickBooks. A line item priced at $19.99 with a quantity of 3, for example, syncs as $59.97 — the calculated amount and the unit price are each rounded to two decimal places, so the QuickBooks invoice total always matches what Glade shows your firm and your client. This prevents penny-level mismatches between Glade and QuickBooks caused by floating-point arithmetic.
@@ -126,6 +136,7 @@ Invoice line item amounts are rounded to the nearest cent before being sent to Q
 - If the refresh token expires (after approximately 100 days without activity), the firm must manually reconnect.
 - Reconnecting to the same QuickBooks company after disconnecting may create duplicate records (previously synced records are not re-matched).
 - No estimates, quotes, or credit memo sync — only invoices and payments.
+- Dates written to QuickBooks before the Eastern Time correction are not re-dated retroactively. Late-evening transactions from those periods may sit on the following calendar day in your books.
 
 ## Related Features
 

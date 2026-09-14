@@ -67,6 +67,9 @@ Court case upload rejects a negative dollar amount outright, which used to surfa
 - If any amount that the court expects to be zero or positive is negative, the filing is stopped before the files are generated and **every offending figure is named**, so all of them can be corrected in one pass rather than one failed submission at a time.
 - Three figures that are legitimately allowed to run negative are exempted and reported to the court as `0.00`: monthly net income, monthly disposable income, and sixty-month disposable income. A genuine Schedule J or means-test deficit does not block a filing.
 - The problem is reported as a specific error on the filing rather than producing an empty debtor information file, which is how it previously failed.
+- **On a Chapter 13 case, the Chapter 7 means-test income figures are ignored.** Chapter 13 questionnaires still carry the Chapter 7 means test (Form 122A-1) alongside the Chapter 13 one (Form 122C-1), and a debtor with a net business loss can drive the Chapter 7 per-debtor income line below zero. That figure is not the case's current monthly income on a Chapter 13 — the Chapter 13 form supplies it — so it is reported as `0.00` and no longer stops the debtor information file being built. Chapter 7 cases are unchanged: a negative figure on that line still stops the filing, because the court would reject it.
+
+A Chapter 13 case that previously failed this way produced everything except the debtor information file, since the other documents are generated independently. The file is not created retroactively — **regenerate the case's documents** to produce it.
 
 ### Filing packet document types
 
@@ -136,6 +139,15 @@ A filing progress panel appears in the bottom-right corner of the screen when a 
 - If you cancel a filing in progress, the header shows "Cancellation pending" until the cancellation is confirmed.
 - Dismissing the panel hides it from view. The case's status tab continues to show full filing history.
 - **Three failure reasons that used to show no detail now explain themselves.** A filing that stopped because the PACER login did not finish loading, because a required file was missing from the packet, or because the court site landed on a page Glade did not expect used to leave the progress detail empty and show only a generic "Case sync failed" message on the dashboard. Each of these now reports its own explanation, so your team can tell a court-site problem worth retrying from a packet problem it has to fix first. Other failure reasons were already explained and are unchanged.
+
+### Watching a filing as it runs
+
+While a PACER filing is in progress, the submission view shows a live preview of the court's site as Glade works through it, so your team can see what is happening on the far side rather than waiting on a status line.
+
+- **The preview stays up for the whole run.** It appears once the filing reaches the court's site and remains until the filing finishes, however long that takes.
+- **A captured screenshot replaces it.** When Glade captures an image at a step in the filing, that image is shown in place of the live preview.
+- **It ends when the filing does.** On completion — succeeded, failed, or canceled — the live preview closes and the run is replaced by a recording of the session (see [Replaying a filing](#replaying-a-filing)); the case's status tab carries the outcome and the step history.
+- For a period, the preview disappeared roughly ten seconds into every filing and the pane read **Live preview unavailable** for the rest of the run. That was a fault in how the preview decided it was finished, not a sign of a problem with the filing itself, and it no longer happens. Filings that ran during that period were submitted normally.
 
 ### Replaying a filing
 
@@ -387,6 +399,7 @@ Deselecting all documents returns the footer to the standard download options. Y
 - Court notice search matches on case number only when what you type reads as a case number. Anything else is matched as ordinary text, so a partial number finds only notices whose stored text contains it.
 - The claims register covers proofs of claim received from the point the feature became available. Claims filed against a case before then are not added to the register on their own — contact Glade if a case needs its earlier claims brought in.
 - The creditor information file and the Creditor Matrix are only rebuilt when the schedules questionnaire is submitted. Editing a completed questionnaire refreshes the petition PDF but leaves those two behind until the questionnaire is submitted again — see [When the case upload files are produced](#when-the-case-upload-files-are-produced).
+- The live preview is a view of a filing in progress, not a record of it. Closing the page or navigating away ends the preview but does not affect the filing, which continues to run — reopen the case's status tab to see where it got to. Nothing from the preview is retained afterwards; only the captured screenshots and the step history remain.
 
 ## Related Features
 
