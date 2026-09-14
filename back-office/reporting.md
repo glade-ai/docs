@@ -79,6 +79,26 @@ Court notices are reportable in their own right, with **one row per notice recei
 
 - Tracks attorney filing data from PACER, aggregated by state and district.
 
+### Time from retainer to filing, broken down by week
+
+Case reports measure how long a case takes to go from its earliest signed retainer to the date it is filed, and can break that measurement down over time. Alongside the monthly and quarterly breakdowns, the figure can be grouped **by week**.
+
+- **A week runs Monday to Sunday**, and a case falls into the week its filing date lands in.
+- Weekly grouping is what makes a single month readable as a trend. A month viewed monthly is one bar; viewed weekly it is four or five points, so a firm can see turnaround moving within the month rather than only comparing one month against the next.
+- **A week that straddles the edge of the period you are looking at is cut to the period.** Filter to a single month and the first and last weeks cover only the days inside that month, so no case outside your date range is counted.
+- Everything else about the measurement is unchanged — which retainer signature is used, which cases are excluded, and the time zone the days are counted in all work exactly as they do for the monthly and quarterly views.
+
+> TODO: Confirm where the weekly grouping is chosen on the report, and whether it is available on dashboard widgets as well as the report itself.
+
+### Address and county on the appointments report
+
+The appointments report can include the booking client's **address** and **county** as columns, and both are carried into its CSV export.
+
+- **Address is one column**, written as a single line — street, city, state, and ZIP. A client with no address on file exports an empty cell rather than stray punctuation.
+- **County is its own column** rather than being folded into the address, because the county is what a firm routes and reports on. A client whose county has not been recorded shows an empty cell.
+- Both read the client's current details, so a client who moves shows their new address against appointments booked before the move.
+- Select the columns on the report and they appear in the export. An export that includes them matches what the report shows on screen.
+
 ### Case Data custom reports
 
 Custom reports let your firm build its own view over case data, choosing the columns and filters it needs rather than working from a fixed report layout.
@@ -104,6 +124,9 @@ Every saved report shows the team member who created it, with their name and pro
 - **Pending client tasks**: Segments cases by whether the client still has an incomplete task assigned to them. Both the "has pending" and "no pending" selections now return accurate results; previously selecting either could produce results that did not match the filter.
 - The **Court notice type** column reflects the filter you have applied. When you filter the report to specific court notice types, the column shows only those types for each case — previously it listed every notice type on the case regardless of the filter, so a filtered report showed rows whose column contradicted the filter above it.
 - Each type in the **Court notice type** column is clickable and opens the matching notice in a panel. Where a case has more than one notice of the same type, the link opens the most recent one.
+- The **Case number** column answers the same question the case-number filter asked. Ordinarily a case with no number of its own borrows one from another workflow in the same case group, so the column is rarely blank. When you filter a report to cases **without** a case number, that borrowing is switched off and the column shows each row's own value — which, for every row the filter returned, is empty.
+  - Previously a report such as *Time Sensitive — Without a Case #* could list a case with a case number printed beside it, so the report looked broken even though the filter had returned the right rows. If your firm stopped trusting a "without a case number" report, try it again.
+  - Reports that do not use that filter are unchanged: the column still fills in a number from a related workflow where the case has one.
 - **Court district**: The report can be narrowed to one or more court districts, so you can answer "which cases are filed in these districts?" rather than only seeing the district on each row. The filter applies to the report on screen and to its CSV export.
   - It matches on the district assigned to the case, not on district text typed into case data. The same court is often written several different ways by hand, which cannot be filtered on reliably.
   - A case with no assigned district is not returned by a district filter, even if a district name appears elsewhere on it.
@@ -181,6 +204,8 @@ Choosing several statuses and the older single-status filter at the same time is
 - **Named dashboards**: Created per firm and shared by everyone in it. Names must be unique within the firm.
 - **Custom report date filters**: Day boundaries follow your firm's configured time zone. There is no per-report time zone setting. A firm with no time zone configured falls back to UTC.
 - **Payments report filters**: Payment status (one or more), payment-plan membership, a specific invoice, payment method search, and date sort order. There is no setting that enables these — they are available on any payments report.
+- **Retainer-to-filing breakdown**: Week, month, or quarter. Weeks run Monday to Sunday and are cut to the report's date range. Nothing else to configure.
+- **Appointments report address and county columns**: Selected on the report like any other column. There is no setting that enables them.
 
 ## Edge Cases & Limitations
 
@@ -199,6 +224,10 @@ Choosing several statuses and the older single-status filter at the same time is
 - The **Client address** column is blank for a case whose address was never written to case data, including cases whose address is held only on the client record. It cannot be sorted or filtered on.
 - A custom report export covers up to **50,000 rows**. A report with more rows than that exports the first 50,000 — narrow the filters and export in batches if your firm needs the rest.
 - A very large export can run out of time before the file is produced, in which case the export fails rather than returning a partial file. Filter the report down and run it again.
+- Weekly retainer-to-filing figures are read from partial weeks at the edges of your date range, so the first and last points on a monthly view cover fewer days than the ones between them. Compare the middle of a month rather than its edges when reading a trend.
+- The weekly breakdown covers only cases that have been filed, since it is keyed to the filing date. Cases still in progress are not in any week's figure, the same as in the monthly and quarterly views.
+- The appointments report's address and county columns read the client's current record, not what was true when the appointment was booked. An old appointment is not a record of where the client lived at the time.
+- A client's county has to have been recorded before it can appear in the report. An address on file does not by itself produce a county.
 - The **Created by me** filter on the report list matches the report's original creator only. There is no filter for "reports I have edited".
 - A payments report cannot combine the multi-select **Payment status** filter with the older single-status filter. Use one or the other.
 - **Refunded** is not selectable in the multi-select payment status filter, because a refund is an amount returned on a payment rather than a status the payment sits in.
