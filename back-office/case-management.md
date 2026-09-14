@@ -14,6 +14,7 @@ Case management is the core back-office feature that lets your firm track client
 - The case list can be sorted by any column, including Progress. Sorting by Progress orders cases by their completion percentage without affecting any active status or other filters.
 - A **Last paid** column on the case list shows the date of the most recent succeeded payment on each case, so your team can scan which cases have had recent payment activity and which have gone quiet. Cases with no payments yet show an empty value; the column is sortable like the other date columns.
 - Cases can be initiated by a specific team member and assigned to one or more owners, each of whom can have a role on that case (e.g., Paralegal, Documents Team).
+- **The email announcing a new case owner links to the case.** When a case is reassigned, the new owner is emailed and the button in that email opens the case. It previously went through an older dashboard redirect that no longer resolved, so the link was dead and the new owner had to find the case by hand. Only the new owner is emailed, as before.
 - A case can be marked as the primary case, with associated sub-workflows linked to it. Associated workflows appear together in intake status reports.
 - **Starting an associated case keeps each filer distinct.** When your team starts a new case from an existing one — for example, a joint Chapter 13 continuing as a Chapter 7 — the second filer is carried across as their own person, separate from the primary debtor. Previously the second filer's slot on the new case could be bound to the primary debtor's record, so both debtor slots showed the same name and the primary debtor's details were also written into the second filer's case data fields. Cases that were already affected are not repaired by this change; the second filer's details have to be corrected on those cases.
 - Case data supports both single-value fields (e.g., debtor SSN, attorney info) and repeatable items (e.g., creditors, assets). The system preserves a full history of field changes for audit purposes.
@@ -24,7 +25,7 @@ Case management is the core back-office feature that lets your firm track client
   - **Petition Check** — when a Petition Check is run, the log records it along with which required fields were still missing, so you can see when the case was validated and what was outstanding at the time.
   - **Case document generation** — when a case document is generated, the log records that the document was created.
   - **PACER filing** — when a case is successfully filed with PACER, the log records "Filed case with PACER" so the filing is part of the case's audit trail.
-  - **Creditors omitted from or restored to the creditor matrix** — when a creditor is left off the creditor mailing matrix, or put back on it, the log records which creditor it was and which team member made the change, so the decision has a name and a date against it.
+  - **Creditors omitted from or restored to the creditor matrix** — when a creditor is left off the creditor mailing matrix, or put back on it, the log records which creditor it was and which team member made the change, so the decision has a name and a date against it. The entry reads **Omitted from creditor matrix** or **Restored to creditor matrix**, with the creditor's name beside it. These entries record a decision rather than a step someone worked through, so they carry no action of their own and show a dash in that column. The case overview's Recent Activity panel uses the same wording — for example, "Dana omitted Midland Funding from the creditor matrix."
 
   These entries are deduplicated, so repeating the same action (for example, re-running a Petition Check or retrying a filing submission) does not clutter the log with duplicate entries.
 
@@ -35,6 +36,18 @@ Case management is the core back-office feature that lets your firm track client
 - **Previewing a case the way the client sees it.** Your team can open a read-only preview of a client's workflow without signing in as the client. The preview renders exactly what the client gets — the same tasks, documents, invoices, and visibility rules, evaluated as though the client were looking at it — with the firm's own navigation left out, so nothing on screen is something the client cannot see. Everything in the preview is read-only: tasks cannot be completed, documents cannot be uploaded or removed, invoices cannot be paid, and messages cannot be posted on the client's behalf. Controls that only view something, such as opening a document to read it, still work. Use it to check what a client is actually looking at before calling them about it.
 - Tags provide lightweight visual categorization (icon and text label) on case list views.
 - Collaborators on a case have specific permissions: ability to assign team members, invite other collaborators, and receive customer notifications. The system tracks how each collaborator was added (manually, as a customer, as an organization member, etc.).
+
+### Firm log numbers
+
+A case can carry a **log number** — your firm's own reference for the matter, available from the moment the client is engaged rather than only once the court assigns a case number.
+
+- **The number is issued when a retainer goes out.** Starting a case whose workflow includes a retainer agreement gives it a log number at that point. A case with no retainer — a consultation, for example — is not given one.
+- The number is made up of your firm's initials, the two-digit year, and a five-digit sequence, run together: `CW2600001`. The sequence is your firm's alone and restarts each calendar year, counted in your firm's own time zone.
+- **Numbers brought over from another practice-management system are left exactly as they are.** A matter imported carrying `26-10151` keeps that reference, and it neither continues nor shifts Glade's own sequence — the two are counted separately.
+- The log number can be searched on, in full or by its first few characters. Searching `CW26` narrows to that year's matters.
+- Unlike the court's case number, a log number belongs to a single case. A case linked to others in a group shows its own number and never a related matter's.
+
+> TODO: Confirm where the log number appears on the case list and in a case's detail view, and whether the initials prefix is configured per firm or derived from the firm name.
 
 ## Configuration
 
@@ -48,7 +61,7 @@ Case management is the core back-office feature that lets your firm track client
 - Custom statuses are free-text values, so entering an unrecognized status name does not produce an error. Make sure status names match exactly.
 - Removing a repeatable item (e.g., a creditor) hides it from views but preserves its data history for audit purposes. It is not permanently deleted.
 - Clearing a field value creates a new history entry rather than erasing previous values, so the full edit history is always retained.
-- Creditor matrix entries in the activity log may appear with an unformatted label until the display text for them is finished. The creditor named on the entry and the team member it is attributed to are correct.
+- Creditor matrix entries recorded before their wording was added to the activity log still read as a questionnaire completion, showing the questionnaire's name in place of the creditor's. The creditor and the team member behind those older entries were recorded correctly and are unchanged; only how they read in the log was wrong. Entries recorded from this point on read as described above.
 - Because creditor matrix entries are written when the schedules questionnaire is completed, a checkbox ticked and then unticked before completion leaves no entry — the log records the state the matrix was compiled with, not every intermediate change.
 - The previous status of a case is only recorded when a status change occurs. Newly created cases do not have a previous status.
 

@@ -28,6 +28,12 @@ A request moves through these stages:
 - When every signer has finished but the signed document is still being assembled, the firm's view says the document is being generated. Previously this state read **"Awaiting signatures from 0 signers"**, which suggested the request was stuck when it was simply finishing.
 - The field-placement prompt clears once fields have been placed, so a request that is ready for signers no longer invites staff to place fields again.
 
+### Requests sent by an automated workflow step
+
+An e-signature request placed on a workflow step behaves the same way whether a staff member attaches it by hand or the step fires automatically as the case progresses. In both cases the signer opens the request and is taken into the signing wizard.
+
+Previously a step that fired automatically produced a request the client could not open: the Signature Request panel read **"Couldn't load signature request"** and there was nothing to sign. Only requests attached by hand worked. If a client reported that error on a request nobody had touched the step to send, this was the cause.
+
 ### Completed requests
 
 - When a request completes, both the signed document and the signing certificate — the audit record of who signed and when — are attached to the case.
@@ -60,6 +66,7 @@ E-signature requests have no settings of their own. They are sent manually or as
 ## Edge Cases & Limitations
 
 - A request whose signature fields have never been placed cannot be signed. If a client reports that a document is still "being prepared", check whether field placement was completed.
+- Requests produced by an automated workflow step before that path was corrected are not repaired retroactively. They still report "Couldn't load signature request" and have to be sent again.
 - Requests that were stuck in the preparing stage before this behavior shipped are not repaired automatically. Opening one now makes the document available; a request that appears stuck after that should be raised with Glade.
 - A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
