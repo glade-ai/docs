@@ -55,6 +55,30 @@ The tab has two sub-views:
 
 Clicking a service in either view opens the availability editor directly — you can update availability without leaving the Bookings section.
 
+### How far ahead a client must book
+
+Each appointment type carries a **minimum booking notice** — how much warning your firm needs before an appointment starts. It is set per appointment type under **Availability → Booking settings**, and the choices are same day, 8 hours, 24 hours, 48 hours, 72 hours, 5 days, or 7 days.
+
+- Time slots that fall inside the notice window are not offered to clients. A firm needing a day's warning shows tomorrow's slots but not this afternoon's.
+- **The window is enforced when the booking is saved, not just hidden on the calendar.** Previously it only controlled which slots were displayed, so a client working from a stale slot list, an old link, or a page left open could still book a time the calendar had deliberately hidden. That booking is now refused.
+- **Firm team members are not held to the window.** Staff booking a client in, or moving an existing appointment, can still use a time inside the notice period — useful for taking a same-day appointment over the phone on a service that otherwise requires notice.
+- An appointment type with no notice set allows same-day booking. Choosing **same day** explicitly has the same effect and is worth setting deliberately on services where same-day consultations are part of how your firm works.
+- This is a per-appointment-type setting, so a firm can require a week's notice for a signing while leaving consultations open same day.
+
+### Recording what happened at an appointment
+
+Your firm can keep its own list of appointment outcomes — **No show**, **Claimed**, or whatever labels match how your team works — and attach one to a booking after the fact. This is how the calendar and daily reports come to record what actually happened, rather than only whether the appointment was scheduled.
+
+- **Your firm defines the list.** Nothing is provided as a starting point, so every firm begins with an empty list and no outcome on any booking until someone creates them. Outcomes can be reordered so the ones your team uses most sit at the top.
+- **An outcome is separate from the booking's status.** Attaching one does not move the booking through its lifecycle — a completed appointment marked **No show** is still recorded as completed. The statuses in [Booking lifecycle](#booking-lifecycle) are unchanged.
+- **It is also separate from workflow custom statuses.** The two lists are kept apart deliberately: an appointment outcome carries none of the case-tracking behavior a workflow status does, and choosing one triggers nothing.
+- Only firm team members can set or clear a booking's outcome. Clients cannot.
+- An outcome has to belong to your firm and be currently in use — an archived or deleted outcome cannot be attached to a booking.
+- **Retiring an outcome does not rewrite history.** Archiving one keeps it on the bookings that already carry it while removing it from the list of choices, so past appointments stay readable.
+- The outcome appears on the booking and as an **Outcome** column in the bookings report and its spreadsheet export.
+
+> TODO: Confirm where the outcome list is managed in firm settings and where the outcome is chosen on an individual booking.
+
 ### Client booking flow
 
 1. The client views the firm's product or service listing. For free sessions, the booking button reads **Book a call**; for paid sessions it shows the session price.
@@ -65,6 +89,40 @@ Clicking a service in either view opens the availability editor directly — you
 6. The booking is confirmed and created.
 7. If the product has video conferencing enabled, a meeting link is generated automatically.
 8. The client receives a confirmation with booking details.
+
+### Asking a booking client for their county
+
+An appointment type can require the client to give their **county** when they book. This is for firms whose work depends on where the client lives — which office covers them, which court their case would be filed in, and whether the firm practices in their county at all.
+
+- **The requirement is set per appointment type**, and it is off until your firm turns it on. A service with no use for a county asks for nothing, so nothing changes for a firm that does not enable it.
+- **The client picks their county from a list rather than typing it.** The list is searchable by county name and can be narrowed to a state, so a client finds their county without needing to spell it the way the courts do. Picking from the list is what makes the answer usable downstream — a typed county has to be matched before it can be relied on, and misspellings are the usual reason that fails.
+- **Requiring the county is separate from requiring the client's address.** The two settings are independent: an appointment type can ask for one, both, or neither.
+- **Existing appointment types are unchanged.** Turning the requirement on affects bookings made afterwards. It does not go back and ask for a county on appointments already booked, and it does not block a client from managing a booking they made before the setting changed.
+
+### Counties your firm serves
+
+Separately from what a booking asks the client, your firm can record **the counties it serves** — the list of counties your practice covers.
+
+- The list is set once for the firm, not per appointment type or per team member.
+- Counties are chosen from the same searchable catalog the booking form uses, so the names your firm records and the ones clients pick from are the same names.
+- A firm that records nothing is treated as having no restriction recorded, which is how every firm starts.
+
+> TODO: Confirm where the served-counties list is edited in the dashboard, and what Glade does with it once recorded — whether it filters which appointment types a client in an unserved county is offered, drives office routing, or is reporting only. The setting is stored and editable; how it is acted on is not established from the source change.
+
+### Collecting the client's address when they book
+
+An appointment type can ask the client for their address as part of booking. Firms running several offices use this to route a new matter to the nearest one, and to see which parts of their advertising area are actually producing consultations.
+
+- **It is set per appointment type.** An appointment type that does not ask for an address shows no address fields at all, so a service with no use for one is unchanged.
+- **Where the client enters it** — on the **Enter your information** step, alongside name, email, and phone.
+- **Required means the whole address.** Street, city, state, and ZIP all have to be filled in; a city or a ZIP on its own is not enough.
+- The client types their street and picks from suggested addresses, which fills in the rest. Where the suggestion service cannot complete the address, Glade falls back to a second lookup so the city, state, and ZIP still arrive rather than being left blank.
+- **The client's county is worked out from the address** and shown under the fields. It is saved to the client's record along with the rest of the address, so nobody has to look it up again later. See [Client Records](../crm/client-records.md).
+- The address is saved on the client's record rather than copied onto the booking, so a booking always shows where the client lives now. Correcting an address once corrects it everywhere.
+- **Booking waits until Glade knows whether an address is needed.** Confirming is held for the moment it takes to load the appointment type's settings, so a service that requires an address can never take a booking without one.
+- Staff booking on a client's behalf can still record or correct an address afterwards on the client's record.
+
+> TODO: Confirm where the "require client address" setting is switched on for an appointment type, and where the address and county appear on the firm-side bookings list.
 
 ### While the booking calendar is loading
 
@@ -230,6 +288,11 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Availability patterns | Days of the week and start/end times, configured per team member. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 | Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
+| Client county required | Whether a client booking this appointment type must give their county. Off until your firm turns it on. Independent of whether the client's address is required. |
+| Counties served | The counties your firm's practice covers, recorded once for the firm. Empty until your firm records them. |
+| Minimum booking notice | How far ahead of the appointment a client must book: same day, 8, 24, 48, or 72 hours, or 5 or 7 days. Set per appointment type under Availability → Booking settings. Appointment types with nothing set allow same-day booking. |
+| Appointment outcomes | The firm's own list of labels recording what happened at an appointment (for example No show). Firm-defined and empty until you create them; can be reordered and archived. |
+| Require client address | Whether the client is asked for their address when booking this appointment type. Off for every existing appointment type until a firm turns it on. |
 
 ## Edge Cases & Limitations
 
@@ -245,6 +308,16 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
 - Calendar colors are read from the appointment type each time the calendar is drawn, so changing a color re-tints that type's existing bookings as well as new ones. There is no way to color one booking differently from others of the same type.
+- Requiring the county on an appointment type applies to bookings made afterwards. Appointments already on the calendar have no county recorded against them, and there is no way to ask for one retroactively.
+- The county requirement and the counties your firm serves are two separate settings. Recording the counties your firm serves does not by itself require a client to give theirs, and requiring a client's county does not check it against your firm's list.
+- A county your firm needs that is not in the searchable catalog cannot be selected. Contact support with the county and state to have it added.
+- The minimum booking notice applies to clients only. It does not stop a team member booking or moving an appointment inside the window, so it is not a way to protect a team member's time from their own colleagues — use a **Blocked** availability window for that.
+- Changing the minimum booking notice does not affect appointments already booked. A client who booked before the change keeps their time.
+- A booking carries at most one outcome. Recording two things about the same appointment means choosing which one the label should capture, or noting the rest on the case.
+- Appointment outcomes are per firm. They are not shared between firms and nothing is set up in advance, so a new firm sees no outcome option on its bookings until the list is created.
+- A booking shows the client's **current** address, not the address they gave when they booked. A client who moves has their earlier bookings show the new address too — this is deliberate, since the firm works from one address per client, but it means the address on an old booking is not a record of where the client lived at the time.
+- The address requirement is enforced on the booking screens, not on the record itself. A staff member correcting a booking after the fact can save it without an address.
+- Turning the setting on does not go back and collect addresses for clients who already booked. Only bookings taken afterwards are asked.
 
 ## Related Features
 
