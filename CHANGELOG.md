@@ -18,6 +18,23 @@ Use one sub-section per domain/feature inside the changelog block (e.g. `### dom
 ```
 
 ---
+## 2026-09-14 10:18:34-04:00 · [PR #457](https://github.com/glade-ai/docs/pull/457)
+
+### crm/client-records
+- Noted in Key Behaviors that county is part of the stored address, and added a **The client's county** section: the county is derived from the address and saved on the client's record when an address is entered on a new booking, a new case, or an edit. Documents that it was previously recalculated on every visit to the create-client form and never kept, that existing clients show a blank county until their address is next saved, that omitting county on an update does not clear an existing value, and that the county is held on the client record for your firm only. Left a TODO for whether county is editable in the **Edit Contact** modal. Source: noodle-api#8720 (CORE-3193).
+- Added an **Address captured when a client books** section: an appointment type can ask for the client's address at booking, and that address is written to the client's record rather than copied onto the booking — so a booking always shows the client's current address, and a client who moves has earlier bookings show the new one. Cross-referenced Scheduling. Source: noodle-api#8726 (LEG-2471).
+- Added two limitations covering the un-backfilled county and the absence of any point-in-time address history on a booking, and added Scheduling to Related Features.
+
+### crm/communication-history
+- New **Who can edit or delete an internal note** subsection: the author can always edit or delete their own internal note, and a **firm administrator can now edit or delete an internal note written by anyone else at the firm**. Documented the two situations this exists for — a note left behind by someone who has since left the firm, and a note filed on the wrong case. Source: noodle-api#8670 (DEV-38105).
+- Documented the boundary explicitly: this covers **internal notes only**. A client-facing comment remains editable and deletable only by its author. Administrator access is scoped to the firm that owns the case, and the Edit and Delete controls appear only where they can be used.
+- Added a pointer distinguishing these notes from the ones on a client's profile (a separate feature with their own rules); `crm/notes.md` is unaffected by this change.
+- New **Stopping an AI reply while it is being written** section: stopping a reply part-way now halts the work behind it and not only the text on screen. The assistant takes no further action on the case and no message arrives afterward. Source: noodle-api#8582.
+- Documented that the portion of the reply already written stays in the conversation, and that a reply which stops on its own for taking too long behaves the same way and is not treated as an error.
+- Documented the known limit: an action the assistant had **already begun** when stopped may still finish.
+- TODO left on which surfaces offer the stop control and whether a portal client can stop a reply.
+- Three **Edge Cases & Limitations** entries: admin edit/delete covers internal notes only; a departed author's note can be edited/deleted only by an administrator; stopping an AI reply cannot undo an action already started.
+
 ## 2026-09-14 10:13:11-04:00 · [PR #482](https://github.com/glade-ai/docs/pull/482)
 
 ### appointments/scheduling.md
