@@ -738,6 +738,19 @@ Use the second when you are collecting wet-ink signatures from the debtor before
 - The **Open draft** link after generation opens whichever document you asked for.
 - If the unmarked copy cannot be produced, the action reports an error rather than quietly handing back the marked draft in its place.
 
+#### What goes into the draft, and where it is saved
+
+When you generate a draft you choose which of the case's documents go into it and the order they appear in. Two further options control what is produced and where it is filed:
+
+- **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced.
+- **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
+
+Both options were previously offered on the form but had no effect on what was produced. A draft was always saved to Forms & Schedules and never came with a separate signature pages document.
+
+If the signature pages cannot be pulled out of the compiled draft, the draft itself is still produced and saved to the folder you chose — you simply do not get the separate document. Generating the draft again is safe and produces both.
+
+> TODO: Confirm what the draft's version choice — working draft, or for signatures with no watermark — does on this path, and whether a draft compiled this way is marked at all. The petition compiled here is assembled from documents that were generated earlier, so it does not carry the margin marking described above.
+
 ### Petition Check Summary
 
 Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time:
