@@ -90,13 +90,24 @@ Previously the find bar matched only against the whole automation name and match
 
 ### Triggers and filters
 
-A trigger has three parts. All must match for the automation to fire:
+A trigger has four parts. All must match for the automation to fire:
 
 - **Notice type** (required) — exact match against the classified PACER notice type. For example, an automation with match type "Notice of Hearing" fires only on notices classified as "Notice of Hearing".
 - **Chapter** (optional) — restricts the automation to a specific chapter (Chapter 7 or Chapter 13). When left blank, the automation matches any chapter.
 - **Judge** (optional) — restricts the automation to a specific judge (matched by judge initials, case-insensitive). When left blank, the automation matches any judge.
+- **Trustee** (optional) — restricts the automation to notices naming a specific trustee. When left blank, the automation matches any trustee.
 
 The judge picker is populated from the judges who have actually appeared on PACER notices for your firm in the last 12 months, sorted by how often they appear so the most common judges are at the top.
+
+#### Filtering by trustee
+
+Trustee was already available as a condition for deciding *who* a created task is assigned to. As a trigger filter it decides something different: whether the automation runs at all. Use it when a trustee needs different wording — or no message — from the others.
+
+- **One trustee per automation.** To cover two trustees with different treatment, set up two automations. To cover two trustees with identical treatment, leave the filter blank and use the chapter or judge filters to narrow instead.
+- The trustee filter is combined with the chapter and judge filters — a notice has to satisfy every filter that is set.
+- Matching ignores capitalisation and surrounding spaces, but is otherwise an exact match on the trustee's name as it appears on the notice.
+- **A notice that names no trustee does not match an automation with a trustee filter set.** If a trustee-specific automation is not firing where you expect, check that the notices in question actually carry a trustee name.
+- Existing automations are unaffected. An automation with no trustee filter continues to match every trustee, as it always has.
 
 #### Notices that arrive before the case is linked
 
