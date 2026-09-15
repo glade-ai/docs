@@ -41,6 +41,19 @@ Writing a new note is unchanged — Enter has always added a line there.
 
 (Notes on a client's profile — the **Internal Notes** tab on the client record — are a separate feature with their own rules. See [Notes](notes.md).)
 
+#### Notes filed from somewhere specific on a case
+
+An internal note can be written from the place on the case it is actually about, rather than only from the case conversation. A note written that way stays attached to what it was written about.
+
+- **Where a note can be filed from**: a document checklist, an individual uploaded file, a booked appointment, an invoice, and a questionnaire.
+- **The note says what it is about.** Alongside the note you see the name of the thing it was filed against — the checklist's title, the file's name, the appointment's service, the invoice's title, or the form's name — so a note read later in the case conversation is not detached from its subject.
+- **A notes panel shows only its own notes.** Opening the notes on an invoice shows the notes filed against that invoice, not every note on the case. The full list is still available in the case conversation.
+- **Appointment notes lost their subject until now.** A note written from a booking was stored as an ordinary case note with no record of which appointment it came from, for as long as booking notes have existed. Notes written from now on keep their appointment; the earlier ones cannot be reconnected, and read as plain case notes.
+- **A subject that can no longer be identified** — an appointment or invoice that has since been removed, for instance — leaves the note showing a general label rather than a specific name. The note itself is never hidden or lost because its subject cannot be found.
+- The same subject labels appear in a client's combined notes view, which gathers notes from across all of that client's cases.
+
+> TODO: Confirm where the notes panel appears on each of these surfaces, and whether a note filed from one of them also appears in the case conversation's main note list.
+
 #### Who can edit or delete an internal note
 
 - The person who wrote an internal note can always edit or delete it.
@@ -86,6 +99,8 @@ None of this changes how you write or read a discussion on the case you are work
 - A firm administrator's ability to edit and delete other people's messages covers internal notes only. There is no way for anyone other than the author to change a client-facing comment.
 - A note whose author has left the firm can now be edited or deleted, but only by an administrator. Other team members still cannot.
 - Stopping an AI reply cannot undo an action the assistant had already started. If a duplicate booking or invoice appears after a stop, that action was already in progress and needs to be removed by hand.
+- Notes written from a booking before appointment context was recorded cannot be reconnected to their appointment. They remain on the case as ordinary internal notes.
+- A note is attached to one subject, not several. A note that covers both an invoice and the checklist behind it has to be filed against one of them, or written on the case conversation instead.
 
 ## Related Features
 
