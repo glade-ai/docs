@@ -84,6 +84,7 @@ The Documents tab collects everything gathered on a case in one place, organized
 - **Each file appears once.** A file referenced by more than one part of a case — including a case where a step can be reached by more than one path — is listed a single time instead of being duplicated.
 - **The item count matches what you can see.** The "N items" label on a group counts the rows actually shown, including placeholders for files not yet uploaded.
 - **Downloading a group as a zip produces the same folder structure** you see on screen.
+- **Completed e-signature requests file their documents here.** A signed document and its signing certificate land in a **Signed Documents** group once the request completes, so they sit with the rest of the case's documents rather than only inside the e-signature task — see [E-Signatures](./e-signatures.md). These files are not added to the compiled petition.
 
 ### Previewing documents and forms
 

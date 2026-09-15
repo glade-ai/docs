@@ -551,6 +551,23 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 - **Arrearage cure amounts** can be populated on line 34 of Forms 122A-2 and 122C-2 from the arrearages recorded on the Master Creditor List. Each active creditor with an arrearage above zero produces one row carrying the creditor name, the secured property, and the total cure amount. Creditors with a zero arrearage, and creditors excluded as above, produce no row.
 - The **monthly cure amount** on that line is not set by this autofill — it continues to be calculated from the total cure amount, so re-running the autofill does not disturb it.
 
+#### A Value You Typed Is Not Re-Derived
+
+An answer a person typed is treated as an input to the form, not as something Glade works out. No automatic run — a calculation, an autofill, or a value mirrored from another field — replaces it.
+
+- **An override survives a save and a reload.** Previously the protection only held for as long as you had the form open. Once the questionnaire had been saved, a correction read as an ordinary value again, and the next time anything it depended on changed, the calculation took the field back: the figure changed, the indicator flipped from **Manually overridden** back to autofilled, and nothing recorded that a person had ever typed there.
+- The clearest case was a total over a long list. A paralegal correcting the Schedule J monthly expense total would keep their figure until somebody edited any one of the 35 expense lines underneath it — at which point the total was silently recalculated over the correction. The same shape applied to any calculated field with an override on it.
+- **Re-run is how you ask for the calculation back.** Using the re-run control on the field deliberately replaces your value with the current derived one and hands the field back to the autofill, exactly as before. That is the only way an automatic value now lands on a field somebody typed into.
+- **A field nobody has answered is unaffected.** Empty fields autofill as normal — the protection applies to answers that were actually supplied.
+- **A locked field is still the exception.** Locking declares the field to belong to its autofill, so a locked field keeps updating regardless — see [Fields You Cannot Type Into](#fields-you-cannot-type-into).
+
+Two related problems were fixed at the same time, both of which could quietly freeze a field:
+
+- **Saving the form no longer marks untouched fields as hand-entered.** A save re-sends the whole form, and fields whose answers had not moved were being recorded as though someone had typed them. A field marked that way would never autofill again, without anyone having touched it.
+- **A sync that produces no value no longer writes anything.** Bringing case data into the form used to stamp a field even when it had nothing to put there, with the same effect.
+
+If a field on an older case is not autofilling and you cannot see why, re-run the autofill on it.
+
 #### Autofills and Values You Typed in List and Table Rows
 
 Glade does not replace a value you entered by hand with an autofilled one. That protection applies to fields inside list and table rows — creditors, properties, income lines — as it does everywhere else on the form. It had stopped working there:
@@ -582,6 +599,16 @@ A calculated cell in a table that adds up other cells in the same table — such
 When an AI agent autofills a group of related fields (for example, property exemptions in a bankruptcy case), re-running the agent preserves any values you have already entered or confirmed. The agent incorporates existing data rather than overwriting it, so you can re-run an analysis after adding new items without losing prior work.
 
 Manual edits to fields in a list also stick when the AI auto-runs after rows have been added, removed, or reordered. For example, on the Bankruptcy Schedules questionnaire, the schedule classifier may run repeatedly as the form changes — moving a creditor from Schedule D to Schedule F by hand will not be reverted by a later automatic run.
+
+#### Fields an Agent Is Meant to Fill Now Actually Fill
+
+Every field an AI agent is set up to produce is filled by that agent. Previously only a subset were: a field could be listed as one of an agent's outputs and still never be filled, because the field itself had not separately been marked as AI-filled. Roughly three in four agent-filled fields were in that position, so this was the ordinary case rather than a rare one.
+
+- **Nothing on the form indicated a problem.** The field simply sat empty — no value, no error, no re-run prompt — and looked the same as a question nobody had got to yet. Preparers filled these in by hand without knowing an agent was supposed to.
+- **These fields now behave like any other AI-filled field**: they populate as the answers they depend on are entered, show the usual status indicator, carry the agent's explanation, and can be re-run.
+- **Expect more fields to fill themselves on questionnaires that use agents**, including inside lists — an agent-filled column on a long creditor or property list now produces a value for every row rather than none.
+- **A failed run now says so.** When the AI could not produce a value for one of these fields, the field reported a *lookup failed* message that pointed at a filing-district lookup which was never involved. It now reports the AI run as the thing that failed, which is what the re-run control retries.
+- Values already entered by hand are not disturbed — the protection described under [A Value You Typed Is Not Re-Derived](#a-value-you-typed-is-not-re-derived) applies to these fields as it does to every other.
 
 #### Firm instructions for the exemptions agent
 
@@ -1312,6 +1339,8 @@ The creditor matrix is also included in the **petition draft** — the review co
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 - Locking a field is the one case where an autofill overwrites an answer someone typed. The protection that keeps hand-entered values from being replaced does not apply to a locked field, so a value entered before the field was locked is replaced the next time the autofill runs.
+- A figure that was overwritten on an earlier case, before overrides were protected across saves, is not restored. Nothing on the field recorded the value that was replaced. Re-check calculated totals on cases where a correction was made and may have been lost.
+- Re-saving a form does not, on its own, un-freeze a field that an older save had marked as hand-entered. Re-run the autofill on the field to hand it back.
 - A locked field cannot be corrected from the questionnaire at all — not by the client, and not by an attorney or paralegal filling on the client's behalf. Fixing a wrong value means fixing the data the autofill reads, or having the field unlocked on the template.
 - Itemized rows on Schedule A/B Part 3 appear only on cases whose schedules questionnaire is on the current template. A case in progress on an older version still prints one combined entry per heading. There is no way to switch a single case over other than upgrading its questionnaire, and upgrading carries the other behaviors described under [Upgrading a Questionnaire and Case Data](#upgrading-a-questionnaire-and-case-data).
 - Petitions already generated are not rebuilt. A draft or signature copy produced before the case was upgraded keeps the combined Part 3 entries it was printed with; generate the petition again to pick up the itemized rows.
