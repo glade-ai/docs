@@ -31,8 +31,10 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - Events marked as "free" or "transparent" in the external calendar do not block availability.
 - When a client views available time slots, any time covered by an external "busy" event is hidden.
 - This prevents double-booking across Glade and external calendars.
-- A "busy" event occupies one place in the slot rather than closing it outright. On an appointment type that allows a single booking per slot — the default — that closes the slot. On an appointment type configured for several concurrent bookings, the event takes one place and the rest stay open. The event Glade itself puts on the calendar for a booking is not counted a second time on top of the booking.
+- A "busy" event closes the slot outright. It means the team member is unavailable, so it blocks the time regardless of how many concurrent bookings the appointment type allows — focus time, a court hearing, or a block carried over from other practice software all take the team member off the calendar entirely. Previously a busy event took only one place in the slot, so an appointment type configured for several concurrent bookings kept offering the remaining places and clients could book over protected time.
+- The concurrent booking limit governs **Glade bookings only**. Two clients can still share a genuinely free slot on an appointment type that allows it, and the event Glade itself puts on the calendar for a booking is not counted a second time on top of the booking.
 - The block is enforced when a booking is saved, not only when slots are displayed. A booking that would overlap a busy event on the assigned team member's synced calendar is refused — including when a booking is rescheduled, and when a scheduled booking is reassigned to a team member who has a conflicting event. A firm team member can still override with **Schedule Anyway**; clients cannot. Only calendars enabled for syncing are checked.
+- A booking with nobody assigned is checked against the **firm calendar owner's** calendar rather than skipped. This covers the public booking page and a reschedule made before anyone is assigned, so a client cannot book over the owner's busy time simply because the booking has no assignee yet.
 
 ### Real-time sync
 
@@ -83,7 +85,10 @@ Real-time notifications are the normal path, but a provider subscription can lap
 - Each team member connects and manages their own calendar accounts.
 - Availability blocking applies per team member. A member's external events only affect their own availability.
 - When a client books with a specific team member, only that member's calendar conflicts are checked.
-- When a booking is reassigned to a different team member and then rescheduled, its calendar event moves with it: Glade creates the event on the newly assigned member's connected calendar and removes it from the previous member's calendar, so the appointment always lands on the calendar of the person actually assigned. Previously the event could stay on the original member's calendar or fail to appear on the new member's.
+- When a booking is reassigned to a different team member, its calendar event moves with it: Glade creates the event on the newly assigned member's connected calendar and removes it from the previous member's calendar, so the appointment always lands on the calendar of the person actually assigned.
+- **Changing only the assignee is enough to move the event.** Previously the move happened only when the booking was also given a new time, so handing an appointment to a colleague at the same time left the event sitting on the original member's calendar and it never appeared on the new member's at all. Reassigning on its own now moves it, for every appointment type.
+- **If the new assignee has no connected calendar**, the event is removed from the previous member's calendar and no replacement is created. The booking itself is unaffected — it stays in Glade under the new assignee, and the event appears once that person connects a calendar and the booking is next updated.
+- A booking that is reassigned and moved to a new time in one edit produces a single event on the new member's calendar, not two.
 
 ### Court hearing sync
 
@@ -127,6 +132,8 @@ This feature is off by default and is turned on per firm by Glade.
 - There is no manual "sync now" button on this screen. Sync happens automatically through provider notifications, backed by the hourly catch-up job described above.
 - Only events that have reached Glade can block a booking. If a team member marks time as busy in Outlook and that change has not synced through, Glade does not know about it and will not stop a booking in that window.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
+- Reassigning a booking does not override an appointment type that routes its bookings to a particular calendar by county. Where county routing applies, the booking keeps the calendar that routing chose.
+- A busy event on a synced calendar blocks the time for everyone booking that team member, including on appointment types that allow several concurrent bookings. If your firm relied on concurrent slots staying open alongside external events, those slots now close.
 - All-day events are handled based on the firm's configured timezone.
 - Court hearing sync only adds **future** hearings, and only when the case is linked to a team member who has a connected calendar. Unresolved cases are skipped.
 - A hearing that is vacated or cancelled with no replacement time is not yet removed from the calendar. De-duplication of repeat notices currently applies only to 341 Meetings.
