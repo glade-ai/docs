@@ -34,7 +34,8 @@ An appointment type can send its bookings to a particular calendar based on **th
 - Individual team members can have their own separate availability schedules.
 - External calendar events from connected calendars (Google Calendar or Outlook) automatically block availability to prevent double-booking.
 - Only events marked as "busy" block availability. Events marked as "free" or "transparent" do not.
-- A synced calendar event counts against the product's concurrent booking limit rather than blocking the slot outright. On a product that allows one booking per slot, an event on the assigned team member's calendar closes that slot. On a product that allows several, the event takes one place and the remaining places stay bookable. The Glade booking and the calendar event Glade created for it count as one, not two.
+- A busy event on the assigned team member's synced calendar **closes the slot outright**, whatever the product's concurrent booking limit. A hearing, focus time, or a block carried over from other practice software means that person is unavailable, not that one place in the slot is taken. Previously such an event counted as a single occupant, so a product allowing several concurrent bookings kept offering the remaining places and clients could book over protected time.
+- The concurrent booking limit governs **Glade bookings only**: two clients can still share a genuinely free slot on a product that allows it. The Glade booking and the calendar event Glade created for it count as one, not two, so booking #1's own event never blocks booking #2.
 - A synced calendar event does more than hide the slot — it is also enforced when a booking is saved. Creating, rescheduling, or reassigning a booking on top of a hearing or meeting already on the assigned team member's synced calendar is rejected. Previously only Glade's own Blocked windows were enforced at save time, so a slot list that was out of date — or a booking written by a staff member covering for someone else — could still land a client on top of a court hearing. Firm team members can override deliberately with **Schedule Anyway**.
 - In addition to recurring availability, you can add **availability blocks** for specific date ranges. Each block has a type that determines its effect on bookable time:
   - **Blocked** — removes the covered times from bookable availability. Clients cannot schedule into these windows. Use this for vacations, court dates, off-site days, or any other time you should not be booked.
@@ -254,10 +255,12 @@ Cancelling keeps the appointment on the books — the row stays in every list ma
 
 ### Booking a slot that is already full
 
-A slot is full when the number of things already occupying it — existing Glade bookings for that team member, plus any synced calendar events that are not those bookings' own events — has reached the product's concurrent booking limit. Booking into a full slot is refused, and the refusal is now visible at the moment of booking.
+A slot is full when the number of **Glade bookings** already held for that team member has reached the product's concurrent booking limit. Booking into a full slot is refused, and the refusal is visible at the moment of booking.
 
 - The booking fails with an error instead of showing a confirmation. Previously the confirmation screen appeared even when the booking had not been saved, so a client or staff member could be told an appointment existed when it did not — no calendar event was created, no reminders were sent, and any workflow the appointment was meant to start never ran. If your team has seen "confirmed" consultations that never appeared on anyone's calendar, this is the cause.
-- Because the check now counts occupancy against the concurrent booking limit rather than treating any overlap as a conflict, products configured for several concurrent bookings behave as configured. A single overlapping calendar event no longer prevents booking on a product that allows five.
+- Products configured for several concurrent bookings behave as configured: booking #1's own calendar event does not count a second time and does not prevent booking #2.
+- **Busy events on a synced calendar are not counted — they block.** An external hearing or focus-time block takes the team member off the calendar for that window entirely, so a product allowing five concurrent bookings offers none inside it. Previously the event counted as one occupant and the remaining places stayed bookable, which let clients book over protected time.
+- A booking with nobody assigned is checked against the firm calendar owner's calendar, so a busy event there blocks it too.
 - **Blocked** availability windows are unaffected. They remain a hard block regardless of the concurrent booking limit, and firm team members override them with **Schedule Anyway** as described above.
 
 A slot that fills between the moment the client loads the time list and the moment they confirm is the common way to hit this. Reloading the booking calendar shows the slot as taken.
@@ -315,7 +318,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Session duration | Length of each appointment. |
 | Scheduling interval | Minimum gap between available time slots. |
 | Buffer time | Preparation time added before and after appointments. |
-| Concurrent bookings | Maximum number of overlapping bookings allowed per time slot. Default is 1. |
+| Concurrent bookings | Maximum number of overlapping Glade bookings allowed per time slot. Default is 1. Busy time on a synced external calendar blocks the slot regardless of this setting. |
 | Count concurrent bookings per appointment type | Whether each appointment type's concurrent booking limit is counted against bookings of that type only, rather than against every booking on the team member's calendar. Set for the firm, and off until your firm turns it on. |
 | Video conference link | Whether to auto-generate a video meeting link for the appointment. |
 | 48-hour reschedule rule | Whether clients can reschedule within 48 hours of the appointment. |
@@ -337,11 +340,11 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - Counting concurrent bookings per appointment type is a firm-wide choice, not a per-appointment-type one. It applies to every appointment type at once.
 - The 48-hour rescheduling restriction applies to clients only. Firm staff can always reschedule.
 - Concurrent booking limits are per time slot, not per day.
-- The full-slot check applies to bookings that have an assigned team member. A booking with nobody assigned has no calendar to check against, so the limit is not enforced for it.
+- A booking with nobody assigned is measured against the firm calendar owner's bookings and calendar rather than being left unchecked.
 - If no team member availability is configured for a product, the product may show no available time slots.
 - External calendar events marked as "free" do not block availability. Only "busy" events create blocks.
 - Enforcement against synced events depends on the event having reached Glade. A commitment a team member blocked out directly in Outlook that has not yet synced is not known to Glade and does not prevent a booking.
-- A booking with no assigned team member is not checked against any synced calendar, since there is no team member whose calendar to compare it with.
+- Products that allow several concurrent bookings offer fewer slots than before wherever a team member's synced calendar carries busy time. This is deliberate — those slots were never genuinely free — but a firm relying on concurrent stacking will see its availability tighten.
 - Allowed start times narrow a window rather than extend it — they select from the times the window would otherwise offer. A window whose listed start times do not fall inside its own hours offers nothing at all.
 - A service that previously had its start times restricted for the whole service keeps those times on every day until its weekly schedule is saved again. Until then the per-day windows have no effect.
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
