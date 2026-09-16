@@ -16,6 +16,16 @@ Glade integrates with electronic court filing systems to let you submit cases di
 - **Inbox notifications**: When a filing event occurs (such as a status update from the court), you receive a notification in the Glade inbox. Clicking the notification takes you directly to the Case Status tab for that case so you can review the current filing status without navigating manually.
 - Direct links to a case opened via an inbox notification automatically open the Case Status tab.
 
+### When a filing pauses and needs a person
+
+Some filings stop part-way through on a page Glade cannot complete on its own and wait for someone to take over. The filing panel has always said so, but only while it was open on screen — so a filing could sit paused for hours because nobody happened to be looking at it.
+
+- **Whoever started the filing gets an inbox notification** titled *Your PACER filing needs you*, so the pause reaches them anywhere in Glade rather than only inside the filing panel.
+- The notification names the page the filing is waiting on where the court's system tells Glade which one it is, and otherwise reads as a general prompt to open the filing.
+- Opening the notification takes you to the case so you can pick the filing up where it stopped.
+- **One notification per pause.** A filing that pauses is announced once, however many times the signal is re-sent.
+- The notification goes to the person who started the filing, not to the whole firm. If that person is away, someone else on the case can still take the filing over from the case itself — but nobody else is alerted.
+
 ### Why a filing is blocked
 
 When a filing cannot be submitted, the eFiling modal explains the specific reason instead of showing a generic error, so your team knows what to address before trying again. Common reasons include missing required case information, missing required documents, a filing district that has not been set up for the case, and permission restrictions. The same explanation appears in the modal's alert and in the accompanying notification.
@@ -364,6 +374,8 @@ This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *S
 - The duplicate-slot and incomplete-tag checks are not repaired automatically and no bulk clean-up has been run. Cases that have been waiting to file will surface findings for defects that have been sitting on them for some time.
 - The non-PDF check is decided from the packet slot the document occupies, not from inspecting the file your team recognizes it as. A file whose format Glade cannot determine at all is treated as not a PDF and blocks the filing, so a document that should be filable may need re-uploading before it is accepted.
 - Filings submitted before this check existed could reach the court with an image under a PDF name. If a packet was rejected or timed out without an explanation, check the tagged documents for a photo — the filing can be resubmitted once it is replaced.
+- The notification about a paused filing goes only to the person who started it. Where a filing was started without a recorded initiator, no notification is sent and the pause is visible only in the filing panel.
+- The notification is an alert, not the place the filing is taken over — open the case to continue it.
 
 ## Related Features
 
