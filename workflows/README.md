@@ -8,6 +8,7 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [Task Templates](./task-templates.md)
 - [Triggers](./triggers.md)
 - [Status Tracking](./status-tracking.md)
+- [Workflow Switch](./workflow-switch.md)
 - [Questionnaires](./questionnaires.md)
 - [Document Collection](./document-collection.md)
 - [E-Signatures](./e-signatures.md)
