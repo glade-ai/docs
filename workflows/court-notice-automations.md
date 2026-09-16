@@ -121,6 +121,7 @@ Several types were added or narrowed:
 - **Investigating Asset** is now limited to trustee reports that explicitly describe an ongoing investigation into estate property. Recovered-asset and claims-bar notices, routine 341 meeting reports, no-distribution reports, and final reports are classified as what they are and no longer land here. An automation set up to watch for asset investigations fires on far fewer, more relevant notices as a result.
 - **A continued 341 meeting is separated by whether the meeting was held.** Two new types — **341 Meeting Held and Continued** and **341 Meeting Not Held and Continued** — cover a meeting that took place and was then continued (usually for further documents) and a meeting that did not take place and was continued. Both previously landed on **341 Meeting Held**, so a firm could not automate a no-show continuation separately from a meeting that went ahead. A 341 that was held and concluded, a reset or rescheduled 341, a certificate of mailing, and a continued *confirmation* hearing are not taken by the new types.
 - **A confirmed delinquency in Chapter 13 plan payments** has its own type, so a firm can automate on it rather than reading it out of a more general classification.
+- **Rescheduled** and **Reset** are available as types of their own. A hearing that is moved, or a 341 meeting that is reset, used to be classified as an ordinary Hearing, Confirmation Hearing, or 341 Meeting Held — so a firm had no way to treat "the date has changed" differently from the original notice. An automation can now match the move itself, and both types appear in the court notices report's type filter.
 - Several neighbouring definitions were narrowed at the same time so they stop taking each other's notices: certificates of service and mailing, requests for a claims deadline, first-meeting reports, and the difference between a confirmation hearing that has been *requested* to move and one that actually has.
 
 **A notice is listed before it has been classified.** A newly arrived notice appears on the court notices list as soon as it is read, and picks up its type when classification finishes a moment later.
@@ -130,7 +131,14 @@ Several types were added or narrowed:
 
 > TODO: Confirm the exact name of the Chapter 13 plan-payment delinquency type as it appears in the notice type picker — an automation's trigger is an exact match on the type, so the wording matters.
 
-**Notices already on your cases are not reclassified.** These rules apply to notices received from now on. A notice that arrived under the old classification keeps the type it was given, and an automation matching a new type will not fire retroactively for it.
+**Notices already on your cases are not reclassified.** These rules apply to notices received from now on. A notice that arrived under the old classification keeps the type it was given, and an automation matching a new type will not fire retroactively for it. If your firm needs its existing notices re-read for Rescheduled and Reset, contact Glade — this can be run for a firm on request.
+
+#### What counts as rescheduled or reset
+
+The two new types are decided from the court's own wording on the docket — language such as *Confirmation Hearing Rescheduled* or *Meeting of Creditors Reset* — before any interpretation is applied, so the same wording classifies the same way every time.
+
+- **The move has to have happened.** A trustee's report merely *requesting* a reschedule is not a Rescheduled notice, and a certificate of mailing about a reset 341 is not a Reset notice. Both are classified as what they are.
+- **Hearing, Confirmation Hearing, and 341 Meeting Held are unchanged as types**, but they no longer absorb reschedule and reset wording. An automation matching one of those three fires on fewer notices than before — check any automation or saved report that was relying on catching moved dates that way.
 
 ### Docket text on a notice
 
@@ -251,7 +259,8 @@ Edits are tracked: each save records who made the change and when, alongside who
 ## Edge Cases & Limitations
 
 - The match type is exact. Notices with a slightly different classification do not match — set up additional automations for related notice types if needed. This matters where a single type has been split into several: an automation that watched for means test and current-monthly-income notices needs one automation per form to keep the same coverage.
-- Classification changes apply only to notices received after the change. Notices already on your cases keep the type they were originally given.
+- Classification changes apply only to notices received after the change. Notices already on your cases keep the type they were originally given. Rescheduled and Reset can be applied to a firm's existing notices on request, but only those two types are re-read.
+- Rescheduled and Reset depend on the court's docket wording. A district that moves a hearing without saying so in those terms produces an ordinary Hearing or 341 notice, so a firm outside the districts that use this language may see neither type.
 - Only the supported tokens listed above are recognized. Unknown tokens render as empty strings.
 - Hearing tokens are filled from the linked court calendar entry or from the notice itself. If neither states a 341 meeting time, or the notice carries no video hearing details, those tokens render as empty strings.
 - The video hearing details token no longer includes the Zoom dial-in number. A firm that needs the dial-in number in its 341 emails has to add the separate phone token to each template that should carry it.
