@@ -223,6 +223,17 @@ When a questionnaire uses the review workflow, a client who has submitted it see
 
 Anyone with view or edit access who opens a questionnaire that is not currently editable for them — for example, a client opening a questionnaire they have already submitted for review, or a view-only team member opening one that is still in progress — sees the questionnaire's answers in read-only form. Previously some of these combinations showed a "We are generating your form results…" message that never cleared (most noticeably after submitting a questionnaire for review from the client's own profile); that stuck message no longer appears for anyone who has permission to view the questionnaire.
 
+### Printing a submitted questionnaire
+
+A questionnaire that has been submitted can be printed to paper or to PDF from your browser's own print command, which is how firms produce a copy to read through with a client or keep in a paper file.
+
+- **Every field in the section you are looking at prints**, including fields on subsections you do not currently have open. Previously the printout carried only the subsection tab that happened to be selected, so a checklist printed from one tab silently left the rest of its questions out.
+- **The printout runs to as many pages as it needs.** It previously stopped at whatever fitted on one screen, so anything below the fold was missing.
+- **Only the questionnaire prints.** The dashboard around it, the navigation, the subsection tabs, and the PDF preview toggle are all left off the page.
+- **Your place is kept.** Whichever subsection tab you had open is still open after you close the print dialog.
+- Printing covers the **section currently open**. A questionnaire split across several sections prints one section at a time — open the next section and print again.
+- This applies to submitted and completed questionnaires. One still in progress prints the way it always did.
+
 ### Filling Out Forms
 
 When using Glade's native form provider, initial values can be pre-populated from field mappings tied to the client's workflow or from the inheritance scheme. Clients fill out sections and fields through the client portal, with changes auto-saved and synced in real time.

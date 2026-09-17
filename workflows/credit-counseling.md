@@ -16,6 +16,22 @@ Pre-filing credit counseling is a required step in bankruptcy workflows: each de
 - **Post-filing debtor education certificates** attach the same way as pre-filing counseling certificates, for each debtor separately. **Debtor Education Certificate (Debtor 1)** and **Debtor Education Certificate (Debtor 2)** are available as document types, so a certificate can be filed under its own name rather than under a generic type. On some cases, attaching a debtor education certificate previously failed with an error and the certificate could not be recorded against the step at all.
 - Debtor education is a post-filing course, so its certificate is not part of the initial petition filing package. It is stored on the case and filed separately.
 
+### The counseling date on the Statement of Financial Affairs
+
+Question 16 of the Statement of Financial Affairs discloses the pre-filing credit counseling briefing. The row is created when your firm imports the disclosure into the questionnaire, which on most cases happens before the briefing has been taken — so it lands with the provider and the fee filled in and the **date left blank**.
+
+Glade now fills that date in when the certificate arrives.
+
+- The date written is the same completion date the credit counseling pane shows for that debtor, so the disclosure and the counseling step never state different dates for one certificate.
+- It works on disclosures imported before this behavior existed. Nothing needs to be re-imported — re-importing was never a fix anyway, since it produced a second counseling row rather than filling the first.
+- **An existing date is replaced.** The certificate is the authority on when the briefing was taken.
+- The date is only written while the questionnaire is still **in progress** or **submitted for review**. A questionnaire your team has already completed or skipped is never edited, so a date that arrives after completion has to be entered by hand.
+- Nothing is duplicated if the certificate is processed again, and on a joint case the second debtor's certificate does not add a second row.
+- This is the **pre-filing** briefing only. A post-filing debtor education certificate does not touch question 16.
+- The certificate and the questionnaire do not have to sit on the same case: a certificate that lands on one matter in a case group fills the disclosure on the matter that holds the schedules.
+
+If two rows on the disclosure cannot be told apart, Glade writes nothing rather than dating the wrong one. Fill that row in by hand.
+
 ### Who pays for the course
 
 Your firm chooses whether it pays for credit counseling or the client does. The choice is made once per firm, per counseling provider, and every firm starts out paying for counseling itself — no existing arrangement changes unless you change it.
@@ -47,6 +63,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - Client-paid checkouts that were charged but never recorded before this was corrected do not repair themselves. If a client paid for a course and still cannot start it, contact Glade to have the purchase applied.
 - Client-paid counseling has to be paid by credit or debit card. It cannot be added to the firm's invoice, put on a payment plan, or paid by bank transfer.
 - Whether the client pays is a firm-wide setting per provider, not a per-case one. A firm cannot have some cases client-paid and others firm-paid for the same provider.
+- Only the counseling **date** on question 16 is filled from the certificate. The fee on that row, and the date and fee on the credit report row beside it, still have to be entered and kept current by hand.
 - Client-paid counseling has to be set up before a client reaches the step. Switching a firm to client-paid does not add a purchase step to a client who has already been enrolled.
 
 ## Related Features
