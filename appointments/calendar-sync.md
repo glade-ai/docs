@@ -22,7 +22,7 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 
 | Direction | What syncs | What does not sync |
 |-----------|------------|-------------------|
-| External to Glade | Event start and end times (for availability blocking) | Event titles, descriptions, attendees, or other details |
+| External to Glade | Event start and end times (for availability blocking), and the event title — visible only to the team member who owns the calendar | Event descriptions, attendees, or other details |
 | Glade to external | Booking details: time, duration, client name, meeting link | Changes made to the external event after initial sync |
 
 ### Availability blocking
@@ -33,6 +33,17 @@ In addition to bookings, Glade can place court hearings (such as 341 Meetings of
 - This prevents double-booking across Glade and external calendars.
 - A "busy" event occupies one place in the slot rather than closing it outright. On an appointment type that allows a single booking per slot — the default — that closes the slot. On an appointment type configured for several concurrent bookings, the event takes one place and the rest stay open. The event Glade itself puts on the calendar for a booking is not counted a second time on top of the booking.
 - The block is enforced when a booking is saved, not only when slots are displayed. A booking that would overlap a busy event on the assigned team member's synced calendar is refused — including when a booking is rescheduled, and when a scheduled booking is reassigned to a team member who has a conflicting event. A firm team member can still override with **Schedule Anyway**; clients cannot. Only calendars enabled for syncing are checked.
+
+### Who can read a synced event's title
+
+A busy block drawn from a connected calendar shows what the event is called only to the team member whose calendar account it came from. Everyone else at the firm sees the same block of time labeled **Busy**, with no title.
+
+- Start and end times are unchanged for everyone, so availability and double-booking protection read exactly the same whichever team member is looking.
+- This matters most where one person works for more than one firm and connects a single calendar to each of them. The same event then appears on every one of those firms' Glade calendars, and its title used to travel with it — so one firm could read another firm's client names off its own bookings calendar. Only the calendar's owner sees the words now.
+- A block with no title is shown as **Busy**, the same as a genuinely untitled event. You cannot tell the two apart from the calendar.
+- Blocked time Glade builds from your firm's own availability settings is not affected and keeps its label for everyone.
+- Court hearings Glade places on a team member's calendar are synced events like any other, so the hearing's title reads as **Busy** to everyone except that team member. The hearing itself is still on the case and on the court calendar, where the whole team can read it.
+- A booking made through Glade is unaffected: the calendar draws bookings from your firm's own booking records, so the appointment card keeps its real title for the whole team.
 
 ### Real-time sync
 
@@ -119,7 +130,8 @@ This feature is off by default and is turned on per firm by Glade.
 
 ## Edge Cases & Limitations
 
-- Only event times are synced inbound. Glade does not see or store external event titles, descriptions, or attendee lists (for privacy).
+- Inbound sync covers event times and the event title. Descriptions and attendee lists are not brought across, and a title is shown only to the team member who owns the calendar it came from — see [Who can read a synced event's title](#who-can-read-a-synced-events-title).
+- Hiding titles from other team members limits what a firm can read; it does not separate the calendars themselves. A calendar connected to more than one firm still contributes its busy time to every one of them, so those firms can see when that person is unavailable even though they cannot see why.
 - Events marked as "free" or "transparent" in external calendars do not block availability. This is by design but can cause confusion if users expect all events to block.
 - The sync window covers the next three months. Events further in the future are not synced until they fall within that window.
 - If a Google or Outlook OAuth token expires and cannot be auto-refreshed, the user must manually reconnect.
