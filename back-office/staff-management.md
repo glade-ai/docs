@@ -12,6 +12,7 @@ Staff management controls who has access to your firm's back office and what the
   - **Case Worker** — access to case management features but not team or finance settings
   - **Finance** — access to financial and billing features
 - The firm owner automatically has full permissions regardless of assigned role.
+- **Deleting a case is restricted to Admins and the firm owner.** Deleting a case removes the matter and its data, so it is not something a Case Worker or a Finance team member can do. Anyone else who attempts it is refused and the case is left intact. Previously any team member on the firm could delete a case. If your firm relied on a paralegal clearing cases out, that work now has to go through an Admin.
 - **Workflow roles** are custom roles your firm defines (e.g., "Paralegal", "Documents Team", "Intake Lead"). They are used to:
   - Segment team members in reports (e.g., the paralegal report filters by the "Paralegal" role)
   - Set a default assignment role for each team member so they are automatically assigned the right role on new cases

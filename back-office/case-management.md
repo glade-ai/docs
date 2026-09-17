@@ -10,6 +10,7 @@ Case management is the core back-office feature that lets your firm track client
 - Cases have a status that uses your firm's custom statuses (e.g., "Data Collection", "Processing", "Filed and Pending", "Completed", "Archived").
 - Cases track progress as a percentage based on steps taken and tasks completed.
 - Cases record key lifecycle dates: when filed, completed, canceled, ended, archived, and paused until a future date.
+- **Only an Admin or the firm owner can delete a case.** Deletion takes the matter and everything recorded on it out of the firm's hands, so it is limited to the roles that already carry firm-level responsibility — see [Staff Management](./staff-management.md). A Case Worker or Finance team member who tries is refused, and the case stays exactly as it was. To take a case out of day-to-day view without deleting it, move it to an archived status instead.
 - A "last activity" timestamp updates whenever significant activity occurs on a case, providing a recency signal for dashboards and reports.
 - The case list can be sorted by any column, including Progress. Sorting by Progress orders cases by their completion percentage without affecting any active status or other filters.
 - A **Last paid** column on the case list shows the date of the most recent succeeded payment on each case, so your team can scan which cases have had recent payment activity and which have gone quiet. Cases with no payments yet show an empty value; the column is sortable like the other date columns.
