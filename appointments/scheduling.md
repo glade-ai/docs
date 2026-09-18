@@ -208,6 +208,19 @@ Each appointment type can be given a color. Bookings of that type are tinted wit
 - Associated reminders are removed when a booking is canceled.
 - Calendar events on connected external calendars are updated to reflect the cancellation.
 
+### Deleting a booking
+
+Cancelling keeps the appointment on the books — the row stays in every list marked **Canceled** and the client is emailed. **Delete** is for a booking that should never have existed at all: a test row, a duplicate, or one taken against the wrong client. It is offered on the booking's detail panel.
+
+- **A deleted booking leaves every view at once** — the bookings list, the calendar, the team views, and the reports. It is not shown as canceled; it is simply gone.
+- **The client is not told.** No cancellation email goes out, because the firm is retracting its own record rather than calling off an appointment the client is expecting. Cancel instead if the client needs to know the appointment is off.
+- **The team member's calendar is cleaned up.** The event Glade created on a connected external calendar is released, so deleting never leaves an orphaned block on someone's calendar.
+- **Pending reminders, completion, and follow-up messages are cancelled**, so nothing is sent about a booking that no longer exists.
+- **It is recorded.** Glade keeps an audit entry naming who deleted the booking and when, even though the booking itself no longer appears.
+- **Only the firm can delete.** A client can cancel their own booking but cannot delete it — erasing the firm's record of an appointment is not something the client can do.
+
+> TODO: Confirm whether a deleted booking can be restored, and by whom.
+
 ### Timezone handling
 
 - Firms define availability in their local timezone.
