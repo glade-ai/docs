@@ -40,6 +40,8 @@ The AI assistant typically begins with `persons_me` to identify who you are and 
 
 Because each customer now carries the date their record was created, the assistant can answer questions about clients by period — how many came in last quarter, or what the lead-source split looked like for the clients who signed up in a given year. Those questions previously came back empty because there was no date to group by.
 
+A phone number is matched whichever way it is written. Asking about the client on `(404) 642-6733` finds the same person as `4046426733`, because punctuation in the number is ignored. Previously only the bare digits matched, so a question that quoted a number the way it appears on a call log or a form returned nothing.
+
 ### Cases & Workflows
 
 | Tool | What it does |
@@ -55,6 +57,16 @@ Because each customer now carries the date their record was created, the assista
 - Case numbers are matched as a whole value rather than word by word, so a case number never matches a different case that happens to share a fragment of it.
 
 In addition to the tools above, the assistant can read the case's **internal team message thread** — the firm-side discussion attached to the workflow, separate from the client-facing inbox conversation. Messages include their attachments (id, type, reference, and title). When a message has a document attachment, the assistant can fetch a short-lived signed download URL for the document. Cases that don't have an internal thread return an empty list.
+
+#### Opening the document a case-data value came from
+
+Every value Glade extracted from a document records which document it came from. Those source documents can now be opened: reading a case's data, reading one entity on the case, or reading a document request returns a short-lived download link for each source document alongside the values themselves.
+
+This is what makes a two-pass review possible — read the extracted figure, then open the paystub, bank statement, or tax return behind it and check the figure against the page. Previously the assistant could see that a value came from a document but had no way to reach the document, and for the uploads that matter most to a petition review no link existed anywhere in the tool set. Questions like "does the paystub actually support this income figure" came back as homework for a paralegal instead of an answer.
+
+- **Links only.** The assistant receives a download link, not the document's contents — no page text, no re-reading, no parsing. What it does with the link is up to the assistant you are using.
+- Each link carries the document's file name and type, and expires after a short period. Ask again for a fresh one if a link has gone stale.
+- A value that nobody extracted from a document — one typed in by your team, or calculated — has no source document and therefore no link.
 
 > TODO: confirm the exact tool names exposed for `GET /user-workflows/:id/messages` and `GET /user-workflows/:id/attachments/:id/download` once they appear in the MCP tool registry.
 
