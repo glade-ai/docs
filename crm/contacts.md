@@ -25,6 +25,8 @@ Contacts are the people your firm interacts with on Glade. The contacts system i
 - **The legal workflow filters work.** **Leads**, **Booked**, **Retained**, and **Filed** each returned an error rather than a result, on every attempt, for every firm. Searching by date of birth failed the same way. Both now return results normally. If your team had written these off as broken, they are worth using again.
 - **Browsing and searching are fast on large contact lists.** A firm with a very large client list could previously wait several seconds to open the Contacts tab, and a name search could hang for minutes — long enough to occupy the whole platform and slow other work down. Opening the list and searching it now return in well under a second in normal use.
 - Searching client notes is included in that. A note search previously read through every note in the firm, which is what produced the longest waits.
+- **A phone number can be searched the way it is written.** Punctuation is ignored, so `(404) 642-6733`, `404-642-6733`, `404 642 6733`, and `4046426733` all find the same contact. Previously only the unformatted digits matched — typing or pasting a number with parentheses, dashes, or spaces returned nothing even though the contact was there. If your team learned to strip the formatting out before searching, that is no longer necessary.
+- Searching by name, email, or Social Security number is unchanged.
 
 ## Edge Cases & Limitations
 
