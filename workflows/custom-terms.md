@@ -102,6 +102,16 @@ An agreement is created for a particular client, and that client can open and si
 
 Invoices already worked this way — the client an invoice is for can open it whether or not they were assigned it.
 
+### When an agreement has no client signature slot at all
+
+Some agreements ask for a client signature in their text without the slot ever having been set up behind it — immigration retainers are the common case. Signing one of those now works: a client signature slot is created for the agreement when it is needed, so the signature is recorded, the agreement is marked agreed, and the workflow step advances.
+
+- Previously the client filled in the signature, submitted, and was returned to the case with the retainer still unsigned and the **Agree to terms** task still outstanding. Nothing on the case explained why, and trying again produced the same result.
+- **Agreements already issued are repaired when the client next signs.** There is no separate fix-up to run and no need to re-issue the agreement — but the client does have to sign again. Glade does not mark a retainer signed on the client's behalf.
+- Where an agreement is signed by more than one person, the count of signers is worked out before the agreement is produced, so a joint retainer is still recognized as needing both signatures.
+
+If a client reported being bounced back to the case with the retainer unsigned, ask them to sign it again.
+
 ## Configuration
 
 Custom terms templates are created and managed from the firm's template library. Each template requires a name and a body. Once created, a template can be referenced as a step in a workflow template.

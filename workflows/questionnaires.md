@@ -146,6 +146,16 @@ Both forms are added to your firm's questionnaire template by Glade rather than 
 
 Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
 
+#### Totals on a form that prints whole-dollar amounts
+
+Where your firm's petition prints amounts as whole dollars, a total on the generated form is added up from the rounded figures **printed on the lines above it**, so the column adds up as read. A total that was rounded separately from its own lines could be a dollar or two away from their sum, which is the kind of discrepancy a trustee queries.
+
+This covers totals on the columns of a table as well as standalone totals. Schedule I is the case where it was reported: lines 5a–5e printed their rounded amounts, but line 6 showed the rounded exact sum rather than the sum of the printed lines, and line 7 was rounded independently again rather than carrying the corrected total.
+
+- Only the printed total changes. The underlying answers, and the figures in the questionnaire, are unaffected.
+- **Re-generate the petition** on a case prepared earlier to pick this up. Documents already generated keep the figures they were generated with.
+- Firms whose petitions print exact amounts to the cent are unaffected.
+
 #### Business and other interests on Schedule A/B line 19
 
 Line 19 of Schedule A/B asks for the debtor's interests in businesses that are not publicly traded. The generated petition prints the **name recorded on the entry together with the brief description** entered alongside it, on the one line the form provides.
@@ -401,6 +411,14 @@ On a Schedule A/B property, you can attach more than one lien to the same proper
 - A selected creditor with a blank or zero balance adds nothing to the total.
 
 The Exemptions Calculator uses the summed total of the selected liens when calculating equity available to exempt. If no liens have been selected for a property, it falls back to the single lien amount entered directly on the property.
+
+**Moving a creditor's collateral to a different property clears the old one.** When you change which property a secured creditor is attached to, the creditor is removed from the property it used to be on as well as added to the new one.
+
+- Previously the creditor could be left on **both** properties' lien lists, so the same secured claim counted against two assets. On a case where that happened, both properties understated their equity — and because equity after liens feeds the Exemptions Calculator, the Texas exemptions schedule, the Chapter 13 liquidation analysis, and the total claim amount on Schedule A/B, the error carried through to all of them.
+- The old behavior depended on how the property and creditor lists were linked together in your firm's template, so it affected some cases and not others with no way to tell them apart from the form.
+- **Re-check any case where collateral was moved between properties.** Open each property's lien list and confirm the creditor appears only against the property that actually secures it; the corrected equity figures are higher than the ones shown before.
+
+> TODO: A separate problem can stop a lien change from reaching the property's lien list at all — the creditor's own collateral field saves correctly, but the property-side list, and the lien total and equity derived from it, can stay as they were. Confirm whether this has since been corrected before relying on the property-side figures.
 
 ### Property Summary
 
@@ -936,6 +954,15 @@ When the signature confirmation modal appears at submission time, you have three
 - **Sign** — apply or confirm the signature and submit.
 - **Skip** — submit while keeping any signature values that were already entered in the questionnaire. Use this when you have manually typed signatures earlier and want them preserved on the saved draft or PDF.
 - **Clear & Submit** — clear every signature field on the questionnaire (including signatures inside list and table rows) and then submit. Use this when you are saving the questionnaire as a draft for client review and the draft should not show any signatures or signing dates.
+
+#### Generating a PDF from a case document
+
+**Save & Generate PDF** on a case document asks about signatures before it produces the PDF, the same way submitting the schedules questionnaire does. Where the case document has signature fields on it, the signature confirmation modal opens first and offers the same three choices — generate the signatures, skip and keep whatever is already entered, or clear them — and the PDF is produced afterwards.
+
+- Previously the PDF was written immediately, so a local form could go out with a blank signature block, or with a signature left over from an earlier round, even though the questionnaire already knew how to collect one.
+- **Cancelling the modal leaves the case document as it is** and produces no PDF.
+- **Generating the PDF does not submit or complete the case document.** The form stays open and the workflow does not advance — this is only about producing the document.
+- A case document with no signature fields on it generates straight away, with no modal.
 
 #### Where the names on generated signatures come from
 
