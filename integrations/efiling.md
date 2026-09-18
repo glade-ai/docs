@@ -279,6 +279,14 @@ Some court documents — for example, documents pulled from PACER — belong in 
 - Recognition is based on the document's file name. A document whose name matches a known filing document is slotted automatically; a document with an unrecognized name is added to the case as usual and can be slotted manually.
 - Previously, a recognized document uploaded outside the modal was left unslotted and excluded from the filing packet. Now a PACER document dropped into the case this way is included in the Electronic Filing Packet without re-uploading it through the modal.
 
+### Putting an uploaded case document into a packet slot
+
+A document your team uploaded under **Case Documents** can be placed into a filing packet slot, and it holds that slot in place of the version Glade generated for it. Use this where the copy that has to be filed is one your team prepared or had signed — a local form, a bifurcated disclosure, a signed page — rather than the generated one.
+
+- **The uploaded file takes over the slot.** The most recently placed document is what is filed, so a signed upload supersedes the generated PDF without your team having to remove anything first.
+- **Assigning it sticks.** For a period, placing a Case Documents upload into an e-filing slot appeared to work and then silently came back unassigned, with no way to make it hold. If your team gave up trying to file a local form they had uploaded, it can be placed now.
+- Nothing about how other documents reach the packet changes, and a generated document left in its slot is filed as before.
+
 ### PDF flattening in filing packets
 
 Court electronic filing systems (CM/ECF) reject PDFs that contain editable layers such as fillable form fields, annotations, or sticky notes. Client-uploaded documents — cover sheets, local forms, photo IDs, mortgage statements — frequently arrive as non-flat PDFs and would otherwise cause the court to reject the packet.
