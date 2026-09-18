@@ -9,6 +9,7 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [Triggers](./triggers.md)
 - [Status Tracking](./status-tracking.md)
 - [Questionnaires](./questionnaires.md)
+- [Case Documents](./case-documents.md)
 - [Document Collection](./document-collection.md)
 - [E-Signatures](./e-signatures.md)
 - [Signature Pages](./signature-pages.md)

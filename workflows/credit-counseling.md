@@ -23,6 +23,21 @@ Your firm chooses whether it pays for credit counseling or the client does. The 
 - **Firm-paid** (the default): counseling is billed to your firm, and it appears on your firm's regular Glade billing as before. The client is enrolled directly with no payment step.
 - **Client-paid**: the client buys the course themselves before they are enrolled, and it is left off your firm's billing entirely.
 
+#### When firm-paid counseling reaches your bill
+
+On firm-paid counseling, the point at which the course is added to your firm's Glade bill follows the provider, matching when that provider charges for the course:
+
+| Provider | Billed when |
+|----------|-------------|
+| Abacus | the client completes the course |
+| Sage | the client is enrolled |
+| Evergreen | the approval request is sent, before enrollment |
+
+- **An Abacus course the client never takes no longer appears on your bill.** Counseling was previously billed at the approval request on every provider — earlier than enrollment and well before completion — so a client who was sent a course and never started it still produced a line item. Those cases now drop off.
+- **A case is billed once.** A case that already carries a counseling line item is not billed again — including a joint case where both debtors' certificates arrive at the same moment, and including a case that was already charged on the approval request before this changed.
+- The line item is described as a credit counseling enrollment on the invoice, as before.
+- Client-paid counseling is unaffected — it never reaches your firm's bill at any point.
+
 ### The client's purchase step
 
 When your firm has chosen client-paid counseling, the client's credit counseling step asks them to buy the course before enrollment rather than enrolling them straight away.
@@ -38,6 +53,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - **Certificate uploads** accept PDF files only.
 - The certificate upload section is shown per debtor and only while that debtor is still missing a certificate; it is hidden once the step is completed or skipped.
 - **Who pays** — set per counseling provider in your firm's provider settings, as either firm-paid or client-paid. Firms that have not changed it are firm-paid.
+- **When firm-paid counseling is billed** is not configurable. It follows the provider — see [When firm-paid counseling reaches your bill](#when-firm-paid-counseling-reaches-your-bill).
 
 ## Edge Cases & Limitations
 

@@ -16,6 +16,17 @@ A case can carry more than one income organizer — typically one for the primar
 
 Before this, an attorney could not see or add income for a non-filing spouse even after a second organizer existed on the case — the interface showed only the first one it found.
 
+#### Each debtor's Schedule I total stays with that debtor
+
+On a joint case, an income source belongs to the debtor it is recorded against, and that debtor's Schedule I total is worked out from the sources that belong to them. A source added for debtor 2 is attached to debtor 2's organizer even if it was entered from debtor 1's, so the two never mix.
+
+Two problems on joint cases came from the same cause and are both resolved:
+
+- **Debtor 2's income no longer lands on debtor 1's Schedule I.** A source tagged for one debtor could sit on the other's organizer, and its amount was then carried onto the wrong debtor's schedule.
+- **An edit after the initial entry updates the total.** Where a source was on the wrong debtor's organizer, editing an amount recalculated the *other* debtor's organizer — which was empty — so the figure on screen never moved however many times it was corrected.
+
+Existing cases are corrected the next time the organizer is opened or recalculated; there is nothing to run. **Re-check Schedule I on any joint case prepared earlier** — a debtor showing income that belongs to their spouse, or a total that did not respond to a correction, is the symptom.
+
 ### Income Calculation Modes
 
 Each income source (such as a paystub) can be set to one of these calculation modes:
@@ -216,6 +227,13 @@ When Glade reads a paystub on its own — on upload, on a re-read, or during a b
 **Deductions printed in two columns.** Some paystubs — government back-pay stubs are the common case — list each deduction twice, once as the current pay period amount and once as an adjusted amount. Glade adds the two together for each deduction rather than reading only the current column. Previously the adjusted column was ignored, which understated the client's total deductions and, on the Chapter 7 means test, overstated the income remaining after them.
 
 **Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
+
+**Take-home pay is read from the net pay line, not the gross.** Stubs that label take-home as **Net Pay ACH**, **Net Pay Check**, or **Direct Deposit** rather than plainly as *Net Pay* had their **Gross Earnings** figure recorded as net, overstating monthly take-home by a wide margin — around 27% on the stubs where this was reported, which was enough to hold up a Chapter 7 filing.
+
+- Those labels are now recognized, and where a stub prints both an ACH and a check amount the two are added together.
+- As a check on the result, a net figure that comes out at or above the gross is re-worked from the gross less the deductions actually printed on the stub. Deduction categories the stub does not print are left empty rather than being recorded as $0.00.
+- **Schedule I still uses gross pay** — it always did. What was wrong was the net column, and anything reading from it.
+- Re-read an affected paystub to correct it. A stub whose net figure looks close to its gross is the symptom worth checking on income entered earlier.
 
 **Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
 

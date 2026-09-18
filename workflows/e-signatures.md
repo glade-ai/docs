@@ -21,6 +21,9 @@ A request moves through these stages:
 
 - Once signature fields have been placed, opening the request loads the document to sign. Previously the client's view stayed on "Your signature request is being prepared" indefinitely and never loaded the document, even though the firm had finished preparing it — so nothing could be signed and there was no indication anything was wrong. This affected firm staff signing on the client's behalf as well.
 - Before fields are placed, the client still sees the preparing message. That is the only stage where it appears.
+- Clicking **Awaiting signature** opens the document to sign. This could instead fail with *"Unable to generate signer URL, please contact support"*, leaving the signer with no way through — each signer was not being registered against the request when it was sent, so there was nothing to match them to at signing time. Signers are now registered as the request goes out.
+
+> TODO: Confirm whether a request sent before this correction can be signed, or has to be sent again. The signer registration happens when the request is created, so already-sent requests may still show the error.
 
 ### What the firm sees
 

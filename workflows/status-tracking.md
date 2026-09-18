@@ -87,6 +87,7 @@ Some cases have to be filed with the court by a particular date — an emergency
 
 - **Setting a deadline** — a case's settings let you record a **filing deadline** as a calendar date, plus an optional **reason** explaining why the case is time sensitive. Recording a deadline is what marks a case as time sensitive; a case with no deadline is not time sensitive.
 - **Setting one at case creation** — the deadline and reason can also be entered when a staff member initiates a case, so an emergency filing carries its deadline from the moment it exists. A reason on its own is not accepted — the reason has to attach to a deadline.
+- **Notes on a case that is not time sensitive** — where a staff member answers **No** to time-sensitive at case creation but writes notes anyway, those notes are posted as an internal note on the case, authored by whoever created it. They appear in the same internal notes thread the team already reads. Previously the notes were saved but had nowhere to appear: the time-sensitive panel only shows on a case that carries a deadline, so a "No, but here is some context" note was recorded and then invisible. Answering **Yes** is unchanged — the reason stays on the time-sensitive fields and is not duplicated as a note. Leaving the notes blank creates nothing.
 - **Who set it** — Glade records which team member recorded the deadline and when. On a case created with a deadline, the person who created the case is recorded.
 - **Clearing a deadline** — clearing the deadline also clears the reason and the record of who set it. The case is no longer time sensitive.
 - **The date does not shift** — the deadline is a calendar day the court cares about, so it reads the same regardless of anyone's timezone.
@@ -100,6 +101,18 @@ A matter can carry several cases at once — an associated filing alongside the 
 - A case created with its own deadline keeps that deadline instead of inheriting.
 - Answering explicitly that a new case is **not** time sensitive suppresses inheritance — it stays unmarked.
 - When you create an associated case, the wizard shows the matter's most recent deadline so you can carry it over or override it deliberately.
+
+### Cases that have gone quiet
+
+A case that has had no activity for **three months** is treated as **stale**, and Glade stops sending its automated follow-ups — both the emails and the text messages. Cases can sit untouched for months while continuing to chase a client who has stopped responding, which costs the firm messaging spend and pesters people on matters that are effectively dead.
+
+- **Activity means anything that happened on the case** — a message either way, a payment attempt including a failed one, a court notice arriving, a task completed, a note your team wrote. Any of these resets the three months.
+- **A follow-up is not activity.** Sending a follow-up does not count as the case having moved, so a stale case cannot keep itself awake by chasing the client.
+- **Nothing else about the case changes.** Stale is not a status: the case keeps whatever status it has, it is not archived, and its tasks stay open and assigned. Only the automated follow-ups stop.
+- **You can override it either way.** A case can be marked stale by hand before three months have passed, or marked active so its follow-ups keep going however long it has been quiet. The override wins over the three-month measure until you clear it, at which point the case goes back to being judged on its last activity.
+- **Finding them** — the cases list can be narrowed to stale cases, and the cases CSV export carries a column showing which cases are stale. This sits alongside the status filter rather than replacing it, so a stale case is still found by its own status too.
+
+> TODO: Confirm where the stale override is set on a case, and whether an on-screen banner marks a stale case — that part of the change ships separately.
 
 ## Configuration
 
@@ -123,6 +136,8 @@ A matter can carry several cases at once — an associated filing alongside the 
 - Labels and tags are separate. Existing tags are not converted into labels, and building a label list does not remove or change the tags already on your cases.
 - A date can only be recorded against a label that was set up to accept one. Applying a date to any other label is refused, and the date has to be a real calendar date.
 - A label is not a status and carries no behavior of its own — applying one does not move the case, complete tasks, or suppress follow-ups the way a custom status can.
+- The three-month staleness threshold is fixed and is not configurable per firm. Where a case needs to keep chasing beyond it, mark the case active rather than looking for a setting.
+- Staleness suppresses automated follow-ups only. Reminders tied to an appointment, and anything a team member sends by hand, are unaffected.
 
 ## Related Features
 
