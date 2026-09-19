@@ -136,6 +136,16 @@ When a client adds a business or rental income source from an income document re
 - **Once a document has uploaded (or is uploading) or a manual statement is saved,** **Back** is disabled. Closing the dialog keeps the source and what has been saved.
 - Other income types — employment, Social Security, and the rest — still use the existing add-source form.
 
+### Which Contact a Business or Rental Belongs To
+
+A business or rental on the case records which contact it belongs to — the **primary** or the **secondary** contact — the same way an asset or a creditor records its owner. Previously there was no way to say, even on a joint case where the organizer already knew which contact the income belonged to.
+
+- **The contact is filled in from the income source** when the business or rental is created from the Income Organizer, so a source already tied to a filing contact does not have to be assigned again.
+- **A source that is not tied to a filing contact is left unassigned** rather than guessed at.
+- **A choice your team makes by hand is the one that is kept**, including clearing it back to unassigned. It is not replaced the next time the case's income data is refreshed.
+- Businesses and rentals recorded before this can be assigned by hand; nothing is assigned for them retroactively.
+- This records who the business or rental belongs to. It does not move income sources between organizers and does not change any income calculation.
+
 ### Including and Excluding Income Records
 
 Each income record carries its own switches for whether it counts toward Schedule I and whether it counts toward the means test. Turning one off is a deliberate choice your team makes about that record, and Glade preserves it:
