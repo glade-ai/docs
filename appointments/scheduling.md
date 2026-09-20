@@ -44,6 +44,17 @@ An appointment type can send its bookings to a particular calendar based on **th
 - Firm team members can deliberately book or reschedule into a blocked window using **Schedule Anyway**. When a team member picks a blocked (or otherwise conflicting) slot, Glade asks them to confirm; confirming overrides the block and saves the booking. This lets a firm keep its calendar blocked to pause new bookings while still moving an existing appointment into that time — no need to temporarily reopen the calendar first.
 - Clients and other non-team members cannot book into blocked time even if they reach a blocked slot. For them, attempting to create or reschedule into a blocked window — for example from a stale link or an out-of-date slot list — is rejected with an error rather than silently saved.
 
+### Restricting which minutes a slot can start at
+
+Ordinarily the bookable times inside an availability window are worked out by stepping through it at the appointment type's scheduling interval. A window can instead name the exact minutes past the hour at which an appointment may start, so a firm whose consultations always begin at ten to the hour offers only those times.
+
+- **The allowed start minutes are set on the availability window itself**, so they can differ from one weekday to the next — Monday to Friday 9–5 starting only at :50, Saturday 9–1 starting at :00 and :40. Because windows are defined per team member, two people working the same day can offer different start times.
+- **A window with no start minutes set behaves exactly as before**, stepping through the window at the scheduling interval.
+- **Everything else that closes a slot still applies.** An allowed start time is only offered if the slot is free — blocked windows, conflicts on a synced Google or Outlook calendar, the concurrent booking limit, and the minimum booking notice all still remove it.
+- **An appointment type that already had start times restricted for the whole service keeps working.** Those times continue to apply until the weekly schedule for the service is saved again, at which point the per-day windows take over. Re-save the schedule when you want a service to move onto per-day start times.
+
+> TODO: Confirm where the allowed start minutes are entered in the Availability editor and how the control is labeled — the source change does not establish the settings screen.
+
 ### Availability management view
 
 The **Availability** tab in the Bookings section gives you a centralized place to review and manage availability across all services and team members.
@@ -298,6 +309,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Default team member | Pre-assigned team member for new bookings on this product. |
 | Custom confirmation message | Message shown to the client after booking is confirmed. |
 | Availability patterns | Days of the week and start/end times, configured per team member. |
+| Allowed start times | The exact minutes past the hour at which an appointment may start, set on an individual availability window. Empty until set, in which case slots follow the scheduling interval. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 | Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
 | Client county required | Whether a client booking this appointment type must give their county. Off until your firm turns it on. Independent of whether the client's address is required. |
@@ -317,6 +329,8 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - External calendar events marked as "free" do not block availability. Only "busy" events create blocks.
 - Enforcement against synced events depends on the event having reached Glade. A commitment a team member blocked out directly in Outlook that has not yet synced is not known to Glade and does not prevent a booking.
 - A booking with no assigned team member is not checked against any synced calendar, since there is no team member whose calendar to compare it with.
+- Allowed start times narrow a window rather than extend it — they select from the times the window would otherwise offer. A window whose listed start times do not fall inside its own hours offers nothing at all.
+- A service that previously had its start times restricted for the whole service keeps those times on every day until its weekly schedule is saved again. Until then the per-day windows have no effect.
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
