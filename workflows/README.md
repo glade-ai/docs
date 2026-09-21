@@ -13,5 +13,6 @@ Tools for automating case processes, managing tasks, and tracking case progress.
 - [E-Signatures](./e-signatures.md)
 - [Signature Pages](./signature-pages.md)
 - [Credit Counseling](./credit-counseling.md)
+- [Foreclosure Alerts](./foreclosure-alerts.md)
 - [Exemptions Calculator](./exemptions-calculator.md)
 - [Payment Gates](./payment-gates.md)
