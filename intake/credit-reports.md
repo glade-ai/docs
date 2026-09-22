@@ -135,6 +135,17 @@ Re-pull when the report itself is unusable and the reason has been resolved — 
 
 > TODO: Confirm where the re-pull action appears on the credit report card and which roles can run it.
 
+### Enrolling again after a chapter conversion
+
+When a case converts from Chapter 7 to Chapter 13, the new chapter carries its own credit report, so the client is asked to complete the bureau's identity enrollment again in the client portal.
+
+- **A client who enrolled on the earlier chapter can complete it.** Glade recognises the identity the bureau already holds for that person at your firm and carries straight on to verification, rather than registering them a second time — which the bureau refuses.
+- Previously the client could not get past enrollment at all. The bureau rejected the second registration as an identity it had already seen, so the Chapter 13 report could not be obtained and the filing stalled with nothing the client could do. A client who was blocked this way can retry enrollment now.
+- The earlier enrollment is only reused where it belongs to the **same person at the same firm**. An enrollment at another firm is never reused.
+- A client enrolling for the first time is unaffected and registers as before.
+
+> TODO: Confirm whether the client is prompted to re-enroll automatically on conversion or has to be sent the enrollment step again, and whether the Chapter 13 report is billed as a separate pull.
+
 ### Creditors reach the case on the first successful pull
 
 On a joint case, creditors from the credit report now reach the case record as soon as the first debtor's report comes back, instead of waiting for every debtor.
