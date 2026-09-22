@@ -279,6 +279,9 @@ The **court division** field lists the divisions belonging to the case's filing 
 - Districts with more than one division still require you to pick one.
 - Divisions that exist only as electronic-filing variants of another division are not offered, and divisions that appear more than once in the underlying court list are shown once.
 - Auto-selection only fills an empty field. A division you have chosen is never replaced.
+- **A generated court form prints the division's name.** Where the court division is mapped onto a field of a court form, the generated PDF prints the division as it is named — *Tampa*, for example — rather than the abbreviated value stored behind it. E-filing and the court office lookup continue to read the stored value, so nothing about filing changes. Forms generated earlier keep the text they were generated with; re-generate them to pick up the correction.
+
+> TODO: Confirm which generated forms this covers. It applies to forms filled from the court's own fillable PDFs; Glade's own generated layouts are unchanged.
 
 ### Debtor County
 
@@ -334,6 +337,18 @@ Lists that are pre-filled automatically from another questionnaire on the same c
 - Imported figures stay put. Reloading the questionnaire shows what was imported rather than reverting to what was on the form before.
 - **If the organizer has nothing calculated yet, the import tells you so** rather than reporting success while filling in nothing. It reads *"No income organizer data available to import yet."*
 - Both places the import is offered — the button in the Schedule I section and the one on the questionnaire's details — behave the same way.
+
+### Itemizing Other Income on Schedule I Lines 8f and 8h
+
+Schedule I reports other government assistance on line 8f and other monthly income on line 8h, and the official form has room for one description and one amount per debtor. A client often has several sources behind that one figure. The income table keeps the summed amount, and a button on the cell opens the list of the individual sources behind it.
+
+- Each debtor's column has its own button opening its own list, so sources stay separated by debtor and by line — an 8f source never turns up under 8h.
+- The list opens over the form, where rows can be added and edited as on any other list. The table's summed amount is still what the form's amount line uses.
+- These lists do not appear as extra lists underneath the income table, and they do not count toward the section's completion progress.
+- The sources come from the case's income organizer. Removing a source there, or taking it off Schedule I, removes its row here.
+- On a case that does not use case data sync, the summed amounts still fill but the item lists stay empty.
+
+> TODO: Confirm the label on the cell button, and which firms' templates carry the 8f/8h item lists — the lists and the buttons are added to a template in the questionnaire editor rather than being present on every template.
 
 ### Restoring Removed List Items
 
@@ -856,6 +871,15 @@ Clients filling out questionnaires on a mobile device see a redesigned navigatio
 
 The mobile layout is only visible to clients accessing the questionnaire on a mobile device. Attorneys and firm staff viewing the same questionnaire on desktop see the standard layout.
 
+### Printing a Questionnaire
+
+A questionnaire can be printed from your browser, including when it is open in a panel alongside the rest of the case rather than on its own page.
+
+- The printed copy covers **every subsection of the section you are on**, continuing over as many pages as it needs. Previously a questionnaire opened in a panel printed only what happened to be on screen — roughly one page of fields — or came out with none of the form's layout.
+- The panel's own surroundings — navigation, the close button, and the chrome around the form — are left off the printed pages.
+- Cancelling the print returns you to the subsection tab you were on.
+- A form your team is reviewing prints the same way as a completed one. A questionnaire a client has submitted for review can be printed by a team member who can edit it, which previously produced the same partial page.
+
 ### Access Control
 
 If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
@@ -892,6 +916,15 @@ When at least one blocking finding is present, the dialog behaves exactly as des
 Informational findings on their own do not interrupt a submit at all. They appear in **Check petition** (see [Petition Check Summary](#petition-check-summary)), which is where to look for them.
 
 Previously the dialog was decided by which button opened it rather than by what the findings said. A submit whose findings were all advisory went through in silence and those findings were never shown to anyone who did not separately run Check petition. Expect one extra confirmation step on those submissions where there was none before.
+
+**Blocking findings are listed on their own tab.** Where a run turns up both kinds of finding, the dialog separates them instead of listing everything together:
+
+- It opens on a **Blocking** tab showing only the findings that have to be cleared. Advisory and informational findings sit on a second **Advisory** tab.
+- Where every finding is of one kind, there are no tabs and the findings appear as a single list, exactly as before.
+- Inside each tab the findings stay in the order they appear on the form. Severity decides which tab a finding is on, not where it sits within the tab.
+- Signatures keep their own summary tile and do not decide whether the tabs appear.
+
+On a petition check that flags a long mixed list, the items that actually stop the filing were previously buried among advisory notes and had to be picked out by reading the whole list.
 
 **Submit Anyway** is also available when a required signature has been skipped — you can submit the questionnaire without completing the signature.
 
@@ -943,6 +976,8 @@ The marking down the margin is what makes the draft unsuitable to sign, so **Gen
 Use the second when you are collecting wet-ink signatures from the debtor before the case is ready to file, and the first when you want a review copy that cannot be mistaken for the filing version.
 
 - Both documents are produced when you ask for the unmarked one, so the marked draft stays available.
+- **Submitting the questionnaire produces it too.** Submitting a bankruptcy schedules questionnaire saves **Petition for Signatures (Draft)** alongside the marked **Petition (Draft)** and the separate signature pages, so nobody has to remember a second **Generate petition for signatures** run after every submit. The progress message shown while the documents are assembled covers the new file.
+- **Generate petition on demand is unchanged.** Asking for the marked draft on a case that has no unmarked copy still does not create one — only a submit, or an explicit **Generate petition for signatures**, does that.
 - **The two never drift apart.** Once a case has an unmarked copy, it is rebuilt every time the draft is regenerated — by hand or automatically — so the pages the debtor signs always match the current draft.
 - The **Open draft** link after generation opens whichever document you asked for.
 - If the unmarked copy cannot be produced, the action reports an error rather than quietly handing back the marked draft in its place.
@@ -1013,6 +1048,17 @@ Not every finding blocks a submission, and the ones that do not are now shown on
 - Findings listed in the subsection popover are now tagged with their severity, matching the Petition Check dialog. Previously the popover printed every message in the same warning colour with no tag, so an advisory note and a blocker looked identical. Where the popover collapses several findings into a single "N issues in the list" line, that line takes the strictest severity among them.
 
 Previously **Go to field** on an advisory finding took you to a field that looked completely clean — the message existed in the dialog and in the subsection popover, but nowhere on the form — which read as a broken check rather than as a finding you were meant to act on.
+
+#### A finding on a row of a list names the row
+
+A finding on a cell inside a list names the entry the row describes, so several findings on the same column of the same list can be told apart.
+
+- The row's name appears under the field label — the creditor, the property, or whatever the row is about. It is read from the row's own answers: the sub-field your firm's template marks as the row's title, or, on the Master Property List, the category and description together.
+- **Go to field opens that row.** It opens the row's editor on the right subsection with the cell in question focused, instead of scrolling to the top of the list. Where the row has been removed since the check ran, it falls back to scrolling to the list rather than opening a different row.
+- Where a subsection's findings are collapsed into a single **N issues in the list** line, that line names the rows it covers — up to three of them, then a count of the rest.
+- Table findings are unchanged: a table repeats the same fields across its columns, and those findings already name the column they belong to.
+
+Previously a finding on a list cell showed its field label and nothing else, so four advisories on one Master Creditor List all read **Account Number** and named none of the creditors they were about — and **Go to field** landed on the top of the list, so whichever row happened to be on screen was the one that got read.
 
 #### Rules that check answers inside tables and lists
 

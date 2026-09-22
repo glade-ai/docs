@@ -119,6 +119,16 @@ Several types were added or narrowed:
 - **Adversary Complaint** is available as a type. A complaint opening an adversary proceeding against a debtor now classifies as Adversary Complaint instead of arriving with no type at all, so these notices can be filtered on the court notices list and used as an automation's match type. Only the complaint itself is classified this way — later filings in the same adversary proceeding, such as answers, summonses, and motions, are not.
 - **521 Compliance** is only applied when the notice explicitly cites Section 521. Notices that merely resemble a compliance notice are no longer classified this way.
 - **Investigating Asset** is now limited to trustee reports that explicitly describe an ongoing investigation into estate property. Recovered-asset and claims-bar notices, routine 341 meeting reports, no-distribution reports, and final reports are classified as what they are and no longer land here. An automation set up to watch for asset investigations fires on far fewer, more relevant notices as a result.
+- **A continued 341 meeting is separated by whether the meeting was held.** Two new types — **341 Meeting Held and Continued** and **341 Meeting Not Held and Continued** — cover a meeting that took place and was then continued (usually for further documents) and a meeting that did not take place and was continued. Both previously landed on **341 Meeting Held**, so a firm could not automate a no-show continuation separately from a meeting that went ahead. A 341 that was held and concluded, a reset or rescheduled 341, a certificate of mailing, and a continued *confirmation* hearing are not taken by the new types.
+- **A confirmed delinquency in Chapter 13 plan payments** has its own type, so a firm can automate on it rather than reading it out of a more general classification.
+- Several neighbouring definitions were narrowed at the same time so they stop taking each other's notices: certificates of service and mailing, requests for a claims deadline, first-meeting reports, and the difference between a confirmation hearing that has been *requested* to move and one that actually has.
+
+**A notice is listed before it has been classified.** A newly arrived notice appears on the court notices list as soon as it is read, and picks up its type when classification finishes a moment later.
+
+- A notice whose classification does not complete — a temporary outage, for example — is retried rather than being recorded as a notice with no type. A notice that ends up with no type is one Glade read and could not place, not one it never got to.
+- Automations are evaluated once the type is known, so a notice that arrives before its classification is still matched against your rules. Case linking, the existing triggers and filters, and the handling of notices that arrive before their case is linked are all unchanged.
+
+> TODO: Confirm the exact name of the Chapter 13 plan-payment delinquency type as it appears in the notice type picker — an automation's trigger is an exact match on the type, so the wording matters.
 
 **Notices already on your cases are not reclassified.** These rules apply to notices received from now on. A notice that arrived under the old classification keeps the type it was given, and an automation matching a new type will not fire retroactively for it.
 

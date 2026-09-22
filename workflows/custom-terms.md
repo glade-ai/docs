@@ -91,6 +91,17 @@ On an agreement carrying more than one client signature slot — a joint retaine
 - When this happens, check who each signature slot on the agreement is assigned to and point the right slot at the spouse who is signing.
 - Agreements with a single client signature slot are unaffected. That slot is used whoever it is assigned to.
 
+### When the agreement was never assigned to the client
+
+An agreement is created for a particular client, and that client can open and sign it even where the workflow step it came from does not list them among the people it is assigned to.
+
+- Previously a client in that position could see the agreement on the case but was refused with **"This task has not been assigned to you."**, and no **Agree to terms** task was created — so the step could not be completed by anyone. Chapter 13 retainers on cases started from a firm's own workflow templates were the common case, because that step's assignment list is often left empty.
+- The client now also gets the **Agree to terms** task, so the agreement reaches their task list rather than sitting only on the case.
+- **Access that was deliberately taken away is not handed back.** Where the agreement has been passed to the attorney to sign, or the step has been skipped, the client cannot open, reset, or skip it — including a client who was never assigned it in the first place.
+- Live cases already stuck in this position can be opened and signed straight away. Their **Agree to terms** task appears the next time something happens on the agreement; new cases get the task when the agreement is created.
+
+Invoices already worked this way — the client an invoice is for can open it whether or not they were assigned it.
+
 ## Configuration
 
 Custom terms templates are created and managed from the firm's template library. Each template requires a name and a body. Once created, a template can be referenced as a step in a workflow template.
