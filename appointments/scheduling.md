@@ -238,6 +238,17 @@ A slot is full when the number of things already occupying it — existing Glade
 
 A slot that fills between the moment the client loads the time list and the moment they confirm is the common way to hit this. Reloading the booking calendar shows the slot as taken.
 
+#### Counting concurrent bookings per appointment type
+
+By default a slot's occupancy is counted across the team member's whole calendar: a booking of any appointment type at 2pm counts toward the concurrent booking limit of every other appointment type at 2pm. A firm running several consultation types alongside each other — an intake consultation and a sign-and-pay appointment, say — can have each type counted on its own instead, so that booking one does not take capacity away from the other.
+
+- With the option on, only bookings of the **same** appointment type count toward that type's concurrent booking limit. Each type offers its own slots up to its own limit, so two services can each run at 2pm.
+- **Busy time still blocks every type.** An event on the assigned team member's synced calendar, and a **Blocked** availability window, remove the slot from every appointment type regardless of this setting.
+- The calendar event Glade creates for a booking is not counted against other types — another service's booking does not block a slot through its own calendar event.
+- The option is **off for every firm** until it is turned on, so a firm relying on one shared limit across its calendar is unaffected. Turning it on changes which slots clients are offered, so review each appointment type's concurrent booking limit before enabling it.
+
+> TODO: Confirm where the setting appears in the appointment type's Product details and what it is labelled there.
+
 ### User Profile Meetings
 
 Each firm member's profile includes a **Meetings** tab that clients can visit to view upcoming appointments and book new consultation types.
@@ -281,6 +292,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Scheduling interval | Minimum gap between available time slots. |
 | Buffer time | Preparation time added before and after appointments. |
 | Concurrent bookings | Maximum number of overlapping bookings allowed per time slot. Default is 1. |
+| Count concurrent bookings per appointment type | Whether each appointment type's concurrent booking limit is counted against bookings of that type only, rather than against every booking on the team member's calendar. Set for the firm, and off until your firm turns it on. |
 | Video conference link | Whether to auto-generate a video meeting link for the appointment. |
 | 48-hour reschedule rule | Whether clients can reschedule within 48 hours of the appointment. |
 | Default team member | Pre-assigned team member for new bookings on this product. |
@@ -297,6 +309,7 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 ## Edge Cases & Limitations
 
 - Unscheduled bookings expire if no time is selected before the expiration date.
+- Counting concurrent bookings per appointment type is a firm-wide choice, not a per-appointment-type one. It applies to every appointment type at once.
 - The 48-hour rescheduling restriction applies to clients only. Firm staff can always reschedule.
 - Concurrent booking limits are per time slot, not per day.
 - The full-slot check applies to bookings that have an assigned team member. A booking with nobody assigned has no calendar to check against, so the limit is not enforced for it.
