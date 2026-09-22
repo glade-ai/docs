@@ -199,6 +199,17 @@ Opening a case with the court asks for a set of answers beyond the petition itse
 - The consistency of the joint-filing answers is checked as well: a case that says it is filed jointly in one place and individually in another is reported rather than being sent to the court to be rejected.
 - Submission still runs its own check at the moment you file, so nothing gets through on a stale review. The difference is that the problem is visible earlier and described in the same place as every other finding.
 
+#### Two answers no longer hold a submission back
+
+Two of these answers were also enforced at the moment of submission, which stopped filings the court would have accepted:
+
+- **Marital filing status** no longer blocks a Chapter 7 individual filing at submission when it has been left unanswered.
+- **Whether the case is filed jointly** no longer has to be answered Yes or No to submit.
+
+**An unanswered joint-filing question files the case as an individual filing.** Nothing is assumed from a blank answer, so a case meant to be filed jointly and left unanswered goes to the court as an individual petition. Confirm that answer before submitting a joint case — this is the one situation where the removed check was doing useful work.
+
+The pre-filing review still reports the answers the case's own district requires, and it remains the place to clear them.
+
 #### Joint petitions in districts that do not accept them
 
 Some districts do not accept joint petitions. A joint case in one of those districts was previously submitted anyway and failed after the fact, with the rejection arriving by email rather than in Glade.
@@ -329,6 +340,8 @@ This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *S
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
 - An unrecognized county is reported by the pre-filing review as a blocking item on the debtor it belongs to, with a suggestion where Glade can offer one. Correcting the address clears it. A county that is spelled correctly and still not recognized needs Glade to add it — contact support with the case and the county.
 - The court's required answers and the joint-petition rule are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
+- An unanswered joint-filing question no longer stops a submission, and is treated as an individual filing. A joint case that has never had the question answered is therefore submitted as an individual petition rather than being held back — check the answer before filing a joint case.
+- Marital filing status is no longer enforced at submission on a Chapter 7 individual filing. Where the case's district requires it, the pre-filing review is the only place it is reported.
 - Whether a district accepts a joint petition is now answered per chapter. A district's general joint-petition setting still applies wherever no chapter-specific rule has been recorded for it, so a district that blocks joint filings in only one chapter needs that rule recorded before the review can tell the difference — contact support if a district's joint-filing behavior does not match its local rules.
 - The New Mexico non-filing-spouse rule blocks the filing and cannot be cleared on the case. Contact support for a case in that position rather than converting it to a joint filing.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
