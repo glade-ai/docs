@@ -74,6 +74,15 @@ When an agreement is set to be signed by an attorney and you assign attorneys th
 
 This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
 
+### The name on the attorney's signature
+
+When an attorney countersigns an agreement, the name printed in the attorney's signature block is the attorney's own name, not the client's.
+
+- Previously the signing form could arrive pre-filled with the client's name, and a typed signature then printed that name in the attorney's block — even though the signing certificate correctly recorded the attorney. If the name submitted for the attorney matches the client on the agreement, the attorney's own name is used instead.
+- A customized attorney name that is not the client's — for example "Jane Smith, Esq." — is kept as entered.
+- If the name is left blank, the signing attorney's name is used.
+- Agreements already signed before this correction are not changed. Check the attorney signature block on any recently countersigned agreement where the client's name may have been printed.
+
 ### When a joint signer has no signature slot
 
 On an agreement carrying more than one client signature slot — a joint retainer, typically — each slot is assigned to a particular signer. If the person signing has no slot assigned to them, for example because both slots were assigned to the attorney rather than one to each spouse, the attempt is refused with an error.

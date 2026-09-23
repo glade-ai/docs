@@ -112,6 +112,16 @@ A matter can carry several cases at once — an associated filing alongside the 
 - Answering explicitly that a new case is **not** time sensitive suppresses inheritance — it stays unmarked.
 - When you create an associated case, the wizard shows the matter's most recent deadline so you can carry it over or override it deliberately.
 
+### Switching a case to a workflow in another service
+
+When you switch a case to a different workflow — for example moving a Chapter 7 case onto a Chapter 13 workflow after an attorney recommendation — you can choose any workflow your firm offers, not only the workflows in the service the case is already under.
+
+- The choices are grouped by the service each workflow belongs to. A workflow that is not part of any service can still be chosen; it simply has no group.
+- Only workflows your firm would start a new case on are offered. Disabled, retired, and draft workflows are not listed, and switching to them is refused.
+- A case can only be switched to one of your own firm's workflows.
+
+> TODO: Confirm where the workflow switch is started from on a case, and whether the picker opens on the case's current service by default.
+
 ## Configuration
 
 - **Custom statuses**: Created and managed per firm. Each status has a unique identifier, display title, icon, color, and optional behavioral flags (archive behavior, disable followups). Any status — custom or built-in default — can be archived from the Custom Statuses settings page.
