@@ -37,6 +37,17 @@ When you fill in a client's information in the credit report modal — including
 - Only empty fields are filled in. Existing values are never overwritten.
 - If the write-through fails, the credit report pull still completes normally.
 
+#### Date of birth carries into the case
+
+The date of birth used for a credit report pull is written into the case's data, so questionnaires that ask for the debtor's date of birth are pre-filled with it instead of asking for it a second time.
+
+- When the bureau's report includes a date of birth, that date is used — the one the bureaus report most often, if they differ — even if a different date was typed on the pull form.
+- When the report has no date of birth, the date entered on the pull form is used.
+- On a joint pull, the co-debtor's date of birth is carried into the case the same way.
+- This applies whether the pull was started by your team or by the client.
+
+Previously the date of birth entered for the pull was saved on the client's profile but never reached the case, so it had to be entered again in the questionnaire.
+
 ### Error Handling
 
 If a credit report pull fails:
@@ -153,6 +164,7 @@ When Glade imports addresses from a credit report into the case as real-estate a
 - The original creditor is recorded only when the report names one. A collection account whose report gives no original creditor shows the agency alone, as before.
 - A creditor that arrives from the report with no address at all — some collection agencies come through this way — opens for editing with empty address fields, and appears normally in creditor lists and pickers. Previously such a creditor could stop the creditor form or the list from loading at all. An address is still required before the creditor can be saved, so fill it in before filing.
 - Importing a report into case data adds the report's creditors and updates ones it has already contributed. It does not remove a creditor, so a creditor that should not be on the case has to be removed by hand.
+- A report stored before the date of birth began carrying into the case gets its date of birth the next time the report is processed again, not straight away. On an older case, enter the date of birth in the questionnaire if it is still blank.
 - A report that completed with no creditors because of an unreadable property record needs support to re-read the stored report. Re-pulling produces a fresh billable pull and is not the fix.
 - Re-pulling a debtor's report replaces the stored one rather than keeping both, so the empty report a freeze produced is not retained as a record of the attempt. Note what you need from it before re-pulling.
 - Re-pulling while the client's freeze is still in place returns another empty report, billed as a pull. Confirm with the client that the freeze has been lifted first.
