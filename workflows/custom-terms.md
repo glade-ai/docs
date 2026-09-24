@@ -35,6 +35,19 @@ Two kinds of value are deliberately left alone, because **Edit details** cannot 
 - Context values that name a person, and those chosen from a fixed list — a case type, for example.
 - A detail that feeds more than one context value on the same workflow. Neither is changed rather than Glade guessing which one you meant, so those keep their existing values.
 
+### Invoice amounts on a retainer
+
+A retainer can show amounts taken from the case's invoice — the base legal fee, for example. Those amounts are filled in once the invoice exists, and kept up to date while the retainer is unsigned.
+
+- **Generating the invoice fills in the retainer.** When the invoice template links a line item — such as "Attorney Fees" — to an amount on the retainer, generating the invoice carries that link through even if the invoice's custom-terms field is left empty, and the retainer picks up the dollar amount.
+- **Unsigned retainers update when the invoice does.** Creating the invoice, making it payable, or correcting its amount refreshes the figures on any retainer that has not yet been signed.
+- Only the current version of the invoice counts. Voided, skipped, and superseded versions are ignored.
+- **Signed, skipped, and hand-edited retainers are left alone.** A retainer that has been agreed to, skipped, or edited by your team is not rewritten when the invoice changes.
+
+Previously a Chapter 7 retainer could go out reading `$[invoice:baseLegalFee not set]` in place of the fee, even after your team had generated the invoice and entered the amount, because the retainer was prepared before the invoice had any line items and was never refreshed afterward.
+
+- A retainer still showing the placeholder is corrected the next time the invoice is generated or corrected. Retainers are not repaired in bulk.
+
 ### Printing an agreement for wet-ink signing
 
 A firm can produce a complete, unsigned copy of a client's agreement to print and sign in ink, before the client has signed anything electronically. The copy carries the firm's letterhead and every detail filled in — the retainer amount, the fee, the attorney's name — exactly as the client would see it, with the signature lines left blank.
