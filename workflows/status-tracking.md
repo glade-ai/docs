@@ -80,6 +80,17 @@ The task list lets each team member clear items they no longer need to watch, wi
 - **Restoring brings a task back.** A dismissed task can be restored to your list. If dismissing it also dropped your own assignment, restoring gives that assignment back; if you were not assigned at the time, restoring leaves assignment untouched.
 - **Filtering by dismissal state.** The list shows **active** tasks by default — everything you have not dismissed. You can switch it to show **dismissed** tasks only, or **all** tasks regardless of dismissal.
 - **Including completed tasks.** A separate setting adds completed tasks to the list alongside incomplete ones. It is off by default and is independent of the dismissal filter, so the two can be combined in any way — completed work you have not dismissed, dismissed work that is still open, and so on. The list previously showed incomplete tasks only, with no way to bring completed ones back into view.
+- **Dismissals apply to your task inbox, not to a case.** The **Tasks** panel on a client and on a workflow shows every open task on that case, including ones you have dismissed from your own inbox, so everyone looking at the same case sees the same list. The task stays dismissed in your inbox. Previously a dismissed task was hidden from those panels too, so the person who dismissed it saw fewer open tasks on the case than their colleagues and the case could look further along than it was. Choosing to show **dismissed** tasks on those panels still works as before.
+
+### What carries over when a case switches workflow
+
+When a case is switched to a different workflow — for example converting a Chapter 7 case to Chapter 13, or back — the client's credit report and the money they have already paid move to the new case.
+
+- **The credit report moves even if the new case has started one of its own.** A new workflow often opens its own credit report step within seconds of being created, before the switch has finished. If that report has never actually been pulled, it is set aside (skipped, not deleted) and the client's real report — with its bureau results and documents — moves onto the new case. If your team has already pulled a report on the new case, that report is kept and the old one is not moved over it.
+- **Payments already made carry forward even when the new fee is lower.** Changing chapter usually changes the fee, so the new invoice can be smaller than what the client has already paid. The new invoice is credited up to its full amount, and the case's switch record names the remaining amount as owed back to the client as a credit or refund.
+- Previously, in both situations, that part of the switch failed. The credit report stayed on the archived case, and when the client had paid more than the new invoice, the payment was not recorded on either case — the only trace was the failure noted in the switch record, and your team had to repair the case by hand.
+
+> TODO: Confirm where the switch record (the internal note listing each step of the switch) appears on the case, and whether cases switched before this correction need to be reviewed for a missing credit report or carried-over payment.
 
 ### Time-sensitive filing deadlines
 

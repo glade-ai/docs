@@ -44,6 +44,19 @@ When a client signs, Glade produces the signed copy of the agreement before reco
 - Previously a failure at this point could leave the client's signature saved and their task completed while your team still saw the agreement as unsigned. The client could not sign again because the signature already appeared filled in.
 - **A client who has already signed is not given a second Agree to terms task.** A later change on the workflow — regenerating the agreement or changing collaborators, for example — previously could open a new task for a client whose signature was already on the agreement.
 
+### Invoice amounts on a retainer
+
+A retainer can show amounts taken from the case's invoice — the base legal fee, for example. Those amounts are filled in once the invoice exists, and kept up to date while the retainer is unsigned.
+
+- **Generating the invoice fills in the retainer.** When the invoice template links a line item — such as "Attorney Fees" — to an amount on the retainer, generating the invoice carries that link through even if the invoice's custom-terms field is left empty, and the retainer picks up the dollar amount.
+- **Unsigned retainers update when the invoice does.** Creating the invoice, making it payable, or correcting its amount refreshes the figures on any retainer that has not yet been signed.
+- Only the current version of the invoice counts. Voided, skipped, and superseded versions are ignored.
+- **Signed, skipped, and hand-edited retainers are left alone.** A retainer that has been agreed to, skipped, or edited by your team is not rewritten when the invoice changes.
+
+Previously a Chapter 7 retainer could go out reading `$[invoice:baseLegalFee not set]` in place of the fee, even after your team had generated the invoice and entered the amount, because the retainer was prepared before the invoice had any line items and was never refreshed afterward.
+
+- A retainer still showing the placeholder is corrected the next time the invoice is generated or corrected. Retainers are not repaired in bulk.
+
 ### Printing an agreement for wet-ink signing
 
 A firm can produce a complete, unsigned copy of a client's agreement to print and sign in ink, before the client has signed anything electronically. The copy carries the firm's letterhead and every detail filled in — the retainer amount, the fee, the attorney's name — exactly as the client would see it, with the signature lines left blank.
