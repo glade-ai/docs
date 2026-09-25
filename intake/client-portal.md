@@ -73,6 +73,15 @@ When a client has more than one active case with your firm, the portal adapts:
 - **Search** — once the client has more than three cases, the sidebar adds a search input. Search matches both the chain representative and any linked member cases, so searching for any case in a chain finds it.
 - **Auto-redirect** — for clients with two or more active cases, opening the home URL routes straight to the first case's representative. The exception is when the URL carries an activity deep link (with a specific case and comment) — the portal honors that deep link and shows the home with the targeted case opened.
 
+#### Matters imported from MyCase
+
+Firms that moved to Glade from MyCase carry their history across as imported matters. These are historical records, not work in progress, and they no longer appear to clients.
+
+- **An imported matter is hidden from the client portal**, so a client sees only the case your firm is actually working. Previously the import sat beside the live case, and clients and staff alike kept opening the wrong one.
+- A client cannot reach an imported matter by link either. A direct link to one is refused rather than opening it.
+- **Your team still sees imported matters in full** on the firm's case tracker, and can filter to them specifically.
+- Nothing is deleted or changed by this — the imported record is intact, and only who can see it has changed.
+
 ### Status meanings
 
 The portal resolves a wide range of internal status values into four user-facing labels:
@@ -154,6 +163,8 @@ Because the home updates automatically, there is no manual refresh step — the 
 - Workflow initiation requires a specific step link; there is no generic "start workflow" entry point.
 - Unverified users (clients who have not confirmed their account) may have limited portal functionality.
 - A booking-request step that hasn't been triggered yet renders as **Upcoming** on the path timeline, not as **Active now**. The client cannot schedule until the step has actually fired and the booking has been sent.
+- Hiding imported MyCase matters covers the client portal and the contact page. A client who bookmarked an imported matter finds the link no longer opens; point them to their live case.
+- Only matters carrying the MyCase import status are hidden. A matter migrated some other way, or one re-opened as live work, is treated as an ordinary case and remains visible to the client.
 
 ## Related Features
 

@@ -37,6 +37,17 @@ When you fill in a client's information in the credit report modal — including
 - Only empty fields are filled in. Existing values are never overwritten.
 - If the write-through fails, the credit report pull still completes normally.
 
+#### Date of birth carries into the case
+
+The date of birth used for a credit report pull is written into the case's data, so questionnaires that ask for the debtor's date of birth are pre-filled with it instead of asking for it a second time.
+
+- When the bureau's report includes a date of birth, that date is used — the one the bureaus report most often, if they differ — even if a different date was typed on the pull form.
+- When the report has no date of birth, the date entered on the pull form is used.
+- On a joint pull, the co-debtor's date of birth is carried into the case the same way.
+- This applies whether the pull was started by your team or by the client.
+
+Previously the date of birth entered for the pull was saved on the client's profile but never reached the case, so it had to be entered again in the questionnaire.
+
 ### Error Handling
 
 If a credit report pull fails:
@@ -54,6 +65,7 @@ For common, known failure types Glade shows a specific, actionable message inste
 - **Invalid firm credentials**: tells you that the credit reporting service rejected your firm's credentials and to update them in Settings before retrying.
 - **Account locked**: tells you that your firm's account with the credit reporting service is locked and to contact their support before retrying.
 - **Invalid borrower data**: tells you that the credit bureau rejected the borrower's information and to verify the client's name, address, SSN, and date of birth before retrying.
+  - A state written out in full — `Georgia` rather than `GA` — is no longer one of the causes. Glade converts the state to its two-letter abbreviation before sending the request, so a client record holding the full name pulls normally. This applies wherever the pull is started from, including older intake screens and cases whose address was recorded long before the pull. A state that is not a real US state or territory is still rejected, and the message names the value that could not be read.
 - **Access denied**: tells you that access was denied for this report and to contact support with the request ID shown in the message.
 
 On a **joint pull**, each borrower's failure is reported separately, with its own specific reason and the borrower's name. When both the main debtor and co-debtor fail, you see what went wrong for each person — rather than a single generic message for only the first failure — so you can correct the right borrower's information before retrying. Each borrower's name is shown exactly as it was submitted to the credit bureau.
@@ -124,6 +136,17 @@ Re-pull when the report itself is unusable and the reason has been resolved — 
 
 > TODO: Confirm where the re-pull action appears on the credit report card and which roles can run it.
 
+### Enrolling again after a chapter conversion
+
+When a case converts from Chapter 7 to Chapter 13, the new chapter carries its own credit report, so the client is asked to complete the bureau's identity enrollment again in the client portal.
+
+- **A client who enrolled on the earlier chapter can complete it.** Glade recognises the identity the bureau already holds for that person at your firm and carries straight on to verification, rather than registering them a second time — which the bureau refuses.
+- Previously the client could not get past enrollment at all. The bureau rejected the second registration as an identity it had already seen, so the Chapter 13 report could not be obtained and the filing stalled with nothing the client could do. A client who was blocked this way can retry enrollment now.
+- The earlier enrollment is only reused where it belongs to the **same person at the same firm**. An enrollment at another firm is never reused.
+- A client enrolling for the first time is unaffected and registers as before.
+
+> TODO: Confirm whether the client is prompted to re-enroll automatically on conversion or has to be sent the enrollment step again, and whether the Chapter 13 report is billed as a separate pull.
+
 ### Creditors reach the case on the first successful pull
 
 On a joint case, creditors from the credit report now reach the case record as soon as the first debtor's report comes back, instead of waiting for every debtor.
@@ -153,6 +176,7 @@ When Glade imports addresses from a credit report into the case as real-estate a
 - The original creditor is recorded only when the report names one. A collection account whose report gives no original creditor shows the agency alone, as before.
 - A creditor that arrives from the report with no address at all — some collection agencies come through this way — opens for editing with empty address fields, and appears normally in creditor lists and pickers. Previously such a creditor could stop the creditor form or the list from loading at all. An address is still required before the creditor can be saved, so fill it in before filing.
 - Importing a report into case data adds the report's creditors and updates ones it has already contributed. It does not remove a creditor, so a creditor that should not be on the case has to be removed by hand.
+- A report stored before the date of birth began carrying into the case gets its date of birth the next time the report is processed again, not straight away. On an older case, enter the date of birth in the questionnaire if it is still blank.
 - A report that completed with no creditors because of an unreadable property record needs support to re-read the stored report. Re-pulling produces a fresh billable pull and is not the fix.
 - Re-pulling a debtor's report replaces the stored one rather than keeping both, so the empty report a freeze produced is not retained as a record of the attempt. Note what you need from it before re-pulling.
 - Re-pulling while the client's freeze is still in place returns another empty report, billed as a pull. Confirm with the client that the freeze has been lifted first.
