@@ -34,7 +34,8 @@ An appointment type can send its bookings to a particular calendar based on **th
 - Individual team members can have their own separate availability schedules.
 - External calendar events from connected calendars (Google Calendar or Outlook) automatically block availability to prevent double-booking.
 - Only events marked as "busy" block availability. Events marked as "free" or "transparent" do not.
-- A synced calendar event counts against the product's concurrent booking limit rather than blocking the slot outright. On a product that allows one booking per slot, an event on the assigned team member's calendar closes that slot. On a product that allows several, the event takes one place and the remaining places stay bookable. The Glade booking and the calendar event Glade created for it count as one, not two.
+- A busy event on the assigned team member's synced calendar **closes the slot outright**, whatever the product's concurrent booking limit. A hearing, focus time, or a block carried over from other practice software means that person is unavailable, not that one place in the slot is taken. Previously such an event counted as a single occupant, so a product allowing several concurrent bookings kept offering the remaining places and clients could book over protected time.
+- The concurrent booking limit governs **Glade bookings only**: two clients can still share a genuinely free slot on a product that allows it. The Glade booking and the calendar event Glade created for it count as one, not two, so booking #1's own event never blocks booking #2.
 - A synced calendar event does more than hide the slot — it is also enforced when a booking is saved. Creating, rescheduling, or reassigning a booking on top of a hearing or meeting already on the assigned team member's synced calendar is rejected. Previously only Glade's own Blocked windows were enforced at save time, so a slot list that was out of date — or a booking written by a staff member covering for someone else — could still land a client on top of a court hearing. Firm team members can override deliberately with **Schedule Anyway**.
 - In addition to recurring availability, you can add **availability blocks** for specific date ranges. Each block has a type that determines its effect on bookable time:
   - **Blocked** — removes the covered times from bookable availability. Clients cannot schedule into these windows. Use this for vacations, court dates, off-site days, or any other time you should not be booked.
@@ -43,6 +44,17 @@ An appointment type can send its bookings to a particular calendar based on **th
 - A Blocked entry that is not assigned to a specific team member applies to **every team member**. Use this when you need to take the firm off the calendar for everyone at once (for example, an office closure) without creating one entry per team member.
 - Firm team members can deliberately book or reschedule into a blocked window using **Schedule Anyway**. When a team member picks a blocked (or otherwise conflicting) slot, Glade asks them to confirm; confirming overrides the block and saves the booking. This lets a firm keep its calendar blocked to pause new bookings while still moving an existing appointment into that time — no need to temporarily reopen the calendar first.
 - Clients and other non-team members cannot book into blocked time even if they reach a blocked slot. For them, attempting to create or reschedule into a blocked window — for example from a stale link or an out-of-date slot list — is rejected with an error rather than silently saved.
+
+### Restricting which minutes a slot can start at
+
+Ordinarily the bookable times inside an availability window are worked out by stepping through it at the appointment type's scheduling interval. A window can instead name the exact minutes past the hour at which an appointment may start, so a firm whose consultations always begin at ten to the hour offers only those times.
+
+- **The allowed start minutes are set on the availability window itself**, so they can differ from one weekday to the next — Monday to Friday 9–5 starting only at :50, Saturday 9–1 starting at :00 and :40. Because windows are defined per team member, two people working the same day can offer different start times.
+- **A window with no start minutes set behaves exactly as before**, stepping through the window at the scheduling interval.
+- **Everything else that closes a slot still applies.** An allowed start time is only offered if the slot is free — blocked windows, conflicts on a synced Google or Outlook calendar, the concurrent booking limit, and the minimum booking notice all still remove it.
+- **An appointment type that already had start times restricted for the whole service keeps working.** Those times continue to apply until the weekly schedule for the service is saved again, at which point the per-day windows take over. Re-save the schedule when you want a service to move onto per-day start times.
+
+> TODO: Confirm where the allowed start minutes are entered in the Availability editor and how the control is labeled — the source change does not establish the settings screen.
 
 ### Availability management view
 
@@ -208,6 +220,19 @@ Each appointment type can be given a color. Bookings of that type are tinted wit
 - Associated reminders are removed when a booking is canceled.
 - Calendar events on connected external calendars are updated to reflect the cancellation.
 
+### Deleting a booking
+
+Cancelling keeps the appointment on the books — the row stays in every list marked **Canceled** and the client is emailed. **Delete** is for a booking that should never have existed at all: a test row, a duplicate, or one taken against the wrong client. It is offered on the booking's detail panel.
+
+- **A deleted booking leaves every view at once** — the bookings list, the calendar, the team views, and the reports. It is not shown as canceled; it is simply gone.
+- **The client is not told.** No cancellation email goes out, because the firm is retracting its own record rather than calling off an appointment the client is expecting. Cancel instead if the client needs to know the appointment is off.
+- **The team member's calendar is cleaned up.** The event Glade created on a connected external calendar is released, so deleting never leaves an orphaned block on someone's calendar.
+- **Pending reminders, completion, and follow-up messages are cancelled**, so nothing is sent about a booking that no longer exists.
+- **It is recorded.** Glade keeps an audit entry naming who deleted the booking and when, even though the booking itself no longer appears.
+- **Only the firm can delete.** A client can cancel their own booking but cannot delete it — erasing the firm's record of an appointment is not something the client can do.
+
+> TODO: Confirm whether a deleted booking can be restored, and by whom.
+
 ### Timezone handling
 
 - Firms define availability in their local timezone.
@@ -230,13 +255,26 @@ Each appointment type can be given a color. Bookings of that type are tinted wit
 
 ### Booking a slot that is already full
 
-A slot is full when the number of things already occupying it — existing Glade bookings for that team member, plus any synced calendar events that are not those bookings' own events — has reached the product's concurrent booking limit. Booking into a full slot is refused, and the refusal is now visible at the moment of booking.
+A slot is full when the number of **Glade bookings** already held for that team member has reached the product's concurrent booking limit. Booking into a full slot is refused, and the refusal is visible at the moment of booking.
 
 - The booking fails with an error instead of showing a confirmation. Previously the confirmation screen appeared even when the booking had not been saved, so a client or staff member could be told an appointment existed when it did not — no calendar event was created, no reminders were sent, and any workflow the appointment was meant to start never ran. If your team has seen "confirmed" consultations that never appeared on anyone's calendar, this is the cause.
-- Because the check now counts occupancy against the concurrent booking limit rather than treating any overlap as a conflict, products configured for several concurrent bookings behave as configured. A single overlapping calendar event no longer prevents booking on a product that allows five.
+- Products configured for several concurrent bookings behave as configured: booking #1's own calendar event does not count a second time and does not prevent booking #2.
+- **Busy events on a synced calendar are not counted — they block.** An external hearing or focus-time block takes the team member off the calendar for that window entirely, so a product allowing five concurrent bookings offers none inside it. Previously the event counted as one occupant and the remaining places stayed bookable, which let clients book over protected time.
+- A booking with nobody assigned is checked against the firm calendar owner's calendar, so a busy event there blocks it too.
 - **Blocked** availability windows are unaffected. They remain a hard block regardless of the concurrent booking limit, and firm team members override them with **Schedule Anyway** as described above.
 
 A slot that fills between the moment the client loads the time list and the moment they confirm is the common way to hit this. Reloading the booking calendar shows the slot as taken.
+
+#### Counting concurrent bookings per appointment type
+
+By default a slot's occupancy is counted across the team member's whole calendar: a booking of any appointment type at 2pm counts toward the concurrent booking limit of every other appointment type at 2pm. A firm running several consultation types alongside each other — an intake consultation and a sign-and-pay appointment, say — can have each type counted on its own instead, so that booking one does not take capacity away from the other.
+
+- With the option on, only bookings of the **same** appointment type count toward that type's concurrent booking limit. Each type offers its own slots up to its own limit, so two services can each run at 2pm.
+- **Busy time still blocks every type.** An event on the assigned team member's synced calendar, and a **Blocked** availability window, remove the slot from every appointment type regardless of this setting.
+- The calendar event Glade creates for a booking is not counted against other types — another service's booking does not block a slot through its own calendar event.
+- The option is **off for every firm** until it is turned on, so a firm relying on one shared limit across its calendar is unaffected. Turning it on changes which slots clients are offered, so review each appointment type's concurrent booking limit before enabling it.
+
+> TODO: Confirm where the setting appears in the appointment type's Product details and what it is labelled there.
 
 ### User Profile Meetings
 
@@ -280,12 +318,14 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 | Session duration | Length of each appointment. |
 | Scheduling interval | Minimum gap between available time slots. |
 | Buffer time | Preparation time added before and after appointments. |
-| Concurrent bookings | Maximum number of overlapping bookings allowed per time slot. Default is 1. |
+| Concurrent bookings | Maximum number of overlapping Glade bookings allowed per time slot. Default is 1. Busy time on a synced external calendar blocks the slot regardless of this setting. |
+| Count concurrent bookings per appointment type | Whether each appointment type's concurrent booking limit is counted against bookings of that type only, rather than against every booking on the team member's calendar. Set for the firm, and off until your firm turns it on. |
 | Video conference link | Whether to auto-generate a video meeting link for the appointment. |
 | 48-hour reschedule rule | Whether clients can reschedule within 48 hours of the appointment. |
 | Default team member | Pre-assigned team member for new bookings on this product. |
 | Custom confirmation message | Message shown to the client after booking is confirmed. |
 | Availability patterns | Days of the week and start/end times, configured per team member. |
+| Allowed start times | The exact minutes past the hour at which an appointment may start, set on an individual availability window. Empty until set, in which case slots follow the scheduling interval. |
 | Show in Meetings tab | Whether this consultation product appears as a Book a meeting card on a firm member's profile Meetings tab. |
 | Calendar color | Color used to tint this appointment type's bookings on the firm's booking calendar. Optional — appointment types have no color until one is set. |
 | Client county required | Whether a client booking this appointment type must give their county. Off until your firm turns it on. Independent of whether the client's address is required. |
@@ -297,13 +337,16 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 ## Edge Cases & Limitations
 
 - Unscheduled bookings expire if no time is selected before the expiration date.
+- Counting concurrent bookings per appointment type is a firm-wide choice, not a per-appointment-type one. It applies to every appointment type at once.
 - The 48-hour rescheduling restriction applies to clients only. Firm staff can always reschedule.
 - Concurrent booking limits are per time slot, not per day.
-- The full-slot check applies to bookings that have an assigned team member. A booking with nobody assigned has no calendar to check against, so the limit is not enforced for it.
+- A booking with nobody assigned is measured against the firm calendar owner's bookings and calendar rather than being left unchecked.
 - If no team member availability is configured for a product, the product may show no available time slots.
 - External calendar events marked as "free" do not block availability. Only "busy" events create blocks.
 - Enforcement against synced events depends on the event having reached Glade. A commitment a team member blocked out directly in Outlook that has not yet synced is not known to Glade and does not prevent a booking.
-- A booking with no assigned team member is not checked against any synced calendar, since there is no team member whose calendar to compare it with.
+- Products that allow several concurrent bookings offer fewer slots than before wherever a team member's synced calendar carries busy time. This is deliberate — those slots were never genuinely free — but a firm relying on concurrent stacking will see its availability tighten.
+- Allowed start times narrow a window rather than extend it — they select from the times the window would otherwise offer. A window whose listed start times do not fall inside its own hours offers nothing at all.
+- A service that previously had its start times restricted for the whole service keeps those times on every day until its weekly schedule is saved again. Until then the per-day windows have no effect.
 - Timezone mismatches can occur if the firm's timezone setting is incorrect.
 - A calendar still showing its loading indicator has no availability to report yet. Wait for it to finish before concluding a month is full — a month that loads and then shows every day greyed out is genuinely unavailable.
 - Booking a time slot does not guarantee a specific team member unless one is pre-assigned to the product.
