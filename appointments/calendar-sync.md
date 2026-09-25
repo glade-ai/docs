@@ -128,6 +128,7 @@ This feature is off by default and is turned on per firm by Glade.
 - Only events that have reached Glade can block a booking. If a team member marks time as busy in Outlook and that change has not synced through, Glade does not know about it and will not stop a booking in that window.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
 - All-day events are handled based on the firm's configured timezone.
+- **An all-day Busy event in Outlook blocks the whole day.** A single all-day event marked Busy — a day out of the office, for example — hides every bookable slot on that day, including on public booking pages. Previously some Outlook all-day events were recorded as taking up no time at all, so clients could still be offered and book slots on days that Outlook and the Glade calendar both showed as blocked. Events already synced this way block their day immediately; no resync is needed.
 - Court hearing sync only adds **future** hearings, and only when the case is linked to a team member who has a connected calendar. Unresolved cases are skipped.
 - A hearing that is vacated or cancelled with no replacement time is not yet removed from the calendar. De-duplication of repeat notices currently applies only to 341 Meetings.
 - Reading multiple hearings from one notice depends on each date being named alongside a recognizable hearing type in the notice text. A date the notice does not label is paired with the nearest hearing type it can find.
