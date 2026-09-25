@@ -26,7 +26,7 @@ Triggers are the events that start or advance a workflow. When something happens
   1. **Starting a new case**: If the trigger is the first step in a workflow thread and the workflow is active, a new case is created for the client.
   2. **Advancing an existing case**: If the trigger is later in a workflow thread, the system finds cases that are waiting for this event and advances them.
 - A trigger is considered complete when the required client action has been fulfilled. At that point, the system runs the actions that follow the trigger in the workflow.
-- When a trigger completes, it can automatically update the case status (see [Status Tracking](./status-tracking.md)). This is configured per step.
+- When a trigger completes, it can automatically update the case status (see [Status Tracking](status-tracking/README.md)). This is configured per step.
 - A trigger that starts a new thread can be gated by prerequisites — it only fires after specific questionnaires, document requests, or other items are completed first.
 - Skipping a questionnaire counts the same as completing it for trigger purposes.
 
@@ -52,5 +52,5 @@ Triggers are the events that start or advance a workflow. When something happens
 ## Related Features
 
 - [Automation Rules](./automation-rules.md) — the workflows that contain trigger steps
-- [Status Tracking](./status-tracking.md) — automatic status updates driven by trigger completion
+- [Status Tracking](status-tracking/README.md) — automatic status updates driven by trigger completion
 - [Task Templates](./task-templates.md) — templates that define trigger-action sequences

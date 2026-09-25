@@ -4,12 +4,12 @@ Connections between Glade and external tools, platforms, and AI assistants.
 
 ## Features
 
-- [Electronic Court Filing (eFiling)](./efiling.md)
+- [Electronic Court Filing (eFiling)](efiling/README.md)
 - [Glade MCP Server](./glade-mcp.md)
 - [QuickBooks Integration](./quickbooks.md)
 - [Stripe Integration](./stripe.md)
 - [Confido Integration](./confido.md)
-- [PACER Integration](./pacer.md)
+- [PACER Integration](pacer/README.md)
 - [USCIS Integration](./uscis.md)
 - [Credit Counseling & Debtor Education](./abacus-credit-counseling.md)
 - [Evergreen Credit Counseling](./evergreen-credit-counseling.md)

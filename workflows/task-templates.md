@@ -66,4 +66,4 @@ If your firm has cases that were stuck at a handoff step, or a handoff prompt sh
 
 - [Automation Rules](./automation-rules.md) — the workflows that templates create
 - [Triggers](./triggers.md) — trigger types used in template step sequences
-- [Status Tracking](./status-tracking.md) — how cases created from templates track progress
+- [Status Tracking](status-tracking/README.md) — how cases created from templates track progress

@@ -93,24 +93,28 @@ This repository contains documentation organized into these domains:
 | Payments | `payments/` | Invoices, payment plans, online payments, tracking |
 | Workflows | `workflows/` | Automation rules, task templates, triggers, status tracking, questionnaires, document collection, webforms |
 
-For each user-facing PR, determine which documentation domain(s) it affects. Read the existing documentation files in those domains to understand the current state.
+For each user-facing PR, determine which documentation domain(s) it affects. Read the existing documentation files in those domains to understand the current state. Domains contain both single-file features (`<domain>/<feature>.md`) and **feature folders** (`<domain>/<feature>/README.md` plus one file per topic, sometimes one sub-folder deeper) — list the domain recursively and find the specific **topic** file the change belongs to, not just the feature.
 
 ## Step 3: Update documentation
 
-For each affected domain, update the relevant markdown files to reflect the new changes:
+For each affected domain, update the relevant markdown files to reflect the new changes. **Docs are one topic per file** — follow "One topic per doc — split and sub-folder" in this repo's `AGENTS.md`:
 
-- **New features that map to an existing doc file**: Add new sections or entries describing the feature, how to use it, and any configuration options
-- **Entirely new features with no existing doc file**: Create a new markdown file in the appropriate domain directory following the feature file structure from `AGENTS.md` (Overview → Key Behaviors → Configuration → Edge Cases & Limitations → Related Features). Use a kebab-case filename matching the feature name (e.g., `payments/auto-late-fees.md`). If the feature doesn't fit any existing domain, flag it in the summary (Step 5) for manual review — do not create new domain directories.
+- **Change to an existing topic**: Edit that topic's file (e.g. `workflows/questionnaires/exemptions-calculator.md`). Update only the affected sections.
+- **New capability of an existing feature**: Create a **new topic file** for it inside the feature's folder (e.g. `workflows/questionnaires/<new-topic>.md`) using the feature file structure (Overview → Key Behaviors → Configuration → Edge Cases & Limitations → Related Features), and add it to the folder `README.md`'s "Topics" list. **Do not append a new `###` section to the bottom of a long doc.**
+- **The feature is still a single file and this change would push it over the limit** (~250 lines / ~20KB, or it would now describe 3+ distinct capabilities): promote it to a folder in the same PR — move `<feature>.md` to `<feature>/README.md`, trim that to an overview plus a "Topics" list, move each distinct topic into its own file alongside it, fix relative links (they gain a `../`), and point the domain `README.md` at `<feature>/README.md`. Preserve every existing fact; this is a restructure, not a rewrite.
+- **Entirely new feature with no existing doc**: Create `<domain>/<feature>.md` (kebab-case, e.g. `payments/auto-late-fees.md`) following the feature file structure — or a `<domain>/<feature>/` folder from the start if it already has several distinct topics. Link it from the domain `README.md`. If the feature doesn't fit any existing domain, flag it in the summary (Step 5) for manual review — do not create new domain directories.
 - **Changed behavior**: Update existing descriptions to reflect the new behavior
 - **Bug fixes**: If the docs described the buggy behavior as expected, correct them
 - **Removed features**: Remove or mark as deprecated
+- **Before creating any file**, search the domain (and related domains) for an existing doc on the topic and update it instead of creating a duplicate.
 
 Writing guidelines — follow the conventions in this repo's `AGENTS.md`:
 - **Audience**: Attorneys, paralegals, legal ops staff, and customer support — not engineers. Write for people who use the software daily but don't know how it's built.
 - **Feature file structure**: Overview → Key Behaviors → Configuration → Edge Cases & Limitations → Related Features
 - **Tone**: Clear, practical, concise. Present tense ("The form validates..." not "The form will validate...")
 - **No technical jargon**: Never mention URLs, query parameters, API endpoints, database fields, component names, CSS classes, or implementation details. Describe what the user *sees and does*, not how it works under the hood. For example, instead of "the page URL updates with a `?modal=fieldKey:rowId` query parameter", write "you can share a direct link to a specific item — anyone who opens the link sees that item's details immediately."
-- Update only the sections affected by the change — do not rewrite unaffected sections
+- Update only the sections affected by the change — do not rewrite unaffected sections (promoting an oversized doc to a folder is the one allowed restructure)
+- Keep indexes current: every new file is linked from its folder `README.md` "Topics" list or the domain `README.md`
 - Do not copy-paste PR descriptions verbatim — translate engineer-speak into user-speak
 - If something is unclear, leave a `> TODO:` blockquote instead of guessing
 - Do not reference PR numbers, commit SHAs, or internal implementation details in the doc content itself

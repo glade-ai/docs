@@ -78,8 +78,8 @@ Glade integrates with Confido, a legal-tech payment platform, as an alternative 
 
 ## Related Features
 
-- [Invoices](../payments/invoices.md)
+- [Invoices](../payments/invoices/README.md)
 - [Online Payments](../payments/online-payments.md)
-- [Payment Plans](../payments/payment-plans.md)
+- [Payment Plans](../payments/payment-plans/README.md)
 - [Payment Tracking](../payments/payment-tracking.md)
 - [Stripe Integration](./stripe.md)

@@ -140,7 +140,7 @@ Invoice line item amounts are rounded to the nearest cent before being sent to Q
 
 ## Related Features
 
-- [Invoices](../payments/invoices.md)
+- [Invoices](../payments/invoices/README.md)
 - [Online Payments](../payments/online-payments.md)
 - [Payment Tracking](../payments/payment-tracking.md)
 - [Glade MCP Server](./glade-mcp.md)

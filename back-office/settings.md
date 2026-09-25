@@ -147,4 +147,4 @@ Settings are primarily configured through the dashboard account page and individ
 
 - [Case Management](./case-management.md) — custom statuses drive case progression; workflow templates define case structure.
 - [Staff Management](./staff-management.md) — workflow roles and system roles are defined in settings.
-- [Reporting](./reporting.md) — firm timezone, custom statuses, and workflow roles affect report output.
+- [Reporting](reporting/README.md) — firm timezone, custom statuses, and workflow roles affect report output.

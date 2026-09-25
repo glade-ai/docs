@@ -72,6 +72,6 @@ The I-129 filing collects:
 
 ## Related Features
 
-- [Electronic Court Filing (eFiling)](./efiling.md)
-- [PACER Integration](./pacer.md)
+- [Electronic Court Filing (eFiling)](efiling/README.md)
+- [PACER Integration](pacer/README.md)
 - [Workflows](../workflows/automation-rules.md)

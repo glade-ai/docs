@@ -25,6 +25,34 @@ Known constraints, unsupported scenarios, or gotchas.
 Links to other feature files that are closely related.
 ```
 
+## One topic per doc — split and sub-folder
+
+Docs are read by people (and the Glade MCP `docs_*` tools) looking for one specific answer — "how does the exemptions calculator work?" — so each file covers **one topic**. A reader should never have to scroll a 1,000-line page to find it.
+
+**Layout.** A simple feature is a single file: `<domain>/<feature>.md`. A feature with several distinct topics is a folder:
+
+```
+workflows/questionnaires/
+  README.md                 # feature overview: Overview + a "## Topics" list linking every sub-doc
+  exemptions-calculator.md  # one topic, using the section structure below
+  petition/                 # optional group folder (max one extra level) when 3+ topics cluster
+    README.md               # short overview + Topics list
+    draft-petition.md
+```
+
+- The folder's `README.md` is the feature's entry point (MCP path `workflows/questionnaires`); each sibling is a topic (MCP path `workflows/questionnaires/exemptions-calculator`).
+- Every topic file uses the feature file structure below.
+- Filenames are kebab-case and descriptive.
+
+**When to split.** Promote a single-file feature to a folder (move `<feature>.md` → `<feature>/README.md`, then move topics out) when **any** of these is true:
+- the file exceeds ~250 lines or ~20KB;
+- it has 3+ `###` sections that each describe a distinct capability (a calculator, a report, an import flow) rather than facets of one;
+- you are about to add a new, distinct capability to it.
+
+**Adding to an existing feature.** A new capability gets its **own topic file** in the feature folder — do not append another `###` section to the bottom of a long doc. Only edit an existing topic file when the change is about that same topic. Before creating a file, check whether the topic already has one (including in other domains) and update it instead of duplicating it.
+
+**Keep indexes current.** Every new file is linked from its parent: a topic from its folder `README.md` "Topics" list, a single-file feature or a feature folder from the domain `README.md`. Relative links must match the file's depth (`../../payments/invoices.md` from inside `workflows/questionnaires/`).
+
 ## Sources of truth
 
 When filling in a feature file, draw from:

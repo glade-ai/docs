@@ -84,7 +84,7 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 
 ## Related Features
 
-- [Document Collection](./document-collection.md) — the checklists and files a switch carries across.
-- [Income Organizer](./income-organizer.md) — the income records carried with the case.
-- [Status Tracking](./status-tracking.md) — where the switch appears in a case's activity history.
-- [Credit Reports](../intake/credit-reports.md) — the report the new case adopts rather than re-pulling.
+- [Document Collection](document-collection/README.md) — the checklists and files a switch carries across.
+- [Income Organizer](income-organizer/README.md) — the income records carried with the case.
+- [Status Tracking](status-tracking/README.md) — where the switch appears in a case's activity history.
+- [Credit Reports](../intake/credit-reports/README.md) — the report the new case adopts rather than re-pulling.

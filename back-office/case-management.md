@@ -68,6 +68,6 @@ A case can carry a **log number** — your firm's own reference for the matter, 
 
 ## Related Features
 
-- [Reporting](./reporting.md) — intake status, paralegal, and documents reports operate on case data.
+- [Reporting](reporting/README.md) — intake status, paralegal, and documents reports operate on case data.
 - [Staff Management](./staff-management.md) — team members are assigned as case owners with workflow roles.
 - [Settings](./settings.md) — custom statuses, workflow templates, and follow-up cadence are configured at the firm level.

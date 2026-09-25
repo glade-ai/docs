@@ -52,5 +52,5 @@ Staff management controls who has access to your firm's back office and what the
 ## Related Features
 
 - [Case Management](./case-management.md) — team members are assigned as case owners and collaborators.
-- [Reporting](./reporting.md) — paralegal and documents reports segment data by workflow role.
+- [Reporting](reporting/README.md) — paralegal and documents reports segment data by workflow role.
 - [Settings](./settings.md) — workflow roles and system roles are configured per firm.

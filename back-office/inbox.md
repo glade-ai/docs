@@ -45,5 +45,5 @@ Notification preferences (such as which events generate notifications and how th
 
 ## Related Features
 
-- [eFiling](../integrations/efiling.md) — filing status updates generate inbox notifications with direct links to the Case Status tab.
+- [eFiling](../integrations/efiling/README.md) — filing status updates generate inbox notifications with direct links to the Case Status tab.
 - [Case Management](./case-management.md) — many inbox notifications link directly to case views.

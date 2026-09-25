@@ -47,7 +47,7 @@ An appointment type can be set to ask for the client's address at the point of b
 - The booking reads the address off the client's record rather than keeping its own copy, so a booking always shows where the client lives now and correcting an address once corrects it everywhere it appears.
 - A client who moves therefore has their earlier bookings show the new address. There is no record of the address as it stood when a past booking was made.
 
-See [Scheduling](../appointments/scheduling.md) for how the address is collected and which appointment types ask for one.
+See [Scheduling](../appointments/scheduling/README.md) for how the address is collected and which appointment types ask for one.
 
 ### Stopping and resuming client follow-ups
 
@@ -79,6 +79,6 @@ Automated follow-ups to a client can be turned off — for example when the clie
 ## Related Features
 
 - [Contacts](contacts.md)
-- [Scheduling](../appointments/scheduling.md) — booking can collect the client's address and county onto their record
+- [Scheduling](../appointments/scheduling/README.md) — booking can collect the client's address and county onto their record
 - [Communication History](communication-history.md)
 - [Notes](notes.md)

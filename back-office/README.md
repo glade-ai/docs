@@ -5,6 +5,6 @@ Internal tools for case management, reporting, staff administration, and platfor
 ## Features
 
 - [Case Management](./case-management.md)
-- [Reporting](./reporting.md)
+- [Reporting](reporting/README.md)
 - [Staff Management](./staff-management.md)
 - [Settings](./settings.md)

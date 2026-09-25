@@ -34,5 +34,5 @@ To connect an integration, open the settings modal for the relevant service, ent
 
 ## Related Features
 
-- [Appointments / Scheduling](../appointments/scheduling.md)
+- [Appointments / Scheduling](../appointments/scheduling/README.md)
 - [Online Payments](../payments/online-payments.md)

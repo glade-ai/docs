@@ -48,5 +48,5 @@ To remove a gate, delete its chip from the message. The gate configuration is re
 ## Related Features
 
 - [Automation Rules](./automation-rules.md)
-- [Invoices](../payments/invoices.md)
+- [Invoices](../payments/invoices/README.md)
 - [Triggers](./triggers.md)

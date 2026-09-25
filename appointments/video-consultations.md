@@ -95,6 +95,6 @@ For a period the client-side button was missing: it was shown only to firm membe
 
 ## Related Features
 
-- [Scheduling](./scheduling.md)
-- [Calendar Sync](./calendar-sync.md)
+- [Scheduling](scheduling/README.md)
+- [Calendar Sync](calendar-sync/README.md)
 - [Reminders](./reminders.md)

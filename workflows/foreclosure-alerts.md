@@ -44,6 +44,6 @@ Foreclosure Alerts compares the monthly foreclosure report your firm already rec
 
 ## Related Features
 
-- [Status Tracking](./status-tracking.md)
+- [Status Tracking](status-tracking/README.md)
 - [Task Templates](./task-templates.md)
 - [Automation Rules](./automation-rules.md)

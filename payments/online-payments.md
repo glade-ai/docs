@@ -104,6 +104,6 @@ Online payments allow clients to pay invoices directly through Glade. Glade inte
 
 ## Related Features
 
-- [Invoices](./invoices.md)
-- [Payment Plans](./payment-plans.md)
+- [Invoices](invoices/README.md)
+- [Payment Plans](payment-plans/README.md)
 - [Payment Tracking](./payment-tracking.md)

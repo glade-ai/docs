@@ -129,5 +129,5 @@ Case data fields follow a structured schema covering primary and secondary parti
 ## Related Features
 
 - [Tools Reference](tools-reference.md)
-- [Invoices](../payments/invoices.md)
-- [Payment Plans](../payments/payment-plans.md)
+- [Invoices](../payments/invoices/README.md)
+- [Payment Plans](../payments/payment-plans/README.md)

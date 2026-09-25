@@ -50,6 +50,6 @@ Merging a multi-page executed scan in one action depends on signature-page merge
 
 ## Related Features
 
-- [Questionnaires](./questionnaires.md) — the petition forms and draft packet that signature pages belong to.
-- [Document Collection](./document-collection.md) — how uploaded files are requested and reviewed.
+- [Questionnaires](questionnaires/README.md) — the petition forms and draft packet that signature pages belong to.
+- [Document Collection](document-collection/README.md) — how uploaded files are requested and reviewed.
 - [Back Office Settings](../back-office/settings.md#petition-settings) — how signature pages are laid out in generated petitions.

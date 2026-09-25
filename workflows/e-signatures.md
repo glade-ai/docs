@@ -75,7 +75,7 @@ E-signature requests have no settings of their own. They are sent manually or as
 - A request whose signature fields have never been placed cannot be signed. If a client reports that a document is still "being prepared", check whether field placement was completed.
 - Requests produced by an automated workflow step before that path was corrected are not repaired retroactively. They still report "Couldn't load signature request" and have to be sent again.
 - Requests that were stuck in the preparing stage before this behavior shipped are not repaired automatically. Opening one now makes the document available; a request that appears stuck after that should be raised with Glade.
-- A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
+- A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal/README.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
 - Filing signed documents into the case's documents applies to requests completing from now on.
@@ -87,5 +87,5 @@ E-signature requests have no settings of their own. They are sent manually or as
 - [Automation Rules](./automation-rules.md)
 - [Triggers](./triggers.md)
 - [Custom Terms](./custom-terms.md)
-- [Document Collection](./document-collection.md) — where the signed document and certificate are filed once a request completes.
-- [Client Portal](../intake/client-portal.md)
+- [Document Collection](document-collection/README.md) — where the signed document and certificate are filed once a request completes.
+- [Client Portal](../intake/client-portal/README.md)
