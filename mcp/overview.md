@@ -24,6 +24,8 @@ The Glade MCP server works with any MCP-compatible AI client, including:
 
 Connecting from Cursor previously failed at the login step: the sign-in never completed and the client reported an error instead of finishing setup. It now completes normally, with no local workaround needed. If your firm gave up on connecting Cursor, try again.
 
+Connecting from **ChatGPT** or **Codex** could fail before the consent screen, ending on a Glade error page that read "The authorization request is invalid." It often worked on one attempt or device and failed on the next — desktop connecting intermittently, mobile failing. Glade's login now works the way these connectors expect, so they connect consistently. If a ChatGPT or Codex connection failed before, remove the Glade connector and add it again so it picks up the change, then connect.
+
 ### What you can access
 
 | Category | What you can query |
