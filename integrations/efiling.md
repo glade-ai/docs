@@ -16,6 +16,16 @@ Glade integrates with electronic court filing systems to let you submit cases di
 - **Inbox notifications**: When a filing event occurs (such as a status update from the court), you receive a notification in the Glade inbox. Clicking the notification takes you directly to the Case Status tab for that case so you can review the current filing status without navigating manually.
 - Direct links to a case opened via an inbox notification automatically open the Case Status tab.
 
+### When a filing pauses and needs a person
+
+Some filings stop part-way through on a page Glade cannot complete on its own and wait for someone to take over. The filing panel has always said so, but only while it was open on screen — so a filing could sit paused for hours because nobody happened to be looking at it.
+
+- **Whoever started the filing gets an inbox notification** titled *Your PACER filing needs you*, so the pause reaches them anywhere in Glade rather than only inside the filing panel.
+- The notification names the page the filing is waiting on where the court's system tells Glade which one it is, and otherwise reads as a general prompt to open the filing.
+- Opening the notification takes you to the case so you can pick the filing up where it stopped.
+- **One notification per pause.** A filing that pauses is announced once, however many times the signal is re-sent.
+- The notification goes to the person who started the filing, not to the whole firm. If that person is away, someone else on the case can still take the filing over from the case itself — but nobody else is alerted.
+
 ### Why a filing is blocked
 
 When a filing cannot be submitted, the eFiling modal explains the specific reason instead of showing a generic error, so your team knows what to address before trying again. Common reasons include missing required case information, missing required documents, a filing district that has not been set up for the case, and permission restrictions. The same explanation appears in the modal's alert and in the accompanying notification.
@@ -199,6 +209,17 @@ Opening a case with the court asks for a set of answers beyond the petition itse
 - The consistency of the joint-filing answers is checked as well: a case that says it is filed jointly in one place and individually in another is reported rather than being sent to the court to be rejected.
 - Submission still runs its own check at the moment you file, so nothing gets through on a stale review. The difference is that the problem is visible earlier and described in the same place as every other finding.
 
+#### Two answers no longer hold a submission back
+
+Two of these answers were also enforced at the moment of submission, which stopped filings the court would have accepted:
+
+- **Marital filing status** no longer blocks a Chapter 7 individual filing at submission when it has been left unanswered.
+- **Whether the case is filed jointly** no longer has to be answered Yes or No to submit.
+
+**An unanswered joint-filing question files the case as an individual filing.** Nothing is assumed from a blank answer, so a case meant to be filed jointly and left unanswered goes to the court as an individual petition. Confirm that answer before submitting a joint case — this is the one situation where the removed check was doing useful work.
+
+The pre-filing review still reports the answers the case's own district requires, and it remains the place to clear them.
+
 #### Joint petitions in districts that do not accept them
 
 Some districts do not accept joint petitions. A joint case in one of those districts was previously submitted anyway and failed after the fact, with the rejection arriving by email rather than in Glade.
@@ -279,6 +300,14 @@ Some court documents — for example, documents pulled from PACER — belong in 
 - Recognition is based on the document's file name. A document whose name matches a known filing document is slotted automatically; a document with an unrecognized name is added to the case as usual and can be slotted manually.
 - Previously, a recognized document uploaded outside the modal was left unslotted and excluded from the filing packet. Now a PACER document dropped into the case this way is included in the Electronic Filing Packet without re-uploading it through the modal.
 
+### Putting an uploaded case document into a packet slot
+
+A document your team uploaded under **Case Documents** can be placed into a filing packet slot, and it holds that slot in place of the version Glade generated for it. Use this where the copy that has to be filed is one your team prepared or had signed — a local form, a bifurcated disclosure, a signed page — rather than the generated one.
+
+- **The uploaded file takes over the slot.** The most recently placed document is what is filed, so a signed upload supersedes the generated PDF without your team having to remove anything first.
+- **Assigning it sticks.** For a period, placing a Case Documents upload into an e-filing slot appeared to work and then silently came back unassigned, with no way to make it hold. If your team gave up trying to file a local form they had uploaded, it can be placed now.
+- Nothing about how other documents reach the packet changes, and a generated document left in its slot is filed as before.
+
 ### PDF flattening in filing packets
 
 Court electronic filing systems (CM/ECF) reject PDFs that contain editable layers such as fillable form fields, annotations, or sticky notes. Client-uploaded documents — cover sheets, local forms, photo IDs, mortgage statements — frequently arrive as non-flat PDFs and would otherwise cause the court to reject the packet.
@@ -329,6 +358,8 @@ This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *S
 - Cancelling a filing dismisses the progress panel and shows the filing in a cancelled state. The case can be re-filed if needed.
 - An unrecognized county is reported by the pre-filing review as a blocking item on the debtor it belongs to, with a suggestion where Glade can offer one. Correcting the address clears it. A county that is spelled correctly and still not recognized needs Glade to add it — contact support with the case and the county.
 - The court's required answers and the joint-petition rule are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
+- An unanswered joint-filing question no longer stops a submission, and is treated as an individual filing. A joint case that has never had the question answered is therefore submitted as an individual petition rather than being held back — check the answer before filing a joint case.
+- Marital filing status is no longer enforced at submission on a Chapter 7 individual filing. Where the case's district requires it, the pre-filing review is the only place it is reported.
 - Whether a district accepts a joint petition is now answered per chapter. A district's general joint-petition setting still applies wherever no chapter-specific rule has been recorded for it, so a district that blocks joint filings in only one chapter needs that rule recorded before the review can tell the difference — contact support if a district's joint-filing behavior does not match its local rules.
 - The New Mexico non-filing-spouse rule blocks the filing and cannot be cleared on the case. Contact support for a case in that position rather than converting it to a joint filing.
 - The Contact Support button is only available for non-retryable errors. Errors that can be retried show the normal retry option instead. If a support conversation is not available for your account, the button does not appear and the error message is displayed as static text.
@@ -343,6 +374,8 @@ This was reported on a Chapter 7 case where a 24-megapixel phone photo titled *S
 - The duplicate-slot and incomplete-tag checks are not repaired automatically and no bulk clean-up has been run. Cases that have been waiting to file will surface findings for defects that have been sitting on them for some time.
 - The non-PDF check is decided from the packet slot the document occupies, not from inspecting the file your team recognizes it as. A file whose format Glade cannot determine at all is treated as not a PDF and blocks the filing, so a document that should be filable may need re-uploading before it is accepted.
 - Filings submitted before this check existed could reach the court with an image under a PDF name. If a packet was rejected or timed out without an explanation, check the tagged documents for a photo — the filing can be resubmitted once it is replaced.
+- The notification about a paused filing goes only to the person who started it. Where a filing was started without a recorded initiator, no notification is sent and the pause is visible only in the filing panel.
+- The notification is an alert, not the place the filing is taken over — open the case to continue it.
 
 ## Related Features
 
