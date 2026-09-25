@@ -35,6 +35,15 @@ Two kinds of value are deliberately left alone, because **Edit details** cannot 
 - Context values that name a person, and those chosen from a fixed list — a case type, for example.
 - A detail that feeds more than one context value on the same workflow. Neither is changed rather than Glade guessing which one you meant, so those keep their existing values.
 
+### When a signed agreement cannot be generated
+
+When a client signs, Glade produces the signed copy of the agreement before recording the signature. If that copy cannot be produced, the signature is not kept and the client can sign again.
+
+- The agreement is treated as signed only once the signed copy exists. Only then is the client's **Agree to terms** task completed and, for an attorney-signed agreement, the agreement handed to the attorney.
+- An agreement with no terms text is refused before anything is saved, rather than part-way through signing.
+- Previously a failure at this point could leave the client's signature saved and their task completed while your team still saw the agreement as unsigned. The client could not sign again because the signature already appeared filled in.
+- **A client who has already signed is not given a second Agree to terms task.** A later change on the workflow — regenerating the agreement or changing collaborators, for example — previously could open a new task for a client whose signature was already on the agreement.
+
 ### Printing an agreement for wet-ink signing
 
 A firm can produce a complete, unsigned copy of a client's agreement to print and sign in ink, before the client has signed anything electronically. The copy carries the firm's letterhead and every detail filled in — the retainer amount, the fee, the attorney's name — exactly as the client would see it, with the signature lines left blank.
