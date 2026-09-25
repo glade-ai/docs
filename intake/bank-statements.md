@@ -50,6 +50,6 @@ On bankruptcy cases, connecting a bank does more than collect statements — eac
 
 ## Related Features
 
-- [Client Portal](./client-portal.md)
-- [Credit Reports](./credit-reports.md)
-- [Document Collection](../workflows/document-collection.md)
+- [Client Portal](client-portal/README.md)
+- [Credit Reports](credit-reports/README.md)
+- [Document Collection](../workflows/document-collection/README.md)

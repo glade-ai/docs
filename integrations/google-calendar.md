@@ -63,6 +63,6 @@ Glade integrates with Google Calendar to sync a firm's calendar availability int
 
 ## Related Features
 
-- [Calendar Sync](../appointments/calendar-sync.md)
-- [Scheduling](../appointments/scheduling.md)
+- [Calendar Sync](../appointments/calendar-sync/README.md)
+- [Scheduling](../appointments/scheduling/README.md)
 - [Outlook Calendar Integration](./outlook-calendar.md)

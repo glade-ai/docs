@@ -4,12 +4,12 @@ Client onboarding — the portal experience and intake flow for new clients.
 
 ## Features
 
-- [Client Portal](./client-portal.md)
+- [Client Portal](client-portal/README.md)
 - [Bank Statements](./bank-statements.md)
 
 ## Workflow Steps
 
 Questionnaires and document collection are general-purpose building blocks used throughout a case's lifecycle. They are documented under Workflows:
 
-- [Questionnaires](../workflows/questionnaires.md)
-- [Document Collection](../workflows/document-collection.md)
+- [Questionnaires](../workflows/questionnaires/README.md)
+- [Document Collection](../workflows/document-collection/README.md)

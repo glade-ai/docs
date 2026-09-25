@@ -104,4 +104,4 @@ Firms already using a key that Glade issued for them by hand keep working as the
 - [Communication History](../crm/communication-history.md) — the rest of a client's recorded contact with your firm.
 - [Contacts](../crm/contacts.md) — how phone numbers and email addresses are recorded against a client.
 - [Case Management](../back-office/case-management.md) — the case the lookup reports on.
-- [PACER](./pacer.md) — the court notices the key dates are read from.
+- [PACER](pacer/README.md) — the court notices the key dates are read from.

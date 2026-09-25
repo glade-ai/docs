@@ -18,12 +18,14 @@ A daily hook scans merged pull requests across the Glade codebase and raises a P
 
 ## Promoting a feature to a folder
 
-When a feature grows complex enough to need multiple pages:
+Each doc covers one topic. When a feature outgrows one page — over ~250 lines / ~20KB, or 3+ distinct capabilities — split it (see "One topic per doc" in `AGENTS.md` for the full rule):
 
 1. Create a folder with the feature name.
-2. Move the existing `.md` to `<feature>/README.md`.
-3. Add sub-feature files alongside it.
-4. Update the domain `README.md` link to point to `<feature>/README.md`.
+2. Move the existing `.md` to `<feature>/README.md` and trim it to an overview plus a `## Topics` list.
+3. Move each distinct topic into its own `<feature>/<topic>.md` alongside it. Group 3+ closely related topics into one sub-folder (with its own `README.md`) if it helps; don't nest deeper than that.
+4. Update the domain `README.md` link to point to `<feature>/README.md`, and fix relative links in moved files.
+
+New capabilities of an already-split feature get a new topic file, not a new section appended to an existing one.
 
 ## Changelog
 

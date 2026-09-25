@@ -42,4 +42,4 @@ Glade connects to Evergreen Financial Counseling so firms can enroll bankruptcy 
 
 - [Credit Counseling & Debtor Education](./abacus-credit-counseling.md)
 - [Workflows](../workflows/README.md)
-- [Client Portal](../intake/client-portal.md)
+- [Client Portal](../intake/client-portal/README.md)

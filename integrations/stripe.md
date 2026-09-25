@@ -92,9 +92,9 @@ Glade uses Stripe as its primary payment processor for collecting payments from 
 
 ## Related Features
 
-- [Invoices](../payments/invoices.md)
+- [Invoices](../payments/invoices/README.md)
 - [Online Payments](../payments/online-payments.md)
-- [Payment Plans](../payments/payment-plans.md)
+- [Payment Plans](../payments/payment-plans/README.md)
 - [Payment Tracking](../payments/payment-tracking.md)
 - [QuickBooks Integration](./quickbooks.md)
 - [Confido Integration](./confido.md)

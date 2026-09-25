@@ -23,7 +23,7 @@ Payment tracking in Glade provides firms with a complete view of all payment act
 | Voided | Payment was cancelled before settlement. |
 | Requires payment method | Payment initiated but awaiting a payment method. This is uncommon and typically an internal state. |
 
-A failed payment only shows retry messaging ("We will retry this payment...") when it is a payment plan installment, because automatic retries apply only to plan installments. A failed one-off payment shows "Failed" — or the specific decline reason, when one is available — with no retry promise, since one-off charges are never retried automatically. See [Payment Plans](./payment-plans.md) for how installment retries work.
+A failed payment only shows retry messaging ("We will retry this payment...") when it is a payment plan installment, because automatic retries apply only to plan installments. A failed one-off payment shows "Failed" — or the specific decline reason, when one is available — with no retry promise, since one-off charges are never retried automatically. See [Payment Plans](payment-plans/README.md) for how installment retries work.
 
 ### Viewing payment history
 
@@ -79,7 +79,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - **The Date column is the calendar day in your firm's timezone**, so a payment reads the same date in the export as it does in the Transactions table. Previously the export used UTC: a payment taken at 11:45pm Eastern on 31 August appeared as 31 August on screen and 1 September in the file, which is exactly the kind of disagreement that shows up during a month-end close.
 - The payments themselves were never affected — only how their date was written into the file. **Re-export any period whose totals did not reconcile**, particularly around month ends; the corrected file will move those late-evening payments back into the month they belong to.
 - Payout data can also be exported separately as its own CSV file.
-- Payment plans have their own export on the Payment Plans section, covering every plan that has not been canceled. Unlike the payments export, it is not narrowed by the dashboard's date range — see [Payment Plans](./payment-plans.md).
+- Payment plans have their own export on the Payment Plans section, covering every plan that has not been canceled. Unlike the payments export, it is not narrowed by the dashboard's date range — see [Payment Plans](payment-plans/README.md).
 
 ### Email notifications
 
@@ -147,6 +147,6 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 
 ## Related Features
 
-- [Invoices](./invoices.md)
+- [Invoices](invoices/README.md)
 - [Online Payments](./online-payments.md)
-- [Payment Plans](./payment-plans.md)
+- [Payment Plans](payment-plans/README.md)

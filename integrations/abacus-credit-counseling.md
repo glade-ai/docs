@@ -87,5 +87,5 @@ Each credit counseling record has its own permission list. The attorney's team m
 ## Related Features
 
 - [Workflows](../workflows/README.md)
-- [Document Collection](../workflows/document-collection.md)
-- [Client Portal](../intake/client-portal.md)
+- [Document Collection](../workflows/document-collection/README.md)
+- [Client Portal](../intake/client-portal/README.md)

@@ -4,7 +4,7 @@
 
 A case document is a form your firm fills in on its own behalf rather than sending out to a client — a local court form, a district cover sheet, an internal worksheet. You upload the PDF, Glade turns the boxes on it into a questionnaire your team completes on the case, and the completed answers are printed back onto the PDF. Case documents are set up by whoever maintains your firm's templates and used by attorneys and paralegals on individual cases.
 
-Because a case document is a questionnaire underneath, most of what is written about [Questionnaires](./questionnaires.md) — fields, conditional logic, autofills, locking, and PDF generation — applies to it. This page covers what is specific to a document built from an uploaded PDF.
+Because a case document is a questionnaire underneath, most of what is written about [Questionnaires](questionnaires/README.md) — fields, conditional logic, autofills, locking, and PDF generation — applies to it. This page covers what is specific to a document built from an uploaded PDF.
 
 ## Key Behaviors
 
@@ -41,7 +41,7 @@ Editing the PDF and saving the case document again rebuilds the questionnaire fr
 ## Configuration
 
 - Case documents are set up per firm by whoever maintains your questionnaire templates. There are no firm-wide settings of their own.
-- A questionnaire is marked as generating a case document on the template, which is what enables PDF generation from its answers — see [Other Settings](./questionnaires.md#other-settings).
+- A questionnaire is marked as generating a case document on the template, which is what enables PDF generation from its answers — see [Template Settings](questionnaires/templates/template-settings.md).
 - Field-level settings — lock, conditional visibility, case-data connection, autofill — are configured per field in the template editor, the same way as on any questionnaire.
 
 ## Edge Cases & Limitations
@@ -50,8 +50,8 @@ Editing the PDF and saving the case document again rebuilds the questionnaire fr
 - **Duplicate templates created by the failed-creation retries are not cleaned up automatically.** If your firm has two or three identical copies of the same case document from that period, delete the extras by hand.
 - Case documents created before fields were detected on upload are not rebuilt. Re-upload the PDF if you want the fields read from it.
 - Conditional logic and field settings lost to an earlier PDF edit or field rename are not recoverable — they have to be authored again, once.
-- Generating the PDF from a case document does not submit or complete it, and does not advance the case. See [Generating a PDF from a case document](./questionnaires.md#generating-a-pdf-from-a-case-document).
-- A case document your team has uploaded can be placed into an electronic filing packet slot, where it supersedes the generated version — see [Electronic Court Filing](../integrations/efiling.md).
+- Generating the PDF from a case document does not submit or complete it, and does not advance the case. See [Generating a PDF from a case document](questionnaires/petition/signatures.md#generating-a-pdf-from-a-case-document).
+- A case document your team has uploaded can be placed into an electronic filing packet slot, where it supersedes the generated version — see [Electronic Court Filing](../integrations/efiling/README.md).
 
 > TODO: Confirm where case documents are created and edited in the dashboard, and which roles can upload or edit one.
 
@@ -59,7 +59,7 @@ Editing the PDF and saving the case document again rebuilds the questionnaire fr
 
 ## Related Features
 
-- [Questionnaires](./questionnaires.md) — a case document is a questionnaire built from an uploaded PDF.
+- [Questionnaires](questionnaires/README.md) — a case document is a questionnaire built from an uploaded PDF.
 - [Signature Pages](./signature-pages.md)
-- [Document Collection](./document-collection.md)
-- [Electronic Court Filing](../integrations/efiling.md) — filing a case document as part of a packet.
+- [Document Collection](document-collection/README.md)
+- [Electronic Court Filing](../integrations/efiling/README.md) — filing a case document as part of a packet.

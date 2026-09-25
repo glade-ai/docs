@@ -86,6 +86,6 @@ Reminder timing (30 minutes for clients, day-before at 5:00 PM for firms) is not
 
 ## Related Features
 
-- [Scheduling](./scheduling.md)
-- [Calendar Sync](./calendar-sync.md)
+- [Scheduling](scheduling/README.md)
+- [Calendar Sync](calendar-sync/README.md)
 - [Video Consultations](./video-consultations.md)

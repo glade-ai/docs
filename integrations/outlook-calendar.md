@@ -73,6 +73,6 @@ If Glade cannot set up the real-time notification subscription when a calendar i
 
 ## Related Features
 
-- [Calendar Sync](../appointments/calendar-sync.md)
-- [Scheduling](../appointments/scheduling.md)
+- [Calendar Sync](../appointments/calendar-sync/README.md)
+- [Scheduling](../appointments/scheduling/README.md)
 - [Google Calendar Integration](./google-calendar.md)

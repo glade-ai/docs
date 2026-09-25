@@ -12,7 +12,7 @@ Pre-filing credit counseling is a required step in bankruptcy workflows: each de
 - **Skipping a failed step**: If a debtor's counseling enrollment fails (shown as "Enrollment failed"), firm staff can skip the step so the workflow can move forward. A **Skip task** option appears on the failed step; confirming it marks the step skipped and the case can continue. Without this, a failed enrollment would leave the step stuck with no way to progress.
 - **An individual filing enrolls as an individual.** A spouse's details are sent to the counseling provider only when the case is genuinely a joint filing. Previously a second debtor's name left on an individual case — intake can record one even where the client is filing alone — was carried onto the enrollment form and passed on, and the provider read any spouse detail as a joint enrollment and refused it for a missing spouse Social Security number. The client was blocked from completing counseling with nothing on the case that looked wrong, and clearing the stray name by hand was the only way through. That is no longer necessary.
 - **A client-paid course unlocks as soon as the payment goes through.** When the client pays for their own credit counseling course and the checkout completes at the standard price with no discount applied, the purchase is recorded and the client can start the course. Previously a checkout of this kind was charged successfully but not recorded, so enrollment stayed blocked and the client was left unable to begin a course they had already paid for.
-- Completing or skipping the step updates the case's tasks and progress like any other workflow step. See [Status Tracking](./status-tracking.md).
+- Completing or skipping the step updates the case's tasks and progress like any other workflow step. See [Status Tracking](status-tracking/README.md).
 - **Post-filing debtor education certificates** attach the same way as pre-filing counseling certificates, for each debtor separately. **Debtor Education Certificate (Debtor 1)** and **Debtor Education Certificate (Debtor 2)** are available as document types, so a certificate can be filed under its own name rather than under a generic type. On some cases, attaching a debtor education certificate previously failed with an error and the certificate could not be recorded against the step at all.
 - Debtor education is a post-filing course, so its certificate is not part of the initial petition filing package. It is stored on the case and filed separately.
 
@@ -84,7 +84,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 
 ## Related Features
 
-- [Status Tracking](./status-tracking.md)
-- [Document Collection](./document-collection.md)
+- [Status Tracking](status-tracking/README.md)
+- [Document Collection](document-collection/README.md)
 - [Task Templates](./task-templates.md)
 - [Credit Counseling & Debtor Education Integration](../integrations/abacus-credit-counseling.md) — provider setup, enrollment, and certificates.
