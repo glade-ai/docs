@@ -11,6 +11,7 @@ Client records track the relationship between a client and your firm on Glade. E
 - Client records store personal details including address, date of birth, SSN, and communication preferences (broadcast opt-in, SMS opt-in).
 - **County is part of the stored address.** A client's county is kept on their record alongside street, city, state, and ZIP, rather than being worked out again each time someone needs it. See [The client's county](#the-clients-county) below.
 - From a client's detail view, you can see their total dollar value, active subscriptions, order history, invoices, payment methods, cases, documents, questionnaires, and associated workflows.
+- **Matters imported from MyCase are kept off the client-facing case list.** A firm that moved to Glade from MyCase carries its history across as imported matters, which are records of past work rather than cases anyone is working. They no longer appear in the case list on a contact, so the client's live case is the one your team lands on. See [Imported matters on a contact](#imported-matters-on-a-contact) below.
 - Clients are classified as **Subscribed**, **Free**, or **Unverified** based on whether they have an active subscription and have verified their account.
 - The member list supports filtering by these classifications and searching by name, email, phone number, or the content of a client's profile notes.
 - You can edit a client's name, email, phone number, date of birth, SSN, and address through the **Edit Contact** modal.
@@ -18,6 +19,14 @@ Client records track the relationship between a client and your firm on Glade. E
 - **Stopping follow-ups is recorded and attributed.** When someone at your firm turns off automated follow-ups for a client, Glade records who stopped them and when, and shows that on the client's record — so a client who has gone quiet is not a mystery about whether anyone decided to stop chasing them. See [Stopping and resuming client follow-ups](#stopping-and-resuming-client-follow-ups) below.
 - When a client makes a payment through Stripe, their payment profile is linked to the client record automatically.
 - QuickBooks customer IDs can also be linked for accounting integration.
+
+### Imported matters on a contact
+
+Imported MyCase matters used to sit on the contact page beside the live case, and both were opened just as readily — so staff and clients alike kept working from the historical record instead of the current one.
+
+- **The case list on a contact leaves imported matters out**, along with any imported matters related to them, so what you see there is the work in progress.
+- **Your firm's case tracker is unchanged.** Imported matters are all still listed there, and the tracker can be filtered to show only them when you need the history.
+- Nothing has been deleted or altered. This changes where imported matters appear, not whether they exist, and the same matters are hidden from the client in their portal.
 
 ### The client's county
 
@@ -64,6 +73,8 @@ Automated follow-ups to a client can be turned off — for example when the clie
 - Follow-ups stopped before this was recorded show no attribution — the setting is in effect, but there is no record of who turned it off or when.
 - County is blank on every client record until an address is saved that carries one. Existing records are not backfilled, so a firm should not read a blank county as "no county on file for this address".
 - An address collected at booking is the client's one current address. Recording where a client lived at the time of an earlier booking is not supported.
+- Imported matters are reached from the firm's case tracker rather than from the contact. If your team used the contact page to open a client's MyCase history, use the tracker and filter to imported matters instead.
+- Only matters carrying the MyCase import status are held back. A matter migrated some other way, or one taken up as live work, appears on the contact as an ordinary case.
 
 ## Related Features
 
