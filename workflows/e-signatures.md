@@ -21,6 +21,9 @@ A request moves through these stages:
 
 - Once signature fields have been placed, opening the request loads the document to sign. Previously the client's view stayed on "Your signature request is being prepared" indefinitely and never loaded the document, even though the firm had finished preparing it — so nothing could be signed and there was no indication anything was wrong. This affected firm staff signing on the client's behalf as well.
 - Before fields are placed, the client still sees the preparing message. That is the only stage where it appears.
+- Clicking **Awaiting signature** opens the document to sign. This could instead fail with *"Unable to generate signer URL, please contact support"*, leaving the signer with no way through — each signer was not being registered against the request when it was sent, so there was nothing to match them to at signing time. Signers are now registered as the request goes out.
+
+> TODO: Confirm whether a request sent before this correction can be signed, or has to be sent again. The signer registration happens when the request is created, so already-sent requests may still show the error.
 
 ### What the firm sees
 
@@ -37,6 +40,10 @@ Previously a step that fired automatically produced a request the client could n
 ### Completed requests
 
 - When a request completes, both the signed document and the signing certificate — the audit record of who signed and when — are attached to the case.
+- **Both files are filed into the case's documents, in a folder called Signed Documents.** They appear in the Documents tab and the document checklist alongside everything else gathered on the matter, so a signed copy can be found, previewed, downloaded, and moved the same way as any other document. Previously the only place a signed document could be opened was inside the e-signature task that produced it — the files existed but were listed nowhere else, and teams reported not being able to find them.
+- **A signed copy is not added to the petition.** Documents filed this way are left out of the compiled petition unless someone puts them in deliberately, so a signed copy cannot drift into the packet that goes to the court.
+- **Each file is listed under the name of the document that was signed**, rather than a generic "E Signature Request" label, so a case with several requests reads as a list of distinct documents.
+- If the files arrive later than the completion itself — the signing service occasionally delivers them a moment behind — they are filed when they arrive. The client is not sent a second completion email in that case.
 - A court form whose own title contains the word "certificate" (for example, a Certificate of Compliance) is treated as a signed document, not as the signing certificate. Previously such a form was mistaken for the audit record, which stopped the request from completing: every signer had signed, but the request stayed at the awaiting-signatures stage indefinitely.
 - If attaching the documents fails, the request is still recorded as completed rather than being left in an earlier stage. The completion is not lost because of an attachment problem.
 
@@ -71,10 +78,14 @@ E-signature requests have no settings of their own. They are sent manually or as
 - A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
+- Filing signed documents into the case's documents applies to requests completing from now on.
+
+> TODO: Confirm whether signed documents from requests completed before this shipped have been filed into the Signed Documents folder retroactively, or whether a firm has to ask Glade to do it.
 
 ## Related Features
 
 - [Automation Rules](./automation-rules.md)
 - [Triggers](./triggers.md)
 - [Custom Terms](./custom-terms.md)
+- [Document Collection](./document-collection.md) — where the signed document and certificate are filed once a request completes.
 - [Client Portal](../intake/client-portal.md)

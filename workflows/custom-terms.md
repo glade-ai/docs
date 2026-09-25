@@ -35,6 +35,28 @@ Two kinds of value are deliberately left alone, because **Edit details** cannot 
 - Context values that name a person, and those chosen from a fixed list — a case type, for example.
 - A detail that feeds more than one context value on the same workflow. Neither is changed rather than Glade guessing which one you meant, so those keep their existing values.
 
+### When a signed agreement cannot be generated
+
+When a client signs, Glade produces the signed copy of the agreement before recording the signature. If that copy cannot be produced, the signature is not kept and the client can sign again.
+
+- The agreement is treated as signed only once the signed copy exists. Only then is the client's **Agree to terms** task completed and, for an attorney-signed agreement, the agreement handed to the attorney.
+- An agreement with no terms text is refused before anything is saved, rather than part-way through signing.
+- Previously a failure at this point could leave the client's signature saved and their task completed while your team still saw the agreement as unsigned. The client could not sign again because the signature already appeared filled in.
+- **A client who has already signed is not given a second Agree to terms task.** A later change on the workflow — regenerating the agreement or changing collaborators, for example — previously could open a new task for a client whose signature was already on the agreement.
+
+### Invoice amounts on a retainer
+
+A retainer can show amounts taken from the case's invoice — the base legal fee, for example. Those amounts are filled in once the invoice exists, and kept up to date while the retainer is unsigned.
+
+- **Generating the invoice fills in the retainer.** When the invoice template links a line item — such as "Attorney Fees" — to an amount on the retainer, generating the invoice carries that link through even if the invoice's custom-terms field is left empty, and the retainer picks up the dollar amount.
+- **Unsigned retainers update when the invoice does.** Creating the invoice, making it payable, or correcting its amount refreshes the figures on any retainer that has not yet been signed.
+- Only the current version of the invoice counts. Voided, skipped, and superseded versions are ignored.
+- **Signed, skipped, and hand-edited retainers are left alone.** A retainer that has been agreed to, skipped, or edited by your team is not rewritten when the invoice changes.
+
+Previously a Chapter 7 retainer could go out reading `$[invoice:baseLegalFee not set]` in place of the fee, even after your team had generated the invoice and entered the amount, because the retainer was prepared before the invoice had any line items and was never refreshed afterward.
+
+- A retainer still showing the placeholder is corrected the next time the invoice is generated or corrected. Retainers are not repaired in bulk.
+
 ### Printing an agreement for wet-ink signing
 
 A firm can produce a complete, unsigned copy of a client's agreement to print and sign in ink, before the client has signed anything electronically. The copy carries the firm's letterhead and every detail filled in — the retainer amount, the fee, the attorney's name — exactly as the client would see it, with the signature lines left blank.
@@ -52,6 +74,15 @@ When an agreement is set to be signed by an attorney and you assign attorneys th
 
 This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
 
+### The name on the attorney's signature
+
+When an attorney countersigns an agreement, the name printed in the attorney's signature block is the attorney's own name, not the client's.
+
+- Previously the signing form could arrive pre-filled with the client's name, and a typed signature then printed that name in the attorney's block — even though the signing certificate correctly recorded the attorney. If the name submitted for the attorney matches the client on the agreement, the attorney's own name is used instead.
+- A customized attorney name that is not the client's — for example "Jane Smith, Esq." — is kept as entered.
+- If the name is left blank, the signing attorney's name is used.
+- Agreements already signed before this correction are not changed. Check the attorney signature block on any recently countersigned agreement where the client's name may have been printed.
+
 ### When a joint signer has no signature slot
 
 On an agreement carrying more than one client signature slot — a joint retainer, typically — each slot is assigned to a particular signer. If the person signing has no slot assigned to them, for example because both slots were assigned to the attorney rather than one to each spouse, the attempt is refused with an error.
@@ -59,6 +90,27 @@ On an agreement carrying more than one client signature slot — a joint retaine
 - Previously the page refreshed with the signature still blank and the **Agree to terms** task still outstanding, and nothing explained why. The signer could try repeatedly and never complete the step.
 - When this happens, check who each signature slot on the agreement is assigned to and point the right slot at the spouse who is signing.
 - Agreements with a single client signature slot are unaffected. That slot is used whoever it is assigned to.
+
+### When the agreement was never assigned to the client
+
+An agreement is created for a particular client, and that client can open and sign it even where the workflow step it came from does not list them among the people it is assigned to.
+
+- Previously a client in that position could see the agreement on the case but was refused with **"This task has not been assigned to you."**, and no **Agree to terms** task was created — so the step could not be completed by anyone. Chapter 13 retainers on cases started from a firm's own workflow templates were the common case, because that step's assignment list is often left empty.
+- The client now also gets the **Agree to terms** task, so the agreement reaches their task list rather than sitting only on the case.
+- **Access that was deliberately taken away is not handed back.** Where the agreement has been passed to the attorney to sign, or the step has been skipped, the client cannot open, reset, or skip it — including a client who was never assigned it in the first place.
+- Live cases already stuck in this position can be opened and signed straight away. Their **Agree to terms** task appears the next time something happens on the agreement; new cases get the task when the agreement is created.
+
+Invoices already worked this way — the client an invoice is for can open it whether or not they were assigned it.
+
+### When an agreement has no client signature slot at all
+
+Some agreements ask for a client signature in their text without the slot ever having been set up behind it — immigration retainers are the common case. Signing one of those now works: a client signature slot is created for the agreement when it is needed, so the signature is recorded, the agreement is marked agreed, and the workflow step advances.
+
+- Previously the client filled in the signature, submitted, and was returned to the case with the retainer still unsigned and the **Agree to terms** task still outstanding. Nothing on the case explained why, and trying again produced the same result.
+- **Agreements already issued are repaired when the client next signs.** There is no separate fix-up to run and no need to re-issue the agreement — but the client does have to sign again. Glade does not mark a retainer signed on the client's behalf.
+- Where an agreement is signed by more than one person, the count of signers is worked out before the agreement is produced, so a joint retainer is still recognized as needing both signatures.
+
+If a client reported being bounced back to the case with the retainer unsigned, ask them to sign it again.
 
 ## Configuration
 

@@ -16,6 +16,17 @@ A case can carry more than one income organizer — typically one for the primar
 
 Before this, an attorney could not see or add income for a non-filing spouse even after a second organizer existed on the case — the interface showed only the first one it found.
 
+#### Each debtor's Schedule I total stays with that debtor
+
+On a joint case, an income source belongs to the debtor it is recorded against, and that debtor's Schedule I total is worked out from the sources that belong to them. A source added for debtor 2 is attached to debtor 2's organizer even if it was entered from debtor 1's, so the two never mix.
+
+Two problems on joint cases came from the same cause and are both resolved:
+
+- **Debtor 2's income no longer lands on debtor 1's Schedule I.** A source tagged for one debtor could sit on the other's organizer, and its amount was then carried onto the wrong debtor's schedule.
+- **An edit after the initial entry updates the total.** Where a source was on the wrong debtor's organizer, editing an amount recalculated the *other* debtor's organizer — which was empty — so the figure on screen never moved however many times it was corrected.
+
+Existing cases are corrected the next time the organizer is opened or recalculated; there is nothing to run. **Re-check Schedule I on any joint case prepared earlier** — a debtor showing income that belongs to their spouse, or a total that did not respond to a correction, is the symptom.
+
 ### Income Calculation Modes
 
 Each income source (such as a paystub) can be set to one of these calculation modes:
@@ -96,6 +107,15 @@ When you add a Social Security income source, Glade asks which benefit it is —
 - **The figures do not change.** Every Social Security source still adds into the single Schedule I line for Social Security (line 8e), and all of it stays out of the means test.
 - Sources recorded before benefit types existed keep working as they are. They carry no type and continue to report on the same Schedule I line.
 
+### Government Assistance and Other Income on Schedule I Lines 8f and 8h
+
+Schedule I reports other government assistance on line 8f and other monthly income on line 8h, each as a single description and amount per debtor. Alongside those totals, Glade records each source behind them individually, so the bankruptcy schedules questionnaire can show the list of sources a line is made up of.
+
+- One entry per source that counts toward Schedule I, kept separately for each debtor and each line. Changing a source from other income to government assistance moves its entry to the line it now belongs to.
+- **The totals are unchanged.** Lines 8f and 8h, the Schedule I totals, and the means test still read the same summed figures they always did.
+- Deleting a source, or turning it off for Schedule I, removes its entry.
+- See [Questionnaires](./questionnaires.md) for how the list appears on the form.
+
 ### Business and Rental Income on Schedule I
 
 Schedule I reports business, professional, and rental income on one line (line 8a). Where a business or rental source has a profit and loss statement — uploaded as a document or typed in by hand — that statement is what the line uses for that source.
@@ -116,6 +136,28 @@ Adding a business or rental income source collects the business's details as par
 - The details are checked before anything is created, so a problem with what you entered is reported without leaving a half-created income source on the case.
 - **The business's name and income type are not entered here** — they come from the income source itself, so renaming the source keeps the business record in step rather than leaving the two to drift apart.
 - This applies to business and rental sources. Other income sources do not collect business details.
+- **Everything the dialog saves is recorded as coming from the Income Organizer.** Case data records where each value came from, and a business added this way used to split across two sources — the couple of fields Glade worked out were attributed to the Income Organizer while the ones your team typed on the same form were recorded as manual entries. One business, one action, two answers. They now all read as Income Organizer.
+- Values your team typed are still protected from being overwritten by a later document read, exactly as before. The change is what the source column says, not what is protected.
+
+### Clients Adding a Business or Rental Source
+
+When a client adds a business or rental income source from an income document request in the client portal, a two-step dialog collects the source the same way your team adds one. The source it creates looks the same on your side as one your team created.
+
+- **Step 1 — details.** For a business, the client enters the business details: name, EIN, address, category, whether it is a sole proprietorship, dates, accountant, and the nature of the business. For a rental, only the property name is asked for.
+- **Step 2 — income.** The client either **uploads documents** for the source, or **enters the figures manually** as a profit & loss statement — the period, gross income, expenses, and optionally the net figure printed on their statement.
+- **Going back or closing before anything is saved** removes the draft source, so an abandoned attempt does not leave an empty source on the case.
+- **Once a document has uploaded (or is uploading) or a manual statement is saved,** **Back** is disabled. Closing the dialog keeps the source and what has been saved.
+- Other income types — employment, Social Security, and the rest — still use the existing add-source form.
+
+### Which Contact a Business or Rental Belongs To
+
+A business or rental on the case records which contact it belongs to — the **primary** or the **secondary** contact — the same way an asset or a creditor records its owner. Previously there was no way to say, even on a joint case where the organizer already knew which contact the income belonged to.
+
+- **The contact is filled in from the income source** when the business or rental is created from the Income Organizer, so a source already tied to a filing contact does not have to be assigned again.
+- **A source that is not tied to a filing contact is left unassigned** rather than guessed at.
+- **A choice your team makes by hand is the one that is kept**, including clearing it back to unassigned. It is not replaced the next time the case's income data is refreshed.
+- Businesses and rentals recorded before this can be assigned by hand; nothing is assigned for them retroactively.
+- This records who the business or rental belongs to. It does not move income sources between organizers and does not change any income calculation.
 
 ### Including and Excluding Income Records
 
@@ -124,6 +166,16 @@ Each income record carries its own switches for whether it counts toward Schedul
 - Excluding a record stays excluded when the underlying document is read again — for example after a re-upload, a re-run of the extraction, or an automatic background retry. Previously any re-read of the document silently switched the record back to counted, in both the income organizer and the means test, so a record your team had deliberately left out could reappear in the totals without anyone changing it.
 - A first-time extraction still starts with the record counted, and a document Glade could not read keeps its record out of the totals until a later successful read.
 - **Clearing the switches holds on the first try.** Turning **Include in Monthly Totals** or **Include in Means Test** off — for a whole income source or for one record — sticks, including on organizers with many paystubs and while AI is still reading uploaded documents in the background. Previously rows could re-check themselves moments after being cleared, so the same action had to be repeated several times before it held; that only happened on busy organizers, which is why it looked intermittent. If a change cannot be saved, the switch returns to its previous position and an error message appears, rather than appearing to save and then reverting on the next refresh.
+
+#### Income read from an upload now counts toward Schedule I
+
+Income extracted from an uploaded document was being recorded as **excluded from Schedule I** even though nobody had excluded it. The record appeared on the case with its figures correct, the means test counted it, and Schedule I silently left it out.
+
+- **What it looked like:** a case with six pay stubs, every figure read correctly, a means test reporting the income in full, and Schedule I showing nothing. Nothing was flagged and no error appeared, because a record excluded from Schedule I is an ordinary thing for a record to be.
+- **Uploads now arrive counted**, the same as a record entered by hand, so newly read documents reach Schedule I.
+- **Your own exclusions are unaffected.** A record your team deliberately left out stays out, including through a re-read of the document. The fix distinguishes the two.
+- **Cases prepared while this was happening are not corrected on their own.** The problem ran from around May 2026 and affected thousands of cases — mostly wage income from pay stubs rather than business income — with some showing no Schedule I income at all and others understated. **Re-check Schedule I on any case prepared since May 2026 where income was read from uploaded documents**, and contact support to have affected cases repaired rather than re-entering the figures by hand.
+- A case whose means test and Schedule I disagree about the same documents is the signature to look for.
 
 ### Feeding Schedule I and the Means Test Questionnaire
 
@@ -217,6 +269,13 @@ When Glade reads a paystub on its own — on upload, on a re-read, or during a b
 
 **Year-to-date gross when a bonus is listed separately.** On paystubs that print a bonus on its own line outside the year-to-date earnings subtotal, the year-to-date gross is taken as the subtotal shown on the stub. Previously the pay period's bonus could be added on top of a subtotal that already accounted for it, inflating year-to-date gross — and, for any employer set to YTD mode, every monthly figure derived from it.
 
+**Take-home pay is read from the net pay line, not the gross.** Stubs that label take-home as **Net Pay ACH**, **Net Pay Check**, or **Direct Deposit** rather than plainly as *Net Pay* had their **Gross Earnings** figure recorded as net, overstating monthly take-home by a wide margin — around 27% on the stubs where this was reported, which was enough to hold up a Chapter 7 filing.
+
+- Those labels are now recognized, and where a stub prints both an ACH and a check amount the two are added together.
+- As a check on the result, a net figure that comes out at or above the gross is re-worked from the gross less the deductions actually printed on the stub. Deduction categories the stub does not print are left empty rather than being recorded as $0.00.
+- **Schedule I still uses gross pay** — it always did. What was wrong was the net column, and anything reading from it.
+- Re-read an affected paystub to correct it. A stub whose net figure looks close to its gross is the symptom worth checking on income entered earlier.
+
 **Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](./document-collection.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
 
 ### Custom Types in the Income Breakdown
@@ -253,6 +312,20 @@ A business or rental income source holds its own profit & loss statements, and t
 - **A business with no statement, or a statement whose period cannot be determined, contributes nothing rather than a zero.** A zero would read as a business that earned nothing, which is a different claim from one whose figures are not in yet.
 - Every statement uploaded against a source is kept. A newer statement does not replace an earlier one.
 - Each parsed record shows which uploaded document it came from.
+- **Deleting the uploaded file removes its figures.** Deleting a profit & loss statement's file from the document checklist removes the statement and its lines, and Schedule I line 8a recalculates without it. Restoring the file brings the statement back. Previously the file disappeared from the checklist while its figures stayed on the income table and on line 8a, with nothing that would remove them.
+- **Deleting a business takes its statements with it.** Removing a business or its income source removes the statements bound to it, and restoring the business brings back only the statements that went with it — a statement your team had deleted on its own stays deleted.
+- **A statement whose business is not on the case yet creates one.** Where a parsed statement cannot be matched to a business already on the case, Glade creates a business income source named from the name printed on the statement and binds the statement to it, so the figures reach line 8a without the business having to be entered by hand first. It does not guess where the name is ambiguous: a statement that matches several of the case's businesses, or that carries no business name at all, is left unbound for your team to place. This applies to statements read from now on — a statement that is already sitting unbound stays that way until it is placed.
+- **The figures survive re-opening the workflow.** Once a statement has produced business income, opening the case again no longer resets Schedule I line 8a and the means test's business lines. Previously the figures showed correctly until the next time the workflow was loaded, when they fell back to zero with nothing on screen to explain it.
+
+#### A statement uploaded outside its business's folder
+
+A profit & loss statement only reached Schedule I line 8a if it was uploaded **into the business's own folder** in the organizer. Uploaded anywhere else it read correctly and its lines landed on the case, but it belonged to no business — so every figure that groups by business skipped it and the business income calculation produced nothing, with no error shown anywhere.
+
+- **A statement is now matched to a business by the name printed on it** when there is no folder to place it from. `RIVERA LANDSCAPING, LLC.` on the statement matches a business your team recorded as `Rivera Landscaping, LLC` — capitalization, spacing, and trailing punctuation are ignored.
+- **Uploading into the business's folder is still the exact route** and takes precedence. Name matching is the fallback.
+- **Matching is exact, not approximate.** `Rivera Landscaping` is not matched to `Rivera Landscaping II` — two businesses a debtor reports separately — because putting one business's income on another's line of a form signed under penalty of perjury is worse than leaving it unattached. A statement that does not match, names no business, or matches two businesses with the same name stays unattached.
+- **This applies to existing cases as well as new ones.** Uploading business income data to a case already open binds it and feeds the calculation.
+- **Statements already sitting unattached are not repaired automatically.** If a case shows itemized profit & loss data but no business income figures, re-upload the statement or contact support. Many unattached statements are on cases with no business income source at all, which have to have the source added first.
 
 > TODO: Confirm where profit & loss statements are uploaded from and where the parsed statement is reviewed and corrected, so those steps can be documented here.
 
@@ -266,6 +339,15 @@ Some uploads are classified as a type the Income Organizer cannot pull income fi
 - **The row records what the document was recognized as.** Where Glade identified the document but cannot read income figures out of it in that slot, the row keeps the recognized type — so it can be presented as an unsupported document rather than sharing one blank label with a paystub the reader simply could not make out. Rows that settled before this change carry no type; re-run AI on the row to record it.
 
 Regular paystub rows are unaffected — they still show extracted values, a spinner while processing, and editable, selectable controls.
+
+### An Upload Left on "Queued for Analysis"
+
+An upload now leaves the queued-for-analysis state however its reading ends, rather than only when it produces paystub income records.
+
+- **A profit & loss statement settles.** Its figures were read and recorded, but the upload kept showing as pending analysis indefinitely, so the income table looked as though nothing had happened.
+- **A read that fails settles too**, as an error you can act on rather than as work that never finished.
+- A read that completes with no income figures on it is reported as such instead of being left pending.
+- **An upload from someone who belongs to more than one firm reaches the case.** A file uploaded into a document checklist is recorded against the firm that owns the case, not whichever firm the person uploading was working in at the time. Previously that mismatch caused a fully read paystub or profit & loss statement to be discarded after extraction — the figures never reached the income table and nothing on screen said why. If your team has staff who work across more than one firm and uploads that produced nothing, those files are worth re-uploading.
 
 ### Working Behind the Edit Income Data Panel
 
@@ -325,6 +407,11 @@ Previously these controls were limited to the case's creator, so a paralegal ass
 - Switching a new income organizer's results through to the Schedule I and Means Test questionnaire happens automatically only for organizers created from this point on. Older organizers are not switched on retroactively.
 - A profit and loss statement wins over the month entries for the same source on Schedule I line 8a. Where a business has both, the month entries are not added on top and are not shown as excluded — they are simply not what the line is built from. Remove the statement if the month entries are the figures you want.
 - Business details entered when an income source is created are saved on a best-effort basis alongside the source itself. If the source is created but the details do not appear on the business record, open the business and enter them there.
+- A business is created from a statement's printed name only where the match is unambiguous. A statement matching several of the case's businesses, or carrying no business name, stays unbound and contributes nothing to line 8a until your team binds it.
+- The individual Schedule I 8f and 8h entries are recorded only on cases that use case data sync. The summed amounts on those lines fill either way.
+- Income records written before the Schedule I exclusion was fixed keep the exclusion they were written with. They are not corrected when a case is reopened or recalculated — the case has to be repaired, which support does.
+- A profit & loss statement is matched to a business by an exact name after allowing for capitalization, spacing, and punctuation. Two businesses with the same recorded name cannot be told apart and neither is matched; rename one of them so the statement has a single answer to bind to.
+- Business fields recorded before the source labels were unified still read as manual entries. The label is corrected going forward rather than rewritten across existing cases — contact support if a firm needs its existing rows relabeled.
 
 > TODO: Confirm where a profit and loss statement is uploaded against a business source, and where the business's own details are viewed and edited on the case.
 - The YTD period method needs paystubs whose year-to-date sections bracket the chosen period. If there aren't enough anchoring paystubs, the method can't be applied and you'll be prompted to upload paystubs that bracket the window. The method always divides the bracketed gross by six months. Periods that cross a calendar-year boundary, and a July filing month, are handled as special cases.

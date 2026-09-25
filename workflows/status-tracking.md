@@ -52,9 +52,14 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - **Activity log**: All status changes are recorded in the case's activity history alongside other events like document uploads, questionnaire completions, payments, and comments.
 - **Case-filed activity**: When a case is filed electronically through the court's PACER system, a **Case Filed** entry is added to the case's activity history and appears in the Recent Activity view, reading "*name* filed the case via PACER." When a filed case is instead recorded manually — for example, a staff member registering a filing or resolving a filing deficiency — the entry reads "*name* registered the filed case," since it was not submitted through PACER. Cases whose status is changed to a filed status still show that as a status-change entry, so a single filing is never recorded twice.
 - **Pause and resume**: Cases can be paused until a specific date. Pausing and resuming are tracked as separate events.
-- **Time-sensitive filing deadline**: A case can be marked as having to reach the court by a specific calendar date — an emergency Chapter 13 ahead of a foreclosure sale or a wage garnishment, for example. This is separate from the filed date, which records when a case was actually filed. See [Time-sensitive filing deadlines](#time-sensitive-filing-deadlines) below.
+- **Time-sensitive filing deadline**: A case can be marked as urgent either by a specific calendar date it has to reach the court by, or by the *kind* of pressure it is under — a garnishment, repossession, foreclosure, or eviction — when nobody knows the date yet. This is separate from the filed date, which records when a case was actually filed. See [Time-sensitive filing deadlines](#time-sensitive-filing-deadlines) below.
 - **Tasks**: Tasks are actionable items created during a case — things like "complete questionnaire", "pay invoice", or "upload document". Each task is assigned to a person (client or team member) and tracks whether it has been completed.
 - **Filing deficiency tasks**: When a case is filed manually (rather than through Glade's automated filing) and the court submission goes out missing required documents, Glade automatically creates an urgent task for **each** missing document, titled after that document. Previously a single task covered all of them at once. Every task references the affected filing and is assigned to both the team member who initiated the filing and the firm owner, so the missing documents can be addressed before the court's cure deadline. Splitting them per document lets your team divide the work and track what is still outstanding. Completing a task also clears that document from the case's filing deficiency, so the case's action-required banner narrows to the documents that remain — see [PACER Integration](../integrations/pacer.md) for the banner itself. Manual filings with no missing documents do not generate these tasks.
+- **Assigning a colleague an internal task emails them.** When a team member creates a task on a case by hand — "case to be filed", "call the trustee", anything your team writes itself — everyone newly assigned to it is emailed, as well as being notified in the inbox. Previously only consultation tasks sent this email, so a task handed to a colleague could sit unnoticed unless they happened to check their inbox.
+  - Reassigning the task later emails whoever it moves to.
+  - The person doing the assigning is not emailed, and nobody is emailed for assigning a task to themselves.
+  - **Document review tasks are deliberately left out.** A "Review Documents" task is created every time a client uploads a file, so emailing on those would bury the ones a colleague actually handed over. Case owners continue to receive the existing documents-in-review email for that work.
+  - A task that is not attached to a case, and a task that is already complete, sends nothing.
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
 
@@ -80,26 +85,66 @@ The task list lets each team member clear items they no longer need to watch, wi
 - **Restoring brings a task back.** A dismissed task can be restored to your list. If dismissing it also dropped your own assignment, restoring gives that assignment back; if you were not assigned at the time, restoring leaves assignment untouched.
 - **Filtering by dismissal state.** The list shows **active** tasks by default — everything you have not dismissed. You can switch it to show **dismissed** tasks only, or **all** tasks regardless of dismissal.
 - **Including completed tasks.** A separate setting adds completed tasks to the list alongside incomplete ones. It is off by default and is independent of the dismissal filter, so the two can be combined in any way — completed work you have not dismissed, dismissed work that is still open, and so on. The list previously showed incomplete tasks only, with no way to bring completed ones back into view.
+- **Dismissals apply to your task inbox, not to a case.** The **Tasks** panel on a client and on a workflow shows every open task on that case, including ones you have dismissed from your own inbox, so everyone looking at the same case sees the same list. The task stays dismissed in your inbox. Previously a dismissed task was hidden from those panels too, so the person who dismissed it saw fewer open tasks on the case than their colleagues and the case could look further along than it was. Choosing to show **dismissed** tasks on those panels still works as before.
+
+### What carries over when a case switches workflow
+
+When a case is switched to a different workflow — for example converting a Chapter 7 case to Chapter 13, or back — the client's credit report and the money they have already paid move to the new case.
+
+- **The credit report moves even if the new case has started one of its own.** A new workflow often opens its own credit report step within seconds of being created, before the switch has finished. If that report has never actually been pulled, it is set aside (skipped, not deleted) and the client's real report — with its bureau results and documents — moves onto the new case. If your team has already pulled a report on the new case, that report is kept and the old one is not moved over it.
+- **Payments already made carry forward even when the new fee is lower.** Changing chapter usually changes the fee, so the new invoice can be smaller than what the client has already paid. The new invoice is credited up to its full amount, and the case's switch record names the remaining amount as owed back to the client as a credit or refund.
+- Previously, in both situations, that part of the switch failed. The credit report stayed on the archived case, and when the client had paid more than the new invoice, the payment was not recorded on either case — the only trace was the failure noted in the switch record, and your team had to repair the case by hand.
+
+> TODO: Confirm where the switch record (the internal note listing each step of the switch) appears on the case, and whether cases switched before this correction need to be reviewed for a missing credit report or carried-over payment.
 
 ### Time-sensitive filing deadlines
 
-Some cases have to be filed with the court by a particular date — an emergency Chapter 13 filed ahead of a foreclosure sale, or a case racing a wage garnishment. Glade tracks that date on the case so your team can find these cases and work them in order rather than remembering them by hand.
+Some cases have to be filed with the court under time pressure — an emergency Chapter 13 filed ahead of a foreclosure sale, or a case racing a wage garnishment. Glade tracks that pressure on the case so your team can find these cases and work them in order rather than remembering them by hand.
 
-- **Setting a deadline** — a case's settings let you record a **filing deadline** as a calendar date, plus an optional **reason** explaining why the case is time sensitive. Recording a deadline is what marks a case as time sensitive; a case with no deadline is not time sensitive.
-- **Setting one at case creation** — the deadline and reason can also be entered when a staff member initiates a case, so an emergency filing carries its deadline from the moment it exists. A reason on its own is not accepted — the reason has to attach to a deadline.
-- **Who set it** — Glade records which team member recorded the deadline and when. On a case created with a deadline, the person who created the case is recorded.
-- **Clearing a deadline** — clearing the deadline also clears the reason and the record of who set it. The case is no longer time sensitive.
+- **Two ways to mark a case urgent** — a case's settings let you record a **filing deadline** as a calendar date, a **type** of urgency, or both. A case is time sensitive if it carries either one.
+- **The type** describes what the client is up against: **garnishment**, **repossession**, **foreclosure**, **eviction**, or **other**. It exists because clients frequently know that a garnishment or a repossession is coming without knowing the day it lands. Marking the type records the urgency straight away, and the date can be added later if it is ever pinned down.
+- **Notes about the urgency** — an optional **reason** can be written alongside, explaining the situation in the client's own terms. The reason is now independent: it can be recorded on a case that is *not* time sensitive, so an intake worker who asks the question and hears "no" still has somewhere to put what the client told them. A reason on its own does not mark the case urgent.
+  - Previously a date was required before a case could be marked time sensitive at all, and a reason could only be saved attached to one. Intake staff either invented a date or lost the client's answer.
+- **Notes on a case that is not time sensitive** — where a staff member answers **No** to time-sensitive at case creation but writes notes anyway, those notes are posted as an internal note on the case, authored by whoever created it. They appear in the same internal notes thread the team already reads. Answering **Yes** keeps the reason on the time-sensitive fields rather than duplicating it as a note, and leaving the notes blank creates nothing.
+- **Setting these at case creation** — the deadline, the type, and the reason can all be entered when a staff member initiates a case, so an urgent filing carries the marking from the moment it exists.
+- **Who set it** — Glade records which team member marked the case and when. On a case created already marked, the person who created the case is recorded.
+- **Clearing the marking** — clearing both the deadline and the type makes the case no longer time sensitive. The reason is left alone, because it may be the only record of what the client said; clear it separately if it no longer applies.
 - **The date does not shift** — the deadline is a calendar day the court cares about, so it reads the same regardless of anyone's timezone.
-- **Filtering, sorting, and reporting** — the workflow list can be filtered to time-sensitive cases only (or to cases that are not time sensitive), narrowed to deadlines falling inside a date range, and sorted by deadline. Cases with no deadline sort to the end in both directions. The cases CSV export includes a filing-deadline column and honors the same filters, so "which cases are due this week" can be answered as a list or as a spreadsheet.
+- **Filtering, sorting, and reporting** — the workflow list can be filtered to time-sensitive cases only (or to cases that are not time sensitive), narrowed to deadlines falling inside a date range, and sorted by deadline. Cases marked by type with no date are included in the time-sensitive filter, and are excluded by a date-range filter, since they have no date to fall inside it. Cases with no deadline sort to the end in both directions. The cases CSV export includes both a filing-deadline column and a type column, so a case marked by type alone is not a blank row in the spreadsheet.
+- **Activity history** records a marking being set — including a type-only marking — and records it being cleared when both the deadline and the type are removed.
 
 #### Deadlines across related cases
 
-A matter can carry several cases at once — an associated filing alongside the main one, or a new case created when a chapter converts. Each case carries its own deadline, because associated filings can genuinely be due on different dates.
+A matter can carry several cases at once — an associated filing alongside the main one, or a new case created when a chapter converts. Each case carries its own marking, because associated filings can genuinely be due on different dates.
 
-- A case joining a matter that is already marked time sensitive **inherits the most recent deadline** on that matter, along with its reason and the record of who set it, provided the joining case has no deadline of its own.
-- A case created with its own deadline keeps that deadline instead of inheriting.
+- A case joining a matter that is already marked time sensitive **inherits the most recent marking** on that matter — its deadline, its type, its reason, and the record of who set it — provided the joining case is not marked itself.
+- Inheritance follows the marking, not the date. A matter marked by type alone passes that type on, even though there is no date to pass with it.
+- A case created with its own deadline or type keeps it instead of inheriting.
+- A reason on its own is not inherited, because a reason on its own does not mark a case.
 - Answering explicitly that a new case is **not** time sensitive suppresses inheritance — it stays unmarked.
-- When you create an associated case, the wizard shows the matter's most recent deadline so you can carry it over or override it deliberately.
+- When you create an associated case, the wizard shows the matter's most recent marking so you can carry it over or override it deliberately.
+
+### Switching a case to a workflow in another service
+
+When you switch a case to a different workflow — for example moving a Chapter 7 case onto a Chapter 13 workflow after an attorney recommendation — you can choose any workflow your firm offers, not only the workflows in the service the case is already under.
+
+- The choices are grouped by the service each workflow belongs to. A workflow that is not part of any service can still be chosen; it simply has no group.
+- Only workflows your firm would start a new case on are offered. Disabled, retired, and draft workflows are not listed, and switching to them is refused.
+- A case can only be switched to one of your own firm's workflows.
+
+> TODO: Confirm where the workflow switch is started from on a case, and whether the picker opens on the case's current service by default.
+
+### Cases that have gone quiet
+
+A case that has had no activity for **three months** is treated as **stale**, and Glade stops sending its automated follow-ups — both the emails and the text messages. Cases can sit untouched for months while continuing to chase a client who has stopped responding, which costs the firm messaging spend and pesters people on matters that are effectively dead.
+
+- **Activity means anything that happened on the case** — a message either way, a payment attempt including a failed one, a court notice arriving, a task completed, a note your team wrote. Any of these resets the three months.
+- **A follow-up is not activity.** Sending a follow-up does not count as the case having moved, so a stale case cannot keep itself awake by chasing the client.
+- **Nothing else about the case changes.** Stale is not a status: the case keeps whatever status it has, it is not archived, and its tasks stay open and assigned. Only the automated follow-ups stop.
+- **You can override it either way.** A case can be marked stale by hand before three months have passed, or marked active so its follow-ups keep going however long it has been quiet. The override wins over the three-month measure until you clear it, at which point the case goes back to being judged on its last activity.
+- **Finding them** — the cases list can be narrowed to stale cases, and the cases CSV export carries a column showing which cases are stale. This sits alongside the status filter rather than replacing it, so a stale case is still found by its own status too.
+
+> TODO: Confirm where the stale override is set on a case, and whether an on-screen banner marks a stale case — that part of the change ships separately.
 
 ## Configuration
 
@@ -118,11 +163,15 @@ A matter can carry several cases at once — an associated filing alongside the 
 - The number of active workflows shown in the archive confirmation reflects workflows at that moment; cases may have moved to other statuses by the time you confirm.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
 - Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
-- The workflow list filters, the deadline sort, and the CSV export read the filing deadline from the matter's main case. A deadline set directly on a non-main case in the same matter is saved and shown on that case, but does not surface in those list views.
-- The filing deadline is not a status. Setting one does not change the case's status, and passing the deadline does not move the case or raise an alert on its own.
+- The workflow list filters, the deadline sort, and the CSV export read the time-sensitive marking from the matter's main case. A marking set directly on a non-main case in the same matter is saved and shown on that case, but does not surface in those list views.
+- The filing deadline is not a status. Setting one — or setting a type — does not change the case's status, and passing the deadline does not move the case or raise an alert on its own.
+- The urgency type is a fixed list (garnishment, repossession, foreclosure, eviction, other). Anything else goes in the reason. Use **other** with a reason for a situation the list does not cover.
+- A case marked by type with no date cannot be found by filtering on a date range, and sorts with the undated cases. Add the date once it is known if the case needs to appear in a date-bounded view.
 - Labels and tags are separate. Existing tags are not converted into labels, and building a label list does not remove or change the tags already on your cases.
 - A date can only be recorded against a label that was set up to accept one. Applying a date to any other label is refused, and the date has to be a real calendar date.
 - A label is not a status and carries no behavior of its own — applying one does not move the case, complete tasks, or suppress follow-ups the way a custom status can.
+- The three-month staleness threshold is fixed and is not configurable per firm. Where a case needs to keep chasing beyond it, mark the case active rather than looking for a setting.
+- Staleness suppresses automated follow-ups only. Reminders tied to an appointment, and anything a team member sends by hand, are unaffected.
 
 ## Related Features
 
