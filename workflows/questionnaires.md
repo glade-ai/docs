@@ -654,6 +654,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - All finalized versions appear together under a single **Chapter 13 Plans** folder, listed as individual files. Each version is no longer split out into its own separate folder, so you can see the full version history of the plan in one place.
 - Interest rates on the generated plan display as percentages — for example, a 9% rate prints as `9.00%` rather than `0.09%`.
 - A claim whose treatment does not carry interest — a pro-rata secured treatment, for example — prints a blank interest rate rather than a figure. On the Northern District of Ohio plan form, changing a claim to one of these treatments used to leave the rate from the treatment you selected before it sitting in the §3.2 and §3.3 rate cells, so the plan showed an interest rate for a claim that pays none.
+- **The interest rate printed is the rate the plan pays.** On the Northern District of Georgia, Middle District of Florida, Eastern District of Louisiana, and Southern District of Illinois plans, each claim's interest rate column now shows the rate its treatment is calculated at: a cramdown prints the district's Till rate (or the Till rate you set on the plan), a priority tax claim prints the §511 rate, and a pro-rata claim prints blank. Previously these columns printed the claim's contract rate whatever the treatment, so a plan could state a rate its payments were not calculated at. Claims paid at the contract rate print as before. Regenerate any plan in these districts that has a cramdown or priority tax claim.
 - **Dollar signs come from the value, not the form.** A money entry that holds a number prints with a dollar sign — `$1,234`. A money entry you have **overridden with text** prints exactly the text you typed, so `TBD` prints as `TBD` rather than `$TBD`. A money entry with no value at all prints as an empty cell rather than a lone `$`.
 - Every amount in the plan's payment schedule carries a dollar sign, including the first one. Previously the first amount in a schedule printed bare while the rest were marked.
 - District and court-level figures are locked to the version you finalized. The values the plan is built from — the no-look attorney fee cap, the filing fee, the trustee's name, the prime rate and other applicable rates — are recorded with each finalized version. If the district later changes one of those figures, re-opening or regenerating an already-finalized plan still shows the figures that were in effect when you finalized it, so a filed plan does not silently change after the fact. Any per-case adjustments you entered by hand are kept with the version as well and continue to apply.
@@ -664,6 +665,10 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
   - The district's **no-look attorney fee cap and trustee fee percentage** are still the national defaults rather than figures recorded for this district. The fee cap prints on the plan and is what the plan's attorney-fee section is checked against, so confirm both before relying on a generated plan.
 - **District of Colorado** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 3015-1.1, on the same terms — available from the calculator, built from the district's own recorded figures, with no per-firm setting to switch on. Colorado's plan form has sections the calculator does not work out for you; fill those in from the plan calculator's own inputs before finalizing, as they print blank otherwise.
 - **Eastern District of Louisiana** cases can generate a Chapter 13 plan on the district's Model Plan — a local court form rather than Official Form 113. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on.
+- **Southern District of Illinois** cases can generate a Chapter 13 plan on the district's Uniform Chapter 13 Plan, on the same terms as the other plan-generation districts. Parts of the form Glade has no source for print blank with a warning so you fill them in by hand — for example, every domestic support obligation prints in §7A, and one owed to a government unit has to be moved to §7B by hand.
+- **Southern District of Florida** cases can generate a Chapter 13 plan on the district's Local Form LF-31, on the same terms. Parts the calculator does not work out print blank with a warning rather than being guessed: creditor addresses and account numbers, which valued items are vehicles (valued personal property is listed together, and vehicles need moving to their own part by hand), the principal residence, student loans, the stay-relief box, the tax-return provision where the case's division is unknown, the attorney fee when it has not been entered, and the amendment number.
+
+> TODO: Confirm the trustee name, no-look attorney fee cap, and trustee fee percentage recorded for the Southern District of Illinois and the Southern District of Florida. Both districts were switched on while those figures were still flagged for confirmation.
 
 > TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
 
@@ -757,6 +762,13 @@ An empty row left behind in a questionnaire list — a creditor row someone star
 
 Blank creditor rows previously became nameless creditors on the case, which then spread into the schedules and could leave them unusable until someone cleaned the case record up by hand.
 
+### Release Notes on a Questionnaire Update
+
+Every published version of a questionnaire template carries release notes describing what changed.
+
+- **Publishing requires a note.** A template version cannot be published with a blank release note, or one made up only of spaces.
+- **Update now shows what changed.** When an in-progress questionnaire has a newer template version, choosing **Update now** starts the update and opens a notice showing the current published version and its release notes. Choose **Okay** to dismiss it. If the version details cannot be loaded, the notice offers a retry.
+
 ### Upgrading a Questionnaire and Case Data
 
 Upgrading a questionnaire to a newer template version does not remove case data that the questionnaire does not cover.
@@ -787,6 +799,12 @@ In either case the upgrade still completes and the questionnaire is usable — o
 - Seeding is skipped when case data sync is switched off for the questionnaire, when the case already has dependents, or when Schedule I has no usable rows to read.
 - **In-progress cases pick this up on their next upgrade** — whether through **Update now** or any other template-version upgrade. A case that was upgraded before this took effect can be upgraded a second time to fill the details in, or the field can be re-saved on the form.
 - A case that was completed and never upgraded still needs the separate repair for completed schedules. Contact support with the case rather than re-entering the household by hand.
+
+### Schedules When a Case Switches Chapter
+
+When a Chapter 7 or Chapter 13 case is switched to a different workflow, the client keeps working in the schedules questionnaire they already filled in. That questionnaire, with its saved answers, moves to the new workflow, and the empty schedules questionnaire the new workflow would otherwise create is removed. Messages that pointed at the new, empty questionnaire point at the preserved one instead.
+
+Previously the new workflow could show an empty schedules questionnaire after a switch, while the client's earlier answers stayed behind on the archived workflow.
 
 ### Creditor Duplicate Status
 

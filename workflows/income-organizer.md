@@ -117,6 +117,16 @@ Adding a business or rental income source collects the business's details as par
 - **The business's name and income type are not entered here** — they come from the income source itself, so renaming the source keeps the business record in step rather than leaving the two to drift apart.
 - This applies to business and rental sources. Other income sources do not collect business details.
 
+### Clients Adding a Business or Rental Source
+
+When a client adds a business or rental income source from an income document request in the client portal, a two-step dialog collects the source the same way your team adds one. The source it creates looks the same on your side as one your team created.
+
+- **Step 1 — details.** For a business, the client enters the business details: name, EIN, address, category, whether it is a sole proprietorship, dates, accountant, and the nature of the business. For a rental, only the property name is asked for.
+- **Step 2 — income.** The client either **uploads documents** for the source, or **enters the figures manually** as a profit & loss statement — the period, gross income, expenses, and optionally the net figure printed on their statement.
+- **Going back or closing before anything is saved** removes the draft source, so an abandoned attempt does not leave an empty source on the case.
+- **Once a document has uploaded (or is uploading) or a manual statement is saved,** **Back** is disabled. Closing the dialog keeps the source and what has been saved.
+- Other income types — employment, Social Security, and the rest — still use the existing add-source form.
+
 ### Including and Excluding Income Records
 
 Each income record carries its own switches for whether it counts toward Schedule I and whether it counts toward the means test. Turning one off is a deliberate choice your team makes about that record, and Glade preserves it:
