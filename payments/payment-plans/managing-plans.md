@@ -51,6 +51,7 @@ Previously, editing an invoice canceled any active payment plan on it, silently 
 - Payments already collected are not reversed.
 - The invoice returns to its normal state with the remaining balance still due.
 - Voiding or skipping an invoice automatically cancels any active payment plan on that invoice.
+- **A plan cannot be set up on an invoice that can no longer be paid.** If a client tries to create a plan on an invoice that has been voided or is otherwise no longer payable — for example from a page they opened before the firm voided and replaced the invoice — the request is refused with an error. The client should set up the plan on the current invoice instead. Previously the plan was accepted, stayed active with nothing to collect, and every scheduled charge silently did nothing.
 - Canceling a workflow with linked invoices also cancels the associated payment plans.
 
 ### External payments applied to a plan
