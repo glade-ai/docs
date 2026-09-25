@@ -60,6 +60,21 @@ The bookings list answers *"what is on the calendar"*. The bookings report answe
 - Paging through a long report is stable: bookings that share a time, and bookings with no time at all, keep a consistent order instead of some rows repeating on one page and going missing from another. Never-scheduled bookings sort to the end in both directions.
 - **CSV export reads the same data as the report on screen**, so a filtered export and the report it came from always agree about which bookings match.
 
+#### Lead source, case labels, and when the booking was taken
+
+Three more pieces of information are available on each row, so the report can answer where an appointment came from and what kind of case it belongs to without cross-referencing the case list:
+
+- **Lead source** — the lead source recorded on the client when they were captured. It can also be filtered on. The filter matches the lead source's name as it was recorded at the time, so renaming a lead source in your settings does not drop the clients captured under the old name out of the report.
+- **The case's labels and tag** — a booking carries none of its own, so these are read from the case the booking is linked to. They are ordered and filtered exactly as they are on the cases list, including the rule that keeps an archived label visible on a case that already carries it.
+- **Booked on** — when the booking was taken, which is a separate axis from when the appointment is scheduled. Filtering on a booked-on range alongside the existing appointment-date range answers questions like "booked in March, scheduled any time." A date-only end of the range includes the whole of the day it names.
+
+#### Filters that match the columns
+
+**Status**, **Custom status**, and **Linked** were columns with no filter, so narrowing a long report meant reading down it. All three can now be filtered, and the filter narrows the whole report rather than the page you are looking at — so the count at the top always describes the same set of bookings as the rows beneath it.
+
+- **Filtering on a case label only returns bookings that are attached to a case**, because a booking with no case has no case to carry a label. This is what the filter means rather than an oversight — but it makes an empty label column ambiguous on its own. Read it alongside the **Linked** column: a booking linked to a case with an empty label column is a case with no labels, and an unlinked booking has no case at all. Reporting both as "untagged" would misstate a large share of some firms' bookings.
+- **A status you did not pick from the list is rejected rather than returning nothing.** A typo would otherwise match no rows and read as "this firm has no completed appointments," which is indistinguishable from a real answer.
+
 > TODO: Confirm where the bookings report is opened from in the dashboard and which columns can be added or removed.
 
 ### Sales Overview
@@ -193,6 +208,16 @@ Alongside the personal dashboard each person sees on their own homepage, a firm 
 - Widgets are added to a named dashboard, reordered, and removed the same way they are on the personal homepage dashboard. Each widget keeps its own filters, sorting, and choice of columns.
 - Personal homepage dashboards are unaffected. Each person still has exactly one, and it stays private to them.
 
+#### Default homepage widgets
+
+A new team member's personal homepage starts with three widgets already on it, rather than an empty dashboard:
+
+- **To do list** — two columns wide, showing 10 items, newest first.
+- **Appointments** — one column wide, showing the next 5 upcoming appointments.
+- **Cases** — one column wide, showing the 5 newest cases.
+
+These are ordinary widgets: they can be moved, changed, or removed like any widget you add yourself. Existing team members whose homepage has no widgets on it can be given the same starting layout. A homepage that already has at least one widget is never changed.
+
 > TODO: Confirm where named dashboards are created and managed in the interface, and whether any firm-level permission controls who can create or edit them.
 
 #### Date filters
@@ -260,6 +285,9 @@ Choosing several statuses and the older single-status filter at the same time is
 - The **Reaffirmation agreement** column reports what the schedules questionnaire says, not what was ultimately filed. A reaffirmation agreement decided outside the questionnaire, or changed after the petition went out, is not reflected until the questionnaire is updated.
 - Cases with no bankruptcy schedules questionnaire are reported as **not answered** on the reaffirmation column. This is the expected result for consultations and non-bankruptcy matters, and it is distinct from a case that answered "no".
 - A named dashboard cannot reuse the name of another named dashboard at the same firm, regardless of capitalization.
+- The default homepage widgets are added only to a homepage with no widgets on it. A homepage you have already customized, even with a single widget, keeps exactly what is on it.
+
+> TODO: Confirm whether an emptied homepage is re-seeded with the default widgets, and when the default layout is applied to existing team members with empty homepages.
 - The **Court district** filter only returns cases with a district assigned to them. Cases that record a district as free text but have none assigned are excluded from a filtered report.
 - The **Client address** column is blank for a case whose address was never written to case data, including cases whose address is held only on the client record. It cannot be sorted or filtered on.
 - A custom report export covers up to **50,000 rows**. A report with more rows than that exports the first 50,000 — narrow the filters and export in batches if your firm needs the rest.
