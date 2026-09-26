@@ -19,7 +19,8 @@ When Glade reads a paystub on its own — on upload, on a re-read, or during a b
 **Take-home pay is read from the net pay line, not the gross.** Stubs that label take-home as **Net Pay ACH**, **Net Pay Check**, or **Direct Deposit** rather than plainly as *Net Pay* had their **Gross Earnings** figure recorded as net, overstating monthly take-home by a wide margin — around 27% on the stubs where this was reported, which was enough to hold up a Chapter 7 filing.
 
 - Those labels are now recognized, and where a stub prints both an ACH and a check amount the two are added together.
-- As a check on the result, a net figure that comes out at or above the gross is re-worked from the gross less the deductions actually printed on the stub. Deduction categories the stub does not print are left empty rather than being recorded as $0.00.
+- As a check on the result, the net figure is re-worked from the gross less the deductions actually printed on the stub when it comes out at or above the gross, **or** when it differs from that gross-less-deductions figure by more than $50. The same check runs on the year-to-date net. Deduction categories the stub does not print are left empty rather than being recorded as $0.00.
+- The second condition catches stubs where the reader picked up a printed **earnings subtotal** — regular, holiday, vacation, and similar pay added together — as net pay. That subtotal sits below gross, so the first check alone let it through and the organizer showed inflated take-home. On the stub where this was reported, an earnings subtotal of $2,159.59 was recorded as net against a true take-home of $2,076.58. A printed net within $50 of gross less deductions is left as printed.
 - **Schedule I still uses gross pay** — it always did. What was wrong was the net column, and anything reading from it.
 - Re-read an affected paystub to correct it. A stub whose net figure looks close to its gross is the symptom worth checking on income entered earlier.
 
@@ -38,6 +39,7 @@ If your team has an organizer where paystubs stayed stuck on **Queued for analys
 ## Edge Cases & Limitations
 
 - Paystubs extracted before the current/year-to-date column handling was corrected are not re-read automatically. If an existing row shows a year-to-date figure in its pay-period gross, re-run extraction on that row or correct the extracted data by hand.
+- The earnings-subtotal net correction also applies only to paystubs uploaded or re-read after it was introduced. A stub read beforehand keeps its net figure until it is re-read.
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
 
 ## Related Features
