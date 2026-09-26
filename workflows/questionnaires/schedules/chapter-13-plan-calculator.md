@@ -112,11 +112,21 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 - **Eastern District of Louisiana** cases can generate a Chapter 13 plan on the district's Model Plan — a local court form rather than Official Form 113. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on.
 - **Southern District of Illinois** cases can generate a Chapter 13 plan on the district's Uniform Chapter 13 Plan, on the same terms as the other plan-generation districts. Parts of the form Glade has no source for print blank with a warning so you fill them in by hand — for example, every domestic support obligation prints in §7A, and one owed to a government unit has to be moved to §7B by hand.
 - **Southern District of Florida** cases can generate a Chapter 13 plan on the district's Local Form LF-31, on the same terms. Parts the calculator does not work out print blank with a warning rather than being guessed: creditor addresses and account numbers, which valued items are vehicles (valued personal property is listed together, and vehicles need moving to their own part by hand), the principal residence, student loans, the stay-relief box, the tax-return provision where the case's division is unknown, the attorney fee when it has not been entered, and the amendment number.
+- **Central District of California** cases can generate a Chapter 13 plan on the district's mandatory form F 3015-1.01 (Chapter 13 Plan), reproduced word for word across the form's 16 pages. It works on the same terms as the other plan-generation districts: the form is available from the calculator and there is no per-firm setting to switch on. Where the plan depends on a judgment the calculator cannot make, it prints its best reading and raises a warning for you to check before filing:
+  - long-term secured claims on real property are placed in Class 2 on the assumption that the property is the principal residence;
+  - the Section I.B election on how much unsecured creditors receive;
+  - a lien-avoidance claim whose kind of lien has not been set, which decides whether it prints in Section IV.A with Attachment A or in Section IV.B;
+  - an arrearage cure sitting under a Class 3 claim;
+  - trustee payments the plan's funding does not cover;
+  - creditors with no account number;
+  - a Class 5C special-class claim that the plan does not fund.
 - **Middle District of Florida** cases can generate a Chapter 13 plan on the district's Chapter 13 Model Plan. As with the other plan-generation districts, the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Two points need checking by hand on this district's form:
   - The Section A notices for **student loans** and for **reinstating an amended automatic stay** always print as "Not Included", because Glade does not yet have a source for either answer. The calculator raises a warning on every plan so you can check both notices yourself before filing.
   - Sections **C.5(c)** and **C.5(k)** have no claim treatments assigned to them yet, so those tables print empty on the generated plan.
 
 > TODO: Confirm the trustee name, no-look attorney fee cap, and trustee fee percentage recorded for the Southern District of Illinois and the Southern District of Florida. Both districts were switched on while those figures were still flagged for confirmation.
+
+> TODO: Confirm the Central District of California's recorded trustee fee percentage and no-look attorney fee cap. The district was switched on while those figures were still the national defaults (a 10% trustee fee against the 11% the district's form states).
 
 > TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
 
