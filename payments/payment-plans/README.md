@@ -8,7 +8,7 @@ Payment plans allow clients to pay invoices in scheduled installments rather tha
 
 - [Setting Up a Payment Plan](./setting-up-a-plan.md) — setup inputs, supported frequencies, maximum duration and minimum installment limits, and the client's setup experience.
 - [Installments, Retries, and Fees](./installments-and-retries.md) — how installments are charged and tracked, failed-charge retries, rescheduling a retrying installment, processing fees, and notifications.
-- [Managing a Payment Plan](./managing-plans.md) — plan lifecycle, modifying and canceling plans, what happens when the invoice is edited, external payments, and schedule health checks.
+- [Managing a Payment Plan](./managing-plans.md) — plan lifecycle, searching for a plan, modifying and canceling plans, what happens when the invoice is edited, external payments, and schedule health checks.
 - [Exporting Payment Plans](./exporting-payment-plans.md) — downloading the Payment Plans section of the transactions dashboard as a spreadsheet.
 
 ## Configuration
