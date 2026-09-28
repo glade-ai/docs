@@ -22,6 +22,7 @@ A payment plan moves through the following statuses over its lifetime:
 - Firms view and manage payment plans from the transactions dashboard.
 - Plan details show: status, frequency, installment amount, next payment date, and payment history. Deferred installments appear in the schedule alongside upcoming and paid ones, so you can see the full picture of what has been collected, postponed, and is still expected.
 - Firms can modify plan settings, cancel plans, or adjust individual installments from this view — including rescheduling an installment that is stuck retrying (see [Rescheduling a retrying installment](./installments-and-retries.md#rescheduling-a-retrying-installment)).
+- **Searching for a plan.** The search box on the Payment Plans tab finds a plan by the client's name, email address, or phone number, by the payment plan's or invoice's identifier, by the invoice title, or by the workflow name. Matching ignores upper and lower case and finds partial text, so part of a name is enough. Only live plans for your firm are searched — canceled plans do not appear, even when the client's name matches. Clearing the search lists every live plan again. Previously the search box had no effect: the tab always listed every live plan, so a plan that was not already on the page you had loaded could not be found by searching.
 
 ### Modifying a payment plan
 
@@ -73,6 +74,7 @@ Previously, editing an invoice canceled any active payment plan on it, silently 
 - Clients cannot modify their own plans. Only firms can make changes.
 - Changing the payment method on a plan applies to all future installments, not just the next one.
 - When an invoice edit lowers the total, a plan that is now over-scheduled is not trimmed automatically. Review the remaining installments and remove or reduce the surplus yourself.
+- Search on the Payment Plans tab narrows only the list on screen. The date-range summary cards and the spreadsheet export are unaffected by it — the export still includes every live plan (see [Exporting Payment Plans](./exporting-payment-plans.md)).
 - Payment plan health is monitored daily. Stalled or misconfigured plans are flagged to operations for review.
 - The daily health check remains the backstop for plans whose schedule no longer covers the remaining balance — deleting or editing an installment and refunding a payment are corrected as they happen, but other routes to a short schedule, such as a client pre-paying installments until there are no longer enough upcoming payments to cover what's still due, are caught by the overnight check. New installments are added on the plan's original schedule (the start date plus the chosen interval), never on a date that falls before tomorrow, and never before an existing pre-paid installment that sits further out in the future. Months are honored: a plan whose installment day is the 31st falls back to the 28th in February and to the 30th in April, then returns to the 31st in months that have one, rather than drifting permanently to an earlier day.
 
