@@ -22,6 +22,7 @@ Foreclosure Alerts compares the monthly foreclosure report your firm already rec
 - **Staff can flag a case by hand.** A case can be tagged as foreclosure directly, with a note explaining why; the note is required. This writes the same designation the report does, so the case appears in the same filters and reports. A hand-applied flag posts a note on the case, does not create the urgent paralegal task (whoever applied it already knows about the case), and survives the next report activation. A case can carry one hand-applied flag at a time, and a case that is already designated cannot be flagged again.
 - **Removing a flag records who removed it and why**, and stops that same property from being flagged again on that case. Removing a flag does not complete the paralegal task — close that separately.
 - **Finding flagged cases.** The case list can be filtered to cases that currently carry a Foreclosure designation, or to those that do not, and the filter carries through to the cases CSV export.
+- **Sorting by match score.** The foreclosure report can be sorted by its **Match score** column, so the strongest matches can be reviewed first instead of opening cases one by one. A case is ranked by its highest current match — the first number shown in its Match score cell. Matches that were removed by your team, never applied, or deleted are not counted. Cases with no current match sit at the bottom whichever direction you sort. Paging through the report and the CSV export both keep the sorted order.
 
 ## Configuration
 
@@ -38,6 +39,7 @@ Foreclosure Alerts compares the monthly foreclosure report your firm already rec
 - **A name alone never produces a match.** Names raise or lower the confidence of an address match; they cannot create one. An address that is too incomplete to identify a property is skipped even when the name matches exactly.
 - **Reports uploaded before residence matching shipped are not re-checked on their own.** Glade re-runs matching against your firm's active report; you do not need to upload the file again. Individual cases also pick it up whenever their address or debtor name is next edited.
 - **A dismissed match stays dismissed.** Once a flag is removed for a property, later checks skip that property on that case even if a new address source later points at the same house.
+- **There is no minimum-score filter on the report.** Sorting by match score puts low-confidence matches at the bottom but does not hide them.
 - **Report history is read-only.** There is no way to merge a corrected file into an earlier report — upload the corrected file and activate it.
 
 > TODO: Confirm whether automatic designation and the urgent paralegal task are enabled for all firms or currently limited to pilot firms, and whether Foreclosure Alerts is available to every firm.

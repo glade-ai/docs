@@ -42,13 +42,14 @@ Use the second when you are collecting wet-ink signatures from the debtor before
 - **Generate petition on demand is unchanged.** Asking for the marked draft on a case that has no unmarked copy still does not create one — only a submit, or an explicit **Generate petition for signatures**, does that.
 - **The two never drift apart.** Once a case has an unmarked copy, it is rebuilt every time the draft is regenerated — by hand or automatically — so the pages the debtor signs always match the current draft.
 - The **Open draft** link after generation opens whichever document you asked for.
+- **Your firm can turn off the separate signature pages.** With **Generate Signature Pages.pdf on submit** turned off in [Petition Settings](../../../back-office/settings.md#turning-off-signature-pagespdf-on-submit), submitting the questionnaire, generating a draft, and the automatic rebuild described below all skip **Signature Pages.pdf**; **Petition (Draft)** and **Petition for Signatures (Draft)** are still produced, and a Signature Pages.pdf already on the case is left in place.
 - If the unmarked copy cannot be produced, the action reports an error rather than quietly handing back the marked draft in its place.
 
 ### What goes into the draft, and where it is saved
 
 When you generate a draft you choose which of the case's documents go into it and the order they appear in. Two further options control what is produced and where it is filed:
 
-- **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced.
+- **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced. This option works regardless of the firm's **Generate Signature Pages.pdf on submit** setting.
 - **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
 
 Both options were previously offered on the form but had no effect on what was produced. A draft was always saved to Forms & Schedules and never came with a separate signature pages document.
@@ -67,6 +68,7 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 - The replacement documents are put in place before the previous ones are removed, so the case is never left with no draft.
 - If a rebuild produces no signature pages, the earlier Signature Pages file is still removed rather than leaving an obsolete packet on the case.
 - Several edits saved in quick succession produce one rebuild from the latest answers, not one per save.
+- If your firm has turned off **Generate Signature Pages.pdf on submit**, the rebuild skips the Signature Pages and leaves any existing copy in place.
 - Only the documents are rebuilt. Downstream workflow steps, notifications, and tasks that ran when the questionnaire was first completed are not triggered again.
 - This applies to Glade's own questionnaire templates. Questionnaires on an external form provider are not rebuilt this way.
 
@@ -82,5 +84,6 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 - [Petition Check](./petition-check.md)
 - [Signatures](./signatures.md)
 - [Signature Pages](../../signature-pages.md)
+- [Petition Settings](../../../back-office/settings.md#petition-settings)
 - [Creditors](../schedules/creditors.md)
 - [PDF Fill Mappings](../templates/pdf-fill-mappings.md)
