@@ -13,18 +13,24 @@ Court notices are reportable in their own right, with **one row per notice recei
 - **Search** matches the case name as well as the client's name, so a notice can be found by the name shown in its Client column. Previously the search only looked at client records, which meant the name displayed on an unlinked row could not be searched for.
 - **Assignee and Attorney columns**: a notice shows who owns the case it landed on and which attorney is on that case, so a firm triaging the day's notices can see whose work each one is without cross-referencing the case list by hand. Both are read from the case the notice matched — a court notice carries no assignment of its own — so they are empty on a notice that never matched a case.
 - **Assignee and Attorney filters**: narrow the report to your own cases, or to one attorney's. Each filter also offers an **Unassigned** option that returns the notices whose column is empty, for any reason — the notice never matched a case, or it matched one with nobody on it. Between them, the two selections cover every notice, so nothing falls between the filter and the blank column.
+- **Subject line filter**: narrow the report by the text of each notice's subject line. You can add more than one rule, and a notice must satisfy every rule to appear. Two kinds of rule are available:
+  - **Contains** keeps notices whose subject includes the text you enter anywhere in it, ignoring upper and lower case — for example, a judge's initials that appear at the end of the case number.
+  - **Does not start with** drops notices whose subject begins with the text you enter. Because PACER subject lines always open with the case number, this rule looks at the wording that follows the case number, not the case number itself. A judge's initials attached to the case number count as part of the case number. For example, **Does not start with "Objection to Confirmation"** drops a notice whose subject reads "25-64848-jwj Objection to Confirmation…".
+  - Combining rules lets a saved report pick out one judge's notices while leaving out a particular kind of filing. The report total and the CSV export follow the same rules as the rows on screen.
 - **CSV export** returns the same columns as the on-screen report and respects the filters you have applied, so a filtered export and the report you are looking at agree. See also [Exporting Custom Reports](./custom-reports/exports.md).
 
 ## Configuration
 
 - **Court notice type filter**: The Court Notices report filters by any combination of named notice types plus **Unassigned**. Options are derived from the notice types Glade has classified for your firm; there is no setting that controls the list.
 - **Linked filter**: The court notices report accepts a linked/unlinked selection to include only notices attached to a workflow, or only those not attached to one. Leaving it unset includes both.
+- **Subject line filter**: Any number of **Contains** and **Does not start with** rules. Rules combine, so a notice must match all of them. Leaving the filter blank applies no subject filtering, and saved reports created before this filter existed are unchanged.
 - **Assignee and attorney filters**: The court notices report accepts a list of assignees and a list of attorneys, each with an optional **Unassigned** selection. They can be combined with each other and with the other court notice filters, and both apply to the CSV export as well as the report on screen. Options come from your firm's team roster and attorney list; there is no setting that controls them.
 
 ## Edge Cases & Limitations
 
 - An unlinked court notice has no client record behind it, so columns that come from the case — rather than from the notice itself — are empty on those rows. The case name on the notice is what identifies the client. This includes the Assignee and Attorney columns, which are read from the matched case.
 - A court notice has no assignee or attorney of its own. Reassigning a case changes what its notices report; there is no way to assign a notice to someone independently of the case it landed on.
+- **Does not start with** always skips the leading case number on a subject line. There is no rule for excluding notices by text within the case number, such as another judge's initials.
 - Text taken from a court notice is exported to CSV as plain text even when it begins with a character a spreadsheet would otherwise read as a formula, so party and trustee names open as written.
 
 ## Related Features
