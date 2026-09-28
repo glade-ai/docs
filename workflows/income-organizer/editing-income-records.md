@@ -22,6 +22,14 @@ A month can hold both an automatically read paystub and a figure your team enter
 - The same applied to a business or farm month recorded as expenses only, with no income line. Those months are counted too.
 - Genuinely empty placeholder rows — no earnings, no overtime, no gross, no expenses — are still left out of the totals, so an empty row does not dilute a month's average.
 
+### Hand-Entered Monthly Income and Expenses Are Kept
+
+Net monthly income and business expenses typed into the organizer by hand are saved and show the same figures when the case is opened again.
+
+- Month-by-month income and expense figures can be added or changed after a source is created, not only when it is first set up. Editing one month does not remove months you did not touch.
+- Saving a row where you filled in some cells and left others empty no longer blanks out figures already on those empty cells — values read from a document, or entered earlier by your team, stay in place.
+- Previously these entries could appear to save and then be gone after the case was closed and reopened. If your team entered monthly income or business expenses by hand and later found them missing, re-enter them.
+
 ### After You Edit an Income Record
 
 When you change the individual earnings lines behind a paystub, the pay-period gross is recalculated from the lines you left in place. Everything that reads that figure — the organizer's own table, the income-remaining-after-deductions figure, and Schedule I — reflects the edit straight away. Previously the gross stayed at its pre-edit value, so a corrected paystub still reported the original figure everywhere the summary was used.

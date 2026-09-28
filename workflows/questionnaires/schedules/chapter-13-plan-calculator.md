@@ -103,26 +103,7 @@ When you finalize a Chapter 13 plan, Glade regenerates the plan PDF and stores i
 
 ### Plan-Generation Districts
 
-- **Northern District of Ohio** cases can generate a Chapter 13 plan. The district's plan form is available from the calculator, and the generated plan is built from the district's own figures — the trustee fee percentage, the no-look attorney fee cap, and the applicable interest rate — in the same way as other plan-generation districts. There is no per-firm setting to switch on.
-- **Western District of Washington** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 13-4. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Cases in this district previously reported that plan generation was not available for them.
-- **Eastern District of Washington** cases can generate a Chapter 13 plan on the district's Local Form 2083. As with the other plan-generation districts, the form is available from the calculator and there is no per-firm setting to switch on. Two points need checking by hand on this district's form until they are resolved:
-  - **A contract the debtor is assuming but paying directly has nowhere correct to go.** Local Form 2083 pays assumed contracts through the trustee, and the form treats a contract not listed as assumed as rejected — whether or not it appears anywhere else on the plan. Choosing to assume a contract while paying it outside the plan therefore does not say what you mean on this form. Review any such contract before filing.
-  - The district's **no-look attorney fee cap and trustee fee percentage** are still the national defaults rather than figures recorded for this district. The fee cap prints on the plan and is what the plan's attorney-fee section is checked against, so confirm both before relying on a generated plan.
-- **District of Colorado** cases can generate a Chapter 13 plan on the district's Local Bankruptcy Form 3015-1.1, on the same terms — available from the calculator, built from the district's own recorded figures, with no per-firm setting to switch on. Colorado's plan form has sections the calculator does not work out for you; fill those in from the plan calculator's own inputs before finalizing, as they print blank otherwise.
-- **Eastern District of Louisiana** cases can generate a Chapter 13 plan on the district's Model Plan — a local court form rather than Official Form 113. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on.
-- **Southern District of Illinois** cases can generate a Chapter 13 plan on the district's Uniform Chapter 13 Plan, on the same terms as the other plan-generation districts. Parts of the form Glade has no source for print blank with a warning so you fill them in by hand — for example, every domestic support obligation prints in §7A, and one owed to a government unit has to be moved to §7B by hand.
-- **Southern District of Florida** cases can generate a Chapter 13 plan on the district's Local Form LF-31, on the same terms. Parts the calculator does not work out print blank with a warning rather than being guessed: creditor addresses and account numbers, which valued items are vehicles (valued personal property is listed together, and vehicles need moving to their own part by hand), the principal residence, student loans, the stay-relief box, the tax-return provision where the case's division is unknown, the attorney fee when it has not been entered, and the amendment number.
-- **Middle District of Florida** cases can generate a Chapter 13 plan on the district's Chapter 13 Model Plan. As with the other plan-generation districts, the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Two points need checking by hand on this district's form:
-  - The Section A notices for **student loans** and for **reinstating an amended automatic stay** always print as "Not Included", because Glade does not yet have a source for either answer. The calculator raises a warning on every plan so you can check both notices yourself before filing.
-  - Sections **C.5(c)** and **C.5(k)** have no claim treatments assigned to them yet, so those tables print empty on the generated plan.
-
-> TODO: Confirm the trustee name, no-look attorney fee cap, and trustee fee percentage recorded for the Southern District of Illinois and the Southern District of Florida. Both districts were switched on while those figures were still flagged for confirmation.
-
-> TODO: Confirm the Eastern District of Washington's actual no-look attorney fee cap and trustee fee percentage once the district's own figures are recorded, and remove the caveat above.
-
-> TODO: Confirm which claim treatments belong in §7.2.c of the Eastern District of Louisiana Model Plan. The section was switched on with no treatments assigned to it, so a claim that belongs there may not print on the generated plan.
-
-> TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
+Chapter 13 plans can be generated on the local plan forms of a growing list of districts. The districts, and the parts of each form that need checking by hand, are listed in [Chapter 13 Plan Districts](./chapter-13-plan-districts.md).
 
 ### Plan Form Explanation
 
@@ -133,7 +114,7 @@ The plan preview's **Explanation** view describes what each field on the plan fo
 
 ## Edge Cases & Limitations
 
-- Several district forms have sections the calculator does not fill; these print blank (usually with a warning) and must be completed by hand before filing. See [Plan-Generation Districts](#plan-generation-districts).
+- Several district forms have sections the calculator does not fill; these print blank (usually with a warning) and must be completed by hand before filing. See [Chapter 13 Plan Districts](./chapter-13-plan-districts.md).
 - A finalized plan keeps the district figures in effect when it was finalized, even when re-opened or regenerated; only the next version picks up changed figures.
 
 ## Related Features
@@ -143,4 +124,5 @@ The plan preview's **Explanation** view describes what each field on the plan fo
 - [Exemptions Calculator](./exemptions-calculator.md) — equity used in the liquidation analysis
 - [Schedule A/B Property](./property.md)
 - [Creditors](./creditors.md)
+- [Chapter 13 Plan Districts](./chapter-13-plan-districts.md) — which districts can generate a plan, and what to check on each form
 - [PACER](../../../integrations/pacer/README.md)
