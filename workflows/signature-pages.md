@@ -16,6 +16,18 @@ Glade identifies an executed signature page by reading the **footer** of the upl
 - **Named local forms without an official form number** are also recognized. Some forms are court-specific or produced by Glade and carry a name in the footer instead of an official form number. The **Verification of Creditor Matrix** is recognized this way.
 - When a page's body text mentions a different form than its footer does, the footer wins. A signed Form 108 page whose body cites Form 106G is identified as Form 108. Previously the first form reference anywhere on the page was used, so a page like this was matched to the wrong form and the merge failed with a message that no matching signature page could be found in the selected form — even though the correct page had been uploaded.
 
+### Which uploads can be merged
+
+When you merge signature pages, you can choose any executed scan that the picker offers. This includes:
+
+- any PDF filed in the case's **Signature Pages** folder, or in a subfolder of it, whatever its file name;
+- a document titled **Signature Pages**, with or without ".pdf" at the end;
+- the generated **Signature Pages.pdf**, and a signature-page upload from the case's document checklist.
+
+Documents outside these, such as a paystub upload, are still refused.
+
+Previously the picker listed every PDF in the Signature Pages folder, but merge accepted only the generated Signature Pages.pdf or a checklist upload. Choosing a wet-ink scan filed in that folder under another name failed with "Couldn't merge signature pages." If your team split or renamed scans to get around this, you no longer need to.
+
 ### Merging a whole signed packet from one scan
 
 Firms commonly print the signature packet, sign every page by hand, and scan the lot back as a single multi-page PDF. That scan can be merged in one action, rather than being split into one file per form first.
