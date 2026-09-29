@@ -28,6 +28,11 @@ Case conversations — the discussions attached to a client's active workflow �
 - Replies to an internal note are also internal. They remain team-only and do not appear in the client-facing discussion, regardless of who sends the reply.
 - Only team members can reply to an internal note. Clients cannot post replies in an internal note thread.
 - Tagged team members on an internal note or its replies receive the standard internal note email notification — but the client is never included.
+- **Tagging a teammate in an internal note also gives them a task.** Each tagged teammate gets a **Respond to internal note** task in Tasks, the same way tagging someone in a client comment creates a "Respond to Comment" task. Previously a tag in an internal note only sent an email, so it was easy to miss among the rest of someone's tasks.
+  - Only the people tagged in the note get the task. The author never gets one, even if they tag themselves. Someone who is not on your firm's team is not assigned one.
+  - A note with no tags creates no task. It is not sent to the case owners instead.
+  - A reply in the note thread completes the open task. If the reply tags someone, that person gets a new task.
+  - These tasks are left out of the daily brief, as "Respond to Comment" tasks are.
 
 #### Editing an internal note
 
