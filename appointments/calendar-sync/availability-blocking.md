@@ -40,6 +40,7 @@ A busy block drawn from a connected calendar shows what the event is called only
 
 - Hiding titles from other team members limits what a firm can read; it does not separate the calendars themselves. A calendar connected to more than one firm still contributes its busy time to every one of them, so those firms can see when that person is unavailable even though they cannot see why.
 - Events marked as "free" or "transparent" in external calendars do not block availability. This is by design but can cause confusion if users expect all events to block.
+- **Events from a calendar account that needs to be reconnected do not block availability.** When Google or Microsoft stops accepting Glade's access to an account, events already synced from it stop closing off time until the account is reconnected, because they may be out of date. Clients can be offered slots that overlap those events in the meantime. See [Connecting Calendars](./connecting-calendars.md#when-a-calendar-needs-to-be-reconnected).
 - Only events that have reached Glade can block a booking. If a team member marks time as busy in Outlook and that change has not synced through, Glade does not know about it and will not stop a booking in that window.
 - A busy event on a synced calendar blocks the time for everyone booking that team member, including on appointment types that allow several concurrent bookings. If your firm relied on concurrent slots staying open alongside external events, those slots now close.
 - All-day events are handled based on the firm's configured timezone.
