@@ -28,6 +28,18 @@ Each team member connects their own Google Calendar or Microsoft Outlook account
 - Accounts can be disconnected entirely, which removes all synced events from Glade.
 - If authorization expires or is revoked, the user can reconnect from the same settings page.
 
+### When a calendar needs to be reconnected
+
+Sometimes Google or Microsoft stops accepting Glade's access to an account, for example because access was revoked or the sign-in expired and cannot be renewed. When this happens, the account is marked as needing to be reconnected.
+
+- **The account stays listed, and shows as not connected.** Its calendars and the name of the team member who connected it are kept. Everyone at the firm can see whose calendar needs attention. Previously the account could keep looking connected, or disappear from the list.
+- **Its events stop blocking availability until it is reconnected.** Events already synced from the account are out of date, so they no longer close off bookable time. See [Availability Blocking](./availability-blocking.md).
+- **Reconnecting restores the same account.** When the team member who owns the account connects it again, Glade picks up the existing account and its calendar choices instead of adding a second copy. If reconnecting fails partway through, the account is kept so you can try again.
+- **Every account that uses the same sign-in is marked together.**
+- **Running a sync by hand tells you to reconnect.** You get a message that the calendar needs to be reconnected instead of a generic error. The firm's other working calendars still sync.
+
+> TODO: Confirm how the settings page labels an account that needs to be reconnected, and whether teammates see a prompt naming the owner.
+
 ### Multi-calendar support
 
 - Users can connect multiple calendar accounts (e.g., both Google and Outlook).
@@ -51,7 +63,7 @@ Each team member connects their own Google Calendar or Microsoft Outlook account
 
 ## Edge Cases & Limitations
 
-- If a Google or Outlook OAuth token expires and cannot be auto-refreshed, the user must manually reconnect.
+- If Google or Outlook stops accepting Glade's access and it cannot be renewed automatically, only the team member who owns the account can reconnect it. The provider needs that person to approve access again. Until then, the account's events do not block availability.
 - Disconnecting a calendar account removes all synced event data from Glade but does not delete events from the external calendar.
 - The sync window covers the next three months. Events further in the future are not synced until they fall within that window.
 
