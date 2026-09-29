@@ -37,7 +37,8 @@ Zaps retry. The integration is built for that.
 
 ### Leads that need a person to look at them
 
-- An identity Glade cannot resolve confidently, or one that appears to belong to another firm, is held for manual review rather than being written to a record. Nothing is created from a lead Glade is not sure about.
+- An identity Glade cannot resolve confidently, such as a lead that matches more than one person, is held for manual review rather than being written to a record. Nothing is created from a lead Glade is not sure about.
+- **A lead that matches exactly one person who is already a client of another firm is accepted.** One person can be a client of more than one firm. Glade adds the lead to your firm's client list for that person, and the lead's note and transcript go on your firm's record. None of the other firm's records are shared with you. Previously these leads were held for manual review and never reached your client list.
 - Access is scoped to your firm throughout. A lead cannot reach another firm's clients or cases through the integration, and another firm's connection cannot reach yours.
 
 ## Configuration
