@@ -26,6 +26,26 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
 - **Middle District of Florida** cases can generate a Chapter 13 plan on the district's Chapter 13 Model Plan. As with the other plan-generation districts, the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Two points need checking by hand on this district's form:
   - The Section A notices for **student loans** and for **reinstating an amended automatic stay** always print as "Not Included", because Glade does not yet have a source for either answer. The calculator raises a warning on every plan so you can check both notices yourself before filing.
   - Sections **C.5(c)** and **C.5(k)** have no claim treatments assigned to them yet, so those tables print empty on the generated plan.
+- **Northern District of Texas** cases can generate a Chapter 13 plan on the district's local form BTXN222, *Debtor's(s') Chapter 13 Plan (Containing a Motion for Valuation)*, revised 5/12/21. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
+  - Mortgages go in Part D. Arrearage cures paid through the trustee go in D.(1), unless the cure belongs to a claim listed elsewhere on the plan. A long-term secured claim paid through the trustee goes in D.(2). Secured claims paid in full through the trustee go in Part E, and a cure split off one of those claims prints beside it marked "(arrears)".
+  - A Part E claim marked as paid outside the plan prints in Part G (direct payments), not as trustee-paid.
+  - Surrendered collateral goes in Part F. Domestic support obligations and priority taxes print one row per payment amount. The manual special-class list prints in Part I. Part J shows the unsecured pool total and payout percentage. Assumed and rejected contracts go in Part K.
+
+  Parts Glade has no source for print blank with a warning, so you can fill them in by hand before filing:
+  - the Part D dates, and the D.(3) post-petition arrearage;
+  - the Part C attorney-fee type boxes, which are left unticked (the fee amounts are filled in);
+  - the special-class term in Part I;
+  - the term and treatment of assumed contracts in Part K, and the Part J creditor rows (the total and percentage are filled in);
+  - the § 1325(a)(4) liquidation value when the case is above median, and monthly disposable income when it has not been entered;
+  - a cramdown claim paid through the trustee that has no value entered.
+
+  Lien avoidance is never listed, because this form states that it avoids no liens. A warning is raised when the case has a lien-avoidance claim.
+
+  Two more warnings flag places where the calculator's figures disagree with the form:
+  - Interest on a Part H priority claim. The form pays priority claims without interest, but priority taxes are calculated with interest.
+  - A Part E pay-in-full claim whose stated value is below the claim. The value prints as entered, and the valuation box is left unticked.
+
+  Plan-modification forms and the district's other companion forms are not generated.
 
 ## Configuration
 
@@ -45,6 +65,8 @@ There is no per-firm setting. A case can generate a plan when its district is on
 > TODO: Confirm which claim treatments belong in §7.2.c of the Eastern District of Louisiana Model Plan. The section was switched on with no treatments assigned to it, so a claim that belongs there may not print on the generated plan.
 
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
+
+> TODO: Confirm the Northern District of Texas's recorded no-look attorney fee cap and trustee fee percentage. The district was switched on while those figures were still the national defaults.
 
 ## Related Features
 
