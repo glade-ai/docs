@@ -74,7 +74,7 @@ When an agreement is set to be signed by an attorney and you assign attorneys th
 
 This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
 
-### The name on the attorney's signature
+### The name on the attorney's and second debtor's signatures
 
 When an attorney countersigns an agreement, the name printed in the attorney's signature block is the attorney's own name, not the client's.
 
@@ -82,6 +82,23 @@ When an attorney countersigns an agreement, the name printed in the attorney's s
 - A customized attorney name that is not the client's — for example "Jane Smith, Esq." — is kept as entered.
 - If the name is left blank, the signing attorney's name is used.
 - Agreements already signed before this correction are not changed. Check the attorney signature block on any recently countersigned agreement where the client's name may have been printed.
+
+The same applies to the second debtor on a joint retainer. When the second debtor signs with the name field still showing the primary debtor's name, the second debtor's own name is recorded on their signature line and in the signed agreement.
+
+- Previously the primary debtor's name could be printed on both signature lines of a joint retainer.
+- A name that deliberately differs from the primary debtor's — for example, the second debtor signing under a different legal name — is kept as entered.
+- The primary debtor signing with their own name is recorded as submitted.
+
+### Who signs a joint retainer
+
+A new joint retainer takes its signatories from the case: the primary debtor is assigned to the primary signature and the spouse to the secondary signature. The agreement is generated straight away, and your team is not asked to pick the signers.
+
+- Previously staff had to choose a primary and secondary signatory on every joint retainer, even though both debtors were already set when the case was created, and the agreement stayed ungenerated until they did.
+- The spouse is given access to open and sign the agreement.
+- **Your team is still asked to pick the second signer** when the case has no spouse, or when the case records conflicting information about who the spouse is. The agreement is not generated until both signature slots have a signer.
+- A retainer with only a primary or only a secondary signature uses that debtor when the case identifies one. If it does not, the retainer's contact signs instead, so the agreement still generates.
+- A joint retainer waiting on invoice amounts or a case number is generated when those arrive only if both signature slots already have a signer.
+- This applies to joint retainers created from now on. A joint retainer created earlier with empty signature slots still asks your team to assign the signers.
 
 ### When a joint signer has no signature slot
 
