@@ -2,7 +2,7 @@
 
 ## Overview
 
-When a credit report comes back, Glade brings its accounts onto the case as creditors so they reach the client questionnaire, the Master Creditor List, and Schedules D, E, and F. This page covers how imported names are formatted, how collection accounts carry their original creditor, how owned real estate is identified, how older reports are imported into case data, and what happens on joint cases and on reports that arrive with no creditors.
+When a credit report comes back, Glade brings its accounts onto the case as creditors so they reach the client questionnaire, the Master Creditor List, and Schedules D, E, and F. This page covers how imported names are formatted, how collection accounts carry their original creditor, how owned real estate is identified, how prior bankruptcies are brought into the questionnaire, how older reports are imported into case data, and what happens on joint cases and on reports that arrive with no creditors.
 
 ## Key Behaviors
 
@@ -28,6 +28,16 @@ A collection account is reported under the collection agency's name, which tells
 ### Imported real-estate addresses
 
 When Glade imports addresses from a credit report into the case as real-estate assets, it imports only addresses the client actually owns. Glade uses the credit report's owner-match indicator on each address to make this determination, so prior addresses where the client lived but did not own the property are no longer imported as real-estate assets even if they have transaction history.
+
+### Prior bankruptcies from the report
+
+When a credit report is imported, the prior bankruptcies it lists are added to the client questionnaire's **List the Bankruptcies** question. A bureau report, or the combined reports on a joint case, can list the same case more than once. Often the second copy has the case number but no filing date. The questionnaire could then show four prior bankruptcies when the report listed two.
+
+- **One entry per case number.** Prior bankruptcies from the report that share a case number are combined into a single entry. Differences in spacing and capitalization in the case number are ignored.
+- **Missing dates are filled, existing dates are kept.** If the kept entry has no filing date and another copy of the same case has one, that date is used. A filing date the entry already has is not replaced.
+- **Re-reading a report updates the same entry.** When a stored report is read again, the existing entry for a case is updated rather than a new one being added.
+- **Leftover duplicates are removed when a completed report is re-read.** Re-reading a completed report removes duplicate prior-bankruptcy entries that came from the credit report.
+- **Prior bankruptcies entered in the questionnaire are never touched.** Only entries that came from the credit report are combined or removed.
 
 ### Creditors reach the case on the first successful pull
 
@@ -67,6 +77,8 @@ A credit report pull can finish successfully and still leave the case with no cr
 - The owned-property filter on imported real-estate addresses applies to reports pulled or refreshed after this behavior took effect. If an owned property is missing from the imported real estate on a report that was pulled earlier, re-pull the report to apply the current filter.
 - Importing a report into case data adds the report's creditors and updates ones it has already contributed. It does not remove a creditor, so a creditor that should not be on the case has to be removed by hand.
 - A report that completed with no creditors because of an unreadable property record needs support to re-read the stored report. Re-pulling produces a fresh billable pull and is not the fix.
+- Duplicate prior-bankruptcy entries are only removed when a completed report is re-read. While a joint case's reports are still arriving one debtor at a time, each import adds or updates entries but removes nothing, the same as for creditors and assets.
+- Prior bankruptcies from the report that have no case number are not combined, because there is nothing to match them on.
 - Importing creditors on the first successful pull does not reach back over joint reports that already completed. On a joint case where the main debtor's creditors never arrived and the report is already marked complete, contact support to have the stored report re-read rather than re-pulling.
 
 ## Related Features
