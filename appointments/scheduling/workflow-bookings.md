@@ -12,6 +12,7 @@ Appointments can be created automatically as steps within a workflow, and bookin
 - Workflow-generated bookings can be assigned to specific team members based on workflow rules.
 - Access permissions are automatically granted to workflow participants.
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
+- **Bookings made from a case's booking link stay on that case.** When a client books through a booking link sent from an existing case, the booking attaches to that case and Glade does not start a second checklist for it. Before, these bookings could open a duplicate checklist next to the one already running on the case. Firm-wide scheduling automations still run for these bookings as usual.
 - When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
 ### Email when a team member is assigned a Schedule Appointment task
