@@ -12,6 +12,15 @@ Pre-filing credit counseling is a required step in bankruptcy workflows: each de
 - **Skipping a failed step**: If a debtor's counseling enrollment fails (shown as "Enrollment failed"), firm staff can skip the step so the workflow can move forward. A **Skip task** option appears on the failed step; confirming it marks the step skipped and the case can continue. Without this, a failed enrollment would leave the step stuck with no way to progress.
 - **An individual filing enrolls as an individual.** A spouse's details are sent to the counseling provider only when the case is genuinely a joint filing. Previously a second debtor's name left on an individual case — intake can record one even where the client is filing alone — was carried onto the enrollment form and passed on, and the provider read any spouse detail as a joint enrollment and refused it for a missing spouse Social Security number. The client was blocked from completing counseling with nothing on the case that looked wrong, and clearing the stray name by hand was the only way through. That is no longer necessary.
 - **A client-paid course unlocks as soon as the payment goes through.** When the client pays for their own credit counseling course and the checkout completes at the standard price with no discount applied, the purchase is recorded and the client can start the course. Previously a checkout of this kind was charged successfully but not recorded, so enrollment stayed blocked and the client was left unable to begin a course they had already paid for.
+- **On a joint case, the spouse can buy the course.** A spouse who has been given access to the case can pay for counseling, and the course unlocks as soon as the payment is recorded. Previously a spouse's payment went through but was not recorded, so the spouse stayed stuck on the purchase screen after being charged.
+- **A course cannot be bought twice.** Once a course has been purchased, starting another checkout for it — on the same case or on a linked case for the same client — is refused, so the client is not charged a second time.
+- **Removing a certificate uploaded by mistake.** If the wrong pre-filing certificate was uploaded for a debtor, it can be removed from the credit counseling pane while the case is still open, and the correct file uploaded in its place. Removing it:
+  - takes the certificate off that debtor's step, which goes back to waiting for a certificate, and reopens the counseling step if that debtor's certificate was needed to complete it (the primary debtor always, and the spouse on a joint case);
+  - brings back the enrollment task, so the case shows counseling as outstanding again;
+  - clears the completion date that was read from that certificate; and
+  - takes the certificate out of the petition filing packet.
+
+  Previously there was no way to take a wrong certificate back off, and uploading the right one afterwards did nothing, so the wrong file stayed on the case and in the packet.
 - Completing or skipping the step updates the case's tasks and progress like any other workflow step. See [Status Tracking](status-tracking/README.md).
 - **Post-filing debtor education certificates** attach the same way as pre-filing counseling certificates, for each debtor separately. **Debtor Education Certificate (Debtor 1)** and **Debtor Education Certificate (Debtor 2)** are available as document types, so a certificate can be filed under its own name rather than under a generic type. On some cases, attaching a debtor education certificate previously failed with an error and the certificate could not be recorded against the step at all.
 - Debtor education is a post-filing course, so its certificate is not part of the initial petition filing package. It is stored on the case and filed separately.
@@ -74,12 +83,18 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 ## Edge Cases & Limitations
 
 - The firm certificate upload and the skip option are available only to firm staff in the dashboard. Clients do not see the upload section in their portal.
+
+> TODO: Confirm whether clients can also remove their own uploaded certificate from their portal, or whether removal is available to firm staff only.
+
 - The **Skip task** option only appears for a debtor whose enrollment has failed and only for team members who are allowed to skip tasks. It does not appear for steps that are already completed or skipped.
 - An individual enrollment that already failed because of a leftover second debtor's name is not retried on its own. Send the enrollment again; it will go out as an individual enrollment this time.
 - Client-paid checkouts that were charged but never recorded before this was corrected do not repair themselves. If a client paid for a course and still cannot start it, contact Glade to have the purchase applied.
 - Client-paid counseling has to be paid by credit or debit card. It cannot be added to the firm's invoice, put on a payment plan, or paid by bank transfer.
 - Whether the client pays is a firm-wide setting per provider, not a per-case one. A firm cannot have some cases client-paid and others firm-paid for the same provider.
 - Only the counseling **date** on question 16 is filled from the certificate. The fee on that row, and the date and fee on the credit report row beside it, still have to be entered and kept current by hand.
+- A certificate cannot be removed once the case has a case number, or once the case is archived or completed.
+- Two checkouts for the same course started at the same moment — for example in two browser tabs, or by submitting twice — can both be charged. Glade is alerted when this happens so the extra charge can be refunded; contact Glade if a client reports paying twice.
+- Spouses who were charged but left stuck on the purchase screen before this was corrected, and any duplicate charges from that time, are not repaired automatically. Contact Glade to have them applied or refunded.
 - Client-paid counseling has to be set up before a client reaches the step. Switching a firm to client-paid does not add a purchase step to a client who has already been enrolled.
 
 ## Related Features

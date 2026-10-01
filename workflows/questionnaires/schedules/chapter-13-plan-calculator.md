@@ -59,6 +59,19 @@ If your firm filed a plan with an unsecured pool ceiling set on it before this c
 
 This affects the Northern District of Georgia plan only.
 
+#### Stating the unsecured payout yourself
+
+On the Northern District of Georgia and Southern District of Illinois plans, the attorney can state what the plan promises general unsecured creditors with the **Unsecured payout** setting, instead of leaving the plan to work it out. Previously this setting could only elect payment in full.
+
+- **Northern District of Georgia** offers all four §5.1 options: a pro rata share of the funds remaining, the larger of a stated dollar amount and the funds remaining, the larger of a stated percentage and the funds remaining, or 100%. The chosen box is ticked on §5.1 and the amount or percentage you enter prints in its blank. A stated option wins over the one the plan would otherwise derive, including when nothing reaches the unsecured pool.
+- **Southern District of Illinois** offers a stated minimum amount or 100%. The minimum prints in §10's "minimum amount the Debtor must pay" blank, and the 100% box is left unticked.
+- Leaving the setting blank keeps the existing behavior: the plan derives the option from the unsecured pool and what the plan funds.
+- Choosing a "larger of" option before entering its amount or percentage still saves, so you can come back to it. The blank prints empty and the calculator warns you until it is filled in. A percentage cannot be more than 100.
+- The calculator also warns when a stated amount is more than the plan actually pays to unsecured creditors, in the same way it already warns about an unfunded 100% election.
+- The stated option changes what the form says. It does not change how the calculator distributes the plan's payments.
+
+Other districts do not offer the setting and continue to derive their own option.
+
 #### Unsecured Creditor Pool on the Ohio Northern Plan
 
 The unsecured creditors section of the Northern District of Ohio plan shows one figure, not two:
