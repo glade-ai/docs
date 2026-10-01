@@ -13,7 +13,7 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - [Client Booking Flow](./client-booking-flow.md) — the steps a client takes, the calendar loading state, and the profile Meetings tab.
 - [Client County and Address](./client-location.md) — collecting county and address at booking, county-based calendar routing, and counties served.
 - [Timezones](./timezones.md) — firm vs. client timezones and the client timezone picker.
-- [Team Member Assignment](./team-assignment.md) — default and reassigned team members, and which team member the Bookings section shows.
+- [Team Member Assignment](./team-assignment.md) — default and reassigned team members, which team member the Bookings section shows, and who scheduled a booking.
 - [Booking Lifecycle](./booking-lifecycle.md) — statuses, rescheduling, unscheduling, cancellation, and deleting a booking.
 - [Appointment Outcomes](./appointment-outcomes.md) — firm-defined labels recording what happened at an appointment.
 - [Workflow Bookings and Access](./workflow-bookings.md) — workflow-created bookings, Schedule Appointment task emails, and booking permissions.
