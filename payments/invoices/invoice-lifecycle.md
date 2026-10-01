@@ -48,6 +48,16 @@ An invoice moves through a series of statuses as it progresses from creation to 
 - Unlike voiding, skipping is reversible — a skipped invoice can be "unskipped" at any time to resume collection.
 - Common use cases: waived fees, pro bono arrangements, payment deferred to a later date.
 
+#### Skipping an invoice when you start a case
+
+When your team initiates a case, any of the case's invoices can be marked to skip. That invoice is created already **Skipped**, so it stays on the case but is not due.
+
+- A skipped invoice is not payable and does not hold up a [payment gate](../../workflows/payment-gates.md) — a gate tied to it treats it the same as a voided invoice while it stays skipped.
+- No payment or payment plan can be attached to an invoice you are skipping. Starting a case with an invoice marked to skip and a payment or payment plan entered for it is refused, and the case is not created.
+- Amounts from the skipped invoice's line items are still available to retainers and other custom terms that refer to them, so a retainer quoting the attorney fee from that invoice still compiles with the line item's amount. Where another, payable invoice on the case defines the same item, that invoice's amount is used.
+- The invoice can be unskipped later to start collecting, like any other skipped invoice.
+- An invoice that is not marked to skip is created payable as before — including one whose line items total $0. Mark it to skip if it should not be due.
+
 ### Voided vs. refunded payments on an invoice
 
 When a payment on an invoice is reversed, the invoice shows the reversed amount with a label that reflects what actually happened to it:
