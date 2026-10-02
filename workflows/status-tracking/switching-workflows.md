@@ -30,6 +30,7 @@ When a case is switched to a different workflow, the client's credit report and 
 
 - Disabled, retired, and draft workflows cannot be switched to.
 - A case cannot be switched to another firm's workflow.
+- A case whose current status is archived — the standard **Archived** status, or a custom status set up to archive cases — cannot be switched. Change it to an active status first. Whether a case can be switched follows its **current** status only. Previously a case that had been archived at some point stayed blocked even after its status was changed back to an active one.
 
 ## Related Features
 

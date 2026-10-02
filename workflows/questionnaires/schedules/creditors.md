@@ -44,6 +44,14 @@ The order shown in the questionnaire itself is still the order the rows were add
 
 The creditor mailing matrix is assembled from every party who should receive notice on the case: the master creditor list, anyone added to the Schedule D and Schedule E/F "others to be notified" lists, and co-debtors entered on Schedule H. Because Schedule H co-debtors are pulled in automatically, you no longer need to add them to the matrix by hand or list them elsewhere to make sure they are noticed — entering a co-debtor on Schedule H is enough for them to appear on the generated matrix.
 
+#### Address line 2 on the matrix
+
+A creditor's second address line — a suite, apartment, or floor — prints on its own line between the street address and the city, state, and ZIP. This applies to both the **Creditor Matrix** document and the creditor list submitted to the court. Previously the second line was left off both, so a notice to a large office building could go out without the suite number. Addresses with no second line print as before.
+
+- Two entries for the same creditor that differ only by suite stay as separate entries on the matrix.
+- If the same creditor is entered once with a second line and once without, it prints once, with the second line.
+- The matrix is built when the schedules questionnaire is completed. A case whose matrix was built before this change keeps the version without the second line. Submit the schedules questionnaire again to rebuild it.
+
 #### Keeping a creditor off the matrix but on the schedules
 
 The Master Creditor List carries an **Omit from creditor matrix** checkbox. A creditor checked this way is left out of both the **Creditor Matrix** document and the creditor list submitted to the court, while staying everywhere else it belongs — on its schedule, in case data, in the Chapter 13 calculator, and on the filled schedule PDFs.
