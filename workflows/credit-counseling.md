@@ -61,6 +61,8 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - The step shows the course being purchased and its current price, so the client sees what they are paying for before they commit.
 - The step explains that the combined pre-filing and post-filing course is paid for by credit or debit card, and that this charge is separate from the firm's legal fees. This distinction matters: the course fee is not a legal fee and is not covered by a retainer or a payment plan on the firm's invoice.
 - The client completes the purchase through Glade's checkout, which opens in a new tab, and is returned to their case afterwards.
+- **Once checkout opens, the Purchase button is replaced** by a notice that checkout has been opened, with an **I've paid, refresh** button and a **Re-open checkout** button. This keeps the client from starting a second checkout for a course they are already paying for.
+- **The step updates when the client comes back to it.** While a purchase is still required, returning to the tab after paying in the checkout tab checks again and shows the course as purchased. Previously the step loaded only once, so the Purchase button stayed live after paying and some clients paid twice. **I've paid, refresh** checks on demand, and shows an error if the check fails.
 - Enrollment is requested once the purchase is complete. Glade confirms the purchase belongs to that client and covers the course being requested before the client is enrolled, so a mismatched or unrelated payment does not enroll them.
 - Everything after enrollment — the course link, the certificate, and how the certificate is attached to the case — works exactly as it does for firm-paid counseling.
 
@@ -80,6 +82,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - Client-paid counseling has to be paid by credit or debit card. It cannot be added to the firm's invoice, put on a payment plan, or paid by bank transfer.
 - Whether the client pays is a firm-wide setting per provider, not a per-case one. A firm cannot have some cases client-paid and others firm-paid for the same provider.
 - Only the counseling **date** on question 16 is filled from the certificate. The fee on that row, and the date and fee on the credit report row beside it, still have to be entered and kept current by hand.
+- A payment is recorded a moment after checkout finishes, so a refresh straight after paying can briefly still show the purchase as required. Wait a few seconds and refresh again rather than paying a second time.
 - Client-paid counseling has to be set up before a client reaches the step. Switching a firm to client-paid does not add a purchase step to a client who has already been enrolled.
 
 ## Related Features

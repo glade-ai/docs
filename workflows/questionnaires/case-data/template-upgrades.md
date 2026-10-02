@@ -2,7 +2,7 @@
 
 ## Overview
 
-When your firm publishes a new version of a questionnaire template, questionnaires already in progress can be moved onto it. This page covers release notes on a published version, the upgrade prompt, and what an upgrade does — and does not do — to answers, case data, and case data sync.
+When your firm publishes a new version of a questionnaire template, questionnaires already in progress can be moved onto it. This page covers release notes on a published version, the upgrade prompt, defaults on new fields, and what an upgrade does — and does not do — to answers, case data, and case data sync.
 
 ## Key Behaviors
 
@@ -44,6 +44,14 @@ Two safeguards sit behind that, so a bad read can no longer take a list with it:
 
 In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
 
+### New fields get their template defaults
+
+When an upgrade moves a questionnaire onto a version that adds fields, list columns, or table columns with a template default, those new fields are filled with their defaults. This works the same way as when a questionnaire is first created.
+
+- **Case data comes first.** Defaults are applied after the upgraded questionnaire has been filled from case data. A field case data already has a value for keeps that value. The default only fills a field that is still empty.
+- **A default on a field connected to case data reaches the case record**, where it ranks below real data. Previously only some upgrades applied defaults, and on those a connected field's default never reached the case record.
+- If filling the questionnaire from case data fails during the upgrade, defaults are not applied, so they cannot overwrite fields case data would have filled.
+
 ### Household details on an upgrade
 
 **Household details now reach the case record on an upgrade.** Dependents and marital status were only written to the case record when a questionnaire was *completed*. **Update now** upgrades a questionnaire that is still in progress and never completes it, so an attorney upgrading a live case saw a blank Household section even though the answers were sitting on the form.
@@ -56,7 +64,7 @@ In either case the upgrade still completes and the questionnaire is usable — o
 
 ## Edge Cases & Limitations
 
-- When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade.
+- When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade. Fields the new version adds do get their template defaults — see [New fields get their template defaults](#new-fields-get-their-template-defaults).
 - An upgrade seeds dependents only when the case has none. A case whose dependents are partly entered — one of three on the case record — is left alone rather than topped up, so the remaining dependents have to be added by hand.
 - Marital status is carried across on upgrade only for the married answers. A client recorded as not married does not have that written to the case record this way.
 - Upgrading the questionnaire to a newer template version does not reconnect a questionnaire you disabled by hand.
