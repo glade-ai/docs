@@ -24,6 +24,15 @@ Glade has a redesigned client portal — the version with the **Your next step**
 - You can configure workflow steps to automatically assign tasks to yourself or to the client, so tasks are ready as soon as a workflow starts.
 - The portal includes a branded "Client login portal" accessible from your public page.
 
+### Opening a questionnaire from a link
+
+When a client opens a link to a questionnaire that runs in your firm's portal (for example, from an email), they go straight into the questionnaire in the portal. They no longer stop on an in-between page that asks them to click through to the new portal.
+
+- While the portal loads, the page reads **Opening your questionnaire…**. An **Open questionnaire** button stays on the page in case the redirect doesn't go through.
+- Pressing the browser's Back button from the portal skips the in-between page, so the client isn't sent straight back into the questionnaire.
+- The portal is told which page the client came from, so its **Back to your portal** link can return them there.
+- Team members still click through to open the questionnaire. When the questionnaire is shown inside a panel on another page, the client also still clicks, so the page they are on isn't replaced.
+
 ### Signing up and signing in
 
 - Clients sign up or sign in through the portal. Each client is associated with your firm's account.

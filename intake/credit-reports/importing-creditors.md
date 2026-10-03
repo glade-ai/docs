@@ -38,6 +38,7 @@ When a credit report is imported, the prior bankruptcies it lists are added to t
 - **Re-reading a report updates the same entry.** When a stored report is read again, the existing entry for a case is updated rather than a new one being added.
 - **Leftover duplicates are removed when a completed report is re-read.** Re-reading a completed report removes duplicate prior-bankruptcy entries that came from the credit report.
 - **Prior bankruptcies entered in the questionnaire are never touched.** Only entries that came from the credit report are combined or removed.
+- **Prior bankruptcies from the case record don't add a second copy.** When the case record's prior bankruptcies are synced into the questionnaire after the credit report has filled it in, an entry with the same case number and district is matched to the row already there. Previously it was added as an extra row without a filing date, so the client saw the same bankruptcy twice.
 
 ### Creditors reach the case on the first successful pull
 
@@ -79,6 +80,7 @@ A credit report pull can finish successfully and still leave the case with no cr
 - A report that completed with no creditors because of an unreadable property record needs support to re-read the stored report. Re-pulling produces a fresh billable pull and is not the fix.
 - Duplicate prior-bankruptcy entries are only removed when a completed report is re-read. While a joint case's reports are still arriving one debtor at a time, each import adds or updates entries but removes nothing, the same as for creditors and assets.
 - Prior bankruptcies from the report that have no case number are not combined, because there is nothing to match them on.
+- Duplicate prior-bankruptcy rows already on a questionnaire before the case-record matching took effect are not removed by it.
 - Importing creditors on the first successful pull does not reach back over joint reports that already completed. On a joint case where the main debtor's creditors never arrived and the report is already marked complete, contact support to have the stored report re-read rather than re-pulling.
 
 ## Related Features
