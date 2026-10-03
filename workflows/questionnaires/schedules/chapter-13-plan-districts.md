@@ -46,6 +46,23 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - A Part E pay-in-full claim whose stated value is below the claim. The value prints as entered, and the valuation box is left unticked.
 
   Plan-modification forms and the district's other companion forms are not generated.
+- **District of South Carolina** cases can generate a Chapter 13 plan on the court's *Chapter 13 Plan (07/24)*, the form required by SC LBR 3015-1(a). The court rewrote Official Form 113's nine parts for this form. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
+  - **Conduit mortgages.** South Carolina has the trustee pay the ongoing mortgage through the plan. A long-term mortgage paid through the trustee ticks §1.4 and §3.1(c). It prints in Part 8 using the court's *Approved Non-Standard Language for Conduit Mortgage Plans*, with its arrearage cure included.
+  - **§3.1(a) and (b).** Claims the debtor keeps paying directly print in §3.1(a) when there is no cure through the trustee, and in §3.1(b) when there is. A standalone arrearage, or the cure on a §3.2 or §3.3 claim, prints as its own §3.1(b) row.
+  - **§3.2.** The non-governmental table lists cramdown claims paid through the trustee, wholly unsecured mortgages (at a secured claim of $0), and the part of a §3.4 lien that is not avoided. The governmental table always prints empty, because Glade cannot tell which claims are owed to a government unit.
+  - **§3.3 and §3.4.** Claims paid in full go in §3.3, with its Trustee and Debtor boxes. §3.4 prints the § 522(f) lien-avoidance chart with the exemption and its code section. The co-owned property chart prints empty.
+  - **Attorney fees (§4.3).** The retainer and fee estimate in §4.3(b) print only when the plan uses the long-form fee option.
+  - **Domestic support obligations (§4.4(a)).** Each one paid through the trustee is listed with its monthly payment.
+  - **Unsecured creditors (§5.1).** This section follows the unsecured payout you stated. If you did not state one, it follows what the plan funds.
+  - **Vesting (§7.1).** Vesting at discharge ticks the standard box. Vesting on confirmation or another choice ticks "Other", and the wording prints in Part 8.
+  - Signature dates are printed in Eastern time.
+
+  Parts Glade has no source for print blank with a warning, so you can fill them in by hand before filing:
+  - the attorney's District Court ID (DCID) number, which is not the state bar number;
+  - the gap payment and escrow boxes on the conduit mortgage table;
+  - the monthly payment on an assumed contract's arrearage in §6.1.
+
+  §3.1(d), §4.5, and §5.2 print unticked or "None".
 
 ## Configuration
 
@@ -67,6 +84,8 @@ There is no per-firm setting. A case can generate a plan when its district is on
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 
 > TODO: Confirm the Northern District of Texas's recorded no-look attorney fee cap and trustee fee percentage. The district was switched on while those figures were still the national defaults.
+
+> TODO: Confirm the District of South Carolina's recorded no-look attorney fee cap. It was switched on with the national $2,500 default, which still has to be checked against SC LBR 2016-1(b). The cap drives the §4.3(a) warning and the calculator's default fee.
 
 ## Related Features
 
