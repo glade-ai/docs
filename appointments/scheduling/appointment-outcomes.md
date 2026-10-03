@@ -13,6 +13,8 @@ Your firm can keep its own list of appointment outcomes — **No show**, **Claim
 - An outcome has to belong to your firm and be currently in use — an archived or deleted outcome cannot be attached to a booking.
 - **Retiring an outcome does not rewrite history.** Archiving one keeps it on the bookings that already carry it while removing it from the list of choices, so past appointments stay readable.
 - The outcome appears on the booking and as an **Outcome** column in the bookings report and its spreadsheet export.
+- **Rescheduling clears the outcome.** When a booking is rescheduled, the new time starts with no outcome, so a **No show** or **Cancellation** recorded for the old time doesn't carry over to the calendar and daily reports. If a new outcome is chosen in the same change as the reschedule, that new outcome is kept.
+- **The case keeps a record of what changed.** When a booking on a case is rescheduled, a staff-only internal note is added to the case and attached to the booking: *This appointment was rescheduled. Previous appointment: 09/29/2026 at 3:30 PM.* The time is in your firm's time zone. If an outcome was cleared, the note adds it, for example *Previous status: No Show.* Clients don't see this note.
 
 > TODO: Confirm where the outcome list is managed in firm settings and where the outcome is chosen on an individual booking.
 
@@ -25,6 +27,7 @@ Your firm can keep its own list of appointment outcomes — **No show**, **Claim
 ## Edge Cases & Limitations
 
 - A booking carries at most one outcome. Recording two things about the same appointment means choosing which one the label should capture, or noting the rest on the case.
+- Rescheduling updates the same booking, so the original appointment isn't kept as a separate record. The internal note on the case is the record of the previous time and outcome.
 - Appointment outcomes are per firm. They are not shared between firms and nothing is set up in advance, so a new firm sees no outcome option on its bookings until the list is created.
 
 ## Related Features
