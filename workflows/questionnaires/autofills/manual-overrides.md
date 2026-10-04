@@ -13,6 +13,7 @@ No automatic run — a calculation, an autofill, or a value mirrored from anothe
 - **An override survives a save and a reload.** Previously the protection only held for as long as you had the form open. Once the questionnaire had been saved, a correction read as an ordinary value again, and the next time anything it depended on changed, the calculation took the field back: the figure changed, the indicator flipped from **Manually overridden** back to autofilled, and nothing recorded that a person had ever typed there.
 - The clearest case was a total over a long list. A paralegal correcting the Schedule J monthly expense total would keep their figure until somebody edited any one of the 35 expense lines underneath it — at which point the total was silently recalculated over the correction. The same shape applied to any calculated field with an override on it.
 - **Re-run is how you ask for the calculation back.** Using the re-run control on the field deliberately replaces your value with the current derived one and hands the field back to the autofill, exactly as before. That is the only way an automatic value now lands on a field somebody typed into.
+- **A "No" you typed is protected like any other answer.** Previously an autofill could replace a hand-entered "No" (or "false" or "0") with "Yes" when its own calculation came out the other way, and such fields were re-checked every time the form loaded. For example, setting a Schedule A/B category line to **No** by hand could flip to **Yes** once matching creditor rows were added. The rule only looked at the two values, not at the kind of field, so it also reached number fields such as the last four digits of an account on the Master Creditor List. A typed "No" now stays until you use re-run on the field.
 - **A field nobody has answered is unaffected.** Empty fields autofill as normal — the protection applies to answers that were actually supplied.
 - **A locked field is still the exception.** Locking declares the field to belong to its autofill, so a locked field keeps updating regardless — see [Locked Fields](./locked-fields.md).
 
@@ -53,6 +54,7 @@ The deduction lines on the long-form means test — Form 122A-2 (Chapter 7) and 
 - A figure that was overwritten on an earlier case, before overrides were protected across saves, is not restored. Nothing on the field recorded the value that was replaced. Re-check calculated totals on cases where a correction was made and may have been lost.
 - Re-saving a form does not, on its own, un-freeze a field that an older save had marked as hand-entered. Re-run the autofill on the field to hand it back.
 - Locking a field is the one case where an autofill overwrites an answer someone typed. See [Locked Fields](./locked-fields.md).
+- A hand-entered "No" that an autofill should now replace — for example, a Schedule A/B category line that genuinely changed after creditors were added — no longer updates on its own. Use re-run on the field to take the calculated value.
 
 ## Related Features
 
