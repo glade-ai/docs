@@ -35,6 +35,7 @@ If your team has reviewed a Schedule I line 8a figure on a case where a business
 ## Edge Cases & Limitations
 
 - A profit and loss statement wins over the month entries for the same source on Schedule I line 8a. Where a business has both, the month entries are not added on top and are not shown as excluded — they are simply not what the line is built from. Remove the statement if the month entries are the figures you want.
+- **A debtor with no businesses gets no business attachment page.** Previously a case with no businesses could still print a business attachment page with $0.00 on every line and a blank business name. Re-generate the petition on a case prepared earlier to remove the extra page.
 - Unchecking a statement's Schedule I box does not delete it. The statement stays on the business and can be checked again.
 - Only a limited number of businesses get their own per-business attachment detail on Schedule I. A debtor holding more than that still gets a correct business income total; the individual breakdowns beyond the limit are not carried onto the form. Contact Glade if a case needs more.
 
