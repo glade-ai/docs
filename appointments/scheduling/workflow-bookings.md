@@ -30,7 +30,9 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - Clients can view and manage their own bookings.
 - Additional collaborators can be granted access to specific bookings.
 - Workflow participants automatically receive appropriate access.
-- **Workflow bookings require explicit assignment**: When a booking is created as a step in a workflow, only people who are explicitly assigned to that booking (or who are members of the firm) can view, reschedule, or cancel it. A client being the subject of the booking is not enough on its own — for example, a signing or notarization booking that is only assigned to firm staff is hidden from the client's upcoming bookings list and the client cannot reschedule it. Add the client as an assignee on the booking if they should be able to manage it themselves.
+- **Clients see their scheduled workflow bookings, read-only unless assigned**: When a booking is created as a step in a workflow, the client it is for always sees it once a time is set — on the **Coming up** card on their home page and on their **Meetings** page. Only people explicitly assigned to the booking (or members of the firm) can reschedule or cancel it, so for a booking that is only assigned to firm staff — for example, a signing or notarization appointment — the client sees the meeting and its join link, the Meetings page shows "Reschedule not available", and no Cancel option appears. Add the client as an assignee on the booking if they should be able to manage it themselves.
+- Previously, a workflow booking the client was not assigned to was hidden from them entirely, so clients could see "No upcoming meetings" on a day they had a meeting scheduled.
+- A workflow booking that has **no time chosen yet** still appears to the client only if they are assigned to it, since the only thing to show would be a Schedule action they cannot take.
 
 ## Related Features
 
