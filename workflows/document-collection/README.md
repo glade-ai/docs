@@ -15,6 +15,8 @@ Document collection enables your team to request specific files from clients as 
 - [Automatic Data Extraction](./data-extraction.md) — what Glade reads from mortgage statements, Social Security cards, IDs, vehicle documents, and investment statements, and how conflicting values are held for review.
 - [Income Documents](./income-documents.md) — income data requests, AI processing of paystubs, and income calculation modes for Schedule I and the means test.
 
+Questionnaire questions can also ask for a document. Those files go into a **Triage** folder on the case's checklist. See [Document Uploads on Questions](../questionnaires/templates/document-upload-questions.md).
+
 ## Related Features
 
 - [Client Portal](../../intake/client-portal/README.md)

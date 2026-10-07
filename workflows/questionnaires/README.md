@@ -15,6 +15,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Validation Rules](./templates/validation-rules.md) — field validation and rules that check one answer against another.
 - [Conditional Visibility](./templates/conditional-visibility.md) — showing and hiding sections and fields.
 - [PDF Fill Mappings](./templates/pdf-fill-mappings.md) — mapping answers to court forms, supplemental forms, and printed totals.
+- [Document Uploads on Questions](./templates/document-upload-questions.md) — asking the client to upload a document under a question.
 
 ### [Autofills](./autofills/README.md)
 
