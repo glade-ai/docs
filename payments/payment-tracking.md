@@ -40,7 +40,11 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - The same range rule applies everywhere a date filter appears on the Transactions dashboard — the payments list, the revenue summary, the refunds list, the payouts tab, and both CSV exports. The figures at the top of the page therefore cover exactly the same days as the rows beneath them.
 - A date that does not exist, such as February 31, is rejected rather than quietly interpreted as a nearby date.
 - Free-text search works across customer name, invoice ID, workflow name, and payout ID.
+- **Filter by Confido account type.** Firms using Confido can narrow payments to the **Trust** or **Operating** account. A payment counts toward an account type when it was deposited into one of that type's bank accounts. A payment recorded outside Glade has no destination account, so it matches neither type. Choosing all account types removes the filter. The account filter applies to the whole list, the revenue summary, and the CSV export, not just the page on screen.
 - All filters combine. For example, a firm can search for a specific customer's failed payments within a date range.
+- **Sorting covers the whole list.** Payments can be sorted by date (newest first by default), amount, or customer. The sort is applied across every page, not just the rows already loaded, so paging through a sorted list never skips or repeats a payment.
+
+> TODO: Confirm the label of the account type filter on the Transactions dashboard and invoice list.
 
 ### Revenue summary
 
@@ -142,6 +146,8 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 - Date ranges are interpreted in the firm's timezone, which is set in firm settings. A firm whose timezone is set incorrectly gets day boundaries drawn in the wrong place, so activity near midnight can fall into the neighboring day. Reports run before this behavior shipped may not reconcile with the same range run today — the earlier run was missing its final day.
 - Processing fee refund amounts are calculated proportionally. They may not exactly match the original fee when only a partial refund is issued.
 - CSV exports are limited to the current filter criteria. To export all data, clear all filters first.
+- A firm with no Confido account sees an empty list when a Trust or Operating filter is applied.
+- Net revenue and other calculated balances can't be used to sort the payments list.
 - The export Date column falls back to UTC for a firm with no timezone set in firm settings. If your exported dates look shifted, check the firm timezone first.
 - Exports produced before this correction still carry UTC dates. Nothing re-dates a file that has already been downloaded, or a spreadsheet built from one — re-export rather than adjusting the old file.
 
