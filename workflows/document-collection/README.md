@@ -12,7 +12,8 @@ Document collection enables your team to request specific files from clients as 
 - [AI-Suggested File Names](./ai-suggested-file-names.md) — the bulk rename step and the document types the suggestions recognize.
 - [Previewing Documents](./previewing-documents.md) — opening PDFs in the in-app preview and paper-style rendering.
 - [The Documents Tab](./documents-tab.md) — the case-wide view of every collected document, grouped like the checklist.
-- [Automatic Data Extraction](./data-extraction.md) — what Glade reads from mortgage statements, Social Security cards, IDs, vehicle documents, and investment statements, and how conflicting values are held for review.
+- [Automatic Data Extraction](./data-extraction.md) — what Glade reads from mortgage statements, Social Security cards, IDs, vehicle documents, investment statements, and bank and payment-app statements, and how conflicting values are held for review.
+- [Glade AI Filing from the Triage Folder](./triage-folder-ai-filing.md) — how Glade AI files questionnaire uploads and staff drops out of a case's Triage folder, what staff and clients see, and how a person's filing interacts with it.
 - [Income Documents](./income-documents.md) — income data requests, AI processing of paystubs, and income calculation modes for Schedule I and the means test.
 
 ## Related Features
