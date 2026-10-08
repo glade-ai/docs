@@ -26,7 +26,7 @@ When you mark a creditor as a duplicate of another in a bankruptcy questionnaire
 
 **A list that has duplicates says so.** Rows marked as a duplicate are hidden from the list, and the list now carries a banner above it reading **"N items are currently marked as duplicate in this list"**, with a **Show Duplicates** action next to it for revealing them. The banner counts the hidden rows and appears only when the list actually has some — a list with no duplicates shows neither the banner nor the action. Previously the only sign that items had been tucked away was a small **Show duplicates** toggle, which was easy to miss, so a Master Creditor List could look shorter than it was with nothing to indicate why.
 
-For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md).
+For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md). For how Glade links duplicates automatically, see [Creditor Deduplication](./creditor-deduplication.md).
 
 ### Creditors are alphabetized on Schedules D and E/F
 
@@ -85,6 +85,8 @@ The creditor matrix is also included in the **petition draft** — the review co
 - [Questionnaires](../README.md)
 - [Schedule Tools](./README.md)
 - [Working With Lists](../filling-out/working-with-lists.md)
+- [Creditor Deduplication](./creditor-deduplication.md)
+- [Chapter 13 Plan Claims](./chapter-13-plan-claims.md) — duplicates are left off the plan
 - [Schedule A/B Property](./property.md) — liens and collateral
 - [Means Test](./means-test.md) — secured debt deductions
 - [Generating a Draft Petition](../petition/draft-petition.md)

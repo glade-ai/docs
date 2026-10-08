@@ -125,4 +125,6 @@ The plan preview's **Explanation** view describes what each field on the plan fo
 - [Schedule A/B Property](./property.md)
 - [Creditors](./creditors.md)
 - [Chapter 13 Plan Districts](./chapter-13-plan-districts.md) — which districts can generate a plan, and what to check on each form
+- [Chapter 13 Plan Claims](./chapter-13-plan-claims.md) — which questionnaire the plan reads, and duplicate creditors
+- [Chapter 13 Attorney Fees](./chapter-13-attorney-fees.md) — fee balance after prepetition payments
 - [PACER](../../../integrations/pacer/README.md)
