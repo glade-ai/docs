@@ -26,6 +26,25 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
 - **Middle District of Florida** cases can generate a Chapter 13 plan on the district's Chapter 13 Model Plan. As with the other plan-generation districts, the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Two points need checking by hand on this district's form:
   - The Section A notices for **student loans** and for **reinstating an amended automatic stay** always print as "Not Included", because Glade does not yet have a source for either answer. The calculator raises a warning on every plan so you can check both notices yourself before filing.
   - Sections **C.5(c)** and **C.5(k)** have no claim treatments assigned to them yet, so those tables print empty on the generated plan.
+- **Northern District of Illinois** cases can generate a Chapter 13 plan on the district's Form 13-6, *National Chapter 13 Plan (Official Form 113) - Expandable and Calculating*. The form is Official Form 113 word for word, with the court's Exhibit of estimated trustee payments at the end. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How the plan is filled:
+  - The running header carries Debtor 1's full name, as the court's form prints it, and is marked for a joint case.
+  - §2.4 lists one row per additional payment, with its source, amount, and date, in date order. Every priced lump sum prints, so the §2.5 total always matches the rows above it.
+  - An arrearage cure split off a claim prints with that claim: in its §3.1 or §6.1 row, or added to the priority claim in §4.4. Each Exhibit line counts the cures from its own section. A standalone arrearage claim prints as its own §3.1 row.
+  - The §3.1 **Distributed by** box follows who pays the ongoing installment. A mortgage the debtors pay directly reads as debtor-paid even when the trustee cures the arrearage. A standalone arrearage claim has no installment, so neither box is ticked.
+  - §4.5, §5.2, and §5.3 always print "None", because no claim treatment is assigned to them.
+  - The §9.1 date is the plan date, or the day the plan was generated in Central time.
+- **Western District of Texas** cases can generate a Chapter 13 plan on the district's Revised District Form Chapter 13 Plan, *Chapter 13 Plan and Motions for Valuation and Lien Avoidance* (effective February 3, 2025). This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How the plan is filled:
+  - The caption's division comes from the case's court division (Austin, El Paso, Midland, San Antonio, or Waco). Any other division prints blank with a warning. The signature date is taken in Mountain time for El Paso and Central time elsewhere.
+  - §2.1 "paid by" ticks Payroll Order or Direct as elected in the calculator. 3rd Party Epay is ticked only when the "Other" payment method text names ePay or TFS.
+  - §3 vesting ticks "vests in the debtor" when property vests at confirmation, and "remains property of the estate" when it vests at discharge.
+  - Every assumed contract is listed in §6.1. Contracts the trustee pays are also listed in §7.3 with their arrears and ongoing payment.
+  - Surrendered collateral goes in §7.4 and debtor-paid claims in §7.5. Long-term claims go in §7.6, marked Trustee (Conduit) when the trustee pays them and Debtor (Direct) otherwise. Cures go in §7.7, and cramdown and pay-in-full claims in §7.8.
+  - Lien avoidance is split by kind of lien: a mortgage strip goes in §7.9, and any other lien goes in the §7.10 motion.
+
+  Parts Glade has no source for print blank with a warning, so you can fill them in by hand before filing:
+  - the §7.1 payment method boxes, the §7.4 collateral location, and the §7.6 payment due date;
+  - parts of a plan this form has no place for: a filing fee paid through the plan, lump sums, special classes, and assumed-contract arrears the trustee doesn't pay;
+  - a §7.8 pay-in-full claim whose stated value is below the debt.
 - **Northern District of Texas** cases can generate a Chapter 13 plan on the district's local form BTXN222, *Debtor's(s') Chapter 13 Plan (Containing a Motion for Valuation)*, revised 5/12/21. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
   - Mortgages go in Part D. Arrearage cures paid through the trustee go in D.(1), unless the cure belongs to a claim listed elsewhere on the plan. A long-term secured claim paid through the trustee goes in D.(2). Secured claims paid in full through the trustee go in Part E, and a cure split off one of those claims prints beside it marked "(arrears)".
   - A Part E claim marked as paid outside the plan prints in Part G (direct payments), not as trustee-paid.
@@ -47,6 +66,15 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
 
   Plan-modification forms and the district's other companion forms are not generated.
 
+### Northern District of Georgia: §3.1 rows with no arrearage
+
+On the Northern District of Georgia plan, a §3.1 (maintenance and cure) claim with a $0 arrearage now prints `$0` for the arrearage, the claim's arrearage interest rate (`0.00` if none was entered), and `$0` for the monthly payment. Previously only the arrearage cell was filled. The interest rate and monthly payment printed blank, which looks like a missing entry and can draw a trustee objection.
+
+- The same applies to a maintained claim with no arrearage at all. Its contract rate used to print under "Interest rate on arrearage". It now prints `0.00`, because that column is the rate on the arrearage, not the loan.
+- A free-text arrearage payment schedule you entered still prints as typed in the monthly column.
+- Cure rows for claims with a positive arrearage are unchanged.
+- Plans already generated keep the old output. Regenerate the plan to pick up the change.
+
 ## Configuration
 
 There is no per-firm setting. A case can generate a plan when its district is on the list above; the district is taken from the case.
@@ -67,6 +95,8 @@ There is no per-firm setting. A case can generate a plan when its district is on
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
 
 > TODO: Confirm the Northern District of Texas's recorded no-look attorney fee cap and trustee fee percentage. The district was switched on while those figures were still the national defaults.
+
+> TODO: Confirm the trustee fee percentage and no-look attorney fee cap recorded for the Northern District of Illinois and the Western District of Texas. Those figures are kept in the district's recorded figures rather than on the form, and this run could not confirm their values.
 
 ## Related Features
 
