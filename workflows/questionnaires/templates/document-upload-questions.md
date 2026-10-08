@@ -22,8 +22,7 @@ A questionnaire question can ask the client to upload a document alongside their
 - Each file remembers which question it answers, and which list entry for a question inside a list. Staff can move the file into another request and the question still finds it.
 - A client can delete a questionnaire upload, and undo the delete, even after staff have moved it into another request. The exception is a for-your-eyes-only folder or a staff-only checklist.
 - Deleting or restoring a questionnaire upload from the case's Documents list removes or restores it wherever it's filed, and the question's upload status updates to match.
-
-> TODO: Confirm where the upload card appears. The source changes say the older questionnaire view has no upload card, so clients there can't upload from the question.
+- The upload card sits right under the question's label. In a list entry, all of the entry's upload cards sit together at the top of the entry's panel, with the list's own upload first. A table cell says "Open this entry to upload documents." The older (classic) questionnaire view has no upload card, so clients using it can't upload from the question.
 
 ### AI review and data extraction
 
