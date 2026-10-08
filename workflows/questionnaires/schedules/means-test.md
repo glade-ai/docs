@@ -2,7 +2,7 @@
 
 ## Overview
 
-The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled and how secured debt deductions are carried onto the forms.
+The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled, how secured debt deductions are carried onto the forms, and the calculation period shown on the Means Test and CMI cards.
 
 ## Key Behaviors
 
@@ -27,6 +27,17 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 - **Arrearage cure amounts** can be populated on line 34 of Forms 122A-2 and 122C-2 from the arrearages recorded on the Master Creditor List. Each active creditor with an arrearage above zero produces one row carrying the creditor name, the secured property, and the total cure amount. Creditors with a zero arrearage, and creditors excluded as above, produce no row.
 - The **monthly cure amount** on that line is not set by this autofill — it continues to be calculated from the total cure amount, so re-running the autofill does not disturb it.
 
+### Calculation Period Range
+
+The **Means Test** and **CMI** (current monthly income) cards on the questionnaire show a **Calculation Period Range**: the months whose income fed that case's means test. It appears at the top of the CMI card and above the Means Test summary.
+
+- The range ends at the month the Income Organizer's calculation ended, rather than being counted back six months from today.
+- By default it covers six completed months. A month still in progress is not counted — see [Means Test Income Window](../../income-organizer/means-test.md#means-test-income-window).
+- If your firm collects a different number of months of pay stubs, the range covers that span instead.
+- Where an employment source applies its Income Organizer calculation method to the means test, the range shows that method's dates — for example the six months before the chosen filing month, January through the month of the pay stub used, or the pay stub's own month. See [Income Calculation Modes](../../income-organizer/calculation-modes.md).
+- The line is hidden until the Income Organizer has calculated a period for the case.
+- Only the dates are shown on the card. The current monthly income figure itself is unchanged and still comes from the calculator.
+
 ### Related means test behavior elsewhere
 
 - IRS standard deduction amounts and median income populate from reference data on open — see [Autofills From Reference Data](../autofills/how-autofills-work.md#autofills-from-reference-data).
@@ -37,6 +48,7 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 ## Edge Cases & Limitations
 
 - Cases set up before the non-consumer automation rolled out need a one-time cleanup requested through Glade support.
+- A case whose Income Organizer has not calculated a period shows the Means Test and CMI cards without a Calculation Period Range.
 
 ## Related Features
 

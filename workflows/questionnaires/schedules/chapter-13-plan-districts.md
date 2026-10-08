@@ -46,6 +46,14 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - A Part E pay-in-full claim whose stated value is below the claim. The value prints as entered, and the valuation box is left unticked.
 
   Plan-modification forms and the district's other companion forms are not generated.
+- **Northern District of Florida** cases can generate a Chapter 13 plan on the district's local form FLNB LF 13-21, *Chapter 13 Plan*, revised 02/23. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
+  - Long-term secured claims paid through the trustee go in §3.1. Cramdown claims go in §3.2(a), secured claims paid in full in §3.2(b), and lien avoidance that strips a mortgage in §3.2(c). A §3.1 or §3.2 claim marked as paid outside the plan prints in §3.5 (direct payments) instead.
+  - Arrearage cures paid through the trustee outside Part 4 go in §3.3, together with the cure on an assumed lease. Every other lien avoidance goes in §3.4. Surrendered collateral goes in §3.6.
+  - Domestic support obligations go in §4.4(b), and the §4.4 election follows the list of support obligations the debtor pays directly as well as the claims. Priority taxes go in §4.5. The manual special-class list prints in §5.2. Assumed contracts go in Part 6.
+  - The Part 1 notices are ticked Included or Not Included to match the parts they refer to, and each section's "None" box matches its own table, so a notice or box cannot disagree with what the plan lists.
+  - The unpaid attorney fee is the total fee less the fee paid before filing. The Part 9 date prints in the division's own time zone.
+
+  A cramdown claim with no value entered prints blank with a warning, so you can fill in the value by hand before filing.
 
 ## Configuration
 
