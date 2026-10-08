@@ -10,6 +10,7 @@ Business and rental income sources in the Income Organizer hold their own profit
 - [Schedule I Line 8a](./schedule-i-line-8a.md) — how line 8a is built from statements and month entries across every business on the case.
 - [Matching Statements to Businesses](./matching-statements-to-businesses.md) — binding a statement to a business by folder or printed name, and creating a business from a statement.
 - [Adding Business and Rental Sources](./adding-business-sources.md) — the add-source dialog for your team and for clients, business details, and which contact a business belongs to.
+- [Businesses on the Petition](./businesses-on-the-petition.md) — how organizer businesses reach Form 101 Part 3, matching typed rows, held-back names, and removals.
 
 ## Related Features
 

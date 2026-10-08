@@ -19,7 +19,7 @@ A workflow switch moves a case from one workflow to another within the same serv
 What belongs to the case rather than the matter is carried across:
 
 - **Document checklists and the client's uploaded files**, with their review and validation status intact. A document a reviewer already accepted arrives accepted, not waiting to be looked at again.
-- **The Income Organizer's records.**
+- **The Income Organizer, intact** — the same organizer with the client's uploaded paystubs, answers, and progress. The new case does not open a second, empty organizer beside it, so nobody has to redo that work.
 - **The credit report**, which is adopted rather than pulled again — no second hard inquiry on the client's credit file, no second charge, and no purchase prompt for a report the case already holds.
 - **Invoices and retainers.**
 
@@ -29,6 +29,7 @@ The new case may already ask for some of the same documents, so checklists are c
 
 - **Where the new case has no equivalent checklist**, the whole checklist moves across as it stands.
 - **Where the new case already has one**, the client's files are moved onto it, matched **requirement by requirement on the requirement's name** — so a file uploaded against "Paystubs" lands on the new case's "Paystubs" rather than wherever the position happened to fall. Moved files sort after anything the new checklist already held, so a reviewer's place in the list is not disturbed.
+- **A moved checklist is active on the new case.** If the checklist being moved — or the new case's checklist it is combined into — had been skipped, the switch reopens it, so a checklist holding the client's documents never shows as "No Longer Required".
 - **A moved file completes the requirement it lands on** and is no longer counted against the one it came from, the same as moving a file by hand.
 - Moved files appear in the new case's **Documents** tab, not only inside the checklist.
 - **Joint filings keep their two debtors apart.** A case with a checklist for each debtor arrives with both, each holding its own documents.
