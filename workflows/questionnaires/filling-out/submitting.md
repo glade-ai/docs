@@ -26,6 +26,8 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 **Who can submit anyway.** Waiving a blocking issue is limited to firm owners, firm Admins, and Glade Admins. Everyone else — case workers, paralegals, and clients working in the portal — still sees the full list of what needs attention, but the acknowledgment checkbox and the **Submit Anyway** button appear disabled, with a note reading *"Only an Admin can submit a questionnaire that has fields needing attention."* They can correct the flagged fields and submit normally; they cannot push a petition past a blocker. This applies on the firm dashboard and in the client portal alike.
 
+**A workflow role can be allowed to submit anyway.** A firm Admin can give a workflow role permission to continue past blocking petition findings (see [Workflow Roles](../../../back-office/settings.md#workflow-roles)). A team member who holds that role on a case, as one of the case's current owners, can then use **Submit Anyway** on that case. This lets a case worker move a petition forward without being made a firm Admin. The waiver works exactly as it does for an Admin: the acknowledgment checkbox is still required and the bypass is still recorded in the activity timeline. The permission doesn't make the person an Admin, so they still can't delete the case or edit the workflow. It covers only cases where that person holds the role. A client never gets it, even if they are assigned the role.
+
 **Findings that do not block are shown, not waived.** Not every finding stops a filing. When a submit turns up findings but none of them block:
 
 - The review dialog still opens, so the findings are read rather than passing unseen.

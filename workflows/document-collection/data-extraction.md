@@ -28,6 +28,17 @@ When a vehicle title, insurance card, or vehicle history report is uploaded, Gla
 
 When an investment account statement — such as a brokerage, retirement, or fund-company statement — is uploaded, Glade detects the document type and records the account as an asset on the case. It captures the financial institution, the account number, the account's total value, and how the account is owned (individual or joint), and writes them to the matching asset record. When a single document describes more than one account — for example, a positions screen that lists both a brokerage account and a 401(k), or a statement covering both checking and savings — each account is recorded as its own asset, instead of only the first being captured and the rest dropped. Sub-balances that belong to one plan (such as the Roth and employer-deferral buckets within a single 403(b)) are combined into one entry at the plan's total, while genuinely separate accounts are kept as separate assets. Repeat statements for the same account are recognized by their account number and update one asset entry instead of creating duplicates; statements with no readable account number are kept separate so unrelated accounts are not merged. Extracted values are assistive — a value already entered by a team member or client takes precedence.
 
+### Bank and payment-app statements
+
+Uploading several statements or screenshots of the **same** bank account or payment-app account updates one asset entry, instead of adding a new property for every upload. Each later upload lands on the existing entry as a new version, or as a conflict to review if its figures differ.
+
+- **Bank accounts with a full account number** are matched on that number, as before.
+- **Bank accounts that show only a masked number** (for example `XXXXXX4321`) are matched on the bank, the visible last four digits, and the type of account. A checking and a savings account at the same bank stay separate, and so do accounts with the same last four at different banks. Any number containing an `X` counts as masked.
+- **PayPal, Venmo, and Cash App** accounts are matched on the app and the account holder's name. The name is matched however it is written: "Jane Q Doe", "JANE DOE" and "Doe, Jane" are the same person, and accents and suffixes such as Jr or III are ignored. On a joint case, each spouse's Venmo stays a separate asset. A savings or CD balance held in the app is kept apart from the main balance. The holder's name is only used for matching. It is not saved to the asset.
+- **A statement with too little to match on is kept on its own entry.** This covers a statement with no bank name, fewer than four visible digits, or a payment-app screenshot where no holder name can be read.
+
+Previously every statement of a masked account, and every payment-app screenshot, created its own property row. A case could end up with several rows for one checking account and several more for one Venmo account.
+
 ### Conflicting extracted values held for review
 
 When a value read from an uploaded document disagrees with a value already on the case record, the change is held for your team to review rather than overwriting the existing value automatically. Values that match, or that fill a field for the first time, are applied directly. The blank starter entries a case begins with — the empty placeholder rows created when the case is first set up — count as empty, not as a confirmed answer. A document-extracted value that fills one of these blank placeholders is applied directly and becomes the current value, and it is not flagged as a conflict against the placeholder it replaced. Only once a real value has been entered or confirmed — by your team, a questionnaire, a credit report, or an earlier document — does a later, disagreeing document value get held for review. This keeps automatic extraction from silently changing information a person has already confirmed, while making sure extracted values are not left sitting behind an empty placeholder.
@@ -40,6 +51,9 @@ When a value read from an uploaded document disagrees with a value already on th
 
 - Identity document extraction (driver's licenses and passports) is currently turned off. Enter each filer's name, date of birth, and address manually until automatic extraction returns.
 - When an insurance card lists more than one vehicle, only the first vehicle on the card is extracted. Add any additional vehicles manually.
+- Duplicate bank and payment-app rows created before repeat statements were merged are not cleaned up. Re-reading an old statement adds it to the merged entry and leaves the old row in place. Remove the extra rows by hand.
+- Two different accounts that match on every detail used, such as the same bank, account type and last four digits, are merged into one asset. Check the Properties page when a debtor has two similar accounts at one bank.
+- A statement with no account digits at all, such as a retirement statement with no number, still creates its own entry for each upload.
 
 ## Related Features
 
