@@ -26,6 +26,7 @@ Schedule I reports other government assistance on line 8f and other monthly inco
 - The list opens over the form, where rows can be added and edited as on any other list. The table's summed amount is still what the form's amount line uses.
 - These lists do not appear as extra lists underneath the income table, and they do not count toward the section's completion progress.
 - The sources come from the case's income organizer. Removing a source there, or taking it off Schedule I, removes its row here.
+- A questionnaire created or upgraded to a new template version after sources are already in the organizer starts with those rows filled in, for both debtors on a joint case. Before, the lists stayed empty until the organizer next changed. This applies only to that questionnaire. Other questionnaires on the case aren't changed. A questionnaire with case data sync turned off still starts empty.
 - On a case that does not use case data sync, the summed amounts still fill but the item lists stay empty.
 
 > TODO: Confirm the label on the cell button, and which firms' templates carry the 8f/8h item lists — the lists and the buttons are added to a template in the questionnaire editor rather than being present on every template.
