@@ -84,7 +84,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 ### Email notifications
 
 - A payment confirmation email is sent to the client when a payment succeeds. The email includes the amount, remaining balance, and payment method used.
-- Firms can opt in to receive a notification when the first payment is made on an invoice.
+- Firms can have the case's owners emailed for every payment on an invoice. See [Notifications and Reminders](invoices/notifications-and-reminders.md).
 - If a payment plan installment fails and all retry attempts are exhausted, both the client and the firm receive a notification.
 - Clients receive a notification when a refund completes.
 
