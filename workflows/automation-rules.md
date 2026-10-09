@@ -29,7 +29,7 @@ Automation rules define what happens automatically when events occur during a ca
 - **Archived**: Hide a workflow without deleting it. Archived workflows do not run.
 - **Locked**: Prevent editing of the workflow. Useful for protecting default workflows.
 - **Email on completion**: Send a notification to your team when all steps in a case finish.
-- **Email on first payment**: Send a notification when the first payment is received on a case.
+- **Email on first payment**: No longer sends any email. Team payment emails are controlled by the invoice template's **Email my team on payment activity** setting. See [Invoice Notifications and Reminders](../payments/invoices/notifications-and-reminders.md).
 - **Start related workflows on completion**: Allow this workflow to automatically kick off related workflows when it finishes.
 - **Preserve assignments on duplication**: Keep team member assignments when a workflow is copied.
 - **USCIS updates**: Enable automatic USCIS case status tracking (immigration cases).

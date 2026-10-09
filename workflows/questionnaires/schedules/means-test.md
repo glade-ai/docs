@@ -2,7 +2,7 @@
 
 ## Overview
 
-The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled and how secured debt deductions are carried onto the forms.
+The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled, how secured debt deductions are carried onto the forms, and how to jump from a means test widget figure to the answer behind it.
 
 ## Key Behaviors
 
@@ -27,6 +27,13 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 - **Arrearage cure amounts** can be populated on line 34 of Forms 122A-2 and 122C-2 from the arrearages recorded on the Master Creditor List. Each active creditor with an arrearage above zero produces one row carrying the creditor name, the secured property, and the total cure amount. Creditors with a zero arrearage, and creditors excluded as above, produce no row.
 - The **monthly cure amount** on that line is not set by this autofill — it continues to be calculated from the total cure amount, so re-running the autofill does not disturb it.
 
+### Jumping From a Means Test Widget to Its Inputs
+
+The **Means Test summary** widget and the median-income widget show figures read from other answers on the questionnaire. Each figure read directly from a single answer — the debtor's name, address, household size, and lines 12a, 12b, and 13 — is a link to that answer. Clicking it opens the right section, scrolls to the field, and highlights it, the same way **go to field** works on a validation finding. Use this to find the answer behind a wrong figure, such as a household size stuck at 1 on Form 122A-1.
+
+- Figures that are worked out rather than read from one answer, such as line 14 and the date of filing, are not links.
+- Figures read from a cell inside a list or table are not links.
+
 ### Related means test behavior elsewhere
 
 - IRS standard deduction amounts and median income populate from reference data on open — see [Autofills From Reference Data](../autofills/how-autofills-work.md#autofills-from-reference-data).
@@ -37,6 +44,7 @@ The autofills that carry secured debts onto the means test forms — mortgages, 
 ## Edge Cases & Limitations
 
 - Cases set up before the non-consumer automation rolled out need a one-time cleanup requested through Glade support.
+- Means Test widget figures are not links in the template editor.
 
 ## Related Features
 

@@ -35,6 +35,18 @@ Both were silent. If your team reviewed list or table data and found figures tha
 
 Manual edits to fields in a list also stick when an AI agent auto-runs after rows have been added, removed, or reordered — see [AI Agents](./ai-agents.md).
 
+### Fields That Are Both Autofilled and Synced With Case Data
+
+Some fields have an autofill and are also synced with case data. On these fields, a value that came from case data is protected the same way as a value you typed.
+
+- **An automatic autofill does not replace a case data value.** Previously the next autofill or AI agent run could replace it. The value now stays until you use re-run on the field.
+- **A hand edit counts as a manual edit.** The field shows as edited, and an automatic autofill leaves your value alone. The edit is still saved to the case record. Previously a hand edit on such a field was not shown as edited, and the next automatic run could replace it.
+- **Revert puts the case data value back.** The field reads **Synced with case data** again.
+- **Re-run replaces either kind of value.** Using the re-run control puts the autofill's current answer on the field, whether the field held a case data value or a manual edit. The new value is also saved to the case record.
+- **A recalculation that changes a synced field is saved to the case record.** When an automatic recalculation changes the stored value of a synced field while the form is open, the case record gets the new value too. The first calculation when a questionnaire is created is not sent to the case record.
+- **Linked-field copies follow the same rule.** A value copied from a linked field does not replace a manual edit or a case data value.
+- A blank field and a locked field still fill automatically, the same as other autofilled fields.
+
 ### Overriding a Schedule I or Means Test figure the calculator produced
 
 The Schedule I and Means Test lines the Income Organizer calculates are handled differently from ordinary case data sync fields, because an attorney's correction to one of them needs to survive the next recalculation.
