@@ -50,7 +50,7 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - Key template settings include:
   - Whether the template is locked, archived, or enabled
   - Whether USCIS updates or PACER submissions are enabled
-  - Whether your firm receives an email when a case is completed or when a first payment is received
+  - Whether your firm receives an email when a case is completed. Payment emails to the team are set on the invoice template instead — see [Invoice Notifications and Reminders](../payments/invoices/notifications-and-reminders.md)
   - Whether associated workflows can be initiated from this template
   - Whether team member assignments carry over to associated workflows
 - Templates have a state of "current", "draft", or "stale", and a version number for tracking revisions.
