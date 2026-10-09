@@ -31,6 +31,10 @@ Before a filing proceeds, Glade checks whether the case already has an assigned 
 
 At the moment you click the final submit button, Glade performs a fresh check. If the status has changed to a hard-block condition while the dialog was open, the submission is blocked and you will see a toast and an updated alert banner.
 
+The existing case number check looks at every case number Glade knows about for the case: a number saved on the case itself, and a number returned by any earlier filing attempt, not only the most recent one. Previously only the latest attempt was checked, so a failed retry could hide a case number the court had already assigned on an earlier attempt, and a number saved on the case was not considered. This check is blocking.
+
+> TODO: Filing into an existing case (a secondary filing rather than opening a new case) is in progress. Such filings skip the new-case number check; document how attorneys start one once the filing flow for it is available.
+
 These three situations — an existing case number, a filing already in progress, and a recent filing attempt — are also reported by the pre-filing review, so your team sees them while working through the review rather than only when the submission dialog opens. The dialog itself behaves exactly as described above.
 
 > TODO: The source docs describe the pre-filing dialog above as still in use, while [Where pre-filing checks run](./README.md#where-pre-filing-checks-run) says the older submission dialog has been retired. Confirm whether this dialog is the one that was removed.
