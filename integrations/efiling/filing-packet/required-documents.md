@@ -10,6 +10,10 @@ Some documents are required by a district's rules and must not be dropped from t
 
 When you prepare a petition, any document the district marks as required is pre-checked and **locked** in the document list — it shows a **Required for filing** note and cannot be unchecked or removed, and range-selection skips over it. This prevents a required document from being left out by accident. For example, Florida Middle District Chapter 7 petitions require the Creditor Matrix and the Verification of Creditor Matrix, so both are locked into the packet. Other pre-checked documents that the district does not mark as required stay freely toggleable, so you can include or exclude them as needed.
 
+**Forms filled from a questionnaire pre-check as configured.** When the district's setup pre-selects a form that Glade generates from a questionnaire — Form 103A, 103B, 122A-2, 122C-1, 122C-2 or 2030 — that form is now pre-checked in the Prepare Petition dialog. Glade recognizes the form by its type rather than by an exact match on its title. Previously a form was pre-checked only when its title in the district's setup matched the title of the generated PDF word for word, so a form named slightly differently was left unchecked and could be missed. In a few districts, Form 2030 and Form 122C-1 now pre-check for the first time.
+
+> TODO: Forms generated before this change may still be matched by title only until Glade updates the existing documents. Confirm whether that update has been run for all firms.
+
 **Glade's own petition output is not offered as an input.** The documents Glade compiles for the case — **Petition**, **Petition (Draft)**, **Petition for Signatures (Draft)**, and **Signature Pages** — are not selectable in the Prepare Petition document list. They are what the compile produces, not material to fold into it, and picking one built a petition containing a copy of an earlier petition. How each of these documents is filed is unchanged; only their appearance in the selection list is.
 
 ### Per-district configuration
