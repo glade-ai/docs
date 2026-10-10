@@ -2,7 +2,7 @@
 
 ## Overview
 
-A questionnaire question can ask the client to upload a document alongside their answer. For example, "Upload your latest mortgage statement" can sit under the mortgage question. Template authors turn this on per question. Clients upload from a card under the question. The files land in a **Triage** folder on the case's document checklist, and AI reads them like any other upload.
+A questionnaire question can ask the client to upload a document alongside their answer. For example, "Upload your latest mortgage statement" can sit under the mortgage question. Template authors turn this on per question. Clients upload from a card under the question, point to a document already on the case, or say they don't have the document yet. The files land in a **Triage** folder on the case's document checklist, and AI reads them like any other upload.
 
 ## Key Behaviors
 
@@ -22,6 +22,9 @@ A questionnaire question can ask the client to upload a document alongside their
 - Each file remembers which question it answers, and which list entry for a question inside a list. Staff can move the file into another request and the question still finds it.
 - A client can delete a questionnaire upload, and undo the delete, even after staff have moved it into another request. The exception is a for-your-eyes-only folder or a staff-only checklist.
 - Deleting or restoring a questionnaire upload from the case's Documents list removes or restores it wherever it's filed, and the question's upload status updates to match.
+- **Already uploaded.** Instead of uploading a file again, the client or the firm can pick a document that is already filed on the case. The list offers only case documents the person can see, so a client can't pick a document hidden from them. Firm staff can pick any document on the case. A linked document can be unlinked again.
+- **I don't have this right now.** The client can record that they don't have the document yet. This can't be chosen while the upload already holds a document. Uploading a file or linking a document later clears it.
+- When a document is removed from the case, it is unlinked from every questionnaire question on that case.
 - The upload card sits right under the question's label. In a list entry, all of the entry's upload cards sit together at the top of the entry's panel, with the list's own upload first. A table cell says "Open this entry to upload documents." The older (classic) questionnaire view has no upload card, so clients using it can't upload from the question.
 
 ### AI review and data extraction
@@ -35,7 +38,10 @@ A questionnaire question can ask the client to upload a document alongside their
 - Changing an answer that the "show when" condition depends on rechecks the upload.
 - The finding is **advisory, not blocking**. It shows in the pre-submit review but doesn't stop the client from submitting.
 - **Documents that already filled in an answer count.** If AI already used a document's data to fill a question's answer, for example a mortgage statement collected through a document request, that document counts as the question's upload and the client isn't asked again. Clients see only the documents they have access to.
-- Upload status carries over when a questionnaire is upgraded to a new template version, reverted, or restored from a snapshot, so a file that was uploaded doesn't show as missing afterwards.
+- **Linked documents and "I don't have this right now" also count.** A document picked through **Already uploaded** satisfies the upload. Answering **I don't have this right now** also clears the finding and doesn't raise a new one. In a list, each entry is answered separately, so the answer on one entry doesn't cover another.
+- Upload status carries over when a questionnaire is upgraded to a new template version, reverted, or restored from a snapshot, so a file that was uploaded doesn't show as missing afterwards. An **I don't have this right now** answer also carries over an upgrade, so the requirement doesn't come back.
+
+> TODO: Confirm the exact wording and placement of the **Already uploaded** and **I don't have this right now** options on the upload card, and whether staff see when the client said they don't have the document.
 
 ## Configuration
 
@@ -55,6 +61,7 @@ Nothing changes on existing templates until an author turns on an upload for a q
 - There is one Triage folder per case. It can't be deleted from the checklist. If the whole Triage checklist is deleted, the next upload creates a new one.
 - When cases are merged or requests are moved between cases, a Triage checklist only merges into the other case's Triage checklist, never into a normal checklist.
 - Restoring a deleted Triage folder while the case already has a new one brings the old folder back as an ordinary folder.
+- Linking a document through **Already uploaded** doesn't copy or move it. The document stays where it is filed on the case.
 - If a template upgrade removes the question a file was uploaded for, the file stays on the case but no longer counts toward any question.
 
 ## Related Features
