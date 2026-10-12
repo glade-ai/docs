@@ -15,6 +15,7 @@ Pre-filing credit counseling is a required step in bankruptcy workflows: each de
 - Completing or skipping the step updates the case's tasks and progress like any other workflow step. See [Status Tracking](status-tracking/README.md).
 - **Post-filing debtor education certificates** attach the same way as pre-filing counseling certificates, for each debtor separately. **Debtor Education Certificate (Debtor 1)** and **Debtor Education Certificate (Debtor 2)** are available as document types, so a certificate can be filed under its own name rather than under a generic type. On some cases, attaching a debtor education certificate previously failed with an error and the certificate could not be recorded against the step at all.
 - Debtor education is a post-filing course, so its certificate is not part of the initial petition filing package. It is stored on the case and filed separately.
+- **Evergreen firms do not need a second credit counseling step for debtor education.** When a case whose client took the Evergreen pre-filing briefing is filed, Glade opens the post-filing debtor education course for the client automatically. See [Evergreen Credit Counseling](../integrations/evergreen-credit-counseling.md#debtor-education-opens-when-the-case-is-filed).
 
 ### The counseling date on the Statement of Financial Affairs
 
@@ -41,17 +42,18 @@ Your firm chooses whether it pays for credit counseling or the client does. The 
 
 #### When firm-paid counseling reaches your bill
 
-On firm-paid counseling, the point at which the course is added to your firm's Glade bill follows the provider, matching when that provider charges for the course:
+On firm-paid counseling, the point at which a course is added to your firm's Glade bill follows the provider and the course, matching when that provider charges for it:
 
-| Provider | Billed when |
-|----------|-------------|
-| Abacus | the client completes the course |
-| Sage | the client is enrolled |
-| Evergreen | the approval request is sent, before enrollment |
+| Course | Billed when |
+|--------|-------------|
+| Abacus pre-filing briefing | the client completes the course |
+| Evergreen pre-filing briefing | the approval request is sent, before enrollment |
+| Post-filing debtor education (Sage, or Evergreen's second course) | the client is enrolled |
 
 - **An Abacus course the client never takes no longer appears on your bill.** Counseling was previously billed at the approval request on every provider — earlier than enrollment and well before completion — so a client who was sent a course and never started it still produced a line item. Those cases now drop off.
-- **A case is billed once.** A case that already carries a counseling line item is not billed again — including a joint case where both debtors' certificates arrive at the same moment, and including a case that was already charged on the approval request before this changed.
-- The line item is described as a credit counseling enrollment on the invoice, as before.
+- **The briefing and debtor education are two separate charges.** Each is billed at most once per case — including a joint case where both debtors' certificates arrive at the same moment, and including a case that was already charged on the approval request before this changed. A case that has already been billed for the briefing is still billed for debtor education when the client enrolls in it; previously the briefing charge could stop the debtor education charge from being added.
+- Sending a debtor education request does not bill your firm. The charge is added only once the client actually enrolls, so a client who is offered the course and never enrolls produces no line item.
+- The briefing is described as a credit counseling enrollment on the invoice, as before. Debtor education appears as its own **Debtor Education enrollment** line.
 - Client-paid counseling is unaffected — it never reaches your firm's bill at any point.
 
 ### The client's purchase step
