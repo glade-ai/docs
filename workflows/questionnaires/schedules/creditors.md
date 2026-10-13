@@ -2,7 +2,7 @@
 
 ## Overview
 
-Bankruptcy questionnaires keep the case's creditors on the Master Creditor List, from which Schedules D, E/F, G, and H and the creditor mailing matrix are produced. This page covers adding creditors, marking duplicates, how creditors are ordered on the schedules, and how the creditor matrix is assembled.
+Bankruptcy questionnaires keep the case's creditors on the Master Creditor List, from which Schedules D, E/F, G, and H and the creditor mailing matrix are produced. This page covers adding creditors, marking duplicates, how creditors are ordered and numbered on the schedules, and how the creditor matrix is assembled.
 
 ## Key Behaviors
 
@@ -39,6 +39,15 @@ When the schedules are filled, the creditors on **Schedule D** and **Schedule E/
 - Existing cases are corrected the next time the petition is generated. Nothing needs to be re-entered, and a case already filed is unaffected.
 
 The order shown in the questionnaire itself is still the order the rows were added, so the on-screen list will not match the filed schedule. The **Sort** action on the Master Creditor List reorders the stored rows if you want the two to agree.
+
+#### Line references follow the schedule's order
+
+Some answers refer to a creditor by the line it prints on — for example the line numbers on **Schedule E/F Part 3**, **Schedule D Part 2**, and **Schedule H** (such as "4.25"). These references are filled in for you and locked. They now use the creditor's position in name order, the same order the schedule prints in, so each reference points at the line where that creditor actually appears.
+
+- Previously, on some questionnaires, these references used the order the rows were added. A creditor added after the credit report import could print on one line while Part 3 referred to another, and the locked field could not be corrected by hand.
+- Renaming a creditor, or adding one out of alphabetical order, renumbers the references for the whole list, since one change can move other creditors up or down a line.
+- Lists without creditor names are numbered as before.
+- The **Creditor Matrix** and the filled schedules use the same name ordering, so the questionnaire, the schedules, and the matrix all agree on a creditor's position.
 
 ### Creditor Matrix
 
@@ -77,7 +86,7 @@ The creditor matrix is also included in the **petition draft** — the review co
 
 ## Edge Cases & Limitations
 
-- The on-screen Master Creditor List keeps the order rows were added; only the generated Schedules D and E/F are alphabetized.
+- The on-screen Master Creditor List keeps the order rows were added; only the generated Schedules D and E/F are alphabetized. Line references to a creditor follow the alphabetized order, not the on-screen order.
 - The **others to be notified** lists on Schedule D and Schedule E/F are not sorted.
 
 ## Related Features
