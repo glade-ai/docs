@@ -20,13 +20,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: "573"
+          GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           python3 << 'PY'
           import json, os, subprocess, pathlib
           pr = os.environ["PR_NUMBER"]
+          repo = os.environ["GH_REPO"]
           body = subprocess.check_output(
-              ["gh", "pr", "view", pr, "--json", "body", "-q", ".body"],
+              ["gh", "pr", "view", pr, "--repo", repo, "--json", "body", "-q", ".body"],
               text=True,
           )
           if body.endswith("\n"):
@@ -67,6 +69,6 @@ jobs:
 
           path = pathlib.Path("/tmp/pr-body.md")
           path.write_text(body)
-          subprocess.check_call(["gh", "pr", "edit", pr, "--body-file", str(path)])
+          subprocess.check_call(["gh", "pr", "edit", pr, "--repo", repo, "--body-file", str(path)])
           print("Updated PR description with a non-empty changelog block.")
           PY
