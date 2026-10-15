@@ -2,7 +2,7 @@
 
 ## Overview
 
-Glade reads the hearings scheduled in incoming court notices — including 341 meetings (meetings of creditors) — and records each one on the case, along with the trustee who will conduct a 341 meeting.
+Glade reads the hearings scheduled in incoming court notices — including 341 meetings (meetings of creditors) — and records each one on the case, along with the trustee who will conduct a 341 meeting. It also works out which trustee is shown on the case.
 
 ## Key Behaviors
 
@@ -12,6 +12,16 @@ Glade processes incoming court notices about 341 meetings (meetings of creditors
 
 - When a 341 meeting notice identifies the conducting trustee by name — for example, via a video or phone conference format — Glade shows that person as the trustee for the meeting.
 - The conducting trustee may differ from the case trustee listed elsewhere in the notice. Glade prioritizes the person actually conducting the meeting, not other named parties such as case-party trustees.
+
+### The trustee shown on the case
+
+The trustee shown on a case is worked out from the court emails Glade has received for that case.
+
+- **The newest creditors-meeting email decides the trustee.** That includes the notice that schedules the meeting of creditors and the trustee's "341 Meeting Held" or "Continued" reports. Because the newest one wins, a case converted from Chapter 13 to Chapter 7 shows the Chapter 7 trustee once the Chapter 7 notice arrives. Previously an earlier Chapter 13 "341 Meeting Held" report outranked everything after it, so a converted case kept showing the old trustee.
+- An email counts as a creditors-meeting email by its subject line as well as by how Glade classified it, so an unclassified notice or a certificate of mailing of the meeting of creditors is still used. A case number that happens to contain "341" does not count.
+- **Without a creditors-meeting email, only a recognized trustee name is used.** Glade takes the newest court email that names a trustee on the U.S. Trustee Program's list, ignoring differences in periods and commas ("Robin R Weiner" matches "Robin R. Weiner"). Previously the newest email of any kind was used, which could put a course provider, a creditor, or a phrase such as "Bankruptcy Case Closed" in the trustee field.
+- **If neither exists, no trustee is shown.** A blank is shown rather than a wrong name.
+- The trustee is worked out each time the case is opened, so every case shows the corrected trustee on its next load with nothing to reprocess.
 
 ### Notices scheduling several hearings at once
 
@@ -23,6 +33,8 @@ Some courts set more than one hearing in a single notice — a confirmation hear
 
 ## Edge Cases & Limitations
 
+- A case with no court emails attached — most often because no case number has been entered in Glade — has no source for its trustee and shows none.
+- A real trustee who is missing from the U.S. Trustee Program list, on a case with no creditors-meeting email, shows blank rather than by name.
 - Notices processed before this correction are not revisited automatically. If your firm files in a district that routinely issues combined notices, ask Glade to reprocess your court notices for the affected date range.
 
 ## Related Features
