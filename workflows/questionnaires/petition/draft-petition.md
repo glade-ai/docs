@@ -2,7 +2,7 @@
 
 ## Overview
 
-While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. This page covers generating a marked draft or an unmarked copy for signatures, what goes into the draft and where it is saved, and how the draft packet is rebuilt when a completed questionnaire is edited.
+While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. This page covers generating a marked draft or an unmarked copy for signatures, what goes into the draft and where it is saved, numbered draft versions, and how the draft packet is rebuilt when a completed questionnaire is edited.
 
 ## Key Behaviors
 
@@ -56,6 +56,33 @@ Both options were previously offered on the form but had no effect on what was p
 
 If the signature pages cannot be pulled out of the compiled draft, the draft itself is still produced and saved to the folder you chose — you simply do not get the separate document. Generating the draft again is safe and produces both.
 
+### Draft versions and the Petitions folder
+
+Each run of the **Generate petition** dialog keeps its draft as a new numbered version instead of overwriting the previous one, so a case keeps its draft history and your team can compare versions or hand the client a stable, named copy.
+
+- Drafts are filed in a **Petitions** folder on the case and named with the debtor and a version number — for example **Petition (Draft) - Jane Doe - Version 3.pdf**, or **Petition (Draft) - Version 3.pdf** when there is no debtor name. Earlier versions are kept.
+- The watermarked draft and the unwatermarked copy for signatures share one numbering sequence and the same naming, so each run is one version whichever copy you asked for.
+- When you ask for separate signature pages, they are filed next to the draft with the same version number — for example **Signature Pages - Jane Doe - Version 3.pdf**.
+- Version numbers are never reused, even after a version is deleted.
+- Draft versions and their signature pages are never offered as documents to include in a new draft, and are never merged into a petition, whatever they are renamed to.
+- The **Petition** compiled for the eFiling packet is saved in the **Petitions** folder too.
+- When signed signature pages are merged back, they go into the newest draft version — or, when the signed pages came from a particular version, into that version.
+
+> TODO: Confirm how the **Save location** choice interacts with the Petitions folder for versioned drafts.
+
+### How the dialog builds a draft
+
+The **Generate petition** dialog builds the draft in one background run:
+
+- Glade first regenerates every section form, the debtor and creditor files, and the creditor matrix from the current answers, then builds the draft from them. A draft is never assembled from section files older than the latest answers.
+- The draft contains exactly the documents you selected, in the order you put them. A section whose form no longer exists — because the section is now hidden — drops out. The creditor matrix is included only if it was regenerated successfully in that run; an older copy is never used in its place. Nothing you did not select is added.
+- You can choose to **complete the questionnaire** once the draft is built. The questionnaire is completed the same way a submit completes it, without regenerating every document a second time. On a template with a review step, it is submitted for review instead. If completing fails, the draft is still kept.
+- If you asked for separate signature pages and they could not be produced, the result says so rather than leaving them silently missing.
+- A run that has not finished after 20 minutes is reported as failed.
+- Submitting the questionnaire, and the older draft button, behave as they did before.
+
+> TODO: Confirm when the Generate petition dialog switched to versioned drafts and the background run, and which options it shows.
+
 > TODO: Confirm what the draft's version choice — working draft, or for signatures with no watermark — does on this path, and whether a draft compiled this way is marked at all. The petition compiled here is assembled from documents that were generated earlier, so it does not carry the margin marking described above.
 
 The creditor matrix is appended to the petition draft as its final pages — see [Creditors](../schedules/creditors.md#the-matrix-in-the-petition-draft).
@@ -76,6 +103,7 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.
 - The shield count on a draft is a snapshot and does not update as fields are corrected.
+- Drafts generated before versioning was introduced are not renamed or moved; a case can show an older single **Petition (Draft)** document alongside the numbered versions.
 
 ## Related Features
 

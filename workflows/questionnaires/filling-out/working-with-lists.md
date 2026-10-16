@@ -43,6 +43,16 @@ Previously a restore re-added the values as brand-new rows. On a master creditor
 
 > Restoring a row whose case record entry was deleted at the same time brings the questionnaire row back but leaves that entry deleted until the row is next edited. If a restored creditor or asset is missing from the case record, open the row and save it.
 
+### Links Between Lists After Reverting to an Earlier Version
+
+Reverting a questionnaire to an earlier version from **Version History** keeps the links between rows in different lists. An exemption stays linked to its asset, and liens, codebtors, "others to be notified", and Statement of Financial Affairs links all point at the same rows they did in the version you reverted to.
+
+- Previously a revert silently unlinked every one of these selections across the whole questionnaire. Staff typically found the exemptions unlinked at ready-to-file and had to re-link them, or delete and re-enter them, by hand.
+- A link that was already broken in the version you revert to stays broken. Glade does not guess at a replacement row.
+- A revert that keeps every link on the same rows no longer records those links as edited in the questionnaire's change history.
+
+> TODO: Confirm whether links already broken by a revert before this fix have been repaired on in-progress questionnaires, or whether staff should re-check them.
+
 ### Concurrent Edits to List Rows
 
 Questionnaires can be open in multiple browser sessions at once — for example, a paralegal and an attorney reviewing the same form, or one user editing the form while a teammate imports data into a list field. List and table rows are now preserved across those concurrent saves:
