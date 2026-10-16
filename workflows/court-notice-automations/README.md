@@ -11,7 +11,7 @@ Court notice automations act automatically when classified PACER court notices a
 - [Notice Classification](./notice-classification.md) — how incoming notices are classified, the available notice types, rescheduled and reset notices, and docket text.
 - [Email Actions](./email-actions.md) — sender identity, recipients, email formatting, and re-sending a run's email.
 - [Email Tokens](./email-tokens.md) — case, debtor, 341 meeting, and video hearing tokens in the subject and body.
-- [Create Task Actions](./create-task-actions.md) — creating a task on the case, due dates, and assignment rules.
+- [Create Task Actions](./create-task-actions.md) — creating a task on the case, due dates, assignment rules, and assigning to the case's owners.
 
 ## Related Features
 
