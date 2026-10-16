@@ -83,6 +83,7 @@ Each credit counseling record has its own permission list. The attorney's team m
 - Enrollments sent before full names were preserved may have created a duplicate record on the provider's side under a shortened or altered name. Those older cases can stay stuck waiting on a certificate and may need the provider record cleaned up by hand before the certificate attaches.
 - A certificate uploaded to the wrong case or for the wrong course cannot be removed by your team. Contact Glade support to have it cleared so the correct certificate can be attached.
 - Client-paid counseling must be paid by credit or debit card through Glade's checkout. It cannot be billed to the firm's invoice or added to a payment plan.
+- **Client-paid post-filing debtor education works without an Evergreen account.** Sage enrolls clients under the firm's Abacus connection, so the client's checkout for post-filing debtor education uses the purchase link set on the firm's Abacus account. Previously a client-pays firm with no Evergreen account could not send a post-filing enrollment request at all unless an earlier course on the case had already been purchased. If the Abacus account has no purchase link set, the request is refused with a message asking the firm to configure one.
 - Whether the client or the firm pays is a firm-wide choice per provider. It cannot be varied case by case, and switching it does not affect clients who have already been enrolled.
 
 ## Related Features
