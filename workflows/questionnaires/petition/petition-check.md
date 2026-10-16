@@ -71,7 +71,7 @@ Previously **Go to field** on an advisory finding took you to a field that looke
 A finding on a cell inside a list names the entry the row describes, so several findings on the same column of the same list can be told apart.
 
 - The row's name appears under the field label — the creditor, the property, or whatever the row is about. It is read from the row's own answers: the sub-field your firm's template marks as the row's title, or, on the Master Property List, the category and description together.
-- **Go to field opens that row.** It opens the row's editor on the right subsection with the cell in question focused, instead of scrolling to the top of the list. Where the row has been removed since the check ran, it falls back to scrolling to the list rather than opening a different row.
+- **Go to field opens that row.** It opens the row's editor on the right subsection with the cell in question focused, instead of scrolling to the top of the list. This works on the first click even when the list is in a different section from the one you are on. Previously, choosing **Go to field** on a list finding from another section — a Master Creditors List finding while you were on Schedule I, for example — started toward the field and then sent you back to the section you started in, with no field open. Where the row has been removed since the check ran, a message tells you so rather than opening a different row or doing nothing.
 - Where a subsection's findings are collapsed into a single **N issues in the list** line, that line names the rows it covers — up to three of them, then a count of the rest.
 - Table findings are unchanged: a table repeats the same fields across its columns, and those findings already name the column they belong to.
 

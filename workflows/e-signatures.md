@@ -31,6 +31,15 @@ A request moves through these stages:
 - When every signer has finished but the signed document is still being assembled, the firm's view says the document is being generated. Previously this state read **"Awaiting signatures from 0 signers"**, which suggested the request was stuck when it was simply finishing.
 - The field-placement prompt clears once fields have been placed, so a request that is ready for signers no longer invites staff to place fields again.
 
+### Signing order
+
+When a request has signers in more than one round — for example, the clients first and then the attorney — each round is invited only after everyone in the round before it has signed.
+
+- **The attorney is invited only after every client has signed.** On a joint request, both clients are invited together, and one client's signature alone does not send the attorney's invitation. Previously the attorney could be emailed while a client still had not signed.
+- Each signer is invited once per send. Saving the request again, or a repeated update from the signing service, does not email signers who were already invited. An invitation that failed to deliver is retried.
+- Voiding and re-sending a request starts the order again from the first round.
+- Requests that were already out for signature before this change keep their earlier behavior. To apply the signing order to one of them — for example, if a signer never received an invitation — void and re-send it.
+
 ### Requests sent by an automated workflow step
 
 An e-signature request placed on a workflow step behaves the same way whether a staff member attaches it by hand or the step fires automatically as the case progresses. In both cases the signer opens the request and is taken into the signing wizard.
@@ -42,8 +51,7 @@ Previously a step that fired automatically produced a request the client could n
 - A document renamed without ".pdf" at the end of its name can be sent for signature. Glade adds ".pdf" to the file name it gives the signing service. Previously the signing service rejected the file, and sending failed every time with a generic error.
 - When the signing service rejects a document, the error now says why in plain words (for example, that the service rejected the document's file name), instead of a generic message.
 - A file that isn't a PDF is refused when it is uploaded or replaced on a request, with a message saying the file is not a PDF. The request keeps its current status rather than being marked as failed.
-
-> TODO: Confirm the exact wording of the rejection messages shown in the app.
+- The send, upload and replace dialogs show the reason itself. A file name the signing service rejects shows **"The e-signature service rejected this document's file name."**, and any other rejection by the signing service shows **"The e-signature service rejected this document."** A file that isn't a PDF shows **"This file is not a PDF. Only PDF files can be sent for signature."** An unexpected server or network failure still shows the generic retry message, such as **"Couldn't send this document for signature. Try again."**
 
 ### Completed requests
 
