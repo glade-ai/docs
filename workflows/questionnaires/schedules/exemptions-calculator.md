@@ -58,6 +58,16 @@ When the exemptions agent claims a property at 100% of its fair market value, th
 
 > TODO: Confirm what the agent records when the property has no fair market value entered against it — whether the claim is left unpriced, skipped, or recorded at zero.
 
+#### Every asset gets an answer
+
+Each run of the exemptions agent returns every asset on the case, with either a proposed exemption or a note explaining why none is proposed and that the asset needs review.
+
+- **Clothing and other personal property are no longer dropped.** Previously the agent could leave an asset out of its answer entirely — most often clothing — so the asset had no claim and no explanation on Schedule C. The agent now recognizes common labels for these categories (such as "clothes", "clothing", and "wearing apparel") and matches them to the state's personal-property exemptions, for example the Illinois wearing-apparel exemption.
+- When the agent proposes no exemption for an asset, it gives a reason. An asset the agent skips or leaves unexplained is returned with a note asking for manual review, rather than being left out.
+- **Existing claims are kept when the agent skips an asset**, but only where the claim's statute applies to the case's current exemption scheme and its amount can be recorded. Claims under the federal exemptions (11 U.S.C. § 522(d)) are not kept on a case using a state's exemptions in an opt-out state. A claim whose amount is unknown is not recorded as $0.00; the asset gets the review note instead.
+
+> TODO: Confirm where the review note appears on Schedule C, and whether it is visible to users on every case yet.
+
 ### Texas exemptions schedule
 
 Glade can generate the Texas exemptions schedule as a supplemental form alongside the official bankruptcy forms (see [PDF Fill Mappings](../templates/pdf-fill-mappings.md#supplemental-and-local-court-forms)).
@@ -82,6 +92,7 @@ Firm-specific exemption strategy for the AI agent is set under **Settings → Yo
 - Statute citations are displayed as entered in the exemption data. If a statute citation is missing or malformed, the pill still appears but may show an incomplete citation.
 - Moving a secured creditor's collateral between properties previously could leave the creditor on both properties' lien lists, understating equity in this calculator — see [Property Liens on Schedule A/B](./property.md#property-liens-on-schedule-ab).
 - A claim you added or edited by hand can be overwritten by a later run of the exemptions agent when it sits on a property the agent also produces a claim for.
+- An asset returned with a review note instead of a proposed exemption has no claim proposed by the agent on this run; check it by hand before filing.
 
 ## Related Features
 

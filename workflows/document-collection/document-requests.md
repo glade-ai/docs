@@ -34,6 +34,7 @@ A document request defines the checklist of files your team wants to collect fro
 - **Document request types**: "basic" for standard file uploads, "income data" for structured income data collection. See [Income Documents](./income-documents.md).
 - **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
 - **Email notifications** can be toggled on or off per document request template.
+- **Months of paystubs to collect**: Pay organizers have a number field beneath the email notifications toggle that sets how many months of paystubs the client is asked for (blank means 7). See [Income Documents](./income-documents.md).
 
 ## Edge Cases & Limitations
 
