@@ -16,7 +16,8 @@ When a filing succeeds, Glade records the court-assigned PACER case number on th
 When a case is filed directly in PACER instead of through Glade, your team can register it against the workflow from the dashboard's case-status widget, so Glade tracks it alongside cases it filed itself.
 
 - Enter the court-assigned case number to register the case. The registration is attributed to your firm, so the case appears in your firm's case-status views and reports next to cases filed through Glade. Previously a manually registered case was not attributed to the firm and could be missing from those reports.
-- **Filed at date** — an optional date field records the date the court actually accepted the filing, which is often earlier than the day someone entered the case into Glade. After you save it, the date is shown read-only next to the case number.
+- **Filed at date** — a required date field that records the date the court actually accepted the filing, which is often earlier than the day someone entered the case into Glade. Use the filing date shown on the PACER docket. The field is marked required, shows a **Required** error if you leave it empty, and **Save** stays disabled until a date is entered. After you save it, the date is shown read-only next to the case number.
+- The date was previously optional. Cases saved without one are left out of monthly filing reports, so the form no longer lets you save a case number without a date.
 
 ### Case numbers when a case has more than one workflow
 
@@ -25,6 +26,12 @@ A single matter often carries several workflows — a retainer alongside a filin
 - Every workflow in the group now **displays** the case number, taking it from whichever sibling holds one. Opening the retainer on a filed case shows the docket number instead of a blank field. Where more than one sibling carries a number, the most recently created one is shown.
 - The case number is displayed, not copied. It still belongs to the workflow the case was filed under, which is what keeps incoming court notices attached to the right workflow.
 - **Reports and filters that match on case number are unchanged.** They match the workflow that actually carries the number, so a report segmenting cases by whether a case number is present continues to count each matter once rather than once per workflow in the group.
+
+## Edge Cases & Limitations
+
+- Case numbers entered before the filing date became required may have no **Filed at** date and are missing from monthly filing reports.
+
+> TODO: Confirm whether a case number entered without a filing date can have the date added afterwards, and whether the requirement also applies in the newer Glade dashboard.
 
 ## Related Features
 

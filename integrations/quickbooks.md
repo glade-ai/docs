@@ -44,6 +44,7 @@ Glade integrates with QuickBooks Online to automatically sync customer, invoice,
 - A private memo on the QuickBooks invoice includes the Glade invoice ID for cross-reference.
 - The QuickBooks invoice due date is set to the Glade invoice's creation date, so synced invoices show as due immediately rather than relying on QuickBooks' default customer terms. If a synced invoice is later out of date in QuickBooks, the next sync also updates its due date to match.
 - **The invoice date is set explicitly rather than left to QuickBooks.** Glade sends both the transaction date and the due date on every synced invoice. Previously the transaction date was omitted, so QuickBooks stamped the invoice with the day the sync happened to run — which is normally the same day, but is the wrong day for an invoice that syncs after a delay or a retry.
+- **An invoice that is already paid still syncs.** With the default **On invoice payable** timing, an invoice that was paid before its sync ran is still sent to QuickBooks. Previously, depending on timing, a quickly paid invoice could be skipped and never reach QuickBooks.
 - If an invoice is voided in Glade, the corresponding QuickBooks invoice is also marked as voided.
 - Edited invoices (new versions) sync as updates to the existing QuickBooks invoice.
 
