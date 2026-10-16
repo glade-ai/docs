@@ -46,6 +46,13 @@ An e-signature request placed on a workflow step behaves the same way whether a 
 
 Previously a step that fired automatically produced a request the client could not open: the Signature Request panel read **"Couldn't load signature request"** and there was nothing to sign. Only requests attached by hand worked. If a client reported that error on a request nobody had touched the step to send, this was the cause.
 
+### Sending a document whose name has no ".pdf"
+
+- A document renamed without ".pdf" at the end of its name can be sent for signature. Glade adds ".pdf" to the file name it gives the signing service. Previously the signing service rejected the file, and sending failed every time with a generic error.
+- When the signing service rejects a document, the error now says why in plain words (for example, that the service rejected the document's file name), instead of a generic message.
+- A file that isn't a PDF is refused when it is uploaded or replaced on a request, with a message saying the file is not a PDF. The request keeps its current status rather than being marked as failed.
+- The send, upload and replace dialogs show the reason itself. A file name the signing service rejects shows **"The e-signature service rejected this document's file name."**, and any other rejection by the signing service shows **"The e-signature service rejected this document."** A file that isn't a PDF shows **"This file is not a PDF. Only PDF files can be sent for signature."** An unexpected server or network failure still shows the generic retry message, such as **"Couldn't send this document for signature. Try again."**
+
 ### Completed requests
 
 - When a request completes, both the signed document and the signing certificate — the audit record of who signed and when — are attached to the case.
