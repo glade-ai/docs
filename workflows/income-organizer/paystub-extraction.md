@@ -26,6 +26,8 @@ When Glade reads a paystub on its own — on upload, on a re-read, or during a b
 
 **Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](../document-collection/README.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
 
+**Paystub rows show the uploaded file name.** Each paystub row is labeled with the name of the file the client uploaded, such as "Statement for Jul 2, 2026.pdf". This works even when the checklist holding the file isn't the one on screen, which can happen after a workflow switch. Previously those rows showed "Untitled file". The name of the checklist item is not used as the row title, because it would give every file in that item the same name.
+
 ### Two Paystubs With the Same Pay Date
 
 A client can have more than one distinct paystub carrying the same pay date — a regular check plus a bonus, or a correction issued the same day. All of them are kept.

@@ -31,6 +31,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Filling Out Forms](./filling-out/filling-out-forms.md) — pre-filling, simultaneous editing, and template defaults.
 - [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, debtor county, and SOFA free-text dates.
 - [Working With Lists](./filling-out/working-with-lists.md) — row detail views, removing and restoring rows, and concurrent edits.
+- [Striking Rows on Amended Schedules](./filling-out/striking-rows-on-amended-schedules.md) — crossing out a row on an amended schedule so it prints but no longer counts.
 - [Layout and Navigation](./filling-out/layout-and-navigation.md) — resource panel, Source Data, tables, large questionnaires, and mobile.
 - [Printing a Questionnaire](./filling-out/printing.md) — printing a section from your browser.
 - [Submitting a Questionnaire](./filling-out/submitting.md) — fields with errors, Fields Need Attention, submit anyway, and completion.

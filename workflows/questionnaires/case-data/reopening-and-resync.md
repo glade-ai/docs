@@ -27,6 +27,7 @@ If you choose to keep the current answers, a warning banner appears at the top o
 **Get back in sync** does not overwrite anything until you have seen what it would do. Choosing it opens a preview listing each change the sync would make, with a checkbox on every one:
 
 - Only values that have actually drifted since the questionnaire last synced are listed. Values that already agree are left out, so the list is the difference rather than the whole case record.
+- **Changes that would not change anything are left out.** A blank answer and an empty one count as the same. So do a date and that same date at midnight, and two ways of writing the same dollar amount (no more "$0.00 → $0.00"). A real change, such as blank to **No**, is still listed. Previously these no-op rows appeared in the preview, so property rows, attorney address lines, and dates that were already in sync looked like pending updates.
 - Changes are grouped by filer — primary and secondary — and labelled the way the Case Data panel labels them. Amounts, addresses, and Yes/No answers are formatted for reading rather than shown raw.
 - Individual field changes and whole records (a creditor or an asset, for example) are listed separately, and each can be taken or left alone.
 - Applying replaces only what you checked. Anything left unchecked keeps the answer it has now.
@@ -39,7 +40,7 @@ Previously **Get back in sync** replaced every answer with the current case reco
 Before you apply anything, the **Get back in sync** preview shows what would change, as a before-and-after comparison rather than only the incoming value. This lets you judge each difference on its merits instead of accepting the whole set on trust.
 
 - **Individual fields** show the questionnaire's current answer alongside the value from the case record — *current → proposed*. Where the questionnaire has no answer yet, the row reads as setting the value rather than changing it.
-- **Existing creditors and properties** show a per-field comparison of only the fields that would actually change. Previously these rows were labeled just "Update", with no indication of which details differed or by how much — so the only way to know was to apply the change and compare afterwards.
+- **Existing creditors and properties** show a per-field comparison of only the fields that would actually change. The card is still labeled with the creditor's or property's name, even when the name is not changing. A creditor or property with no real changes is left out entirely, unless its duplicate link would change, in which case it stays in the list so you can apply the link. Previously these rows were labeled just "Update", with no indication of which details differed or by how much — so the only way to know was to apply the change and compare afterwards.
 - **New creditors and properties** are shown as additions with the values that would be added. There is nothing to compare against for these.
 
 ### Compare case data
