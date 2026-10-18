@@ -118,6 +118,7 @@ The plan preview's **Explanation** view describes what each field on the plan fo
 
 - Several district forms have sections the calculator does not fill; these print blank (usually with a warning) and must be completed by hand before filing. See [Chapter 13 Plan Districts](./chapter-13-plan-districts.md).
 - A finalized plan keeps the district figures in effect when it was finalized, even when re-opened or regenerated; only the next version picks up changed figures.
+- Plans with a large number of claims preview and generate normally, up to 500 claims. Previously a plan with more than about 50 claims paid through the trustee showed a blank plan form preview — no regular monthly payment in §2.1 and "None" in every Part 3 section — even though the calculator itself was fully filled in. Re-open the preview on any affected case to see the completed form.
 
 ## Related Features
 
