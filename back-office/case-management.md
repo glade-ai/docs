@@ -16,9 +16,7 @@ Case management is the core back-office feature that lets your firm track client
 - A **Last paid** column on the case list shows the date of the most recent succeeded payment on each case, so your team can scan which cases have had recent payment activity and which have gone quiet. Cases with no payments yet show an empty value; the column is sortable like the other date columns.
 - Cases can be initiated by a specific team member and assigned to one or more owners, each of whom can have a role on that case (e.g., Paralegal, Documents Team).
 - **The email announcing a new case owner links to the case.** When a case is reassigned, the new owner is emailed and the button in that email opens the case. It previously went through an older dashboard redirect that no longer resolved, so the link was dead and the new owner had to find the case by hand. Only the new owner is emailed, as before.
-- **A handoff note becomes a task for the person you hand off to.** When you hand a case off — giving a teammate a role on the case — and type a note, Glade creates a task titled "Handoff from <your name>" with the note as its description, linked to the case and assigned to the teammates who were given a new role in that handoff. They receive the usual task assignment email and inbox notification. Previously the note was meant to appear on tasks created later in the workflow, but it was dropped every time.
-  - The note task goes only to team members of the firm, never to the client, and never to the person handing off.
-  - A note needs someone to receive it. Saving a handoff with a note but without giving anyone a new role — re-saving the same people, or only removing a role — is refused, and the case's owners are left unchanged. To message someone who already holds a role on the case, leave an internal note that @mentions them instead; that creates a "Respond to internal note" task for them.
+- **Handing off a workflow step is one action.** When a step hands its role to a teammate, the handoff gives the recipients the role, creates their handoff task, and moves the step's own open work to them in one go. See [Step handoffs](#step-handoffs) below.
 - A case can be marked as the primary case, with associated sub-workflows linked to it. Associated workflows appear together in intake status reports.
 - **Starting an associated case keeps each filer distinct.** When your team starts a new case from an existing one — for example, a joint Chapter 13 continuing as a Chapter 7 — the second filer is carried across as their own person, separate from the primary debtor. Previously the second filer's slot on the new case could be bound to the primary debtor's record, so both debtor slots showed the same name and the primary debtor's details were also written into the second filer's case data fields. Cases that were already affected are not repaired by this change; the second filer's details have to be corrected on those cases.
 - **The spouse is filled in from what the client already gave you.** When you start a joint case from an existing one with **Initiate Associated Case** (for example, from a client's consultation), the Spouse box is pre-filled with the spouse's name, email, and phone number from the client's intake questionnaire. You no longer need to copy them over from another window.
@@ -44,6 +42,25 @@ Case management is the core back-office feature that lets your firm track client
 - **Previewing a case the way the client sees it.** Your team can open a read-only preview of a client's workflow without signing in as the client. The preview renders exactly what the client gets — the same tasks, documents, invoices, and visibility rules, evaluated as though the client were looking at it — with the firm's own navigation left out, so nothing on screen is something the client cannot see. Everything in the preview is read-only: tasks cannot be completed, documents cannot be uploaded or removed, invoices cannot be paid, and messages cannot be posted on the client's behalf. Controls that only view something, such as opening a document to read it, still work. Use it to check what a client is actually looking at before calling them about it.
 - Tags provide lightweight visual categorization (icon and text label) on case list views.
 - Collaborators on a case have specific permissions: ability to assign team members, invite other collaborators, and receive customer notifications. The system tracks how each collaborator was added (manually, as a customer, as an organization member, etc.).
+
+### Step handoffs
+
+A workflow step can hand its role to a teammate — for example, an attorney handing **Case Management Final Review** to a case manager. Saving the handoff does three things at once.
+
+- **The recipients get the role.** The teammates you choose take the step's role on the case.
+- **They get one handoff task.** Glade creates a task titled "Handoff for <step> from <your name>", carrying your note, the priority, and the due date you set, linked to the case.
+  - The task goes to the teammates newly given the role. If nobody is new — for example, you are handing back to the person who already holds it — it goes to everyone who holds the role.
+  - You can add other teammates to the task without putting them on the case.
+  - The task never goes to you, and never to the client.
+  - A note to someone who already holds the role now saves. Previously such a handoff was refused.
+- **The step's own open work moves with the role.** Open items the step sent to the case's workflow owners — questionnaires, credit reports, bookings, invoices, and document checklists — move from the people handing off to the recipients. In a typical case, handing off **Case Management Final Review** moves that questionnaire to the recipient instead of leaving it with the attorney.
+  - These moves are quiet: the recipient is not sent a separate "you were assigned" notice for each item. A moved item's own task still sends its normal assignment email when your firm emails every task assignee, and bookings always do.
+  - Items the client holds stay where they are. Retainers never move.
+  - Handoff task recipients no longer also get the "you were added to this case" email.
+- **Older open work stays put.** A handoff on a case that already has owners no longer adds the recipient to every open "Generate invoice", "Generate terms", and "Review documents" task on the case. Previously a single handoff could add dozens of unrelated tasks to the recipient's list. A plain owner change, and a handoff that gives a case its very first owners, still hand that open work over as before.
+- **The next step skips the people who handed off.** When the handoff releases the next step, that step's new workflow-owner items go to the remaining owners, not to the sender or the role's previous holders. Owners in other roles still receive them.
+
+If moving one document checklist fails, the handoff still saves and the other checklists still move.
 
 ### Firm log numbers
 
