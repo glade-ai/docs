@@ -47,14 +47,11 @@ Use the second when you are collecting wet-ink signatures from the debtor before
 
 ### What goes into the draft, and where it is saved
 
-When you generate a draft you choose which of the case's documents go into it and the order they appear in. Two further options control what is produced and where it is filed:
+When you generate a draft you choose which of the case's documents go into it and the order they appear in. Further options control what is produced and where it is filed:
 
 - **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced. This option works regardless of the firm's **Generate Signature Pages.pdf on submit** setting.
-- **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
-
-- **File into a checklist item** — instead of downloading the draft and uploading it again, you can have Glade file it straight into a requested item on one of the case's checklists (for example a "Final Draft" item on a checklist your team uses to review the petition with the client). The item is checked against the chosen checklist before anything is generated; picking an item that is not on that checklist is refused and nothing changes on the case. Generating again swaps the previous draft out of that item, so the item holds only the latest draft rather than a stack of copies. The filed draft does not also appear a second time in the case's document list.
-
-> TODO: Confirm the on-screen label of the checklist-item option in the Generate Petition dialog.
+- **Save draft to:** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Petitions**.
+- **Fill requested item:** — when the folder chosen under **Save draft to:** is a checklist with requested items, a second picker appears (placeholder "Choose a requested item…"). It lists that checklist's requested items in checklist order, selects the item automatically when the checklist has only one, and includes **Don't fill a requested item**. Picking a different folder resets the choice. Instead of downloading the draft and uploading it again, Glade files the draft straight into the chosen requested item (for example a "Final Draft" item on a checklist your team uses to review the petition with the client). The item is checked against the chosen checklist before anything is generated; picking an item that is not on that checklist is refused and nothing changes on the case. Generating again swaps the previous draft out of that item, so the item holds only the latest draft rather than a stack of copies. The filed draft does not also appear a second time in the case's document list.
 
 Both the signature pages and save location options were previously offered on the form but had no effect on what was produced. A draft was always saved to Forms & Schedules and never came with a separate signature pages document.
 

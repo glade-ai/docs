@@ -2,7 +2,7 @@
 
 ## Overview
 
-Two settings on a document request template control what happens when a checklist is ready for review. A **review email** replaces Glade's generic "in review" email with a message your firm writes — to the client, the case's assignees, or both — optionally with the finished documents attached. **Submit for review automatically** moves a checklist your team fills in to review as soon as every required item is complete, without anyone pressing **Submit for Review**. Firms use them together, for example to send the client a final petition draft for review the moment it is filed into a "Final Draft" checklist.
+Two settings on a document request template control what happens when a checklist is ready for review. A **review email** replaces Glade's generic "in review" email with a message your firm writes — to the **Client**, **Workflow assignees**, or both — optionally with the finished documents attached. **Submit for review automatically** moves a checklist your team fills in to review as soon as every required item is complete, without anyone pressing **Submit for Review**. Firms use them together, for example to send the client a final petition draft for review the moment it is filed into a "Final Draft" checklist.
 
 ## Key Behaviors
 
@@ -10,17 +10,15 @@ Two settings on a document request template control what happens when a checklis
 
 - **Sent whenever the checklist reaches review.** It goes out whatever moved the checklist to **In Review** — a client submitting, your team submitting, or an automatic submit.
 - **Replaces the generic email.** When a review email is set up, the standard "in review" email is not sent for that checklist. With no review email set up, nothing changes: the standard email goes out as before.
-- **Recipients.** Choose the client, the case's assignees, or both. Each group gets its own review link, and a team member who is also the client's address is not emailed twice.
-- **Silent submissions are respected.** When your team submits a "for your team" checklist without checking **Notify client**, the client is left off the review email; any assignees chosen still receive it. See [Document Requests](./document-requests.md#checklists-for-your-team).
-- **Placeholders.** The subject and body can include the client's name, the checklist's name, and the review link; Glade fills them in when the email is sent.
+- **Recipients.** Choose **Client**, **Workflow assignees**, or both. Each group gets its own review link, and a team member who is also the client's address is not emailed twice.
+- **Silent submissions are respected.** When your team submits a "for your team" checklist without checking **Notify client**, the client is left off the review email; any **Workflow assignees** chosen still receive it. See [Document Requests](./document-requests.md#checklists-for-your-team).
+- **Placeholders.** The **Message** can use `{{clientName}}` (the client's name) and `{{documentRequest}}` (the checklist's name). A review link is added to the email automatically; you do not type a placeholder for it.
 - **Branding.** The email uses your firm's branded email layout and logo.
 - **Sent regardless of the template's email notifications toggle.** That toggle controls only the standard client notification; a review email your firm wrote is always sent.
 
-> TODO: Confirm the exact placeholder names shown in the review email editor (the email supports the client's name, the checklist name, and the review link).
-
 ### Attaching the finished documents
 
-With **attach documents** turned on, the checklist's finished documents are attached to the review email.
+With **Attach the submitted documents** turned on, the checklist's finished documents are attached to the review email.
 
 - Only completed files are attached. Files marked **for your eyes only**, encrypted files, and duplicates are left out.
 - Attachments are capped at 20 MB in total. Documents that would push the email past that limit are left off; the email still sends.
@@ -39,7 +37,7 @@ With **attach documents** turned on, the checklist's finished documents are atta
 
 Both settings live on the document request template:
 
-- **Review email** — subject (up to 250 characters), body, recipients (client, case assignees, or both), and whether to attach finished documents. Clearing it returns the checklist to the standard in-review email.
+- **Send email when submitted for review** — the note under the switch reads "This message replaces the standard review email for this checklist." The fields are **Subject** (up to 250 characters), **Message**, **Recipients** (**Client**, **Workflow assignees**, or both), and **Attach the submitted documents**. Clearing it returns the checklist to the standard in-review email.
 - **Submit for review automatically** — on or off (off by default).
 
 Both settings are kept when a workflow template is cloned.
