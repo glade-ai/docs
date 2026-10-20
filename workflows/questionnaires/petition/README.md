@@ -9,6 +9,7 @@ The Bankruptcy Schedules questionnaire produces the petition packet. Your team c
 - [Petition Check](./petition-check.md) — the consolidated check dialog, issue order and wording, and findings shown on the field.
 - [Cross-Form Consistency Checks](./cross-form-checks.md) — business-income contradictions between Schedule I, the petition, Form 122A-1, and the SOFA.
 - [Generating a Draft Petition](./draft-petition.md) — marked drafts, unmarked copies for signatures, save options, and automatic rebuilds after a completed questionnaire is edited.
+- [Petition Document Order](./document-order.md) — the firm's saved document order, where it applies, and cases rearranged by hand.
 - [Signatures](./signatures.md) — the Sign / Skip / Clear & Submit choices, PDFs from case documents, and where signer names come from.
 
 ## Related Features

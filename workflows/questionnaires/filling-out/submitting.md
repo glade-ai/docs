@@ -26,6 +26,16 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 
 **Who can submit anyway.** Waiving a blocking issue is limited to firm owners, firm Admins, and Glade Admins. Everyone else — case workers, paralegals, and clients working in the portal — still sees the full list of what needs attention, but the acknowledgment checkbox and the **Submit Anyway** button appear disabled, with a note reading *"Only an Admin can submit a questionnaire that has fields needing attention."* They can correct the flagged fields and submit normally; they cannot push a petition past a blocker. This applies on the firm dashboard and in the client portal alike.
 
+**Who can override a single blocking finding.** A blocking finding on the questionnaire's Validation tab has an **Override** button. The same rule applies there:
+
+- **Standard validations** — a required field left blank, for example — can be overridden only by the people who can submit anyway. A case worker or paralegal who tries gets an error and nothing is waived.
+- **AI findings** can still be dismissed by anyone at the firm.
+- Withdrawing an override, which makes the finding block again, is open to anyone at the firm.
+
+Previously any firm member could override a standard validation from the Validation tab, even though the same person could not use **Submit Anyway**.
+
+> TODO: Confirm whether the Override button is hidden on standard validations for people who can't use it, or shown and refused with an error.
+
 **Findings that do not block are shown, not waived.** Not every finding stops a filing. When a submit turns up findings but none of them block:
 
 - The review dialog still opens, so the findings are read rather than passing unseen.

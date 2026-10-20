@@ -28,6 +28,12 @@ The **Remove X selected** button in the list footer counts only the real items y
 
 **Add Item starts a blank row.** Removing a row and then clicking **Add Item** straight away gives you an empty row to fill in. For a period, the new row could open pre-filled with another row's answers — most noticeable on the property lists, where a freshly added item arrived carrying a neighbouring item's details. Rows that shifted position because of the removal also load their own answers rather than the answers of the row that used to sit in that place.
 
+**An empty list shows one starter row, and only an empty list.** In the legacy questionnaire editor, a list shown as rows (rather than as a table) offers a single starter row to fill in when it has no rows yet. Once the list has rows, no starter row appears. Filling in the starter row turns it into the list's first row without losing your place in the field you are typing in.
+
+- Previously the starter row appeared every time the list was opened, even when it already had rows, and it could save several identical blank rows — one per column of the list, each filled with the template's default values (for example a default category and $0). A household goods list could end up with four identical $0 rows after one save.
+- Lists shown as tables never had this problem.
+- **Duplicate blank rows already saved are not removed.** Delete them from the list by hand.
+
 When a list row is deleted, the values inside the row are deleted along with it. Restoring the row from **Removed Items** brings the inner field values back as they were.
 
 ### Restoring Removed List Items

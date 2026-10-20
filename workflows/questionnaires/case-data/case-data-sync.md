@@ -14,6 +14,17 @@ When you edit a case data sync field, the updated value saves automatically and 
 
 Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
 
+### Newer answers are not overwritten by older case data
+
+Case data replaces a questionnaire answer automatically only when case data owns that answer, or when its value is newer than the answer on the form. An answer that a person typed, an AI agent filled, or a calculation produced is kept if it was saved after the case data value.
+
+- This covers the times case data is re-applied without anyone asking for it: a template upgrade, a background sync across the case's other questionnaires, and similar refreshes. Previously these could put back an older case value over a newer answer. In one reported case an upgrade replaced the AI's correct court with an older free-text value that e-filing could not match.
+- An answer that case data filled in itself, or one that has never been answered, is still updated as before.
+- **Name and address fields are compared part by part.** A newer street line on the form is kept even if case data has a newer city.
+- **Choosing to sync still overwrites.** **Use case data** on a field and **Get back in sync** (full or selective) replace the answers you chose, whatever their age. See [Re-opening and Re-syncing](./reopening-and-resync.md).
+- **Income Organizer totals** still flow into the questionnaire when the organizer recalculates, because each recalculation is newer than the figure on the form.
+- When Glade can't tell when a case value was saved, it doesn't overwrite an answer that case data doesn't own.
+
 ### Turning sync off for one questionnaire
 
 You can stop a single questionnaire from syncing with case data without waiting for an out-of-sync banner to offer it. On an in-progress Glade questionnaire, the same three-dot menu that holds the questionnaire's other actions offers:
