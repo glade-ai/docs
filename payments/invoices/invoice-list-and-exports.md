@@ -2,7 +2,7 @@
 
 ## Overview
 
-Your firm's invoices can be browsed and filtered in the invoice list, downloaded as PDFs, exported to CSV, and synced to QuickBooks. This page covers date filtering, how invoices on deleted cases are handled in the lists, invoice and receipt PDFs, the CSV export, and QuickBooks sync.
+Your firm's invoices can be browsed, filtered, and sorted in the invoice list, downloaded as PDFs, exported to CSV, and synced to QuickBooks. This page covers date and account filtering, sorting, how invoices on deleted cases are handled in the lists, invoice and receipt PDFs, the CSV export, and QuickBooks sync.
 
 ## Key Behaviors
 
@@ -11,6 +11,10 @@ Your firm's invoices can be browsed and filtered in the invoice list, downloaded
 The invoice list supports date filtering. The date filters are labeled **Created from** and **Created to**, and filter invoices by their creation date. Both filters can be set independently or together to narrow the list to a specific time window.
 
 Both dates are whole calendar days in **your firm's timezone**, and both ends are included. Picking the 1st and the 6th returns everything created from the start of the 1st through the end of the 6th; picking the same date for both returns that one day. Previously the range stopped at the beginning of the day you named rather than the end of it, so the last day selected was always missing and a single-day range came back empty — which read as "nothing was billed that day" rather than as a filtering problem. If your team learned to set the end date a day later than they meant, that adjustment now over-selects by a day and should be dropped.
+
+**Filtering by Confido account type.** Firms using Confido can narrow the invoice list to invoices that belong to the **Trust** or **Operating** account. An invoice with no Confido or Stripe secondary account set counts as your firm's default Confido account, the same account the invoice list already displays for it. The filter applies to the full list and to the CSV export, so finance teams can review each account without exporting and sorting a spreadsheet by hand.
+
+**Sorting covers the whole list.** Invoices can be sorted by creation date (the default), invoice number, or contact. The sort is applied across every page, not just the rows already loaded. Calculated figures such as the amount due can't be used to sort.
 
 ### Invoices on a deleted case
 
