@@ -29,6 +29,8 @@ When partial payments are enabled on an invoice:
 
 When partial payments are disabled, the client must pay the full balance in a single transaction.
 
+Staff can also schedule a single payment for a future date on a client's saved payment method. See [Scheduled One-Time Payments](./scheduled-payments.md).
+
 The **minimum amount** configured for payment plans does not apply to one-time custom payments. A client paying a single custom amount can pay any amount up to the balance due, even if it is below the payment-plan minimum installment threshold — that minimum only governs payment plan installments (see [Payment Plans](../payment-plans/README.md)).
 
 ### Payment plans
@@ -68,6 +70,7 @@ Destination account settings can be configured per invoice or template.
 
 - [Invoices](./README.md)
 - [Invoice Templates](./invoice-templates.md)
+- [Scheduled One-Time Payments](./scheduled-payments.md)
 - [Payment Plans](../payment-plans/README.md) — Detailed documentation on installment payment configuration and behavior.
 - [Online Payments](../online-payments.md) — How Glade processes payments, supported processors, and payment method management.
 - [Stripe](../../integrations/stripe.md)

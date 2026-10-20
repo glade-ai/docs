@@ -13,6 +13,7 @@ These pages cover how invoices work end-to-end — creating them, sending them, 
 - [Invoice Lifecycle](./invoice-lifecycle.md) — invoice statuses, common payment flows, voiding and skipping, and voided vs. refunded payment labels.
 - [Editing and Versioning Invoices](./editing-and-versioning.md) — which changes create a new version and how payments, payment plans, and custom-terms links carry over.
 - [Payment Options](./payment-options.md) — payment methods, partial payments, payment plans, processing fees, and destination/trust accounts.
+- [Scheduled One-Time Payments](./scheduled-payments.md) — staff scheduling a single future-dated charge on a client's saved payment method, upcoming payments, and what happens on the date.
 - [Invoice Notifications and Reminders](./notifications-and-reminders.md) — client and firm emails, retainer-deferred invoice emails, payment follow-ups, and the Pay Invoice task.
 - [Client Experience and Access](./client-experience.md) — who can view and pay an invoice, and what the client sees when paying.
 - [Invoice List, PDFs, and Exports](./invoice-list-and-exports.md) — date filtering, invoices on deleted cases, invoice and receipt PDFs, CSV export, and QuickBooks sync.
