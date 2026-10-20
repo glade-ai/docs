@@ -17,6 +17,7 @@ Scheduling in Glade allows firms to offer bookable appointments to clients. Firm
 - [Booking Lifecycle](./booking-lifecycle.md) — statuses, rescheduling, unscheduling, cancellation, and deleting a booking.
 - [Appointment Outcomes](./appointment-outcomes.md) — firm-defined labels recording what happened at an appointment.
 - [Workflow Bookings and Access](./workflow-bookings.md) — workflow-created bookings, Schedule Appointment task emails, and booking permissions.
+- [Booking a Client from a Case](./booking-from-a-case.md) — the case summary's Book client action for appointments that aren't part of a workflow step.
 
 ## Related Features
 

@@ -39,3 +39,4 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - [Scheduling](./README.md)
 - [Team Member Assignment](./team-assignment.md)
 - [Booking Lifecycle](./booking-lifecycle.md)
+- [Booking a Client from a Case](./booking-from-a-case.md)
