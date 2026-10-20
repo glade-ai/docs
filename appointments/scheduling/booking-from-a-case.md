@@ -4,8 +4,6 @@
 
 Firm staff can book a case's client into any of the firm's consultation services directly from the case, using the **Book client** action on the case summary. This is for appointments that happen between workflow steps. For example, a paralegal can book "doc prep" appointments to chase missing documents before filing. The appointment is attached to the case you are looking at, but it is not part of any workflow step.
 
-> TODO: The case summary's **Book client** action ships in a separate app release. Confirm the exact labels once it is live.
-
 ## Key Behaviors
 
 - **Book at any point in the case, as many times as needed.** Each booking made this way is a new appointment. It never reschedules an existing booking of the same service. The global booking wizard does reschedule: it moves the client's existing booking of that service instead of adding one.
@@ -14,7 +12,20 @@ Firm staff can book a case's client into any of the firm's consultation services
 - **Firm-wide booking automations still run.** Automations your firm has set up for every new booking still fire.
 - **Choose a service, time and team member.** Any consultation or session service your firm schedules can be booked. You can assign the appointment to a team member at your firm. If you are allowed to book over conflicts, you can book a time that conflicts with existing appointments (see [Conflicts and Concurrent Bookings](./conflicts-and-concurrent-bookings.md)).
 - **Add an internal note.** The note is saved to the case's notes and linked to the booking. It appears a moment after the booking is created.
-- **Tell several bookings apart.** The case summary's Bookings group lists each booking on the case with its service name and status, next to any booking the workflow created.
+- **Tell several bookings apart.** The case summary's **Bookings** group lists each booking with its time and service title, next to any booking the workflow created. A canceled booking shows **· Canceled**, and a skipped one shows **· Skipped**. A booking with no service title still reads **Open booking**.
+
+### How to book from a case
+
+1. Open the case summary.
+2. In the **Bookings** group, choose **Book client**. The group is always shown, even with no bookings, and **Book client** is its last row.
+3. On **Service**, choose the consultation.
+4. On **Note**, add a note, or leave it blank.
+5. On **Time**, pick a time.
+6. Choose **Create booking**.
+
+The client is already known, so there is no customer step. **Create booking** adds a new appointment. It is never **Confirm reschedule**.
+
+If you have moved past **Service**, typed a note, or picked a time, and then press Escape, click close, or click outside, Glade asks **Discard your progress?** before closing. The global booking wizard asks the same question.
 
 ## Configuration
 
