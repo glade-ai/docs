@@ -10,13 +10,13 @@ On a joint bankruptcy case, your team can swap which person is the primary debto
 
 - **Cases with linked workflows can be swapped.** A case that is part of a linked group — for example a petition workflow linked to the triage and retainer workflows before it — can be swapped from the petition workflow's settings, as long as the other checks pass. Previously the swap was refused on any case that wasn't a standalone workflow.
 - **A warning is shown for a linked group.** The swap is still allowed, but your team is told the case is part of a linked group before going ahead.
-- **Only the workflow you swap from changes.** The swap updates the questionnaires that belong to that workflow, plus questionnaires that belong to the case as a whole rather than to one workflow. Questionnaires on the linked triage or retainer workflows are left exactly as they were.
+- **Only the workflow you swap from changes.** The swap updates the questionnaires that belong to that workflow, plus questionnaires that belong to the case as a whole rather than to one workflow. Case data updates for the whole case. Questionnaires on the linked triage or retainer workflows are left exactly as they were.
 
 ## Edge Cases & Limitations
 
 - The intake questionnaires on the other workflows in the group keep the original primary debtor and spouse. Update them separately if they need to match.
 
-> TODO: Confirm the wording of the linked-group warning.
+For a workflow in a linked case group, the swap dialog shows a warning under **Before you swap**. It says that only this workflow's questionnaires change, while case data updates for the whole case.
 
 ## Related Features
 
