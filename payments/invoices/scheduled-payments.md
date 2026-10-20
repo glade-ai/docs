@@ -2,28 +2,32 @@
 
 ## Overview
 
-Firm staff can schedule a single payment on an invoice for a later date, charged to a payment method the client has already saved. Use it when a client agrees to pay a set amount on a specific future day, such as their next payday, without setting up a recurring payment plan. Nothing is charged until the chosen date.
-
-> TODO: The invoice-screen controls for scheduling ship in a separate app release. Confirm the on-screen labels once it is live.
+Firm staff can schedule a single payment on an invoice for a later date from **Pay on behalf of client**. Use it when a client agrees to pay a set amount on a specific future day, such as their next payday, without setting up a recurring payment plan. Nothing is charged until that date.
 
 ## Key Behaviors
 
 ### Scheduling a payment
 
 1. Open the invoice and choose **Pay on behalf of client**.
-2. Enter the amount, choose the client's saved card or bank account, and pick a payment date.
-3. Click **Next**. The summary shows the date the payment is scheduled for and says that nothing is charged today.
-4. Confirm. A confirmation names the amount and the date.
+2. Enter the amount and a **Payment date**. The date defaults to today.
+3. Click **Next**.
+4. Choose the payment method. You can use one already saved to the client, or enter a new card or bank account. A new method is saved to the client when the payment is scheduled.
+5. For a later date, the summary shows **Scheduled for** and **Total to be charged**, and notes that nothing is charged today.
+6. Choose **Schedule $X payment**.
+7. The confirmation names the amount and the date.
 
-- **The date must be after today**, measured in your firm's time zone. You cannot schedule a payment for today.
-- **Nothing happens to the invoice until the date.** No payment is recorded and the balance due does not change.
+- Picking today charges the client now. A later date, up to 6 months ahead and measured in your firm's time zone, schedules the payment instead.
+- An invoice that must be paid in full uses this amount step too, titled **When to pay**. It shows the full balance and the **Payment date**.
+- If part of the balance is already scheduled, the amount step says how much is left to schedule, and **Next** stays disabled until the amount fits.
+- **For a later date, nothing happens to the invoice until that date.** No payment is recorded and the balance due does not change.
 - The payment is a one-time charge. To collect on a repeating schedule, use a [payment plan](../payment-plans/README.md).
 
 ### Upcoming payments
 
-- Scheduled payments are listed under the invoice's **Upcoming payments** with the status **Scheduled**, soonest first.
-- Anyone who can view the invoice can see them, including the client.
-- Staff can cancel a scheduled payment from its row. Once the charge has started, it can no longer be cancelled.
+- The **Upcoming payments** tab lists scheduled payments alongside payment plan installments, soonest first. The tab appears whenever there is an upcoming payment, even when the invoice has no payment plan.
+- Each row shows its own payment method and a **Scheduled** or **Processing** status. Dates are shown in your firm's time zone, including installments.
+- Anyone who can view the invoice can see them, including the client. Clients see the rows read-only.
+- Staff cancel a payment from the row's menu, and Glade asks them to confirm before cancelling. Cancel is available only while the payment is **Scheduled**.
 - A scheduled payment cannot be edited. To change the amount, date, or payment method, cancel it and schedule a new one.
 
 ### On the payment date
@@ -47,7 +51,7 @@ A [payment gate](../../workflows/payment-gates.md) is not satisfied by a schedul
 
 | Rule | Detail |
 |------|--------|
-| Payment method | Must be a card or bank account already saved to the invoice's client. A method belonging to someone else is refused. |
+| Payment method | Must belong to the invoice's client. A card or bank account entered while scheduling is saved to that client when the payment is scheduled. A method belonging to someone else is refused. |
 | Partial payments | If the invoice does not allow partial payments, the scheduled amount must be the full balance due. |
 | Total scheduled | All upcoming scheduled payments on an invoice together cannot exceed the balance due. |
 | Limit | An invoice can hold at most 20 upcoming scheduled payments. |
