@@ -10,6 +10,7 @@ The Bankruptcy Schedules questionnaire carries tools and behaviors specific to i
 - [Schedule A/B Property](./property.md) — liens and equity, the Property summary, Unknown values, and how Part 3 and line 19 print.
 - [Creditors](./creditors.md) — adding creditors, duplicate status, alphabetized schedules, and the creditor matrix.
 - [Schedule I and Income](./income.md) — importing Income Organizer figures and itemizing lines 8f and 8h.
+- [SOFA Other Income](./sofa-other-income.md) — Statement of Financial Affairs Part 2 question 5, one income source per row, and how Form 107 groups rows by year.
 - [Means Test](./means-test.md) — non-consumer Chapter 7 cases and secured debt deductions.
 - [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) — plan elections, lump sums, unsecured pool, arrearage cures, and generated plans.
 - [Chapter 13 Plan Districts](./chapter-13-plan-districts.md) — the districts whose local plan forms can be generated, and what to check by hand on each.

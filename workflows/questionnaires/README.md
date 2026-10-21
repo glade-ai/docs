@@ -47,6 +47,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Schedule A/B Property](./schedules/property.md) — liens, equity, Property summary, and Part 3 and line 19 printing.
 - [Creditors](./schedules/creditors.md) — adding creditors, duplicates, alphabetized schedules, and the creditor matrix.
 - [Schedule I and Income](./schedules/income.md) — Income Organizer import and lines 8f and 8h.
+- [SOFA Other Income](./schedules/sofa-other-income.md) — SOFA question 5 other income as per-debtor lists by calendar year.
 - [Means Test](./schedules/means-test.md) — non-consumer Chapter 7 cases and secured debt deductions.
 - [Chapter 13 Plan Calculator](./schedules/chapter-13-plan-calculator.md) — modeling and generating the Chapter 13 plan.
 
