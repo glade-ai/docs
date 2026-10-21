@@ -42,9 +42,7 @@ A workflow asks its own set-up questions, and the outgoing case cannot always an
 - Questions the outgoing case can answer are **carried over automatically**, including where the two workflows word the same option differently — a "Chapter 7 joint" selection is matched to the target's "Chapter 13 joint".
 - Anything that cannot be carried is **listed before you confirm**, and you answer it as part of the switch.
 - A question whose wording leaves more than one possible match is treated as unanswered and put to you rather than guessed at.
-- **The case Type question is always asked**, even when the outgoing case's answer could carry over — for example, whether a Chapter 7 case is joint or individual. Previously an answer that existed on both workflows carried across without the question appearing, so a joint Chapter 7 case switched to an individual Chapter 7 workflow stayed typed as joint. You must choose a Type as part of the switch, and your answer replaces the old one.
-
-> TODO: Confirm whether the switch dialog preselects the case's current Type. At release the old answer was available to the dialog but not yet shown as preselected.
+- **The case Type question is always asked**, even when the outgoing case's answer could carry over — for example, whether a Chapter 7 case is joint or individual. Previously an answer that existed on both workflows carried across without the question appearing, so a joint Chapter 7 case switched to an individual Chapter 7 workflow stayed typed as joint. You must choose a Type as part of the switch, and your answer replaces the old one. The dialog does not preselect the case's current Type — the choices start with nothing selected.
 
 ### Watching a switch run
 

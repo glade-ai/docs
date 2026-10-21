@@ -13,7 +13,7 @@ Tasks are actionable items created during a case — things like "complete quest
   - The person doing the assigning is not emailed, and nobody is emailed for assigning a task to themselves.
   - **Document review tasks are deliberately left out.** A "Review Documents" task is created every time a client uploads a file, so emailing on those would bury the ones a colleague actually handed over. Case owners continue to receive the existing documents-in-review email for that work.
   - A task that is not attached to a case, and a task that is already complete, sends nothing.
-- **A step handoff moves that step's open internal tasks to the new owners.** When a workflow step is handed off, every open task that step sent to your team — including tasks nobody was assigned to and tasks sent before this change — goes to the people now holding the handed-off role. They become the task's only assignees, so a teammate added to the task by hand is removed. Previously a task with no assignee, such as a review questionnaire sent before the case had an owner, could not be moved by a handoff and stayed unassigned. See [Case Management](../../back-office/case-management.md#step-handoffs) for the handoff itself.
+- **A step handoff moves that step's open internal tasks to the new owners.** When a workflow step is handed off, every open task that step sent to your team — including tasks nobody was assigned to and tasks sent before this change — goes to the people now holding the handed-off role. They become the task's only assignees, so a teammate added to the task by hand is removed. An older task that cannot be tied to the step that sent it stays where it is. Previously a task with no assignee, such as a review questionnaire sent before the case had an owner, could not be moved by a handoff and stayed unassigned. See [Case Management](../../back-office/case-management.md#step-handoffs) for the handoff itself.
   - Tasks the step sent to the client stay with the client. A task sent to both the client and your team counts as a client task.
   - Finished tasks never move — for example a completed or skipped questionnaire, a completed or canceled booking, or a paid invoice.
   - Tasks from other steps are not touched.
@@ -35,8 +35,9 @@ The task list lets each team member clear items they no longer need to watch, wi
 ## Edge Cases & Limitations
 
 - A step handoff replaces every assignee on the step's open internal tasks, including teammates someone added by hand. Re-add them after the handoff if they still need the task.
+- An older open task that cannot be tied to the step that sent it is not moved by a handoff. It stays with whoever holds it, or stays unassigned.
 
-> TODO: Confirm whether some older tasks whose step template could not be identified remain unmoved by a handoff, and whether firms need to contact Glade for those.
+> TODO: Confirm whether firms need to contact Glade about an older task a handoff leaves in place because it cannot be tied to the step that sent it.
 
 - Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
 

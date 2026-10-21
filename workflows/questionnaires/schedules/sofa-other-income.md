@@ -27,8 +27,7 @@ Statement of Financial Affairs Part 2, question 5 asks for income the debtor rec
 - When old table answers are moved into the lists on upgrade, "current year" means the year the answers were last saved, not the year of the upgrade. A questionnaire last saved in an earlier year carries its rows under that earlier year — check the years after upgrading an older questionnaire.
 - Only years that were ticked under the old "When did you receive other income?" question are carried across on upgrade. A table for an unticked year was hidden, and anything left in it is not carried.
 - Empty $0 amounts the old tables filled in by default are not carried across as rows.
-
-> TODO: Confirm whether firms with their own Client Questionnaire template receive the lists automatically or need the template converted and published.
+- A firm that uses its own Client Questionnaire does not receive the lists automatically. That template has to be updated and published first. Questionnaires on it keep the old tables until that published version is in use.
 
 ## Related Features
 
