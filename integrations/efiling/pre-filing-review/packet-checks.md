@@ -2,7 +2,7 @@
 
 ## Overview
 
-Several pre-filing review checks look at the documents in the filing packet themselves: whether each maps to a slot the district accepts, whether the district will take it electronically for this case, and whether the packet is put together correctly. These catch defects that used to surface only as a failed submission or a rejection after filing.
+Several pre-filing review checks look at the documents in the filing packet themselves: whether each maps to a slot the district accepts, whether the district will take it electronically for this case, whether the packet is put together correctly, and whether the compiled petition contains Form 121. These catch defects that used to surface only as a failed submission or a rejection after filing.
 
 ## Key Behaviors
 
@@ -37,7 +37,22 @@ Two advisory findings look at how the packet itself is put together, so defects 
 
 Both start as advisory, so neither gates a filing today — they are there to be read and cleared. **Expect findings on cases that have been sitting unfiled**: a platform-wide check found several hundred workflows with more than one document on a single slot, most of them not yet filed. Working through those findings before filing is the point of the check.
 
+### Form 121 inside the petition
+
+The Statement About Your Social Security Numbers (Form 121) contains the debtor's full Social Security number and is not filed on the public docket as part of the petition. The review reads the compiled petition itself and blocks the filing if Form 121 appears anywhere inside it.
+
+- Applies to every Chapter 7 and Chapter 13 case, in every district.
+- The finding gives the **page numbers** where the form appears, so your team can find it and remove it from the petition before filing. It never repeats any Social Security number digits.
+- The voluntary petition (Form 101), which shows only the last four digits of the number, is not mistaken for Form 121.
+- The check runs on the initial review, when the review is run manually, and again whenever the petition is regenerated — so a petition with the form shows a failed finding the first time the case is reviewed.
+- **If the check cannot read every page of the petition, it reports as inconclusive and does not block submission.** An inconclusive result means the petition was not fully checked, not that it is clean.
+- This was added after a district's petition setup stopped leaving Form 121 out of the compiled petition, and petitions reached the public docket with the form inside. Nothing read the petition itself before filing until now.
+
+This check looks only inside the compiled petition. It does not affect Form 121 filed as its own separate document where the district expects one. See [Filing packet required documents](../filing-packet/required-documents.md).
+
 ## Edge Cases & Limitations
+
+- The Form 121 check does not gate submission when it is inconclusive. If it reports inconclusive, check the petition for Form 121 by hand before filing.
 
 - The check on whether a district will accept a document electronically is advisory, so a filing can proceed past it. The court's system will still refuse the document — filing over the finding converts an early warning into a rejection after submission.
 - A district's answer about a document can depend on the shape of the case, so the same document can raise a finding on one case and none on another in the same district.
