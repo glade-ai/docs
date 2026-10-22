@@ -34,10 +34,11 @@ When staff create a client, Glade checks your firm's existing clients as they ty
   - Name compares the whole name, ignoring capitalization and extra spaces.
 - **Checks start once a value is complete enough** — a full email address, a phone number of at least 10 digits, or a name of at least two words. Partial entries are ignored rather than flagged.
 - **The warning shows what matched** and lists up to five clients. Email matches come first, then clients matching on more details, then the most recently added.
-- **Use the existing client.** One click uses the flagged client instead of creating a new one, and the case is created on that client's record.
+- **Where it appears.** The warning shows under the phone field on the **Create new client** tab when you start a case, on the **Create new client** tab when you book an appointment, and on the **Create client** panel.
+- **Use this client** on the case and booking forms selects that client. The case or booking continues on their record instead of a new one.
+- **Open client** on the **Create client** panel opens that client's record. Holding Command (Mac) or Control (Windows) while clicking opens it in a new tab.
+- **When more than five clients match,** the warning still lists five, and a line under the list reads **More existing clients match than are shown here.**
 - Archived clients and people who are not your firm's clients are never flagged.
-
-> TODO: Confirm which "Create new client" forms show the warning (new case wizard, other intake forms) and how the warning is worded when more than five clients match.
 
 ### Details captured when creating a new client
 

@@ -87,14 +87,13 @@ In the Glade support chat, stopping is now something you do on purpose, not some
 
 - **Leaving no longer stops the assistant.** Going back to the thread list, closing the chat panel or the browser tab, or losing your connection only ends the live view. The assistant finishes its answer and saves it, and if you asked for a person it still hands the request to Glade support. Previously, leaving a few seconds after sending cut the assistant off, so the reply stayed blank forever and a request for a human never reached anyone.
 - **Come back to read the answer.** A reply that finished while you were away is in the conversation the next time you open it.
+- **Stop is the button in the Glade support chat.** It is labeled **Stop** and appears when the assistant starts responding. It stays disabled until the assistant has picked up the question, because a stop sent earlier does nothing, and it stays disabled while a stop is being sent so it cannot be sent twice.
 - **Stop applies only to the reply you press it on.** It does not affect earlier replies or a newer answer in the same thread. Pressing Stop on a reply that has already finished does nothing.
 - **Only people in the conversation can stop a reply**, and the explicit Stop applies only to Glade support conversations.
-- **Stop works at any point.** A reply stopped before the assistant starts answering ends without your question being processed. A reply stopped mid-answer keeps the text written so far.
+- Pressing **Stop** stops that reply. The message settles to the same result you see if you close the chat and open it again. A stop mid-answer keeps the text written so far.
 - **A stopped reply is not shown as an error.** Stopped before any text, it stays blank; stopped mid-answer, it keeps the partial text. The "something went wrong" message appears only when a reply actually fails.
-- **If Stop does not go through**, an error is shown instead of the reply appearing stopped. Press Stop again to retry.
+- **If the stop does not go through,** Stop ends the live view instead. Reopen the conversation to see the reply the assistant finished.
 - Long replies are still cut off by the existing time limit, as before.
-
-> TODO: Confirm when the updated Stop button reaches the Glade support chat. Until it does, pressing Stop only stops the live view and the full reply appears when the conversation is reopened.
 
 ### Case discussions stay with their own case
 
