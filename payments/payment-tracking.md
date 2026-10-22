@@ -58,6 +58,11 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - Refunds are processed through the original payment processor (Stripe or Confido).
 - If processing fees were passed to the customer on the original payment, a proportional fee amount is also refunded.
 - Refund statuses: Pending (submitted to the processor), Succeeded, or Failed.
+- **A refund the processor has accepted is reported as issued.** Once Stripe or Confido accepts a refund, Glade confirms it rather than showing "Couldn't issue the refund", even if a later step on Glade's side runs into a problem. Previously that error could appear after the money had already moved, inviting a retry that refunded the client twice.
+- **Each refund is recorded and counted once.** The refunded amount on the payment goes up by the refund amount exactly once, whether Glade records the refund first or the processor's own confirmation arrives first.
+- **Two refunds on the same payment can't run at once.** If two people (or a double-click) submit a refund on the same payment at the same time, only one refund is issued; the other is rejected because a refund is already pending.
+- **If the processor rejects the refund**, nothing is refunded, the error is shown, and you can try again. The rejected attempt does not appear in the refund list.
+- **If Glade can't tell whether the refund went through** — for example, the processor didn't respond — the refund stays **Pending** and further refunds on that payment are blocked until it is resolved. If the processor did issue it, it is recorded automatically when the processor confirms it; if not, the pending refund must be cleared by Glade support before you can retry.
 - The client receives a notification when the refund completes.
 - Payments recorded as outside-of-Glade cannot be refunded through the system — the firm must handle those refunds directly with the client.
 
@@ -136,6 +141,7 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 ## Edge Cases & Limitations
 
 - Only one refund can be pending per payment at a time. The firm must wait for the current refund to complete before initiating another.
+- A refund whose outcome Glade could not confirm with the processor stays Pending and blocks further refunds on that payment until it settles. If it stays Pending, check with Glade support rather than issuing the refund another way, since the money may already have moved.
 - Refunds on outside-of-Glade payments must be handled outside the system.
 - The amount on a payment can only be corrected when the payment was recorded outside Glade and is attached to an invoice. Processor-handled payments and outside-of-Glade payments not tied to an invoice cannot have their amount changed.
 - QuickBooks sync is one-directional. Changes made in QuickBooks do not flow back to Glade.
