@@ -17,8 +17,39 @@ Client records track the relationship between a client and your firm on Glade. E
 - You can edit a client's name, email, phone number, date of birth, SSN, and address through the **Edit Contact** modal.
 - Follow-up cadence settings can be configured per client to control how frequently automated reminders are sent.
 - **Stopping follow-ups is recorded and attributed.** When someone at your firm turns off automated follow-ups for a client, Glade records who stopped them and when, and shows that on the client's record — so a client who has gone quiet is not a mystery about whether anyone decided to stop chasing them. See [Stopping and resuming client follow-ups](#stopping-and-resuming-client-follow-ups) below.
+- **Possible duplicates are flagged while you create a client.** Typing into a **Create new client** form warns you about existing clients with the same email, phone number, or full name, and lets you use the existing client instead. See [Possible duplicate clients](#possible-duplicate-clients) below.
+- **The new-client form on a new case captures date of birth and an internal note.** See [Details captured when creating a new client](#details-captured-when-creating-a-new-client) below.
+- **Client lists and profiles are visible only to your firm's staff.** Someone outside your firm — including a signed-in client or another firm's staff — cannot open your client list or view or edit a client's profile. A profile opens only for a person who is your firm's client, lead, or team member, or who is on one of your firm's cases.
+- **Each firm keeps its own copy of a shared client's SSN.** When the same person is a client of two firms, each firm sees and edits only the SSN it entered. Saving or clearing the SSN at your firm never changes or removes the other firm's copy.
 - When a client makes a payment through Stripe, their payment profile is linked to the client record automatically.
 - QuickBooks customer IDs can also be linked for accounting integration.
+
+### Possible duplicate clients
+
+When staff create a client, Glade checks your firm's existing clients as they type and warns before a duplicate is created, so intake does not have to search the client list first.
+
+- **What counts as a match.** An existing client is flagged when they share the exact email, phone number, or full name being entered. Matching is exact, not partial:
+  - Email ignores capitalization.
+  - Phone compares digits only, so formatting, spacing, and a leading US country code do not matter — `(404) 555-0134` matches `+1 404 555 0134`. Both the client's phone and contact phone are checked.
+  - Name compares the whole name, ignoring capitalization and extra spaces.
+- **Checks start once a value is complete enough** — a full email address, a phone number of at least 10 digits, or a name of at least two words. Partial entries are ignored rather than flagged.
+- **The warning shows what matched** and lists up to five clients. Email matches come first, then clients matching on more details, then the most recently added.
+- **Where it appears.** The warning shows under the phone field on the **Create new client** tab when you start a case, on the **Create new client** tab when you book an appointment, and on the **Create client** panel.
+- **Use this client** on the case and booking forms selects that client. The case or booking continues on their record instead of a new one.
+- **Open client** on the **Create client** panel opens that client's record. Holding Command (Mac) or Control (Windows) while clicking opens it in a new tab.
+- **When more than five clients match,** the warning still lists five, and a line under the list reads **More existing clients match than are shown here.**
+- Archived clients and people who are not your firm's clients are never flagged.
+
+### Details captured when creating a new client
+
+When you create a new case for a new client, the **Create new client** tab includes two additional fields:
+
+- **Date of birth** — saved to the client's record and shown on their profile.
+- **Internal note** — a short note, such as why the person is calling. It is saved as an internal note on the new case, where the attorney reads it, and also appears in the client's combined notes tagged with that case. It is never visible to the client and follows the usual internal note rules, including notifying anyone tagged in it. See [Internal notes in case conversations](communication-history.md#internal-notes-in-case-conversations).
+
+- The note is optional and limited to 4,000 characters. A note that is too long stops the case from being created until it is shortened.
+- If the case is created but the note could not be saved, the case still exists and you are warned that the note was not saved, so you can add it to the case instead of creating the case again.
+- These fields appear only when creating a new client. Starting a case for an existing client does not offer the internal note field.
 
 ### Imported matters on a contact
 
@@ -67,6 +98,10 @@ Automated follow-ups to a client can be turned off — for example when the clie
 ## Edge Cases & Limitations
 
 - Duplicate client records can occasionally be created if the same person connects through different flows. When duplicates exist, the record linked to a Stripe payment profile is preferred.
+- Creating a client still matches an existing person by email only. Entering an email already on file attaches the new case to that person and keeps their existing name, even if you typed a different name (for example, spouses who share an email). The duplicate warning makes this visible before you save; it does not change it. A different email always creates a separate person, even when the name and phone match an existing client.
+- An email match that differs only in capitalization from what is stored may still create a new person rather than using the existing one. Use **Use this client** from the warning to be sure the existing client is used.
+- A shared client's SSN entered before SSNs were kept per firm cannot be attributed to a firm.
+- Removing a client who has no remaining cases or lead with your firm means their profile can no longer be opened by your staff.
 - Archiving a client is blocked if they have active cases, upcoming bookings, active subscriptions, unpaid invoices, or pending payments. All of these must be resolved first.
 - When you archive a client, their open tasks are completed and their conversations with your firm are archived. The client record itself is preserved for historical reference.
 - The activity entries recording a follow-up stop are written to the client's cases that exist at that moment. A case started afterwards does not receive a backdated entry, though the client record still shows that follow-ups are stopped.

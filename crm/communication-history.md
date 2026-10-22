@@ -46,6 +46,8 @@ Writing a new note is unchanged — Enter has always added a line there.
 
 (Notes on a client's profile — the **Internal Notes** tab on the client record — are a separate feature with their own rules. See [Notes](notes.md).)
 
+An internal note can also be written while creating a new case for a new client, and it is saved to that case. See [Details captured when creating a new client](client-records.md#details-captured-when-creating-a-new-client).
+
 #### Notes filed from somewhere specific on a case
 
 An internal note can be written from the place on the case it is actually about, rather than only from the case conversation. A note written that way stays attached to what it was written about.
@@ -79,6 +81,20 @@ An AI reply can be stopped part-way through, and stopping it now stops the work 
 
 > TODO: Confirm which surfaces offer the stop control and how it is labeled, and whether a client chatting from the portal can stop a reply as well as a team member.
 
+#### Leaving a Glade support conversation does not stop the reply
+
+In the Glade support chat, stopping is now something you do on purpose, not something that happens when you look away.
+
+- **Leaving no longer stops the assistant.** Going back to the thread list, closing the chat panel or the browser tab, or losing your connection only ends the live view. The assistant finishes its answer and saves it, and if you asked for a person it still hands the request to Glade support. Previously, leaving a few seconds after sending cut the assistant off, so the reply stayed blank forever and a request for a human never reached anyone.
+- **Come back to read the answer.** A reply that finished while you were away is in the conversation the next time you open it.
+- **Stop is the button in the Glade support chat.** It is labeled **Stop** and appears when the assistant starts responding. It stays disabled until the assistant has picked up the question, because a stop sent earlier does nothing, and it stays disabled while a stop is being sent so it cannot be sent twice.
+- **Stop applies only to the reply you press it on.** It does not affect earlier replies or a newer answer in the same thread. Pressing Stop on a reply that has already finished does nothing.
+- **Only people in the conversation can stop a reply**, and the explicit Stop applies only to Glade support conversations.
+- Pressing **Stop** stops that reply. The message settles to the same result you see if you close the chat and open it again. A stop mid-answer keeps the text written so far.
+- **A stopped reply is not shown as an error.** Stopped before any text, it stays blank; stopped mid-answer, it keeps the partial text. The "something went wrong" message appears only when a reply actually fails.
+- **If the stop does not go through,** Stop ends the live view instead. Reopen the conversation to see the reply the assistant finished.
+- Long replies are still cut off by the existing time limit, as before.
+
 ### Case discussions stay with their own case
 
 A reply you post in a case discussion is always filed against the case open in front of you.
@@ -103,6 +119,7 @@ None of this changes how you write or read a discussion on the case you are work
 - Case-specific conversations (internal team discussions about a case) are separate from client-facing conversations.
 - A firm administrator's ability to edit and delete other people's messages covers internal notes only. There is no way for anyone other than the author to change a client-facing comment.
 - A note whose author has left the firm can now be edited or deleted, but only by an administrator. Other team members still cannot.
+- In the Glade support chat, closing the chat or navigating away is not a way to cancel a reply. The assistant finishes and saves its answer, and escalates to a person if asked. Use **Stop** to cancel.
 - Stopping an AI reply cannot undo an action the assistant had already started. If a duplicate booking or invoice appears after a stop, that action was already in progress and needs to be removed by hand.
 - Notes written from a booking before appointment context was recorded cannot be reconnected to their appointment. They remain on the case as ordinary internal notes.
 - A note is attached to one subject, not several. A note that covers both an invoice and the checklist behind it has to be filed against one of them, or written on the case conversation instead.
