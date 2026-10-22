@@ -42,6 +42,7 @@ A workflow asks its own set-up questions, and the outgoing case cannot always an
 - Questions the outgoing case can answer are **carried over automatically**, including where the two workflows word the same option differently — a "Chapter 7 joint" selection is matched to the target's "Chapter 13 joint".
 - Anything that cannot be carried is **listed before you confirm**, and you answer it as part of the switch.
 - A question whose wording leaves more than one possible match is treated as unanswered and put to you rather than guessed at.
+- **The case Type question is always asked**, even when the outgoing case's answer could carry over — for example, whether a Chapter 7 case is joint or individual. Previously an answer that existed on both workflows carried across without the question appearing, so a joint Chapter 7 case switched to an individual Chapter 7 workflow stayed typed as joint. You must choose a Type as part of the switch, and your answer replaces the old one. The dialog does not preselect the case's current Type — the choices start with nothing selected.
 
 ### Watching a switch run
 
@@ -50,6 +51,7 @@ A switch is several steps, and each one is recorded as it happens.
 - **A progress view shows each step and its outcome** while the switch runs. You can leave the page and come back to it.
 - **If a step fails, the switch carries on and records the failure** rather than stopping halfway with no account of what happened. By the time the individual steps run the case has already moved, so an abandoned switch would leave the case moved and unexplained.
 - **The outcome is written to the new case as an internal note**, always — including a clean switch with nothing to report. That note also appears in the case's activity history, so a switch is visible from either place. An absent note means the switch never ran, rather than being ambiguous.
+  - The note records the case Type before and after the switch — for example Chapter 7 (Joint) to Chapter 7 (Individual), or that it was unchanged — so it reads correctly even when both workflows share a name. Its billing line lists any invoice lines that were priced from the voided invoice.
 - Switching shows in the activity history under its own label rather than as a general status change.
 
 ### What does not happen
@@ -62,6 +64,10 @@ A switch is several steps, and each one is recorded as it happens.
 
 Invoices on the new case are raised from **that** workflow's invoice templates. A switched case is no longer billed against the workflow it just left.
 
+- **Prices on the target template win.** A line the new workflow's invoice template already prices keeps that price.
+- **A line with no price is filled from the voided invoice.** When the target template leaves a line unpriced — for example an "Attorney Fees" line with no amount — the switch fills it with the price of the line with the same name on the invoice voided by the switch. Names are matched ignoring capitalization and surrounding spaces, and each old line is used once. Previously such a line stayed empty, so the new invoice could carry only the filing costs and the attorney fee was dropped.
+- Once every line has a price, the invoice is ready and its PDF is regenerated. Payments the client already made are then carried forward against the corrected total — see [Switching a Case to Another Workflow](status-tracking/switching-workflows.md#what-carries-over-when-a-case-switches-workflow).
+
 ## Configuration
 
 Nothing is configured for a switch itself. What a case can switch to follows from how your firm's service is set up:
@@ -70,7 +76,7 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 |------------|--------|
 | Workflows grouped under one service | Determines which workflows a case can be moved between. |
 | Whether a workflow is enabled | A disabled workflow is not offered as a destination. |
-| The target workflow's invoice templates | Decide what the case is billed for after the switch. |
+| The target workflow's invoice templates | Decide what the case is billed for after the switch. Lines left unpriced take their price from the matching line on the voided invoice. |
 
 ## Edge Cases & Limitations
 
@@ -80,6 +86,7 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 - Documents already moved are not moved a second time by a repeat run.
 - The archived case keeps its own checklists showing what was asked for there, so the same requirement can appear on both cases. Only the new case's copy holds the client's files.
 - A checklist requirement whose name differs between the two workflows is carried across as a requirement of its own rather than merged, so a renamed requirement can arrive alongside the new case's version of it.
+- An unpriced line on the new invoice with no same-named line on the voided invoice stays unpriced, and the invoice is not ready until someone prices it.
 - A case that has already been switched, then switched back, accumulates a linked chain of archived cases. The client sees only the current one.
 
 ## Related Features
