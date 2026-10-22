@@ -47,7 +47,18 @@ Use the second when you are collecting wet-ink signatures from the debtor before
 
 ### What goes into the draft, and where it is saved
 
-When you generate a draft you choose which of the case's documents go into it and the order they appear in. Two further options control what is produced and where it is filed:
+When you generate a draft you choose which of the case's documents go into it and the order they appear in. The list offered is built to match what belongs in the petition:
+
+- **Ticked by default: the official forms that apply to the case.** Only forms whose section of the questionnaire applies to this case are listed and ticked, in petition order — the case's own drag order first, then your firm's saved order. A form that applies but has not been generated yet is still listed; it is generated with the draft.
+- **The creditor matrix comes last** in the ticked list.
+- **Everything else is an optional extra, unticked.** Every other file on the case — including your firm's own questionnaire PDFs, such as fee agreements or compensation statements — appears in the list unticked. Tick any you want appended to the draft.
+- **Not offered at all:** earlier drafts, signature pages, the compiled petition, legacy copies, plain-text files, and official forms whose section does not apply to the case.
+- **A form that does not apply is never merged,** even if an old copy of it is still on the case.
+- Generating a draft without changing the selection produces exactly the ticked list.
+
+Previously the list ticked official forms that did not apply to the case (for example, means-test supplements or other states' forms) and described them as generated with the draft, although they were never actually merged. It also ticked your firm's own questionnaire PDFs filed in Forms & Schedules, and those were merged into the petition.
+
+Two further options control what is produced and where it is filed:
 
 - **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced. This option works regardless of the firm's **Generate Signature Pages.pdf on submit** setting.
 - **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
@@ -76,6 +87,7 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.
 - The shield count on a draft is a snapshot and does not update as fields are corrected.
+- On a case with a very large number of documents (more than about 500), the optional extras list may not include every file on the case. The ticked official forms and the creditor matrix are always complete.
 
 ## Related Features
 

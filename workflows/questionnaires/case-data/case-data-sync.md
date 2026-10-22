@@ -2,7 +2,7 @@
 
 ## Overview
 
-Some questionnaire fields and lists are linked to the case record — they display a value pulled from the case record rather than a standalone response, and edits flow back to it. This page covers how synced fields and entity-bound lists behave, turning sync off for one questionnaire, deleting and restoring case record entities, and how data reaches the schedules from other sources.
+Some questionnaire fields and lists are linked to the case record — they display a value pulled from the case record rather than a standalone response, and edits flow back to it. This page covers how synced fields and entity-bound lists behave, hearing details filled from court notices, turning sync off for one questionnaire, deleting and restoring case record entities, and how data reaches the schedules from other sources.
 
 ## Key Behaviors
 
@@ -13,6 +13,23 @@ Some questionnaire fields are linked to case data — they display a value pulle
 When you edit a case data sync field, the updated value saves automatically and syncs to the case record immediately — no extra confirmation step is required.
 
 Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
+
+### Meeting of Creditors and Confirmation Hearing Details from Court Notices
+
+When a PACER court notice for the case arrives, the details Glade reads from it are written to the case record, so any questionnaire field linked to them fills in on its own — no re-typing from the notice:
+
+- the 341 meeting (meeting of creditors) **date**, **time** (with its time zone, for example *9:30 AM CDT*), and **room**;
+- the 341 meeting's **Zoom meeting ID** and **passcode**;
+- the **confirmation hearing date**.
+
+How the values behave:
+
+- **Late notices still reach the questionnaire.** A questionnaire that was started before the notice arrived fills in when the notice comes in, as long as it is still in progress and syncing. A questionnaire started afterwards is filled from the case record when it is created.
+- **Notices linked to the case later count too.** A notice that arrived before the case was matched to it — for example, before e-filing, before the case number was entered, or before a transfer or import — fills these values once it is linked to the case.
+- **The newest notice wins.** Where several notices exist for the same kind of hearing, the most recent one supplies the values. The room, meeting ID, and passcode come only from the 341 meeting notice.
+- **A value is never blanked.** A notice that leaves a detail out does not clear what is already there. If a notice is cancelled, the value falls back to the previous notice or stays as it is.
+- **A hand correction is kept until a new notice arrives.** If your team corrects one of these values on the questionnaire or the case, the correction stays; processing the same notice again does not overwrite it. A genuinely newer notice does replace it.
+- Nothing fills until your firm's questionnaire template links a field to these values. No Glade questionnaire template ships with that link already in place, including a 341 meeting questionnaire. In the template editor, the case-data binding picker lists them as **341 meeting date**, **341 meeting time**, **341 meeting room**, **341 meeting ID**, **341 meeting passcode**, and **Confirmation hearing date**.
 
 ### Turning sync off for one questionnaire
 
@@ -74,6 +91,7 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 ## Edge Cases & Limitations
 
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening and Re-syncing](./reopening-and-resync.md)).
+- Hearing details are taken only from PACER court notices. The 341 meeting address and dial-in number, and the confirmation hearing time, are not filled this way.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features

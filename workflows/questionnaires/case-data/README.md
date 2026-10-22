@@ -6,7 +6,7 @@ Questionnaires share information with the case record: synced fields and lists r
 
 ## Topics
 
-- [Case Data Sync](./case-data-sync.md) — synced fields, turning sync off, entity-bound lists, blank rows, deleting and restoring entities, removed import actions, and chapter switches.
+- [Case Data Sync](./case-data-sync.md) — synced fields, 341 meeting and confirmation hearing details from court notices, turning sync off, entity-bound lists, blank rows, deleting and restoring entities, removed import actions, and chapter switches.
 - [Re-opening and Re-syncing](./reopening-and-resync.md) — re-opening a completed questionnaire, the Get back in sync preview, and Compare case data.
 - [Template Upgrades](./template-upgrades.md) — release notes, the upgrade prompt, and what an upgrade does to case data, sync, and household details.
 

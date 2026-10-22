@@ -24,7 +24,14 @@ When you click **Submit Questionnaire** and required fields are missing, a **Fie
 
 When a questionnaire is submitted this way, an entry is recorded in the workflow activity timeline showing the questionnaire name and the number of required fields that were left unanswered. This gives your team a full audit trail of bypass submissions, so your team can see at a glance which submissions bypassed validation and how many fields were incomplete at the time.
 
-**Who can submit anyway.** Waiving a blocking issue is limited to firm owners, firm Admins, and Glade Admins. Everyone else — case workers, paralegals, and clients working in the portal — still sees the full list of what needs attention, but the acknowledgment checkbox and the **Submit Anyway** button appear disabled, with a note reading *"Only an Admin can submit a questionnaire that has fields needing attention."* They can correct the flagged fields and submit normally; they cannot push a petition past a blocker. This applies on the firm dashboard and in the client portal alike.
+**Who can submit anyway.** Waiving a blocking issue is limited to firm owners, firm Admins, Glade Admins, and team members with petition override permission through a workflow role. Everyone else — case workers, paralegals, and clients working in the portal — still sees the full list of what needs attention, but the acknowledgment checkbox and the **Submit Anyway** button appear disabled, with a note reading *"Only an Admin can submit a questionnaire that has fields needing attention."* They can correct the flagged fields and submit normally; they cannot push a petition past a blocker. This applies on the firm dashboard and in the client portal alike.
+
+**Petition overrides through a workflow role.** A team member can override blocking petition findings without being made an Admin when a workflow role they hold has **Petition review override** enabled (see [Workflow Roles](../../../back-office/settings.md#workflow-roles)):
+
+- **The Workflow Role set on their team membership applies firm-wide.** It lets them override blocking petition findings on any case in the firm, whether or not they are assigned to that case. Previously the role counted only on cases where they were also assigned, so a member set up with the permission in Team settings still could not override on cases they were not assigned to.
+- **A role assigned on a case still counts for that case.** Holding a role with the permission as one of a case's assignees grants it on that case only.
+- This works for any role with the setting enabled, including custom roles. With the setting off, the role grants nothing.
+- The permission does not make anyone an Admin, and it does not extend to the pre-filing review: signing off on blocking filing findings still requires a flagged role assigned on that specific case. See [Who can clear a blocking finding](../../../integrations/efiling/pre-filing-review/clearing-findings.md).
 
 **Findings that do not block are shown, not waived.** Not every finding stops a filing. When a submit turns up findings but none of them block:
 
