@@ -18,6 +18,18 @@ When a questionnaire uses the review workflow, a client who has submitted it see
 
 Anyone with view or edit access who opens a questionnaire that is not currently editable for them — for example, a client opening a questionnaire they have already submitted for review, or a view-only team member opening one that is still in progress — sees the questionnaire's answers in read-only form. Previously some of these combinations showed a "We are generating your form results…" message that never cleared (most noticeably after submitting a questionnaire for review from the client's own profile); that stuck message no longer appears for anyone who has permission to view the questionnaire.
 
+### Questionnaires that have moved to the new client portal
+
+Glade is moving client questionnaires to a new questionnaire engine one template at a time. Once a client's questionnaire has moved, the client continues it in your firm's new client portal rather than in the older Glade app.
+
+- **A client who opens the questionnaire is sent to the portal.** Opening it from the client's own profile or from their inbox in the older app takes them to the portal in the same tab.
+- **Inside a side panel**, the questionnaire isn't redirected. The panel shows an **Open questionnaire** button instead.
+- **Your team, working from the firm dashboard,** is offered **Open in Glade** for the same questionnaire.
+- **Re-opening a submitted questionnaire** that moves it to the new engine — for example with **Edit Responses** — also takes the client to the portal.
+- **If the questionnaire moves while the client has it open**, saving is refused and the message tells them it now opens in your firm's new client portal and to reload to continue there. Your team sees the same refusal with a prompt to open it in Glade.
+
+> TODO: Confirm which questionnaire templates have moved so far and how firms are told when theirs moves.
+
 ### Access Control
 
 If you navigate to a questionnaire you are not assigned to and are not a member of the firm it belongs to, you see a "You don't have access to this questionnaire" screen. This applies to direct links shared by others — opening the link shows the access denied message rather than an error.
