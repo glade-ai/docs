@@ -13,7 +13,7 @@ The eFile module marks the point in a workflow where the case is filed with the 
 - **The module completes when a matching filing succeeds.** A filing submitted through Glade that succeeds completes the module. A filing recorded as filed outside Glade completes it too, as long as a case number is recorded with it.
 - **Only a matching filing counts.** A Part 1 skeleton filing does not complete a Complete filing module, and vice versa. A Part 2 module completes only on the remaining-schedules filing.
 - **Completing the module releases the next step.** The workflow holds at the step until the module is complete, then continues on its own, in the same way a [payment gate](./payment-gates.md) releases a step once it is satisfied.
-- **The module records which filing completed it**, so firm staff can open that filing from the module.
+- **The module records which filing completed it.** Before that filing succeeds, clicking the **eFile** card opens **Electronic filing**. After it succeeds, clicking the card opens the filing that completed the module.
 - **A case that was already filed when the step is reached is not held.** If a matching filing has already succeeded by the time the workflow reaches the step, the module is created already complete and the workflow carries on.
 - **A filing that lands while Glade cannot check filings is still picked up.** If Glade cannot confirm the filing status when the step is reached, the step is sent anyway with the module pending, and Glade checks again shortly afterwards to catch a filing it missed.
 - **A filing update received twice does not complete the module twice.** Once complete, the module keeps the filing that first completed it.
@@ -21,7 +21,9 @@ The eFile module marks the point in a workflow where the case is filed with the 
 
 ## Configuration
 
-- Add the eFile module to a step in the workflow template, or to a step on a live case, and choose its filing type: complete filing, skeleton filing part 1, or skeleton filing part 2. A filing type is required when adding the module to a live step.
+- In the workflow template editor, add an **eFile** module to a step. Its configuration panel asks for a **Filing type**: **Complete filing** (the default), **Skeleton filing, part 1**, or **Skeleton filing, part 2**. Assignees and conditions are set on the same panel.
+- On a live case, **Add module** lists one **eFile** choice for each filing type. A filing type is required when adding the module to a live step.
+- On the case, the module card is labeled **eFile**. It shows the filing type, and the case number once the filing has succeeded.
 - Use separate modules on separate steps for a skeleton case — one for Part 1 and one for Part 2 — so each filing point advances the workflow independently.
 - Adding the module is optional. Workflows and cases without one behave as before, and cases already in progress keep the workflow version they started on.
 
@@ -31,8 +33,6 @@ The eFile module marks the point in a workflow where the case is filed with the 
 - A filing recorded as filed outside Glade completes the module only when a case number is recorded with it.
 - The eFile module cannot be skipped. The step waits until a matching filing succeeds.
 - A failed filing never completes the module or advances the workflow.
-
-> TODO: Confirm where the eFile module appears in the step editor and how firm staff open the completing filing from it.
 
 ## Related Features
 

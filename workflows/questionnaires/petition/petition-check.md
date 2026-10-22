@@ -76,8 +76,9 @@ Your team can dismiss an advisory or informational finding once it has been look
 - **Any team member can dismiss.** No petition override permission is needed, because dismissing an advisory never clears anything that blocks a submission. A reason is optional.
 - **Blocking findings cannot be dismissed.** They still have to be fixed or overridden by someone allowed to override — see [Submitting a Questionnaire](../filling-out/submitting.md#submitting-with-incomplete-fields).
 - Dismissing, restoring, and overriding a finding are each recorded in the case's activity history.
-
-> TODO: Confirm where the Dismiss and Restore controls and the Dismissed filter appear on screen.
+- **Dismiss and Restore are on the Validation tab.** Open the questionnaire's **Validation** tab and use the findings list with the **All**, **Blocking**, **Advisory**, and **Info** counts. **Dismiss** is the button on an advisory or informational row. A blocking row offers **Override** instead.
+- **The Dismissed filter is in that list's Filter menu.** **Dismissed** appears in **Filter** once at least one finding has been dismissed, and it shows how many. Each row reads **Dismissed by** the team member's name **on** the date, and has **Restore**.
+- These controls are on the Validation tab that includes AI findings. A validation list that only shows the questionnaire's own checks does not include **Dismiss**, **Restore**, or **Dismissed**.
 
 ### A finding on a row of a list names the row
 

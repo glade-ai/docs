@@ -29,9 +29,7 @@ How the values behave:
 - **The newest notice wins.** Where several notices exist for the same kind of hearing, the most recent one supplies the values. The room, meeting ID, and passcode come only from the 341 meeting notice.
 - **A value is never blanked.** A notice that leaves a detail out does not clear what is already there. If a notice is cancelled, the value falls back to the previous notice or stays as it is.
 - **A hand correction is kept until a new notice arrives.** If your team corrects one of these values on the questionnaire or the case, the correction stays; processing the same notice again does not overwrite it. A genuinely newer notice does replace it.
-- Nothing fills until your firm's questionnaire template links a field to these values.
-
-> TODO: Confirm which Glade questionnaire templates (for example, a 341 meeting questionnaire) ship with fields already linked to these values.
+- Nothing fills until your firm's questionnaire template links a field to these values. No Glade questionnaire template ships with that link already in place, including a 341 meeting questionnaire. In the template editor, the case-data binding picker lists them as **341 meeting date**, **341 meeting time**, **341 meeting room**, **341 meeting ID**, **341 meeting passcode**, and **Confirmation hearing date**.
 
 ### Turning sync off for one questionnaire
 

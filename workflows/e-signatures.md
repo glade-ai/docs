@@ -57,10 +57,8 @@ Previously a step that fired automatically produced a request the client could n
 
 - **Brief outages at the signing service are retried automatically.** When Glade sets a request up with the signing service and the service is briefly unavailable, overloaded, or the connection drops, Glade tries again — up to three attempts in total — before giving up. Previously a single passing failure marked the request as failed with no explanation, and later opening it showed *"Unable to generate signer URL, please contact support"*, even though simply retrying the step worked.
 - Rejections that will not succeed on another attempt — such as a document the service refuses — are not retried.
-- **When the request still fails, the error carries the actual reason** (for example, that the e-signature packet could not be created because the service was unavailable) rather than only a generic message, and the reason is recorded so support can see what went wrong.
+- **When the request still fails, firm staff do not see the specific reason.** Opening the signature request still shows **"Unable to generate signer URL, please contact support"**. That reason is not shown on the signature request or on the workflow step.
 - Retrying the workflow step sets the request up again, as before.
-
-> TODO: Confirm where the failure reason is visible to firm staff. The signature request panel and the workflow step may still show the generic "Unable to generate signer URL" text until the reason is stored with the request.
 
 ### Completed requests
 
