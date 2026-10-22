@@ -36,9 +36,6 @@ The task list lets each team member clear items they no longer need to watch, wi
 
 - A step handoff replaces every assignee on the step's open internal tasks, including teammates someone added by hand. Re-add them after the handoff if they still need the task.
 - An older open task that cannot be tied to the step that sent it is not moved by a handoff. It stays with whoever holds it, or stays unassigned.
-
-> TODO: Confirm whether firms need to contact Glade about an older task a handoff leaves in place because it cannot be tied to the step that sent it.
-
 - Dismissing a task does not complete it. The underlying work stays outstanding for whoever is assigned, and the task still counts toward the case's task totals — dismissal only controls whether it appears in your own list.
 
 ## Related Features
