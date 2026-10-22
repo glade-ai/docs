@@ -30,6 +30,16 @@ Your firm keeps its own list of **lead sources** — the channels new clients ar
 - **Retiring a lead source does not change clients already recorded under it.** A client who arrived through a channel your firm has since stopped using keeps that source on their record, so historical reporting stays intact. Re-adding the name later is allowed.
 - **Every firm starts with a default list** — Meta, Google local search ads, Google search ads, Phone, Billboard, and Building sign — which you can rename, reorder, or retire as you like. Firms that were already set up before this existed were given the same starting list. Editing your list does not affect what a newly created firm starts with.
 
+#### Sub-options
+
+A lead source can carry its own list of **sub-options** — for example, the individual referral programs under "Referral", or English and Spanish under "Google". When a new client comes in through that source, intake also records which sub-option they came through, as the client's **lead source detail**.
+
+- **Any lead source can have sub-options**, not just one named "Referral". A source can have up to 50, each up to 255 characters. Names must be unique within that source, whichever way they are capitalized.
+- **The order you set is the order offered.** Saving a source's sub-options replaces its whole list. Renaming the lead source or reordering your lead sources keeps its sub-options.
+- **The detail is stored as text on the client.** Renaming or removing a sub-option later does not change clients already recorded with it.
+- **Source and detail are always recorded together.** When a client is recorded under a new lead source, the detail is replaced too — and cleared if no sub-option was picked — so a client never ends up with one capture's source paired with another capture's detail.
+- **Reports keep grouping on the lead source.** The detail is shown alongside the source on the client's record and in the [Bookings Report](reporting/bookings-report.md), and exported as its own column in the bookings CSV. Filtering that report on a lead source still returns every sub-option under it.
+
 Some intake paths record a lead source without anyone using the picker — a call arriving through your firm's phone integration is stamped with its own source name, for example. A source recorded that way can appear on a client even though it is not an entry in your settings list, and retiring an entry does not stop those paths from recording it.
 
 > TODO: Confirm where the lead source is chosen on a client or lead record, and which reports group by it.
@@ -40,8 +50,8 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - Workflow roles are used to segment team members in reports and to set a default role for case assignments.
 - A role card has two switches, both off by default:
   - **Filing review override:** team members who hold the role on a case can sign off on blocking pre-filing findings for that case. See [Who can clear a blocking finding](../integrations/efiling/pre-filing-review/clearing-findings.md).
-  - **Petition review override:** team members who hold the role on a case can continue past blocking petition findings when submitting that case's questionnaire or generating its petition. The findings dialog still lists what's incomplete, and its acknowledgement starts checked for them. See [Submitting a Questionnaire](../workflows/questionnaires/filling-out/submitting.md).
-- Each permission applies only on cases where the person is a current owner with that role assigned. It doesn't make them a firm Admin, so they still can't delete cases or edit workflows. Clients never receive it.
+  - **Petition review override:** team members whose Workflow Role in Team settings has this enabled can continue past blocking petition findings on any case in the firm, whether or not they are assigned to it; team members who hold the role on a case can do so on that case. This applies when submitting a questionnaire or generating a petition. The findings dialog still lists what's incomplete, and its acknowledgement starts checked for them. See [Submitting a Questionnaire](../workflows/questionnaires/filling-out/submitting.md).
+- The filing review override applies only on cases where the person is a current owner with that role assigned; the petition review override also applies firm-wide through the Workflow Role set on their team membership, as described above. Neither permission makes them a firm Admin, so they still can't delete cases or edit workflows. Clients never receive it.
 - Only a firm Admin can turn either permission on or off, or create, change, or delete a role that has one turned on. Other team members can still rename a role. Reordering roles leaves the permissions as they are.
 
 ### Workflow Templates
@@ -64,6 +74,17 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - **Statement descriptor** sets the text that appears on client bank or card statements.
 - **QuickBooks integration** controls when invoices are synced to QuickBooks: never, when payable, or on first payment.
 - **Confido integration** can be configured for alternative payment processing.
+
+### Glade Billing Invoices
+
+Glade bills your firm weekly for its charges. These invoices are listed under **Settings → Billing → Invoices**, and each has a PDF and a CSV version.
+
+> TODO: Confirm how the PDF and CSV are downloaded from Settings → Billing → Invoices.
+
+- **Invoice PDF layout.** The PDF opens with a summary of charges by category (for example workflow fees, credit reports, and SMS) and the invoice total. Below it, charges are grouped into one block per workflow, sorted by client. Each block is headed by the client's name, which links to the case, and states the workflow name and Glade workflow fee once. Each charge is then listed on its own line with its percentage. Identical charges are combined into a single line marked "× N".
+- Charges that do not belong to a workflow, such as SMS, come after the workflow blocks. The SMS line reads "SMS charges for this week".
+- **Paid receipt email.** When a billing invoice is paid in full, your firm owner receives an email with the charges broken down by category. The full invoice PDF and CSV are attached, and the email links to **Settings → Billing → Invoices**. This email replaces the generic payment receipt previously sent for billing invoices.
+- No receipt is sent for an invoice that is partially paid, has a payment still pending, has a zero total, or is voided.
 
 ### Notifications
 
@@ -158,9 +179,13 @@ Settings are primarily configured through the dashboard account page and individ
 - Rounding to whole dollars happens as a petition is filled, so it does not reach documents already generated. Re-generate the petition to apply it.
 - Rounding does not change the Income Organizer, the figures stored on the case, or electronic filing data — only what prints on the petition PDF and its preview.
 - QuickBooks invoice sync is disabled unless you explicitly configure QuickBooks settings.
+- Glade billing paid-receipt emails are sent only for invoices paid after the feature was introduced. Earlier paid invoices did not get the email retroactively.
+- Billing invoice PDFs written before charges had categories show those charges in the summary as "Other charges". Very large invoices still produce long PDFs; the CSV export is the detailed view.
+- The billing invoice PDF does not state the billing period, and its due date is the date the PDF was generated.
 - AI settings (system message, rules, chat prompt) accept free-form text with no length limit enforced in the interface.
 - Two workflow roles can share the same display rank, which may result in unpredictable ordering.
 - The lead source list is what the picker offers; it is not enforced on the value stored against a client. A source recorded by an automated intake path, or on a client from before the list was editable, can sit outside the list, and retiring an entry does not remove or rewrite it anywhere.
+- Lead source sub-options are not enforced on the detail stored against a client. Removing a sub-option leaves it on every client already recorded with it.
 - Retiring a lead source is not the same as deleting its history. The name stays on every client already recorded under it, so a retired channel continues to appear in reports covering earlier periods.
 
 ## Related Features
