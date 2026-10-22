@@ -100,7 +100,7 @@ Automated follow-ups to a client can be turned off — for example when the clie
 - Duplicate client records can occasionally be created if the same person connects through different flows. When duplicates exist, the record linked to a Stripe payment profile is preferred.
 - Creating a client still matches an existing person by email only. Entering an email already on file attaches the new case to that person and keeps their existing name, even if you typed a different name (for example, spouses who share an email). The duplicate warning makes this visible before you save; it does not change it. A different email always creates a separate person, even when the name and phone match an existing client.
 - An email match that differs only in capitalization from what is stored may still create a new person rather than using the existing one. Use **Use this client** from the warning to be sure the existing client is used.
-- A shared client's SSN entered before SSNs were kept per firm cannot be attributed to a firm and continues to show at each firm as before.
+- A shared client's SSN entered before SSNs were kept per firm cannot be attributed to a firm.
 - Removing a client who has no remaining cases or lead with your firm means their profile can no longer be opened by your staff.
 - Archiving a client is blocked if they have active cases, upcoming bookings, active subscriptions, unpaid invoices, or pending payments. All of these must be resolved first.
 - When you archive a client, their open tasks are completed and their conversations with your firm are archived. The client record itself is preserved for historical reference.
