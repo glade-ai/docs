@@ -79,8 +79,8 @@ Some intake paths record a lead source without anyone using the picker — a cal
 
 Glade bills your firm weekly for its charges. These invoices are listed under **Settings → Billing → Invoices**, and each has a PDF and a CSV version.
 
-> TODO: Confirm how the PDF and CSV are downloaded from Settings → Billing → Invoices.
-
+- **PDF.** Open an invoice from that list. The detail panel shows the invoice PDF. If the PDF cannot be loaded, the panel says **Invoice PDF unavailable**.
+- **CSV.** The line-item CSV is the download button at the top of that same invoice.
 - **Invoice PDF layout.** The PDF opens with a summary of charges by category (for example workflow fees, credit reports, and SMS) and the invoice total. Below it, charges are grouped into one block per workflow, sorted by client. Each block is headed by the client's name, which links to the case, and states the workflow name and Glade workflow fee once. Each charge is then listed on its own line with its percentage. Identical charges are combined into a single line marked "× N".
 - Charges that do not belong to a workflow, such as SMS, come after the workflow blocks. The SMS line reads "SMS charges for this week".
 - **Paid receipt email.** When a billing invoice is paid in full, your firm owner receives an email with the charges broken down by category. The full invoice PDF and CSV are attached, and the email links to **Settings → Billing → Invoices**. This email replaces the generic payment receipt previously sent for billing invoices.
