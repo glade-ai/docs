@@ -43,6 +43,8 @@ The debtor's filing county is worked out from the address on the case, by lookin
 
 - **No AI model is involved.** On questionnaires where this field is computed for you, the county was previously produced by an AI model, which returned plausible but wrong counties for some addresses. It is now a direct lookup.
 - The address has to be complete enough to identify. Where it cannot be resolved to a county, the field is left for you to fill in rather than filled with a guess.
+- **A county in a different state is rejected.** If the lookup returns a place in a different state from the one on the address, that result is ignored and the lookup is tried with another phrasing of the address; if none agrees with the address's state, the county is left blank. Previously the county attached to the lookup's top result was used even when it was in another state — an Orlando, Florida address could be given a New York county, which then raised a false blocking finding in Check petition. Counties already filled in this way are not corrected automatically; check the debtor county on cases where it looks wrong.
+- Where the address has no state, or the lookup result does not name one, the result is used as before.
 - A county that Glade does not recognize for the state blocks e-filing and is reported in the pre-filing review. See [Electronic Court Filing](../../../integrations/efiling/README.md).
 
 ### Free-Text Dates on the Statement of Financial Affairs

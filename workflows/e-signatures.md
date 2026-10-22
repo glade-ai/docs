@@ -53,6 +53,15 @@ Previously a step that fired automatically produced a request the client could n
 - A file that isn't a PDF is refused when it is uploaded or replaced on a request, with a message saying the file is not a PDF. The request keeps its current status rather than being marked as failed.
 - The send, upload and replace dialogs show the reason itself. A file name the signing service rejects shows **"The e-signature service rejected this document's file name."**, and any other rejection by the signing service shows **"The e-signature service rejected this document."** A file that isn't a PDF shows **"This file is not a PDF. Only PDF files can be sent for signature."** An unexpected server or network failure still shows the generic retry message, such as **"Couldn't send this document for signature. Try again."**
 
+### When preparing a request with the signing service fails
+
+- **Brief outages at the signing service are retried automatically.** When Glade sets a request up with the signing service and the service is briefly unavailable, overloaded, or the connection drops, Glade tries again — up to three attempts in total — before giving up. Previously a single passing failure marked the request as failed with no explanation, and later opening it showed *"Unable to generate signer URL, please contact support"*, even though simply retrying the step worked.
+- Rejections that will not succeed on another attempt — such as a document the service refuses — are not retried.
+- **When the request still fails, the error carries the actual reason** (for example, that the e-signature packet could not be created because the service was unavailable) rather than only a generic message, and the reason is recorded so support can see what went wrong.
+- Retrying the workflow step sets the request up again, as before.
+
+> TODO: Confirm where the failure reason is visible to firm staff. The signature request panel and the workflow step may still show the generic "Unable to generate signer URL" text until the reason is stored with the request.
+
 ### Completed requests
 
 - When a request completes, both the signed document and the signing certificate — the audit record of who signed and when — are attached to the case.
