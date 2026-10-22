@@ -58,7 +58,7 @@ Links between related case records — a creditor and the property securing it, 
 
 When a questionnaire generates multiple documents — for example, filled court forms alongside supplemental documents such as a creditor matrix — the documents appear in the case document list in a consistent order: filled court forms first, followed by other questionnaire-generated documents. This ordering is maintained even when new sections are added to the questionnaire after some documents have already been created.
 
-For how the creditor mailing matrix is assembled, see [Creditors](../schedules/creditors.md#creditor-matrix). Editing a completed Bankruptcy Schedules questionnaire rebuilds the petition draft packet — see [Generating a Draft Petition](../petition/draft-petition.md#editing-a-completed-questionnaire-after-the-petition-is-drafted).
+For how the creditor mailing matrix is assembled, see [Creditors](../schedules/creditors.md#creditor-matrix). Completing or editing a Bankruptcy Schedules questionnaire regenerates the filled court forms but does not build a petition draft — see [Generating a Draft Petition](../petition/draft-petition.md#completing-and-editing-the-questionnaire).
 
 ## Edge Cases & Limitations
 

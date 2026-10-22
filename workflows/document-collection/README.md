@@ -7,6 +7,7 @@ Document collection enables your team to request specific files from clients as 
 ## Topics
 
 - [Document Requests](./document-requests.md) — setting up request templates and file slots, assignment statuses, "for your team" checklists, and who can see which checklists and documents.
+- [Review Email and Automatic Submit for Review](./review-email-and-auto-submit.md) — a firm-written email sent when a checklist reaches review, attaching finished documents, and moving a team checklist to review automatically.
 - [Uploading and Reviewing Documents](./uploading-and-reviewing.md) — client uploads, Glade AI's check of an upload, rejections and replacements, submitting for review, moving and deleting files, and re-opening a completed checklist.
 - [Renaming and Downloading Files](./renaming-and-downloading-files.md) — renaming documents from the dashboard and keeping file names on download, shared links, and MyCase imports.
 - [AI-Suggested File Names](./ai-suggested-file-names.md) — the bulk rename step and the document types the suggestions recognize.
