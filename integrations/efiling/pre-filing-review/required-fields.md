@@ -32,6 +32,25 @@ Opening a case with the court asks for a set of answers beyond the petition itse
 - The consistency of the joint-filing answers is checked as well: a case that says it is filed jointly in one place and individually in another is reported rather than being sent to the court to be rejected.
 - Submission still runs its own check at the moment you file, so nothing gets through on a stale review. The difference is that the problem is visible earlier and described in the same place as every other finding.
 
+### Answers that block every Chapter 7 and Chapter 13 filing
+
+Four answers are now blocking pre-filing findings on every Chapter 7 and Chapter 13 case, in every district, when they are left unanswered. A blank answer in any of them does not stop the court from accepting the case — it is recorded with a default that may be wrong — so the review stops the filing until someone answers the question.
+
+| Question | What a blank answer used to do |
+|----------|--------------------------------|
+| How the filing fee will be paid | The court records the fee as paid in full |
+| Whether the debtor has filed bankruptcy in the last 8 years | The court records no prior case |
+| The court division | The court's filing system refuses the case because no office is identified |
+| Whether the case is filed jointly | A joint case is filed as a single debtor |
+
+- **Each finding has a fix button** that opens the question that needs an answer.
+- **Prior bankruptcy can be answered from the case data.** If the case already records a prior bankruptcy for the debtor (for example, from a credit report), that counts as an answer, and the finding is raised only when both the questionnaire and the case data are empty.
+- **The fee and prior bankruptcy answers must be ones the court recognizes.** An answer outside the court's accepted options is treated as unanswered.
+- The fee and prior bankruptcy answers are reported only by these findings, not also as a generic line in the court's required answers, so each gap appears once.
+- **The court division must resolve to a court office.** A division that is not picked, or that does not map to an office the court's filing system recognizes, is blocked. This replaces the earlier court office check that applied to a fixed list of districts; it now applies everywhere. See [District rules](./district-rules.md#district-rules-that-used-to-fail-at-submission).
+- **The joint-filing question was advisory and is now blocking.** Any sign-off an attorney gave on that finding before the change no longer applies, and the finding has to be signed off again (or answered) before the case can be filed. See [Who can clear a blocking finding](./clearing-findings.md).
+- The advisory check that compares the joint-filing answers for consistency now has a fix button that opens the joint-filing question as well.
+
 ### Two answers no longer hold a submission back
 
 Two of these answers were also enforced at the moment of submission, which stopped filings the court would have accepted:
@@ -39,7 +58,7 @@ Two of these answers were also enforced at the moment of submission, which stopp
 - **Marital filing status** no longer blocks a Chapter 7 individual filing at submission when it has been left unanswered.
 - **Whether the case is filed jointly** no longer has to be answered Yes or No to submit.
 
-**An unanswered joint-filing question files the case as an individual filing.** Nothing is assumed from a blank answer, so a case meant to be filed jointly and left unanswered goes to the court as an individual petition. Confirm that answer before submitting a joint case — this is the one situation where the removed check was doing useful work.
+**An unanswered joint-filing question files the case as an individual filing.** Nothing is assumed from a blank answer, so a case meant to be filed jointly and left unanswered goes to the court as an individual petition. The pre-filing review now reports an unanswered joint-filing question as a blocking finding on every Chapter 7 and Chapter 13 case (see [Answers that block every Chapter 7 and Chapter 13 filing](#answers-that-block-every-chapter-7-and-chapter-13-filing)), so this happens only if the finding is signed off rather than answered.
 
 The pre-filing review still reports the answers the case's own district requires, and it remains the place to clear them.
 
@@ -47,7 +66,8 @@ The pre-filing review still reports the answers the case's own district requires
 
 ## Edge Cases & Limitations
 
-- An unanswered joint-filing question no longer stops a submission, and is treated as an individual filing. A joint case that has never had the question answered is therefore submitted as an individual petition rather than being held back — check the answer before filing a joint case.
+- An unanswered joint-filing question is treated as an individual filing. The pre-filing review blocks it, but if the finding is signed off instead of answered, a joint case is submitted as an individual petition — answer the question rather than signing off.
+- If the case's Schedules questionnaire cannot be loaded when the review runs, the fee, prior bankruptcy, court division, and joint-filing findings report as failed rather than unresolved. A fresh review runs at submission, so a temporary loading problem clears on retry.
 - Marital filing status is no longer enforced at submission on a Chapter 7 individual filing. Where the case's district requires it, the pre-filing review is the only place it is reported.
 - The court's required answers are checked against the district resolved for the case. On a case whose filing district has not been set up, those checks report as unresolved rather than passing, and the district block is what needs clearing first.
 
