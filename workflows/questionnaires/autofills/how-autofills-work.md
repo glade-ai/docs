@@ -48,6 +48,12 @@ The national standard deduction amounts — including food and clothing — are 
 - Both routes now reach the same value, so a figure refreshed away from the form matches what the questionnaire computes on screen.
 - **Re-check these fields on any case prepared before this.** A means test deduction or a court division field sitting blank or at $0.00 is the symptom. Re-run the autofill on the field to fill it in correctly.
 
+**Joint cases now fill Schedule I marital status.** On a joint case, Schedule I **Marital Status** fills in as *Married and Spouse is filing*, and Schedule J question 1 (*Is this a joint case?*) as *Yes*. When these autofills ran away from the form, they were not told what type of case it was, so they fell back on the Statement of Financial Affairs answer — leaving marital status blank and the joint-case question at *No*, which staff then had to correct by hand. The fields that take their answer from Schedule I — the means test, Form 122C-1, and the Debtor 2 fields — now follow. Individual cases are unchanged.
+
+- A wrong answer already saved is not corrected on its own. It updates the next time the Statement of Financial Affairs answer changes or the autofill is re-run. An answer someone typed by hand is never overwritten.
+
+> TODO: Confirm which questionnaires this covers. The correction applies where these autofills are worked out on Glade's side; the same fix for autofills worked out in the browser ships separately. Questionnaires on template versions from October 7–20, 2026 may need a template upgrade first.
+
 ## Edge Cases & Limitations
 
 - Reference-data autofills that were blanked before the correction are not repaired automatically. Nothing on the field records that it was cleared rather than never filled, so a blank means-test deduction or court division field needs its autofill re-run to tell the difference.
