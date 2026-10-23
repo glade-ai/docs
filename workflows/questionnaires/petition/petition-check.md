@@ -109,5 +109,6 @@ For rules written against table and list cells, and rules that compare two answe
 - [Petition](./README.md)
 - [Cross-Form Consistency Checks](./cross-form-checks.md)
 - [Validation Rules](../templates/validation-rules.md)
+- [Firm Validation Settings](./firm-validation-settings.md) — turning checks off or making required fields advisory for your firm
 - [Submitting a Questionnaire](../filling-out/submitting.md)
 - [Generating a Draft Petition](./draft-petition.md)

@@ -29,7 +29,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 
 - [Statuses and Access](./filling-out/statuses-and-access.md) — statuses, the client's view after submitting, access control, and collaborators.
 - [Filling Out Forms](./filling-out/filling-out-forms.md) — pre-filling, simultaneous editing, and template defaults.
-- [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, debtor county, and SOFA free-text dates.
+- [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, outside-the-US addresses, debtor county, and SOFA free-text dates.
 - [Working With Lists](./filling-out/working-with-lists.md) — row detail views, removing and restoring rows, and concurrent edits.
 - [Layout and Navigation](./filling-out/layout-and-navigation.md) — resource panel, Source Data, tables, large questionnaires, and mobile.
 - [Printing a Questionnaire](./filling-out/printing.md) — printing a section from your browser.
@@ -54,6 +54,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 ### [Petition](./petition/README.md)
 
 - [Petition Check](./petition/petition-check.md) — the consolidated list of what still needs attention.
+- [Firm Validation Settings](./petition/firm-validation-settings.md) — turning checks off, or running required fields as Advisory or Blocking, for your firm.
 - [Cross-Form Consistency Checks](./petition/cross-form-checks.md) — contradictions between forms in the package.
 - [Generating a Draft Petition](./petition/draft-petition.md) — drafts, signing copies, and automatic rebuilds.
 - [Signatures](./petition/signatures.md) — signature choices and signer names.

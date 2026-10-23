@@ -44,6 +44,16 @@ Two safeguards sit behind that, so a bad read can no longer take a list with it:
 
 In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
 
+### Property keeps its answers when it moves to its category list
+
+Newer versions of the client questionnaire split the property section into separate lists by category — vehicles, accounts, and so on — plus a catch-all list for anything else the client owns. An upgrade copies each property into the catch-all list first, and the next case data sync moves it to the list for its category.
+
+- **A moved property keeps the client's answers.** Its VIN, the names on the title or account, the value the client gave, and its link to a loan all travel with it to the category list.
+- Previously the sync removed the property from the catch-all list and added a fresh, bare row to the category list containing only what the case record held. The client's own answers were dropped — on one reported case a vehicle lost its VIN and loan link, and the client's $26,000 value was replaced by the $23,000 on the case record — so a client's property list could appear to have been wiped after an upgrade.
+- An answer that has no matching question in the category list is not carried across. It is removed as before and can be restored.
+
+> TODO: Confirm whether questionnaires that already lost answers this way are being repaired by Glade, and whether firms should contact support for affected cases.
+
 ### Household details on an upgrade
 
 **Household details now reach the case record on an upgrade.** Dependents and marital status were only written to the case record when a questionnaire was *completed*. **Update now** upgrades a questionnaire that is still in progress and never completes it, so an attorney upgrading a live case saw a blank Household section even though the answers were sitting on the form.
