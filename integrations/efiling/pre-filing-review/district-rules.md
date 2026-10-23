@@ -36,6 +36,8 @@ Three further district requirements are now pre-filing findings rather than fail
 
 **The court office check now covers every district that needs one.** It was first switched on for Idaho and Florida Northern, and applies to all of the districts whose filing system requires a court office: Florida Middle, Florida Northern, Florida Southern, Idaho, Louisiana Eastern, New Mexico, Ohio Southern, Pennsylvania Western, South Carolina, Virginia Eastern, and Washington Western. In each of those, a case whose division does not resolve to an office is now stopped at review rather than at submission.
 
+**Wyoming files every case under its single court office.** Wyoming has one bankruptcy court office, and every Wyoming filing now goes to the court under it, whatever the court division answer is — Casper, Cheyenne, or left blank. A Wyoming case with no division is no longer blocked at review by the court division check, and its filing reaches the court; previously such a filing failed before reaching the court and had to be filed by hand. The questionnaire still asks Wyoming filers for a division, and no other district is affected.
+
 Three further district requirements are checked at review for the same reason — each one previously cleared the review and then failed once a submission was already underway:
 
 - **New Mexico and the presumption of abuse.** On a New Mexico Chapter 7 case that is not exempt from the means test, the presumption of abuse has to be answered yes or no. A case that leaves it unanswered is blocked at review.
