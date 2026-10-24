@@ -20,6 +20,8 @@ Which documents a district expects, and whether each is filed inside the petitio
 
 Some districts fold a form into the petition itself rather than expecting it as its own file — North Carolina Eastern Chapter 7, for example, builds Form 122A-1 and Form 2030 into the petition. Those forms have no separate slot in the packet, and Glade no longer reports them as missing documents. A compliant filing in one of these districts is no longer held up over a form that is already inside the petition. A form the district does expect as its own file is still flagged when it is genuinely absent, including a form that is both built into the petition and filed separately.
 
+**Forms built into the petition never get their own upload slot.** A form the district builds into the petition does not appear in the packet as a separate required upload, in a full filing or a skeleton filing. Previously some skeleton packets listed such a form — for example, Form 2030 in the Southern District of Texas — as a required upload that could never be filled, because the form only ever exists inside the petition.
+
 **Florida Middle District Chapter 13** filings are a correction to this. The Certificate of Credit Counseling and Form 121 (Statement About Your Social Security Numbers) are filed as their own separate documents in this district rather than being folded into the petition. They had been configured the wrong way round, so each now has its own slot in the packet and is expected as a separate file.
 
 ## Related Features
