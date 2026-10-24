@@ -57,6 +57,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Cross-Form Consistency Checks](./petition/cross-form-checks.md) — contradictions between forms in the package.
 - [Generating a Draft Petition](./petition/draft-petition.md) — drafts, signing copies, and automatic rebuilds.
 - [Signatures](./petition/signatures.md) — signature choices and signer names.
+- [Older Petition Drafts](./petition/older-petition-drafts.md) — older petitions moved to Petitions and labeled as legacy.
 
 ## Edge Cases & Limitations
 
