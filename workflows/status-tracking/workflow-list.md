@@ -12,12 +12,18 @@ The workflow list shows your firm's cases in a table that can be sorted, filtere
 - **Unassigned filter**: The assignment filter includes an **Unassigned** option (under an *Assignment Status* group) so you can isolate workflows with no current owner. The workflow list also accepts deep links that pre-apply filters — for example, opening the list from the dashboard's unassigned-workflows widget or from the paralegal report seeds the assignee, status, attorney, or settlement-status filters automatically.
 - **Export unassigned workflows to CSV**: From the workflow list, you can export the current set of unassigned workflows to a CSV file. The export reflects the filters currently applied to the list, so narrowing by status or attorney before exporting limits the output to the matching cases. This is useful for triaging assignment backlogs offline or sharing the list with team leads outside Glade.
 - **Workflow tags**: Workflows can be labeled with tags to group related cases. Each tag is a short label with an optional emoji icon. The workflow list shows a **Tags** column, and the list filters include a tag filter — pick one or more tags to narrow the list to workflows carrying any of the selected tags (selecting several tags shows cases that match any one of them). When tagging workflows, you can choose from the tags your firm already uses, so the same label and icon stay consistent across cases.
+- **Client activity**: Each case records when the **client** last did something on it, separately from the case's general last activity. Only things the client does count — sending a message, uploading a document, submitting or completing a document request, completing a questionnaire, signing the retainer, or approving a credit report. Messages, notes, assignments, and status changes made by your team or by automation do not count, so a case whose client went quiet months ago no longer looks active just because your team has been working it. The workflow list can be sorted by client activity, and filtered to cases whose client activity — or whose general last activity — falls before or after a date. Cases with no client activity recorded are listed last whichever way you sort. The cases CSV export follows these filters and includes a client activity column.
 - **Workflow labels**: A firm-managed set of labels can be applied to cases, several at a time. Labels are separate from tags and do not replace them. See [Workflow Labels](./workflow-labels.md).
 - The list can also be filtered and sorted by time-sensitive filing deadline (see [Time-Sensitive Filing Deadlines](./time-sensitive-filing-deadlines.md)) and narrowed to stale cases (see [Cases That Have Gone Quiet](./stale-cases.md)).
 
 ## Edge Cases & Limitations
 
 - The unassigned-workflows CSV export includes only cases matching the filters currently applied to the list.
+
+- **Payments and e-signature packets do not count as client activity.** A payment plan charges the client automatically, and an e-signature packet can be completed by an attorney alone, so neither reliably means the client acted. A retainer the client signs does count.
+- **In a joint case, the spouse's activity does not count toward the primary client's.** It is recorded on the spouse's own linked case.
+
+> TODO: Confirm where the client activity sort and the activity date filters appear in the workflow list and dashboard widgets.
 
 ## Related Features
 
