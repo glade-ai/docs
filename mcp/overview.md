@@ -82,7 +82,7 @@ Guardrails:
 
 > TODO: Confirm how a firm enables write actions and which of them are available today. They are being switched on in batches.
 
-See the [Tools Reference](tools-reference.md) for the full list.
+See the [Tools Reference](tools-reference/README.md) for the full list.
 
 ### Getting started
 
@@ -128,6 +128,6 @@ Case data fields follow a structured schema covering primary and secondary parti
 
 ## Related Features
 
-- [Tools Reference](tools-reference.md)
+- [Tools Reference](tools-reference/README.md)
 - [Invoices](../payments/invoices/README.md)
 - [Payment Plans](../payments/payment-plans/README.md)
