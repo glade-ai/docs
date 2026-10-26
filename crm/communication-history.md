@@ -44,6 +44,16 @@ An internal note can be edited after it is posted. While you are editing:
 
 Writing a new note is unchanged — Enter has always added a line there.
 
+#### An unfinished note is kept as a draft
+
+Closing the **Add internal note** window before saving no longer throws away what you typed. Clicking outside the window — for example, when switching back to Glade from a PDF you were reading — closes it, and previously the half-written note was lost.
+
+- **Reopening restores the draft.** The next time you choose **Add note** on the same case, the window opens with the text you had typed, along with any contact type, date, and time you had picked, and **Save** is ready to use.
+- **One draft per case.** Each case keeps its own draft, and the draft is the same whichever place on the case you open **Add note** from.
+- **A failed save keeps the note.** If saving fails, the text is put back in the window so you can try again rather than retype it.
+- **The draft is cleared** when the note is saved, or when you empty every field yourself.
+- **Drafts are not stored on the computer.** A draft survives the window closing and moving around Glade, but not reloading the page. Signing out or switching accounts clears every draft, so someone else signing in on the same browser never sees your unsaved note.
+
 (Notes on a client's profile — the **Internal Notes** tab on the client record — are a separate feature with their own rules. See [Notes](notes.md).)
 
 An internal note can also be written while creating a new case for a new client, and it is saved to that case. See [Details captured when creating a new client](client-records.md#details-captured-when-creating-a-new-client).
@@ -122,6 +132,7 @@ None of this changes how you write or read a discussion on the case you are work
 - In the Glade support chat, closing the chat or navigating away is not a way to cancel a reply. The assistant finishes and saves its answer, and escalates to a person if asked. Use **Stop** to cancel.
 - Stopping an AI reply cannot undo an action the assistant had already started. If a duplicate booking or invoice appears after a stop, that action was already in progress and needs to be removed by hand.
 - Notes written from a booking before appointment context was recorded cannot be reconnected to their appointment. They remain on the case as ordinary internal notes.
+- An unsaved internal note draft does not survive reloading the page or signing out. Attached documents are not kept in the draft, and an `@` mention in a restored draft shows as plain text — it still becomes a proper mention, and the teammate is still tagged, when the note is saved.
 - A note is attached to one subject, not several. A note that covers both an invoice and the checklist behind it has to be filed against one of them, or written on the case conversation instead.
 
 ## Related Features
