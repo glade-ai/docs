@@ -14,6 +14,17 @@ When you edit a case data sync field, the updated value saves automatically and 
 
 Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
 
+#### Several questions tied to the same case detail
+
+Some case details are asked in more than one place on a questionnaire — the court division, for example, appears on Form 101 and again in a state-specific section that is shown only for some states, and each debtor's name is repeated across many forms. When the questionnaire syncs, Glade sends the case record one value for each detail:
+
+- **An answered copy beats an unanswered one.** A question nobody has answered no longer replaces the real answer with a blank. Previously, whichever copy synced last won, so a hidden, never-answered copy could blank the court division on the case and on every form that reads it — which then blocked pre-filing review.
+- **A blank someone saved still counts.** Clearing an answer on purpose is treated as an answer, and still clears the detail on the case record.
+- **Between two answered copies, the more recently set one wins.**
+- A detail already blanked this way is corrected the next time the questionnaire is saved or re-synced.
+
+**Clearing a dropdown in a list row now clears it on the case record.** Previously, clearing a single-choice answer inside a list or table row — such as a ticked business type — was ignored, and the case record kept the old answer.
+
 ### Meeting of Creditors and Confirmation Hearing Details from Court Notices
 
 When a PACER court notice for the case arrives, the details Glade reads from it are written to the case record, so any questionnaire field linked to them fills in on its own — no re-typing from the notice:
@@ -91,6 +102,7 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 ## Edge Cases & Limitations
 
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening and Re-syncing](./reopening-and-resync.md)).
+- **One unusable list row no longer stops the rest of the questionnaire from syncing.** A row whose values no longer fit the list it sits in is skipped, and the questionnaire's other rows and answers still reach the case record. Previously a single such row, or a single unanswered box, could stop the whole questionnaire from syncing. A skipped row does not reach the case record until its values are corrected.
 - Hearing details are taken only from PACER court notices. The 341 meeting address and dial-in number, and the confirmation hearing time, are not filled this way.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
