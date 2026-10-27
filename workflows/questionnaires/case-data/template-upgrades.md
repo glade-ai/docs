@@ -11,11 +11,12 @@ When your firm publishes a new version of a questionnaire template, questionnair
 Every published version of a questionnaire template carries release notes describing what changed.
 
 - **Publishing requires a note.** A template version cannot be published with a blank release note, or one made up only of spaces.
+- **Updating is offered only on an in-progress form request.** The **New version available → Update now** button in the form request header, and the **Update to current version** menu item, appear only while the form request is **in progress**. They no longer appear once it has been submitted for review, completed, or skipped, and an update attempted on such a form request is refused with the message "Only an in-progress form request can be updated to the latest version. Reopen it first." To update a submitted form request, reopen it first, then update it (see [Re-opening and Re-syncing](./reopening-and-resync.md#re-opening)). Previously a form request submitted for review could still be updated, which reopened its questionnaire for editing while the form request continued to read as submitted.
 - **Update now shows what changed.** When an in-progress questionnaire has a newer template version, choosing **Update now** starts the update and opens a notice showing the current published version and its release notes. Choose **Okay** to dismiss it. If the version details cannot be loaded, the notice offers a retry.
 
 ### Outdated Template Upgrade Prompt
 
-If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked.
+If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked. The **Upgrade Questionnaire** button follows the same rule as **Update now**: on a form request that is not in progress, it shows the "Reopen it first" message instead of upgrading.
 
 ### Upgrading a Questionnaire and Case Data
 
@@ -56,6 +57,7 @@ In either case the upgrade still completes and the questionnaire is usable — o
 
 ## Edge Cases & Limitations
 
+- If a form request is submitted at the same moment someone updates it, or its status and its questionnaire's status disagree, the update is refused with a message that the questionnaire has been submitted and to contact support. Reopening does not help in that case, because the form request already reads as in progress. Previously this showed a generic error.
 - When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade.
 - An upgrade seeds dependents only when the case has none. A case whose dependents are partly entered — one of three on the case record — is left alone rather than topped up, so the remaining dependents have to be added by hand.
 - Marital status is carried across on upgrade only for the married answers. A client recorded as not married does not have that written to the case record this way.
