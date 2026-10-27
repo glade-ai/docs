@@ -10,6 +10,7 @@ The inbox is a notification center inside the back office where your firm receiv
 
 - Notifications appear in the inbox automatically as events occur — no refresh is needed.
 - Each notification includes a summary of the event and a link to the relevant case or resource. Clicking a notification takes you directly to the associated view (for example, clicking a court filing notification opens the Case Status tab for that case).
+- **Removing someone from a task does not notify the others.** When a person is removed from a task or step that has several assignees, the people who remain assigned do not get a new notification. Only people newly added to the task get one. The removed person's notification for that task is cleared. Previously, removing one assignee put a fresh assignment notification in every remaining assignee's inbox, even if they had already dismissed the original, as though they had just been assigned.
 - Notifications have a read/unread state. Unread notifications are visually distinguished.
 - Notifications can be dismissed to remove them from your inbox view.
 
