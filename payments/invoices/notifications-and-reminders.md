@@ -15,12 +15,25 @@ Glade emails clients when an invoice is created or paid, can email the case's ow
 
 ## Configuration
 
-- Email notifications can be enabled or disabled per template.
+- Email notifications can be enabled or disabled per template — see [Turning off the client invoice email](#turning-off-the-client-invoice-email).
 - **Email my team on payment activity** is set on the invoice template and alone decides whether the case's owners are emailed about payments. The workflow's **Email on first payment** setting no longer affects payment emails.
 - Follow-up reminders and their frequency are set on the template — see [Invoice Templates](./invoice-templates.md).
 
+### Turning off the client invoice email
+
+An invoice template has a switch that stops the client invoice email for every invoice created from that template. This is the "Everything you need to know about your invoice" email with a **Pay Invoice** link. It suits firms whose clients do not pay their own invoices, where the email only confuses the client. The switch is on by default, so firms that never change it see no difference.
+
+- **All three sends stop.** With the switch off, the email is not sent when the invoice is created, when it becomes payable, or when someone new is added to the invoice.
+- **Checked when the email would go out.** Turning the switch off also stops emails still waiting on existing invoices from that template, such as ones held back for an unsigned retainer.
+- **Turning it back on.** An email that was skipped while the switch was off is sent the next time the invoice becomes payable.
+- **Copied with the template.** A workflow template exported to another firm keeps the switch as it was. Templates exported before the switch existed import with it on.
+
+> TODO: Confirm the on-screen label and location of this switch in the invoice template editor.
+
 ## Edge Cases & Limitations
 
+- **Turning off the client invoice email covers that email only.** Payment follow-up reminders (controlled by the template's follow-up setting), the client's grouped reminders that list their **Pay Invoice** task, and payment receipts to whoever pays are still sent.
+- Invoices created without a template always send the client invoice email.
 - **Team payment emails need a case.** They go to the case's owners, so an invoice that isn't on a case sends no team email.
 - **Deferred invoice emails cover the invoice email only.** Payment plan reminders and the client's Pay Invoice task are not held back while a retainer is unsigned — only the invoice email itself is deferred.
 
