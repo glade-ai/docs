@@ -44,6 +44,14 @@ Some intake paths record a lead source without anyone using the picker — a cal
 
 > TODO: Confirm where the lead source is chosen on a client or lead record, and which reports group by it.
 
+#### Requiring a lead source on new clients
+
+Your firm can make the lead source picker required whenever staff add a new client, so no new client is created without attribution. The switch is in **Settings > Lead sources** and is off by default.
+
+- With the switch on, staff must pick a lead source when they create a new client through **Create case**, **Create booking**, or **Create client**.
+- **Choosing an existing client is never blocked**, whether or not that client already has a lead source.
+- The requirement applies to staff in the Glade firm app only. Clients that arrive through other intake paths, such as Zapier, your phone integration, webforms, or the MCP, are still created without a lead source when none is supplied.
+
 ### Workflow Roles
 
 - Your firm defines named roles (e.g., "Paralegal", "Documents Team") that team members can be assigned to. Each role has a display rank that controls ordering in lists and reports.
@@ -187,6 +195,7 @@ Settings are primarily configured through the dashboard account page and individ
 - AI settings (system message, rules, chat prompt) accept free-form text with no length limit enforced in the interface.
 - Two workflow roles can share the same display rank, which may result in unpredictable ordering.
 - The lead source list is what the picker offers; it is not enforced on the value stored against a client. A source recorded by an automated intake path, or on a client from before the list was editable, can sit outside the list, and retiring an entry does not remove or rewrite it anywhere.
+- **Require lead source** applies only when staff create a new client in the firm app. It doesn't backfill existing clients that have no lead source, and automated intake paths can still create clients without one.
 - Lead source sub-options are not enforced on the detail stored against a client. Removing a sub-option leaves it on every client already recorded with it.
 - Retiring a lead source is not the same as deleting its history. The name stays on every client already recorded under it, so a retired channel continues to appear in reports covering earlier periods.
 
