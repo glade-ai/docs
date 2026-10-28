@@ -27,6 +27,12 @@ A consultation calendar has to fetch a month's availability before it can show w
 - **Months load in well under a second in typical cases.** A month's availability is fetched in one go rather than day by day, so the wait that made the loading state noticeable in the first place is largely gone.
 - If adding a session to the cart does not complete within about ten seconds, the attempt stops and reports the failure instead of leaving the button spinning indefinitely. Try again, or reload the calendar.
 
+### Buying several sessions at once
+
+When a client buys a package of several sessions, checkout books only the **first** session at the time the client picked. The other sessions are left unscheduled for the client to book later. Previously every session in the package was booked at the same time. On a service that allows one booking per slot the second session failed, and on services with higher limits all the sessions stacked into one slot.
+
+If a paid booking can't get its time after payment, it is saved as unscheduled rather than lost, so a paid purchase always ends with a booking.
+
 ### User Profile Meetings
 
 Each firm member's profile includes a **Meetings** tab that clients can visit to view upcoming appointments and book new consultation types.
