@@ -29,7 +29,7 @@ Each template defines:
 | **Max payment plan months** | Maximum duration for installment plans |
 | **Client modifications** | Whether clients can request changes to the invoice |
 | **Modification message** | Custom message shown when client changes are disabled |
-| **Email notifications** | Whether to send payment emails to the client |
+| **Email notifications** | Whether the client is sent the invoice email with the **Pay Invoice** link for invoices created from this template. On by default. See [Notifications and Reminders](./notifications-and-reminders.md#turning-off-the-client-invoice-email). |
 | **Follow-up reminders** | Automatic payment reminders with configurable frequency |
 | **Destination account** | Which bank account receives the funds |
 
