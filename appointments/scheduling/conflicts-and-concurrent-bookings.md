@@ -27,6 +27,9 @@ A slot is full when the number of **Glade bookings** already held for that team 
 
 A slot that fills between the moment the client loads the time list and the moment they confirm is the common way to hit this. Reloading the booking calendar shows the slot as taken.
 
+- **Two people booking the last open place at the same moment can't both get it.** Glade handles bookings, reschedules and team member changes at a firm one at a time, so the second person sees the slot as taken and their booking is refused. Previously both could pass the availability check and both be booked into the last place.
+- Booking confirmation emails and calendar events go out only after the booking is saved.
+
 ### Counting concurrent bookings per appointment type
 
 By default a slot's occupancy is counted across the team member's whole calendar: a booking of any appointment type at 2pm counts toward the concurrent booking limit of every other appointment type at 2pm. A firm running several consultation types alongside each other — an intake consultation and a sign-and-pay appointment, say — can have each type counted on its own instead, so that booking one does not take capacity away from the other.
