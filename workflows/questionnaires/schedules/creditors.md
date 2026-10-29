@@ -28,6 +28,15 @@ When you mark a creditor as a duplicate of another in a bankruptcy questionnaire
 
 **A list that has duplicates says so.** Rows marked as a duplicate are hidden from the list, and the list now carries a banner above it reading **"N items are currently marked as duplicate in this list"**, with a **Show Duplicates** action next to it for revealing them. The banner counts the hidden rows and appears only when the list actually has some — a list with no duplicates shows neither the banner nor the action. Previously the only sign that items had been tucked away was a small **Show duplicates** toggle, which was easy to miss, so a Master Creditor List could look shorter than it was with nothing to indicate why.
 
+**An open account with a balance is never marked as a duplicate of a closed $0 account.** Glade's automatic duplicate matching now checks each account's status. An open account that carries a balance and a closed account with a $0 or empty balance are never grouped together, even at the same lender, under the same account number, or through a third row with no status. Previously a closed, paid-off account could absorb an open balance at the same lender. On joint cases where the second debtor's credit report was merged in, this dropped open debts off Schedule E/F.
+
+- Two open copies of the same balance, two closed $0 copies, and the same debt listed once under each debtor are still matched as duplicates.
+- An account whose status is unknown can still be matched with either kind.
+- The check applies to automatic matching on the case record and in the questionnaire. Manual duplicate marks are not changed.
+- Open-balance creditors that were wrongly hidden reappear the next time duplicates are re-checked on the case. Copies of one account that one bureau reports as open with a balance and another reports as closed at $0 will also be shown separately.
+
+> TODO: Confirm when duplicate matching re-runs on an existing case, so firms know how to bring back open-balance creditors hidden before this change.
+
 For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md).
 
 ### Creditors are alphabetized on Schedules D and E/F

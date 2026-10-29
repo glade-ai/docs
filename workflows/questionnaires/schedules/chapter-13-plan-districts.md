@@ -71,6 +71,23 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - A Part E pay-in-full claim whose stated value is below the claim. The value prints as entered, and the valuation box is left unticked.
 
   Plan-modification forms and the district's other companion forms are not generated.
+- **Western District of Wisconsin** cases can generate a Chapter 13 plan on the district's Local Form 3015-1.2, *Chapter 13 Plan (Individual Adjustment of Debts)* (Rev. December 4, 2024), which the district's local rules require for initial, amended and modified plans. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. The court's form is a reworded version of the Southern District of Florida's LF-31, so claims are laid out much as on that plan. How claims are placed on this form:
+  - **IIIA (Payment in Full)** lists every secured claim the trustee pays. A long-term mortgage paid through the plan prints its regular payment, with its cure as the arrears payment. This form has no 910-day boxes.
+  - **IIIB (Maintenance of Payments and Cure of Default)** lists every claim the debtor pays directly, as a regular direct payment, with any trustee-paid cure on that claim, followed by the plan's other trustee-paid cures.
+  - **IIIC** values trustee-paid cramdowns, split into real property, vehicles and personal property, and wholly unsecured mortgages. For vehicles and personal property, the creditor's lien amount is the valued secured claim. **IIID** lists lien avoidance and **IIIE** surrendered collateral.
+  - **Section IV** prints priority taxes (IV.A), domestic support obligations with the ongoing payment and cure split (IV.B), and the filing fee (IV.C). The trustee's fee is not printed, as the form instructs.
+  - Each "NONE" box is ticked only when its table is empty.
+
+  Parts Glade has no source for print blank with a warning, so you can fill them in by hand before filing:
+  - the objection deadline on an amended or modified plan;
+  - IIIC's choice between a separate valuation motion and Rule 3012, its method boxes, and its objection deadline;
+  - IV.B payment addresses;
+  - the terms in V.C;
+  - the stay request in Section VI.
+
+  The mortgage modification mediation box is never ticked. If your plan needs it, write the model language in Section VII yourself.
+
+  > TODO: Confirm the Western District of Wisconsin's recorded no-look attorney fee cap and trustee fee percentage. The district was switched on with a 10% trustee fee and the national default fee cap. Also confirm the district is available on every firm's cases, since its district template had to be set up separately after launch.
 
 ## Configuration
 
