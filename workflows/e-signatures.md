@@ -40,6 +40,17 @@ When a request has signers in more than one round — for example, the clients f
 - Voiding and re-sending a request starts the order again from the first round.
 - Requests that were already out for signature before this change keep their earlier behavior. To apply the signing order to one of them — for example, if a signer never received an invitation — void and re-send it.
 
+### Who gets the signing task
+
+The task to sign a request goes to the people who actually have to sign it.
+
+- **Every signer who still has access to the request gets the task.** This includes an attorney named as a signer. Previously the task could go to the client and to a different attorney who was not a signer and could not sign, while the attorney who had to sign got the signing email but no task.
+- **Once a firm team member is a signer, team members who are not signers are taken off the task.** Other people who already had the task, such as the client, keep it.
+- **Changing the signers updates the task.** Swapping one signer for another moves the task to the new signer and removes it from the old one. A signer who had dismissed the task gets it back, and someone who is not a signer and had dismissed it is not added again.
+- To change who signs, change the signer on the request. The task follows.
+
+> TODO: Confirm whether signing tasks on requests that were already out for signature before this change have been corrected, and whether firm staff are stopped from removing a signer from the task by hand.
+
 ### Requests sent by an automated workflow step
 
 An e-signature request placed on a workflow step behaves the same way whether a staff member attaches it by hand or the step fires automatically as the case progresses. In both cases the signer opens the request and is taken into the signing wizard.
@@ -69,6 +80,8 @@ Previously a step that fired automatically produced a request the client could n
 - If the files arrive later than the completion itself — the signing service occasionally delivers them a moment behind — they are filed when they arrive. The client is not sent a second completion email in that case.
 - A court form whose own title contains the word "certificate" (for example, a Certificate of Compliance) is treated as a signed document, not as the signing certificate. Previously such a form was mistaken for the audit record, which stopped the request from completing: every signer had signed, but the request stayed at the awaiting-signatures stage indefinitely.
 - If attaching the documents fails, the request is still recorded as completed rather than being left in an earlier stage. The completion is not lost because of an attachment problem.
+- **A request where everyone has signed no longer waits indefinitely.** When the signing service reports that the last signer has finished but its notice does not confirm the whole packet is complete, Glade asks the signing service for the packet's current state. If the packet is complete, the request completes as normal: the signed document is attached and filed, and the e-signature task is marked done. Previously such a request could show as signed and waiting for the document to generate for days, with no signed document on the case and the task still open.
+  - If the signing service can't be reached for that check, the request is left where the notice put it, as before.
 
 ### Voiding, correcting, and re-sending a request
 
@@ -102,6 +115,7 @@ E-signature requests have no settings of their own. They are sent manually or as
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
 - Filing signed documents into the case's documents applies to requests completing from now on.
+- A request that was already stuck as signed but waiting to generate before this correction is not completed automatically. Raise it with Glade, which can check it against the signing service and complete it.
 
 > TODO: Confirm whether signed documents from requests completed before this shipped have been filed into the Signed Documents folder retroactively, or whether a firm has to ask Glade to do it.
 

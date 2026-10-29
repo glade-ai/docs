@@ -2,7 +2,7 @@
 
 ## Overview
 
-Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, calculated table totals, and autofills that draw on reference data.
+Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, autofills that fill every row of a list, calculated table totals, and autofills that draw on reference data.
 
 ## Key Behaviors
 
@@ -25,7 +25,22 @@ An autofill that draws from a list can join every matching row into a single ans
 - Lines filled before this change may still use commas. Re-run the autofill on the field to re-join it with semicolons.
 - **Every row's description is carried onto the form, not only the first.** Some Schedule A/B description lines were joining only the first row in a category, so a client with three deposit accounts or three business interests had two of the descriptions dropped from the generated petition. All of the rows in the category are now joined. Where a **Describe** field on Schedule A/B had no autofill attached to it at all, one is set up, so the descriptions reach the form instead of being captured on the questionnaire and going no further.
 - **Where the printed form has no separate description slot, the description is combined with the name.** Line 17 of Schedule A/B (deposits of money — checking, savings, and similar accounts) has nowhere on the official form to print a brief description, so the description is printed alongside the institution name in the one field the form provides. Firms had been typing the institution and the description into the name field together as a workaround; that is no longer necessary. An entry with no brief description prints the institution name on its own, as before.
+- **Schedule C describes an account the way Schedule A/B does.** The locked **Brief description** on Schedule C prints a deposit account (checking, savings, certificates of deposit, and similar) as the institution and the last four digits — for example **Chase #1234** — the same as Schedule A/B line 17. An account with no institution prints its account type instead, such as **Checking Account #1234**. A retirement account prints the institution and the type of account, such as **Harbor Funds IRA**, plus the last four digits when there is an account number. The Schedule A/B brief description is not used for accounts, so an account number typed into it no longer reaches Schedule C.
+  - Previously Schedule C printed the Schedule A/B brief description followed by the last four digits. Clients had often typed their full account number into that description, so filed Schedule C lines could show a whole account number — the rules allow only the last four digits. A description that already ended in the last four digits printed them twice.
+  - For other property, Schedule C prints the brief description and adds **#** and the last four digits only when they are not already in it. Real estate and vehicles are unchanged.
+  - To change how an account reads on Schedule C, edit its institution or account number on Schedule A/B. The help text beside the locked field says so.
+  - The change covers Glade's Bankruptcy Schedules template, including questionnaires already in progress or submitted for review. The locked field refills when the questionnaire is next opened.
+
+> TODO: Confirm whether firms that use their own copy of the schedules template have received the Schedule C change, and whether the update to in-progress questionnaires has been applied in production.
+
 - Petitions generated before these corrections keep the text they were generated with. Re-generate the petition on a case whose Schedule A/B descriptions should appear on the filed copy.
+
+### Autofills that fill every row of a list
+
+An autofill on a list fills each row with that row's own result. On Schedule H, the boxes that show which schedules a codebtor appears on — Schedule D, Schedule E/F, and Schedule G — are now ticked on every codebtor row.
+
+- Previously only the first codebtor's boxes were filled. Every codebtor after the first was left unchecked, and the generated form printed those boxes blank.
+- Codebtor rows already left blank on a questionnaire in progress are not corrected straight away. They fill the next time the autofill runs on that row.
 
 ### Totals Calculated From Other Cells in a Table
 
@@ -52,6 +67,8 @@ The national standard deduction amounts — including food and clothing — are 
 
 - Reference-data autofills that were blanked before the correction are not repaired automatically. Nothing on the field records that it was cleared rather than never filled, so a blank means-test deduction or court division field needs its autofill re-run to tell the difference.
 - When using "Autofill from Glade questionnaire" on a list field, date entries that contain only a descriptive placeholder (no actual date value) are skipped — the destination date field is left blank rather than filled with invalid text. You can fill these fields manually after autofill completes.
+- Schedule H codebtor boxes left blank before the per-row correction stay blank until the autofill runs again on that row. Check the boxes on any case with more than one codebtor before filing.
+- Petitions already generated with a full account number on Schedule C keep it. Re-generate the petition before filing.
 - When an autofill fills a currency field but cannot work out an amount, the field is set to **$0.00** — see [Field Behaviors](../filling-out/field-behaviors.md#currency-field-behavior).
 
 ## Related Features

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time. This page covers the dialog, how findings are ordered and worded, how findings appear on the fields themselves, and dismissing advisory findings.
+Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time. This page covers the dialog, how findings are ordered and worded, how findings appear on the fields themselves, Glade AI blocking findings after an answer changes, and dismissing advisory findings.
 
 ## Key Behaviors
 
@@ -80,6 +80,15 @@ Your team can dismiss an advisory or informational finding once it has been look
 - **The Dismissed filter is in that list's Filter menu.** **Dismissed** appears in **Filter** once at least one finding has been dismissed, and it shows how many. Each row reads **Dismissed by** the team member's name **on** the date, and has **Restore**.
 - These controls are on the Validation tab that includes AI findings. A validation list that only shows the questionnaire's own checks does not include **Dismiss**, **Restore**, or **Dismissed**.
 
+### Glade AI blocking findings after the answer changes
+
+A blocking Glade AI finding stops blocking once the answer it is about has changed. You can fix the data and submit without running Check work again.
+
+- **A finding on a field or a list row becomes advisory once that answer changes**, or once the row it names is deleted. It stays in the list as an advisory finding and no longer gates the submit.
+- **A finding about a whole list keeps blocking after the list is edited.** An edit to one row doesn't show that a problem with the list as a whole is fixed, so run Check work again to confirm. When such a finding's evidence points at one specific row, it is treated as a finding on that row and becomes advisory once that row's answer changes.
+- **A field is not blocked twice.** When a standard validation already blocks a field, an open Glade AI finding on the same field and row becomes advisory. It stays listed.
+- The stored findings are not changed. Running Check work again replaces them with fresh results.
+
 ### A finding on a row of a list names the row
 
 A finding on a cell inside a list names the entry the row describes, so several findings on the same column of the same list can be told apart.
@@ -97,6 +106,7 @@ For rules written against table and list cells, and rules that compare two answe
 
 - **A dismissal applies only while the finding is advisory or informational.** If your firm changes the rule behind it to blocking, the finding counts as blocking again and must be fixed or overridden. If the rule later goes back to advisory, the earlier dismissal applies again.
 - **Upgrading a questionnaire to a newer template version drops its dismissals and overrides.** Findings dismissed on the old version reappear after an upgrade and need dismissing again.
+- **The reason a Glade AI finding stopped blocking is not shown yet.** Glade works out notes such as "Answer changed since Glade AI checked." and "List changed since Glade AI checked. Rerun Check work to confirm.", but they don't appear on screen. Until they do, a whole-list finding keeps blocking after a list edit with no hint to run Check work again.
 - Dismissing is refused if the finding has changed since the list was loaded (for example, the rule's wording was edited). Reload the findings and try again.
 
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
