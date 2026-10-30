@@ -83,6 +83,17 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 - Only the documents are rebuilt. Downstream workflow steps, notifications, and tasks that ran when the questionnaire was first completed are not triggered again.
 - This applies to Glade's own questionnaire templates. Questionnaires on an external form provider are not rebuilt this way.
 
+### When One Form Fails to Generate
+
+When the petition's court forms are filled — on **Generate petition**, when a questionnaire is completed, and when a completed questionnaire is edited — a form that fails no longer stops the forms after it.
+
+- Every other form is still filled from the current answers. The run then reports a failure that names each form that failed.
+- Previously the run stopped at the first failure. The forms before it had the new answers and the forms after it kept their old PDFs, so a stale schedule could reach a filing without anyone noticing. Which forms were left stale depended on their order and timing.
+- The **Generate petition** failure message no longer lists forms that never got their turn as failed. It lists the forms that actually failed.
+- Generating again fills every form again.
+
+> TODO: Confirm whether the failure message can still list a section that was skipped for this case, or a form whose title differs from its section name.
+
 ## Edge Cases & Limitations
 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.

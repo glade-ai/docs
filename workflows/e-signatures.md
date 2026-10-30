@@ -53,6 +53,14 @@ Previously a step that fired automatically produced a request the client could n
 - A file that isn't a PDF is refused when it is uploaded or replaced on a request, with a message saying the file is not a PDF. The request keeps its current status rather than being marked as failed.
 - The send, upload and replace dialogs show the reason itself. A file name the signing service rejects shows **"The e-signature service rejected this document's file name."**, and any other rejection by the signing service shows **"The e-signature service rejected this document."** A file that isn't a PDF shows **"This file is not a PDF. Only PDF files can be sent for signature."** An unexpected server or network failure still shows the generic retry message, such as **"Couldn't send this document for signature. Try again."**
 
+### Sending a fillable PDF with answers already filled in
+
+- When you send a fillable PDF whose fields already hold answers (names, a case number, checked boxes, a selected option), the signed copy keeps those answers. Previously the signed copy came back with only the signatures, and every prefilled answer was gone.
+- The filled-in answers are fixed onto the page in the version that goes to signers, so a signer cannot change them while signing.
+- Fields left blank stay fillable, so they are still offered for assignment to a signer when you place fields.
+- This applies when a request is first sent and when you use **Replace file** on a request.
+- The copy of the document kept on the case is the file exactly as it was uploaded.
+
 ### When preparing a request with the signing service fails
 
 - **Brief outages at the signing service are retried automatically.** When Glade sets a request up with the signing service and the service is briefly unavailable, overloaded, or the connection drops, Glade tries again — up to three attempts in total — before giving up. Previously a single passing failure marked the request as failed with no explanation, and later opening it showed *"Unable to generate signer URL, please contact support"*, even though simply retrying the step worked.
@@ -102,6 +110,9 @@ E-signature requests have no settings of their own. They are sent manually or as
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
 - Filing signed documents into the case's documents applies to requests completing from now on.
+- A fillable PDF that needs a password just to open it is sent as it is, so its prefilled answers can still be missing from the signed copy. Court and trustee forms that only restrict editing are handled normally.
+- If Glade cannot fix a fillable PDF's answers onto the page, the document is still sent as it is rather than the send failing, and the prefilled answers may be missing from the signed copy. Check the signed copy of a prefilled form before relying on it.
+- Signed copies that came back without their prefilled answers before this correction are not repaired. Send the document again to get a signed copy that keeps them.
 
 > TODO: Confirm whether signed documents from requests completed before this shipped have been filed into the Signed Documents folder retroactively, or whether a firm has to ask Glade to do it.
 
