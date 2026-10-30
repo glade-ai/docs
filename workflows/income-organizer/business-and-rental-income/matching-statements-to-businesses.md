@@ -16,13 +16,28 @@ A profit & loss statement only reached Schedule I line 8a if it was uploaded **i
 - **This applies to existing cases as well as new ones.** Uploading business income data to a case already open binds it and feeds the calculation.
 - **Statements already sitting unattached are not repaired automatically.** If a case shows itemized profit & loss data but no business income figures, re-upload the statement or contact support. Many unattached statements are on cases with no business income source at all, which have to have the source added first.
 
+### A statement uploaded through any of the case's document requests
+
+**A statement links to the debtor's business whichever document request on the case it was uploaded through**, including the requests belonging to associated workflows. Once linked, it reaches the Business Income calculator and Schedule I line 8a recalculates on its own.
+
+- Previously only statements uploaded through the case's first document request could be linked. A statement uploaded through any other request on the case was read but never linked to a business, so it contributed nothing to line 8a.
+- A statement is matched against the debtor's own businesses first. On a joint case, a spouse's statement uploaded through the other spouse's request links to the spouse's business when exactly one business on the case carries the printed name, rather than creating a new business under the wrong debtor.
+- A business your team linked or unlinked by hand is left as your team set it.
+
+> TODO: Confirm whether statements that were left unlinked before this change are repaired automatically, or need to be re-uploaded.
+
 ### A statement whose business is not on the case yet
 
-**A statement whose business is not on the case yet creates one.** Where a parsed statement cannot be matched to a business already on the case, Glade creates a business income source named from the name printed on the statement and binds the statement to it, so the figures reach line 8a without the business having to be entered by hand first. It does not guess where the name is ambiguous: a statement that matches several of the case's businesses, or that carries no business name at all, is left unbound for your team to place. This applies to statements read from now on — a statement that is already sitting unbound stays that way until it is placed.
+**A statement whose business is not on the case yet creates one when the debtor has no business income source at all.** Glade creates a business income source named from the name printed on the statement and binds the statement to it, so the figures reach line 8a without the business having to be entered by hand first. It does not guess where the name is ambiguous: a statement that matches several of the case's businesses, or that carries no business name at all, is left unbound for your team to place. This applies to statements read from now on — a statement that is already sitting unbound stays that way until it is placed.
+
+Where the debtor already has businesses on the case, no new business is created, so the same income is not counted twice on line 8a:
+
+- If the debtor has a single business with no name recorded, the statement links to it.
+- If none of the debtor's named businesses matches the printed name, or the debtor has more than one unnamed business, the statement is left unbound for your team to place.
 
 ## Edge Cases & Limitations
 
-- A business is created from a statement's printed name only where the match is unambiguous. A statement matching several of the case's businesses, or carrying no business name, stays unbound and contributes nothing to line 8a until your team binds it.
+- A business is created from a statement's printed name only when the debtor has no business on the case and the match is unambiguous. A statement matching several of the case's businesses, or carrying no business name, stays unbound and contributes nothing to line 8a until your team binds it.
 - A profit & loss statement is matched to a business by an exact name after allowing for capitalization, spacing, and punctuation. Two businesses with the same recorded name cannot be told apart and neither is matched; rename one of them so the statement has a single answer to bind to.
 
 ## Related Features
