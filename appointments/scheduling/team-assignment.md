@@ -2,7 +2,7 @@
 
 ## Overview
 
-Bookings can be assigned to specific team members within the firm, either by default per product, by workflow rules, or by hand. The Bookings section's List, Calendar, and Team views follow whichever team member you have selected.
+Bookings can be assigned to specific team members within the firm, either by default per product, by workflow rules, or by hand. The Bookings section's List, Calendar, and Team views follow whichever team member you have selected. Each booking also records who first scheduled it.
 
 ## Key Behaviors
 
@@ -24,6 +24,16 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - **Block this Time** applies to the team member currently selected, rather than always to the appointment type's default assignee. Check who is selected before blocking time.
 - The Team view's team member filter lists every member of the firm, including people with no appointments booked. Previously anyone without a booking dropped out of the filter entirely, so they could not be selected.
 - Once you have picked a team member by hand, that choice stays put — a change to the appointment type's default assignee, or bookings reloading in the background, does not switch the view away from the person you chose.
+
+### Who scheduled a booking
+
+A booking records who first put it on the calendar, shown as **Scheduled by** on the booking's details. This is separate from the team member the booking is assigned to, and from whoever last rescheduled it.
+
+- When a team member creates a booking, they are recorded as the one who scheduled it. When a client books for themselves, the client is recorded.
+- A booking created without a time — for example one a workflow opens for the client to pick a time later — has no one recorded until a time is first chosen. Whoever picks that first time is recorded.
+- Rescheduling does not change it. **Scheduled by** always shows the person who first scheduled the booking.
+
+> TODO: Confirm whether **Scheduled by** also appears as a column in the Bookings list, and whether bookings created before this field existed show who scheduled them.
 
 ## Configuration
 
