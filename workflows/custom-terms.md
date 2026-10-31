@@ -74,6 +74,19 @@ When an agreement is set to be signed by an attorney and you assign attorneys th
 
 This only shows up when a firm assigns two or more attorneys in a single action. Previously the signature landed on an arbitrary one of them, so the same assignment could produce a different signatory on different cases.
 
+### Handing the attorney signature to another attorney
+
+When an agreement is waiting on the attorney's countersignature, your team can hand that signature to a different attorney at the firm, or send it to the same attorney again, without the client signing again. This covers a client who signed before an attorney was assigned to the case, and an on-call attorney signing while the case attorney is out.
+
+- Only the attorney signature changes. The client's signature, the agreement text, and the case's assigned attorney stay as they are, so a stand-in attorney is not added to the case or written into its questionnaires.
+- The new attorney gets the signing task and the "your turn to sign" email, once every client on the agreement has signed. The previous attorney's signing task is closed.
+- Sending the signature to the same attorney again re-sends the email without opening a second task.
+- The change is recorded in the agreement's audit trail, where the signing certificate lists it as **Reassigned (Attorney)** with the team member who made it, and in the case's activity feed with both attorneys' names.
+- The new signer must be an attorney at your firm who is still on your team. Anyone on your firm's team can make the change.
+- It is not available once the attorney has signed, on an agreement that was skipped, or on an agreement that is not set to be signed by an attorney.
+
+> TODO: Confirm where the reassign action appears on the agreement and what it is labelled.
+
 ### The name on the attorney's signature
 
 When an attorney countersigns an agreement, the name printed in the attorney's signature block is the attorney's own name, not the client's.
@@ -119,6 +132,7 @@ Custom terms templates are created and managed from the firm's template library.
 ## Edge Cases & Limitations
 
 - Custom terms content is read-only for clients — they can accept the presented terms but cannot edit the text.
+- Handing the attorney signature to another attorney applies to retainers and other custom terms agreements only. Changing the signer on a petition or amendment sent for e-signature is not covered.
 
 > TODO: Confirm whether editing a custom terms template affects clients who are already mid-workflow, or only affects new workflow instances started after the edit.
 
