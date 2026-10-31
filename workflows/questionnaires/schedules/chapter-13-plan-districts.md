@@ -71,6 +71,17 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - A Part E pay-in-full claim whose stated value is below the claim. The value prints as entered, and the valuation box is left unticked.
 
   Plan-modification forms and the district's other companion forms are not generated.
+- **Eastern District of Wisconsin** plans print the elections the district's filed plans make:
+  - **First payment due (§ 2.1.B).** Choose how the filing fee was paid (paid when filing, or in installments), then when the first plan payment is due under that choice. The form ticks exactly those two boxes, and prints a specific date you pick on the chosen branch's line. A due date with no filing-fee choice prints nothing, because the form has nowhere to put it. With nothing chosen the section stays blank, as the form's own text then makes the first payment due 30 days after the petition. A half-made choice raises a warning.
+  - **Post-petition claims under § 1305 (§ 6.2).** The box you choose is ticked. A warning is raised only when no choice is made; previously both boxes always printed blank with a warning.
+  - **Chapter 7 liquidation amount (§ 5.1).** The amount the calculator works out now prints at any income level, including for above-median debtors, where it used to print blank. A plan saved before this change prints it once the plan is saved again.
+- **Western District of Wisconsin** plans print two more lines the filed plans carry:
+  - **How the debtor pays (Section II.A).** The court's form assumes a wage order and has no box for anything else, so a line is added under the payment total: "Payments to be made debtor direct." for a direct-pay plan, or a line such as "Debtor will pay $173.08 Bi-Weekly for 60 months" for each payment step of a weekly, every-two-weeks, or twice-a-month payroll plan. The line appears once a payment method is chosen for the plan.
+  - **Loans the debtor pays directly (Section IIIB).** The payoff prints as the filed claim amount, and the monthly payment shows the months it covers — for example "$603 /month (Months 1 to 60)". The months come from the plan's own schedule for that loan, which is the whole plan unless set otherwise. Previously the payoff was blank and no months printed.
+
+  The court's own wording does not change on either Wisconsin form, and no other district's form is affected.
+
+> TODO: Confirm where the § 2.1.B first-payment and § 6.2 post-petition-claims choices are made in the plan calculator, and what they are labelled.
 
 ## Configuration
 
