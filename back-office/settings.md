@@ -119,6 +119,9 @@ Glade bills your firm weekly for its charges. These invoices are listed under **
 
 - **Brand color** sets your firm's primary color (hex value).
 - **Logos** include a full logo and a compact logo for different display contexts.
+  - **A compact logo is made for you when you only upload the full logo.** When your firm saves its full (wide) logo and has no compact (square) logo, Glade crops the icon or monogram out of the full logo and saves it as the compact logo. Nothing is redrawn — the compact logo is cut from your own artwork.
+  - Glade saves a generated compact logo only when it is confident the result is clean. If it is not, nothing is saved and Glade's team reviews it instead. A compact logo built from the firm's initials, rather than cropped from the logo, is never saved without a person checking it first.
+  - A compact logo your firm uploaded itself is never replaced. A generated one is replaced only when you change the full logo, and uploading your own compact logo at any time takes its place.
 - **Custom domain** sets a custom domain for your firm's public-facing pages.
 - **Custom Open Graph image** controls the preview image shown when your pages are shared on social media.
 - **Payment redirect URL** sets where clients are redirected after a successful payment.
