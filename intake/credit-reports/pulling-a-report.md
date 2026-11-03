@@ -14,6 +14,16 @@ Your team pulls a client's credit report from within the case or intake workflow
 - The action buttons in the modal are disabled while the request is in progress, preventing accidental duplicate submissions.
 - All phone numbers you enter in the modal — including the client's mobile number and contact phone — are included in the request to the credit reporting service. If a bureau requires a phone number that the report previously failed to match against, having mobile and contact phone present alongside the primary number reduces "invalid borrower data" rejections.
 
+### Completing a firm-side pull
+
+When your team pulls a client's credit report directly — confirming the client's identity in the modal rather than sending the client an approval request — the report is marked complete as soon as every debtor assigned to it has been pulled. The **Get Credit Report** step then advances, and the purchase screen no longer appears for that report.
+
+- Previously such a pull succeeded and was billed, but the report was never marked complete. The firm was shown the purchase screen again for a report it had already paid for, and the Get Credit Report step did not advance.
+- **Submitting the identity form again repairs a stuck report.** If every requested debtor has already been pulled, re-submitting completes the report. It never pulls or bills the report a second time.
+- Reports that were stuck this way are also completed automatically by a regular background check, without being billed again.
+- On a joint report, the report stays open until both debtors have been pulled. A co-debtor added before the second pull is not left out by the report completing early.
+- A report is completed only once, even if two completion signals arrive at nearly the same moment, so the follow-on steps tied to completion run once.
+
 ### Joint Filing Safeguards
 
 In a joint credit report pull, you enter the main debtor and the co-debtor on separate, visually similar steps, which makes it easy to accidentally enter one person's information for the other. Before the report is pulled, Glade compares the two dates of birth you entered. If they are identical, a confirmation appears naming each debtor (for example, "Main debtor and co-debtor have the same date of birth — is this correct?").

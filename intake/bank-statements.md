@@ -15,6 +15,8 @@ The Bank Statements Organizer collects a client's bank statements for a case. Th
 ### Viewing Statements
 
 - Clients can open the Bank Statements Organizer directly from a workflow in the client portal to view the statements that have been collected.
+- **The organizer opens in your firm's client portal.** When a client opens their Bank Statements Organizer — from a bank statements task or a link — they are taken to the organizer in your firm's client portal, the same way a live questionnaire opens there. The portal organizer lists the client's banks, with a panel for each account, and opens with the first account showing. A brief "Opening your bank statements…" message appears while the client is moved across. Previously clients landed on an older version of the organizer and never saw the updated layout.
+- The hand-off page is skipped in the browser history, so pressing **Back** in the portal returns the client to where they came from rather than to the hand-off.
 - Firm staff view the same organizer from the dashboard or the client's case.
 
 ### Partial Retrieval
