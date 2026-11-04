@@ -102,6 +102,7 @@ Firms already using a key that Glade issued for them by hand keep working as the
 
 - [Client Records](../crm/client-records.md) — the client details the lookup returns, and the record a call transcript is filed against.
 - [Communication History](../crm/communication-history.md) — the rest of a client's recorded contact with your firm.
+- [NetSapiens (NoodleVoice) Call Transcripts](./netsapiens.md) — call transcripts for firms whose phones run on NetSapiens.
 - [Contacts](../crm/contacts.md) — how phone numbers and email addresses are recorded against a client.
 - [Case Management](../back-office/case-management.md) — the case the lookup reports on.
 - [PACER](pacer/README.md) — the court notices the key dates are read from.
