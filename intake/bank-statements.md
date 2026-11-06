@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Bank Statements Organizer collects a client's bank statements for a case. The client connects a bank account, and Glade retrieves the available statements from that account so your team can review them alongside the rest of the case. It is typically used in bankruptcy workflows where recent statements are part of the required financial documentation.
+The Financial Account Organizer (previously called the Bank Statements Organizer) collects a client's bank statements for a case. It is named for financial accounts rather than bank statements because a client can connect brokerage, retirement, credit card, and loan accounts as well as bank accounts. The client connects a bank account, and Glade retrieves the available statements from that account so your team can review them alongside the rest of the case. It is typically used in bankruptcy workflows where recent statements are part of the required financial documentation.
 
 ## Key Behaviors
 
@@ -15,9 +15,10 @@ The Bank Statements Organizer collects a client's bank statements for a case. Th
 ### Viewing Statements
 
 - Clients can open the Bank Statements Organizer directly from a workflow in the client portal to view the statements that have been collected.
-- **The organizer opens in your firm's client portal.** When a client opens their Bank Statements Organizer — from a bank statements task or a link — they are taken to the organizer in your firm's client portal, the same way a live questionnaire opens there. The portal organizer lists the client's banks, with a panel for each account, and opens with the first account showing. A brief "Opening your bank statements…" message appears while the client is moved across. Previously clients landed on an older version of the organizer and never saw the updated layout.
+- **The organizer opens in your firm's client portal.** When a client opens their Bank Statements Organizer — from a bank statements task or a link — they are taken to the organizer in your firm's client portal, the same way a live questionnaire opens there. The portal organizer lists the client's banks, with a panel for each account, and opens with the first account showing. A brief "Opening your financial accounts…" message appears while the client is moved across. Previously clients landed on an older version of the organizer and never saw the updated layout.
 - The hand-off page is skipped in the browser history, so pressing **Back** in the portal returns the client to where they came from rather than to the hand-off.
 - Firm staff view the same organizer from the dashboard or the client's case.
+- **Client-facing wording says financial accounts.** On the organizer card in the client's portal the button reads **Add Financial Accounts** (previously "Upload Bank Statements"). The older organizer page is titled **Financial Account Organizer**, and its upload window, Plaid and manual-upload descriptions, and success message refer to financial accounts, institutions, and account statements rather than bank statements. Clients with investment or retirement accounts could otherwise read the old wording as not applying to them.
 
 ### Partial Retrieval
 
