@@ -16,6 +16,10 @@ Clients upload documents against the file slots on a document request, and your 
 ### Glade AI's check of an upload
 
 - **A check that never finishes is marked unavailable.** While Glade AI checks an uploaded document, the document shows "Glade AI is evaluating this document…" and **Re-run AI** is disabled. If no result arrives within about four hours, the document now shows "AI review unavailable" and **Re-run AI** becomes available again. Previously a check that was dropped before it finished left the document showing "evaluating" indefinitely, with no way to re-run it.
+- **An upload stays at Needs Review until Glade AI has finished reading it.** Glade AI checks an upload in two passes: a quick quality check (blurry, expired, or the wrong document) and a slower read of the document's contents for findings. Where the content check is switched on for your firm, a document that passes the quality check now stays at **Needs Review** until the content check comes back. If the content check finds nothing, Glade AI approves the document then. If it raises a finding, or the check fails, the document stays at Needs Review for someone on your team. Previously a clean quality check approved the document straight away, so for a few minutes it read **Approved**, then flipped to **Needs Review** when the content findings arrived — a paralegal looking in that window saw a document marked approved that Glade AI had not finished reading.
+  - **Re-running the check keeps the document held.** Using **Re-run AI** on a document that is still waiting on its content check keeps it at Needs Review until the new check finishes. Re-running a document that has already been released does not put it back on hold.
+  - **A person's decision is never undone.** If someone on your team approves or reopens the document while the check is still running, the check's result does not override them.
+  - Where no content check runs for the document — for example, the check is not set up on the workflow — the document is not held.
 - **Files over 100 MB are not checked by Glade AI.** A very large upload is kept on the case as normal, but it gets the "Not able to validate the document using AI" result, the same one oversized images already get. Review these files by hand.
 
 ### Submitting for review
@@ -45,6 +49,9 @@ A client can re-open their own completed checklist to add a document that turns 
 - A rejected item with no replacement uploaded still blocks submission.
 - Documents deleted from the Documents list before the checklist fix, while still filed on a checklist, were not cleaned up. They still appear on their checklist item; remove them from the checklist directly.
 - A stuck Glade AI check is only marked unavailable after about four hours, so a document can show "evaluating" for that long before **Re-run AI** becomes available.
+- Because a clean upload now waits for the content check before it is approved, documents spend a few minutes longer at **Needs Review** than before. A document whose content check fails stays at Needs Review until someone reviews it by hand.
+
+> TODO: Confirm which firms have Glade AI's content check switched on, and whether firms can see or change this themselves.
 
 ## Related Features
 
