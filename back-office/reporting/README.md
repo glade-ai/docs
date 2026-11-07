@@ -14,7 +14,7 @@ Reporting provides your firm with operational and financial visibility into your
 - [Bookings Report](./bookings-report.md) — one row per booking, with case assignees, lead source, labels, and client address/county.
 - [Financial Reports](./financial-reports.md) — Sales Overview, Current Sales Overview, and Conversion Metrics (Firm Overview).
 - [Task Efficiency and Leaderboard](./performance-analytics.md) — task time-to-completion analytics and PACER attorney filing data.
-- [Dashboards](./dashboards.md) — firm-shared named dashboards and default homepage widgets.
+- [Dashboards](./dashboards/README.md) — firm-shared named dashboards, the firm default homepage, default homepage widgets, and workflow cards.
 - [Custom Reports](./custom-reports/README.md) — firm-built reports over case and payment data: filters, columns, exports, saved-report management, and time from retainer to filing.
 
 ## Configuration
