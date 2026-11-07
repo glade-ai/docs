@@ -41,6 +41,7 @@ Case conversations — the discussions attached to a client's active workflow �
   - Only the people tagged in the note get the task. The author never gets one, even if they tag themselves. Someone who is not on your firm's team is not assigned one.
   - A note with no tags creates no task. It is not sent to the case owners instead.
   - A reply in the note thread completes the open task. If the reply tags someone, that person gets a new task.
+  - **Tagging someone by editing a note works the same way.** If you post a note and then edit it to tag a teammate, the newly tagged teammate gets the **Respond to internal note** task and the tagged email, just as if they had been tagged when the note was posted. People who were already tagged are not notified again, and anyone already on the note's open task stays on it. If the note's task was already completed, a new task opens for the newly tagged teammate. Previously, a tag added by editing a note sent no task and no email.
   - These tasks are left out of the daily brief, as "Respond to Comment" tasks are.
 
 #### Editing an internal note
@@ -144,6 +145,7 @@ None of this changes how you write or read a discussion on the case you are work
 - An unsaved internal note draft does not survive reloading the page or signing out. Attached documents are not kept in the draft, and an `@` mention in a restored draft shows as plain text — it still becomes a proper mention, and the teammate is still tagged, when the note is saved.
 - A reply from a team member who is neither an owner of the case nor assigned to its Respond to Comment task does not clear the task. Reassign the task to that person, or have an owner reply, if it should be closed.
 - To bring a team member's comment to the owners' attention as a task, @-mention them. A team member's comment with no @-mention creates no task for anyone.
+- Adding a tag by editing applies to internal notes only. Editing a client-facing comment to @-mention someone does not create a task or send a notification. Tags added by editing a note before this change were not notified retroactively.
 - A note is attached to one subject, not several. A note that covers both an invoice and the checklist behind it has to be filed against one of them, or written on the case conversation instead.
 
 ## Related Features
