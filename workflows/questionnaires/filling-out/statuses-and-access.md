@@ -2,7 +2,7 @@
 
 ## Overview
 
-A questionnaire moves through a small set of statuses as it is filled out, reviewed, and completed, and who can see or edit it depends on assignment, firm membership, and collaborator permissions. This page covers the statuses, how a submitted questionnaire looks to the client, and access control.
+A questionnaire moves through a small set of statuses as it is filled out, reviewed, and completed, and who can see or edit it depends on assignment, firm membership, and collaborator permissions. This page covers the statuses, sending a questionnaire back for changes, how a submitted questionnaire looks to the client, and access control.
 
 ## Key Behaviors
 
@@ -11,6 +11,17 @@ A questionnaire moves through a small set of statuses as it is filled out, revie
 Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **completed**, and **skipped**.
 
 A completed questionnaire can be re-opened — see [Re-opening and Re-syncing](../case-data/reopening-and-resync.md).
+
+### Sending a questionnaire back for changes
+
+A reviewer can send a questionnaire that is **submitted for review** back for changes, choosing who it goes back to. The people pre-selected in that choice depend on who actually works in the questionnaire:
+
+- **The client is pre-selected only while they hold the questionnaire with edit access.** On a questionnaire the client fills in, they are selected as before. On one the firm fills in and the client never had — such as the Bankruptcy Schedules — the client is not selected, so the reviewer no longer has to untick them each time.
+- **The team member who submitted it** is pre-selected while they are still part of the firm.
+- **If neither applies**, the client is pre-selected so the questionnaire still goes to someone who can fix it.
+- The reviewer can change the selection before sending. A send back made without choosing anyone goes to the same people the choice pre-selects.
+
+> TODO: Confirm the label of the send-back action and where the recipient choice appears.
 
 ### How a submitted questionnaire appears to the client
 

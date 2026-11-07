@@ -9,7 +9,7 @@ The Bankruptcy Schedules questionnaire carries tools and behaviors specific to i
 - [Exemptions Calculator](./exemptions-calculator.md) — the exemptions panel, equity and joint limits, the Schedule C homestead answer, the exemptions agent, and the Texas exemptions schedule.
 - [Schedule A/B Property](./property.md) — liens and equity, the Property summary, Unknown values, and how Part 3 and line 19 print.
 - [Creditors](./creditors.md) — adding creditors, duplicate status, alphabetized schedules, and the creditor matrix.
-- [Schedule I and Income](./income.md) — importing Income Organizer figures and itemizing lines 8f and 8h.
+- [Schedule I and Income](./income.md) — importing Income Organizer figures, itemizing lines 8f and 8h, and line 8h as the locked sum of its sources.
 - [SOFA Other Income](./sofa-other-income.md) — Statement of Financial Affairs Part 2 question 5, one income source per row, and how Form 107 groups rows by year.
 - [Means Test](./means-test.md) — non-consumer Chapter 7 cases and secured debt deductions.
 - [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) — plan elections, lump sums, unsecured pool, arrearage cures, and generated plans.

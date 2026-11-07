@@ -43,6 +43,7 @@ Schedule I reports other government assistance on line 8f and other monthly inco
 - One entry per source that counts toward Schedule I, kept separately for each debtor and each line. Changing a source from other income to government assistance moves its entry to the line it now belongs to.
 - **The totals are unchanged.** Lines 8f and 8h, the Schedule I totals, and the means test still read the same summed figures they always did.
 - Deleting a source, or turning it off for Schedule I, removes its entry.
+- On the current Bankruptcy Schedules template, line 8h on the questionnaire is the locked total of these entries rather than a figure that can be typed over. See [Schedule I and Income](../questionnaires/schedules/income.md#line-8h-is-the-sum-of-its-income-sources).
 - See [Questionnaires](../questionnaires/README.md) for how the list appears on the form.
 
 ### Feeding Schedule I and the Means Test Questionnaire
