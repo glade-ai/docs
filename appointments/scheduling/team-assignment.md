@@ -16,6 +16,17 @@ Bookings can be assigned to specific team members within the firm, either by def
 - Each team member's individual availability is checked when assigning.
 - When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
 
+### Filtering by who claimed an appointment
+
+Claiming an appointment records who will handle it. That person often isn't the calendar owner or the case's assignee, for example an attorney who takes a consult sitting on someone else's calendar. The bookings list can be filtered by who claimed each appointment, so an attorney can find the appointments they claimed, including ones with no case attached.
+
+- Pick one or more team members to see the appointments any of them claimed. Choose the **nobody has claimed** option to see unclaimed appointments. Picking people and that option together shows both.
+- Appointments marked as claimed with no person chosen count as unclaimed.
+- The claimed-by filter works together with the calendar owner, case assignee, and service filters. An appointment has to match all of them to appear. For example, filtering by one person as claimer and a different person as case assignee shows only appointments that match both.
+- Leaving the filter empty shows every appointment, as before.
+
+> TODO: Confirm the label of the claimed-by filter, its "nobody has claimed" option, and whether the **Your appointments** home widget offers it too.
+
 ### Which team member the Bookings section is showing
 
 The Bookings section has List, Calendar, and Team views, and the team member you are looking at carries across them. Whoever you have selected stays selected as you move between views, so you no longer have to re-pick them each time.
@@ -41,3 +52,4 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - [Availability](./availability.md)
 - [Conflicts and Concurrent Bookings](./conflicts-and-concurrent-bookings.md) — conflict checks when reassigning a booking
 - [Workflow Bookings](./workflow-bookings.md)
+- [Appointment Outcomes](./appointment-outcomes.md)
