@@ -2,7 +2,7 @@
 
 ## Overview
 
-A custom report is built from the columns your firm chooses. This doc covers columns whose behavior needs explaining: court notice type, case number, client address, and reaffirmation agreement.
+A custom report is built from the columns your firm chooses. This doc covers columns whose behavior needs explaining: court notice type, case number, client address, reaffirmation agreement, and days in status.
 
 ## Key Behaviors
 
@@ -32,6 +32,13 @@ A custom report is built from the columns your firm chooses. This doc covers col
   - The filter offers reaffirming and non-reaffirming selections plus a **not answered** selection. A case whose bankruptcy schedules questionnaire has not been filled in — a consultation or a turned-down matter, for example — has no answer to give and falls under **not answered** rather than under "no".
   - The lease-assumption question on the same form ("Will the lease be assumed?") is **not** available as a column or filter.
 
+### Days in status
+
+- The **Days in status** column shows how many days each case has been in its current status. It is meant for finding cases that have sat in one status too long.
+- Case reports can be sorted by days in status. Sorting from most days to fewest puts the cases that have been stuck longest at the top. Sorting from fewest to most puts the most recent status changes first. Saved reports run through the Glade assistant sort the same way.
+- The count is in whole calendar days in the firm's time zone, not in 24-hour periods. A status that changed at 11 pm yesterday reads 1 once it is past midnight, and a status that changed today reads 0. In a CSV export, every row is measured against the same "today".
+- The count is based on when the case's status last changed. Nothing new is recorded to produce it, so it is available for existing cases.
+
 ## Configuration
 
 - **Reaffirmation agreement**: Nothing to configure. The answer is read from the bankruptcy schedules questionnaire and updates as the questionnaire is filled in.
@@ -41,6 +48,7 @@ A custom report is built from the columns your firm chooses. This doc covers col
 - The **Client address** column is blank for a case whose address was never written to case data, including cases whose address is held only on the client record. It cannot be sorted or filtered on.
 - The **Reaffirmation agreement** column reports what the schedules questionnaire says, not what was ultimately filed. A reaffirmation agreement decided outside the questionnaire, or changed after the petition went out, is not reflected until the questionnaire is updated.
 - Cases with no bankruptcy schedules questionnaire are reported as **not answered** on the reaffirmation column. This is the expected result for consultations and non-bankruptcy matters, and it is distinct from a case that answered "no".
+- **Days in status** follows the firm's time zone. If the firm has no time zone set, days are counted in UTC, so a status change late in the evening in US time can count toward the next day.
 
 ## Related Features
 
