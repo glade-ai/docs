@@ -17,7 +17,7 @@ Firms whose phone service runs on the NetSapiens platform — including NoodleVo
 
 Glade staff connect a firm. There is no setting in the app yet. Your firm provides a read-only key for its phone account, and Glade gives your phone carrier a private web address to send finished-call notices to. Contact Glade support to set it up.
 
-> TODO: Confirm where a client's saved call transcripts are read in the app, and whether they appear alongside 3CX transcripts.
+Open the client and choose **Transcripts**. A saved NetSapiens call is listed there with that client's other call transcripts, including calls saved from 3CX. The list is not split by phone system, and it does not label which system a transcript came from. The transcript is filed on the client, not on a case.
 
 ## Edge Cases & Limitations
 

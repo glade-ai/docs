@@ -40,7 +40,7 @@ The change is what makes date-based routing possible: a flow can now ask *when* 
 
 As well as looking a caller up while the phone is ringing, 3CX can send a finished call's transcript back to Glade, so the conversation is on the client's record instead of only in the phone system.
 
-- **A transcript is filed against the client it belongs to**, matched on the calling number the same way the lookup matches it, and appears on that client's transcripts alongside their other recorded calls.
+- **A transcript is filed against the client it belongs to**, matched on the calling number the same way the lookup matches it. Open the client and choose **Transcripts**. It is listed there with that client's other call transcripts, including calls saved from another phone system. The list is not split by phone system.
 - **A caller the lookup did not recognize can be created as a client.** Where the number matches nobody at your firm, 3CX can ask Glade to create a client record from the call so the transcript has somewhere to live rather than being discarded. The new client is recorded as having come from 3CX and is **not** sent a welcome email.
 - **Only answered calls with a transcript are recorded.** A missed or unanswered call, and an answered call whose transcription came through empty, is skipped rather than filed as a blank entry. A skipped call is reported back to the phone system as handled, so it is not sent again and again. Previously an empty transcript was refused as a faulty call, and 3CX retried it indefinitely.
 - **The time a call took place is read in your firm's timezone.** Phone systems report a finished call's time either as a full date and time with a timezone on it, or as the plain wall-clock reading on the PBX itself — `9/15/2026 3:20 PM`. Both are accepted, and a wall-clock reading is taken to be your firm's local time. A firm whose phone system sends the plain form previously had **every** call refused, so nothing from it was ever filed, and the phone system retried each one.
@@ -49,7 +49,7 @@ As well as looking a caller up while the phone is ringing, 3CX can send a finish
 
 Recording calls is set up in your firm's 3CX configuration, separately from the caller lookup — the lookup keeps working on its own if you do not turn call recording on. Your 3CX administrator needs the configuration details from Glade support to enable it.
 
-> TODO: Confirm where a client's call transcripts are read in the app, and whether a client created from an unmatched call is distinguishable in the client list beyond its 3CX lead source.
+> TODO: Confirm whether a client created from an unmatched call is distinguishable in the client list beyond its 3CX lead source.
 
 ### Case details for clients imported from another system
 
