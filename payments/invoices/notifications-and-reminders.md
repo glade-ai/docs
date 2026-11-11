@@ -27,8 +27,7 @@ An invoice template has a switch that stops the client invoice email for every i
 - **Checked when the email would go out.** Turning the switch off also stops emails still waiting on existing invoices from that template, such as ones held back for an unsigned retainer.
 - **Turning it back on.** An email that was skipped while the switch was off is sent the next time the invoice becomes payable.
 - **Copied with the template.** A workflow template exported to another firm keeps the switch as it was. Templates exported before the switch existed import with it on.
-
-> TODO: Confirm the on-screen label and location of this switch in the invoice template editor.
+- On the invoice template, the switch is labelled **Send the invoice payment email**. It is in the **Client emails** section, between **Client modifications** and **Follow-up reminders**.
 
 ## Edge Cases & Limitations
 
