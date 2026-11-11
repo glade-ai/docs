@@ -17,6 +17,7 @@ The eFile module marks the point in a workflow where the case is filed with the 
 - **A case that was already filed when the step is reached is not held.** If a matching filing has already succeeded by the time the workflow reaches the step, the module is created already complete and the workflow carries on.
 - **A filing that lands while Glade cannot check filings is still picked up.** If Glade cannot confirm the filing status when the step is reached, the step is sent anyway with the module pending, and Glade checks again shortly afterwards to catch a filing it missed.
 - **A filing update received twice does not complete the module twice.** Once complete, the module keeps the filing that first completed it.
+- **The module keeps the assignees its template sets.** If the workflow template assigns the eFile module to someone (for example, the workflow owner), that person shows as the assignee on the case's **eFile** card and is included in follow-ups for the step. Before, every eFile card showed **No assignees**, whatever the template said.
 - **The module is visible to the firm only.** Clients do not see or open it in their portal. It is labeled **eFile**.
 
 ## Configuration
@@ -33,6 +34,7 @@ The eFile module marks the point in a workflow where the case is filed with the 
 - A filing recorded as filed outside Glade completes the module only when a case number is recorded with it.
 - The eFile module cannot be skipped. The step waits until a matching filing succeeds.
 - A failed filing never completes the module or advances the workflow.
+- eFile modules sent to a case before template assignees were supported keep showing **No assignees**. Only modules sent since then pick up the template's assignees.
 
 ## Related Features
 
