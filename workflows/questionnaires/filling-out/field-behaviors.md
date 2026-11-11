@@ -47,7 +47,7 @@ The debtor's filing county is worked out from the address on the case, by lookin
 - Where the address has no state, or the lookup result does not name one, the result is used as before.
 - **The street is checked before the city.** The lookup first looks up the exact street address, and uses that answer only when its house number and street match what was entered, it is not in a different ZIP code or state, and it names a county. Anything else — including an address with no house number, such as a PO box — falls back to the city and ZIP lookup described above. This corrects addresses in a city or ZIP that crosses a county line: 5434 Tourmaline Way, Pattison, TX 77423 used to come back as Waller County and now comes back as Fort Bend County, where it is.
 
-> TODO: Confirm whether the county shown while filling out the questionnaire in the browser also checks the street first. At release only the lookup Glade runs on its servers did, so for an address in a city or ZIP that crosses a county line the form and the saved county could disagree.
+- **The county on the questionnaire uses this same lookup.** While you fill out the form, the county shown for the debtor is the one this lookup returns, street first and then the city and ZIP. The county on the form and the county saved on the case are that same answer.
 - A county that Glade does not recognize for the state blocks e-filing and is reported in the pre-filing review. See [Electronic Court Filing](../../../integrations/efiling/README.md).
 
 ### Free-Text Dates on the Statement of Financial Affairs

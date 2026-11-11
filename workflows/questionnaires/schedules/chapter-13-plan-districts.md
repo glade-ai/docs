@@ -81,7 +81,10 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
 
   The court's own wording does not change on either Wisconsin form, and no other district's form is affected.
 
-> TODO: Confirm where the § 2.1.B first-payment and § 6.2 post-petition-claims choices are made in the plan calculator, and what they are labelled.
+On an Eastern District of Wisconsin plan, both choices are on the calculator's **Form details** card. No other district's card shows them.
+
+- **First plan payment** (§ 2.1.B). **Filing fee** is how the fee was paid. With **Paid in installments** selected, **First payment due** offers **30 days after last installment**, **30 days after confirmation**, **On a set date**, and **Leave blank**. **On a set date** adds **First payment date**. The due-date wording follows the filing-fee choice, and changing or clearing **Filing fee** clears the due date. Left unset, the card says the form's own rule applies: the first payment is due 30 days after the petition is filed.
+- **§ 1305 post-petition claims** (§ 6.2). The choice to have the trustee pay is **Trustee pays the claim**. The card says that leaving it unset prints both boxes blank and raises a warning on the plan.
 
 ## Configuration
 

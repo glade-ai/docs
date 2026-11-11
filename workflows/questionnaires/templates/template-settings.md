@@ -54,7 +54,7 @@ A questionnaire template can name its own review skill for **Complete with Glade
 - The template's pick still applies to questionnaires already sent from it, including after the template is archived.
 - If a skill picked on a template is later retired or unpublished, reviews fall back to your firm's pick, then Glade's default. Saving the template with that old pick still unchanged is allowed.
 
-> TODO: Confirm where the review skill picker appears in the questionnaire template settings and what it is labelled.
+The picker is on the questionnaire template's settings, labeled **AI review skill**. **Firm default** keeps the skill chosen in Petition settings. The list also includes your firm's published skills and published Glade skills.
 
 ## Configuration
 

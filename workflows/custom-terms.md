@@ -85,7 +85,8 @@ When an agreement is waiting on the attorney's countersignature, your team can h
 - The new signer must be an attorney at your firm who is still on your team. Anyone on your firm's team can make the change.
 - It is not available once the attorney has signed, on an agreement that was skipped, or on an agreement that is not set to be signed by an attorney.
 
-> TODO: Confirm where the reassign action appears on the agreement and what it is labelled.
+- On the agreement, **Reassign attorney** sits with the signature progress, above the list of signers. When no attorney holds the signature yet, the same control reads **Assign attorney**.
+- It opens **Choose the signing attorney**. The attorney who holds the signature now is marked **Current**. Until you pick someone, the confirm button reads **Send request**. After you pick an attorney it reads **Send to** followed by their name, or **Send to** that name **again** when you pick the attorney who already holds it. **Cancel** closes the dialog without a change.
 
 ### The name on the attorney's signature
 

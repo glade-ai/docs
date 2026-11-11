@@ -26,7 +26,7 @@ The workflow list shows your firm's cases in a table that can be sorted, filtere
 - The unassigned-workflows CSV export includes only cases matching the filters currently applied to the list.
 - **A case now also lists the client's appointments that sit on no case.** An appointment booked from the calendar, such as an intake, is not attached to any case, so it used to appear on none of the client's cases. A case's details now include the client's appointments with your firm that are not on any case, up to the 20 most recent by start time, alongside the case's own appointments. Appointments attached to another of the client's cases stay on that case only. Only your firm's team sees these; a collaborator on the case does not.
 
-> TODO: Confirm the column names shown in the workflow list for the next and last appointment, and where the client's off-case appointments appear on the case.
+The two columns are **Next appointment** and **Last appointment**. They are hidden until you turn them on: open **Filter & Sort**, then **Display**. On the case, appointments that sit on no case appear in the case summary under Bookings, in a group labeled **Other client bookings**. The group is shown only when the client has at least one, and each row opens that appointment.
 
 ## Related Features
 

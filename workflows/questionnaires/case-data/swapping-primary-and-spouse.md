@@ -4,7 +4,16 @@
 
 On a joint case, **Swap primary and spouse** trades the roles of the two debtors, so the person filed as Debtor 1 becomes Debtor 2 and the other way round. Firm staff use it when the debtors were entered in the wrong order. Before the swap is applied, a confirmation dialog previews what will change.
 
-> TODO: Confirm where **Swap primary and spouse** is opened from on the case, and describe the full preview the confirmation dialog shows.
+Open it from the case's workflow settings, under **Workflow actions**. The row is labeled **Swap primary and spouse**. When the case cannot be swapped, the row stays unavailable and says why. When a swap has already been made, the row names who made it and when.
+
+The confirmation dialog is titled **Swap primary and spouse**. It names who will become the primary debtor and who will become the spouse, and says that each person keeps their own uploads, answers, and open tasks — only the roles change, and swapping again restores the original roles. The rest of the dialog is filled in for this case, under four headings:
+
+- **What changes** — the new primary and spouse, and what moves with the roles, such as how many case-data values are swapped.
+- **What stays where it is** — for example a signed retainer left untouched, open tasks that stay with the person they are assigned to, and uploads, permissions, payments, bookings, and chat threads, which stay with the person who owns them.
+- **Not touched — check these afterwards** — anything the swap leaves in place for you to fix, such as a pending e-signature packet you void and regenerate after the swap.
+- **Please confirm before swapping** — a checkbox naming the two people and stating that swapping again is the only way to undo it. **Swap primary and spouse** stays unavailable until that box is ticked. **Cancel** leaves the case unchanged.
+
+When the names already look reversed, the dialog adds a **Before you swap** alert: "Case data already lists these clients' names the other way round from their roles, probably from an earlier manual edit. The swap moves the names along with everything else, so they will still be reversed afterwards. Correct the Debtor 1 and Debtor 2 names in the schedules as well." You can still confirm the swap.
 
 ## Key Behaviors
 
