@@ -20,8 +20,12 @@ Generating a draft is available to your team on a supported bankruptcy schedules
 
 ### The draft is marked as a draft
 
-Every page of the **Petition (Draft)** document carries a marking down the right-hand margin: the Glade mark, the word **DRAFT** repeated down the page, and a shield showing how many blocking issues the petition check found at the moment the draft was built.
+Every page of the **Petition (Draft)** document carries two markings:
 
+- **A diagonal DRAFT watermark** — a large, faint grey **DRAFT** running corner to corner across the middle of the page. It is the conventional "not the final copy" mark that attorneys and debtors recognize at a glance, and it is sized to the page, so portrait, landscape and unusually sized pages are all covered.
+- **A margin marking down the right-hand edge** — the Glade mark, the word **DRAFT** repeated down the page, and a shield showing how many blocking issues the petition check found at the moment the draft was built.
+
+- The watermark tints the page behind the form rather than covering it, so the text and figures on the draft stay fully legible.
 - The marking exists so a printed draft cannot be mistaken for the filing copy once it is off the screen and in a stack of paper on a desk.
 - The **shield count matches the Petition Check badge** — it counts blocking findings, and it leaves out signature fields, exactly as the badge in the questionnaire header does. It is a snapshot from when the draft was generated, so it does not move as you correct fields; generate a new draft to refresh it.
 - **Signature Pages are not marked.** The pages a client signs in ink come from the unmarked copy, so nothing overprints a signature block.
@@ -97,6 +101,7 @@ When the petition's court forms are filled — on **Generate petition**, when a 
 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.
 - The shield count on a draft is a snapshot and does not update as fields are corrected.
+- The diagonal watermark appears on drafts generated after it was introduced. A draft generated earlier carries only the margin marking until it is generated again.
 - On a case with a very large number of documents (more than about 500), the optional extras list may not include every file on the case. The ticked official forms and the creditor matrix are always complete.
 
 ## Related Features
