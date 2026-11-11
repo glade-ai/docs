@@ -141,8 +141,7 @@ If a payment recorded outside Glade should not be there at all (for example, the
 - If the invoice has an active payment plan, the plan's schedule is extended where needed so it still covers what is owed.
 - If the payment had already synced to QuickBooks, the matching QuickBooks payment is voided. If the void fails, the case owners get a message saying so.
 - A payment can only be removed once. If someone else removed it first, or an invoice edit has since moved it to a new version of the invoice, the removal is refused instead of acting twice.
-
-> TODO: Confirm where the **Remove payment** action appears in the dashboard, and whether a confirmation step is shown.
+- On the invoice, open **Recent payments**. A payment recorded outside Glade has a **More actions** menu with **Edit payment** and **Remove payment**. **Remove payment** asks you to confirm. The confirmation is titled **Remove this payment?** and says the payment will be removed and will no longer count toward the invoice. If the invoice has an active payment plan, it adds that the plan will be extended to cover the higher balance. If the invoice is already paid in full, it says the invoice will reopen with a balance due and nothing will collect it automatically. Confirm with **Remove payment**.
 
 ## Configuration
 

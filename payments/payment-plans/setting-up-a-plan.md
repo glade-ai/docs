@@ -21,8 +21,7 @@ A payment plan is set up on an invoice by the client or by the firm on the clien
 - A start date earlier than today is refused with an error, and no plan is created. Previously, a same-day plan saved in the afternoon failed with an error but could leave a half-created plan behind.
 - Modifying a plan and choosing today as its next payment date also charges that installment within about a minute. Re-saving a plan whose next installment is already scheduled for later today keeps that installment's original time.
 - A same-day first installment is charged the same way as any other installment, with the same retries, failure handling, and emails.
-
-> TODO: Confirm when the payment plan dialog starts offering today's date. Until that update reaches the dialog, it may still require a start date of tomorrow or later. A same-day date already works when it comes from client checkout at the start of a workflow.
+- **Set up a payment plan** (and **Modify payment plan**, when a plan already exists) offers today as the earliest start date, using the firm's time zone. A date before today cannot be chosen. When today is selected, the start date says "The first payment is charged as soon as you save." That line stays hidden when you save a plan again and its next installment is already today, because that installment keeps its original time. A same-day date also works when it comes from client checkout at the start of a workflow.
 
 ### Supported frequencies
 
