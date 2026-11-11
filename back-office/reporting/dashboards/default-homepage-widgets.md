@@ -12,7 +12,7 @@ A new team member's personal homepage starts with three widgets already on it, r
   - **Cases** — one column wide, showing the 5 newest cases.
 - These are ordinary widgets: they can be moved, changed, or removed like any widget you add yourself.
 - Existing team members whose homepage has no widgets on it can be given the same starting layout. A homepage that already has at least one widget is never changed.
-- If the firm has a [default homepage](./firm-default-homepage.md), it appears above these widgets. Setting a firm default does not change the starting widgets.
+- Setting a [firm default](./firm-default-homepage.md) does not change these widgets. Home does not show the default dashboard above them.
 
 ## Edge Cases & Limitations
 
