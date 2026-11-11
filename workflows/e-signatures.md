@@ -90,7 +90,7 @@ A reassignment is refused when:
 
 Only firm staff can reassign a signer.
 
-> TODO: Confirm where the reassign and resend actions appear on an e-signature request, and their labels.
+While the request is waiting on signatures, **Reassign attorney** appears on the signature request, above the signing area. If more than one attorney can be reassigned, each action is labelled **Reassign {name}'s signature**. It opens **Choose the signing attorney**. Choose another attorney, then **Send to {name}**. Choosing the attorney who already holds the signature and then **Send to {name} again** sends the request to them again. Attorneys without a Glade login are listed but cannot be chosen. Signatures already collected stay as they are.
 
 ### Voiding, correcting, and re-sending a request
 
@@ -105,8 +105,8 @@ Because the placements survive, correcting a document that has already been sent
 - Void, replace, and resend apply to the same request rather than creating a new one, so the case keeps a single record of what was sent and when.
 - A request that has been resent stays resent. A late status update arriving from the signing service for the version you voided does not flip the request back to voided after you have already sent it again.
 - Voiding from inside the signing service's own editor rather than from Glade is not the same action, and does not preserve the field placements. Use the void action in Glade.
-
-> TODO: Confirm where the void, replace file, and resend actions appear in the app, and which roles can use them.
+- **Void request** is in the signature request's header. Choosing it asks you to confirm; the confirmation is titled **Void e-signature request** and the confirm button is **Void**. It is available until the request is voided or completed.
+- On a voided request, **Replace PDF** and **Resend the signature packet** appear under the voided message. After the PDF is replaced, the request says **Ready to resend**, and **Resend the signature packet** is on that message.
 
 ## Configuration
 

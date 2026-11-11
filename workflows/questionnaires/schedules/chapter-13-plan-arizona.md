@@ -18,7 +18,7 @@ District of Arizona cases can generate a Chapter 13 plan from the [Chapter 13 Pl
 
 ## Configuration
 
-There is no per-firm setting. The district's recorded figures include a $4,500 no-look attorney fee cap (LR 2084-3(b)(2)), a deduction for the hypothetical Chapter 7 trustee fee, and pro-rata payment with interest on secured claims in (C)(5)(a).
+There is no per-firm setting. The district's recorded figures include a $4,500 no-look attorney fee cap (LR 2084-3(b)(2)), a 10% Chapter 13 trustee fee, a deduction for the hypothetical Chapter 7 trustee fee, and pro-rata payment with interest on secured claims in (C)(5)(a). The plan summary's trustee line uses that 10%.
 
 ## Edge Cases & Limitations
 
@@ -35,8 +35,6 @@ Other limits:
 
 - (C)(2)(b) additional services, (C)(2)(c), the (C)(5)(a) codebtor block, and the "Nonstandard Provisions. See Section (H)." boxes are not recorded in Glade and print as the court's blanks.
 - A plan whose calculator figures were saved before Arizona was added has no non-exempt equity or Chapter 7 trustee fee saved, so (J)(1)(a) and (c) print blank with a warning. Re-save the calculator to fill them.
-
-> TODO: Confirm the District of Arizona's recorded trustee fee percentage before firms rely on a generated plan.
 
 ## Related Features
 

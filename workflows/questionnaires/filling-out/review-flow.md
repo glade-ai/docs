@@ -15,7 +15,7 @@ When a questionnaire uses the review workflow, submitting it does not complete i
 ### Editing while a questionnaire is in review
 
 - **Only the reviewers can edit a questionnaire in review.** For everyone else — other firm staff, assignees, and the client — the questionnaire behaves as if it were completed and shows its answers read-only. Previously any firm staff member or assignee could keep editing a questionnaire after it was submitted for review.
-- **Nobody can edit a questionnaire once changes have been requested on it.**
+- **Once changes have been requested, only the people it was sent back to can edit it.** Reviewers and everyone else see the answers read-only until it is submitted for review again.
 - Glade's own automatic updates to a questionnaire are not affected by these rules.
 - The same rules apply to edits made through an AI assistant connected to Glade: an assistant cannot change answers on a questionnaire that is in review or has changes requested.
 
@@ -35,9 +35,14 @@ A reviewer can send a questionnaire in review back to the client:
 - A **changes requested** entry is added to the case activity, naming the reviewer.
 - The client resubmits the questionnaire for review, which starts the review again and records a new submitted-for-review entry.
 
-Only firm users can request changes, and only on a questionnaire that is currently in review.
+Only the questionnaire's reviewers can request changes, and only while it is in review. On a firm that has change requests turned on:
 
-> TODO: Confirm where the **Request changes** and **Resubmit** buttons appear and when they became available, and how the client addresses feedback while the questionnaire cannot be edited.
+- When the questionnaire has section PDFs, firm staff see **Review mode** at the bottom of the questionnaire. Review mode's footer has **Request changes** above **Approve**.
+- When it has no section PDFs, **Request changes** is on the questionnaire itself, above **Approve**.
+- With no change written yet, **Request changes** opens the place to write one. Once a change is outstanding, the same button reads **Submit 1 change request** (or **Submit N change requests**) and asks who it goes back to. Those people can edit it until it is submitted again.
+- Someone who is not a reviewer still sees the buttons, disabled, with the line "Only this questionnaire's reviewers can request changes or approve it."
+
+There is no separate **Resubmit** button. The questionnaire opens on **Check work**, and the people it was sent back to edit the answers there. Each request can be discussed with the firm. When the changes are done, **Submit for review** sends it back into review. Someone who cannot edit it is told it can be edited again once it is moved back to in progress.
 
 ### Approving and completing
 
