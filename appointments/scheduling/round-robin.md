@@ -34,7 +34,7 @@ Round robin lets a firm share a consultation service across several team members
 
 Before turning round robin on, set weekly hours on the service for each team member who should take bookings, and have each of them connect their calendar.
 
-> TODO: Confirm where the round-robin switch appears in the firm app and what it is labelled. Round robin is not yet available to every firm.
+The switch is labelled **Round robin**. Open the consultation service and find it under **Bookings**, directly under **Minimum booking notice**. The line under the switch says clients book any available team member, each booking goes to whoever has gone longest without one, everyone with weekly hours for the service is in the rotation, county routing does not apply, and staff can still book a specific person. It appears only on consultation services, and only for firms that have round robin turned on. It is off until the firm turns it on.
 
 ## Edge Cases & Limitations
 
