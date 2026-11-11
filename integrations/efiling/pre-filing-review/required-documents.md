@@ -39,9 +39,9 @@ A skeleton filing submits only the minimum set of documents a district accepts t
 
 Skeleton requirements are defined per district, alongside that district's other filing rules. Kentucky Eastern is now set up for electronic filing, with its required documents pre-selected for skeleton submissions.
 
-> TODO: Confirm that pre-filing reviews started from the eFiling screen now run in skeleton mode for skeleton filings. The skeleton packet change applies as soon as it ships; the review only leaves out later-due forms once the screen tells it the filing is a skeleton.
-
-> TODO: Confirm where a filing is marked as a skeleton filing — whether it is a choice in the eFiling modal at submission time or a setting on the case.
+- **Check work on the eFiling screen follows the filing's current mode.** Both **Run checks** and the automatic re-run, when a review is out of date, use the mode the filing is in now. A review run in the other mode counts as out of date, so switching a filing between a skeleton filing and a full filing runs the checks again. A full-packet review does not clear a skeleton filing, and a skeleton review does not clear a full filing.
+- **Submitting a skeleton filing sends only the skeleton packet.** Documents the district files later are not included in that submission.
+- A filing is a skeleton filing when the petition is generated with **Use skeleton petition** checked. The electronic filing packet then shows a **Skeleton filing** badge. Generating the petition again without that box checked makes the filing a full packet. The choice is kept for the browser you are working in; it is not a setting saved on the case.
 
 ## Edge Cases & Limitations
 
