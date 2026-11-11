@@ -39,9 +39,14 @@ A reviewer can send a questionnaire in review back to the client:
 - Questionnaire reminders keep going out while changes are requested.
 - The client resubmits the questionnaire for review, which starts the review again and records a new submitted-for-review entry. A resubmission that does not name reviewers goes back to the reviewers who requested the changes.
 
-Only the questionnaire's reviewers can request changes, and only on a questionnaire that is currently in review.
+Only the questionnaire's reviewers can request changes, and only while it is in review. On a firm that has change requests turned on:
 
-> TODO: Confirm where the **Request changes** and **Resubmit** buttons appear and when they became available, and how the client addresses feedback while the questionnaire cannot be edited.
+- When the questionnaire has section PDFs, firm staff see **Review mode** at the bottom of the questionnaire. Review mode's footer has **Request changes** above **Approve**.
+- When it has no section PDFs, **Request changes** is on the questionnaire itself, above **Approve**.
+- With no change written yet, **Request changes** opens the place to write one. Once a change is outstanding, the same button reads **Submit 1 change request** (or **Submit N change requests**) and asks who it goes back to. The choice starts with the client and whoever submitted it, and those people can edit it until it is submitted again.
+- Someone who is not a reviewer still sees the buttons, disabled, with the line "Only this questionnaire's reviewers can request changes or approve it."
+
+There is no separate **Resubmit** button. The questionnaire opens on **Check work**, and the people it was sent back to edit the answers there. Each request can be discussed with the firm. When the changes are done, **Submit for review** sends it back into review.
 
 ### Approving and completing
 

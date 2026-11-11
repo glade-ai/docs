@@ -17,12 +17,12 @@ District of Arizona cases can generate a Chapter 13 plan from the [Chapter 13 Pl
 - **Commitment period** comes from the means test, not the plan term: 60 months for an above-median debtor and 36 months for a below-median debtor (§ 1325(b)(4)), unless a period is stated on the plan. A below-median debtor on a 60-month plan therefore prints 36. With no means test on the case, the period prints blank with a warning rather than a guessed figure.
 - **Attorney fee box.** When no fee election is made, the plan ticks the box Local Rule 2084-3(b)(2) calls for: the flat fee when the attorney fee is at or under the no-look cap, and a fee application when it is above. An election you make still wins. A warning is raised when the flat fee is elected for a fee above the cap, and for any flat fee above the rule's $5,500. Previously neither box was ticked when no election was made.
 - **Vesting (E).** With no vesting election, the plan shows property vesting in the debtor on confirmation, as section (E) itself provides. Only an "other" election with no text still warns.
-- **A real-property claim the debtor pays directly prints in (C)(4).** A claim on "Secured, paid by debtor" whose collateral is real property — for example a homeowners' association — prints in (C)(4)(b) with no cure, or (C)(4)(c) with a cure. A cure is counted on line (I)(4)(b) and warns like any directly paid cure. The claim's real-property box is pre-ticked from the linked Schedule A/B property. Previously such a claim was left off the plan, and its warning did not say a claim was missing.
+- **A real-property claim the debtor pays directly prints in (C)(4).** A claim on **Secured, paid by debtor** or **Secured, paid by debtor, § 506 N/A** whose collateral is real property — for example a homeowners' association — prints in (C)(4)(b) with no cure, or (C)(4)(c) with a cure. A cure is counted on line (I)(4)(b) and warns like any directly paid cure. On that claim in the calculator, **Collateral is real property** is pre-ticked from the linked Schedule A/B property, and it can be changed. Previously such a claim was left off the plan, and its warning did not say a claim was missing.
 - **Every claim table** repeats one row per claim, and prints the court's blank row when it has none.
 
 ## Configuration
 
-There is no per-firm setting. The district's recorded figures include a $4,500 no-look attorney fee cap (LR 2084-3(b)(2)), a deduction for the hypothetical Chapter 7 trustee fee, and pro-rata payment with interest on secured claims in (C)(5)(a).
+There is no per-firm setting. The district's recorded figures include a $4,500 no-look attorney fee cap (LR 2084-3(b)(2)), a 10% Chapter 13 trustee fee, a deduction for the hypothetical Chapter 7 trustee fee, and pro-rata payment with interest on secured claims in (C)(5)(a). The plan summary's trustee line uses that 10%. **Form details** shows the defaults the plan prints when an election is left unset: **Applicable commitment period** follows the means test, **Attorney fee arrangement** follows the fee against the no-look cap, and **Property vesting** is **Vests at plan confirmation**.
 
 ## Edge Cases & Limitations
 
@@ -42,10 +42,6 @@ Other limits:
 
 - Nothing in the plan records that the debtor is a business, so the no-look cap does not rise on its own for a business case. Set the plan's fee cap to $5,500 yourself for a business debtor.
 - Plans already generated are not changed; regenerate a plan to pick up these defaults.
-
-> TODO: Confirm where the real-property box for a directly paid secured claim appears in the plan calculator, and that Form Details shows the Arizona defaults above.
-
-> TODO: Confirm the District of Arizona's recorded trustee fee percentage before firms rely on a generated plan.
 
 ## Related Features
 
