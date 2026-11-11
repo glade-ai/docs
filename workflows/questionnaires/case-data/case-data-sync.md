@@ -25,6 +25,18 @@ Some case details are asked in more than one place on a questionnaire — the co
 
 **Clearing a dropdown in a list row now clears it on the case record.** Previously, clearing a single-choice answer inside a list or table row — such as a ticked business type — was ignored, and the case record kept the old answer.
 
+#### Debtor names written "Last, First"
+
+When a questionnaire such as the petition is started from a client's record, each debtor's first, middle, and last name and suffix are filled from the name on the client's record. A name stored surname-first with a comma — "Lynch, Jamar", as intake and CRM imports often record it — is now split correctly, so "Lynch" goes into the last name and "Jamar" into the first name.
+
+- Surnames of more than one word stay together, and a suffix such as "Jr." is recognized on either side of the comma.
+- "Jamar Lynch, Jr." is still read as first name, last name, suffix.
+- A name that is only a surname followed by a comma fills the last name only.
+- A stray comma is never carried into a name field.
+- Names written without a comma are filled exactly as before.
+
+Previously the name was split purely by position, so "Lynch, Jamar" put "Lynch," in the first name field and "Jamar" in the last name field.
+
 ### Meeting of Creditors and Confirmation Hearing Details from Court Notices
 
 When a PACER court notice for the case arrives, the details Glade reads from it are written to the case record, so any questionnaire field linked to them fills in on its own — no re-typing from the notice:
@@ -101,6 +113,7 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 
 ## Edge Cases & Limitations
 
+- Debtor names filled before the "Last, First" correction are not changed. If a case shows the surname in the first name field, correct the name on the questionnaire.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening and Re-syncing](./reopening-and-resync.md)).
 - **One unusable list row no longer stops the rest of the questionnaire from syncing.** A row whose values no longer fit the list it sits in is skipped, and the questionnaire's other rows and answers still reach the case record. Previously a single such row, or a single unanswered box, could stop the whole questionnaire from syncing. A skipped row does not reach the case record until its values are corrected.
 - Hearing details are taken only from PACER court notices. The 341 meeting address and dial-in number, and the confirmation hearing time, are not filled this way.
