@@ -78,6 +78,28 @@ Previously a step that fired automatically produced a request the client could n
 - A court form whose own title contains the word "certificate" (for example, a Certificate of Compliance) is treated as a signed document, not as the signing certificate. Previously such a form was mistaken for the audit record, which stopped the request from completing: every signer had signed, but the request stayed at the awaiting-signatures stage indefinitely.
 - If attaching the documents fails, the request is still recorded as completed rather than being left in an earlier stage. The completion is not lost because of an attachment problem.
 
+### Handing a pending attorney signature to another attorney
+
+Firm staff can move an attorney's pending signature on a petition — or on any other document sent for e-signature — to a different attorney at the firm, without voiding the request. The usual case: the client has signed, the attorney who prepared the filing is out, and another attorney needs to sign instead.
+
+- **Signatures already collected are kept.** The client is not asked to sign again, and the document does not have to be regenerated.
+- **The new attorney takes the original attorney's place in the signing order.** They are invited only once every earlier round has signed, as the original attorney would have been. Their name and email replace the original attorney's on the request and in the document's signer fields.
+- **Links the original attorney already had stop working**, so they can no longer sign in the new attorney's place.
+- **The signing task moves to the new attorney**, and they are given access to the case if they did not already have it. The original attorney's access is removed unless they own the case.
+- **The change is recorded in the case activity**, naming both attorneys — the same kind of entry a reassigned retainer attorney produces.
+- **Resending to the same attorney.** Instead of choosing someone new, staff can send the pending signature to the same attorney again — for example, if they lost the invitation. Nothing else about the request changes.
+
+A reassignment is refused when:
+
+- the request is no longer waiting on signatures;
+- the attorney has already signed;
+- the signer is the client, or is not an attorney at the firm — a client's signature can never be handed to someone else;
+- the chosen attorney is no longer on the firm's team, or already signs this request.
+
+Only firm staff can reassign a signer.
+
+While the request is waiting on signatures, **Reassign attorney** appears on the signature request, above the signing area. If more than one attorney can be reassigned, each action is labelled **Reassign {name}'s signature**. It opens **Choose the signing attorney**. Choose another attorney, then **Send to {name}**. Choosing the attorney who already holds the signature and then **Send to {name} again** sends the request to them again. Attorneys without a Glade login are listed but cannot be chosen. Signatures already collected stay as they are.
+
 ### Voiding, correcting, and re-sending a request
 
 A request that has already gone out can be pulled back, corrected, and sent again without rebuilding it from scratch. Three actions work together:
@@ -107,6 +129,7 @@ E-signature requests have no settings of their own. They are sent manually or as
 - Requests produced by an automated workflow step before that path was corrected are not repaired retroactively. They still report "Couldn't load signature request" and have to be sent again.
 - Requests that were stuck in the preparing stage before this behavior shipped are not repaired automatically. Opening one now makes the document available; a request that appears stuck after that should be raised with Glade.
 - A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal/README.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
+- Reassigning applies only to a firm attorney's signature that has not been given yet. To change who signs on the client's side, void and re-send the request.
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
 - Filing signed documents into the case's documents applies to requests completing from now on.
