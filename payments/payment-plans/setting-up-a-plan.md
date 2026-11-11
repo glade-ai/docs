@@ -14,6 +14,15 @@ A payment plan is set up on an invoice by the client or by the firm on the clien
 - The system generates a schedule of individual installments based on these inputs.
 - The plan starts on the selected start date and charges repeat at the chosen frequency until the invoice balance reaches zero.
 
+### Starting a plan today
+
+- A plan can start on today's date in the firm's time zone. When it does, the first installment is charged within about a minute of saving the plan, so a client who agrees to "pay $100 today and the rest in two weeks" has the first payment taken right away.
+- Only the first installment moves. Later installments still fall on the chosen schedule, counted from the selected start date, and charge at the usual time of day.
+- A start date earlier than today is refused with an error, and no plan is created. Previously, a same-day plan saved in the afternoon failed with an error but could leave a half-created plan behind.
+- Modifying a plan and choosing today as its next payment date also charges that installment within about a minute. Re-saving a plan whose next installment is already scheduled for later today keeps that installment's original time.
+- A same-day first installment is charged the same way as any other installment, with the same retries, failure handling, and emails.
+- **Set up a payment plan** (and **Modify payment plan**, when a plan already exists) offers today as the earliest start date, using the firm's time zone. A date before today cannot be chosen. When today is selected, the start date says "The first payment is charged as soon as you save." That line stays hidden when you save a plan again and its next installment is already today, because that installment keeps its original time. A same-day date also works when it comes from client checkout at the start of a workflow.
+
 ### Supported frequencies
 
 - **Weekly** — every 7 days
@@ -63,6 +72,7 @@ When you choose **semi-monthly**, the first installment moves forward to the nex
 ## Edge Cases & Limitations
 
 - There is no distinct "down payment" feature. The first installment is the same amount as all others; only the start date can differ.
+- A plan cannot start on a date that has already passed in the firm's time zone. A firm whose time zone is set incorrectly may find "today" drawn in the wrong place.
 - Only one active payment plan can exist per invoice at a time.
 - Maximum duration enforcement happens only at plan creation. It is not applied retroactively if the template limit changes after a plan is already active.
 
