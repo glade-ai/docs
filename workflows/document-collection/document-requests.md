@@ -34,6 +34,7 @@ A document request defines the checklist of files your team wants to collect fro
 - **Document request types**: "basic" for standard file uploads, "income data" for structured income data collection. See [Income Documents](./income-documents.md).
 - **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
 - **Email notifications** can be toggled on or off per document request template.
+- **Review email** and **Submit for review automatically** can be set per document request template. See [Review Email and Automatic Submit for Review](./review-email-and-auto-submit.md).
 
 ## Edge Cases & Limitations
 
