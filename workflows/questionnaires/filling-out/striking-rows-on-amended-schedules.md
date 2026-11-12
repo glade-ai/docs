@@ -8,9 +8,7 @@ When you amend a schedule, the court needs to see what left it. Instead of delet
 
 ### How to strike a row
 
-Staff strike a row from the row's ⋮ (more actions) menu with **Amend: Strikethrough**, and choose it again to clear the strike (**Amend: Bold, Italicize, Underline** on the same menu marks a row as added). The same option appears in the bulk-edit menu when several rows are selected; a bulk strike skips rows marked as duplicates. A struck row shows as **Marked as removed**. These controls are for staff only; clients do not see them.
-
-The strike controls are being rolled out gradually and may not appear for every firm yet, and a strike already saved always displays and prints regardless.
+Staff strike a row from the row's ⋮ (more actions) menu with **Amend: Strikethrough**, and choose it again to clear the strike (**Amend: Bold, Italicize, Underline** on the same menu marks a row as added). The same option appears in the bulk-edit menu when several rows are selected; a bulk strike skips rows marked as duplicates. A struck row shows as **Marked as removed**. These controls are for staff only; clients do not see them. This is being rolled out gradually; contact Glade support if you don't see it. A strike already saved always displays and prints regardless.
 
 - **The row still prints, crossed out.** A struck row keeps its values and its line number on the amended schedule. Rows after it are not renumbered.
 - **It stops counting in totals.** Schedule totals and any other sum or count over the list leave the struck row out, both on screen and on the printed PDF. For example, a struck Schedule D creditor no longer adds to the Schedule D total.

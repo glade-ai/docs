@@ -15,6 +15,7 @@ Bookings can be assigned to specific team members within the firm, either by def
 - When connected to a workflow, team assignment follows workflow rules.
 - Each team member's individual availability is checked when assigning.
 - When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
+- On a consultation service with round robin turned on, clients don't see team member chips or the no-availability message. Glade assigns the booking instead. See [Round-Robin Consultation Booking](./round-robin.md).
 
 ### Which team member the Bookings section is showing
 
@@ -41,3 +42,4 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - [Availability](./availability.md)
 - [Conflicts and Concurrent Bookings](./conflicts-and-concurrent-bookings.md) — conflict checks when reassigning a booking
 - [Workflow Bookings](./workflow-bookings.md)
+- [Round-Robin Consultation Booking](./round-robin.md)

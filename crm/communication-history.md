@@ -20,6 +20,15 @@ Communication history tracks messaging between your firm and clients. Each conve
 - Conversations are categorized by type: paid, scheduled, case-related, subscriber, lead, or anonymous.
 - The conversation list shows a preview of the last message, timestamp, unread count, status, and associated products.
 
+### Reply tasks in case conversations
+
+A comment in a case conversation can give someone a **Respond to Comment** task. Who gets one, and whose reply clears it, depends on who wrote the comment.
+
+- **A client's comment always goes to the case owners.** The owners get a Respond to Comment task whenever the client writes. If the client @-mentions team members, those team members share the same task with the owners. Previously a client comment that mentioned someone gave the task only to that person, and the owners got nothing. Someone the client mentions who is not on your firm's team does not get a task.
+- **A team member's comment gives a task only to the people it @-mentions.** A comment from a team member with no @-mention creates no task. Previously a comment from any team member who was not an owner of the case gave the owners a task, as if the client had written it.
+- **Only an owner, or the person the task is assigned to, clears it by replying.** A reply from either of them completes the open task, and no new task opens. A reply from any other team member leaves the open task as it is. Previously any team member's reply closed the task and a new one opened for the owners straight away. A team member the task has been reassigned to can now clear it by replying.
+- These rules cover comments in a case's workflow conversation. Direct messages with a client are not affected. Tasks from tagging someone in an internal note follow their own rules — see below.
+
 ### Internal notes in case conversations
 
 Case conversations — the discussions attached to a client's active workflow — support two types of messages: regular comments (visible to the client) and internal notes (visible to your team only).
@@ -32,6 +41,7 @@ Case conversations — the discussions attached to a client's active workflow �
   - Only the people tagged in the note get the task. The author never gets one, even if they tag themselves. Someone who is not on your firm's team is not assigned one.
   - A note with no tags creates no task. It is not sent to the case owners instead.
   - A reply in the note thread completes the open task. If the reply tags someone, that person gets a new task.
+  - **Tagging someone by editing a note works the same way.** If you post a note and then edit it to tag a teammate, the newly tagged teammate gets the **Respond to internal note** task and the tagged email, just as if they had been tagged when the note was posted. People who were already tagged are not notified again, and anyone already on the note's open task stays on it. If the note's task was already completed, a new task opens for the newly tagged teammate. Previously, a tag added by editing a note sent no task and no email.
   - These tasks are left out of the daily brief, as "Respond to Comment" tasks are.
 
 #### Editing an internal note
@@ -44,7 +54,19 @@ An internal note can be edited after it is posted. While you are editing:
 
 Writing a new note is unchanged — Enter has always added a line there.
 
+#### An unfinished note is kept as a draft
+
+Closing the **Add internal note** window before saving no longer throws away what you typed. Clicking outside the window — for example, when switching back to Glade from a PDF you were reading — closes it, and previously the half-written note was lost.
+
+- **Reopening restores the draft.** The next time you choose **Add note** on the same case, the window opens with the text you had typed, along with any contact type, date, and time you had picked, and **Save** is ready to use.
+- **One draft per case.** Each case keeps its own draft, and the draft is the same whichever place on the case you open **Add note** from.
+- **A failed save keeps the note.** If saving fails, the text is put back in the window so you can try again rather than retype it.
+- **The draft is cleared** when the note is saved, or when you empty every field yourself.
+- **Drafts are not stored on the computer.** A draft survives the window closing and moving around Glade, but not reloading the page. Signing out or switching accounts clears every draft, so someone else signing in on the same browser never sees your unsaved note.
+
 (Notes on a client's profile — the **Internal Notes** tab on the client record — are a separate feature with their own rules. See [Notes](notes.md).)
+
+An internal note can also be written while creating a new case for a new client, and it is saved to that case. See [Details captured when creating a new client](client-records.md#details-captured-when-creating-a-new-client).
 
 #### Notes filed from somewhere specific on a case
 
@@ -79,6 +101,20 @@ An AI reply can be stopped part-way through, and stopping it now stops the work 
 
 > TODO: Confirm which surfaces offer the stop control and how it is labeled, and whether a client chatting from the portal can stop a reply as well as a team member.
 
+#### Leaving a Glade support conversation does not stop the reply
+
+In the Glade support chat, stopping is now something you do on purpose, not something that happens when you look away.
+
+- **Leaving no longer stops the assistant.** Going back to the thread list, closing the chat panel or the browser tab, or losing your connection only ends the live view. The assistant finishes its answer and saves it, and if you asked for a person it still hands the request to Glade support. Previously, leaving a few seconds after sending cut the assistant off, so the reply stayed blank forever and a request for a human never reached anyone.
+- **Come back to read the answer.** A reply that finished while you were away is in the conversation the next time you open it.
+- **Stop is the button in the Glade support chat.** It is labeled **Stop** and appears when the assistant starts responding. It stays disabled until the assistant has picked up the question, because a stop sent earlier does nothing, and it stays disabled while a stop is being sent so it cannot be sent twice.
+- **Stop applies only to the reply you press it on.** It does not affect earlier replies or a newer answer in the same thread. Pressing Stop on a reply that has already finished does nothing.
+- **Only people in the conversation can stop a reply**, and the explicit Stop applies only to Glade support conversations.
+- Pressing **Stop** stops that reply. The message settles to the same result you see if you close the chat and open it again. A stop mid-answer keeps the text written so far.
+- **A stopped reply is not shown as an error.** Stopped before any text, it stays blank; stopped mid-answer, it keeps the partial text. The "something went wrong" message appears only when a reply actually fails.
+- **If the stop does not go through,** Stop ends the live view instead. Reopen the conversation to see the reply the assistant finished.
+- Long replies are still cut off by the existing time limit, as before.
+
 ### Case discussions stay with their own case
 
 A reply you post in a case discussion is always filed against the case open in front of you.
@@ -103,8 +139,13 @@ None of this changes how you write or read a discussion on the case you are work
 - Case-specific conversations (internal team discussions about a case) are separate from client-facing conversations.
 - A firm administrator's ability to edit and delete other people's messages covers internal notes only. There is no way for anyone other than the author to change a client-facing comment.
 - A note whose author has left the firm can now be edited or deleted, but only by an administrator. Other team members still cannot.
+- In the Glade support chat, closing the chat or navigating away is not a way to cancel a reply. The assistant finishes and saves its answer, and escalates to a person if asked. Use **Stop** to cancel.
 - Stopping an AI reply cannot undo an action the assistant had already started. If a duplicate booking or invoice appears after a stop, that action was already in progress and needs to be removed by hand.
 - Notes written from a booking before appointment context was recorded cannot be reconnected to their appointment. They remain on the case as ordinary internal notes.
+- An unsaved internal note draft does not survive reloading the page or signing out. Attached documents are not kept in the draft, and an `@` mention in a restored draft shows as plain text — it still becomes a proper mention, and the teammate is still tagged, when the note is saved.
+- A reply from a team member who is neither an owner of the case nor assigned to its Respond to Comment task does not clear the task. Reassign the task to that person, or have an owner reply, if it should be closed.
+- To bring a team member's comment to the owners' attention as a task, @-mention them. A team member's comment with no @-mention creates no task for anyone.
+- Adding a tag by editing applies to internal notes only. Editing a client-facing comment to @-mention someone does not create a task or send a notification. Tags added by editing a note before this change were not notified retroactively.
 - A note is attached to one subject, not several. A note that covers both an invoice and the checklist behind it has to be filed against one of them, or written on the case conversation instead.
 
 ## Related Features

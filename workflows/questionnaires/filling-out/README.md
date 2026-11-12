@@ -14,6 +14,7 @@ Clients fill out questionnaires through the client portal, and your team works i
 - [Layout and Navigation](./layout-and-navigation.md) — the resource panel, Source Data, Schedule Builder tables, very large questionnaires, and the mobile layout.
 - [Printing a Questionnaire](./printing.md) — printing a section from your browser.
 - [Submitting a Questionnaire](./submitting.md) — finding fields with errors, the Fields Need Attention dialog, who can submit anyway, and completion.
+- [Questionnaire Review](./review-flow.md) — reviewers, who can edit a questionnaire in review, review tasks and activity, requesting changes, and approval.
 
 ## Related Features
 
