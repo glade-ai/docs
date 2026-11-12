@@ -26,6 +26,7 @@ Staff can **affirm** a flag to record that the foreclosure is real, not only dis
 ### Dismissing (removing) a flag
 
 - **Removing a flag records who removed it and why**, and stops that same property from being flagged again on that case. Removing a flag does not complete the paralegal task — close that separately.
+- **Removing a flag posts a note to the case's internal notes.** The note reads *Foreclosure flag removed.*, followed by the reason when one was given, and is posted as the person who removed it — the same way a note added while the flag is on already appears. One note is posted per removal, even when the removal clears the same property from more than one match. If the note cannot be posted, the flag is not removed, so a removal never happens without its record in the notes. Previously the reason was saved on the match but nothing appeared in the case's notes.
 - A flag that was affirmed and later removed reads as dismissed.
 
 ### Review status
@@ -52,6 +53,7 @@ Every flag has a review status:
 
 - **Flags are affirmed and dismissed from the case, not from the report.** The foreclosure report rows have no Affirm or remove-flag action.
 - **A dismissed match stays dismissed.** Once a flag is removed for a property, later checks skip that property on that case even if a new address source later points at the same house.
+- **Removals made before removal notes were added have no note.** Their reasons are not posted retroactively; they remain visible in the report's review note column.
 - **Each month's match is reviewed on its own.** An affirmation on one month's match does not mark a later month's match for the same property as affirmed.
 - Flags reviewed before affirming was available read as **Unreviewed** or **Dismissed**.
 

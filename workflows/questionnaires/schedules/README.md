@@ -14,6 +14,7 @@ The Bankruptcy Schedules questionnaire carries tools and behaviors specific to i
 - [Means Test](./means-test.md) — non-consumer Chapter 7 cases and secured debt deductions.
 - [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) — plan elections, lump sums, unsecured pool, arrearage cures, and generated plans.
 - [Chapter 13 Plan Districts](./chapter-13-plan-districts.md) — the districts whose local plan forms can be generated, and what to check by hand on each.
+- [Chapter 13 Plan — District of Arizona](./chapter-13-plan-arizona.md) — Local Form 2084-4, how claims are placed on it, and what to check by hand.
 
 ## Related Features
 
