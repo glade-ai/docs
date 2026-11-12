@@ -132,6 +132,17 @@ When a Chapter 7 or Chapter 13 case is switched to a different workflow, the cli
 
 Previously the new workflow could show an empty schedules questionnaire after a switch, while the client's earlier answers stayed behind on the archived workflow.
 
+**The new workflow's "send the schedules" step uses the moved questionnaire.** The new workflow's own step that sends the Bankruptcy Schedules usually runs after the switch has finished. That step now attaches the schedules questionnaire the switch carried over instead of opening a new, empty one beside it.
+
+- The case holds one schedules questionnaire, with its answers, whichever runs first — the switch or the step.
+- The step's assignees are given access to the moved questionnaire, in addition to anyone who already had it.
+- Any Forms & Schedules entries the new case does not yet have are added. Entries it already has are left as they are, so petition PDFs already generated into them are kept.
+- The questionnaire's completion task moves to the new case.
+- If the moved questionnaire was already submitted, the step treats it as complete rather than waiting for a submission that already happened.
+- Previously the step always opened a second, empty schedules questionnaire after a chapter switch. Staff could end up working in the empty copy and re-typing answers the case already had.
+- Only the schedules questionnaire is carried over this way. Other questionnaires the new workflow sends are opened as new requests, as before.
+- If a case switched before this change still has two schedules questionnaires, contact Glade support to merge them.
+
 ## Edge Cases & Limitations
 
 - Debtor names filled before the "Last, First" correction are not changed. If a case shows the surname in the first name field, correct the name on the questionnaire.

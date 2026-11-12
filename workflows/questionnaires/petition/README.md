@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Bankruptcy Schedules questionnaire produces the petition packet. Your team can check the petition for problems, generate marked drafts and unmarked signing copies while work continues, and handle signatures before the packet is produced.
+The Bankruptcy Schedules questionnaire produces the petition packet. Your team can check the petition for problems, turn on optional checks, generate marked drafts and unmarked signing copies while work continues, handle signatures before the packet is produced, and mark changed answers on amended schedules.
 
 ## Topics
 
@@ -11,6 +11,8 @@ The Bankruptcy Schedules questionnaire produces the petition packet. Your team c
 - [Generating a Draft Petition](./draft-petition.md) — marked drafts, unmarked copies for signatures, which documents the draft includes, save options, and automatic rebuilds after a completed questionnaire is edited.
 - [Petition Document Order](./document-order.md) — the firm's saved document order, where it applies, and cases rearranged by hand.
 - [Signatures](./signatures.md) — the Sign / Skip / Clear & Submit choices, PDFs from case documents, and where signer names come from.
+- [Opt-In Petition Checks](./opt-in-checks.md) — validation rules a firm turns on in Petition settings, including the eviction judgment check on Form 101 line 11.
+- [Amendment Marks](./amendment-marks.md) — striking and emphasizing rows, single answers, and cells on amended schedules, and how marks affect totals and print.
 
 ## Related Features
 
