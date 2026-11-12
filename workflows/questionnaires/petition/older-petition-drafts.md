@@ -27,9 +27,7 @@ Cases prepared before numbered petition drafts were introduced still hold petiti
 ## Edge Cases & Limitations
 
 - Signature pages generated before drafts were tied to their run are matched to a draft the older way, by version number.
-- For a short period after the rename, the **Generate petition** dialog and the eFiling petition selection may still offer a renamed legacy draft as a document to choose. Even if one is chosen, it is left out of the filing copy and the draft.
-
-> TODO: Confirm when the move and rename have been applied to all firms' cases, and whether the dialog no longer offers renamed legacy drafts.
+- Older petition drafts are moved and renamed as Glade applies this to your firm. If the **Generate petition** dialog or the eFiling petition selection still offers a renamed legacy draft, contact Glade support.
 
 ## Related Features
 
