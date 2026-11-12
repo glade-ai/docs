@@ -33,7 +33,7 @@ At the moment you click the final submit button, Glade performs a fresh check. I
 
 The existing case number check looks at every case number Glade knows about for the case: a number saved on the case itself, and a number returned by any earlier filing attempt, not only the most recent one. Previously only the latest attempt was checked, so a failed retry could hide a case number the court had already assigned on an earlier attempt, and a number saved on the case was not considered. This check is blocking.
 
-> TODO: Filing into an existing case (a secondary filing rather than opening a new case) is in progress. Such filings skip the new-case number check; document how attorneys start one once the filing flow for it is available.
+Filing into an existing case is not documented here yet. Contact Glade support if you need to file into a case that is already open.
 
 These three situations — an existing case number, a filing already in progress, and a recent filing attempt — are also reported by the pre-filing review, so your team sees them while working through the review rather than only when the submission dialog opens. The dialog itself behaves exactly as described above.
 
