@@ -12,6 +12,7 @@ Busy events on a team member's synced calendars block their bookable availabilit
 - Events marked as "free" or "transparent" in the external calendar do not block availability.
 - When a client views available time slots, any time covered by an external "busy" event is hidden.
 - This prevents double-booking across Glade and external calendars.
+- A synced event with no duration — one whose start and end times are the same, such as an out-of-office marker, a reminder, or a deadline note — blocks only the slot it starts inside. It does not block the rest of the team member's day.
 - Availability blocking applies per team member. A member's external events only affect their own availability.
 
 ### Busy events and concurrent bookings
@@ -45,6 +46,7 @@ A busy block drawn from a connected calendar shows what the event is called only
 - A busy event on a synced calendar blocks the time for everyone booking that team member, including on appointment types that allow several concurrent bookings. If your firm relied on concurrent slots staying open alongside external events, those slots now close.
 - All-day events are handled based on the firm's configured timezone.
 - **An all-day Busy event in Outlook blocks the whole day.** A single all-day event marked Busy — a day out of the office, for example — hides every bookable slot on that day, including on public booking pages. Previously some Outlook all-day events were recorded as taking up no time at all, so clients could still be offered and book slots on days that Outlook and the Glade calendar both showed as blocked. Events already synced this way block their day immediately; no resync is needed.
+- **Zero-length events no longer blank out a day.** An event with no duration (start equals end), such as a 6:30am "Out" marker from Google Calendar, previously hid every bookable slot that day for the team member, even though Glade would have accepted a booking in those slots when saved. Such an event now leaves the rest of the day bookable; only the slot it starts inside is hidden. Existing synced events are read the new way immediately; no resync is needed. To block a full day, use an all-day event or an event that spans the hours you are unavailable.
 
 ## Related Features
 

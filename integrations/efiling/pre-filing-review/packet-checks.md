@@ -25,6 +25,13 @@ Separate from whether a document can be *placed* on a filing slot, a district de
 - **It is advisory, so the review will let you file past it** — but the court's system will not. Filing over one of these findings means the submission fails at the court rather than at the review. Treat it as a rejection you have been shown early, not as an optional warning.
 - Only documents actually in the packet are checked. An expected slot with nothing in it raises nothing here.
 - Where Glade cannot determine whether the district accepts a document, no finding is raised for it.
+- **The list of what each court accepts has been brought up to date.** It had fallen behind the courts, so some findings were wrong:
+  - **Georgia Northern (GANB)** no longer warns that Debtor 2's credit counseling certificate and pay stubs can't be e-filed on a joint case. The court accepts both.
+  - **Texas Northern (TXNB)** no longer warns about the Statement of Social Security Number (Form 121).
+  - **Ohio Northern (OHNB)** acceptance is current.
+  - **Ohio Southern (OHSB)** now flags a **Statement of Intent** and a **Verification of Creditor Matrix** on a Chapter 13 case as not accepted electronically. Both are filed only in Chapter 7 there.
+  
+  If a case showed one of the cleared warnings, run the review again. Which filings are allowed, and how the review runs, are unchanged.
 
 This is a different check from [Documents the district cannot place](#documents-the-district-cannot-place), which is blocking and asks whether a document maps to a filing slot at all. A document can map to a slot perfectly well and still be one the district will not take electronically.
 
@@ -46,7 +53,6 @@ The Statement About Your Social Security Numbers (Form 121) contains the debtor'
 - The voluntary petition (Form 101), which shows only the last four digits of the number, is not mistaken for Form 121.
 - The check runs on the initial review, when the review is run manually, and again whenever the petition is regenerated — so a petition with the form shows a failed finding the first time the case is reviewed.
 - **If the check cannot read every page of the petition, it reports as inconclusive and does not block submission.** An inconclusive result means the petition was not fully checked, not that it is clean.
-- This was added after a district's petition setup stopped leaving Form 121 out of the compiled petition, and petitions reached the public docket with the form inside. Nothing read the petition itself before filing until now.
 
 This check looks only inside the compiled petition. It does not affect Form 121 filed as its own separate document where the district expects one. See [Filing packet required documents](../filing-packet/required-documents.md).
 

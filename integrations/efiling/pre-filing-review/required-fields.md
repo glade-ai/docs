@@ -34,7 +34,7 @@ Opening a case with the court asks for a set of answers beyond the petition itse
 
 ### Answers that block every Chapter 7 and Chapter 13 filing
 
-Four answers are now blocking pre-filing findings on every Chapter 7 and Chapter 13 case, in every district, when they are left unanswered. A blank answer in any of them does not stop the court from accepting the case — it is recorded with a default that may be wrong — so the review stops the filing until someone answers the question.
+Four answers are now blocking pre-filing findings on every Chapter 7 and Chapter 13 case, in every district, when they are left unanswered. A blank court division blocks filing: the court's filing system refuses the case because no office is identified. A blank answer on the filing fee, prior bankruptcy, or joint filing does not stop the court from accepting the case — it is recorded with a default that may be wrong. The review stops the filing until someone answers the question.
 
 | Question | What a blank answer used to do |
 |----------|--------------------------------|
