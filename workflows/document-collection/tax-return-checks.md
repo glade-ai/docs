@@ -22,8 +22,7 @@ When a client uploads a federal tax return (a Form 1040 packet), Glade AI reads 
   - signs of home ownership, dependents, and estimated or household payments.
 - **IRS transcripts are handled differently.** An IRS account or return transcript shows only the first letters of each name, so a shortened name that matches the start of the debtor's first and last name is treated as the debtor. Transcripts never include schedules, so the missing-schedule check is skipped for them. Before this adjustment, transcripts were often flagged by mistake as belonging to someone else or as missing schedules.
 - **Partial uploads are not flagged for missing schedules.** Glade AI knows the full page count of each upload, so it does not report a schedule as missing just because it is checking only part of a long document.
-
-> TODO: Confirm where tax return findings appear in the app and which firms have the Glade AI content check turned on.
+- **Tax return findings appear with the other document checks.** Open **Check work** and look at the document's **Glade AI findings**. The check runs for every firm, and your team cannot turn it off. If you don't see tax return findings on a return, contact Glade support.
 
 ## Edge Cases & Limitations
 
