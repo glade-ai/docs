@@ -35,6 +35,7 @@ A document request defines the checklist of files your team wants to collect fro
 - **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
 - **Email notifications** can be toggled on or off per document request template.
 - **Review email** and **Submit for review automatically** can be set per document request template. See [Review Email and Automatic Submit for Review](./review-email-and-auto-submit.md).
+- **Months of paystubs to collect**: Pay organizers have a number field beneath the email notifications toggle that sets how many months of paystubs the client is asked for (blank means 7). See [Income Documents](./income-documents.md).
 
 ## Edge Cases & Limitations
 

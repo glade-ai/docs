@@ -122,6 +122,14 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - the monthly payment on an assumed contract's arrearage in §6.1.
 
   §3.1(d), §4.5, and §5.2 print unticked or "None".
+- **Northern District of Florida** cases can generate a Chapter 13 plan on the district's local form FLNB LF 13-21, *Chapter 13 Plan*, revised 02/23. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
+  - Long-term secured claims paid through the trustee go in §3.1. Cramdown claims go in §3.2(a), secured claims paid in full in §3.2(b), and lien avoidance that strips a mortgage in §3.2(c). A §3.1 or §3.2 claim marked as paid outside the plan prints in §3.5 (direct payments) instead.
+  - Arrearage cures paid through the trustee outside Part 4 go in §3.3, together with the cure on an assumed lease. Every other lien avoidance goes in §3.4. Surrendered collateral goes in §3.6.
+  - Domestic support obligations go in §4.4(b), and the §4.4 election follows the list of support obligations the debtor pays directly as well as the claims. Priority taxes go in §4.5. The manual special-class list prints in §5.2. Assumed contracts go in Part 6.
+  - The Part 1 notices are ticked Included or Not Included to match the parts they refer to, and each section's "None" box matches its own table, so a notice or box cannot disagree with what the plan lists.
+  - The unpaid attorney fee is the total fee less the fee paid before filing. The Part 9 date prints in the division's own time zone.
+
+  A cramdown claim with no value entered prints blank with a warning, so you can fill in the value by hand before filing.
 - **Western District of Wisconsin** cases can generate a Chapter 13 plan on the district's Local Form 3015-1.2, *Chapter 13 Plan (Individual Adjustment of Debts)* (Rev. December 4, 2024), which the district's local rules require for initial, amended and modified plans. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. The district is available once it is set on the case. Contact Glade support if you don't see it. The court's form is a reworded version of the Southern District of Florida's LF-31, so claims are laid out much as on that plan. How claims are placed on this form:
   - **IIIA (Payment in Full)** lists every secured claim the trustee pays. A long-term mortgage paid through the plan prints its regular payment, with its cure as the arrears payment. This form has no 910-day boxes.
   - **IIIB (Maintenance of Payments and Cure of Default)** lists every claim the debtor pays directly, as a regular direct payment, with any trustee-paid cure on that claim, followed by the plan's other trustee-paid cures.

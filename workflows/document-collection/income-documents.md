@@ -8,9 +8,11 @@ Document requests of the "income data" type collect paystubs and other income do
 
 - **Income data document requests**: The "income data" document request type is used for structured income data collection. Income data files can track metadata including income source, pay frequency, start/end dates, and monthly dollar values.
 - **Income organizer AI processing**: When a paystub or income document is uploaded, AI automatically extracts the income data. While processing is underway, a loading indicator appears on the row. The uploaded file name is clickable even during processing — you can view the original document without waiting for AI to finish. Once AI completes, the loading indicator clears and extracted data appears. An **Edit** button is available on all income rows once processing is complete, whether the data was entered manually or extracted by AI. The Edit button is only hidden while AI is actively processing a row. If extraction fails — including when a follow-up retry is also interrupted — any income data already on the row is preserved. Earlier entries are not overwritten with empty values when the extractor cannot complete, so re-running AI on the row picks up where the previous attempt left off.
+- **Paystub upload window**: When a client adds an employment income source, the paystub upload grid asks for one upload slot per month for the number of months set on the document request. If no number is set, it asks for the last 7 months. Your team can still add an older month by hand. Other income types, such as business or rental income, continue to ask for 7 months.
 
 ## Configuration
 
+- **Months of paystubs to collect** (pay organizers only): In the document request edit form, under **Settings**, directly beneath the email notifications toggle, enter how many months of paystubs the organizer collects — a whole number from 1 to 36. Leave it blank to collect 7 months. The field does not appear on document requests that are not pay organizers.
 - **Income calculation mode** (employment income): When a client uploads multiple paystubs for employment income, your team can choose how Glade calculates the monthly income figures used in documents like Schedule I:
   - **All paystubs** (default): sums all selected paystubs and averages them across the unique months represented.
   - **Single paystub YTD**: uses the year-to-date totals from one paystub divided by the number of months elapsed in the year. This is useful when only one recent paystub is available or when YTD figures are more accurate than averaging multiple pay periods.
@@ -20,6 +22,7 @@ Document requests of the "income data" type collect paystubs and other income do
 
 ## Edge Cases & Limitations
 
+- The configured number of months applies only to employment paystubs. Other income types always ask for 7 months.
 - The Edit button on an income row is hidden while AI is actively processing that row.
 - Apply YTD to means test only affects employers set to YTD mode; other employers continue to use the standard calculation.
 
