@@ -2,7 +2,7 @@
 
 ## Overview
 
-Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, calculated table totals, and autofills that draw on reference data.
+Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, importing answers from another questionnaire in the case, calculated table totals, and autofills that draw on reference data.
 
 ## Key Behaviors
 
@@ -26,6 +26,17 @@ An autofill that draws from a list can join every matching row into a single ans
 - **Every row's description is carried onto the form, not only the first.** Some Schedule A/B description lines were joining only the first row in a category, so a client with three deposit accounts or three business interests had two of the descriptions dropped from the generated petition. All of the rows in the category are now joined. Where a **Describe** field on Schedule A/B had no autofill attached to it at all, one is set up, so the descriptions reach the form instead of being captured on the questionnaire and going no further.
 - **Where the printed form has no separate description slot, the description is combined with the name.** Line 17 of Schedule A/B (deposits of money — checking, savings, and similar accounts) has nowhere on the official form to print a brief description, so the description is printed alongside the institution name in the one field the form provides. Firms had been typing the institution and the description into the name field together as a workaround; that is no longer necessary. An entry with no brief description prints the institution name on its own, as before.
 - Petitions generated before these corrections keep the text they were generated with. Re-generate the petition on a case whose Schedule A/B descriptions should appear on the filed copy.
+
+### Importing Answers From Another Questionnaire in the Case
+
+An autofill that imports answers from another questionnaire — for example, a Schedules questionnaire carrying forward the client's answers from the Bankruptcy Client Questionnaire — looks across every workflow in the case that belongs to the same client, not only the workflow the questionnaire sits on.
+
+- This matters for firms that run intake, the consultation, and the bankruptcy filing as separate linked workflows. Previously, an import from a questionnaire on a different workflow came back empty even though the client had answered it.
+- **The questionnaire's own workflow comes first.** If the workflow has its own copy of the source questionnaire, that copy is used, exactly as before — even if a linked workflow has a completed copy. Other workflows in the case are only used when the workflow has no copy of its own.
+- **Only the same client's workflows are used.** A workflow in the case that belongs to another person is never imported from, and neither is a workflow in a different case.
+- A workflow started from **Initiate associated case** is linked into the case before its first questionnaire is created, so that questionnaire's first autofill already sees the earlier workflows.
+- Existing questionnaires pick this up only when they are created or their answers are re-imported. Questionnaires already filled in are not changed on their own.
+- If the source questionnaire cannot be found, only the affected fields are left blank.
 
 ### Totals Calculated From Other Cells in a Table
 
