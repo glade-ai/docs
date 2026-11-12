@@ -41,4 +41,4 @@ A matter can carry several cases at once — an associated filing alongside the 
 - [Status Tracking](./README.md)
 - [Workflow List](./workflow-list.md)
 - [Case Status](./case-status.md)
-- [Foreclosure Alerts](../foreclosure-alerts.md)
+- [Foreclosure Alerts](../foreclosure-alerts/README.md)

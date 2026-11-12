@@ -6,7 +6,7 @@ Clients fill out questionnaires through the client portal, and your team works i
 
 ## Topics
 
-- [Statuses and Access](./statuses-and-access.md) — questionnaire statuses, what a submitted questionnaire looks like to the client, access control, and collaborators.
+- [Statuses and Access](./statuses-and-access.md) — questionnaire statuses, sending a questionnaire back for changes, what a submitted questionnaire looks like to the client, access control, and collaborators.
 - [Filling Out Forms](./filling-out-forms.md) — pre-filling, simultaneous editing, response history, and template defaults.
 - [Field Behaviors](./field-behaviors.md) — phone number, currency, court division, and debtor county fields, and free-text dates on the SOFA.
 - [Working With Lists](./working-with-lists.md) — row detail views, removing and restoring rows, and concurrent edits to lists.

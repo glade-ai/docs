@@ -60,6 +60,6 @@ Alongside the monthly and quarterly breakdowns, the figure can be grouped **by w
 
 - [Custom Reports](./README.md)
 - [Columns](./columns.md)
-- [Dashboards](../dashboards.md)
+- [Dashboards](../dashboards/README.md)
 - [Custom Terms](../../../workflows/custom-terms.md) — retainer agreements are the signatures the time-to-filing measurement starts from.
 - [Settings](../../settings.md) — firm timezone

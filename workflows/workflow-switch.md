@@ -35,6 +35,10 @@ The new case may already ask for some of the same documents, so checklists are c
 - **A checklist is not duplicated when its step eventually runs.** The switch opens the new case's checklists immediately so the client's documents have somewhere to land; when the workflow step that would normally create that checklist reaches its turn, it takes over the one already there rather than opening an empty second copy beside it.
 - The checklist on the archived case is left as it was — a record of what was asked for there.
 
+### How the schedules questionnaire arrives
+
+The Bankruptcy Schedules questionnaire moves to the new case with its answers. When the new workflow's step that sends the schedules runs — before or after the switch finishes — it uses that questionnaire rather than opening an empty second copy. See [Schedules When a Case Switches Chapter](questionnaires/case-data/case-data-sync.md#schedules-when-a-case-switches-chapter).
+
 ### What has to be answered
 
 A workflow asks its own set-up questions, and the outgoing case cannot always answer them.
@@ -95,3 +99,4 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 - [Income Organizer](income-organizer/README.md) — the income records carried with the case.
 - [Status Tracking](status-tracking/README.md) — where the switch appears in a case's activity history.
 - [Credit Reports](../intake/credit-reports/README.md) — the report the new case adopts rather than re-pulling.
+- [Joint and Individual Filing](joint-and-individual-filing/README.md) — converting a case between joint and individual filing, or swapping its debtors, without switching workflow.
