@@ -110,6 +110,21 @@ On an Eastern District of Wisconsin plan, both choices are on the calculator's *
 - **First plan payment** (§ 2.1.B). **Filing fee** is how the fee was paid. With **Paid in installments** selected, **First payment due** offers **30 days after last installment**, **30 days after confirmation**, **On a set date**, and **Leave blank**. **On a set date** adds **First payment date**. The due-date wording follows the filing-fee choice, and changing or clearing **Filing fee** clears the due date. Left unset, the card says the form's own rule applies: the first payment is due 30 days after the petition is filed.
 - **§ 1305 post-petition claims** (§ 6.2). The choice to have the trustee pay is **Trustee pays the claim**. The card says that leaving it unset prints both boxes blank and raises a warning on the plan.
 
+- **Eastern District of Wisconsin** cases can generate a Chapter 13 plan on the court's *Official Form Plan for the Eastern District of Wisconsin, Chapter 13 Plan* (5/2021), which the district's local rules require. This is the court's own rewrite of Official Form 113, not Official Form 113 itself. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Plan generation is available once that district is set on the case. Contact Glade support if the case has the district and the plan still is not offered. The calculator uses the district's recorded no-look attorney fee cap and trustee fee. Check them against the district's local rule, and contact Glade support if the fee warning doesn't match. What the generated plan fills in for you:
+  - **Part 2 (plan payments).** The over/under median box comes from the means test. A plan with one payment amount prints in the "no step" section, and a stepped plan prints each step through a calendar month counted from the plan's start. A plan paid by payroll deduction prints Debtor 1's employer and the payment frequency. The first-payment election is left unticked, which the form itself reads as 30 days after the petition.
+  - **§3.1** lists every secured claim the debtor pays directly, with any cure the trustee pays on the same line. A claim with nothing to cure shows a zero cure in every cure column rather than blanks, so a trustee does not read it as an omission.
+  - **§3.2** holds cramdowns paid through the trustee and wholly unsecured mortgages. A lien that is stripped because the senior liens use up the property's value prints a principal of $0, and the form sends the claim to Part 5. **§3.3** holds the claims paid in full. A claim paid pro rata prints no monthly payment, which the form reads as paid pro rata with the other secured creditors that do not receive equal monthly payments. **§3.4** is the lien-avoidance worksheet, and **§3.6** lists pre-confirmation adequate protection payments.
+  - **Part 4 and Part 5.** Priority taxes print in §4.4. §5.1 ticks "the sum of" for a fixed unsecured pool, otherwise the percentage paid, and prints the chapter 7 liquidation amount only when the case is below median. Special-class claims print in §5.3.
+  - **Exhibit.** Lines a–j are what the trustee pays out under each section; line e adds the trustee's fee, the attorney fee, and the filing fee. Signature dates use Central time.
+
+  Parts Glade has no source for print blank or unticked, some with a warning, so you can fill them in by hand before filing:
+  - on a joint case paid by payroll deduction, the employer, with a warning;
+  - the governmental domestic support boxes in §4.5 — every domestic support obligation prints in the non-governmental box, with a warning, so move one owed to a government unit by hand;
+  - §5.2, the § 1305 election in §6.2 (which warns on every plan), and mortgage modification mediation in §8.2;
+  - a "discharge" treatment prints in §7.1 as "other" and asks you for the reason.
+
+  Two more warnings flag claims the form has no exact place for: a long-term secured claim paid through the trustee prints in §3.1, and a stripped lien that the calculator still pays as secured prints what it pays and counts on Exhibit line b.
+
 ## Configuration
 
 There is no per-firm setting. A case can generate a plan when its district is on the list above; the district is taken from the case.
