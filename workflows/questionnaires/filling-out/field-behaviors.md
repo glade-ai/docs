@@ -2,7 +2,7 @@
 
 ## Overview
 
-Several field types behave in specific ways as you fill them in — formatting, defaults, auto-selection, and how the value prints on a generated form. This page covers phone number, currency, court division, and debtor county fields, and free-text dates on the Statement of Financial Affairs.
+Several field types behave in specific ways as you fill them in — formatting, defaults, auto-selection, and how the value prints on a generated form. This page covers phone number, currency, court division, address, and debtor county fields, and free-text dates on the Statement of Financial Affairs.
 
 ## Key Behaviors
 
@@ -34,8 +34,17 @@ The **court division** field lists the divisions belonging to the case's filing 
 - Divisions that exist only as electronic-filing variants of another division are not offered, and divisions that appear more than once in the underlying court list are shown once.
 - Auto-selection only fills an empty field. A division you have chosen is never replaced.
 - **A generated court form prints the division's name.** Where the court division is mapped onto a field of a court form, the generated PDF prints the division as it is named — *Tampa*, for example — rather than the abbreviated value stored behind it. E-filing and the court office lookup continue to read the stored value, so nothing about filing changes. Forms generated earlier keep the text they were generated with; re-generate them to pick up the correction.
+- **Documents built from Glade's own layouts print the division's name too.** This covers documents such as the **Verification of Creditor Matrix**. From late September these documents printed an internal code in place of the division — for example *south-east-st-louis-3 DIVISION* on a Southern District of Illinois case — and they now print the name again (*East St. Louis (3) DIVISION*). Where a form uses its own wording for a division, such as the Southern District of Texas Schedule C-1 printing *HOUSTON*, that wording is kept. A document generated while the code was printing keeps it until you re-generate it.
+- In districts whose divisions carry an office number, the printed name includes it — *East St. Louis (3)* rather than *East St. Louis* — because the number is what separates divisions of the same name.
 
-> TODO: Confirm which generated forms this covers. It applies to forms filled from the court's own fillable PDFs; Glade's own generated layouts are unchanged.
+### Addresses Outside the US
+
+Questionnaire address fields offer **-- (Outside the US)** at the top of the **State** list, so a creditor, landlord, or business with a foreign address can be saved — for example, a German landlord on Schedule G or a Canadian creditor. Previously the State list held only US states and the ZIP code had to be exactly five digits, so a foreign address could not be saved and an amendment that needed one was blocked.
+
+- With **-- (Outside the US)** selected, the ZIP code box accepts a foreign postal code such as `J0L 1B0`. It only has to be filled in; on a required field, leaving it blank shows *Postal code is required*.
+- With a US state selected, the ZIP code must still be exactly five digits.
+- **There is no country field.** The address prints with `--` in place of the state — for example `Bamberg, -- 96047` — so type the country into the second address line or the city.
+- The option is offered on questionnaire address fields only. Other address entry in Glade, such as on a credit report pull, a client profile, or the creditor library, still lists US states only.
 
 ### Debtor County
 
