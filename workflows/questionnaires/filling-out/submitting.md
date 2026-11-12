@@ -33,6 +33,8 @@ When a questionnaire is submitted this way, an entry is recorded in the workflow
 - This works for any role with the setting enabled, including custom roles. With the setting off, the role grants nothing.
 - The permission does not make anyone an Admin, and it does not extend to the pre-filing review: signing off on blocking filing findings still requires a flagged role assigned on that specific case. See [Who can clear a blocking finding](../../../integrations/efiling/pre-filing-review/clearing-findings.md).
 
+**A workflow role can be allowed to submit anyway.** A firm Admin can give a workflow role permission to continue past blocking petition findings (see [Workflow Roles](../../../back-office/settings.md#workflow-roles)). A team member who holds that role on a case, as one of the case's current owners, can then use **Submit Anyway** on that case. This lets a case worker move a petition forward without being made a firm Admin. The waiver works exactly as it does for an Admin: the acknowledgment checkbox is still required and the bypass is still recorded in the activity timeline. The permission doesn't make the person an Admin, so they still can't delete the case or edit the workflow. It covers only cases where that person holds the role. A client never gets it, even if they are assigned the role.
+
 **Findings that do not block are shown, not waived.** Not every finding stops a filing. When a submit turns up findings but none of them block:
 
 - The review dialog still opens, so the findings are read rather than passing unseen.
