@@ -37,7 +37,7 @@ The Middle District of Florida calculator has fields for two more attorney fees.
 - **Plans in progress may change.** A plan that already has a prepaid amount now pays the attorney that much less through the trustee. This affects plans in the Northern District of Florida, the Northern and Western Districts of Texas, the Eastern District of Kentucky, the Northern District of Alabama, the District of South Carolina, the District of Colorado, the Eastern District of Washington, and the Southern District of Illinois. Check the attorney fee on any plan you are still working on in these districts.
 - The MMM and monitoring fee fields appear only in the Middle District of Florida calculator. Other districts are unaffected.
 
-> TODO: Confirm whether a plan that was already finalized keeps paying the full fee until it is finalized again, or whether reopening it applies the balance immediately.
+A plan that was already finalized keeps the fee it was finalized with until you finalize it again. Contact Glade support if the balance should apply sooner.
 
 ## Related Features
 
