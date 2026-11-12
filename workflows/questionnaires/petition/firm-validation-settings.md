@@ -2,7 +2,7 @@
 
 ## Overview
 
-Your firm can change how the checks on a petition questionnaire apply to its own cases without changing the shared Bankruptcy Schedules template. From **Petition Settings**, a firm admin can turn a validation rule or a required field off, or choose whether a missing required answer or document is **Blocking** or **Advisory**. The settings affect your firm's cases only, and are reflected wherever findings appear: the [Petition Check](./petition-check.md), the notes on each field, and the submit dialog.
+Your firm can change how the checks on a petition questionnaire apply to its own cases without changing the shared Bankruptcy Schedules template. From **Petition settings → Validations**, a firm admin can turn a validation rule or a required field off, or choose whether a missing required answer or document is **Blocking** or **Advisory**. The settings affect your firm's cases only, and are reflected wherever findings appear: the [Petition Check](./petition-check.md), the notes on each field, and the submit dialog.
 
 ## Key Behaviors
 
@@ -26,16 +26,15 @@ By default a required field is **Blocking** and a required document upload is **
 - **A blank Advisory field stays advisory.** If another rule reads a field your firm has made Advisory and the field is blank, the *Needed to check* finding for it is capped at Advisory too, so the rule cannot turn it back into a blocker.
 - **An Advisory required finding can be dismissed.** Like any advisory finding, any team member can dismiss it once it has been looked at (see [Dismissing an advisory finding](./petition-check.md#dismissing-an-advisory-finding)). A field kept at Blocking still needs an override from someone allowed to override — see [Submitting a Questionnaire](../filling-out/submitting.md#submitting-with-incomplete-fields).
 - Validation rules can already be run at Blocking or Advisory per firm in the same settings.
-
-> TODO: Confirm where the Advisory / Blocking choice for required fields appears in Petition Settings and when it is available to firms. The choice is supported by Glade but the control for it was released separately.
+- Set the choice under **Petition settings → Validations**. Required fields and run-check rules each have a **Severity** of **Advisory**, **Blocking**, or **Info**, and the choice saves as soon as you change it.
 
 ## Configuration
 
 | Setting | Where | Who can change it |
 |---|---|---|
-| Turn a validation rule on or off | Petition Settings | Firm owners and firm admins |
-| Turn a required field or required document on or off | Petition Settings | Firm owners and firm admins |
-| Run a required field or document at Advisory or Blocking | Petition Settings | Firm owners and firm admins |
+| Turn a validation rule on or off | Petition settings → Validations | Firm owners and firm admins |
+| Turn a required field or required document on or off | Petition settings → Validations | Firm owners and firm admins |
+| Run a required field or document at Advisory, Blocking, or Info | Petition settings → Validations | Firm owners and firm admins |
 
 Any team member can view the settings; case workers and other team members without admin rights cannot change them.
 
