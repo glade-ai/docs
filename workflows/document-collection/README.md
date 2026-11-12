@@ -7,7 +7,7 @@ Document collection enables your team to request specific files from clients as 
 ## Topics
 
 - [Document Requests](./document-requests.md) — setting up request templates and file slots, assignment statuses, "for your team" checklists, and who can see which checklists and documents.
-- [Uploading and Reviewing Documents](./uploading-and-reviewing.md) — client uploads, rejections and replacements, submitting for review, moving and deleting files, and re-opening a completed checklist.
+- [Uploading and Reviewing Documents](./uploading-and-reviewing.md) — client uploads, Glade AI's check of an upload (including when AI findings move a document to Needs Review), rejections and replacements, submitting for review, moving and deleting files, and re-opening a completed checklist.
 - [Renaming and Downloading Files](./renaming-and-downloading-files.md) — renaming documents from the dashboard and keeping file names on download, shared links, and MyCase imports.
 - [AI-Suggested File Names](./ai-suggested-file-names.md) — the bulk rename step and the document types the suggestions recognize.
 - [Previewing Documents](./previewing-documents.md) — opening PDFs in the in-app preview and paper-style rendering.
@@ -15,6 +15,8 @@ Document collection enables your team to request specific files from clients as 
 - [Automatic Data Extraction](./data-extraction.md) — what Glade reads from mortgage statements, Social Security cards, IDs, vehicle documents, investment statements, and bank and payment-app statements, and how conflicting values are held for review.
 - [Glade AI Filing from the Triage Folder](./triage-folder-ai-filing.md) — how Glade AI files questionnaire uploads and staff drops out of a case's Triage folder, what staff and clients see, and how a person's filing interacts with it.
 - [Income Documents](./income-documents.md) — income data requests, AI processing of paystubs, and income calculation modes for Schedule I and the means test.
+
+Questionnaire questions can also ask for a document. Those files go into a **Triage** folder on the case's checklist. See [Document Uploads on Questions](../questionnaires/templates/document-upload-questions.md).
 
 ## Related Features
 

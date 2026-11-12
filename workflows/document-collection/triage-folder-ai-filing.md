@@ -32,7 +32,7 @@ A case's **Triage** folder holds documents waiting to be filed: every upload a c
 - If someone on your team moves a document out of Triage before Glade AI files it, Glade AI leaves it where the person put it.
 - If someone later moves a document Glade AI filed, the person's choice stands, and Glade records that the AI's filing was undone.
 
-> TODO: Confirm whether staff can ask Glade AI to file a document again from the dashboard (a "Route again" action), and where that control appears.
+While a file is in that case's Triage item, the document preview's overflow menu offers **Route again with Glade AI**. It uses the previous read of the file and does not read it again.
 
 ### Staff dropping documents into Triage
 
@@ -40,13 +40,13 @@ A case's **Triage** folder holds documents waiting to be filed: every upload a c
 - If the case doesn't have a Triage folder yet, Glade creates one the first time a document is dropped in. Staff drops and questionnaire uploads share the same folder, whichever comes first.
 - A workflow that isn't attached to a case can't use the Triage folder.
 
-> TODO: Confirm the name and location of the staff action for adding a document to Triage (the source changes refer to "Add to Triage").
+On the case **Documents** tab, when you add a document, the destination is **Triage — Glade AI routes them**. The help text reads **Glade AI reads each document and moves it into the checklist item it belongs in. Anything it can't place stays in Triage for your team.** The section is **Documents Triage**. There is no separate button labeled Add to Triage.
 
 ### Triage activity
 
 Glade keeps an activity log for each case's Triage folder, newest first. It records when a document is uploaded (and whether it came from a questionnaire question or was dropped straight into the folder), filed by Glade AI, left in Triage because it couldn't be filed, moved by a person, or deleted.
 
-> TODO: Confirm where the Triage activity log is shown to staff.
+On the Triage folder, **Show Glade AI routing activity** opens a panel titled **Glade AI routing**. If routing is off, it says **Glade AI routing isn't on for your firm.**
 
 ### What the client sees
 
@@ -56,7 +56,7 @@ Glade keeps an activity log for each case's Triage folder, newest first. It reco
 - A file moved into an item only your team can see is shown as filed, without the checklist or item name.
 - When a document is moved, an open upload card updates straight away without a page reload. The staff Documents tab is also told about the move.
 
-> TODO: Confirm the staff Documents tab now refreshes on its own when a document is moved by Glade AI or by another team member.
+The staff **Documents** tab, the filing card, and the activity log update on their own when Glade AI or another team member moves a document. You do not need to reload the page.
 
 ## Configuration
 
@@ -64,7 +64,7 @@ Glade keeps an activity log for each case's Triage folder, newest first. It reco
 |---|---|---|
 | AI filing from the Triage folder | Turned on per firm by Glade | When on, Glade AI files documents out of the Triage folder, and staff can drop documents into Triage for it to file. When off (the default), documents stay in Triage until staff file them by hand. |
 
-> TODO: Confirm how a firm asks to have AI filing turned on.
+Glade AI filing is turned on by Glade. Contact Glade support to ask for it. Until then, documents dropped in Triage stay there until your team moves them.
 
 ## Edge Cases & Limitations
 
