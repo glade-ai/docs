@@ -10,7 +10,7 @@ Custom reports let your firm build its own view over case data, choosing the col
 
 - [Managing Saved Reports](./managing-reports.md) — who created a report, the Created by me filter, and duplicating a report.
 - [Filters](./filters.md) — attorney, workflow type, completion event, pending client tasks, court district, date filters, and search.
-- [Columns](./columns.md) — court notice type, case number, client address, and reaffirmation agreement columns.
+- [Columns](./columns.md) — court notice type, case number, client address, reaffirmation agreement, and days in status columns.
 - [Exporting](./exports.md) — CSV export behavior and limits.
 - [Payments Reports](./payments-reports.md) — building a custom report over payment records.
 - [Time from Retainer to Filing](./retainer-to-filing.md) — first retainer signed, days to filing, and the weekly/monthly/quarterly breakdowns.
@@ -18,5 +18,5 @@ Custom reports let your firm build its own view over case data, choosing the col
 ## Related Features
 
 - [Reporting](../README.md)
-- [Dashboards](../dashboards.md)
+- [Dashboards](../dashboards/README.md)
 - [Case Management](../../case-management.md) — reports operate on case data and case statuses.
