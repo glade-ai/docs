@@ -8,7 +8,9 @@ A questionnaire moves through a small set of statuses as it is filled out, revie
 
 ### Statuses
 
-Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **completed**, and **skipped**.
+Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **changes requested** (when a reviewer sends it back to the client), **completed**, and **skipped**.
+
+For who reviews a submitted questionnaire, who can edit it while it is in review, and requesting changes, see [Questionnaire Review](./review-flow.md).
 
 A completed questionnaire can be re-opened — see [Re-opening and Re-syncing](../case-data/reopening-and-resync.md).
 
@@ -37,5 +39,6 @@ Collaborators (additional team members) can be assigned to questionnaires with v
 - [Questionnaires](../README.md)
 - [Filling Out Questionnaires](./README.md)
 - [Submitting a Questionnaire](./submitting.md)
+- [Questionnaire Review](./review-flow.md)
 - [Re-opening and Re-syncing](../case-data/reopening-and-resync.md)
 - [Client Portal](../../../intake/client-portal/README.md)
