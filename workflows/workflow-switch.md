@@ -91,7 +91,7 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 - An unpriced line on the new invoice with no same-named line on the voided invoice stays unpriced, and the invoice is not ready until someone prices it.
 - A case that has already been switched, then switched back, accumulates a linked chain of archived cases. The client sees only the current one.
 
-> TODO: Confirm the recommended way to repair a case switched before the empty-checklist fix.
+A case switched before the empty-checklist fix is not repaired on its own. Contact Glade support to restore the checklist.
 
 ## Related Features
 
