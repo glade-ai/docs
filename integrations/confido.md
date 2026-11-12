@@ -30,6 +30,8 @@ Glade integrates with Confido, a legal-tech payment platform, as an alternative 
 | ACH | 1% capped at $30 |
 
 - Firms can choose to pass processing fees to the client or absorb them.
+- **A payment keeps the fee it was charged with.** Later updates from Confido about a payment don't change whether its fee was passed to the client or how much the fee was. Turning fee pass-through off on an invoice that already has payments only affects payments made after that. Earlier charges stay as they were and the invoice's remaining balance stays correct. Previously, turning the setting off could count an earlier payment's fee toward the invoice and leave the balance too low.
+- **Charges to a saved payment method use the fee Glade works out.** When a client pays with a saved card or bank account, Glade works out the fee for that method's type (card or ACH). If the firm absorbs fees, no fee is added.
 - Additional methods (Zelle, push-to-card, manual) are available depending on the firm's Confido configuration.
 
 ### Stored payment methods
@@ -73,6 +75,7 @@ Glade integrates with Confido, a legal-tech payment platform, as an alternative 
 - Confido payment pages are hosted by Confido, not Glade — the client is redirected to Confido's domain to complete payment.
 - ACH payments have stricter success rules than card payments: ACH is only marked as succeeded when funds are deposited, while card payments can succeed while still in transit.
 - Webhooks may arrive before the internal payment record is fully persisted; Glade retries the lookup with short delays to handle this race condition.
+- If Confido reports a different amount for a payment than Glade recorded, the payment is treated as a different charge and its fee is updated to match.
 - Stored payment methods are scoped to a firm — a client's saved method at one firm is not available at another.
 - One firm account per Glade account.
 
