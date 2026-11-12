@@ -22,6 +22,8 @@ Some districts fold a form into the petition itself rather than expecting it as 
 
 **Forms built into the petition never get their own upload slot.** A form the district builds into the petition does not appear in the packet as a separate required upload, in a full filing or a skeleton filing. Previously some skeleton packets listed such a form — for example, Form 2030 in the Southern District of Texas — as a required upload that could never be filled, because the form only ever exists inside the petition.
 
+**A skeleton packet leaves out forms the district files later.** Documents already on the case that the district does not file in a skeleton packet — for example Form 121 and Form 122A-1 from an earlier compile — are not added to a skeleton packet as extra documents. Full packets still include every document on the case. See [Skeleton filings](../pre-filing-review/required-documents.md#skeleton-filings) for how the review treats them.
+
 **Florida Middle District Chapter 13** filings are a correction to this. The Certificate of Credit Counseling and Form 121 (Statement About Your Social Security Numbers) are filed as their own separate documents in this district rather than being folded into the petition. They had been configured the wrong way round, so each now has its own slot in the packet and is expected as a separate file.
 
 ## Related Features
