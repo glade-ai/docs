@@ -10,6 +10,7 @@ The Bankruptcy Schedules questionnaire produces the petition packet. Your team c
 - [Firm Validation Settings](./firm-validation-settings.md) — turning validation rules and required fields off for your firm, and running required fields and documents as Advisory or Blocking.
 - [Cross-Form Consistency Checks](./cross-form-checks.md) — business-income contradictions between Schedule I, the petition, Form 122A-1, and the SOFA.
 - [Generating a Draft Petition](./draft-petition.md) — marked drafts, unmarked copies for signatures, which documents the draft includes, numbered draft versions in the Petitions folder, save options, and automatic rebuilds after a completed questionnaire is edited.
+- [Petition Document Order](./document-order.md) — the firm's saved document order, where it applies, and cases rearranged by hand.
 - [Signatures](./signatures.md) — the Sign / Skip / Clear & Submit choices, PDFs from case documents, and where signer names come from.
 - [Older Petition Drafts](./older-petition-drafts.md) — how petitions from before numbered drafts are moved to the Petitions folder and labeled as legacy.
 - [Opt-In Petition Checks](./opt-in-checks.md) — validation rules a firm turns on in Petition settings, including the eviction judgment check on Form 101 line 11.

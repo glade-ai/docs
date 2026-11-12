@@ -24,6 +24,12 @@ When an autofill fills a currency field but cannot work out an amount, the field
 - a value **overridden with text**, and
 - an amount you have entered yourself.
 
+The same applies when an autofill or case data **left a currency field with no amount at all** — for example an unused Schedule J expense whose autofill found nothing. Glade fills those fields with $0.00, so they no longer have to be typed in by hand. Fields with **Default to blank** turned on stay empty, and so does a field someone cleared on purpose: an amount a person removed is never brought back as $0.00.
+
+- New questionnaires, template upgrades and questionnaires moving to the new questionnaire engine pick this up automatically.
+- In-progress questionnaires that already have these blank fields get $0.00 only once Glade re-applies defaults to them.
+- Existing questionnaires are updated when this is run for your firm. If an older questionnaire still shows the previous behavior, contact Glade support.
+
 For marking an asset's value as **Unknown** on Schedule A/B, see [Schedule A/B Property](../schedules/property.md#marking-a-value-as-unknown).
 
 ### Court Division

@@ -57,6 +57,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Firm Validation Settings](./petition/firm-validation-settings.md) — turning checks off, or running required fields as Advisory or Blocking, for your firm.
 - [Cross-Form Consistency Checks](./petition/cross-form-checks.md) — contradictions between forms in the package.
 - [Generating a Draft Petition](./petition/draft-petition.md) — drafts, signing copies, numbered draft versions, and automatic rebuilds.
+- [Petition Document Order](./petition/document-order.md) — the firm's saved order and per-case overrides.
 - [Signatures](./petition/signatures.md) — signature choices and signer names.
 - [Older Petition Drafts](./petition/older-petition-drafts.md) — older petitions moved to Petitions and labeled as legacy.
 - [Opt-In Petition Checks](./petition/opt-in-checks.md) — firm opt-in validation rules and the eviction judgment check.
