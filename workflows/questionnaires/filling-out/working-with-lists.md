@@ -12,6 +12,7 @@ List-type fields allow you to click into individual rows to view or edit details
 
 - When you open a row, the page link updates so you can share it directly — anyone who opens that link sees the same row's details immediately.
 - Required sub-fields in each row are validated individually. Rows with missing required fields show a red dot indicator.
+- The red dot ignores required fields inside a group that is hidden for the row. On a case that is not filed jointly, for example, an empty required date inside the hidden Debtor 2 dates on a prior-address row no longer marks the row incomplete. A group can be hidden by an answer in the row itself or by an answer elsewhere in the questionnaire, such as whether the case is joint. Previously such a row showed the red dot even though every visible field was filled.
 - The section's error badge count includes errors from incomplete list rows and table cells, in the same way it counts errors from other field types. Error badges always appear on the source list section — for example, errors in a property list appear under "Property (Real & Personal)", not under a derived section like "Schedule D Creditors". Completing required fields in a row reduces the section count; clearing them increases it. Deleted rows (rows that have been removed to the Removed Items panel) are excluded from the error count — only active, non-deleted rows are included. Error badge counts update when the questionnaire is submitted, not in real time as fields are edited. After saving a list row, any validation errors that were shown for that row clear immediately — the error count reflects only fields that are currently incomplete in active rows. When error counts change (for example, after a row is saved or a field is corrected), the badge count animates to its new value. Section sidebar navigation and subsection tab badges display error counts in amber.
 - When a list row has validation errors, each subsection tab in the detail view (for example, **Details** or **Exemptions**) shows an error count badge so you can navigate directly to the tab with missing required fields. An error summary popover is also available within the row detail view — it lists the specific fields that need attention, and clicking any item jumps directly to that field.
 - When editing a row in the detail view and the questionnaire requires all fields to be complete, saving highlights any incomplete required fields and prompts you to confirm before saving with incomplete data. This prompt also appears if you clear a required field that previously had a value. On questionnaires that do not require completion, saving always proceeds without a prompt. Fields that are hidden by conditional logic are not considered incomplete and do not trigger the prompt.
@@ -27,6 +28,13 @@ When a list row has duplicate sub-rows (for example, a creditor that appears on 
 The **Remove X selected** button in the list footer counts only the real items you picked, not the duplicates that were auto-selected along with them. Selecting one creditor that has two duplicates reads **Remove 1 selected**, not "Remove 3 selected." Removing still deletes the parent row and its duplicates together — only the displayed count excludes the duplicates.
 
 **Add Item starts a blank row.** Removing a row and then clicking **Add Item** straight away gives you an empty row to fill in. For a period, the new row could open pre-filled with another row's answers — most noticeable on the property lists, where a freshly added item arrived carrying a neighbouring item's details. Rows that shifted position because of the removal also load their own answers rather than the answers of the row that used to sit in that place.
+
+**Removing a row removes that row and no other.** Removing a row — with the row's **Remove Item** button, from inside the row's detail view, or with **Remove X selected** — deletes exactly the rows you picked. Previously, on a list that already had rows deleted from it, removing a row could take the chosen row off the screen while deleting a different row behind the scenes, sometimes a completed one. A blank duplicate removed next to a filled-in row could take the filled-in row with it, and the blank row came back on the next reload. This made leftover blank rows impossible to clear and could hold up completing the questionnaire.
+
+- If Glade cannot find a row you asked to remove, it removes nothing and shows an error starting "No items were removed…" instead of guessing at a row. Reload the questionnaire and try again.
+- **Remove X selected** works the same way: if any selected row cannot be found, none of the selected rows are removed.
+- A row removed in bulk is now deleted straight away. Previously a bulk removal was only saved with the next change to the questionnaire.
+- Rows deleted in error before this correction can be put back from **Removed Items** — see [Restoring Removed List Items](#restoring-removed-list-items).
 
 When a list row is deleted, the values inside the row are deleted along with it. Restoring the row from **Removed Items** brings the inner field values back as they were.
 
@@ -51,7 +59,7 @@ Reverting a questionnaire to an earlier version from **Version History** keeps t
 - A link that was already broken in the version you revert to stays broken. Glade does not guess at a replacement row.
 - A revert that keeps every link on the same rows no longer records those links as edited in the questionnaire's change history.
 
-> TODO: Confirm whether links already broken by a revert before this fix have been repaired on in-progress questionnaires, or whether staff should re-check them.
+Links broken by a revert before this fix are not repaired on their own. Re-check in-progress questionnaires, or contact Glade support.
 
 ### Concurrent Edits to List Rows
 
@@ -77,6 +85,7 @@ Deleting a row from a list leaves a gap in the list's stored ordering, and on a 
 ## Edge Cases & Limitations
 
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
+- Blank rows already left on a list before the row-removal correction can still hold up completion until they are removed. If a row will not remove or keeps coming back, contact support with the case.
 - Removing a row from an entity-bound list can delete the matching creditor or asset from the case record — see [Case Data Sync](../case-data/case-data-sync.md#entity-bound-list-fields).
 
 ## Related Features

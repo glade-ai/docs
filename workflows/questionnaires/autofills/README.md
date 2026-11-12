@@ -6,7 +6,7 @@ Autofills populate field values from external data sources, AI inference, or com
 
 ## Topics
 
-- [How Autofills Work](./how-autofills-work.md) — when an autofill may write to a field, combining several rows into one answer, calculated table totals, and reference-data autofills.
+- [How Autofills Work](./how-autofills-work.md) — when an autofill may write to a field, combining several rows into one answer, importing answers from another questionnaire in the case, calculated table totals, and reference-data autofills.
 - [Autofill Status Indicators](./status-indicators.md) — the Synced, Out of sync, Error, Edited, and Import Autofill states, background recalculation, and fields that also sync with case data.
 - [Manual Overrides](./manual-overrides.md) — how typed values are protected, list and table rows, and overriding Schedule I and Means Test calculator figures.
 - [Locked Fields](./locked-fields.md) — locking a field to its autofilled value and what a locked field looks like on the form.

@@ -36,7 +36,9 @@ An invoice moves through a series of statuses as it progresses from creation to 
 
 ### Voiding an invoice
 
-- Any active (non-terminal) invoice can be voided by the firm.
+- The firm can void an invoice that is **Generating**, **In Progress**, or **Payment Failed**.
+- An invoice with a payment underway (**Payment Requested** or **Final Payment Initiated**) cannot be voided, and neither can a **Paid** invoice. Wait for the payment to settle or fail first.
+- If a payment completes while the void confirmation is still open, the void is refused and the invoice stays paid. Nothing else changes: no replacement invoice is created and no payment plan is cancelled.
 - Voiding permanently cancels the invoice and any associated payment plan.
 - If the invoice was linked to a workflow, a new empty invoice is automatically created as a replacement so the workflow can continue.
 - Voiding is irreversible — once voided, an invoice cannot be reactivated. A new invoice must be created if billing is still needed.
