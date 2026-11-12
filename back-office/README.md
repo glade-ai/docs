@@ -8,3 +8,4 @@ Internal tools for case management, reporting, staff administration, and platfor
 - [Reporting](reporting/README.md)
 - [Staff Management](./staff-management.md)
 - [Settings](./settings.md)
+- [Default Creditors](./default-creditors.md)
