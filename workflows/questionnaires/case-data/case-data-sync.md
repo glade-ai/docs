@@ -85,6 +85,16 @@ An empty row left behind in a questionnaire list — a creditor row someone star
 
 Blank creditor rows previously became nameless creditors on the case, which then spread into the schedules and could leave them unusable until someone cleaned the case record up by hand.
 
+### Property Rows Filled Only by an Autofill Wait for a Person
+
+A property row on a questionnaire that was filled in entirely by an autofill — and that nobody has touched — is held back from the case record and the Master Property List until someone edits it. Some autofills pull public-records property from the credit report, which is matched by name, so a client's list could otherwise pick up real estate that belongs to someone else.
+
+- **A row is held when every filled cell came from a template's initial values, the credit report, or a default**, and at least one came from initial values or the credit report. Values Glade calculates on its own — such as "who has an interest" and "portion owned" on the Master Property List — count as defaults, not answers, so they do not release a row.
+- **Any edit by a person releases the row.** Once someone fills in or changes a cell, the row syncs to the case record as usual. Marking a value as **Unknown** counts as an answer and releases the row.
+- **A held row is not deleted from case data.** If the property is already in case data, it stays there; it is simply not overwritten or removed by the held row.
+- **Building the schedules leaves out untouched autofill property.** When the Bankruptcy Schedules are created from a client questionnaire, property rows that were only autofilled and never touched are not carried into case data.
+- **Resync from client questionnaire still clears held rows** already in case data when staff run it.
+
 ### Deleting and Restoring Case Data Entities
 
 Case records hold entities such as creditors and assets that feed synced questionnaire lists. When an entity is deleted from the case record, it is removed from live lists, entity counts, and any synced questionnaires — but it is not erased. The deletion is recorded so your team can review what was removed and undo it.
@@ -126,6 +136,8 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 - [Re-opening and Re-syncing](./reopening-and-resync.md)
 - [Template Upgrades](./template-upgrades.md)
 - [Autofill Status Indicators](../autofills/status-indicators.md)
+- [How Autofills Work](../autofills/how-autofills-work.md)
+- [Schedule A/B Property](../schedules/property.md)
 - [Working With Lists](../filling-out/working-with-lists.md)
 - [Workflow Switch](../../workflow-switch.md)
 - [Case Management](../../../back-office/case-management.md)
