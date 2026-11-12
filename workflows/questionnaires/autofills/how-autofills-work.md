@@ -15,6 +15,8 @@ An answer someone typed by hand is protected — an autofill does not replace it
 
 Both situations previously blocked the autofill for good, so a Schedule A/B category answered early — left blank, or answered "No" — never picked up assets added later and the generated schedule shipped without them. If your team has been re-checking Schedule A/B by hand for assets that failed to carry over, that is no longer necessary. Free text someone has actually written is still never overwritten.
 
+A value that came from case data is also protected. On a field that is both autofilled and synced with case data, an automatic autofill does not replace the case data value; only re-run does. See [Fields That Are Both Autofilled and Synced With Case Data](./manual-overrides.md#fields-that-are-both-autofilled-and-synced-with-case-data).
+
 For how hand-entered values are protected across saves and in list rows, see [Manual Overrides](./manual-overrides.md). Locked fields are the exception — see [Locked Fields](./locked-fields.md).
 
 ### Autofills That Combine Several Values

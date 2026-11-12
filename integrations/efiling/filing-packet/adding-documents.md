@@ -11,6 +11,8 @@ Documents reach the filing packet from inside the eFiling modal, from the case's
 - **A document added to the packet as "Other" must be given a name.** When you add a document under the generic **Other** type, the packet needs a filename for it. Leaving that name blank and clicking **Add to packet** shows the validation message on the field straight away. Previously the first click did nothing at all — no error, no document added, no indication of what was wrong — and the message appeared only after you had clicked into the name field and back out, which read as the button being broken.
 - When you save documents to the filing packet and the save does not go through, the document selection window stays open and shows the specific reason it failed (for example, the exact validation message), so you can correct the problem and try again. Previously the window could close on a failed save without anything being saved, and only a generic error was shown.
 
+- **Form 121 (Statement About Your Social Security Numbers) can be added to the packet.** Choosing **Add to packet** on a signed Form 121 now places it in the packet. Previously the button spun and then reverted, and the form could not be added.
+
 ### Recognized documents uploaded outside the filing modal
 
 Some court documents — for example, documents pulled from PACER — belong in a specific slot of the electronic filing packet. When you add such a document through the case's normal document area instead of from inside the eFiling modal, Glade now recognizes documents whose file name matches a known filing document and automatically places them in the correct packet slot.
