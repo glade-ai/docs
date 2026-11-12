@@ -29,6 +29,13 @@ The **Remove X selected** button in the list footer counts only the real items y
 
 **Add Item starts a blank row.** Removing a row and then clicking **Add Item** straight away gives you an empty row to fill in. For a period, the new row could open pre-filled with another row's answers — most noticeable on the property lists, where a freshly added item arrived carrying a neighbouring item's details. Rows that shifted position because of the removal also load their own answers rather than the answers of the row that used to sit in that place.
 
+**Removing a row removes that row and no other.** Removing a row — with the row's **Remove Item** button, from inside the row's detail view, or with **Remove X selected** — deletes exactly the rows you picked. Previously, on a list that already had rows deleted from it, removing a row could take the chosen row off the screen while deleting a different row behind the scenes, sometimes a completed one. A blank duplicate removed next to a filled-in row could take the filled-in row with it, and the blank row came back on the next reload. This made leftover blank rows impossible to clear and could hold up completing the questionnaire.
+
+- If Glade cannot find a row you asked to remove, it removes nothing and shows an error starting "No items were removed…" instead of guessing at a row. Reload the questionnaire and try again.
+- **Remove X selected** works the same way: if any selected row cannot be found, none of the selected rows are removed.
+- A row removed in bulk is now deleted straight away. Previously a bulk removal was only saved with the next change to the questionnaire.
+- Rows deleted in error before this correction can be put back from **Removed Items** — see [Restoring Removed List Items](#restoring-removed-list-items).
+
 When a list row is deleted, the values inside the row are deleted along with it. Restoring the row from **Removed Items** brings the inner field values back as they were.
 
 ### Restoring Removed List Items
@@ -68,6 +75,7 @@ Deleting a row from a list leaves a gap in the list's stored ordering, and on a 
 ## Edge Cases & Limitations
 
 - Editing a table row and saving preserves all column data. Columns are not dropped or lost when a row is saved after being edited.
+- Blank rows already left on a list before the row-removal correction can still hold up completion until they are removed. If a row will not remove or keeps coming back, contact support with the case.
 - Removing a row from an entity-bound list can delete the matching creditor or asset from the case record — see [Case Data Sync](../case-data/case-data-sync.md#entity-bound-list-fields).
 
 ## Related Features

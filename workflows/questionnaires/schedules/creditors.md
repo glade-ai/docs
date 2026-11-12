@@ -33,9 +33,7 @@ When you mark a creditor as a duplicate of another in a bankruptcy questionnaire
 - Two open copies of the same balance, two closed $0 copies, and the same debt listed once under each debtor are still matched as duplicates.
 - An account whose status is unknown can still be matched with either kind.
 - The check applies to automatic matching on the case record and in the questionnaire. Manual duplicate marks are not changed.
-- Open-balance creditors that were wrongly hidden reappear the next time duplicates are re-checked on the case. Copies of one account that one bureau reports as open with a balance and another reports as closed at $0 will also be shown separately.
-
-> TODO: Confirm when duplicate matching re-runs on an existing case, so firms know how to bring back open-balance creditors hidden before this change.
+- Open-balance creditors hidden before this change are not brought back on their own. Contact Glade support if a case still hides a creditor that has a balance. When duplicates are checked, copies of one account that one bureau reports as open with a balance and another reports as closed at $0 are shown separately.
 
 For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md).
 

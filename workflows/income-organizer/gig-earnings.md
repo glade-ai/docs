@@ -41,8 +41,7 @@ No setup is needed. Gig statements are read automatically for new uploads and fo
 - **A list of 12 or more months with no years printed** can place its oldest month in the current month. Check the months on long statements that don't print years.
 - **Organizers on Glade's older income calculation don't count files that were split by month.** Those organizers can only place a file on one pay date.
 - **Files read before this change keep their old rows.** For example, a DoorDash statement may have been read as a paystub, or an Uber summary as a profit & loss statement. Re-running the file puts the new values into review. An old profit & loss record and any business source it created are not removed and need to be cleaned up by hand.
-
-> TODO: Confirm the exact list of gig platforms supported beyond Uber, Lyft, DoorDash, Grubhub and Instacart.
+- There is no fixed list of platforms beyond Uber, Lyft, DoorDash, Grubhub, and Instacart. Glade reads an app earnings statement as gig income by its shape — rideshare, food or grocery delivery, or package delivery — including statements from **Amazon Flex**, **Uber Eats**, **Shipt**, **Spark**, and **Postmates**.
 
 ## Related Features
 

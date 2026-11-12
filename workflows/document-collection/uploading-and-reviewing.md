@@ -17,6 +17,10 @@ Clients upload documents against the file slots on a document request, and your 
 
 - **A check that never finishes is marked unavailable.** While Glade AI checks an uploaded document, the document shows "Glade AI is evaluating this document…" and **Re-run AI** is disabled. If no result arrives within about four hours, the document now shows "AI review unavailable" and **Re-run AI** becomes available again. Previously a check that was dropped before it finished left the document showing "evaluating" indefinitely, with no way to re-run it.
 - **Files over 100 MB are not checked by Glade AI.** A very large upload is kept on the case as normal, but it gets the "Not able to validate the document using AI" result, the same one oversized images already get. Review these files by hand.
+- **A document with open AI findings moves to Needs Review.** On firms with Glade AI document findings turned on, a document Glade AI approved no longer stays **Approved** when its findings check turns up something. Once the check finishes with at least one finding still open, the document moves to **Needs Review**. Previously only a blurry, expired, or wrong document moved it there, so a document with content findings could read Approved.
+  - This happens once, when the findings arrive. Approve the document after reviewing it and it stays Approved, even if the findings are checked again.
+  - It applies only to a document Glade AI approved. A status a person on your team set is left as it is, including an approval made while the findings were still being checked.
+- **Approving or reopening a document keeps what Glade AI found.** When someone on your team marks a flagged document **Approved**, or sets it back to **Needs Review**, only the document's review status changes. The AI's verdict stays with the document, so the blurry, expired, or doesn't-match-the-request flags you approved past are still visible. Previously approving replaced the verdict with a clean one, and the flags disappeared without a trace.
 
 ### Submitting for review
 
@@ -45,6 +49,8 @@ A client can re-open their own completed checklist to add a document that turns 
 - A rejected item with no replacement uploaded still blocks submission.
 - Documents deleted from the Documents list before the checklist fix, while still filed on a checklist, were not cleaned up. They still appear on their checklist item; remove them from the checklist directly.
 - A stuck Glade AI check is only marked unavailable after about four hours, so a document can show "evaluating" for that long before **Re-run AI** becomes available.
+- Documents a person approved before approvals stopped clearing the AI verdict keep the cleared verdict. Their earlier flags come back only if Glade AI checks the document again.
+- Clearing a document's last blurry, expired, or wrong-document flag can still return it to Approved while other AI findings on it are open. Check the findings before relying on the Approved status.
 
 ## Related Features
 

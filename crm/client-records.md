@@ -15,6 +15,7 @@ Client records track the relationship between a client and your firm on Glade. E
 - Clients are classified as **Subscribed**, **Free**, or **Unverified** based on whether they have an active subscription and have verified their account.
 - The member list supports filtering by these classifications and searching by name, email, phone number, or the content of a client's profile notes.
 - You can edit a client's name, email, phone number, date of birth, SSN, and address through the **Edit Contact** modal.
+- **Names typed in all capitals or all lowercase are saved in name case.** "JANE ANN DOE" or "jane ann doe" is saved as "Jane Ann Doe", whether the name is entered by your team, imported, or typed by the client when they sign up. Hyphenated names, initials, and common prefixes are capitalized as expected — `Mary-Kate`, `J.R.`, `O'Brien`, `McDonald` — and a trailing suffix such as `III` stays in capitals. Because the petition and the client's alternate names on Form 101 are built from the client's name, they pick up the same casing. A name typed in mixed case, such as "DeShawn" or "van der Berg", is saved exactly as typed.
 - Follow-up cadence settings can be configured per client to control how frequently automated reminders are sent.
 - **Stopping follow-ups is recorded and attributed.** When someone at your firm turns off automated follow-ups for a client, Glade records who stopped them and when, and shows that on the client's record — so a client who has gone quiet is not a mystery about whether anyone decided to stop chasing them. See [Stopping and resuming client follow-ups](#stopping-and-resuming-client-follow-ups) below.
 - **Possible duplicates are flagged while you create a client.** Typing into a **Create new client** form warns you about existing clients with the same email, phone number, or full name, and lets you use the existing client instead. See [Possible duplicate clients](#possible-duplicate-clients) below.
@@ -108,6 +109,8 @@ Automated follow-ups to a client can be turned off — for example when the clie
 - Follow-ups stopped before this was recorded show no attribution — the setting is in effect, but there is no record of who turned it off or when.
 - County is blank on every client record until an address is saved that carries one. Existing records are not backfilled, so a firm should not read a blank county as "no county on file for this address".
 - An address collected at booking is the client's one current address. Recording where a client lived at the time of an earlier booking is not supported.
+- Name casing is applied when a name is saved. A client whose name was saved in all capitals before this change keeps it until the name is next saved or corrected.
+- Creditor and alias names that come from a credit report are formatted separately — see [Importing Creditors from a Report](../intake/credit-reports/importing-creditors.md#imported-creditor-names).
 - Imported matters are reached from the firm's case tracker rather than from the contact. If your team used the contact page to open a client's MyCase history, use the tracker and filter to imported matters instead.
 - Only matters carrying the MyCase import status are held back. A matter migrated some other way, or one taken up as live work, appears on the contact as an ordinary case.
 
