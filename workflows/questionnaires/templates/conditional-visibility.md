@@ -24,7 +24,7 @@ A currency answer carries more than a number — it also records the currency an
 ## Edge Cases & Limitations
 
 - Fields that are hidden by conditional logic are not considered incomplete and do not trigger the incomplete-row save prompt (see [Working With Lists](../filling-out/working-with-lists.md)).
-- A field that appears only once another field carries an amount — for example the **Specify** box on Schedule I line 8h, shown once "Other monthly income" has a figure in it — is validated like any other required field. It is highlighted when empty, counted in its section's badge, and listed in the Petition Check. Fields gated on a money amount this way were previously treated as hidden and skipped by validation altogether, so a package could reach ready-to-file with an unnamed income line on a sworn schedule. Re-run the Petition Check on cases prepared before this correction to catch any that got through.
+- A field that appears only once another field carries an amount — for example the **Specify** box on Schedule I line 8h, shown once "Other monthly income" has a figure in it — is validated like any other required field. It is highlighted when empty, counted in its section's badge, and listed in the Petition Check. Fields gated on a money amount this way were previously treated as hidden and skipped by validation altogether, so a package could reach ready-to-file with an unnamed income line on a sworn schedule. Re-run the Petition Check on cases prepared before this correction to catch any that got through. Current template versions no longer have the line 8h Specify box; each 8h source carries its own description (see [Schedule I and Income](../schedules/income.md#line-8h-is-the-sum-of-its-income-sources)).
 
 ## Related Features
 

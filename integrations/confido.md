@@ -20,6 +20,7 @@ Glade integrates with Confido, a legal-tech payment platform, as an alternative 
 - The client is redirected to a Confido-hosted page where they enter payment details.
 - Confido processes the payment and sends a webhook to Glade with the transaction result.
 - Glade records the payment and updates the invoice status.
+- **Only payments made through Glade are recorded.** A payment the firm takes directly in Confido (for example, through a Confido payment link it creates itself) for a client that was not created through Glade is not recorded in Glade. Later deposit, return, refund, and void updates for that payment are ignored too.
 
 ### Payment methods
 
@@ -78,6 +79,7 @@ Glade integrates with Confido, a legal-tech payment platform, as an alternative 
 - If Confido reports a different amount for a payment than Glade recorded, the payment is treated as a different charge and its fee is updated to match.
 - Stored payment methods are scoped to a firm — a client's saved method at one firm is not available at another.
 - One firm account per Glade account.
+- Payments collected directly in Confido for clients that Glade did not create do not appear in Glade and are not applied to any invoice. Record them manually if they need to be tracked in Glade.
 
 ## Related Features
 
