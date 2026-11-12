@@ -62,6 +62,7 @@ Some rules exist to confirm that two answers match — an address entered in two
 - [Questionnaires](../README.md)
 - [Building Templates](./README.md)
 - [Petition Check](../petition/petition-check.md)
+- [Opt-In Petition Checks](../petition/opt-in-checks.md) — rules that run only for firms that turn them on
 - [Cross-Form Consistency Checks](../petition/cross-form-checks.md)
 - [Submitting a Questionnaire](../filling-out/submitting.md)
 - [Conditional Visibility](./conditional-visibility.md)

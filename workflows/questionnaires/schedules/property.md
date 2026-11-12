@@ -23,6 +23,10 @@ The Exemptions Calculator uses the summed total of the selected liens when calcu
 - The old behavior depended on how the property and creditor lists were linked together in your firm's template, so it affected some cases and not others with no way to tell them apart from the form.
 - **Re-check any case where collateral was moved between properties.** Open each property's lien list and confirm the creditor appears only against the property that actually secures it; the corrected equity figures are higher than the ones shown before.
 
+**A lien is linked once, from either side.** Linking a secured creditor to a property from the Master Creditor List, or linking the lien from the property on the Master Property List, saves the matching link on the other list as well. Removing the link from either side removes it from both. Previously a link made from one list could stay one-sided — the creditor showed its collateral but the property did not list the lien, or the reverse — until someone linked it again from the other list.
+
+Changing a lien on either the creditor or the property updates the other side. If a deleted row still shows a lien on the other list, or an older case has only one side linked, contact Glade support.
+
 > TODO: A separate problem can stop a lien change from reaching the property's lien list at all — the creditor's own collateral field saves correctly, but the property-side list, and the lien total and equity derived from it, can stay as they were. Confirm whether this has since been corrected before relying on the property-side figures.
 
 ### Property Summary
