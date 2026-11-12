@@ -24,8 +24,7 @@ Your firm uploads the monthly foreclosure report it receives, and Glade compares
   - Cases with no AKAs are matched exactly as before.
 - **Evidence is split into what matched and what did not.** The match card separates the signals that raised the percentage (ZIP match, name match, close address) from the ones that held it below 100% (no ZIP available, a one-sided street qualifier, a name that is similar but not identical). This is what tells a paralegal where the percentage came from.
 - **Cases are re-checked when the underlying data changes.** Editing a property address, the client's residential address, the client's contact record, or a debtor's name re-runs the check for that case. Unrelated edits — the case number, attorney fields, a phone number — do not.
-
-For what happens when a match reaches the threshold, see [Flags and Review](./flags-and-review.md).
+For what happens when a match reaches the threshold, see [Flags and Review](./flags-and-review.md). For the report's columns, filters, and sorting, see [The Foreclosure Report](./foreclosure-report.md).
 
 ## Configuration
 

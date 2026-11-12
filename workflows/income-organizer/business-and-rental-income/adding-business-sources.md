@@ -34,6 +34,7 @@ A business or rental on the case records which contact it belongs to — the **p
 
 - **The contact is filled in from the income source** when the business or rental is created from the Income Organizer, so a source already tied to a filing contact does not have to be assigned again.
 - **A source that is not tied to a filing contact is left unassigned** rather than guessed at.
+- **Choosing the business owner when you add the source.** The add-source form for a business asks who owns it — the primary or the secondary contact. Leaving it on the default (the debtor the source belongs to) keeps the owner filled in from the income source as above. Choosing the other contact is saved as your team's choice, and later refreshes of the income data do not replace it.
 - **A choice your team makes by hand is the one that is kept**, including clearing it back to unassigned. It is not replaced the next time the case's income data is refreshed.
 - Businesses and rentals recorded before this can be assigned by hand; nothing is assigned for them retroactively.
 - This records who the business or rental belongs to. It does not move income sources between organizers and does not change any income calculation.
