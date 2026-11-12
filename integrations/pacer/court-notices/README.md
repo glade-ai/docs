@@ -10,7 +10,7 @@ Each firm is given its own dedicated address for receiving PACER court notices w
 
 ## Topics
 
-- [Hearings and 341 meetings](./hearings.md) — trustee names on 341 notices, and notices that schedule several hearings at once.
+- [Hearings and 341 meetings](./hearings.md) — trustee names on 341 notices, the trustee shown on the case, and notices that schedule several hearings at once.
 - [Case number matching](./case-number-matching.md) — how notices are linked and searched across case-number formats, transferred cases, and case numbers shared by two clients.
 - [Proofs of claim and the claims register](./claims.md) — capturing claim PDFs and attachments, and the per-case claims register.
 
