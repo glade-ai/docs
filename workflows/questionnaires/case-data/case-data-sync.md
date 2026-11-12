@@ -2,7 +2,7 @@
 
 ## Overview
 
-Some questionnaire fields and lists are linked to the case record — they display a value pulled from the case record rather than a standalone response, and edits flow back to it. This page covers how synced fields and entity-bound lists behave, turning sync off for one questionnaire, deleting and restoring case record entities, and how data reaches the schedules from other sources.
+Some questionnaire fields and lists are linked to the case record — they display a value pulled from the case record rather than a standalone response, and edits flow back to it. This page covers how synced fields and entity-bound lists behave, hearing details filled from court notices, turning sync off for one questionnaire, deleting and restoring case record entities, and how data reaches the schedules from other sources.
 
 ## Key Behaviors
 
@@ -15,6 +15,46 @@ When you edit a case data sync field, the updated value saves automatically and 
 When a synced field also has an autofill, an automatic autofill does not replace the case data value. A hand edit on the field shows as edited and is still saved to the case record. Using re-run on the field replaces the value with the autofill's answer and saves that answer to the case record. See [Fields That Are Both Autofilled and Synced With Case Data](../autofills/manual-overrides.md#fields-that-are-both-autofilled-and-synced-with-case-data).
 
 Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
+
+#### Several questions tied to the same case detail
+
+Some case details are asked in more than one place on a questionnaire — the court division, for example, appears on Form 101 and again in a state-specific section that is shown only for some states, and each debtor's name is repeated across many forms. When the questionnaire syncs, Glade sends the case record one value for each detail:
+
+- **An answered copy beats an unanswered one.** A question nobody has answered no longer replaces the real answer with a blank. Previously, whichever copy synced last won, so a hidden, never-answered copy could blank the court division on the case and on every form that reads it — which then blocked pre-filing review.
+- **A blank someone saved still counts.** Clearing an answer on purpose is treated as an answer, and still clears the detail on the case record.
+- **Between two answered copies, the more recently set one wins.**
+- A detail already blanked this way is corrected the next time the questionnaire is saved or re-synced.
+
+**Clearing a dropdown in a list row now clears it on the case record.** Previously, clearing a single-choice answer inside a list or table row — such as a ticked business type — was ignored, and the case record kept the old answer.
+
+#### Debtor names written "Last, First"
+
+When a questionnaire such as the petition is started from a client's record, each debtor's first, middle, and last name and suffix are filled from the name on the client's record. A name stored surname-first with a comma — "Lynch, Jamar", as intake and CRM imports often record it — is now split correctly, so "Lynch" goes into the last name and "Jamar" into the first name.
+
+- Surnames of more than one word stay together, and a suffix such as "Jr." is recognized on either side of the comma.
+- "Jamar Lynch, Jr." is still read as first name, last name, suffix.
+- A name that is only a surname followed by a comma fills the last name only.
+- A stray comma is never carried into a name field.
+- Names written without a comma are filled exactly as before.
+
+Previously the name was split purely by position, so "Lynch, Jamar" put "Lynch," in the first name field and "Jamar" in the last name field.
+
+### Meeting of Creditors and Confirmation Hearing Details from Court Notices
+
+When a PACER court notice for the case arrives, the details Glade reads from it are written to the case record, so any questionnaire field linked to them fills in on its own — no re-typing from the notice:
+
+- the 341 meeting (meeting of creditors) **date**, **time** (with its time zone, for example *9:30 AM CDT*), and **room**;
+- the 341 meeting's **Zoom meeting ID** and **passcode**;
+- the **confirmation hearing date**.
+
+How the values behave:
+
+- **Late notices still reach the questionnaire.** A questionnaire that was started before the notice arrived fills in when the notice comes in, as long as it is still in progress and syncing. A questionnaire started afterwards is filled from the case record when it is created.
+- **Notices linked to the case later count too.** A notice that arrived before the case was matched to it — for example, before e-filing, before the case number was entered, or before a transfer or import — fills these values once it is linked to the case.
+- **The newest notice wins.** Where several notices exist for the same kind of hearing, the most recent one supplies the values. The room, meeting ID, and passcode come only from the 341 meeting notice.
+- **A value is never blanked.** A notice that leaves a detail out does not clear what is already there. If a notice is cancelled, the value falls back to the previous notice or stays as it is.
+- **A hand correction is kept until a new notice arrives.** If your team corrects one of these values on the questionnaire or the case, the correction stays; processing the same notice again does not overwrite it. A genuinely newer notice does replace it.
+- Nothing fills until your firm's questionnaire template links a field to these values. No Glade questionnaire template ships with that link already in place, including a 341 meeting questionnaire. In the template editor, the case-data binding picker lists them as **341 meeting date**, **341 meeting time**, **341 meeting room**, **341 meeting ID**, **341 meeting passcode**, and **Confirmation hearing date**.
 
 ### Turning sync off for one questionnaire
 
@@ -48,6 +88,16 @@ An empty row left behind in a questionnaire list — a creditor row someone star
 
 Blank creditor rows previously became nameless creditors on the case, which then spread into the schedules and could leave them unusable until someone cleaned the case record up by hand.
 
+### Property Rows Filled Only by an Autofill Wait for a Person
+
+A property row on a questionnaire that was filled in entirely by an autofill — and that nobody has touched — is held back from the case record and the Master Property List until someone edits it. Some autofills pull public-records property from the credit report, which is matched by name, so a client's list could otherwise pick up real estate that belongs to someone else.
+
+- **A row is held when every filled cell came from a template's initial values, the credit report, or a default**, and at least one came from initial values or the credit report. Values Glade calculates on its own — such as "who has an interest" and "portion owned" on the Master Property List — count as defaults, not answers, so they do not release a row.
+- **Any edit by a person releases the row.** Once someone fills in or changes a cell, the row syncs to the case record as usual. Marking a value as **Unknown** counts as an answer and releases the row.
+- **A held row is not deleted from case data.** If the property is already in case data, it stays there; it is simply not overwritten or removed by the held row.
+- **Building the schedules leaves out untouched autofill property.** When the Bankruptcy Schedules are created from a client questionnaire, property rows that were only autofilled and never touched are not carried into case data.
+- **Resync from client questionnaire still clears held rows** already in case data when staff run it.
+
 ### Deleting and Restoring Case Data Entities
 
 Case records hold entities such as creditors and assets that feed synced questionnaire lists. When an entity is deleted from the case record, it is removed from live lists, entity counts, and any synced questionnaires — but it is not erased. The deletion is recorded so your team can review what was removed and undo it.
@@ -77,7 +127,10 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 ## Edge Cases & Limitations
 
 - A row deleted by mistake is not brought back by re-uploading the document. Restore it from the list's **Removed Items** view — see [Restoring Removed List Items](../filling-out/working-with-lists.md#restoring-removed-list-items).
+- Debtor names filled before the "Last, First" correction are not changed. If a case shows the surname in the first name field, correct the name on the questionnaire.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening and Re-syncing](./reopening-and-resync.md)).
+- **One unusable list row no longer stops the rest of the questionnaire from syncing.** A row whose values no longer fit the list it sits in is skipped, and the questionnaire's other rows and answers still reach the case record. Previously a single such row, or a single unanswered box, could stop the whole questionnaire from syncing. A skipped row does not reach the case record until its values are corrected.
+- Hearing details are taken only from PACER court notices. The 341 meeting address and dial-in number, and the confirmation hearing time, are not filled this way.
 - When more than one questionnaire on the same case can sync case data — for example, the client questionnaire and the schedules questionnaire — each one syncs independently. Starting or initiating a second questionnaire does not turn off syncing on another that is still in progress: both keep syncing while open. A questionnaire stops syncing only when it is itself submitted, not when a sibling questionnaire is created.
 
 ## Related Features
@@ -87,6 +140,8 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 - [Re-opening and Re-syncing](./reopening-and-resync.md)
 - [Template Upgrades](./template-upgrades.md)
 - [Autofill Status Indicators](../autofills/status-indicators.md)
+- [How Autofills Work](../autofills/how-autofills-work.md)
+- [Schedule A/B Property](../schedules/property.md)
 - [Working With Lists](../filling-out/working-with-lists.md)
 - [Workflow Switch](../../workflow-switch.md)
 - [Case Management](../../../back-office/case-management.md)

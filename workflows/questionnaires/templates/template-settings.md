@@ -47,14 +47,26 @@ An AI summary can be enabled to generate a summary of the questionnaire response
 - **The summary reads every answer on the questionnaire.** Previously it read only the first 25 answers, so on a long questionnaire such as the bankruptcy schedules it could report assets, debts, or answered questions as missing when the client had entered them.
 - **Hidden fields are left out.** Answers on fields hidden from the questionnaire are not included, so default values the client never saw no longer appear as answers. Social Security numbers are still excluded.
 - The summary uses the same AI model as document parsing.
+- A summary is generated when the questionnaire is completed. A summary produced before this change stays as it was unless the questionnaire is re-opened and completed again.
 
-> TODO: A way for staff to re-run the AI summary on a completed questionnaire is being added. Confirm where it appears and how it works before documenting it. Until then, a summary is generated only when the questionnaire is completed, so a summary produced before this change stays as it was unless the questionnaire is re-opened and completed again.
+### Glade AI Review Skill
+
+A questionnaire template can name its own review skill for **Complete with Glade AI**, so an intake, a means-test follow-up, and a creditor list can each be reviewed against their own checklist.
+
+- When a review runs on a questionnaire, Glade uses the skill picked on its template first, then the skill your firm picked in Petition Settings, then Glade's default.
+- A template with no pick behaves as before, using your firm's pick or Glade's default.
+- You can pick one of your firm's own published skills or a published Glade skill. A draft or retired skill cannot be newly picked. Clearing the pick returns the template to the firm-wide choice.
+- The template's pick still applies to questionnaires already sent from it, including after the template is archived.
+- If a skill picked on a template is later retired or unpublished, reviews fall back to your firm's pick, then Glade's default. Saving the template with that old pick still unchanged is allowed.
+
+The picker is on the questionnaire template's settings, labeled **AI review skill**. **Firm default** keeps the skill chosen in Petition settings. The list also includes your firm's published skills and published Glade skills.
 
 ## Configuration
 
 - A **require all fields** setting controls whether all required fields must be filled before the questionnaire can be completed.
 - A questionnaire can be marked as generating a case document, which enables PDF generation from the questionnaire data.
 - The form provider can be set to Glade's native system, Typeform, or Anvil.
+- A **review skill** for Complete with Glade AI can be picked per template; see [Glade AI Review Skill](#glade-ai-review-skill).
 
 ## Edge Cases & Limitations
 
