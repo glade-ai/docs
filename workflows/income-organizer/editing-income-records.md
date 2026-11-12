@@ -58,6 +58,7 @@ Free-text entry was unavailable for a period after the breakdown editor moved to
 - **Re-entering a value that would not hold**: A figure read from a document can be set aside — superseded by a later reading or by a correction elsewhere — which could leave the field with no current value at all. Re-typing the same number then looked like it saved and the field was blank again after a refresh, because Glade treated the entry as identical to the set-aside figure and recorded nothing. Entering the number again now records it as the current value and it survives the refresh. If your team gave up on a field that would not keep what was typed into it, try it again.
 - **Deleting an itemized line**: When you delete one earnings or deduction line in a paystub's itemized details and save, that line stays deleted, even if its amount was read from the document. The lines you kept keep their amounts. Previously a deleted line whose amount came from document extraction came back after a refresh, so removing an extracted Medicare deduction, for example, had no lasting effect. If your team removed an extracted line and later found it back, delete it again.
 - **Removing a paystub**: When you delete a paystub from the Income Organizer, the income data that came from it is removed along with it. A removed paystub no longer lingers as a leftover row in the client's income data.
+- **Removing an income source updates the organizer straight away.** When you remove an income source's folder, the source disappears from the organizer's table view and the calculators without a reload, and clicking **Undo** brings it back the same way. Previously the source was deleted correctly but stayed on screen until a reload — an employer still listed with "0 paystubs" and a "Missing" folder — which made a working removal look broken.
 - **Closing the Add Income Source window**: Adding an employment income source and then closing the window discards the new source only when nothing has been uploaded to it. Once a paystub has been uploaded — or is still uploading — closing the window keeps the source and its paystubs.
   - **Back** is disabled once paystubs exist or are in flight, and hovering it explains why. Use **Close** instead; the source and its paystubs are kept.
   - Closing after an upload refreshes the organizer so the source you just added is visible in the list without a reload.
@@ -74,6 +75,7 @@ This applies to Glade's draggable panels generally, including the PDF preview pa
 
 ## Edge Cases & Limitations
 
+- **The Document requests list may not refresh after a removal.** The automatic refresh applies to the organizer's table view and the calculators. If you remove an income source with only the Document requests list open, the removed source can still show there until the page is reloaded.
 - **Net pay per period is not recalculated after an edit the way gross is.** Editing the earnings lines behind a paystub updates the pay-period gross; the net figure keeps the value it was read or entered with. Check it against the paystub after a substantial edit.
 
 ## Related Features

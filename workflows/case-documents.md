@@ -50,7 +50,7 @@ Editing the PDF and saving the case document again rebuilds the questionnaire fr
 - **Duplicate templates created by the failed-creation retries are not cleaned up automatically.** If your firm has two or three identical copies of the same case document from that period, delete the extras by hand.
 - Case documents created before fields were detected on upload are not rebuilt. Re-upload the PDF if you want the fields read from it.
 - Conditional logic and field settings lost to an earlier PDF edit or field rename are not recoverable — they have to be authored again, once.
-- Generating the PDF from a case document does not submit or complete it, and does not advance the case. See [Generating a PDF from a case document](questionnaires/petition/signatures.md#generating-a-pdf-from-a-case-document).
+- Generating the PDF from a case document does not submit or complete it, and does not advance the case. The exception is a workflow step set up to wait on that case document: generating the PDF completes that step's attachment — see [Automation Rules](./automation-rules.md). See [Generating a PDF from a case document](questionnaires/petition/signatures.md#generating-a-pdf-from-a-case-document).
 - A case document your team has uploaded can be placed into an electronic filing packet slot, where it supersedes the generated version — see [Electronic Court Filing](../integrations/efiling/README.md).
 
 > TODO: Confirm where case documents are created and edited in the dashboard, and which roles can upload or edit one.
