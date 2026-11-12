@@ -44,6 +44,11 @@ A review workflow can be enabled on the template so that a questionnaire goes to
 
 An AI summary can be enabled to generate a summary of the questionnaire responses after completion. The summary voice (tone) is customizable.
 
+- **The summary reads every answer on the questionnaire.** Previously it read only the first 25 answers, so on a long questionnaire such as the bankruptcy schedules it could report assets, debts, or answered questions as missing when the client had entered them.
+- **Hidden fields are left out.** Answers on fields hidden from the questionnaire are not included, so default values the client never saw no longer appear as answers. Social Security numbers are still excluded.
+- The summary uses the same AI model as document parsing.
+- A summary is generated when the questionnaire is completed. A summary produced before this change stays as it was unless the questionnaire is re-opened and completed again.
+
 ### Glade AI Review Skill
 
 A questionnaire template can name its own review skill for **Complete with Glade AI**, so an intake, a means-test follow-up, and a creditor list can each be reviewed against their own checklist.
