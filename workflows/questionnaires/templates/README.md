@@ -6,11 +6,12 @@ A questionnaire template defines the structure of a form — its sections, field
 
 ## Topics
 
-- [Template Settings](./template-settings.md) — versions, sections, assignees, tags, inheritance, reminders, review workflow, AI summary, and form provider.
+- [Template Settings](./template-settings.md) — versions, sections, assignees, tags, inheritance, reminders, review workflow, AI summary, the Glade AI review skill, and form provider.
 - [Fields, Lists, and Tables](./fields-and-tables.md) — field types, select options, linked and referenced fields, table columns, and flipping a table.
 - [Validation Rules](./validation-rules.md) — field validation, rules on table and list cells, and rules whose answers are still blank.
 - [Conditional Visibility](./conditional-visibility.md) — showing and hiding sections and fields, including conditions on currency fields.
 - [PDF Fill Mappings](./pdf-fill-mappings.md) — mapping fields to PDFs, supplemental forms, pagination, and whole-dollar totals.
+- [Document Uploads on Questions](./document-upload-questions.md) — asking the client to upload a document under a question, the case's Triage folder, and required-upload findings.
 
 Autofills are configured on the template too — see [Autofills](../autofills/README.md).
 

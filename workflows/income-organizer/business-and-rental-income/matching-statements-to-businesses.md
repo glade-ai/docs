@@ -24,7 +24,7 @@ A profit & loss statement only reached Schedule I line 8a if it was uploaded **i
 - A statement is matched against the debtor's own businesses first. On a joint case, a spouse's statement uploaded through the other spouse's request links to the spouse's business when exactly one business on the case carries the printed name, rather than creating a new business under the wrong debtor.
 - A business your team linked or unlinked by hand is left as your team set it.
 
-> TODO: Confirm whether statements that were left unlinked before this change are repaired automatically, or need to be re-uploaded.
+Statements left unlinked before this change are not attached on their own. Re-upload the statement, or contact Glade support.
 
 ### A statement whose business is not on the case yet
 

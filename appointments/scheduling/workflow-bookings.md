@@ -12,6 +12,8 @@ Appointments can be created automatically as steps within a workflow, and bookin
 - Workflow-generated bookings can be assigned to specific team members based on workflow rules.
 - Access permissions are automatically granted to workflow participants.
 - Booking events (created, rescheduled, canceled) can trigger subsequent workflow steps.
+- **Bookings made from a case's booking link stay on that case.** When a client books through a booking link sent from an existing case, the booking attaches to that case and Glade does not start a second checklist for it. Before, these bookings could open a duplicate checklist next to the one already running on the case. Firm-wide scheduling automations still run for these bookings as usual.
+- **The appointment picker in the workflow editor lists only prices you can book.** When you add an appointment booking step, archived and inactive prices are left out of the list, so you cannot pick an old price next to its replacement. Before, an archived price could appear beside the current one under a nearly identical name, and a step saved with it kept booking that price's appointment length (for example 30 minutes instead of the current 60). The menu for attaching a booking in a case conversation leaves out the same prices.
 - When a workflow creates a booking task for a client, the task title includes the appointment type name — for example, "Schedule Appointment: Initial Consultation". This helps clients identify which service they are being asked to schedule when multiple appointment types exist.
 
 ### Email when a team member is assigned a Schedule Appointment task
@@ -29,10 +31,17 @@ When a team member is newly assigned to a **Schedule Appointment** task on a cas
 - Clients can view and manage their own bookings.
 - Additional collaborators can be granted access to specific bookings.
 - Workflow participants automatically receive appropriate access.
-- **Workflow bookings require explicit assignment**: When a booking is created as a step in a workflow, only people who are explicitly assigned to that booking (or who are members of the firm) can view, reschedule, or cancel it. A client being the subject of the booking is not enough on its own — for example, a signing or notarization booking that is only assigned to firm staff is hidden from the client's upcoming bookings list and the client cannot reschedule it. Add the client as an assignee on the booking if they should be able to manage it themselves.
+- **Clients see their scheduled workflow bookings, read-only unless assigned**: When a booking is created as a step in a workflow, the client it is for always sees it once a time is set — on the **Coming up** card on their home page and on their **Meetings** page. Only people explicitly assigned to the booking (or members of the firm) can reschedule or cancel it, so for a booking that is only assigned to firm staff — for example, a signing or notarization appointment — the client sees the meeting and its join link, the Meetings page shows "Reschedule not available", and no Cancel option appears. Add the client as an assignee on the booking if they should be able to manage it themselves.
+- Previously, a workflow booking the client was not assigned to was hidden from them entirely, so clients could see "No upcoming meetings" on a day they had a meeting scheduled.
+- A workflow booking that has **no time chosen yet** still appears to the client only if they are assigned to it, since the only thing to show would be a Schedule action they cannot take.
+
+## Edge Cases & Limitations
+
+- A step that was saved with a price before that price was archived or made inactive is not updated automatically. It keeps booking with the old price and its length. When you open the step in the workflow editor, no price appears selected. Choose the current price and save the step to fix it.
 
 ## Related Features
 
 - [Scheduling](./README.md)
 - [Team Member Assignment](./team-assignment.md)
 - [Booking Lifecycle](./booking-lifecycle.md)
+- [Booking a Client from a Case](./booking-from-a-case.md)

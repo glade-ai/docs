@@ -15,6 +15,8 @@ Pre-filing credit counseling is a required step in bankruptcy workflows: each de
 - Completing or skipping the step updates the case's tasks and progress like any other workflow step. See [Status Tracking](status-tracking/README.md).
 - **Post-filing debtor education certificates** attach the same way as pre-filing counseling certificates, for each debtor separately. **Debtor Education Certificate (Debtor 1)** and **Debtor Education Certificate (Debtor 2)** are available as document types, so a certificate can be filed under its own name rather than under a generic type. On some cases, attaching a debtor education certificate previously failed with an error and the certificate could not be recorded against the step at all.
 - Debtor education is a post-filing course, so its certificate is not part of the initial petition filing package. It is stored on the case and filed separately.
+- **A debtor education course the client hasn't finished reads "Not completed yet" in the portal**, with the course link shown so the client can start or return to the course. Previously the portal could show **"Certificate pending — should arrive within minutes"** for a post-filing course the client had not finished, and hid the course link, so the client had no way back into the course. A finished course with its certificate on file still shows as completed.
+- **Evergreen firms do not need a second credit counseling step for debtor education.** When a case whose client took the Evergreen pre-filing briefing is filed, Glade opens the post-filing debtor education course for the client automatically. See [Evergreen Credit Counseling](../integrations/evergreen-credit-counseling.md#debtor-education-opens-when-the-case-is-filed).
 
 ### The counseling date on the Statement of Financial Affairs
 
@@ -41,17 +43,18 @@ Your firm chooses whether it pays for credit counseling or the client does. The 
 
 #### When firm-paid counseling reaches your bill
 
-On firm-paid counseling, the point at which the course is added to your firm's Glade bill follows the provider, matching when that provider charges for the course:
+On firm-paid counseling, the point at which a course is added to your firm's Glade bill follows the provider and the course, matching when that provider charges for it:
 
-| Provider | Billed when |
-|----------|-------------|
-| Abacus | the client completes the course |
-| Sage | the client is enrolled |
-| Evergreen | the approval request is sent, before enrollment |
+| Course | Billed when |
+|--------|-------------|
+| Abacus pre-filing briefing | the client completes the course |
+| Evergreen pre-filing briefing | the approval request is sent, before enrollment |
+| Post-filing debtor education (Sage, or Evergreen's second course) | the client is enrolled |
 
 - **An Abacus course the client never takes no longer appears on your bill.** Counseling was previously billed at the approval request on every provider — earlier than enrollment and well before completion — so a client who was sent a course and never started it still produced a line item. Those cases now drop off.
-- **A case is billed once.** A case that already carries a counseling line item is not billed again — including a joint case where both debtors' certificates arrive at the same moment, and including a case that was already charged on the approval request before this changed.
-- The line item is described as a credit counseling enrollment on the invoice, as before.
+- **The briefing and debtor education are two separate charges.** Each is billed at most once per case — including a joint case where both debtors' certificates arrive at the same moment, and including a case that was already charged on the approval request before this changed. A case that has already been billed for the briefing is still billed for debtor education when the client enrolls in it; previously the briefing charge could stop the debtor education charge from being added.
+- Sending a debtor education request does not bill your firm. The charge is added only once the client actually enrolls, so a client who is offered the course and never enrolls produces no line item.
+- The briefing is described as a credit counseling enrollment on the invoice, as before. Debtor education appears as its own **Debtor Education enrollment** line.
 - Client-paid counseling is unaffected — it never reaches your firm's bill at any point.
 
 ### The client's purchase step
@@ -62,6 +65,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - The step explains that the combined pre-filing and post-filing course is paid for by credit or debit card, and that this charge is separate from the firm's legal fees. This distinction matters: the course fee is not a legal fee and is not covered by a retainer or a payment plan on the firm's invoice.
 - The client completes the purchase through Glade's checkout, which opens in a new tab, and is returned to their case afterwards.
 - Enrollment is requested once the purchase is complete. Glade confirms the purchase belongs to that client and covers the course being requested before the client is enrolled, so a mismatched or unrelated payment does not enroll them.
+- **The enrollment chat message matches who pays.** On firm-paid counseling, the message the client receives reads *"Your attorney has paid for your credit counseling. Please fill in your enrollment details below and complete the course."* On client-paid counseling, it says the attorney has requested that the client complete credit counseling, that the law firm does not cover the cost of the course, and that the client purchases it themselves. Previously every client was told their attorney had paid, including clients who were expected to buy the course.
 - Everything after enrollment — the course link, the certificate, and how the certificate is attached to the case — works exactly as it does for firm-paid counseling.
 
 ## Configuration
@@ -80,6 +84,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - Client-paid counseling has to be paid by credit or debit card. It cannot be added to the firm's invoice, put on a payment plan, or paid by bank transfer.
 - Whether the client pays is a firm-wide setting per provider, not a per-case one. A firm cannot have some cases client-paid and others firm-paid for the same provider.
 - Only the counseling **date** on question 16 is filled from the certificate. The fee on that row, and the date and fee on the credit report row beside it, still have to be entered and kept current by hand.
+- Enrollment messages already sent before the message was corrected are not changed. A client-paid client who received one may still see "Your attorney has paid" in their chat history.
 - Client-paid counseling has to be set up before a client reaches the step. Switching a firm to client-paid does not add a purchase step to a client who has already been enrolled.
 
 ## Related Features

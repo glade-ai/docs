@@ -9,7 +9,18 @@ Clients upload documents against the file slots on a document request, and your 
 - Clients upload documents through the portal. Each uploaded file is linked to its corresponding file slot.
 - Each uploaded file is listed under its file slot by its own file name. For a short period in August 2026 every uploaded file in the Document Requests checklist displayed as **"Untitled file"** regardless of its real name; the names are stored and now display correctly again, with no re-upload needed. Folder names were never affected.
 - **The delete control on an uploaded file deletes it.** Clicking the trash icon next to a file used to open the file for viewing instead, so the only way to remove a document was to open it and use **Remove** from the document view. The trash icon now removes the file directly, and the drag handle in the same cluster of controls responds again too.
+- **Deleting a document from the case's Documents list takes it off its checklists too.** Whether you delete one row or several at once, the document leaves every checklist item it is filed under on the case, including the **Triage** folder. Undo puts it back everywhere it was. Previously the document disappeared from the Documents list but stayed on its checklist item or in Triage, so the checklist still counted a document your team had deleted. If the document is a paystub or profit & loss statement in an income folder, deleting it also removes its income figures, and undo restores them.
+- **A client's remove follows an upload Glade AI has filed.** When a client removes a file they uploaded on a questionnaire card after Glade AI has moved it out of Triage to a checklist item, the file is removed from wherever it was filed. Previously nothing was removed, even though the remove appeared to succeed. A client still cannot remove a file your team has filed into a folder the client cannot see.
 - Files can be moved from one document request to another using a dropdown that lists the available destination requests. If the source document request is currently in review, a warning message asks you to confirm before proceeding — moving files out changes the review status. If all files in an in-review request are moved out, the request status resets from in review to in progress.
+
+### Glade AI's check of an upload
+
+- **A check that never finishes is marked unavailable.** While Glade AI checks an uploaded document, the document shows "Glade AI is evaluating this document…" and **Re-run AI** is disabled. If no result arrives within about four hours, the document now shows "AI review unavailable" and **Re-run AI** becomes available again. Previously a check that was dropped before it finished left the document showing "evaluating" indefinitely, with no way to re-run it.
+- **Files over 100 MB are not checked by Glade AI.** A very large upload is kept on the case as normal, but it gets the "Not able to validate the document using AI" result, the same one oversized images already get. Review these files by hand.
+- **A document with open AI findings moves to Needs Review.** On firms with Glade AI document findings turned on, a document Glade AI approved no longer stays **Approved** when its findings check turns up something. Once the check finishes with at least one finding still open, the document moves to **Needs Review**. Previously only a blurry, expired, or wrong document moved it there, so a document with content findings could read Approved.
+  - This happens once, when the findings arrive. Approve the document after reviewing it and it stays Approved, even if the findings are checked again.
+  - It applies only to a document Glade AI approved. A status a person on your team set is left as it is, including an approval made while the findings were still being checked.
+- **Approving or reopening a document keeps what Glade AI found.** When someone on your team marks a flagged document **Approved**, or sets it back to **Needs Review**, only the document's review status changes. The AI's verdict stays with the document, so the blurry, expired, or doesn't-match-the-request flags you approved past are still visible. Previously approving replaced the verdict with a clean one, and the flags disappeared without a trace.
 
 ### Submitting for review
 
@@ -36,6 +47,10 @@ A client can re-open their own completed checklist to add a document that turns 
 ## Edge Cases & Limitations
 
 - A rejected item with no replacement uploaded still blocks submission.
+- Documents deleted from the Documents list before the checklist fix, while still filed on a checklist, were not cleaned up. They still appear on their checklist item; remove them from the checklist directly.
+- A stuck Glade AI check is only marked unavailable after about four hours, so a document can show "evaluating" for that long before **Re-run AI** becomes available.
+- Documents a person approved before approvals stopped clearing the AI verdict keep the cleared verdict. Their earlier flags come back only if Glade AI checks the document again.
+- Clearing a document's last blurry, expired, or wrong-document flag can still return it to Approved while other AI findings on it are open. Check the findings before relying on the Approved status.
 
 ## Related Features
 
