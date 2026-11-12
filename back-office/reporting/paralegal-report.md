@@ -19,7 +19,7 @@ The Paralegal Report shows per-paralegal workload metrics so a firm can see how 
 - CSV export includes a total row with summed columns and averaged filing rate.
 - **A paralegal keeps credit for a case after being removed from it.** A case counts toward every team member in a paralegal role who was assigned to it at any point from the start of the schedule builder onward, including one who was later unassigned. Firms that hand a case to a filing team and unassign the paralegal at that point no longer see the case drop out of the paralegal's row at the moment it is filed. Previously the report credited only the people currently assigned, so it undercounted cases written and, especially, cases filed for those firms. The CSV export follows the same rule.
 
-> TODO: The report's download in the newer Glade dashboard adds a Total row that recalculates the filing rate from the column totals, and shows each chapter's share of written cases. Confirm which report view firms use, and whether the older dashboard's export still averages the filing rate.
+The download in the newer Glade dashboard adds a **Total** row and each chapter's share of cases. Contact Glade support if you still use the older dashboard and need the same total.
 
 ## Configuration
 
