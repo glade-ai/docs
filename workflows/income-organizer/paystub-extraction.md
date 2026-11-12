@@ -24,6 +24,14 @@ When Glade reads a paystub on its own — on upload, on a re-read, or during a b
 - **Schedule I still uses gross pay** — it always did. What was wrong was the net column, and anything reading from it.
 - Re-read an affected paystub to correct it. A stub whose net figure looks close to its gross is the symptom worth checking on income entered earlier.
 
+**Earnings not matched to a specific line are counted and flagged.** Some paystubs print earnings lines that the reader has no dedicated place for, such as "Deputy Supplement" or "SSI Supplement". When a stub has more than one of these, some could be dropped, and the organizer showed less income than the stub's gross pay with no sign of the gap. Now, when the printed pay-period gross is more than the itemized earnings (including overtime) by more than a cent, the difference is added to the pay period's income as a separate breakdown item labeled **Unitemized Earnings (not matched to a pay stub line)**.
+
+- The money is counted, and your team can see that it wasn't matched to a specific line on the stub.
+- If the gross equals the itemized earnings or is lower, nothing is added.
+- A stub that itemizes only overtime is handled the same way: the rest of the gross is added as unitemized earnings.
+- Gross pay is used on its own only when no earnings are itemized at all, such as a manually entered gross-only row.
+- The unmatched lines are not yet itemized by name. Check the stub itself to see what the unitemized amount is made of.
+
 **Values still awaiting your review are not counted.** When a figure read from a document disagrees with what is already on the case, it is held for your team to review rather than applied (see [Document Collection](../document-collection/README.md)). The Income Organizer's figures use confirmed values only — a value sitting in review, or one your team has already rejected or replaced with a correction, does not feed the totals. Previously the organizer could pick up a pending value while the rest of the case used the confirmed one, so the same figure read differently in two places.
 
 ### Two Paystubs With the Same Pay Date
@@ -41,6 +49,7 @@ If your team has an organizer where paystubs stayed stuck on **Queued for analys
 - Paystubs extracted before the current/year-to-date column handling was corrected are not re-read automatically. If an existing row shows a year-to-date figure in its pay-period gross, re-run extraction on that row or correct the extracted data by hand.
 - The earnings-subtotal net correction also applies only to paystubs uploaded or re-read after it was introduced. A stub read beforehand keeps its net figure until it is re-read.
 - The same applies to the two-column deduction and year-to-date bonus corrections: rows extracted beforehand keep the figures they were read with. On a case where the client's paystubs carry an adjusted deduction column or a separately-listed bonus, re-run extraction on those rows before relying on the deduction totals or the year-to-date gross.
+- Unitemized earnings rely on the pay-period gross being read correctly from the stub. If the gross was misread, the unitemized amount is wrong too, so compare it with the stub before relying on it.
 
 ## Related Features
 
@@ -48,4 +57,5 @@ If your team has an organizer where paystubs stayed stuck on **Queued for analys
 - [Upload Processing Status](./processing-status.md)
 - [Editing Income Records](./editing-income-records.md)
 - [Income Calculation Modes](./calculation-modes.md)
+- [Gig Earnings Statements](./gig-earnings.md)
 - [Document Collection](../document-collection/README.md)

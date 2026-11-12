@@ -15,6 +15,7 @@ Document collection enables your team to request specific files from clients as 
 - [Automatic Data Extraction](./data-extraction.md) — what Glade reads from mortgage statements, Social Security cards, IDs, vehicle documents, investment statements, and bank and payment-app statements, and how conflicting values are held for review.
 - [Glade AI Filing from the Triage Folder](./triage-folder-ai-filing.md) — how Glade AI files questionnaire uploads and staff drops out of a case's Triage folder, what staff and clients see, and how a person's filing interacts with it.
 - [Income Documents](./income-documents.md) — income data requests, AI processing of paystubs, and income calculation modes for Schedule I and the means test.
+- [Glade AI Checks on Tax Returns](./tax-return-checks.md) — the findings Glade AI raises on an uploaded Form 1040 return, and how IRS transcripts are handled.
 
 Questionnaire questions can also ask for a document. Those files go into a **Triage** folder on the case's checklist. See [Document Uploads on Questions](../questionnaires/templates/document-upload-questions.md).
 
