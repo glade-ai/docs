@@ -13,6 +13,8 @@ A **Send email** action sends the configured email to the resolved recipients wh
 Recipients are the people who receive the email when the automation fires. Three recipient kinds are supported and can be combined on a single automation:
 
 - **Case-party token** — automatically resolves to the email address of a person on the case. Supported tokens are `debtor1`, `debtor2`, and `attorney`.
+  - **Attorney** resolves to the case's attorney on the petition. If the case has no attorney on the petition, or that attorney has no email address, it falls back to your firm owner. Previously it always went to the firm owner, so an email set to copy the attorney skipped the attorney actually handling the case. The attorney does not need an Attorney role on the case for this to work.
+  - An address that resolves more than once, ignoring capitalization, receives the email once.
 - **Team member** — a specific Glade team member at your firm. The system verifies the team member still belongs to your firm at fire time; soft-deleted team members are skipped.
 - **Literal email** — a fixed email address you type in.
 
@@ -51,6 +53,7 @@ A run's email can be sent again from the automation's run history — useful whe
 - Re-sending an email re-sends only the email. A **Create task** action on the same automation is not run again, so a run that failed to create its task is not repaired by a re-send.
 - A re-sent email uses the automation's template as it stands now. There is no way to re-send the message exactly as it was originally worded once the template has been edited.
 - The fallback to the Glade support address is a delivery safeguard, not a substitute for verifying your firm's sending address. It applies per message, so every automation email keeps going out from the support address until the firm's own address is verified.
+- The **Attorney** recipient only uses an attorney on the petition from your own firm. If neither an attorney on the petition with an email nor a firm owner is available, no one receives the email through that recipient.
 
 ## Related Features
 

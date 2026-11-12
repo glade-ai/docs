@@ -46,8 +46,11 @@ Where the filing district is filled in for you, it is worked out from the **ZIP 
 - **A case with no residence address, or a residence with no ZIP code, produces no district at all** rather than a guess. An empty field is the prompt to enter the district yourself.
 - The first row of the residence list is the one used. Removing a later row does not change which row counts as the first.
 - A ZIP code beginning with a zero is read as written.
+- **Florida ZIP codes are matched through their county.** For a Florida ZIP code, Glade finds the county the ZIP code is in and takes the district that county belongs to. Previously the district was chosen from the ZIP code alone and nothing checked the county, so a client in Fort Pierce (St. Lucie County) could be given the Middle District when St. Lucie County files in the Southern District.
+- If the county cannot be determined for a Florida ZIP code, the district is chosen from the ZIP code alone, as before. ZIP codes outside Florida are unaffected.
+- A district already set on the case, including one your team picked by hand, is not replaced.
 
-The filing district is worth re-checking on cases prepared before this change, along with the figures that follow from it. The median income comparison and the means test lookups are all selected by district, so a district that came out wrong carried into those figures as well.
+The filing district is worth re-checking on cases prepared before these changes — Florida cases in particular, along with the figures that follow from it. The median income comparison and the means test lookups are all selected by district, so a district that came out wrong carried into those figures as well.
 
 ### The Explanation Beside an AI-Filled Answer
 

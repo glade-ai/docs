@@ -67,6 +67,7 @@ For how descriptions on other Schedule A/B lines (including line 17 deposits) ar
 ## Edge Cases & Limitations
 
 - Itemized rows on Schedule A/B Part 3 appear only on cases whose schedules questionnaire is on the current template. A case in progress on an older version still prints one combined entry per heading. There is no way to switch a single case over other than upgrading its questionnaire, and upgrading carries the other behaviors described under [Template Upgrades](../case-data/template-upgrades.md).
+- **Leases on a client questionnaire property are optional.** On the Bankruptcy Client Questionnaire's property list, *Leases you have on this property* is no longer required, on every version of the template — including questionnaires already in progress, without an upgrade. Previously every property not under a lease (a bank account, clothing, a car owned outright) raised a blocking **Required** finding, and a client who had answered No to leases had no lease to choose at all, so the questionnaire could not be submitted without an override.
 - Petitions already generated are not rebuilt. A draft or signature copy produced before the case was upgraded keeps the combined Part 3 entries it was printed with; generate the petition again to pick up the itemized rows.
 
 ## Related Features
