@@ -2,7 +2,7 @@
 
 ## Overview
 
-Bookings can be assigned to specific team members within the firm, either by default per product, by workflow rules, or by hand. The Bookings section's List, Calendar, and Team views follow whichever team member you have selected.
+Bookings can be assigned to specific team members within the firm, either by default per product, by workflow rules, or by hand. The Bookings section's List, Calendar, and Team views follow whichever team member you have selected. Each booking also records who first scheduled it.
 
 ## Key Behaviors
 
@@ -17,6 +17,17 @@ Bookings can be assigned to specific team members within the firm, either by def
 - When a workflow has an assigned attorney, the scheduling modal automatically opens to that attorney's availability. This applies in the client portal (Home Page booking tasks) and on the firm-side Bookings tab. If the assigned attorney has no availability, a message indicates this and you can select another team member from the available chips. Selecting a different team member chip always shows their calendar, even if they have no availability.
 - On a consultation service with round robin turned on, clients don't see team member chips or the no-availability message. Glade assigns the booking instead. See [Round-Robin Consultation Booking](./round-robin.md).
 
+### Filtering by who claimed an appointment
+
+Claiming an appointment records who will handle it. That person often isn't the calendar owner or the case's assignee, for example an attorney who takes a consult sitting on someone else's calendar. The bookings list can be filtered by who claimed each appointment, so an attorney can find the appointments they claimed, including ones with no case attached.
+
+- Pick one or more team members to see the appointments any of them claimed. The filter is labeled **Claimed by**. Choose **Nobody** to see unclaimed appointments. Picking people and **Nobody** together shows both.
+- Appointments marked as claimed with no person chosen count as unclaimed.
+- The claimed-by filter works together with the calendar owner, case assignee, and service filters. An appointment has to match all of them to appear. For example, filtering by one person as claimer and a different person as case assignee shows only appointments that match both.
+- Leaving the filter empty shows every appointment, as before.
+
+The **Your appointments** home widget offers the same **Claimed by** filter. Its summary reads **Claimed by nobody**, or **Claimed by** followed by the people's names. When nothing matches, it says **Nothing coming up for these filters**, with **Adjust filters**.
+
 ### Which team member the Bookings section is showing
 
 The Bookings section has List, Calendar, and Team views, and the team member you are looking at carries across them. Whoever you have selected stays selected as you move between views, so you no longer have to re-pick them each time.
@@ -25,6 +36,16 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - **Block this Time** applies to the team member currently selected, rather than always to the appointment type's default assignee. Check who is selected before blocking time.
 - The Team view's team member filter lists every member of the firm, including people with no appointments booked. Previously anyone without a booking dropped out of the filter entirely, so they could not be selected.
 - Once you have picked a team member by hand, that choice stays put — a change to the appointment type's default assignee, or bookings reloading in the background, does not switch the view away from the person you chose.
+
+### Who scheduled a booking
+
+A booking records who first put it on the calendar, shown as **Scheduled by** on the booking's details. This is separate from the team member the booking is assigned to, and from whoever last rescheduled it.
+
+- When a team member creates a booking, they are recorded as the one who scheduled it. When a client books for themselves, the client is recorded.
+- A booking created without a time — for example one a workflow opens for the client to pick a time later — has no one recorded until a time is first chosen. Whoever picks that first time is recorded.
+- Rescheduling does not change it. **Scheduled by** always shows the person who first scheduled the booking.
+
+**Scheduled by** is also a column on the Bookings list. The cell shows the stored name. Bookings created before this field existed are blank.
 
 ## Configuration
 
@@ -42,4 +63,5 @@ The Bookings section has List, Calendar, and Team views, and the team member you
 - [Availability](./availability.md)
 - [Conflicts and Concurrent Bookings](./conflicts-and-concurrent-bookings.md) — conflict checks when reassigning a booking
 - [Workflow Bookings](./workflow-bookings.md)
+- [Appointment Outcomes](./appointment-outcomes.md)
 - [Round-Robin Consultation Booking](./round-robin.md)

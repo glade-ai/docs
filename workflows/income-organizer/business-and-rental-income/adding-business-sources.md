@@ -25,6 +25,7 @@ When a client adds a business or rental income source from an income document re
 - **Step 2 — income.** The client either **uploads documents** for the source, or **enters the figures manually** as a profit & loss statement — the period, gross income, expenses, and optionally the net figure printed on their statement.
 - **Going back or closing before anything is saved** removes the draft source, so an abandoned attempt does not leave an empty source on the case.
 - **Once a document has uploaded (or is uploading) or a manual statement is saved,** **Back** is disabled. Closing the dialog keeps the source and what has been saved.
+- **Clients can save a manually entered statement.** Previously, a signed-in client who chose to enter the figures manually got a **"Could not create the statement"** error and nothing was saved. The statement now saves. Pressing **Save** again doesn't create a second copy.
 - Other income types — employment, Social Security, and the rest — still use the existing add-source form.
 
 ### Which Contact a Business or Rental Belongs To
@@ -33,7 +34,7 @@ A business or rental on the case records which contact it belongs to — the **p
 
 - **The contact is filled in from the income source** when the business or rental is created from the Income Organizer, so a source already tied to a filing contact does not have to be assigned again.
 - **A source that is not tied to a filing contact is left unassigned** rather than guessed at.
-- **Choosing the business owner when you add the source.** The add-source form for a business asks who owns it — the primary or the secondary contact. Leaving it on the default (the debtor the source belongs to) keeps the owner filled in from the income source as above. Choosing the other contact is saved as your team's choice, and later refreshes of the income data do not replace it. Shortly after this choice was added to the form, adding any business income source failed with "Couldn't add the income source." That is fixed, and business sources can be added again — if your team was blocked, add the source now.
+- **Choosing the business owner when you add the source.** The add-source form for a business asks who owns it — the primary or the secondary contact. Leaving it on the default (the debtor the source belongs to) keeps the owner filled in from the income source as above. Choosing the other contact is saved as your team's choice, and later refreshes of the income data do not replace it.
 - **A choice your team makes by hand is the one that is kept**, including clearing it back to unassigned. It is not replaced the next time the case's income data is refreshed.
 - Businesses and rentals recorded before this can be assigned by hand; nothing is assigned for them retroactively.
 - This records who the business or rental belongs to. It does not move income sources between organizers and does not change any income calculation.

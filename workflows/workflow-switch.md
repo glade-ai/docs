@@ -33,8 +33,13 @@ The new case may already ask for some of the same documents, so checklists are c
 - **A moved file completes the requirement it lands on** and is no longer counted against the one it came from, the same as moving a file by hand.
 - Moved files appear in the new case's **Documents** tab, not only inside the checklist.
 - **Joint filings keep their two debtors apart.** A case with a checklist for each debtor arrives with both, each holding its own documents.
+- **An empty copy of a checklist does not take the place of the one holding files.** When the outgoing case has two checklists of the same kind for the same person — for example two income organizers, only one of which has uploads — the one holding the uploads is merged into the new case's checklist. An empty copy no longer claims that spot first. Previously the checklist with the uploads could arrive as a second, separate request, leaving the organizer your team opens with every paystub showing as "Untitled file".
 - **A checklist is not duplicated when its step eventually runs.** The switch opens the new case's checklists immediately so the client's documents have somewhere to land; when the workflow step that would normally create that checklist reaches its turn, it takes over the one already there rather than opening an empty second copy beside it.
 - The checklist on the archived case is left as it was — a record of what was asked for there.
+
+### How the schedules questionnaire arrives
+
+The Bankruptcy Schedules questionnaire moves to the new case with its answers. When the new workflow's step that sends the schedules runs — before or after the switch finishes — it uses that questionnaire rather than opening an empty second copy. See [Schedules When a Case Switches Chapter](questionnaires/case-data/case-data-sync.md#schedules-when-a-case-switches-chapter).
 
 ### What has to be answered
 
@@ -85,10 +90,13 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 - The client is not notified. Anyone who needs to know the case has moved has to be told outside Glade.
 - A switch that fails part-way leaves the case on the new workflow with the failures recorded in the note. Read the note before deciding what to repair; running the switch again is safe and reports that there is nothing left to move.
 - Documents already moved are not moved a second time by a repeat run.
+- Cases switched before the fix for empty duplicate checklists are not repaired. If a switched case's income organizer shows paystubs as "Untitled file", the uploads may be on a second request on the new case. Those files stay where the earlier switch put them.
 - The archived case keeps its own checklists showing what was asked for there, so the same requirement can appear on both cases. Only the new case's copy holds the client's files.
 - A checklist requirement whose name differs between the two workflows is carried across as a requirement of its own rather than merged, so a renamed requirement can arrive alongside the new case's version of it.
 - An unpriced line on the new invoice with no same-named line on the voided invoice stays unpriced, and the invoice is not ready until someone prices it.
 - A case that has already been switched, then switched back, accumulates a linked chain of archived cases. The client sees only the current one.
+
+A case switched before the empty-checklist fix is not repaired on its own. Contact Glade support to restore the checklist.
 
 ## Related Features
 
@@ -96,3 +104,4 @@ Nothing is configured for a switch itself. What a case can switch to follows fro
 - [Income Organizer](income-organizer/README.md) — the income records carried with the case.
 - [Status Tracking](status-tracking/README.md) — where the switch appears in a case's activity history.
 - [Credit Reports](../intake/credit-reports/README.md) — the report the new case adopts rather than re-pulling.
+- [Joint and Individual Filing](joint-and-individual-filing/README.md) — converting a case between joint and individual filing, or swapping its debtors, without switching workflow.

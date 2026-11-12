@@ -15,6 +15,7 @@ A blocking pre-filing finding gates submission until it is resolved or someone s
 
 - The attorney override for missing required documents does not clear the block on a non-PDF file in a slot the court expects as a PDF. See [PDF and image conversion](../filing-packet/file-conversion.md).
 - The workflow role permission applies only while the person is a current owner of the case with that role assigned. Removing them from the case, or unassigning the role, removes the permission on that case.
+- A sign-off applies to the finding as it was when signed off. When a check's severity changes — for example, the joint-filing question moving from advisory to blocking — earlier sign-offs on it no longer apply, and the finding has to be signed off again or resolved. See [Required fields](./required-fields.md#answers-that-block-every-chapter-7-and-chapter-13-filing).
 - Some blocking findings cannot be cleared on the case at all — for example the New Mexico non-filing-spouse rule and the New Mexico and Ohio Southern Chapter 7-only rule. See [District rules](./district-rules.md).
 
 ## Related Features
