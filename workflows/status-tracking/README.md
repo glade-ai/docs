@@ -14,6 +14,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - [Tasks](./tasks.md) — case tasks, filing deficiency tasks, assignment emails, reminders, performance tracking, and dismissing/restoring tasks.
 - [Time-Sensitive Filing Deadlines](./time-sensitive-filing-deadlines.md) — marking urgent cases by date or urgency type, and how markings pass between related cases.
 - [Switching a Case to Another Workflow](./switching-workflows.md) — choosing a workflow in another service and what carries over (credit report, payments).
+- [Swapping the Debtor and Spouse](./swapping-debtor-and-spouse.md) — swapping on cases with linked workflows, and which questionnaires change.
 - [Cases That Have Gone Quiet](./stale-cases.md) — the three-month staleness rule that stops automated follow-ups, and overriding it.
 
 ## Related Features

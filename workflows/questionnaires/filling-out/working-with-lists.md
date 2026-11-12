@@ -36,6 +36,12 @@ The **Remove X selected** button in the list footer counts only the real items y
 - A row removed in bulk is now deleted straight away. Previously a bulk removal was only saved with the next change to the questionnaire.
 - Rows deleted in error before this correction can be put back from **Removed Items** — see [Restoring Removed List Items](#restoring-removed-list-items).
 
+**An empty list shows one starter row, and only an empty list.** In the legacy questionnaire editor, a list shown as rows (rather than as a table) offers a single starter row to fill in when it has no rows yet. Once the list has rows, no starter row appears. Filling in the starter row turns it into the list's first row without losing your place in the field you are typing in.
+
+- Previously the starter row appeared every time the list was opened, even when it already had rows, and it could save several identical blank rows — one per column of the list, each filled with the template's default values (for example a default category and $0). A household goods list could end up with four identical $0 rows after one save.
+- Lists shown as tables never had this problem.
+- **Duplicate blank rows already saved are not removed.** Delete them from the list by hand.
+
 When a list row is deleted, the values inside the row are deleted along with it. Restoring the row from **Removed Items** brings the inner field values back as they were.
 
 ### Restoring Removed List Items

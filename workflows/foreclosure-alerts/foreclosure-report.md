@@ -10,6 +10,8 @@ The foreclosure report is the case list view your team works through after each 
 
 On the workflows list and on custom reports, filter with **Foreclosure**: **All**, **Designated**, or **Not designated**. The filter carries through to the cases CSV export.
 
+A match your team dismisses stays on the report filtered to **Designated** rather than dropping off, so the review is visible alongside the active flags. A match cleared by the system — for example because a newer report no longer lists the property — still drops off. A case kept only because of a dismissed match is not in the **Not designated** list as well.
+
 ### Sorting
 
 Every foreclosure column can be sorted, so a long monthly report can be worked in whatever order suits the reviewer instead of paged through by hand.
@@ -39,12 +41,15 @@ Alongside the existing tag and label filters, the report can be narrowed by:
 
 The foreclosure columns on the workflows list and on custom reports are **Foreclosure address**, **Foreclosure client**, **Match score**, **Review status**, **Review note**, **Foreclosure attorney**, **Foreclosure attorney email**, and **Foreclosure source**.
 
+**Review note** shows the reason given when a match was dismissed, or the note written with a hand-applied flag while that flag is on. A flag that is still on from the report shows a blank note. The column is included in the CSV export. Turn it on from the report's column list under **Details**, alongside the other foreclosure columns.
+
 The uploaded file is a different screen. Open **Foreclosure detection**, then **View data**. The **Foreclosure data** table shows **Source row**, **Property address**, **Owner**, **Mortgagor**, **City**, **County**, **ZIP code**, **Foreclosure reference**, **Parcel**, and **Data quality**.
 
 ## Edge Cases & Limitations
 
 - A filter value that is not valid is refused with an error, rather than being ignored and returning — or exporting — the firm's whole caseload.
 - Sorting puts blank cells last but does not hide them. Use the filters to leave cases out.
+- A dismissed match with a blank reason still shows its address and score on the **Designated** report, and its **Review note** cell is empty — the same as a flag that is still on.
 - A report whose import failed, or whose report date could not be read, does not appear as a report-month choice.
 
 ## Related Features

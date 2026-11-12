@@ -29,8 +29,9 @@ Glade's native questionnaire system supports template versioning, field-level va
 
 - [Statuses and Access](./filling-out/statuses-and-access.md) — statuses, sending back for changes, the client's view after submitting, access control, and collaborators.
 - [Filling Out Forms](./filling-out/filling-out-forms.md) — pre-filling, simultaneous editing, and template defaults.
-- [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, debtor county, and SOFA free-text dates.
+- [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, outside-the-US addresses, debtor county, and SOFA free-text dates.
 - [Working With Lists](./filling-out/working-with-lists.md) — row detail views, removing and restoring rows, links after a revert, and concurrent edits.
+- [Striking Rows on Amended Schedules](./filling-out/striking-rows-on-amended-schedules.md) — crossing out a row on an amended schedule so it prints but no longer counts.
 - [Layout and Navigation](./filling-out/layout-and-navigation.md) — resource panel, Source Data, tables, large questionnaires, and mobile.
 - [Printing a Questionnaire](./filling-out/printing.md) — printing a section from your browser.
 - [Submitting a Questionnaire](./filling-out/submitting.md) — fields with errors, Fields Need Attention, submit anyway, and completion.
@@ -54,9 +55,12 @@ Glade's native questionnaire system supports template versioning, field-level va
 ### [Petition](./petition/README.md)
 
 - [Petition Check](./petition/petition-check.md) — the consolidated list of what still needs attention.
+- [Firm Validation Settings](./petition/firm-validation-settings.md) — turning checks off, or running required fields as Advisory or Blocking, for your firm.
 - [Cross-Form Consistency Checks](./petition/cross-form-checks.md) — contradictions between forms in the package.
 - [Generating a Draft Petition](./petition/draft-petition.md) — drafts, signing copies, numbered draft versions, and automatic rebuilds.
+- [Petition Document Order](./petition/document-order.md) — the firm's saved order and per-case overrides.
 - [Signatures](./petition/signatures.md) — signature choices and signer names.
+- [Older Petition Drafts](./petition/older-petition-drafts.md) — older petitions moved to Petitions and labeled as legacy.
 - [Opt-In Petition Checks](./petition/opt-in-checks.md) — firm opt-in validation rules and the eviction judgment check.
 - [Amendment Marks](./petition/amendment-marks.md) — struck and added answers on amended schedules.
 
