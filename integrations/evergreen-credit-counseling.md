@@ -41,6 +41,16 @@ Evergreen's own explanation of the problem is not shown on the screen yet.
 - When a credit counseling step runs for a firm connected to Evergreen, enrollment and course delivery work the same way as with other providers: the client receives the enrollment, launches the course from inside Glade through the course link, and the completion certificate flows back to the case. See [Credit Counseling & Debtor Education](./abacus-credit-counseling.md) for the full enrollment, certificate, and permissions behavior.
 - Each enrolled person sees their own course link. Glade shows the signed-in user their own assigned link; otherwise it shows the primary debtor's link.
 
+### Debtor education opens when the case is filed
+
+Most Evergreen workflow templates have only one credit counseling step, for the pre-filing briefing, so clients were previously never asked to take the post-filing debtor education course. Glade now opens that second course on its own.
+
+- When a case is filed — or a case number is recorded on it — and the client has enrolled in the Evergreen pre-filing briefing, Glade opens post-filing debtor education for the client. The client receives the **Get Post-Filing Debtor Education** enrollment task and a chat message, just as they would from a workflow step.
+- No template changes are needed. If a template does include a later credit counseling step for debtor education, that step attaches to the course already opened instead of sending the client a second request.
+- The second course is enrolled under the same Evergreen client record as the briefing, rather than creating a new client at Evergreen.
+- Debtor education opens once per case. Filing events that repeat, or a case number being corrected, do not send the client another request.
+- On firm-paid counseling, your firm is charged for debtor education when the client enrolls, as its own line item — not when the course is opened. See [When firm-paid counseling reaches your bill](../workflows/credit-counseling.md#when-firm-paid-counseling-reaches-your-bill).
+
 ## Configuration
 
 | Setting | Description |
@@ -53,6 +63,9 @@ Evergreen's own explanation of the problem is not shown on the screen yet.
 - The integration is for U.S. bankruptcy credit counseling.
 - Evergreen is an alternative to Abacus for pre-filing credit counseling. The provider that handles a given enrollment is determined by the firm's connected provider.
 - If connecting or registering fails, the setup screen stays open with an error message so the firm can correct the details and try again.
+- Debtor education opens automatically only for a filed case whose client has already enrolled in the Evergreen pre-filing briefing. A case with no Evergreen briefing, or with no case number, is left alone. If the briefing enrollment happens after filing, debtor education opens once that enrollment succeeds.
+- Clearing a case number does not open debtor education.
+- Clients on cases filed before this change are picked up by a one-time catch-up. Contact Glade support if a filed case has not been sent the debtor education request.
 - An attorney code saved while Evergreen was unavailable is not checked. If enrollments fail for a firm that connected during an outage, remove the connection and connect again with the code so it is checked.
 - Codes saved before the check was added were never checked. A firm connected with a mistyped code still shows as connected.
 
