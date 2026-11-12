@@ -65,6 +65,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - The step explains that the combined pre-filing and post-filing course is paid for by credit or debit card, and that this charge is separate from the firm's legal fees. This distinction matters: the course fee is not a legal fee and is not covered by a retainer or a payment plan on the firm's invoice.
 - The client completes the purchase through Glade's checkout, which opens in a new tab, and is returned to their case afterwards.
 - Enrollment is requested once the purchase is complete. Glade confirms the purchase belongs to that client and covers the course being requested before the client is enrolled, so a mismatched or unrelated payment does not enroll them.
+- **The enrollment chat message matches who pays.** On firm-paid counseling, the message the client receives reads *"Your attorney has paid for your credit counseling. Please fill in your enrollment details below and complete the course."* On client-paid counseling, it says the attorney has requested that the client complete credit counseling, that the law firm does not cover the cost of the course, and that the client purchases it themselves. Previously every client was told their attorney had paid, including clients who were expected to buy the course.
 - Everything after enrollment — the course link, the certificate, and how the certificate is attached to the case — works exactly as it does for firm-paid counseling.
 
 ## Configuration
@@ -83,6 +84,7 @@ When your firm has chosen client-paid counseling, the client's credit counseling
 - Client-paid counseling has to be paid by credit or debit card. It cannot be added to the firm's invoice, put on a payment plan, or paid by bank transfer.
 - Whether the client pays is a firm-wide setting per provider, not a per-case one. A firm cannot have some cases client-paid and others firm-paid for the same provider.
 - Only the counseling **date** on question 16 is filled from the certificate. The fee on that row, and the date and fee on the credit report row beside it, still have to be entered and kept current by hand.
+- Enrollment messages already sent before the message was corrected are not changed. A client-paid client who received one may still see "Your attorney has paid" in their chat history.
 - Client-paid counseling has to be set up before a client reaches the step. Switching a firm to client-paid does not add a purchase step to a client who has already been enrolled.
 
 ## Related Features

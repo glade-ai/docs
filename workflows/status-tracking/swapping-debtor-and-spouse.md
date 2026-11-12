@@ -4,7 +4,7 @@
 
 On a joint bankruptcy case, your team can swap which person is the primary debtor and which is the spouse from the petition workflow's settings. This page covers which cases can be swapped and what a swap changes when the case has linked workflows, such as a triage, retainer and petition workflow on one case.
 
-> TODO: Document the full swap flow — where the action sits in the workflow settings, who can use it, the eligibility checks it runs, and exactly what it changes on the case.
+Open it from the case's workflow settings, on the row **Swap primary and spouse**. Who can run it, when it is refused, and what the confirmation shows are in [Swapping Primary and Spouse](../questionnaires/case-data/swapping-primary-and-spouse.md).
 
 ## Key Behaviors
 
@@ -23,3 +23,4 @@ For a workflow in a linked case group, the swap dialog shows a warning under **B
 - [Status Tracking](./README.md)
 - [Switching a Case to Another Workflow](./switching-workflows.md)
 - [Questionnaires](../questionnaires/README.md)
+- [Swapping Primary and Spouse](../questionnaires/case-data/swapping-primary-and-spouse.md)

@@ -28,8 +28,7 @@ The same applies when an autofill or case data **left a currency field with no a
 
 - New questionnaires, template upgrades and questionnaires moving to the new questionnaire engine pick this up automatically.
 - In-progress questionnaires that already have these blank fields get $0.00 only once Glade re-applies defaults to them.
-
-> TODO: Confirm whether existing questionnaires have been backfilled for all firms, or only for firms where it was run on request.
+- Existing questionnaires are updated when this is run for your firm. If an older questionnaire still shows the previous behavior, contact Glade support.
 
 For marking an asset's value as **Unknown** on Schedule A/B, see [Schedule A/B Property](../schedules/property.md#marking-a-value-as-unknown).
 
@@ -50,6 +49,11 @@ The debtor's filing county is worked out from the address on the case, by lookin
 
 - **No AI model is involved.** On questionnaires where this field is computed for you, the county was previously produced by an AI model, which returned plausible but wrong counties for some addresses. It is now a direct lookup.
 - The address has to be complete enough to identify. Where it cannot be resolved to a county, the field is left for you to fill in rather than filled with a guess.
+- **A county in a different state is rejected.** If the lookup returns a place in a different state from the one on the address, that result is ignored and the lookup is tried with another phrasing of the address; if none agrees with the address's state, the county is left blank. Previously the county attached to the lookup's top result was used even when it was in another state — an Orlando, Florida address could be given a New York county, which then raised a false blocking finding in Check petition. Counties already filled in this way are not corrected automatically; check the debtor county on cases where it looks wrong.
+- Where the address has no state, or the lookup result does not name one, the result is used as before.
+- **The street is checked before the city.** The lookup first looks up the exact street address, and uses that answer only when its house number and street match what was entered, it is not in a different ZIP code or state, and it names a county. Anything else — including an address with no house number, such as a PO box — falls back to the city and ZIP lookup described above. This corrects addresses in a city or ZIP that crosses a county line: 5434 Tourmaline Way, Pattison, TX 77423 used to come back as Waller County and now comes back as Fort Bend County, where it is.
+
+- **The county on the questionnaire uses this same lookup.** While you fill out the form, the county shown for the debtor is the one this lookup returns, street first and then the city and ZIP. The county on the form and the county saved on the case are that same answer.
 - A county that Glade does not recognize for the state blocks e-filing and is reported in the pre-filing review. See [Electronic Court Filing](../../../integrations/efiling/README.md).
 
 ### Free-Text Dates on the Statement of Financial Affairs

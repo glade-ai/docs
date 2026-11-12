@@ -19,10 +19,8 @@ Your firm can save the order its petition documents should appear in. Glade appl
 
 | Setting | Where | Effect |
 |---|---|---|
-| Petition document order | [Petition Settings](../../../back-office/settings.md#petition-settings) | The order the firm's petition documents appear in on every generated petition. |
-| Case-specific order | **Prepare Petition** on the case | Dragging documents into a new order there overrides the firm order for that case only. |
-
-> TODO: Confirm the on-screen label of the document-order control in Petition Settings, and whether a case's custom order can be reset back to the firm order.
+| **Document order** | **Petition settings** | The order the firm's petition documents appear in on every generated petition. The description reads **Set the order documents appear in your petition. New cases start in this order.** Columns are **Document** and **Included**. |
+| Case-specific order | **Prepare Petition** on the case | Dragging documents into a new order there overrides the firm order for that case only. There is no control to reset that case back to the firm order. |
 
 ## Edge Cases & Limitations
 

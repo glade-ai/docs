@@ -20,8 +20,12 @@ Generating a draft is available to your team on a supported bankruptcy schedules
 
 ### The draft is marked as a draft
 
-Every page of the **Petition (Draft)** document carries a marking down the right-hand margin: the Glade mark, the word **DRAFT** repeated down the page, and a shield showing how many blocking issues the petition check found at the moment the draft was built.
+Every page of the **Petition (Draft)** document carries two markings:
 
+- **A diagonal DRAFT watermark** — a large, faint grey **DRAFT** running corner to corner across the middle of the page. It is the conventional "not the final copy" mark that attorneys and debtors recognize at a glance, and it is sized to the page, so portrait, landscape and unusually sized pages are all covered.
+- **A margin marking down the right-hand edge** — the Glade mark, the word **DRAFT** repeated down the page, and a shield showing how many blocking issues the petition check found at the moment the draft was built.
+
+- The watermark tints the page behind the form rather than covering it, so the text and figures on the draft stay fully legible.
 - The marking exists so a printed draft cannot be mistaken for the filing copy once it is off the screen and in a stack of paper on a desk.
 - The **shield count matches the Petition Check badge** — it counts blocking findings, and it leaves out signature fields, exactly as the badge in the questionnaire header does. It is a snapshot from when the draft was generated, so it does not move as you correct fields; generate a new draft to refresh it.
 - **Signature Pages are not marked.** The pages a client signs in ink come from the unmarked copy, so nothing overprints a signature block.
@@ -47,7 +51,18 @@ Use the second when you are collecting wet-ink signatures from the debtor before
 
 ### What goes into the draft, and where it is saved
 
-When you generate a draft you choose which of the case's documents go into it and the order they appear in. Two further options control what is produced and where it is filed:
+When you generate a draft you choose which of the case's documents go into it and the order they appear in. The list offered is built to match what belongs in the petition:
+
+- **Ticked by default: the official forms that apply to the case.** Only forms whose section of the questionnaire applies to this case are listed and ticked, in petition order — the case's own drag order first, then your firm's saved order. A form that applies but has not been generated yet is still listed; it is generated with the draft.
+- **The creditor matrix comes last** in the ticked list.
+- **Everything else is an optional extra, unticked.** Every other file on the case — including your firm's own questionnaire PDFs, such as fee agreements or compensation statements — appears in the list unticked. Tick any you want appended to the draft.
+- **Not offered at all:** earlier drafts, signature pages, the compiled petition, legacy copies, plain-text files, and official forms whose section does not apply to the case.
+- **A form that does not apply is never merged,** even if an old copy of it is still on the case.
+- Generating a draft without changing the selection produces exactly the ticked list.
+
+Previously the list ticked official forms that did not apply to the case (for example, means-test supplements or other states' forms) and described them as generated with the draft, although they were never actually merged. It also ticked your firm's own questionnaire PDFs filed in Forms & Schedules, and those were merged into the petition.
+
+Two further options control what is produced and where it is filed:
 
 - **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced. This option works regardless of the firm's **Generate Signature Pages.pdf on submit** setting.
 - **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
@@ -72,10 +87,22 @@ When a **completed** Bankruptcy Schedules questionnaire is edited, Glade rebuild
 - Only the documents are rebuilt. Downstream workflow steps, notifications, and tasks that ran when the questionnaire was first completed are not triggered again.
 - This applies to Glade's own questionnaire templates. Questionnaires on an external form provider are not rebuilt this way.
 
+### When One Form Fails to Generate
+
+When the petition's court forms are filled — on **Generate petition**, when a questionnaire is completed, and when a completed questionnaire is edited — a form that fails no longer stops the forms after it.
+
+- Every other form is still filled from the current answers. The run then reports a failure that names each form that failed.
+- Previously the run stopped at the first failure. The forms before it had the new answers and the forms after it kept their old PDFs, so a stale schedule could reach a filing without anyone noticing. Which forms were left stale depended on their order and timing.
+- The **Generate petition** failure message no longer lists forms that never got their turn as failed. It lists the forms that actually failed.
+- The message matches forms by their title. It can still name a section that was left out of this case, or a form whose title is not the same as its section name.
+- Generating again fills every form again.
+
 ## Edge Cases & Limitations
 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.
 - The shield count on a draft is a snapshot and does not update as fields are corrected.
+- The diagonal watermark appears on drafts generated after it was introduced. A draft generated earlier carries only the margin marking until it is generated again.
+- On a case with a very large number of documents (more than about 500), the optional extras list may not include every file on the case. The ticked official forms and the creditor matrix are always complete.
 
 ## Related Features
 

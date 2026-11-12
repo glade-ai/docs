@@ -33,12 +33,15 @@ A skeleton filing submits only the minimum set of documents a district accepts t
 - When a case is submitted as a skeleton filing, the required-documents check reads the district's **skeleton packet** requirements instead of its full-packet requirements. A document the district requires only in the complete packet no longer blocks a valid skeleton submission.
 - Documents a district requires only when they apply are treated the same way in skeleton mode as in a full filing — absent is not the same as missing.
 - The filing packet checklist and the list of expected documents still show the district's full shape either way. Only what the review treats as *required* changes; nothing disappears from the packet view.
+- **Forms that are due later stay out of a skeleton packet and its review.** When a document already on the case is one the district does not file in a skeleton packet — for example Form 121 or Form 122A-1 left over from an earlier compile — the skeleton packet no longer lists it as an extra document, and a skeleton review no longer flags it as "e-filing document not supported". Previously every court-tagged document on the case was added to the skeleton packet, so these forms appeared in it with "not supported" warnings even though the district files them later. A document the district's rules do not recognize, such as a file your team added by hand as "Other", still appears in the skeleton packet. A form is left out only when none of the district's rules put it in a skeleton packet, so a form that is part of the skeleton packet for one chapter still appears for that chapter.
 - Filings that are not marked as skeleton are unchanged and continue to be checked against the district's complete required-document list.
 - Each review records the mode it ran in, so a result can be read back against whether it was checked as a skeleton or a full packet.
 
 Skeleton requirements are defined per district, alongside that district's other filing rules. Kentucky Eastern is now set up for electronic filing, with its required documents pre-selected for skeleton submissions.
 
-> TODO: Confirm where a filing is marked as a skeleton filing — whether it is a choice in the eFiling modal at submission time or a setting on the case.
+- **Check work on the eFiling screen follows the filing's current mode.** Both **Run checks** and the automatic re-run, when a review is out of date, use the mode the filing is in now. A review run in the other mode counts as out of date, so switching a filing between a skeleton filing and a full filing runs the checks again. A full-packet review does not clear a skeleton filing, and a skeleton review does not clear a full filing.
+- **Submitting a skeleton filing sends only the skeleton packet.** Documents the district files later are not included in that submission.
+- A filing is a skeleton filing when the petition is generated with **Use skeleton petition** checked. The electronic filing packet then shows a **Skeleton filing** badge. Generating the petition again without that box checked makes the filing a full packet. The choice is kept for the browser you are working in; it is not a setting saved on the case.
 
 ## Edge Cases & Limitations
 

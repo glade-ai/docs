@@ -8,7 +8,9 @@ A questionnaire moves through a small set of statuses as it is filled out, revie
 
 ### Statuses
 
-Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **completed**, and **skipped**.
+Questionnaires progress through statuses: **in progress**, **submitted for review** (if review workflow is enabled), **changes requested** (when a reviewer sends it back to the client), **completed**, and **skipped**.
+
+For who reviews a submitted questionnaire, who can edit it while it is in review, and requesting changes, see [Questionnaire Review](./review-flow.md).
 
 A completed questionnaire can be re-opened — see [Re-opening and Re-syncing](../case-data/reopening-and-resync.md).
 
@@ -27,8 +29,7 @@ Glade is moving client questionnaires to a new questionnaire engine one template
 - **Your team, working from the firm dashboard,** is offered **Open in Glade** for the same questionnaire.
 - **Re-opening a submitted questionnaire** that moves it to the new engine — for example with **Edit Responses** — also takes the client to the portal.
 - **If the questionnaire moves while the client has it open**, saving is refused and the message tells them it now opens in your firm's new client portal and to reload to continue there. Your team sees the same refusal with a prompt to open it in Glade.
-
-> TODO: Confirm which questionnaire templates have moved so far and how firms are told when theirs moves.
+- Templates are moved over time. Glade will tell you when yours moves. Contact Glade support if you expected a move and don't see it.
 
 ### Access Control
 
@@ -47,5 +48,6 @@ Collaborators (additional team members) can be assigned to questionnaires with v
 - [Questionnaires](../README.md)
 - [Filling Out Questionnaires](./README.md)
 - [Submitting a Questionnaire](./submitting.md)
+- [Questionnaire Review](./review-flow.md)
 - [Re-opening and Re-syncing](../case-data/reopening-and-resync.md)
 - [Client Portal](../../../intake/client-portal/README.md)
