@@ -2,7 +2,7 @@
 
 ## Overview
 
-Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, autofills that fill every row of a list, calculated table totals, and autofills that draw on reference data.
+Autofills populate field values from external data sources, AI inference, or computed expressions. AI autofills allow AI to infer field values from uploaded documents or prior responses. This page covers when an autofill writes to a field, how autofills that combine several values behave, autofills that fill every row of a list, importing answers from another questionnaire in the case, calculated table totals, and autofills that draw on reference data.
 
 ## Key Behaviors
 
@@ -29,9 +29,7 @@ An autofill that draws from a list can join every matching row into a single ans
   - Previously Schedule C printed the Schedule A/B brief description followed by the last four digits. Clients had often typed their full account number into that description, so filed Schedule C lines could show a whole account number — the rules allow only the last four digits. A description that already ended in the last four digits printed them twice.
   - For other property, Schedule C prints the brief description and adds **#** and the last four digits only when they are not already in it. Real estate and vehicles are unchanged.
   - To change how an account reads on Schedule C, edit its institution or account number on Schedule A/B. The help text beside the locked field says so.
-  - The change covers Glade's Bankruptcy Schedules template, including questionnaires already in progress or submitted for review. The locked field refills when the questionnaire is next opened.
-
-> TODO: Confirm whether firms that use their own copy of the schedules template have received the Schedule C change, and whether the update to in-progress questionnaires has been applied in production.
+  - This Schedule C change is on Glade's schedules template. The locked field refills when the questionnaire is next opened. If your firm uses its own copy, or an in-progress questionnaire still shows the old result, contact Glade support.
 
 - Petitions generated before these corrections keep the text they were generated with. Re-generate the petition on a case whose Schedule A/B descriptions should appear on the filed copy.
 
@@ -41,6 +39,17 @@ An autofill on a list fills each row with that row's own result. On Schedule H, 
 
 - Previously only the first codebtor's boxes were filled. Every codebtor after the first was left unchecked, and the generated form printed those boxes blank.
 - Codebtor rows already left blank on a questionnaire in progress are not corrected straight away. They fill the next time the autofill runs on that row.
+
+### Importing Answers From Another Questionnaire in the Case
+
+An autofill that imports answers from another questionnaire — for example, a Schedules questionnaire carrying forward the client's answers from the Bankruptcy Client Questionnaire — looks across every workflow in the case that belongs to the same client, not only the workflow the questionnaire sits on.
+
+- This matters for firms that run intake, the consultation, and the bankruptcy filing as separate linked workflows. Previously, an import from a questionnaire on a different workflow came back empty even though the client had answered it.
+- **The questionnaire's own workflow comes first.** If the workflow has its own copy of the source questionnaire, that copy is used, exactly as before — even if a linked workflow has a completed copy. Other workflows in the case are only used when the workflow has no copy of its own.
+- **Only the same client's workflows are used.** A workflow in the case that belongs to another person is never imported from, and neither is a workflow in a different case.
+- A workflow started from **Initiate associated case** is linked into the case before its first questionnaire is created, so that questionnaire's first autofill already sees the earlier workflows.
+- Existing questionnaires pick this up only when they are created or their answers are re-imported. Questionnaires already filled in are not changed on their own.
+- If the source questionnaire cannot be found, only the affected fields are left blank.
 
 ### Totals Calculated From Other Cells in a Table
 
