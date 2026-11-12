@@ -2,7 +2,7 @@
 
 ## Overview
 
-When your firm publishes a new version of a questionnaire template, questionnaires already in progress can be moved onto it. This page covers release notes on a published version, the upgrade prompt, and what an upgrade does — and does not do — to answers, case data, and case data sync.
+When your firm publishes a new version of a questionnaire template, questionnaires already in progress can be moved onto it. This page covers release notes on a published version, the upgrade prompt, defaults on new fields, and what an upgrade does — and does not do — to answers, case data, and case data sync.
 
 ## Key Behaviors
 
@@ -56,14 +56,22 @@ Upgrading a questionnaire to a newer template version does not remove case data 
 
 ### An upgrade no longer empties a prepared list
 
-Opening a schedules questionnaire on a case whose template had moved to a newer version could remove most of the case's creditors and assets — on one reported case, 102 of 149 creditors were gone the next morning, with only the deduplicated ones left behind. The upgrade was reading the freshly-copied list back before it had finished being written, saw nothing there, and treated the case's creditors as though they had been deleted. It now reads the list as it stood before the upgrade, which is settled and complete.
+An upgrade reads a list as it stood before the upgrade, which is settled and complete. It does not read the freshly-copied list back before that copy has finished being written, which would look empty and treat the case's creditors and assets as though they had been deleted.
 
 Two safeguards sit behind that, so a bad read can no longer take a list with it:
 
 - If the upgrade reads back an empty list while it is about to remove entries, it stops and removes nothing.
 - If it would remove ten or more entries and more than half of what it looked at, it stops and removes nothing.
 
-In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
+In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. If creditors or assets are missing after an upgrade, contact support with the case rather than re-entering them, so the rows can be restored with their deduplication and ordering.
+
+### New fields get their template defaults
+
+When an upgrade moves a questionnaire onto a version that adds fields, list columns, or table columns with a template default, those new fields are filled with their defaults. This works the same way as when a questionnaire is first created.
+
+- **Case data comes first.** Defaults are applied after the upgraded questionnaire has been filled from case data. A field case data already has a value for keeps that value. The default only fills a field that is still empty.
+- **A default on a field connected to case data reaches the case record**, where it ranks below real data. Previously only some upgrades applied defaults, and on those a connected field's default never reached the case record.
+- If filling the questionnaire from case data fails during the upgrade, defaults are not applied, so they cannot overwrite fields case data would have filled.
 
 ### Property keeps its answers when it moves to its category list
 
@@ -87,7 +95,7 @@ Newer versions of the client questionnaire split the property section into separ
 ## Edge Cases & Limitations
 
 - If a form request is submitted at the same moment someone updates it, or its status and its questionnaire's status disagree, the update is refused with a message that the questionnaire has been submitted and to contact support. Reopening does not help in that case, because the form request already reads as in progress. Previously this showed a generic error.
-- When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade.
+- When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade. Fields the new version adds do get their template defaults — see [New fields get their template defaults](#new-fields-get-their-template-defaults).
 - An answer dropped because its field changed shape or type is not restored by a later upgrade. Re-enter it on the new field.
 - A new field added before field identifiers stopped being reused may already hold answers carried over from a deleted field on an earlier upgrade. Those answers are not removed automatically.
 - An upgrade seeds dependents only when the case has none. A case whose dependents are partly entered — one of three on the case record — is left alone rather than topped up, so the remaining dependents have to be added by hand.

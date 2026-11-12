@@ -38,6 +38,10 @@ Editing the PDF and saving the case document again rebuilds the questionnaire fr
 - **Renaming a field in the PDF editor keeps its settings.** A renamed field used to look like a brand-new one, so its lock, its case-data connection, and its conditions were dropped. A rename is exactly the edit an author makes, so this was easy to hit and tedious to recover from.
 - **Numbered field labels are accepted.** A label such as `1. Debtor Name` produced a field name Glade rejected, which blocked the save. Names are now generated in a form Glade accepts, and fields that already exist keep the names they have, so a re-save does not change what your team has already configured.
 
+### Names printed on the PDF
+
+A debtor's name prints on a case document exactly as recorded: first, middle, and last name separated by single spaces, with any blank part left out. Previously a full middle name printed with a period after it, as if it were an initial ("Ashley Melaine. Freeman"), and the period could not be removed. Existing case-document PDFs pick this up the next time they are generated.
+
 ## Configuration
 
 - Case documents are set up per firm by whoever maintains your questionnaire templates. There are no firm-wide settings of their own.
