@@ -30,6 +30,15 @@ Triggers are the events that start or advance a workflow. When something happens
 - A trigger that starts a new thread can be gated by prerequisites — it only fires after specific questionnaires, document requests, or other items are completed first.
 - Skipping a questionnaire counts the same as completing it for trigger purposes.
 
+### Triggering a step by hand
+
+Staff can fire a trigger step on a case with **Trigger step**, and the Glade MCP assistant can do the same. Only trigger steps can be fired this way.
+
+- **An action step is refused.** Picking an action — for example, the step that sends the client a questionnaire or message — returns an error that points to the trigger step the action belongs to. Trigger that step instead; it runs the action as part of the workflow.
+- Nothing is recorded on the case when an action step is refused, so the right trigger can still be fired afterwards.
+- Previously an action step picked this way was marked as done without running. The client never received the message or questionnaire, the step's card could show the questionnaire as unable to open, the workflow could not move past it, and firing the step again was refused because it was already marked done.
+- A step from a different workflow than the case's is refused as not found.
+
 ## Configuration
 
 - **Trigger type**: Which event this trigger listens for (one of the types listed above).
@@ -48,6 +57,7 @@ Triggers are the events that start or advance a workflow. When something happens
 - Skipped questionnaires are treated the same as completed questionnaires.
 - The "all prerequisites met" trigger type fires based on prior workflow steps being complete, rather than waiting for a specific client action.
 - Triggers in draft or stale workflows are never evaluated.
+- **Trigger step** accepts trigger steps only. An action step cannot be run on its own; fire the trigger step it follows.
 
 ## Related Features
 
