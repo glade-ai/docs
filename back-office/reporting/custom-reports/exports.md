@@ -8,6 +8,7 @@ A custom report can be exported to CSV. The export is built from the report itse
 
 - **CSV export** of a custom report was failing to complete and now exports normally. If your team gave up on exporting a custom report, try it again.
 - **An export now matches the report it came from.** The file is built from the report itself rather than assembled out of the pages on screen, so every column you selected is in it — including columns your firm defined for its own workflow roles, which used to be dropped from the file without warning — and the report's filters and sort order are carried through. Rows beyond the page you are looking at are included. Exports work the same way on case, court notice, and payments reports. If your firm compared an export against the report on screen and found columns or rows missing, re-run it.
+- **Days in status** can be included in a case report's CSV export. Each row shows the whole number of calendar days the case has been in its current status, counted in the firm's time zone, and every row in the file is measured against the same day. See [Columns](./columns.md#days-in-status).
 
 ## Edge Cases & Limitations
 
