@@ -130,8 +130,7 @@ Previously the new workflow could show an empty schedules questionnaire after a 
 - If the moved questionnaire was already submitted, the step treats it as complete rather than waiting for a submission that already happened.
 - Previously the step always opened a second, empty schedules questionnaire after a chapter switch. Staff could end up working in the empty copy and re-typing answers the case already had.
 - Only the schedules questionnaire is carried over this way. Other questionnaires the new workflow sends are opened as new requests, as before.
-
-> TODO: Confirm whether cases switched before this change that ended up with two schedules questionnaires have been merged, or whether firms should contact support to merge them.
+- If a case switched before this change still has two schedules questionnaires, contact Glade support to merge them.
 
 ## Edge Cases & Limitations
 

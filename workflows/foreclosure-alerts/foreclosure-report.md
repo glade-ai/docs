@@ -8,16 +8,16 @@ The foreclosure report is the case list view your team works through after each 
 
 ### Finding flagged cases
 
-The case list can be filtered to cases that currently carry a Foreclosure designation, or to those that do not, and the filter carries through to the cases CSV export.
+On the workflows list and on custom reports, filter with **Foreclosure**: **All**, **Designated**, or **Not designated**. The filter carries through to the cases CSV export.
 
 ### Sorting
 
 Every foreclosure column can be sorted, so a long monthly report can be worked in whatever order suits the reviewer instead of paged through by hand.
 
 - **Match score** ranks a case by its highest current match — the first number shown in its Match score cell. Matches that were removed by your team, never applied, or deleted are not counted.
-- **Flag source** sorts Glade report matches first, then cases flagged both by the report and by hand, then cases flagged by hand only.
-- **Review status** sorts by its label (Affirmed, Dismissed, Unreviewed).
-- **Address, the name on the report, review note, and attorney name and email** sort alphabetically, ignoring capitalization. Where a cell holds more than one value, the case sorts by the first one shown in the cell.
+- **Foreclosure source** sorts **Glade match** first, then cases flagged both ways, then **Manually tagged**.
+- **Review status** sorts by its label (**Affirmed**, **Dismissed**, **Unreviewed**).
+- **Foreclosure address**, **Foreclosure client**, **Review note**, **Foreclosure attorney**, and **Foreclosure attorney email** sort alphabetically, ignoring capitalization. Where a cell holds more than one value, the case sorts by the first one shown in the cell.
 - A blank cell, or a case with no current match, sits at the bottom whichever direction you sort.
 - Paging through the report and the CSV export both keep the sorted order.
 
@@ -28,8 +28,8 @@ Alongside the existing tag and label filters, the report can be narrowed by:
 | Filter | What it keeps |
 |--------|---------------|
 | **Match score** | Matches within a score range. Either end can be left open, and both ends are inclusive. |
-| **Review status** | Unreviewed, affirmed, or dismissed flags — see [Flags and Review](./flags-and-review.md#review-status). |
-| **Flag source** | Flags from the monthly report, or flags applied by hand. |
+| **Review status** | **Affirmed**, **Dismissed**, or **Unreviewed** — see [Flags and Review](./flags-and-review.md#review-status). |
+| **Foreclosure source** | **Glade match**, **Manually tagged**, or both. |
 | **Report month** | Matches from the chosen month's report. The choices are every month your firm has a successfully imported report for, newest first. |
 
 - **Filters combine, and they all apply to the same match.** "Unreviewed and above 80%" keeps a case only when one of its matches is both unreviewed and above 80% — not a case with one unreviewed match and a different high-scoring one.
@@ -37,7 +37,9 @@ Alongside the existing tag and label filters, the report can be narrowed by:
 - A hand-applied flag has no report month, so it never matches a report-month filter.
 - The filters and the sort carry through to the CSV export and to saved reports, including saved reports run through the Glade MCP assistant.
 
-> TODO: Confirm the exact column labels and where the foreclosure report is opened in the dashboard.
+The foreclosure columns on the workflows list and on custom reports are **Foreclosure address**, **Foreclosure client**, **Match score**, **Review status**, **Review note**, **Foreclosure attorney**, **Foreclosure attorney email**, and **Foreclosure source**.
+
+The uploaded file is a different screen. Open **Foreclosure detection**, then **View data**. The **Foreclosure data** table shows **Source row**, **Property address**, **Owner**, **Mortgagor**, **City**, **County**, **ZIP code**, **Foreclosure reference**, **Parcel**, and **Data quality**.
 
 ## Edge Cases & Limitations
 

@@ -10,7 +10,7 @@ Foreclosure Alerts compares the monthly foreclosure report your firm already rec
 - [Flags and Review](./flags-and-review.md) — the Foreclosure designation and urgent task, flagging a case by hand, affirming or dismissing a flag, and the review status shown on the match card.
 - [The Foreclosure Report](./foreclosure-report.md) — filtering the case list, sorting every foreclosure column, filtering by match score, review status, flag source, and report month, and exports and saved reports.
 
-> TODO: Confirm whether automatic designation and the urgent paralegal task are enabled for all firms or currently limited to pilot firms, and whether Foreclosure Alerts is available to every firm.
+Automatic designation and the urgent task are being rolled out gradually. When they are on, a matching case is flagged and an urgent task titled **Foreclosure match** goes to your **Foreclosure team**, or to the case paralegal if no team is set, or to the case owners if neither is set. Matches are still recorded when the task is not. Contact Glade support if you see matches but no task.
 
 ## Related Features
 

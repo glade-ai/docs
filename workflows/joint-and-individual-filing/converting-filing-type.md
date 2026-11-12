@@ -6,14 +6,14 @@ Staff can convert a case from individual to joint filing, or from joint to indiv
 
 ## Key Behaviors
 
-- **Run from the workflow's settings** with **Convert to joint** or **Convert to individual**, whichever applies to the case. Before you confirm, a dialog shows what the conversion will change and any warnings.
+- **Run from the workflow's settings.** Open **Change filing type**. The dialog is **Convert to joint filing** or **Convert to individual filing**, whichever applies to the case, and it shows what the conversion will change and any warnings before you confirm. Confirm with **Convert to joint** or **Convert to individual**.
 - **The case's filing type changes in place.** The workflow's joint or individual selection — for example, Chapter 7 joint or Chapter 7 individual — is switched to the other option on the same workflow.
 - **The change is recorded in the case's activity history.**
 - **If any part of the conversion fails, the whole conversion is undone**, so the case is not left half converted.
 
 ### Converting to joint
 
-- **You identify the spouse.** The spouse is matched to an existing person by email, or added as a new one, and connected to your firm.
+- **You type the spouse in the dialog**, not from existing contacts: **Full name**, **Email**, **Phone (optional)**, and **Household marital status**. The spouse is matched to an existing person by the email you enter, or added as a new one, and connected to your firm.
 - **The spouse gets access to the case and is sent an invite.**
 - **Debtor 2 is filled in** on the case record from the spouse's details, and the household's marital status is set to married unless it already says married or you choose a different value in the dialog.
 - **The schedules questionnaire follows.** "Are you filing jointly?" becomes Yes, the household is marked married, and Debtor 2's answers are filled from the case record. Submitted schedules questionnaires are updated too.
@@ -53,8 +53,6 @@ Other limitations:
 
 - **Debtor 2's answers are cleared, not struck.** On an amended schedule, converting to individual removes Debtor 2's answers from the forms rather than printing them as removed, even if they were struck first. See [Amendment Marks](../questionnaires/petition/amendment-marks.md).
 - If the case changes between opening the dialog and confirming, the conversion is refused and has to be reviewed again.
-
-> TODO: Confirm exactly where in the workflow's settings the conversion is offered, and whether the spouse's details are entered in the dialog or picked from existing contacts.
 
 ## Related Features
 

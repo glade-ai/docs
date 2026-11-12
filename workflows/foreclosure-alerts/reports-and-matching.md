@@ -44,8 +44,7 @@ For what happens when a match reaches the threshold, see [Flags and Review](./fl
 - **Reports uploaded before residence matching shipped are not re-checked on their own.** Glade re-runs matching against your firm's active report; you do not need to upload the file again. Individual cases also pick it up whenever their address or debtor name is next edited.
 - **Existing match scores are not recalculated on their own.** A match recorded before exact-address scoring or AKA matching changed keeps its stored percentage until the case is checked again — for example, when the active report is re-run or the case's address or debtor name is next edited.
 - **Report history is read-only.** There is no way to merge a corrected file into an earlier report — upload the corrected file and activate it.
-
-> TODO: Confirm whether Glade re-runs firms' active reports so that listings filed under an AKA are picked up, or whether firms should ask support to re-run their report.
+- **A listing under another name is picked up the next time that case is checked**, including when you activate a report. A report that is already active is not re-checked on its own. Contact Glade support if you need the current report run again.
 
 ## Related Features
 

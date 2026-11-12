@@ -44,7 +44,7 @@ Striking an answer does not delete it. The answer keeps its value and prints wit
 
 ## Configuration
 
-> TODO: Confirm how amendment marks are turned on for a firm, and which template versions and forms carry them. Marking requires a Bankruptcy Schedules template version that allows struck rows, and single-answer marks print on a form only once that form's updated template has been published.
+Amendment marks are available on a schedules questionnaire whose template version allows them. A mark prints on a form only after that form's updated template is published. If you don't see **Amend this answer**, contact Glade support.
 
 ## Edge Cases & Limitations
 
@@ -53,9 +53,7 @@ Striking an answer does not delete it. The answer keeps its value and prints wit
 - **Unanswered fields cannot be marked.** A field with no answer has nothing to format, so it offers no menu.
 - **Struck list rows still count in the filing statistics.** The statistical figures sent with the electronic filing leave out struck single answers and cells, but a struck list row is still counted — for example, a struck Schedule C row still counts toward total exemptions.
 - **A few values print without their mark.** Answers printed inside repeated blocks that do not belong to a single list cell — such as the individual Schedule I line 8f and 8h source rows, Schedule A/B Part 3 lines, and Schedule C's exemption value — print plain.
-- **A mark that cannot be saved is refused.** Marking a cell through a list that shows another list's rows — such as a creditor's amount on the Schedule E/F screen, whose rows belong to the Master Creditor List — must be saved to the underlying list. A mark sent to the wrong list returns an error rather than appearing to succeed. Previously such a strike looked applied but saved nothing.
-
-> TODO: Confirm that striking a creditor's cell from the Schedule D, E/F, G, or H screen is now saved to the Master Creditor List row.
+- **A creditor cell struck from Schedule D, E/F, G, or H is saved on the Master Creditor List row.** Those screens show the Master Creditor List's rows, so the strike is stored on the list that owns the cell. A strike aimed at the schedule list itself is refused rather than appearing to succeed. Previously such a strike looked applied but saved nothing.
 
 ## Related Features
 

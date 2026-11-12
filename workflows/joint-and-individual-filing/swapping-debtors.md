@@ -2,11 +2,11 @@
 
 ## Overview
 
-On a joint case, the debtor swap trades the two debtors' roles, so the person entered as Debtor 1 (the primary) becomes Debtor 2 (the spouse) and the other way around. Staff use it when the debtors were entered in the wrong order. The swap moves each debtor's information to the other role on the case record and on the Bankruptcy Schedules questionnaire, rather than requiring it to be retyped.
+When a spouse is set on the workflow, the debtor swap trades the two debtors' roles, so the person entered as Debtor 1 (the primary) becomes Debtor 2 (the spouse) and the other way around. Staff use it when the debtors were entered in the wrong order. The swap moves each debtor's information to the other role on the case record and on the Bankruptcy Schedules questionnaire, rather than requiring it to be retyped. It is offered whenever a spouse is set, not only on a workflow labeled joint.
 
 ## Key Behaviors
 
-- **Run from the workflow's settings** with **Swap primary and spouse**. A confirmation dialog lists anything to be aware of before you confirm.
+- **Run from the workflow's settings.** The row is **Swap primary and spouse**, and the button is **Swap**. A confirmation dialog lists anything to be aware of before you confirm. A link to other workflows warns **Before you swap** and does not block the swap.
 - **Each debtor's information moves with them.** Answers recorded for Debtor 1 move to Debtor 2 and the reverse — on the case record and on the schedules questionnaire, including questionnaires that have already been submitted.
 - **Every part of a debtor's row moves.** On the schedules, the swap moves all of a debtor's answers, wherever they sit:
   - paired Debtor 1 and Debtor 2 lists, such as each debtor's other names (AKAs), move row by row, including answers nested under an explanation within a row;
@@ -23,11 +23,10 @@ On a joint case, the debtor swap trades the two debtors' roles, so the person en
 ## Edge Cases & Limitations
 
 - A swap cannot run while a conversion between joint and individual filing is in progress on the case, and the reverse.
+- When a swap cannot run, the dialog is titled **This workflow can't be swapped** and shows the reason: **No spouse is set on this workflow.**, **The case has been filed.**, or **Archived workflows cannot swap debtors.**
 - **A swap is refused when a paired Debtor 1 / Debtor 2 list contains a list of its own inside each row**, because moving the rows would separate the inner list's entries from their row. Where a per-debtor table contains a nested list, that list is left in place and the swap reports it.
 - **Some calculated figures can keep their pre-swap value.** A calculated answer that reads a Debtor 1 input with no Debtor 2 counterpart is not recalculated by the swap. Check calculated totals after swapping.
 - The swap cannot tell a deliberate hand correction from correct data. Fix names typed into the wrong role by hand before swapping, or the swap carries the error to the other debtor.
-
-> TODO: Confirm whether the swap is offered only on joint workflows, whether it is blocked once a case is filed, and what is shown when a swap cannot run.
 
 ## Related Features
 
