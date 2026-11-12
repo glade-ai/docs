@@ -43,6 +43,7 @@ The Schedule I line 8a business statement is covered under [PDF Fill Mappings](.
 - [Questionnaires](../README.md)
 - [Schedule Tools](./README.md)
 - [Means Test](./means-test.md)
+- [SOFA Other Income](./sofa-other-income.md)
 - [Manual Overrides](../autofills/manual-overrides.md)
 - [Layout and Navigation](../filling-out/layout-and-navigation.md) — opening the Income Organizer from Source Data
 - [Income Organizer](../../income-organizer/README.md)
