@@ -2,7 +2,7 @@
 
 ## Overview
 
-The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled, how secured debt deductions are carried onto the forms, and how to jump from a means test widget figure to the answer behind it.
+The means test forms — Form 122A-1 and 122A-2 for Chapter 7, Form 122C-1 and 122C-2 for Chapter 13 — are filled largely by autofills drawing on the Income Organizer, the Master Creditor List, and IRS and Census reference data. This page covers how non-consumer Chapter 7 cases are handled, how secured debt deductions are carried onto the forms, the calculation period shown on the Means Test and CMI cards, and how to jump from a means test widget figure to the answer behind it.
 
 ## Key Behaviors
 
@@ -34,6 +34,17 @@ The **Means Test summary** widget and the median-income widget show figures read
 - Figures that are worked out rather than read from one answer, such as line 14 and the date of filing, are not links.
 - Figures read from a cell inside a list or table are not links.
 
+### Calculation Period Range
+
+The **Means Test** and **CMI** (current monthly income) cards on the questionnaire show a **Calculation Period Range**: the months whose income fed that case's means test. It appears at the top of the CMI card and above the Means Test summary.
+
+- The range ends at the month the Income Organizer's calculation ended, rather than being counted back six months from today.
+- By default it covers six completed months. A month still in progress is not counted — see [Means Test Income Window](../../income-organizer/means-test.md#means-test-income-window).
+- If your firm collects a different number of months of pay stubs, the range covers that span instead.
+- Where an employment source applies its Income Organizer calculation method to the means test, the range shows that method's dates — for example the six months before the chosen filing month, January through the month of the pay stub used, or the pay stub's own month. See [Income Calculation Modes](../../income-organizer/calculation-modes.md).
+- The line is hidden until the Income Organizer has calculated a period for the case.
+- Only the dates are shown on the card. The current monthly income figure itself is unchanged and still comes from the calculator.
+
 ### Related means test behavior elsewhere
 
 - IRS standard deduction amounts and median income populate from reference data on open — see [Autofills From Reference Data](../autofills/how-autofills-work.md#autofills-from-reference-data).
@@ -45,6 +56,7 @@ The **Means Test summary** widget and the median-income widget show figures read
 
 - Cases set up before the non-consumer automation rolled out need a one-time cleanup requested through Glade support.
 - Means Test widget figures are not links in the template editor.
+- A case whose Income Organizer has not calculated a period shows the Means Test and CMI cards without a Calculation Period Range.
 
 ## Related Features
 
