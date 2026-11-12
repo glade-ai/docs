@@ -21,6 +21,14 @@ Once an attorney initiates a filing, Glade runs the end-to-end PACER filing proc
 5. On success, Glade records the case number and notifies the attorney via email and inbox notification with a link to the case.
 6. On failure, the attorney receives a failure notification with error details and can retry from the case view.
 
+### Nature of business on business-debt cases
+
+On a case whose debts are primarily business debts, the court's filing screens ask for the debtor's nature of business. Glade answers with the business type the debtor chose in Form 101 Part 3. The choices are health care business, single asset real estate, stockbroker, commodity broker, or none of these.
+
+- Previously nothing was sent, so every business-debt filing answered "None of the above" whatever the debtor had chosen.
+- When Part 3 has no answer, nothing is sent and the court's screen keeps its "None of the above" default.
+- The free-text description of the business is not sent.
+
 ### Filing fees
 
 - PACER charges a filing fee per case, determined by court and chapter type.

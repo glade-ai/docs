@@ -27,6 +27,7 @@ Each booking moves through a series of statuses over its lifetime:
 - By default, clients cannot reschedule within 48 hours of the appointment start time. This protects firms from last-minute schedule changes.
 - Firms can override this restriction and allow client rescheduling within 48 hours on a per-product basis.
 - Firm staff can always reschedule regardless of the 48-hour window.
+- Rescheduling clears any outcome recorded on the booking, such as **No show**, and adds an internal note to the case with the previous appointment time. See [Appointment Outcomes](./appointment-outcomes.md).
 - When a firm blocks calendar time to pause new bookings, firm staff can still move an existing appointment into that blocked time by confirming **Schedule Anyway** when they select the blocked slot. Clients cannot reschedule into blocked time this way. See [Conflicts and Concurrent Bookings](./conflicts-and-concurrent-bookings.md).
 - Team members can also reschedule bookings that are in canceled or completed status by assigning a new time, returning them to scheduled status and recreating associated calendar events, reminders, and email notifications.
 - Clients and their workflow collaborators (for example, a spouse on a joint case) can reschedule a booking from its attachment card in the workflow Discussion view even after the appointment time has passed. Past bookings on the path render with a completion check and a "Completed on …" subtitle, but the card stays clickable so the client can pick a new time.

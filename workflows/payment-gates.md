@@ -50,3 +50,4 @@ To remove a gate, delete its chip from the message. The gate configuration is re
 - [Automation Rules](./automation-rules.md)
 - [Invoices](../payments/invoices/README.md)
 - [Triggers](./triggers.md)
+- [eFile Step](./efile-step.md) — a step module that holds the workflow until the case is filed

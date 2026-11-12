@@ -19,7 +19,7 @@ Part 3 of the voluntary petition (Form 101) lists the debtor's sole proprietorsh
 - **Renaming after the business reaches Part 3.** If a business that is already on Part 3 is later renamed to an income label, or its name is cleared, its existing row stays on the petition. Remove it by hand if it should not be there.
 - Businesses that reached Part 3 before this behavior existed may carry an organizer label in their name, or may have been added as a second row beside one your team typed. Check Part 3 on cases in progress for twin rows and label-named businesses.
 
-> TODO: Confirm whether Glade has already cleaned up existing Part 3 rows named after income labels and organizer names saved with a "Business - …" label, or whether firms need to review in-progress cases themselves.
+Older Part 3 rows that used an income label, or a business saved as "Business - …", are not renamed on their own. Review in-progress cases, or contact Glade support.
 
 ## Related Features
 
