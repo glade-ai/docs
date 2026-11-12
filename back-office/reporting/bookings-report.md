@@ -17,6 +17,7 @@ The bookings list answers *"what is on the calendar"*. The bookings report answe
 Three more pieces of information are available on each row, so the report can answer where an appointment came from and what kind of case it belongs to without cross-referencing the case list:
 
 - **Lead source** — the lead source recorded on the client when they were captured. It can also be filtered on. The filter matches the lead source's name as it was recorded at the time, so renaming a lead source in your settings does not drop the clients captured under the old name out of the report.
+  - Where the lead source has sub-options, the client's **lead source detail** (the sub-option they came through, such as a specific referral program) is shown with it and exported as its own column in the CSV. Filtering on a lead source still matches the source alone, so it returns clients under every one of its sub-options. See [Lead Sources](../settings.md#lead-sources).
 - **The case's labels and tag** — a booking carries none of its own, so these are read from the case the booking is linked to. They are ordered and filtered exactly as they are on the cases list, including the rule that keeps an archived label visible on a case that already carries it.
 - **Booked on** — when the booking was taken, which is a separate axis from when the appointment is scheduled. Filtering on a booked-on range alongside the existing appointment-date range answers questions like "booked in March, scheduled any time." A date-only end of the range includes the whole of the day it names.
 

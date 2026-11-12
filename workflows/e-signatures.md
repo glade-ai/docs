@@ -31,11 +31,42 @@ A request moves through these stages:
 - When every signer has finished but the signed document is still being assembled, the firm's view says the document is being generated. Previously this state read **"Awaiting signatures from 0 signers"**, which suggested the request was stuck when it was simply finishing.
 - The field-placement prompt clears once fields have been placed, so a request that is ready for signers no longer invites staff to place fields again.
 
+### Signing order
+
+When a request has signers in more than one round — for example, the clients first and then the attorney — each round is invited only after everyone in the round before it has signed.
+
+- **The attorney is invited only after every client has signed.** On a joint request, both clients are invited together, and one client's signature alone does not send the attorney's invitation. Previously the attorney could be emailed while a client still had not signed.
+- Each signer is invited once per send. Saving the request again, or a repeated update from the signing service, does not email signers who were already invited. An invitation that failed to deliver is retried.
+- Voiding and re-sending a request starts the order again from the first round.
+- Requests that were already out for signature before this change keep their earlier behavior. To apply the signing order to one of them — for example, if a signer never received an invitation — void and re-send it.
+
 ### Requests sent by an automated workflow step
 
 An e-signature request placed on a workflow step behaves the same way whether a staff member attaches it by hand or the step fires automatically as the case progresses. In both cases the signer opens the request and is taken into the signing wizard.
 
 Previously a step that fired automatically produced a request the client could not open: the Signature Request panel read **"Couldn't load signature request"** and there was nothing to sign. Only requests attached by hand worked. If a client reported that error on a request nobody had touched the step to send, this was the cause.
+
+### Sending a document whose name has no ".pdf"
+
+- A document renamed without ".pdf" at the end of its name can be sent for signature. Glade adds ".pdf" to the file name it gives the signing service. Previously the signing service rejected the file, and sending failed every time with a generic error.
+- When the signing service rejects a document, the error now says why in plain words (for example, that the service rejected the document's file name), instead of a generic message.
+- A file that isn't a PDF is refused when it is uploaded or replaced on a request, with a message saying the file is not a PDF. The request keeps its current status rather than being marked as failed.
+- The send, upload and replace dialogs show the reason itself. A file name the signing service rejects shows **"The e-signature service rejected this document's file name."**, and any other rejection by the signing service shows **"The e-signature service rejected this document."** A file that isn't a PDF shows **"This file is not a PDF. Only PDF files can be sent for signature."** An unexpected server or network failure still shows the generic retry message, such as **"Couldn't send this document for signature. Try again."**
+
+### Sending a fillable PDF with answers already filled in
+
+- When you send a fillable PDF whose fields already hold answers (names, a case number, checked boxes, a selected option), the signed copy keeps those answers. Previously the signed copy came back with only the signatures, and every prefilled answer was gone.
+- The filled-in answers are fixed onto the page in the version that goes to signers, so a signer cannot change them while signing.
+- Fields left blank stay fillable, so they are still offered for assignment to a signer when you place fields.
+- This applies when a request is first sent and when you use **Replace file** on a request.
+- The copy of the document kept on the case is the file exactly as it was uploaded.
+
+### When preparing a request with the signing service fails
+
+- **Brief outages at the signing service are retried automatically.** When Glade sets a request up with the signing service and the service is briefly unavailable, overloaded, or the connection drops, Glade tries again — up to three attempts in total — before giving up. Previously a single passing failure marked the request as failed with no explanation, and later opening it showed *"Unable to generate signer URL, please contact support"*, even though simply retrying the step worked.
+- Rejections that will not succeed on another attempt — such as a document the service refuses — are not retried.
+- **When the request still fails, firm staff do not see the specific reason.** Opening the signature request still shows **"Unable to generate signer URL, please contact support"**. That reason is not shown on the signature request or on the workflow step.
+- Retrying the workflow step sets the request up again, as before.
 
 ### Completed requests
 
@@ -46,6 +77,28 @@ Previously a step that fired automatically produced a request the client could n
 - If the files arrive later than the completion itself — the signing service occasionally delivers them a moment behind — they are filed when they arrive. The client is not sent a second completion email in that case.
 - A court form whose own title contains the word "certificate" (for example, a Certificate of Compliance) is treated as a signed document, not as the signing certificate. Previously such a form was mistaken for the audit record, which stopped the request from completing: every signer had signed, but the request stayed at the awaiting-signatures stage indefinitely.
 - If attaching the documents fails, the request is still recorded as completed rather than being left in an earlier stage. The completion is not lost because of an attachment problem.
+
+### Handing a pending attorney signature to another attorney
+
+Firm staff can move an attorney's pending signature on a petition — or on any other document sent for e-signature — to a different attorney at the firm, without voiding the request. The usual case: the client has signed, the attorney who prepared the filing is out, and another attorney needs to sign instead.
+
+- **Signatures already collected are kept.** The client is not asked to sign again, and the document does not have to be regenerated.
+- **The new attorney takes the original attorney's place in the signing order.** They are invited only once every earlier round has signed, as the original attorney would have been. Their name and email replace the original attorney's on the request and in the document's signer fields.
+- **Links the original attorney already had stop working**, so they can no longer sign in the new attorney's place.
+- **The signing task moves to the new attorney**, and they are given access to the case if they did not already have it. The original attorney's access is removed unless they own the case.
+- **The change is recorded in the case activity**, naming both attorneys — the same kind of entry a reassigned retainer attorney produces.
+- **Resending to the same attorney.** Instead of choosing someone new, staff can send the pending signature to the same attorney again — for example, if they lost the invitation. Nothing else about the request changes.
+
+A reassignment is refused when:
+
+- the request is no longer waiting on signatures;
+- the attorney has already signed;
+- the signer is the client, or is not an attorney at the firm — a client's signature can never be handed to someone else;
+- the chosen attorney is no longer on the firm's team, or already signs this request.
+
+Only firm staff can reassign a signer.
+
+While the request is waiting on signatures, **Reassign attorney** appears on the signature request, above the signing area. If more than one attorney can be reassigned, each action is labelled **Reassign {name}'s signature**. It opens **Choose the signing attorney**. Choose another attorney, then **Send to {name}**. Choosing the attorney who already holds the signature and then **Send to {name} again** sends the request to them again. Attorneys without a Glade login are listed but cannot be chosen. Signatures already collected stay as they are.
 
 ### Voiding, correcting, and re-sending a request
 
@@ -60,8 +113,8 @@ Because the placements survive, correcting a document that has already been sent
 - Void, replace, and resend apply to the same request rather than creating a new one, so the case keeps a single record of what was sent and when.
 - A request that has been resent stays resent. A late status update arriving from the signing service for the version you voided does not flip the request back to voided after you have already sent it again.
 - Voiding from inside the signing service's own editor rather than from Glade is not the same action, and does not preserve the field placements. Use the void action in Glade.
-
-> TODO: Confirm where the void, replace file, and resend actions appear in the app, and which roles can use them.
+- **Void request** is in the signature request's header. Choosing it asks you to confirm; the confirmation is titled **Void e-signature request** and the confirm button is **Void**. It is available until the request is voided or completed.
+- On a voided request, **Replace PDF** and **Resend the signature packet** appear under the voided message. After the PDF is replaced, the request says **Ready to resend**, and **Resend the signature packet** is on that message.
 
 ## Configuration
 
@@ -76,9 +129,13 @@ E-signature requests have no settings of their own. They are sent manually or as
 - Requests produced by an automated workflow step before that path was corrected are not repaired retroactively. They still report "Couldn't load signature request" and have to be sent again.
 - Requests that were stuck in the preparing stage before this behavior shipped are not repaired automatically. Opening one now makes the document available; a request that appears stuck after that should be raised with Glade.
 - A voided request is removed from the client's path and cannot be acted on — see [Client Portal](../intake/client-portal/README.md). It can be corrected and resent from Glade; see [Voiding, correcting, and re-sending a request](#voiding-correcting-and-re-sending-a-request).
+- Reassigning applies only to a firm attorney's signature that has not been given yet. To change who signs on the client's side, void and re-send the request.
 - Signature field placements are preserved only when a request is voided from Glade. A request voided in the signing service's own editor cannot have its placements recovered, and has to be prepared again.
 - Requests voided before this behavior shipped are not repaired retroactively — their field placements are already gone.
 - Filing signed documents into the case's documents applies to requests completing from now on.
+- A fillable PDF that needs a password just to open it is sent as it is, so its prefilled answers can still be missing from the signed copy. Court and trustee forms that only restrict editing are handled normally.
+- If Glade cannot fix a fillable PDF's answers onto the page, the document is still sent as it is rather than the send failing, and the prefilled answers may be missing from the signed copy. Check the signed copy of a prefilled form before relying on it.
+- Signed copies that came back without their prefilled answers before this correction are not repaired. Send the document again to get a signed copy that keeps them.
 
 > TODO: Confirm whether signed documents from requests completed before this shipped have been filed into the Signed Documents folder retroactively, or whether a firm has to ask Glade to do it.
 

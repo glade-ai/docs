@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Glade MCP Server provides tools across multiple categories, including profile, customers, cases, workflows, tasks, invoices, payments, payment plans, task efficiency, team members, organizations, agencies, court notices, dockets, custom reports, and documentation. Most are read-only; a small set of actions that change data is being introduced separately — see [Write actions](#write-actions). You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
+The Glade MCP Server provides tools across multiple categories, including profile, customers, cases, workflows, tasks, invoices, payments, payment plans, task efficiency, team members, organizations, agencies, court notices, dockets, custom reports, and documentation. Most are read-only; a small set of actions that change data is being introduced separately — see [Write Actions](write-actions.md). You don't need to call these tools directly — your AI assistant selects the right ones based on your questions. This reference is useful if you want to understand exactly what data is available or troubleshoot why a question isn't returning the results you expect.
 
 ## Key Behaviors
 
@@ -10,7 +10,7 @@ All tools share these behaviors:
 
 - **Permission-scoped** — results are limited to what you have access to in Glade, and an action you could not perform in the app cannot be performed through the assistant either.
 - **Paginated** — list tools return results in pages (default 20, max 100 per page).
-- **Read by default** — every tool listed below is read-only unless it appears under [Write actions](#write-actions).
+- **Read by default** — every tool listed below is read-only unless it appears under [Write Actions](write-actions.md).
 
 ### Getting started
 
@@ -196,36 +196,13 @@ The saved Custom Reports your firm builds under **Workflow Reports → Custom Re
 | Custom reports — list | Lists the firm's saved custom reports. Searchable by name, and filterable by who created the report. Paginated. |
 | Custom reports — get | Returns one saved report with the data it covers, its columns, its filters, and its sort order. |
 
-Creating, editing, duplicating, and deleting a saved report are write actions — see below.
+Creating, editing, duplicating, and deleting a saved report are write actions — see [Write Actions](write-actions.md).
 
 > TODO: Confirm the registered MCP tool names for the custom report tools once the matching `glade-mcp-server` companion is settled.
 
 ### Write actions
 
-Alongside the read tools, a set of actions can change data. These cover the support requests the assistant could previously only describe rather than carry out.
-
-| Area | What the assistant can do |
-|------|--------------------------|
-| **Bookings** | Schedule a new consultation for a client — pick the service, the price, and the time — as well as cancel one, or reschedule it to a new time and optionally a different team member. |
-| **Clients and contacts** | Correct a client's, spouse's, or contact's name, email address, or phone number. |
-| **Team** | Invite a team member, and correct a team member's role — including the case where a member has no role recorded and the firm cannot add anyone new until it is fixed. |
-| **Invoices and payments** | Void an invoice, refund a payment in full or in part, and remove processing fees from an invoice. |
-| **Cases** | Resend a client's portal invitation, re-run a workflow step that did not fire, and re-run AI extraction on a document that was read incorrectly. |
-| **Questionnaire answers** | Add a new row to a list on a questionnaire — a creditor, an asset, a lease — as well as correcting answers already recorded. An empty schedule can be populated rather than only edited. |
-| **Custom reports** | Create, edit, duplicate, and delete a saved custom report. |
-
-How these are guarded:
-
-- **Write actions are off unless your firm has them switched on.** Where they are not enabled, the assistant answers as it does today — it explains what to change and leaves the change to you.
-- **Your own permissions still apply.** Inviting a team member or changing a role requires the same team-management permission the app requires; without it the action is refused. Every action is scoped to your firm, and an action aimed at another firm's record is refused as not found.
-- **Sensitive client fields are deliberately out of reach.** Date of birth, Social Security number, and address cannot be changed through the assistant — only name, email, and phone.
-- **A portal invitation always goes to the case's own client.** The recipient is taken from the case rather than supplied in the request, so an invitation cannot be redirected to someone else.
-- **Money actions are confirmed before they run.** The assistant confirms a void or a refund with you first, and each one is recorded in an audit trail identifying who asked for it.
-- **Asking twice does not book twice.** If the assistant repeats a request to schedule the same client for the same service at the same time — which it may do if a reply is slow to arrive — it returns the booking already made rather than creating a second one and notifying the client twice.
-- **A new questionnaire row has to say something.** A row with every cell left blank is refused rather than added, so an accidental request cannot leave an empty creditor sitting on a schedule.
-- **Adding a row can create a real record on the case.** On a list that feeds the case's own records — creditors and property, for example — a row added through the assistant creates the corresponding case record immediately, exactly as it would if someone typed it into the form. Rows added this way are recorded as entered by hand, and appear in the case's activity history.
-
-> TODO: Confirm which write actions are available to firms today and how a firm has them enabled. The actions are being switched on in batches, so a firm may have some and not others.
+A set of actions that change data — bookings, client details, team members, invoices and payments, cases, questionnaire answers, and custom reports. See [Write Actions](write-actions.md) for what each covers and how they are guarded.
 
 ### Documentation
 
@@ -247,13 +224,12 @@ How these are guarded:
 - **Case data is not exposed over MCP.** The eFiling tools cover the packet, the district, and the review; the case's creditor and property records are not available to the assistant, so a review it runs works from the filing packet rather than from the underlying case data.
 - **Listing one person's tasks now works.** Asking for the tasks assigned to a specific team member used to fail outright, leaving the assistant with nothing but an unfiltered list of every task at the firm. If your assistant has been unable to answer "what is Sarah working on", retry it.
 - **Reading a long questionnaire's answers now works.** Asking the assistant about the answers on a full bankruptcy petition questionnaire used to fail with an upstream server error, because far more detail was being sent back than the assistant needed — the reply grew large enough on a long form that it never arrived. Only what the assistant reads is returned now: each question's label, the answer, and the choices behind a dropdown or multiple-choice answer, so a selected option still reads as its label rather than a code. Shorter questionnaires were never affected, and listing questionnaires always worked. If your assistant has failed on questions about a client's petition answers, retry them.
-- **Correcting a client's email no longer reports a failure after it saved.** Changing a client's email address through the assistant could come back as an upstream server error even though the change had already been applied — so the assistant would report a failure, try again, and leave your team unsure which state the record was in. The change now reports success. An email address already in use by someone else is still refused, and it is refused before anything is saved.
-- **Write actions are limited to the list above**, and only where your firm has them enabled. For anything else, the assistant will tell you the change needs to be made in the Glade app.
-- **Booking a client who has never booked before needs the price named.** The assistant can only reach a service's price through a client's existing booking, so scheduling a brand-new client may need you to say which price applies. Asking the assistant to list your services does not currently return their prices.
-- **Scheduling through the assistant does not require a case.** A booking can be made from the client, the service, and the time alone.
-- **Creating a report does not run it.** The assistant saves a custom report to your firm's dashboard with the columns and filters you described; open it in Glade to read the rows or export them.
 - **Grouping by date is done by the assistant, not by Glade.** Customer records carry the date they were created, but the customer tools have no date filter and no totals of their own. To answer a question about a period, the assistant reads the customers and counts them itself — which means a firm with a large client list may take several requests to answer, and a very broad question may not be answerable in one go. Narrow the question to the period you care about where you can.
+
+## Topics
+
+- [Write Actions](write-actions.md) — the actions that change data, how they are guarded, and their limitations.
 
 ## Related Features
 
-- [MCP Overview](overview.md)
+- [MCP Overview](../overview.md)
