@@ -44,7 +44,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - All filters combine. For example, a firm can search for a specific customer's failed payments within a date range.
 - **Sorting covers the whole list.** Payments can be sorted by date (newest first by default), amount, or customer. The sort is applied across every page, not just the rows already loaded, so paging through a sorted list never skips or repeats a payment.
 
-> TODO: Confirm the label of the account type filter on the Transactions dashboard and invoice list.
+The filter is labeled **Account type** on the Transactions list, and that is the account-type label on the invoice list as well.
 
 ### Revenue summary
 
