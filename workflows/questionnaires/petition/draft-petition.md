@@ -2,7 +2,7 @@
 
 ## Overview
 
-While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. This page covers generating a marked draft or an unmarked copy for signatures, what goes into the draft and where it is saved, and what is (and is not) rebuilt when a questionnaire is completed or a completed questionnaire is edited.
+While you are still working on a bankruptcy schedules questionnaire, you can generate a draft petition to review or send for review — without submitting the questionnaire. This page covers generating a marked draft or an unmarked copy for signatures, what goes into the draft and where it is saved, numbered draft versions, and what is (and is not) rebuilt when a questionnaire is completed or a completed questionnaire is edited.
 
 ## Key Behaviors
 
@@ -65,14 +65,41 @@ Previously the list ticked official forms that did not apply to the case (for ex
 Further options control what is produced and where it is filed:
 
 - **Generate signature pages PDF separately** — as well as the compiled draft, Glade pulls the signature pages out of it and files them as their own **Signature Pages.pdf**. The pages the debtor has to sign can then be printed or sent on their own, without the rest of the petition alongside them. With the option off, no separate document is produced. This option works regardless of the firm's **Generate Signature Pages.pdf on submit** setting.
-- **Save draft to:** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Petitions**.
-- **Fill requested item:** — when the folder chosen under **Save draft to:** is a checklist with requested items, a second picker appears (placeholder "Choose a requested item…"). It lists that checklist's requested items in checklist order, selects the item automatically when the checklist has only one, and includes **Don't fill a requested item**. Picking a different folder resets the choice. Instead of downloading the draft and uploading it again, Glade files the draft straight into the chosen requested item (for example a "Final Draft" item on a checklist your team uses to review the petition with the client). The item is checked against the chosen checklist before anything is generated; picking an item that is not on that checklist is refused and nothing changes on the case. Generating again swaps the previous draft out of that item, so the item holds only the latest draft rather than a stack of copies. The filed draft does not also appear a second time in the case's document list.
+- **Save location** — choose which of the case's document folders the draft is saved into. The draft and the separate signature pages document both go to the folder you pick. With no choice made, both are saved to **Forms & Schedules**, which is where drafts have always gone.
+- **Fill requested item:** — when the folder chosen under **Save location** is a checklist with requested items, a second picker appears (placeholder "Choose a requested item…"). It lists that checklist's requested items in checklist order, selects the item automatically when the checklist has only one, and includes **Don't fill a requested item**. Picking a different folder resets the choice. Instead of downloading the draft and uploading it again, Glade files the draft straight into the chosen requested item (for example a "Final Draft" item on a checklist your team uses to review the petition with the client). The item is checked against the chosen checklist before anything is generated; picking an item that is not on that checklist is refused and nothing changes on the case. Generating again swaps the previous draft out of that item, so the item holds only the latest draft rather than a stack of copies. The filed draft does not also appear a second time in the case's document list.
 
 Both the signature pages and save location options were previously offered on the form but had no effect on what was produced. A draft was always saved to Forms & Schedules and never came with a separate signature pages document.
 
 If the draft is generated but cannot be added to the checklist item, the draft is kept and an error tells you it was generated but could not be added to the item, so you can add it by hand or generate again.
 
 If the signature pages cannot be pulled out of the compiled draft, the draft itself is still produced and saved to the folder you chose — you simply do not get the separate document. Generating the draft again is safe and produces both.
+
+### Draft versions and the Petitions folder
+
+Each run of the **Generate petition** dialog keeps its draft as a new numbered version instead of overwriting the previous one, so a case keeps its draft history and your team can compare versions or hand the client a stable, named copy.
+
+- Drafts are filed in a **Petitions** folder on the case and named with the debtor and a version number — for example **Petition (Draft) - Jane Doe - Version 3.pdf**, or **Petition (Draft) - Version 3.pdf** when there is no debtor name. Earlier versions are kept.
+- The watermarked draft and the unwatermarked copy for signatures share one numbering sequence and the same naming, so each run is one version whichever copy you asked for.
+- When you ask for separate signature pages, they are filed next to the draft with the same version number — for example **Signature Pages - Jane Doe - Version 3.pdf**.
+- Version numbers are never reused, even after a version is deleted.
+- Draft versions and their signature pages are never offered as documents to include in a new draft, and are never merged into a petition, whatever they are renamed to.
+- The **Petition** compiled for the eFiling packet is saved in the **Petitions** folder too.
+- When signed signature pages are merged back, they go into the newest draft version — or, when the signed pages came from a particular version, into that version.
+
+For a versioned draft, choose **Save location** in the **Generate petition** dialog. Contact Glade support if a draft does not land in the **Petitions** folder.
+
+### How the dialog builds a draft
+
+The **Generate petition** dialog builds the draft in one background run:
+
+- Glade first regenerates every section form, the debtor and creditor files, and the creditor matrix from the current answers, then builds the draft from them. A draft is never assembled from section files older than the latest answers.
+- The draft contains exactly the documents you selected, in the order you put them. A section whose form no longer exists — because the section is now hidden — drops out. The creditor matrix is included only if it was regenerated successfully in that run; an older copy is never used in its place. Nothing you did not select is added.
+- You can choose to **complete the questionnaire** once the draft is built. The questionnaire is completed the same way a submit completes it, without regenerating every document a second time. On a template with a review step, it is submitted for review instead. If completing fails, the draft is still kept.
+- If you asked for separate signature pages and they could not be produced, the result says so rather than leaving them silently missing.
+- A run that has not finished after 20 minutes is reported as failed.
+- Submitting the questionnaire, and the older draft button, behave as they did before.
+
+**Generate petition** now saves a versioned draft and runs in the background. If you still see the older dialog, contact Glade support.
 
 > TODO: Confirm what the draft's version choice — working draft, or for signatures with no watermark — does on this path, and whether a draft compiled this way is marked at all. The petition compiled here is assembled from documents that were generated earlier, so it does not carry the margin marking described above.
 
@@ -105,6 +132,7 @@ When the petition's court forms are filled — on **Generate petition**, when a 
 - Petitions already generated are not rebuilt when a generation correction ships; generate the petition again to pick it up.
 - The shield count on a draft is a snapshot and does not update as fields are corrected.
 - **Petition (Draft)** and **Petition for Signatures (Draft)** copies built automatically on completion before this change stay on the case but are no longer updated. Generate the petition to get a current draft.
+- Drafts generated before versioning was introduced are not renamed or moved; a case can show an older single **Petition (Draft)** document alongside the numbered versions.
 - The diagonal watermark appears on drafts generated after it was introduced. A draft generated earlier carries only the margin marking until it is generated again.
 - On a case with a very large number of documents (more than about 500), the optional extras list may not include every file on the case. The ticked official forms and the creditor matrix are always complete.
 
