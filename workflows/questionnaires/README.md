@@ -27,7 +27,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 
 ### [Filling Out Questionnaires](./filling-out/README.md)
 
-- [Statuses and Access](./filling-out/statuses-and-access.md) — statuses, the client's view after submitting, access control, and collaborators.
+- [Statuses and Access](./filling-out/statuses-and-access.md) — statuses, sending back for changes, the client's view after submitting, access control, and collaborators.
 - [Filling Out Forms](./filling-out/filling-out-forms.md) — pre-filling, simultaneous editing, and template defaults.
 - [Field Behaviors](./filling-out/field-behaviors.md) — phone, currency, court division, debtor county, and SOFA free-text dates.
 - [Working With Lists](./filling-out/working-with-lists.md) — row detail views, removing and restoring rows, and concurrent edits.
@@ -47,7 +47,7 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Exemptions Calculator](./schedules/exemptions-calculator.md) — exemption coverage, the exemptions agent, the homestead answer, and the Texas schedule.
 - [Schedule A/B Property](./schedules/property.md) — liens, equity, Property summary, and Part 3 and line 19 printing.
 - [Creditors](./schedules/creditors.md) — adding creditors, duplicates, alphabetized schedules, and the creditor matrix.
-- [Schedule I and Income](./schedules/income.md) — Income Organizer import and lines 8f and 8h.
+- [Schedule I and Income](./schedules/income.md) — Income Organizer import, lines 8f and 8h, and the locked 8h total.
 - [SOFA Other Income](./schedules/sofa-other-income.md) — SOFA question 5 other income as per-debtor lists by calendar year.
 - [Means Test](./schedules/means-test.md) — non-consumer Chapter 7 cases and secured debt deductions.
 - [Chapter 13 Plan Calculator](./schedules/chapter-13-plan-calculator.md) — modeling and generating the Chapter 13 plan.
@@ -58,6 +58,8 @@ Glade's native questionnaire system supports template versioning, field-level va
 - [Cross-Form Consistency Checks](./petition/cross-form-checks.md) — contradictions between forms in the package.
 - [Generating a Draft Petition](./petition/draft-petition.md) — drafts, signing copies, and automatic rebuilds.
 - [Signatures](./petition/signatures.md) — signature choices and signer names.
+- [Opt-In Petition Checks](./petition/opt-in-checks.md) — firm opt-in validation rules and the eviction judgment check.
+- [Amendment Marks](./petition/amendment-marks.md) — struck and added answers on amended schedules.
 
 ## Edge Cases & Limitations
 

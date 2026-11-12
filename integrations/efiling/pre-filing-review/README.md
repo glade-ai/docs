@@ -24,7 +24,11 @@ The following checks are active:
 | District supports a joint petition | The filing district accepts joint petitions for the chapter being filed, on a case being filed jointly | Blocking |
 | Non-filing spouse accepted by the district | The district accepts a married debtor filing individually with a non-filing spouse | Blocking |
 | Presumption of abuse (Idaho) | On an Idaho Chapter 7 means-test case, the presumption of abuse is answered "no" | Blocking |
-| Court office identified | The case's division resolves to an office the court's filing system recognizes | Blocking |
+| Court division answered | (Chapter 7 and 13, every district) A court division is picked and resolves to an office the court's filing system recognizes | Blocking |
+| Filing fee payment answered | (Chapter 7 and 13, every district) How the filing fee will be paid is answered | Blocking |
+| Prior bankruptcy answered | (Chapter 7 and 13, every district) Whether the debtor filed bankruptcy in the last 8 years is answered, in the questionnaire or the case data | Blocking |
+| Joint filing answered | (Chapter 7 and 13, every district) Whether the case is filed jointly is answered | Blocking |
+| Form 121 not in the petition | (Chapter 7 and 13, every district) The compiled petition does not contain the Statement About Your Social Security Numbers (Form 121) | Blocking |
 | An attorney is assigned to file | The case has a filing attorney, either assigned on the case or set as the firm's default | Blocking |
 | Petition out of date | The compiled petition is older than the case data or questionnaire answers behind it | Advisory |
 | Required signatures on the petition | Everyone required to sign the petition has signed, everywhere a signature is called for | Advisory |
@@ -62,12 +66,12 @@ Credit counseling recency was held back from the first release and has since bee
 ## Topics
 
 - [Required documents](./required-documents.md) — missing required documents, fee and means-test forms, joint-only documents, and skeleton filings.
-- [Required fields](./required-fields.md) — the debtor fields and court-required answers checked before filing.
+- [Required fields](./required-fields.md) — the debtor fields and court-required answers checked before filing, including the fee, prior bankruptcy, court division, and joint-filing answers.
 - [Submission checks and duplicate filings](./submission-checks.md) — existing case numbers, filings in progress, recent attempts, and other checks that used to appear only at submission.
 - [An unrecognized county](./unrecognized-county.md) — how a county Glade cannot identify is reported, with suggestions.
 - [District rules](./district-rules.md) — debtor types, joint petitions, non-filing spouses, presumption of abuse, court offices, and Chapter 7-only districts.
 - [An attorney is assigned to file](./filing-attorney.md) — the filing attorney check.
-- [Packet checks](./packet-checks.md) — unplaceable documents, documents the district will not accept electronically, and packet integrity.
+- [Packet checks](./packet-checks.md) — unplaceable documents, documents the district will not accept electronically, packet integrity, and Form 121 inside the petition.
 - [Required signatures on the petition](./petition-signatures.md) — the advisory signature check.
 - [Duplicate creditors](./duplicate-creditors.md) — near-duplicate creditors on the mailing matrix.
 - [Credit counseling checks](./credit-counseling.md) — certificate recency findings.
