@@ -39,6 +39,7 @@ This covers totals on the columns of a table as well as standalone totals. Sched
 - Only the printed total changes. The underlying answers, and the figures in the questionnaire, are unaffected.
 - **Re-generate the petition** on a case prepared earlier to pick this up. Documents already generated keep the figures they were generated with.
 - Firms whose petitions print exact amounts to the cent are unaffected.
+- **Only currency amounts are rounded.** A calculated field that holds a count or a percentage — for example, Form 122C-2 line 5, the number of people used in determining your deductions — prints the figure stored in the questionnaire. Previously, with whole-dollar printing on, such a field could print as `[object Object]` on the generated form and in the section's PDF preview. The stored answer was never affected; re-generate the form to correct the printed copy.
 
 ## Edge Cases & Limitations
 
