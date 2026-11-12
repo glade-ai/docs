@@ -18,6 +18,26 @@ Every published version of a questionnaire template carries release notes descri
 
 If you try to save responses on a questionnaire whose template version is no longer accepting changes, a modal appears explaining that the template has been updated. The modal includes an **Upgrade Questionnaire** button that moves the questionnaire onto the current template version and reloads it so you can continue editing. Until you upgrade, saves on the old version are blocked. The **Upgrade Questionnaire** button follows the same rule as **Update now**: on a form request that is not in progress, it shows the "Reopen it first" message instead of upgrading.
 
+### Which Answers Carry Over to the New Version
+
+An upgrade copies each answer to the matching field on the new template version. An answer carries over only if the field kept the same shape:
+
+- **The field is still a list or table, or still not one.** A field that changed from a single field into a list or table, or the other way round, does not keep its answer.
+- **The field sits in the same list or table as before**, or is still outside any list or table. Moving a field into or out of an explanation group is a layout change and does not affect matching.
+
+When a field's type changed, the answer carries over only for simple conversions:
+
+- Number to text.
+- Number, or text that holds a number, to currency.
+- Currency to number, unless the amount was marked unknown or overridden with text.
+- Single-select to multi-select, or multi-select to single-select when only one choice was selected.
+- Text to number, as before.
+
+For any other change, the answer is dropped rather than stored in a form the new field cannot read. Answers inside a dropped list or table, and documents uploaded to it, are dropped with it.
+
+- **Questionnaires stuck on failed upgrades now upgrade.** A field whose shape had changed between versions could make every later upgrade of a questionnaire fail. Those questionnaires now upgrade normally.
+- **A deleted field's answers no longer move into an unrelated new field.** Fields and sections added in the template editor now get identifiers that are never reused. Previously, a new field added after a deletion could be matched to the deleted field on upgrade and receive its answers.
+
 ### Upgrading a Questionnaire and Case Data
 
 Upgrading a questionnaire to a newer template version does not remove case data that the questionnaire does not cover.
@@ -67,6 +87,8 @@ When an upgrade moves a questionnaire onto a version that adds fields, list colu
 
 - If a form request is submitted at the same moment someone updates it, or its status and its questionnaire's status disagree, the update is refused with a message that the questionnaire has been submitted and to contact support. Reopening does not help in that case, because the form request already reads as in progress. Previously this showed a generic error.
 - When upgrading a questionnaire to a new template version, responses are copied from the old instance. Pre-filled initial values are not re-applied during the upgrade. Fields the new version adds do get their template defaults — see [New fields get their template defaults](#new-fields-get-their-template-defaults).
+- An answer dropped because its field changed shape or type is not restored by a later upgrade. Re-enter it on the new field.
+- A new field added before field identifiers stopped being reused may already hold answers carried over from a deleted field on an earlier upgrade. Those answers are not removed automatically.
 - An upgrade seeds dependents only when the case has none. A case whose dependents are partly entered — one of three on the case record — is left alone rather than topped up, so the remaining dependents have to be added by hand.
 - Marital status is carried across on upgrade only for the married answers. A client recorded as not married does not have that written to the case record this way.
 - Upgrading the questionnaire to a newer template version does not reconnect a questionnaire you disabled by hand.

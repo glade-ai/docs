@@ -25,6 +25,7 @@ When a client adds a business or rental income source from an income document re
 - **Step 2 — income.** The client either **uploads documents** for the source, or **enters the figures manually** as a profit & loss statement — the period, gross income, expenses, and optionally the net figure printed on their statement.
 - **Going back or closing before anything is saved** removes the draft source, so an abandoned attempt does not leave an empty source on the case.
 - **Once a document has uploaded (or is uploading) or a manual statement is saved,** **Back** is disabled. Closing the dialog keeps the source and what has been saved.
+- **Clients can save a manually entered statement.** Previously, a signed-in client who chose to enter the figures manually got a **"Could not create the statement"** error and nothing was saved. The statement now saves. Pressing **Save** again doesn't create a second copy.
 - Other income types — employment, Social Security, and the rest — still use the existing add-source form.
 
 ### Which Contact a Business or Rental Belongs To

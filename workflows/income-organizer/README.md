@@ -14,6 +14,7 @@ The Income Organizer is a tool in bankruptcy workflows that helps attorneys revi
 - [Editing Income Records](./editing-income-records.md) — entering, correcting, and removing records and income sources, custom breakdown types, and the Edit income data panel.
 - [Who Can Edit an Organizer](./who-can-edit.md) — which firm staff and collaborators can change figures and settings.
 - [Paystub Extraction](./paystub-extraction.md) — how paystubs are read automatically, and how same-date paystubs are kept.
+- [Gig Earnings Statements](./gig-earnings.md) — reading Uber, Lyft, DoorDash and other app earnings statements into monthly income rows.
 - [Upload Processing Status](./processing-status.md) — queued, settled, and no-extracted-data states, and automatic re-extraction on workflow load.
 - [Business and Rental Income](./business-and-rental-income/README.md) — profit & loss statements, adding business sources, and Schedule I line 8a.
 
