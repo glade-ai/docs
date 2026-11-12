@@ -7,12 +7,11 @@ A named dashboard belongs to the firm rather than to one person. Everyone at the
 ## Key Behaviors
 
 - A named dashboard belongs to the firm, not to the person who created it. Every member sees the same dashboard and the same widgets on it.
+- Open **Dashboards**, then **New dashboard**. The dialog is titled **New dashboard**; submit **Create dashboard**. **Manage dashboards** is where the firm's dashboards are managed.
 - Dashboard names are unique within the firm, and matching ignores capitalization — "Intake" and "intake" are treated as the same name.
 - Widgets are added to a named dashboard, reordered, and removed the same way they are on the personal homepage dashboard. Each widget keeps its own filters, sorting, and choice of columns.
 - Any member of the firm can edit a named dashboard and its widgets. The exception is the dashboard the firm has chosen as its [default homepage](./firm-default-homepage.md): while it is the default, only Admins and the firm owner can change it.
 - Personal homepage dashboards are unaffected. Each person still has exactly one, and it stays private to them.
-
-> TODO: Confirm where named dashboards are created and managed in the interface.
 
 ## Configuration
 
