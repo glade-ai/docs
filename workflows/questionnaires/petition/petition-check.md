@@ -2,7 +2,7 @@
 
 ## Overview
 
-Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time. This page covers the dialog, how findings are ordered and worded, and how findings appear on the fields themselves.
+Before a client or preparer submits a petition questionnaire, a **Petition Check** dialog gives a single, consolidated view of everything still needing attention, instead of surfacing problems one field or section at a time. This page covers the dialog, how findings are ordered and worded, how findings appear on the fields themselves, and dismissing advisory findings.
 
 ## Key Behaviors
 
@@ -66,12 +66,26 @@ Not every finding blocks a submission, and the ones that do not are now shown on
 
 Previously **Go to field** on an advisory finding took you to a field that looked completely clean — the message existed in the dialog and in the subsection popover, but nowhere on the form — which read as a broken check rather than as a finding you were meant to act on.
 
+### Dismissing an advisory finding
+
+Your team can dismiss an advisory or informational finding once it has been looked at and does not need action — for example, an account number the check keeps questioning that you have already confirmed. A dismissed finding stays dismissed until someone restores it.
+
+- **It stops counting.** A dismissed finding no longer counts toward the advisory total, is no longer a stop when working through the findings, and does not come back each time the check runs.
+- **It survives edits.** Changing the field's answer, or running the check again, does not bring the finding back. This is deliberate, and differs from overriding a blocking finding, which lasts only until the field's answer changes.
+- **Dismissed findings can be reviewed and restored.** A **Dismissed** filter lists them, each showing who dismissed it and when. Restoring a finding returns it to the list as an active finding.
+- **Any team member can dismiss.** No petition override permission is needed, because dismissing an advisory never clears anything that blocks a submission. A reason is optional.
+- **Blocking findings cannot be dismissed.** They still have to be fixed or overridden by someone allowed to override — see [Submitting a Questionnaire](../filling-out/submitting.md#submitting-with-incomplete-fields).
+- Dismissing, restoring, and overriding a finding are each recorded in the case's activity history.
+- **Dismiss and Restore are on the Validation tab.** Open the questionnaire's **Validation** tab and use the findings list with the **All**, **Blocking**, **Advisory**, and **Info** counts. **Dismiss** is the button on an advisory or informational row. A blocking row offers **Override** instead.
+- **The Dismissed filter is in that list's Filter menu.** **Dismissed** appears in **Filter** once at least one finding has been dismissed, and it shows how many. Each row reads **Dismissed by** the team member's name **on** the date, and has **Restore**.
+- These controls are on the Validation tab that includes AI findings. A validation list that only shows the questionnaire's own checks does not include **Dismiss**, **Restore**, or **Dismissed**.
+
 ### A finding on a row of a list names the row
 
 A finding on a cell inside a list names the entry the row describes, so several findings on the same column of the same list can be told apart.
 
 - The row's name appears under the field label — the creditor, the property, or whatever the row is about. It is read from the row's own answers: the sub-field your firm's template marks as the row's title, or, on the Master Property List, the category and description together.
-- **Go to field opens that row.** It opens the row's editor on the right subsection with the cell in question focused, instead of scrolling to the top of the list. Where the row has been removed since the check ran, it falls back to scrolling to the list rather than opening a different row.
+- **Go to field opens that row.** It opens the row's editor on the right subsection with the cell in question focused, instead of scrolling to the top of the list. This works on the first click even when the list is in a different section from the one you are on. Previously, choosing **Go to field** on a list finding from another section — a Master Creditors List finding while you were on Schedule I, for example — started toward the field and then sent you back to the section you started in, with no field open. Where the row has been removed since the check ran, a message tells you so rather than opening a different row or doing nothing.
 - Where a subsection's findings are collapsed into a single **N issues in the list** line, that line names the rows it covers — up to three of them, then a count of the rest.
 - Table findings are unchanged: a table repeats the same fields across its columns, and those findings already name the column they belong to.
 
@@ -80,6 +94,10 @@ Previously a finding on a list cell showed its field label and nothing else, so 
 For rules written against table and list cells, and rules that compare two answers, see [Validation Rules](../templates/validation-rules.md).
 
 ## Edge Cases & Limitations
+
+- **A dismissal applies only while the finding is advisory or informational.** If your firm changes the rule behind it to blocking, the finding counts as blocking again and must be fixed or overridden. If the rule later goes back to advisory, the earlier dismissal applies again.
+- **Upgrading a questionnaire to a newer template version drops its dismissals and overrides.** Findings dismissed on the old version reappear after an upgrade and need dismissing again.
+- Dismissing is refused if the finding has changed since the list was loaded (for example, the rule's wording was edited). Reload the findings and try again.
 
 - Validation issues on a **list row** name the field but not the row. A list of vehicles with the make missing on two rows produces two issues that read alike, with nothing to distinguish one vehicle from the other. Table cells do name their column; list rows do not yet.
 

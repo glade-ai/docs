@@ -14,6 +14,8 @@ Payment reports can be filtered and sorted by:
 - **Payment method** — search by payment method to narrow to a particular card or bank account.
 - **Date order** — sort oldest-first or newest-first. Paging through a large payment report is stable: payments that share the same timestamp (every charge in one payment-plan run, for example) keep a consistent order instead of some rows repeating on one page and going missing from another.
 
+**How a payment was paid reads the same everywhere.** The payment method type in a payments report and its CSV export shows **ACH**, **Credit card**, **Debit card**, or **Card**, using the same wording as the Payments export under Transactions. A Confido card payment shows as **Credit card** or **Debit card**. A Stripe card payment shows as **Card**, because Stripe does not record whether a card is credit or debit. Previously a Confido debit card exported as "Card" from a custom report.
+
 Choosing several statuses and the older single-status filter at the same time is not allowed — the report asks you to use one or the other. **Refunded** is not a payment status; a refund is recorded as an amount returned on a payment, so it is only available through the single-status filter.
 
 ## Configuration

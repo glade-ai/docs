@@ -62,6 +62,11 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 - Refunds are processed through the original payment processor (Stripe or Confido).
 - If processing fees were passed to the customer on the original payment, a proportional fee amount is also refunded.
 - Refund statuses: Pending (submitted to the processor), Succeeded, or Failed.
+- **A refund the processor has accepted is reported as issued.** Once Stripe or Confido accepts a refund, Glade confirms it rather than showing "Couldn't issue the refund", even if a later step on Glade's side runs into a problem. Previously that error could appear after the money had already moved, inviting a retry that refunded the client twice.
+- **Each refund is recorded and counted once.** The refunded amount on the payment goes up by the refund amount exactly once, whether Glade records the refund first or the processor's own confirmation arrives first.
+- **Two refunds on the same payment can't run at once.** If two people (or a double-click) submit a refund on the same payment at the same time, only one refund is issued; the other is rejected because a refund is already pending.
+- **If the processor rejects the refund**, nothing is refunded, the error is shown, and you can try again. The rejected attempt does not appear in the refund list.
+- **If Glade can't tell whether the refund went through** — for example, the processor didn't respond — the refund stays **Pending** and further refunds on that payment are blocked until it is resolved. If the processor did issue it, it is recorded automatically when the processor confirms it; if not, the pending refund must be cleared by Glade support before you can retry.
 - The client receives a notification when the refund completes.
 - Payments recorded as outside-of-Glade cannot be refunded through the system — the firm must handle those refunds directly with the client.
 
@@ -79,7 +84,10 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 
 - Firms can export payment data as a CSV file for use in accounting software or reporting.
 - The export respects current filters, including date range, status, and search terms.
-- CSV columns include: Customer, Amount, Currency, Refunded Amount, Discounts, Glade Fee, Processing Fee, Customer-Paid Fees, Tax, Net, Account, Description, Product Title, Price Title, Notes, Date, Payment Plan (yes/no), and Workflow.
+- CSV columns include: Customer, Amount, Currency, Refunded Amount, Discounts, Glade Fee, Processing Fee, Customer-Paid Fees, Tax, Net, Account, Description, Product Title, Price Title, Notes, Date, Payment Plan (yes/no), Workflow, Payment Method, and Failure Reason.
+- **Payment Method** shows how each payment was paid: **ACH**, **Credit card**, **Debit card**, **Card**, or **Outside of Glade**. A Confido card payment shows as **Credit card** or **Debit card**. A Stripe card payment shows as **Card**, because Stripe does not record whether a card is credit or debit. When the method was not recorded, the column shows **NA**, like the file's other empty columns. Custom payments reports use the same wording — see [Payments reports](../back-office/reporting/custom-reports/payments-reports.md).
+- **Failure Reason** shows why a failed payment failed, such as the decline reason from the processor.
+- Payment Method and Failure Reason are the last two columns in the file, so the existing columns keep their positions and spreadsheets or imports built on the older layout still line up. With these columns, a firm reconciling against Confido can tell ACH payments from card payments and track failed ACH payments without opening each one.
 - **The Date column is the calendar day in your firm's timezone**, so a payment reads the same date in the export as it does in the Transactions table. Previously the export used UTC: a payment taken at 11:45pm Eastern on 31 August appeared as 31 August on screen and 1 September in the file, which is exactly the kind of disagreement that shows up during a month-end close.
 - The payments themselves were never affected — only how their date was written into the file. **Re-export any period whose totals did not reconcile**, particularly around month ends; the corrected file will move those late-evening payments back into the month they belong to.
 - Payout data can also be exported separately as its own CSV file.
@@ -88,7 +96,7 @@ A failed payment only shows retry messaging ("We will retry this payment...") wh
 ### Email notifications
 
 - A payment confirmation email is sent to the client when a payment succeeds. The email includes the amount, remaining balance, and payment method used.
-- Firms can opt in to receive a notification when the first payment is made on an invoice.
+- Firms can have the case's owners emailed for every payment on an invoice. See [Notifications and Reminders](invoices/notifications-and-reminders.md).
 - If a payment plan installment fails and all retry attempts are exhausted, both the client and the firm receive a notification.
 - Clients receive a notification when a refund completes.
 
@@ -127,6 +135,18 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 - The invoice updates as soon as the correction is saved. If the new amount covers the invoice in full, the invoice is marked **Paid** and any payment plan on it is completed. If the new amount is lower and the invoice is no longer covered, the invoice reopens to **In Progress** for the remaining balance, and anything waiting on the invoice being paid returns to waiting.
 - Notes on a payment can be edited at any time, on any payment, and do not affect the invoice.
 
+#### Removing a recorded payment
+
+If a payment recorded outside Glade should not be there at all (for example, the same check entered twice), your team can remove it. Before, the only fix was to change its amount, and a duplicate entry needed Glade support to remove it.
+
+- Only firm staff can remove a payment, and only one recorded outside Glade that is attached to an invoice. A payment handled by a payment processor cannot be removed; refund it instead.
+- After the removal, the invoice balance is recalculated. If the removed payment had paid the invoice in full, the invoice reopens to **In Progress** for the remaining balance.
+- The case balance and the billing totals on the case update to match.
+- If the invoice has an active payment plan, the plan's schedule is extended where needed so it still covers what is owed.
+- If the payment had already synced to QuickBooks, the matching QuickBooks payment is voided. If the void fails, the case owners get a message saying so.
+- A payment can only be removed once. If someone else removed it first, or an invoice edit has since moved it to a new version of the invoice, the removal is refused instead of acting twice.
+- On the invoice, open **Recent payments**. A payment recorded outside Glade has a **More actions** menu with **Edit payment** and **Remove payment**. **Remove payment** asks you to confirm. The confirmation is titled **Remove this payment?** and says the payment will be removed and will no longer count toward the invoice. If the invoice has an active payment plan, it adds that the plan will be extended to cover the higher balance. If the invoice is already paid in full, it says the invoice will reopen with a balance due and nothing will collect it automatically. Confirm with **Remove payment**.
+
 ## Configuration
 
 - Payment tracking has no standalone configuration. It reflects the payment activity generated by invoices, payment plans, and payment settings.
@@ -137,8 +157,11 @@ If a payment was recorded for the wrong amount — a check entered as $1,500 whe
 ## Edge Cases & Limitations
 
 - Only one refund can be pending per payment at a time. The firm must wait for the current refund to complete before initiating another.
+- A refund whose outcome Glade could not confirm with the processor stays Pending and blocks further refunds on that payment until it settles. If it stays Pending, check with Glade support rather than issuing the refund another way, since the money may already have moved.
 - Refunds on outside-of-Glade payments must be handled outside the system.
 - The amount on a payment can only be corrected when the payment was recorded outside Glade and is attached to an invoice. Processor-handled payments and outside-of-Glade payments not tied to an invoice cannot have their amount changed.
+- The same rule applies to removing a payment: only outside-of-Glade payments attached to an invoice can be removed.
+- If removing a payment reopens an invoice whose payment plan had already finished, the plan stays **Completed**. It does not restart to collect the reopened balance.
 - QuickBooks sync is one-directional. Changes made in QuickBooks do not flow back to Glade.
 - Payout timing depends on the payment processor and the firm's bank. Glade displays the expected delivery date but cannot guarantee exact timing.
 - ACH payments may show as pending for several business days before settling.
