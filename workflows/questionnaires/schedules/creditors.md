@@ -2,7 +2,7 @@
 
 ## Overview
 
-Bankruptcy questionnaires keep the case's creditors on the Master Creditor List, from which Schedules D, E/F, G, and H and the creditor mailing matrix are produced. This page covers adding creditors, marking duplicates, how creditors are ordered on the schedules, and how the creditor matrix is assembled.
+Bankruptcy questionnaires keep the case's creditors on the Master Creditor List, from which Schedules D, E/F, G, and H and the creditor mailing matrix are produced. This page covers adding creditors, marking duplicates, how creditors are ordered and numbered on the schedules, and how the creditor matrix is assembled.
 
 ## Key Behaviors
 
@@ -12,7 +12,9 @@ The add-creditor flow in bankruptcy questionnaires is optimized to keep firms wi
 
 - Adding a creditor from the **Schedule E** tab defaults the new row's schedule to Schedule E. Adding from the **Schedule F** tab defaults to Schedule F. You can still change the schedule before saving, but the default matches the tab you're working from so the row lands on the right schedule without a manual pick.
 - The saved-creditor search appears at the top of the add-creditor dialog (above the schedule selector), labeled with a magnifying-glass icon and a **Search for a creditor** placeholder. It lets you reuse a creditor your firm has previously saved instead of re-entering details.
-- The saved-creditor search shows up to **100 matches** at a time. When more matches exist, a "Showing first 100 matches. Keep typing to narrow results." line appears at the bottom of the list — keep typing the creditor's name to narrow the result set. This keeps the dialog responsive for firms with tens of thousands of saved creditors.
+- The saved-creditor search shows up to **100 matches** at a time. When more matches exist, a "Showing first 100 matches. Keep typing to narrow results." line appears at the bottom of the list — keep typing to narrow the result set. This keeps the dialog responsive for firms with tens of thousands of saved creditors.
+- **The search matches the address as well as the name.** Each word you type can match the creditor's name or any part of its address, and a creditor is listed only when every word matches somewhere. Typing "capital one salt lake" finds the Capital One in Salt Lake City and not the one in Richmond, and a zip code or PO box number on its own also works. This tells apart several saved creditors that share a name but have different payment addresses. Previously only the name was searched, so a search for a city or zip found nothing. The same search applies wherever your firm's saved creditors are listed or searched, including the Creditors page.
+- **Saved creditors are listed alphabetically by name**, so creditors with the same name sit next to each other, and scrolling to load more matches neither repeats nor skips a creditor. A `%` or `_` in the search is matched as that character; previously searching for `%` returned every saved creditor.
 - Saving a creditor row shows a **"Creditor saved successfully"** toast so you have explicit confirmation the row was written. If you save a row with required fields still missing, the confirmation prompt reads **"Item incomplete. Save anyway?"** — confirming saves the row in its incomplete state for you to come back to later.
 
 ### Creditor Duplicate Status
@@ -39,6 +41,15 @@ When the schedules are filled, the creditors on **Schedule D** and **Schedule E/
 - Existing cases are corrected the next time the petition is generated. Nothing needs to be re-entered, and a case already filed is unaffected.
 
 The order shown in the questionnaire itself is still the order the rows were added, so the on-screen list will not match the filed schedule. The **Sort** action on the Master Creditor List reorders the stored rows if you want the two to agree.
+
+#### Line references follow the schedule's order
+
+Some answers refer to a creditor by the line it prints on — for example the line numbers on **Schedule E/F Part 3**, **Schedule D Part 2**, and **Schedule H** (such as "4.25"). These references are filled in for you and locked. They now use the creditor's position in name order, the same order the schedule prints in, so each reference points at the line where that creditor actually appears.
+
+- Previously, on some questionnaires, these references used the order the rows were added. A creditor added after the credit report import could print on one line while Part 3 referred to another, and the locked field could not be corrected by hand.
+- Renaming a creditor, or adding one out of alphabetical order, renumbers the references for the whole list, since one change can move other creditors up or down a line.
+- Lists without creditor names are numbered as before.
+- The **Creditor Matrix** and the filled schedules use the same name ordering, so the questionnaire, the schedules, and the matrix all agree on a creditor's position.
 
 ### Creditor Matrix
 
@@ -77,7 +88,7 @@ The creditor matrix is also included in the **petition draft** — the review co
 
 ## Edge Cases & Limitations
 
-- The on-screen Master Creditor List keeps the order rows were added; only the generated Schedules D and E/F are alphabetized.
+- The on-screen Master Creditor List keeps the order rows were added; only the generated Schedules D and E/F are alphabetized. Line references to a creditor follow the alphabetized order, not the on-screen order.
 - The **others to be notified** lists on Schedule D and Schedule E/F are not sorted.
 
 ## Related Features

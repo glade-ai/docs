@@ -30,9 +30,27 @@ Your firm keeps its own list of **lead sources** — the channels new clients ar
 - **Retiring a lead source does not change clients already recorded under it.** A client who arrived through a channel your firm has since stopped using keeps that source on their record, so historical reporting stays intact. Re-adding the name later is allowed.
 - **Every firm starts with a default list** — Meta, Google local search ads, Google search ads, Phone, Billboard, and Building sign — which you can rename, reorder, or retire as you like. Firms that were already set up before this existed were given the same starting list. Editing your list does not affect what a newly created firm starts with.
 
+#### Sub-options
+
+A lead source can carry its own list of **sub-options** — for example, the individual referral programs under "Referral", or English and Spanish under "Google". When a new client comes in through that source, intake also records which sub-option they came through, as the client's **lead source detail**.
+
+- **Any lead source can have sub-options**, not just one named "Referral". A source can have up to 50, each up to 255 characters. Names must be unique within that source, whichever way they are capitalized.
+- **The order you set is the order offered.** Saving a source's sub-options replaces its whole list. Renaming the lead source or reordering your lead sources keeps its sub-options.
+- **The detail is stored as text on the client.** Renaming or removing a sub-option later does not change clients already recorded with it.
+- **Source and detail are always recorded together.** When a client is recorded under a new lead source, the detail is replaced too — and cleared if no sub-option was picked — so a client never ends up with one capture's source paired with another capture's detail.
+- **Reports keep grouping on the lead source.** The detail is shown alongside the source on the client's record and in the [Bookings Report](reporting/bookings-report.md), and exported as its own column in the bookings CSV. Filtering that report on a lead source still returns every sub-option under it.
+
 Some intake paths record a lead source without anyone using the picker — a call arriving through your firm's phone integration is stamped with its own source name, for example. A source recorded that way can appear on a client even though it is not an entry in your settings list, and retiring an entry does not stop those paths from recording it.
 
 > TODO: Confirm where the lead source is chosen on a client or lead record, and which reports group by it.
+
+#### Requiring a lead source on new clients
+
+Your firm can make the lead source picker required whenever staff add a new client, so no new client is created without attribution. The switch is in **Settings > Lead sources** and is off by default.
+
+- With the switch on, staff must pick a lead source when they create a new client through **Create case**, **Create booking**, or **Create client**.
+- **Choosing an existing client is never blocked**, whether or not that client already has a lead source.
+- The requirement applies to staff in the Glade firm app only. Clients that arrive through other intake paths, such as Zapier, your phone integration, webforms, or the MCP, are still created without a lead source when none is supplied.
 
 ### Workflow Roles
 
@@ -40,8 +58,8 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - Workflow roles are used to segment team members in reports and to set a default role for case assignments.
 - A role card has two switches, both off by default:
   - **Filing review override:** team members who hold the role on a case can sign off on blocking pre-filing findings for that case. See [Who can clear a blocking finding](../integrations/efiling/pre-filing-review/clearing-findings.md).
-  - **Petition review override:** team members who hold the role on a case can continue past blocking petition findings when submitting that case's questionnaire or generating its petition. The findings dialog still lists what's incomplete, and its acknowledgement starts checked for them. See [Submitting a Questionnaire](../workflows/questionnaires/filling-out/submitting.md).
-- Each permission applies only on cases where the person is a current owner with that role assigned. It doesn't make them a firm Admin, so they still can't delete cases or edit workflows. Clients never receive it.
+  - **Petition review override:** team members whose Workflow Role in Team settings has this enabled can continue past blocking petition findings on any case in the firm, whether or not they are assigned to it; team members who hold the role on a case can do so on that case. This applies when submitting a questionnaire or generating a petition. The findings dialog still lists what's incomplete, and its acknowledgement starts checked for them. See [Submitting a Questionnaire](../workflows/questionnaires/filling-out/submitting.md).
+- The filing review override applies only on cases where the person is a current owner with that role assigned; the petition review override also applies firm-wide through the Workflow Role set on their team membership, as described above. Neither permission makes them a firm Admin, so they still can't delete cases or edit workflows. Clients never receive it.
 - Only a firm Admin can turn either permission on or off, or create, change, or delete a role that has one turned on. Other team members can still rename a role. Reordering roles leaves the permissions as they are.
 
 ### Workflow Templates
@@ -65,6 +83,17 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - **QuickBooks integration** controls when invoices are synced to QuickBooks: never, when payable, or on first payment.
 - **Confido integration** can be configured for alternative payment processing.
 
+### Glade Billing Invoices
+
+Glade bills your firm weekly for its charges. These invoices are listed under **Settings → Billing → Invoices**, and each has a PDF and a CSV version.
+
+- **PDF.** Open an invoice from that list. The detail panel shows the invoice PDF. If the PDF cannot be loaded, the panel says **Invoice PDF unavailable**.
+- **CSV.** The line-item CSV is the download button at the top of that same invoice.
+- **Invoice PDF layout.** The PDF opens with a summary of charges by category (for example workflow fees, credit reports, and SMS) and the invoice total. Below it, charges are grouped into one block per workflow, sorted by client. Each block is headed by the client's name, which links to the case, and states the workflow name and Glade workflow fee once. Each charge is then listed on its own line with its percentage. Identical charges are combined into a single line marked "× N".
+- Charges that do not belong to a workflow, such as SMS, come after the workflow blocks. The SMS line reads "SMS charges for this week".
+- **Paid receipt email.** When a billing invoice is paid in full, your firm owner receives an email with the charges broken down by category. The full invoice PDF and CSV are attached, and the email links to **Settings → Billing → Invoices**. This email replaces the generic payment receipt previously sent for billing invoices.
+- No receipt is sent for an invoice that is partially paid, has a payment still pending, has a zero total, or is voided.
+
 ### Notifications
 
 - **Chat message notifications** control how your firm is notified of client chat messages: via SMS or not at all.
@@ -73,6 +102,8 @@ Some intake paths record a lead source without anyone using the picker — a cal
 - **Slack integration** sends notifications to a configured Slack channel.
 - **Support email** settings customize the sender name and address for outbound emails to clients. For attorney firms whose outbound mail goes from the shared Glade support address, the sender display name shown to clients defaults to the firm's name when no custom sender name has been set — so emails arrive labeled with the firm name rather than no name at all. A custom **support email sender name** still takes precedence when configured.
 - **Replies to follow-up emails reach your firm, not Glade.** Where no support email is configured, follow-up emails still go out from the shared Glade support address — but the reply address on them is your firm owner's email, so a client who hits Reply reaches your team. Previously those replies landed in Glade support, and the client heard nothing back from the firm they were writing to. This covers the follow-ups chasing outstanding documents, forms, and invoices, and the grouped reminders about a client's open tasks. Firms already sending from their own address are unaffected — their replies already came to them. Configuring a **Support email** is still the better arrangement: it puts your firm's address on the message the client sees, not only on the reply.
+- **Replies to follow-up emails go to the case's team.** When a client replies to a follow-up email, the reply is addressed to every team member assigned to that client's case, so it reaches the people working the case rather than one firm inbox that then has to forward it on. A follow-up that covers tasks on several cases addresses the team members of all of them, each once. Team members with no email address, or who are no longer on your firm's team, are left out. If nobody is assigned to the case, the reply goes where it did before — to your support email if one is configured, otherwise to the firm owner. This applies to every firm, whether or not a support email is configured, and covers the same follow-ups: outstanding documents, forms, and invoices, the grouped reminders about a client's open tasks, and booking follow-ups.
+- **Replies to comment notification emails go to the right people.** When your team posts a comment on a client's workflow, the client's email notification is now addressed for replies the same way as follow-ups. A client who hits **Reply** reaches every team member assigned to the case, or, if nobody is assigned and your firm sends from the shared Glade support address, the firm owner. Team members without an email address, or no longer on your firm's team, are left out. Previously these comment emails had no reply address, so on firms sending from the shared Glade support address a client's reply to a "has sent you a message" email landed in Glade support. Team members notified about a comment, whether tagged or not, reply to the comment's author, so a team member who replies to a client's comment by email reaches that client. Replies to chat messages are not covered yet.
 - **Task notifications** is its own page in Settings, with one switch. Turning it on sends the task assignment email to each team member newly assigned to any task, including tasks Glade creates on its own, such as review tasks and form requests. The switch is off by default, and only someone who can change organization settings sees the page. When it's off, the assignment email goes out only for consultations and for tasks someone on your team created by hand. Turning it on keeps the same recipients. The email still goes only to the team members just added, never to the client or to the person who made the assignment. A team member asked to choose booking availability still gets only the email about choosing availability, not a second assignment email.
 - **Custom confirmation email message** lets you add custom text to payment confirmation emails.
 - **Text messages fit in a single SMS.** Every text Glade sends is kept to one standard SMS of 160 plain characters. Curly quotes, long dashes, ellipses and accented letters are replaced with plain equivalents, and emoji are removed. A message that is still too long is shortened, but links are never cut. The built-in texts were reworded to fit: chat and mention alerts, the 30-minute appointment reminder, booking confirmed, rescheduled and new-booking texts, payment failed, the opt-in message, and the case invite, which now greets the client by first name. The opt-in message still includes your firm name, the STOP instruction and "Msg & data rates may apply".
@@ -88,6 +119,9 @@ Some intake paths record a lead source without anyone using the picker — a cal
 
 - **Brand color** sets your firm's primary color (hex value).
 - **Logos** include a full logo and a compact logo for different display contexts.
+  - **A compact logo is made for you when you only upload the full logo.** When your firm saves its full (wide) logo and has no compact (square) logo, Glade crops the icon or monogram out of the full logo and saves it as the compact logo. Nothing is redrawn — the compact logo is cut from your own artwork.
+  - Glade saves a generated compact logo only when it is confident the result is clean. If it is not, nothing is saved and Glade's team reviews it instead. A compact logo built from the firm's initials, rather than cropped from the logo, is never saved without a person checking it first.
+  - A compact logo your firm uploaded itself is never replaced. A generated one is replaced only when you change the full logo, and uploading your own compact logo at any time takes its place.
 - **Custom domain** sets a custom domain for your firm's public-facing pages.
 - **Custom Open Graph image** controls the preview image shown when your pages are shared on social media.
 - **Payment redirect URL** sets where clients are redirected after a successful payment.
@@ -116,7 +150,7 @@ Petition Settings control how petition documents generated by Glade are rendered
 - **Signature pages mode** controls where attorney and client signatures appear in generated petition PDFs:
   - **Full Page** (default) — signature blocks are placed on a dedicated full page at the end of the document, separated from the main form content.
 - **Round amounts up to the next dollar** controls whether money amounts are printed as whole dollars on petition PDFs. Off by default.
-- **Generate Signature Pages.pdf on submit** controls whether submitting a petition questionnaire also produces the separate **Signature Pages.pdf** document. On by default. See [Turning off Signature Pages.pdf on submit](#turning-off-signature-pagespdf-on-submit).
+- **Generate Signature Pages.pdf on submit** controls whether generating a petition draft also produces the separate **Signature Pages.pdf** document. On by default. See [Turning off Signature Pages.pdf on submit](#turning-off-signature-pagespdf-on-submit).
 
 Changes to petition settings apply to new documents generated after the change. Previously generated petition documents are not affected.
 
@@ -126,16 +160,17 @@ Firms that file in whole dollars can have Glade round the figures as it fills th
 
 - **Rounding is always up, never to the nearest dollar.** $1.03 prints as $2, and $1.50 prints as $2. Any amount with cents moves up to the next whole dollar.
 - **Calculated totals are recalculated from the rounded lines**, so a total agrees with the figures printed above it rather than being the rounded version of the exact total. Schedule I lines of $12.40, $13.40, $15.40 and $17.40 print as 13, 14, 16 and 18, and their total prints as 61 — not 59.
-- It applies to every money amount filled from a questionnaire onto a petition PDF, not only Schedules I and J.
+- It applies to every money amount filled from a questionnaire onto a petition PDF, not only Schedules I and J — with one exception below.
+- **Form 103A is never rounded.** The filing fee installments on Form 103A are amounts the court sets, and they have to add up to the fee, so they always print with exact cents whatever this setting says. A $313 fee paid as $78 now plus two installments of $117.50 prints as 117.50, not 118. Petitions generated before this change may show rounded 103A amounts; re-generate the petition to correct them.
 - **Questionnaire answers stay exact.** The setting changes what is printed, not what is stored. Field values on the questionnaire, the Income Organizer's arithmetic, and the figures held on the case all keep their cents.
 - The questionnaire's on-screen PDF preview rounds the same way, so a preparer checking a form sees the figures that will print on the filed copy.
 
 #### Turning off Signature Pages.pdf on submit
 
-Submitting a petition questionnaire normally produces a separate **Signature Pages.pdf** alongside the petition drafts. A firm that never uses that document can turn it off, so a new copy stops appearing on each case.
+Generating a petition draft normally produces a separate **Signature Pages.pdf** alongside it. A firm that never uses that document can turn it off, so a new copy stops appearing on each case. Despite the setting's name, submitting the questionnaire no longer builds petition drafts or signature pages on its own — drafts are built only from **Generate Petition** (see [Draft Petition](../workflows/questionnaires/petition/draft-petition.md)) — so the setting now takes effect when a draft is generated.
 
-- **The petition drafts are still produced.** With the setting off, submitting the questionnaire still creates **Petition (Draft)** and **Petition for Signatures (Draft)**. Only Signature Pages.pdf is skipped.
-- It applies everywhere Glade builds the petition drafts on its own or on request: submitting the questionnaire, the automatic rebuild after a completed questionnaire is edited, and generating a draft. The progress list shown while the documents are assembled leaves Signature Pages.pdf out.
+- **The petition drafts are still produced.** With the setting off, generating a draft still creates **Petition (Draft)** and **Petition for Signatures (Draft)**. Only Signature Pages.pdf is skipped.
+- The progress list shown while the documents are assembled leaves Signature Pages.pdf out.
 - **An existing Signature Pages.pdf is left in place.** Turning the setting off does not remove a copy already on a case, including one someone created by hand from **Prepare Petition**.
 - **Generating signature pages by hand still works.** The **Generate signature pages PDF separately** option when preparing a petition is unaffected by this setting.
 - This setting is separate from **Signature pages mode**, which controls where signatures are laid out inside the petition documents rather than whether the extra document is produced.
@@ -157,9 +192,14 @@ Settings are primarily configured through the dashboard account page and individ
 - Rounding to whole dollars happens as a petition is filled, so it does not reach documents already generated. Re-generate the petition to apply it.
 - Rounding does not change the Income Organizer, the figures stored on the case, or electronic filing data — only what prints on the petition PDF and its preview.
 - QuickBooks invoice sync is disabled unless you explicitly configure QuickBooks settings.
+- Glade billing paid-receipt emails are sent only for invoices paid after the feature was introduced. Earlier paid invoices did not get the email retroactively.
+- Billing invoice PDFs written before charges had categories show those charges in the summary as "Other charges". Very large invoices still produce long PDFs; the CSV export is the detailed view.
+- The billing invoice PDF does not state the billing period, and its due date is the date the PDF was generated.
 - AI settings (system message, rules, chat prompt) accept free-form text with no length limit enforced in the interface.
 - Two workflow roles can share the same display rank, which may result in unpredictable ordering.
 - The lead source list is what the picker offers; it is not enforced on the value stored against a client. A source recorded by an automated intake path, or on a client from before the list was editable, can sit outside the list, and retiring an entry does not remove or rewrite it anywhere.
+- **Require lead source** applies only when staff create a new client in the firm app. It doesn't backfill existing clients that have no lead source, and automated intake paths can still create clients without one.
+- Lead source sub-options are not enforced on the detail stored against a client. Removing a sub-option leaves it on every client already recorded with it.
 - Retiring a lead source is not the same as deleting its history. The name stays on every client already recorded under it, so a retired channel continues to appear in reports covering earlier periods.
 
 ## Related Features
