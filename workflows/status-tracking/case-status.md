@@ -24,9 +24,10 @@ Each case (an active workflow for a specific client) has a status, a progress pe
   - Additional built-in statuses include: Initiated, Retained, Triage, Document Collection, Credit Report Pulled, Questionnaire Collection, Petition Prep, Final Review, Ready to File, Signed & Paid, Post-Filing, Retaining, Bankruptcy Forms
 - Your firm can also define its own statuses — see [Custom Statuses](./custom-statuses.md).
 - **What happens when status changes**:
-  - Moving to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case.
+  - Moving to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case. The exception is Filed and Pending: an **Assign <role>** handoff task stays open while the handoff it asks for is still unmet. See [Handoffs](./handoffs.md).
   - Archiving a case preserves the previous status so it can be restored later. Archiving also promotes any associated workflows to primary.
   - Unarchiving a case restores the previous status. If there was no previous status, it defaults to Data Collection.
+  - **Moving an archived case back to an active status brings it out of archive.** This applies whether the status is changed by hand or by a completed workflow step, not only when the case is unarchived. If no other case in its group is the primary one, the reactivated case becomes primary again, so it stays in firm search. Previously the case could keep its archived marking. If a duplicate case was later deleted, the group was left with no primary case, and an active case dropped out of firm search.
   - Moving to Filed and Pending records the filing date. Moving back to Data Collection or Processing clears the filing date.
   - Moving to Completed records the completion date.
 - **Court case number visible to clients**: After a case is filed with the court, its court-assigned case number is recorded on the case and shown to the client in their own portal view of the workflow, so clients can find their case number without contacting the firm. No case number appears before the case is filed.
@@ -46,6 +47,7 @@ Each case (an active workflow for a specific client) has a status, a progress pe
 - Any string can technically be set as a status, though the system expects it to match either a built-in or custom status.
 - When a case is archived and later unarchived, it restores to the previous status. If there is no previous status, it defaults to Data Collection.
 - The completion date is preserved when archiving a case, so it remains accurate if the case is later unarchived.
+- When a case that is the primary one in its group is deleted, Glade picks the new primary case from every related case in the group, so an active related case still appears in firm search.
 
 ## Related Features
 
@@ -53,4 +55,5 @@ Each case (an active workflow for a specific client) has a status, a progress pe
 - [Automatic Status Updates](./automatic-status-updates.md)
 - [Custom Statuses](./custom-statuses.md)
 - [Tasks](./tasks.md)
+- [Handoffs](./handoffs.md)
 - [PACER Integration](../../integrations/pacer/README.md)

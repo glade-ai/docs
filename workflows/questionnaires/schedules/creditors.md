@@ -35,7 +35,7 @@ When you mark a creditor as a duplicate of another in a bankruptcy questionnaire
 - The check applies to automatic matching on the case record and in the questionnaire. Manual duplicate marks are not changed.
 - Open-balance creditors hidden before this change are not brought back on their own. Contact Glade support if a case still hides a creditor that has a balance. When duplicates are checked, copies of one account that one bureau reports as open with a balance and another reports as closed at $0 are shown separately.
 
-For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md).
+For selecting, removing, and restoring creditors with duplicates, see [Working With Lists](../filling-out/working-with-lists.md). For how Glade links duplicates automatically, see [Creditor Deduplication](./creditor-deduplication.md).
 
 ### Creditors are alphabetized on Schedules D and E/F
 
@@ -111,6 +111,8 @@ The creditor matrix is also included in the **petition draft** — the review co
 - [Questionnaires](../README.md)
 - [Schedule Tools](./README.md)
 - [Working With Lists](../filling-out/working-with-lists.md)
+- [Creditor Deduplication](./creditor-deduplication.md)
+- [Chapter 13 Plan Claims](./chapter-13-plan-claims.md) — duplicates are left off the plan
 - [Schedule A/B Property](./property.md) — liens and collateral
 - [Means Test](./means-test.md) — secured debt deductions
 - [Generating a Draft Petition](../petition/draft-petition.md)

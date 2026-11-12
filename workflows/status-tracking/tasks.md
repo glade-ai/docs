@@ -19,7 +19,7 @@ Tasks are actionable items created during a case — things like "complete quest
   - Tasks from other steps are not touched.
 - **Automated reminders**: Tasks can have automated reminder emails and text messages attached to them. These reminders are scheduled, sent, and tracked automatically.
 - **Task performance tracking**: The system tracks how long tasks take from creation to completion, how many times they are reopened, and the last completion time. This data is used for performance reporting.
-- Moving a case to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case — see [Case Status](./case-status.md).
+- Moving a case to Completed, Filed and Pending, or any status with archive behavior completes all pending tasks for the case — see [Case Status](./case-status.md). On Filed and Pending, an **Assign <role>** handoff task whose handoff is still unmet stays open — see [Handoffs](./handoffs.md).
 
 ### Dismissing and restoring tasks
 
@@ -42,6 +42,7 @@ The task list lets each team member clear items they no longer need to watch, wi
 
 - [Status Tracking](./README.md)
 - [Case Status](./case-status.md)
+- [Handoffs](./handoffs.md)
 - [Task Templates](../task-templates.md)
 - [Inbox](../../back-office/inbox.md)
 - [PACER Integration](../../integrations/pacer/README.md)

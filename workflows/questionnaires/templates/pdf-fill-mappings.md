@@ -9,6 +9,7 @@ PDF fill mappings connect questionnaire fields to PDF template fields, enabling 
 - Individual fields connect to specific PDF fields, and each section can reference a PDF template.
 - Dynamic PDF templates support generated PDFs with custom layouts and assets, going beyond simple field-to-field mapping.
 - Generated forms paginate by content: a section that runs longer than a single page continues onto the next page. Previously a section was kept together as one block, so anything that no longer fit was pushed whole to the following page — leaving a large blank area at the bottom of the page before it. This was most visible on Schedule A/B, where the residence details plus a long property list pushed the entire section down a page.
+- **An empty list prints no rows.** When a money field in a list has no answer in any row, the generated form prints no rows for it. Previously it printed one row of $0.00, which on Form 106I produced a full business attachment page for a debtor with no businesses. Money fields in a **table**, such as the Debtor 1 and Debtor 2 columns on Schedule I, still print $0.00 when unanswered, because those rows always exist on the form.
 
 ### Supplemental and local court forms
 
