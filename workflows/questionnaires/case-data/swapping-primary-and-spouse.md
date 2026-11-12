@@ -4,12 +4,12 @@
 
 On a joint case, **Swap primary and spouse** trades the roles of the two debtors, so the person filed as Debtor 1 becomes Debtor 2 and the other way round. Firm staff use it when the debtors were entered in the wrong order. Before the swap is applied, a confirmation dialog previews what will change.
 
-Open it from the case's workflow settings, under **Workflow actions**. The row is labeled **Swap primary and spouse**. When the case cannot be swapped, the row stays unavailable and says why. When a swap has already been made, the row names who made it and when.
+Open it from the case's workflow settings, under **Workflow actions**. The row is labeled **Swap primary and spouse**. Staff who can open that case's settings can run it. When the case cannot be swapped, the row stays unavailable and says why. When a swap has already been made, the row names who made it and when.
 
 The confirmation dialog is titled **Swap primary and spouse**. It names who will become the primary debtor and who will become the spouse, and says that each person keeps their own uploads, answers, and open tasks — only the roles change, and swapping again restores the original roles. The rest of the dialog is filled in for this case, under four headings:
 
 - **What changes** — the new primary and spouse, and what moves with the roles, such as how many case-data values are swapped.
-- **What stays where it is** — for example a signed retainer left untouched, open tasks that stay with the person they are assigned to, and uploads, permissions, payments, bookings, and chat threads, which stay with the person who owns them.
+- **What stays where it is** — for example a signed retainer left untouched, open tasks that stay with the person they are assigned to, and uploads, permissions, payments, invoices, bookings, and chat threads, which stay with the person who owns them.
 - **Not touched — check these afterwards** — anything the swap leaves in place for you to fix, such as a pending e-signature packet you void and regenerate after the swap.
 - **Please confirm before swapping** — a checkbox naming the two people and stating that swapping again is the only way to undo it. **Swap primary and spouse** stays unavailable until that box is ticked. **Cancel** leaves the case unchanged.
 
@@ -32,6 +32,7 @@ When the names already look reversed, the dialog adds a **Before you swap** aler
 
 ## Edge Cases & Limitations
 
+- The swap is refused when there is no spouse, the spouse is ambiguous, the spouse is the primary debtor, the spouse is not a client of the firm, the case has been filed, a swap or a filing-type change is already running, or the document or questionnaire check fails first. The row stays unavailable and says why.
 - The swap cannot correct names that were hand-swapped on the case record. Fix the names (or the other details) so they agree before swapping, or after the warning appears.
 - Cases swapped before the five joint answers were kept may have lost those answers. Check them on any recently swapped case and re-enter them if they are blank.
 - The reversed-names warning does not catch two debtors with the same first name.
@@ -41,3 +42,4 @@ When the names already look reversed, the dialog adds a **Before you swap** aler
 - [Case Data](./README.md)
 - [Case Data Sync](./case-data-sync.md)
 - [Re-opening and Re-syncing](./reopening-and-resync.md)
+- [Swapping the Debtor and Spouse](../../status-tracking/swapping-debtor-and-spouse.md) — linked workflows

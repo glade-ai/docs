@@ -27,7 +27,7 @@ Your firm uploads the monthly foreclosure report it receives, and Glade compares
 - **Cases are re-checked when the underlying data changes.** Editing a property address, the client's residential address, the client's contact record, or a debtor's name re-runs the check for that case. Unrelated edits — the case number, attorney fields, a phone number — do not.
 - **The foreclosing attorney is shown on the match.** When your firm's report includes the attorney's name and email, the match card shows both under the addresses, so staff can see who to contact without opening the raw report. A hand-applied flag has no report row, so it shows no attorney. Reports already uploaded show the attorney too; nothing needs re-uploading.
 
-For what happens when a match reaches the threshold, see [Flags and Review](./flags-and-review.md). Columns, sorting, and filters are in [The Foreclosure Report](./foreclosure-report.md).
+For what happens when a match reaches the threshold, see [Flags and Review](./flags-and-review.md). For the report's columns, filters, and sorting, see [The Foreclosure Report](./foreclosure-report.md).
 
 ## Configuration
 

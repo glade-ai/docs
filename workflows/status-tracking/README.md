@@ -15,6 +15,7 @@ Status tracking governs how a case's status and progress change over its lifecyc
 - [Handoffs](./handoffs.md) — steps that wait for a case owner with a specific role, the **Assign <role>** task, and finding cases waiting on a handoff.
 - [Time-Sensitive Filing Deadlines](./time-sensitive-filing-deadlines.md) — marking urgent cases by date or urgency type, and how markings pass between related cases.
 - [Switching a Case to Another Workflow](./switching-workflows.md) — choosing a workflow in another service and what carries over (credit report, payments).
+- [Swapping the Debtor and Spouse](./swapping-debtor-and-spouse.md) — swapping on cases with linked workflows, and which questionnaires change.
 - [Cases That Have Gone Quiet](./stale-cases.md) — the three-month staleness rule that stops automated follow-ups, and overriding it.
 
 ## Related Features

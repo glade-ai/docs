@@ -19,6 +19,31 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - **Employer under a wage order.** The employer details typed on the plan print first. When none are typed, a single filer's plan with a wage order prints the employer named on the client's record, with a warning to add the employer's address and phone. A joint plan prints no employer, because Glade cannot tell whose wages the order is on; a wage order that still names no employer warns. Previously a wage-order plan printed "Yes" with a blank employer line and no warning.
   - **Section 3A, "by the Debtor(s) or Co-Obligor".** The plan records who pays the 3A mortgage directly — the debtor or a co-obligor — and ticks the matching box when 3A lists a mortgage. Until it is chosen, both boxes stay blank with a warning; Glade does not guess "Debtor(s)". The 3A start and end dates are part of the existing row-details warning.
   - In the calculator's **Form details**, **Payment method** lists **ePay (online payment)** and **TFS (bank withdrawals)** along with payroll and direct payment. **Direct payments made by** is there too, with **Debtor(s)** and **Co-obligor**. It prints only when the plan lists a mortgage paid directly; left unset, neither box is ticked and the plan warns.
+- **Eastern District of Kentucky** cases can generate a Chapter 13 plan on the district's Local Form 3015-1(a), *Chapter 13 Plan*, revised 02/25. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
+  - The form has no separate direct-payment section, so secured claims the debtor pays directly print in §3.1 with the "Disbursed by Debtor(s)" box ticked.
+  - Secured claims paid in full go in §3.3. A claim in §3.2 or §3.3 paid without interest prints a rate of 0.00, because the form reads a blank rate as "WSJ Prime + 2".
+  - Lien avoidance that strips a mortgage prints in §3.2 as a valuation at $0. Every other lien avoidance goes in §3.4 with the § 522(f) worksheet filled in.
+  - The §4.3 attorney fee follows the plan's attorney fee election: (b) when the fee is by application, otherwise (a) with the fee, the amount paid before filing, and the balance. An (a) fee above the district's no-look cap raises a warning.
+  - §4.4 prints a single estimate, using the domestic support obligation estimate the attorney entered where there is one. The manual special-class list prints in §5.3. §5.2 always prints "None".
+  - Lump sums raise a warning that they belong in Part 8.
+- **Northern District of Alabama** cases can generate a Chapter 13 plan on the district's LR 3015-1 A, *Chapter 13 Plan*. This is a local court form, not Official Form 113. You open the form from the calculator, and there is no per-firm setting to switch on. The district's four divisions fill parts of this form differently, so the plan reads the **court division** recorded on the case:
+  - **When the fixed monthly payments begin:** left blank in the Northern Division (Huntsville), "Confirmation" in the Eastern Division (Anniston), and "Month N After Confirmation" in the Western Division (Tuscaloosa). The Southern Division (Birmingham), and a case with no division recorded, print the calculator's first payment month.
+  - **Priority claims:** print "N/A" for the fixed payment in the Southern Division. In the Northern Division a tax claim takes no fixed payment.
+  - **§5.2 (unsecured creditors):** 100% when unsecured creditors are paid in full. Otherwise "Pot" in the Western Division and "Base" in the other divisions. The percentage option is never chosen.
+  - Warnings are raised for amounts that are not whole dollars, payments below the $15 floor, a mortgage paid through the trustee in the Northern Division, and a case with no division recorded — set the division on the case before generating the plan.
+
+  How claims are placed on this form:
+  - The form has no separate direct-payment section, so secured claims the debtor pays directly print in §3.1. Because §3.1 has the trustee pay every listed arrearage, an arrearage the debtor pays prints its balance with no monthly payment or start date, and raises a warning.
+  - Secured claims paid in full go in §3.3. Claims in §3.2 and §3.3 carry their own adequate-protection payment, and a claim paid without interest prints a rate of 0.00.
+  - Lien avoidance that strips a mortgage prints in §3.2 as a $0 secured claim. Every other lien avoidance goes in §3.4, as Total Avoidance or on the Partial Avoidance chart (lines a–h). The chart assumes the debtor owns the property alone.
+  - §4.3 always ticks the administrative-order box. The manual special-class list prints in §5.5, and rejected contracts in §6.2.
+
+  Parts Glade has no source for print blank, or are left unticked, so check them by hand before filing:
+  - the Southern Division's "six months from the petition month" start, which is not worked out — the calculator's first month prints instead;
+  - months in arrearage and lease terms, which print blank with a warning;
+  - the §4.5 box for a domestic support obligation paid less than in full, and the §5.3 and §5.4 boxes, which are never ticked.
+
+  In the Western Division, the start prints as "Month N After Confirmation" but the monthly amounts are still the calculator's, spread from the first month. Starting later leaves fewer payments, so a claim can come up short of what the plan says it pays. No warning is raised for this — check Western Division plans before filing.
 - **Southern District of Florida** cases can generate a Chapter 13 plan on the district's Local Form LF-31, on the same terms. What the generated plan fills in for you:
   - **Account numbers and addresses.** Every claims table with a "Last 4 Digits of Account No." column prints the creditor's last four digits from the Master Creditor List, and Section III prints each creditor's address from the creditor list on one line. A creditor with no account number or address on the list prints blank there.
   - **Typed payout schedules.** Where you typed a claim's payout schedule in the calculator ("Override with text"), the plan prints your text as written in place of the computed payments. This applies to every trustee-paid payout line: the II.B attorney fees, III.A, III.B, and IV.A through IV.D. A cure split off a claim prints the schedule typed for the cure, not the parent claim's. Previously the typed text was ignored and the computed amounts printed.
@@ -166,6 +191,10 @@ There is no per-firm setting. A case can generate a plan when its district is on
 > TODO: Confirm which claim treatments belong in §7.2.c of the Eastern District of Louisiana Model Plan. The section was switched on with no treatments assigned to it, so a claim that belongs there may not print on the generated plan.
 
 > TODO: Confirm the Western District of Washington's recorded no-look attorney fee cap and trustee fee percentage before firms rely on a generated plan — these were still carrying placeholder values when the district was switched on, and the fee cap prints on the plan itself.
+
+The calculator uses the Eastern District of Kentucky's recorded no-look attorney fee cap. That cap drives the §4.3(a) warning. Check it against LBR 2016-2(a). Contact Glade support if the fee warning doesn't match.
+
+The calculator uses the Northern District of Alabama's recorded no-look attorney fee cap and trustee fee. The form itself does not print a trustee fee, so those figures affect the calculator only. Check the cap against the district's local rule. Contact Glade support if the fee warning doesn't match, or if Western Division amounts are not spread from the starting month.
 
 > TODO: Confirm the Northern District of Texas's recorded no-look attorney fee cap and trustee fee percentage. The district was switched on while those figures were still the national defaults.
 

@@ -34,12 +34,14 @@ A document request defines the checklist of files your team wants to collect fro
 - **Document request types**: "basic" for standard file uploads, "income data" for structured income data collection. See [Income Documents](./income-documents.md).
 - **Integration support**: File slots can be associated with external integrations (e.g., PACER) to include auto-generated legal documents in the checklist.
 - **Email notifications** can be toggled on or off per document request template.
+- **Review email** and **Submit for review automatically** can be set per document request template. See [Review Email and Automatic Submit for Review](./review-email-and-auto-submit.md).
 
 ## Edge Cases & Limitations
 
 - Skipping a document request assignment sets its status to "skipped" but does not remove uploaded files. Unskipping returns it to its previous state.
 - A compiled document that aggregates all uploaded files can be generated, but this is optional and may not always be present.
 - The **Download all as a single PDF** option in a document request's overflow menu is only available when at least one file has been uploaded to that slot. The option does not appear for slots with no files yet.
+- **PDFs with issuer restrictions are included in full.** Some PDFs — Chase bank statements are a common example — carry restrictions set by whoever issued them but open without a password. These are now combined into a compiled PDF with their real pages, and they are no longer treated as password-protected after upload. Previously they were mistaken for password-protected files and replaced in the compiled PDF with an "Encrypted Document" placeholder page. Only a PDF that genuinely needs a password to open is still replaced by that placeholder, which now points to Glade's current support address.
 - Archiving a document request template prevents it from being used in new workflows but does not affect existing assignments.
 
 ## Related Features
