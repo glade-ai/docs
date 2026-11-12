@@ -7,6 +7,7 @@ As well as sending an email, an automation can create a task on the case when it
 ## Key Behaviors
 
 - The task's **assignees** are chosen the same way as email recipients — case-party tokens (`debtor1`, `debtor2`, `attorney`) and team members at your firm. At least one assignee is required.
+- A task can also go to **the people who own the case**. Choose **Owner: [role]** (for example **Owner: Inputting Team**) to assign whoever holds that role on the notice's case, or **Every owner** to assign all of the case's owners. See [Assigning to the case's owners](#assigning-to-the-cases-owners).
 - **Due in** sets the task's due date as a number of days after the notice date, calculated in your firm's timezone. Leave it blank for no due date.
 - The task carries a title and description, which support the same tokens as the email subject and body (see [Email Tokens](./email-tokens.md)). The same case-party and hearing details are available to **Create task** actions, so a task raised from a 341 notice can state the meeting date, time, and join details in its description.
 - Assignees are notified through the normal task notifications and the task appears in their inbox, exactly as a task created any other way.
@@ -44,12 +45,22 @@ The trustee picker is populated from the trustees who have actually appeared on 
 
 Automations set up before assignment rules existed keep working unchanged. Their single list of assignees reads as one rule with no conditions, so the same people are assigned on every firing until you add conditions.
 
+### Assigning to the case's owners
+
+Owner options let one automation route each notice to the right person on that case, instead of the same fixed list of people every time — for example, deficiency notices to whoever is the inputter on each case.
+
+- **Owner: [role]** assigns the case's owners who hold that workflow role. **Every owner** assigns all of the case's owners. They appear in the **Assign to** field alongside the other assignee options and can be picked together.
+- Owners are read from the notice's own case at the moment the notice arrives, so a change of owner on the case is picked up by the next notice.
+- **When no owner matches, the task is never lost.** If the case has no owner with that role, or that owner has left the firm, the task goes to the team members whose default role is that role. If nobody has that default role, it goes to the firm owner. It is never sent to the whole team. **Every owner** on a case with no owners goes straight to the firm owner. The automation's run history records when this happened and who received the task.
+- Because of that fallback, a case with no owner in the role can send the task to several people at once — everyone whose default role matches. Giving the case an owner in that role sends it to that one person.
+- Saving checks that the role belongs to your firm. If your firm deletes a workflow role an automation uses, saving that automation's actions is refused until the **Owner: [role]** choice is replaced; the editor names the role. Renaming the automation or changing its triggers still saves.
+
 ## Configuration
 
 | Setting | Description |
 |---------|-------------|
 | Assignment rules | For an automation that creates a task: a list of rules, each with an optional chapter, judge, and trustee condition joined by **and**/**or**, plus the people to assign. At least one assignee per rule. |
-| Task assignees | For a **Create task** action: case-party tokens and team members. At least one is required; literal email addresses are not available here. |
+| Task assignees | For a **Create task** action: case-party tokens, team members, **Owner: [role]**, and **Every owner**. At least one is required; literal email addresses are not available here. |
 | Task due in | For a **Create task** action: the number of days after the notice date that the task is due, in your firm's timezone. Optional. |
 
 ## Edge Cases & Limitations

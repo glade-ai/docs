@@ -12,6 +12,8 @@ Some questionnaire fields are linked to case data — they display a value pulle
 
 When you edit a case data sync field, the updated value saves automatically and syncs to the case record immediately — no extra confirmation step is required.
 
+When a synced field also has an autofill, an automatic autofill does not replace the case data value. A hand edit on the field shows as edited and is still saved to the case record. Using re-run on the field replaces the value with the autofill's answer and saves that answer to the case record. See [Fields That Are Both Autofilled and Synced With Case Data](../autofills/manual-overrides.md#fields-that-are-both-autofilled-and-synced-with-case-data).
+
 Fields that sit inside a table underneath an explanation heading receive synced values like any other. Schedule I line 8 is the common example: those business and rental income lines are nested this way, and values sent from the Income Organizer were being skipped, so the lines stayed at $0.00 with nothing to indicate a figure had been missed. They fill on the next sync. If your team has been re-typing Schedule I line 8 figures by hand, re-sync the case and the lines should populate on their own.
 
 #### Several questions tied to the same case detail
@@ -74,6 +76,7 @@ Some list and table fields are linked directly to case entities such as creditor
 - When a firm team member removes a row from an entity-bound list, the corresponding entity (creditor or asset) is deleted from the case record immediately.
 - When a client removes a row, the deletion is held for team review rather than applied immediately. A team member must approve the change before the entity is removed from the case record.
 - Writes (adding and editing rows) follow the same case data sync behavior as other synced fields.
+- **A row you delete stays deleted when a document is re-uploaded.** Uploading a new document, such as a new bank statement, no longer adds back rows a person deleted from a synced list. Previously, financial accounts a firm had removed came back on every statement upload, without the answers the team had entered on them.
 
 ### Blank Rows Are Not Written to the Case Record
 
@@ -121,8 +124,20 @@ When a Chapter 7 or Chapter 13 case is switched to a different workflow, the cli
 
 Previously the new workflow could show an empty schedules questionnaire after a switch, while the client's earlier answers stayed behind on the archived workflow.
 
+**The new workflow's "send the schedules" step uses the moved questionnaire.** The new workflow's own step that sends the Bankruptcy Schedules usually runs after the switch has finished. That step now attaches the schedules questionnaire the switch carried over instead of opening a new, empty one beside it.
+
+- The case holds one schedules questionnaire, with its answers, whichever runs first — the switch or the step.
+- The step's assignees are given access to the moved questionnaire, in addition to anyone who already had it.
+- Any Forms & Schedules entries the new case does not yet have are added. Entries it already has are left as they are, so petition PDFs already generated into them are kept.
+- The questionnaire's completion task moves to the new case.
+- If the moved questionnaire was already submitted, the step treats it as complete rather than waiting for a submission that already happened.
+- Previously the step always opened a second, empty schedules questionnaire after a chapter switch. Staff could end up working in the empty copy and re-typing answers the case already had.
+- Only the schedules questionnaire is carried over this way. Other questionnaires the new workflow sends are opened as new requests, as before.
+- If a case switched before this change still has two schedules questionnaires, contact Glade support to merge them.
+
 ## Edge Cases & Limitations
 
+- A row deleted by mistake is not brought back by re-uploading the document. Restore it from the list's **Removed Items** view — see [Restoring Removed List Items](../filling-out/working-with-lists.md#restoring-removed-list-items).
 - Debtor names filled before the "Last, First" correction are not changed. If a case shows the surname in the first name field, correct the name on the questionnaire.
 - Case data sync only writes to questionnaires that are still in progress. Once a questionnaire is submitted, submitted for review, snapshotted, or otherwise past the in-progress stage, incoming case data updates no longer modify its responses — completed work is preserved as it was at submission. Add or edit data on an in-progress questionnaire to apply new values from the case record. Re-opening a submitted questionnaire also resumes syncing when case data has not changed since it was last synced; if case data has changed, syncing stays off until you choose **Get back in sync** (see [Re-opening and Re-syncing](./reopening-and-resync.md)).
 - **One unusable list row no longer stops the rest of the questionnaire from syncing.** A row whose values no longer fit the list it sits in is skipped, and the questionnaire's other rows and answers still reach the case record. Previously a single such row, or a single unanswered box, could stop the whole questionnaire from syncing. A skipped row does not reach the case record until its values are corrected.

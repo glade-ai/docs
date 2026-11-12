@@ -59,6 +59,17 @@ When the exemptions agent claims a property at 100% of its fair market value, th
 
 > TODO: Confirm what the agent records when the property has no fair market value entered against it — whether the claim is left unpriced, skipped, or recorded at zero.
 
+#### Individual filings with co-owned property
+
+On a case with only one debtor, the exemptions agent applies the single-filer limits, even when the debtor co-owns property with someone else.
+
+- Every claim goes to Debtor 1, and the homestead and wildcard limits are applied once, at the single-filer amount.
+- Previously the agent decided whether a case was joint only from how property ownership was recorded. A debtor filing alone who co-owned a home or a car could therefore be given the doubled joint limits.
+- When Glade doesn't know whether the case is an individual or a joint filing, the agent works as it did before.
+- The single-filer limits are an instruction the agent follows, not a fixed calculation. Check the claims on Schedule C against the limits before filing.
+
+The exemptions calculator uses the case's individual or joint filing type. Claims calculated before this change update when the calculator is run again. Contact Glade support if a re-run still shows the old result.
+
 ### Texas exemptions schedule
 
 Glade can generate the Texas exemptions schedule as a supplemental form alongside the official bankruptcy forms (see [PDF Fill Mappings](../templates/pdf-fill-mappings.md#supplemental-and-local-court-forms)).
@@ -83,6 +94,7 @@ Firm-specific exemption strategy for the AI agent is set under **Settings → Yo
 - Statute citations are displayed as entered in the exemption data. If a statute citation is missing or malformed, the pill still appears but may show an incomplete citation.
 - Moving a secured creditor's collateral between properties previously could leave the creditor on both properties' lien lists, understating equity in this calculator — see [Property Liens on Schedule A/B](./property.md#property-liens-on-schedule-ab).
 - A claim you added or edited by hand can be overwritten by a later run of the exemptions agent when it sits on a property the agent also produces a claim for.
+- On an individual filing with co-owned property, claims the agent made before single-filer limits applied may still use the joint limits. Re-run the agent and check Schedule C.
 
 ## Related Features
 

@@ -53,7 +53,11 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - a Class 5C special-class claim that the plan does not fund.
 - **Middle District of Florida** cases can generate a Chapter 13 plan on the district's Chapter 13 Model Plan. As with the other plan-generation districts, the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Two points need checking by hand on this district's form:
   - The Section A notices for **student loans** and for **reinstating an amended automatic stay** always print as "Not Included", because Glade does not yet have a source for either answer. The calculator raises a warning on every plan so you can check both notices yourself before filing.
-  - Sections **C.5(c)** and **C.5(k)** have no claim treatments assigned to them yet, so those tables print empty on the generated plan.
+  - Section **C.5(k)** has no claim treatments assigned to it yet, so that table prints empty on the generated plan.
+
+  **Mortgage modification mediation (MMM) claims print in C.5(c).** On a real-property **Secured, long term, in plan** claim, mark the claim for mortgage modification mediation and enter its adequate protection payment. The plan prints the claim in Section C.5(c), with the last four digits of the account, the creditor, the collateral address, and the adequate protection payment, and leaves it out of C.5(a) and C.5(b). For the Middle and Southern Districts of Florida, that mark replaces the contract payment with the adequate protection payment and drops the arrears from the cure. The payment prints blank until it is entered. Other districts have no MMM section, so the mark changes nothing there.
+
+  **Typed payout schedules print on the plan.** When a claim's payout schedule is set to **Override with text** in the calculator, the typed text prints word for word in that claim's payment cell. This covers the regular monthly cells in C.5(a), C.5(b), C.5(h) and C.6(a), and the payment-through-plan cells in C.5(d), C.5(f) and C.5(g). An override left empty prints a blank cell. Claims with no override print their calculated amounts as before. The typed text is not used for an arrears cure split off a claim, because this form has no cure-payment column, or for C.5(i) direct payments, which the debtor pays and which have no payout schedule in the calculator.
 
   Every "Last Four Digits of Acct. No." column on this form, including C.5(a) secured long-term claims, prints the creditor's account last four digits from the Master Creditor List. Glade uses the creditor's last-four field, or failing that the last four letters or digits of its account number ("9779-1211-C203" prints "C203"). A creditor with neither prints blank. These columns used to print blank on every plan, so regenerate a plan to fill them in.
 - **Northern District of Texas** cases can generate a Chapter 13 plan on the district's local form BTXN222, *Debtor's(s') Chapter 13 Plan (Containing a Motion for Valuation)*, revised 5/12/21. This is a local court form, not Official Form 113. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. How claims are placed on this form:
@@ -93,13 +97,32 @@ The [Chapter 13 Plan Calculator](./chapter-13-plan-calculator.md) generates a pl
   - the monthly payment on an assumed contract's arrearage in §6.1.
 
   §3.1(d), §4.5, and §5.2 print unticked or "None".
+- **Western District of Wisconsin** cases can generate a Chapter 13 plan on the district's Local Form 3015-1.2, *Chapter 13 Plan (Individual Adjustment of Debts)* (Rev. December 4, 2024), which the district's local rules require for initial, amended and modified plans. It works the same way as the other plan-generation districts: you open the form from the calculator, and there is no per-firm setting to switch on. The district is available once it is set on the case. Contact Glade support if you don't see it. The court's form is a reworded version of the Southern District of Florida's LF-31, so claims are laid out much as on that plan. How claims are placed on this form:
+  - **IIIA (Payment in Full)** lists every secured claim the trustee pays. A long-term mortgage paid through the plan prints its regular payment, with its cure as the arrears payment. This form has no 910-day boxes.
+  - **IIIB (Maintenance of Payments and Cure of Default)** lists every claim the debtor pays directly, as a regular direct payment, with any trustee-paid cure on that claim, followed by the plan's other trustee-paid cures.
+  - **IIIC** values trustee-paid cramdowns, split into real property, vehicles and personal property, and wholly unsecured mortgages. For vehicles and personal property, the creditor's lien amount is the valued secured claim. **IIID** lists lien avoidance and **IIIE** surrendered collateral.
+  - **Section IV** prints priority taxes (IV.A), domestic support obligations with the ongoing payment and cure split (IV.B), and the filing fee (IV.C). The trustee's fee is not printed, as the form instructs.
+  - Each "NONE" box is ticked only when its table is empty.
+
+  Parts Glade has no source for print blank with a warning, so you can fill them in by hand before filing:
+  - the objection deadline on an amended or modified plan;
+  - IIIC's choice between a separate valuation motion and Rule 3012, its method boxes, and its objection deadline;
+  - IV.B payment addresses;
+  - the terms in V.C;
+  - the stay request in Section VI.
+
+  The mortgage modification mediation box is never ticked. If your plan needs it, write the model language in Section VII yourself.
+
+  The calculator uses the district's recorded no-look attorney fee cap and trustee fee. Check them against the district's local rule, and contact Glade support if the fee warning doesn't match.
+
+  Western District of Wisconsin plans also print two more lines the filed plans carry:
+  - **How the debtor pays (Section II.A).** The court's form assumes a wage order and has no box for anything else, so a line is added under the payment total: "Payments to be made debtor direct." for a direct-pay plan, or a line such as "Debtor will pay $173.08 Bi-Weekly for 60 months" for each payment step of a weekly, every-two-weeks, or twice-a-month payroll plan. The line appears once a payment method is chosen for the plan.
+  - **Loans the debtor pays directly (Section IIIB).** The payoff prints as the filed claim amount, and the monthly payment shows the months it covers — for example "$603 /month (Months 1 to 60)". The months come from the plan's own schedule for that loan, which is the whole plan unless set otherwise. Previously the payoff was blank and no months printed.
+
 - **Eastern District of Wisconsin** plans print the elections the district's filed plans make:
   - **First payment due (§ 2.1.B).** Choose how the filing fee was paid (paid when filing, or in installments), then when the first plan payment is due under that choice. The form ticks exactly those two boxes, and prints a specific date you pick on the chosen branch's line. A due date with no filing-fee choice prints nothing, because the form has nowhere to put it. With nothing chosen the section stays blank, as the form's own text then makes the first payment due 30 days after the petition. A half-made choice raises a warning.
   - **Post-petition claims under § 1305 (§ 6.2).** The box you choose is ticked. A warning is raised only when no choice is made; previously both boxes always printed blank with a warning.
   - **Chapter 7 liquidation amount (§ 5.1).** The amount the calculator works out now prints at any income level, including for above-median debtors, where it used to print blank. A plan saved before this change prints it once the plan is saved again.
-- **Western District of Wisconsin** plans print two more lines the filed plans carry:
-  - **How the debtor pays (Section II.A).** The court's form assumes a wage order and has no box for anything else, so a line is added under the payment total: "Payments to be made debtor direct." for a direct-pay plan, or a line such as "Debtor will pay $173.08 Bi-Weekly for 60 months" for each payment step of a weekly, every-two-weeks, or twice-a-month payroll plan. The line appears once a payment method is chosen for the plan.
-  - **Loans the debtor pays directly (Section IIIB).** The payoff prints as the filed claim amount, and the monthly payment shows the months it covers — for example "$603 /month (Months 1 to 60)". The months come from the plan's own schedule for that loan, which is the whole plan unless set otherwise. Previously the payoff was blank and no months printed.
 
   The court's own wording does not change on either Wisconsin form, and no other district's form is affected.
 
@@ -107,6 +130,21 @@ On an Eastern District of Wisconsin plan, both choices are on the calculator's *
 
 - **First plan payment** (§ 2.1.B). **Filing fee** is how the fee was paid. With **Paid in installments** selected, **First payment due** offers **30 days after last installment**, **30 days after confirmation**, **On a set date**, and **Leave blank**. **On a set date** adds **First payment date**. The due-date wording follows the filing-fee choice, and changing or clearing **Filing fee** clears the due date. Left unset, the card says the form's own rule applies: the first payment is due 30 days after the petition is filed.
 - **§ 1305 post-petition claims** (§ 6.2). The choice to have the trustee pay is **Trustee pays the claim**. The card says that leaving it unset prints both boxes blank and raises a warning on the plan.
+
+- **Eastern District of Wisconsin** cases can generate a Chapter 13 plan on the court's *Official Form Plan for the Eastern District of Wisconsin, Chapter 13 Plan* (5/2021), which the district's local rules require. This is the court's own rewrite of Official Form 113, not Official Form 113 itself. It works the same way as the other plan-generation districts: the form is available from the calculator, the plan is built from the district's own recorded figures, and there is no per-firm setting to switch on. Plan generation is available once that district is set on the case. Contact Glade support if the case has the district and the plan still is not offered. The calculator uses the district's recorded no-look attorney fee cap and trustee fee. Check them against the district's local rule, and contact Glade support if the fee warning doesn't match. What the generated plan fills in for you:
+  - **Part 2 (plan payments).** The over/under median box comes from the means test. A plan with one payment amount prints in the "no step" section, and a stepped plan prints each step through a calendar month counted from the plan's start. A plan paid by payroll deduction prints Debtor 1's employer and the payment frequency. The first-payment election is left unticked, which the form itself reads as 30 days after the petition.
+  - **§3.1** lists every secured claim the debtor pays directly, with any cure the trustee pays on the same line. A claim with nothing to cure shows a zero cure in every cure column rather than blanks, so a trustee does not read it as an omission.
+  - **§3.2** holds cramdowns paid through the trustee and wholly unsecured mortgages. A lien that is stripped because the senior liens use up the property's value prints a principal of $0, and the form sends the claim to Part 5. **§3.3** holds the claims paid in full. A claim paid pro rata prints no monthly payment, which the form reads as paid pro rata with the other secured creditors that do not receive equal monthly payments. **§3.4** is the lien-avoidance worksheet, and **§3.6** lists pre-confirmation adequate protection payments.
+  - **Part 4 and Part 5.** Priority taxes print in §4.4. §5.1 ticks "the sum of" for a fixed unsecured pool, otherwise the percentage paid, and prints the chapter 7 liquidation amount only when the case is below median. Special-class claims print in §5.3.
+  - **Exhibit.** Lines a–j are what the trustee pays out under each section; line e adds the trustee's fee, the attorney fee, and the filing fee. Signature dates use Central time.
+
+  Parts Glade has no source for print blank or unticked, some with a warning, so you can fill them in by hand before filing:
+  - on a joint case paid by payroll deduction, the employer, with a warning;
+  - the governmental domestic support boxes in §4.5 — every domestic support obligation prints in the non-governmental box, with a warning, so move one owed to a government unit by hand;
+  - §5.2, the § 1305 election in §6.2 (which warns on every plan), and mortgage modification mediation in §8.2;
+  - a "discharge" treatment prints in §7.1 as "other" and asks you for the reason.
+
+  Two more warnings flag claims the form has no exact place for: a long-term secured claim paid through the trustee prints in §3.1, and a stripped lien that the calculator still pays as secured prints what it pays and counts on Exhibit line b.
 
 ## Configuration
 
