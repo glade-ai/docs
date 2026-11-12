@@ -2,7 +2,7 @@
 
 ## Overview
 
-Calendar sync runs in both directions: events on connected calendars flow into Glade to block availability, and Glade bookings are written out to the assigned team member's calendar. Changes arrive in real time through provider push notifications, backed by an hourly catch-up job. This page covers what syncs in each direction, how real-time sync and catch-up work, and how booking events follow reassignment between team members.
+Calendar sync runs in both directions: events on connected calendars flow into Glade to block availability, and Glade bookings are written out to the assigned team member's calendar. Changes arrive in real time through provider push notifications, backed by an hourly catch-up job. This page covers what syncs in each direction, how real-time sync and catch-up work, how the Outlook sync window stays current, and how booking events follow cancellation, rescheduling, and reassignment.
 
 ## Key Behaviors
 
@@ -38,6 +38,21 @@ Real-time notifications are the normal path, but a provider subscription can lap
 - The catch-up fetches only what changed since the last sync where the provider supports it, so tightening the window does not slow syncing down.
 - If Glade cannot establish a real-time subscription with Outlook, it retries within the hour instead of waiting until the subscription would have expired two days later. A calendar therefore does not sit without live updates for days after a single failure.
 
+### Keeping the Outlook sync window current
+
+- Outlook calendars are read through a three-month window that starts on the day the window is set up. Glade now renews that window once a day, so it always reaches about three months ahead.
+- Previously the window was never renewed. Once its three months ran out, busy blocks a team member added in Outlook no longer reached Glade, and clients could book consults on top of time that had been blocked off. Glade also lost track of some of the consult events it had placed on those calendars.
+- Affected calendars repair themselves on their first sync after the fix — nobody needs to disconnect or reconnect.
+- When a renewal finds a consult event Glade had lost track of, Glade picks its existing record back up rather than treating the event as a separate outside appointment. The consult therefore does not block its own time slot.
+- Google calendars never had this problem, because Google's sync has no date window.
+
+### Cancelling and rescheduling when Glade has lost its copy
+
+These apply to both Outlook and Google calendars.
+
+- **Cancelling a booking removes the calendar event** even when Glade had lost track of it. Previously the event stayed on the calendar, so the slot showed as busy in Outlook while Glade offered it to clients as open. If the event has already been deleted on the calendar, the cancellation still completes normally.
+- **Rescheduling a booking moves the existing calendar event** instead of creating a second event beside it.
+
 ### Booking events and reassignment
 
 - When a client books with a specific team member, only that member's calendar conflicts are checked.
@@ -52,6 +67,7 @@ Real-time notifications are the normal path, but a provider subscription can lap
 - Changes made directly to a synced event in the external calendar (after Glade created it) are not synced back to Glade.
 - There is no manual "sync now" button on this screen. Sync happens automatically through provider notifications, backed by the hourly catch-up job described above.
 - The sync window covers the next three months. Events further in the future are not synced until they fall within that window.
+- Consults cancelled while Glade had lost track of their Outlook events may still be on those Outlook calendars. Once the calendar's sync window is renewed, Glade reads them as busy time. Delete them in Outlook to free the slot.
 - Reassigning a booking does not override an appointment type that routes its bookings to a particular calendar by county. Where county routing applies, the booking keeps the calendar that routing chose.
 
 ## Related Features

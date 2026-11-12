@@ -2,7 +2,7 @@
 
 ## Overview
 
-Fields populated by autofill show a status indicator so you can see where the value came from and whether it is current. This page covers each indicator state, what a field shows while a background autofill is still working, and how the indicator reads on fields that both sync with case data and autofill.
+Fields populated by autofill show a status indicator so you can see where the value came from and whether it is current. This page covers each indicator state, what a field shows while a background autofill is still working, and how the indicator reads on fields that both sync with case data and autofill, including on the older questionnaire view.
 
 ## Key Behaviors
 
@@ -40,6 +40,15 @@ Previously any field with a case data connection claimed to be synced with case 
 > TODO: Confirm the in-product wording of the "Populated from Internal data" label — the underlying source name may read differently to a preparer.
 
 Schedule I and Means Test lines calculated by the Income Organizer name the calculator as their source — see [Manual Overrides](./manual-overrides.md#overriding-a-schedule-i-or-means-test-figure-the-calculator-produced).
+
+### Both Indicators on the Older Questionnaire View
+
+On the older questionnaire view, a field that syncs with case data and also has an autofill or AI agent shows **two** indicators side by side — one for case data and one for the autofill — whichever one last wrote the value. Brief description on Schedule A/B property entries is an example: it syncs to the asset's description, and a conditional autofill builds the year, make and model (or an address) when the description is empty. Previously only one indicator showed, so staff couldn't see that the field was still synced and still autofilled.
+
+- The case data indicator reads **Synced**, or **Case data not available** when the value is empty. In this pair it doesn't offer revert.
+- The autofill indicator keeps its re-run control, and shows that the value was edited after a hand edit.
+- Each indicator opens its own source: the case data indicator opens the case record, and the autofill indicator opens the autofill. This also works in list cells.
+- Calculated fields still show a single indicator. A synced field with no autofill still shows one case data indicator, which offers revert after a hand edit. When case data sync is turned off for the questionnaire, only the autofill indicator shows.
 
 ## Edge Cases & Limitations
 
