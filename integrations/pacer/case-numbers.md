@@ -31,7 +31,7 @@ A single matter often carries several workflows — a retainer alongside a filin
 
 - Case numbers entered before the filing date became required may have no **Filed at** date and are missing from monthly filing reports.
 
-> TODO: Confirm whether a case number entered without a filing date can have the date added afterwards, and whether the requirement also applies in the newer Glade dashboard.
+A case number needs a filing date. If the date was left off, add it on the case or contact Glade support.
 
 ## Related Features
 
