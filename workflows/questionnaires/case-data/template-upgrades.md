@@ -56,14 +56,14 @@ Upgrading a questionnaire to a newer template version does not remove case data 
 
 ### An upgrade no longer empties a prepared list
 
-Opening a schedules questionnaire on a case whose template had moved to a newer version could remove most of the case's creditors and assets — on one reported case, 102 of 149 creditors were gone the next morning, with only the deduplicated ones left behind. The upgrade was reading the freshly-copied list back before it had finished being written, saw nothing there, and treated the case's creditors as though they had been deleted. It now reads the list as it stood before the upgrade, which is settled and complete.
+An upgrade reads a list as it stood before the upgrade, which is settled and complete. It does not read the freshly-copied list back before that copy has finished being written, which would look empty and treat the case's creditors and assets as though they had been deleted.
 
 Two safeguards sit behind that, so a bad read can no longer take a list with it:
 
 - If the upgrade reads back an empty list while it is about to remove entries, it stops and removes nothing.
 - If it would remove ten or more entries and more than half of what it looked at, it stops and removes nothing.
 
-In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. Cases affected before this correction are being repaired case by case; contact support with the case if creditors or assets are missing after an upgrade rather than re-entering them, so the repair can restore the deduplication and ordering along with the rows.
+In either case the upgrade still completes and the questionnaire is usable — only the removals are skipped. If creditors or assets are missing after an upgrade, contact support with the case rather than re-entering them, so the rows can be restored with their deduplication and ordering.
 
 ### New fields get their template defaults
 
